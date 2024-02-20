@@ -11,8 +11,8 @@ public:
 		Capacity = capacity;
 		Nodes = (T**)YRMemory::Allocate(sizeof(T*) * (Capacity + 1));
 		Count = 0;
-		LMost = (T*)nullptr;
-		RMost = (T*)0xFFFFFFFF;
+		MaxNode = (T*) nullptr;
+		MinNode = (T*) 0xFFFFFFFF;
 
 		ClearAll();
 	}
@@ -117,18 +117,18 @@ private:
 
 	void WWPointerUpdate(T* pValue)
 	{
-		if (pValue > RMost)
-			RMost = pValue;
-		if (pValue < LMost)
-			LMost = pValue;
+		if (pValue > MaxNode)
+			MaxNode = pValue;
+		if (pValue < MinNode)
+			MinNode = pValue;
 	}
 
 public:
-	int Capacity;
 	int Count;
+	int Capacity;
 	T** Nodes;
-	T* LMost;
-	T* RMost;
+	T* MaxNode;
+	T* MinNode;
 };
 
 struct PriorityQueueClassNode

@@ -4,8 +4,7 @@
 #include <ArrayClasses.h>
 #include <CellClass.h>
 #include <AnimTypeClass.h>
-
-#include "AStarClass.h"
+#include <AStarClass.h>
 
 class BulletTypeClass;
 class ObjectClass;
@@ -30,66 +29,6 @@ public:
 	//Properties
 	CDTimerClass CrateTimer;
 	CellStruct Location;
-};
-
-struct CellLevelPassabilityStruct
-{
-	char CellPassability;
-	char CellLevel;
-	unsigned short ZoneArrayIndex;
-};
-
-struct LevelAndPassabilityStruct2
-{
-	__int16 word_0[4];
-	char CellLevel;
-	char field_9;
-};
-
-//ZoneConnectionClass - Holding zone connection info from tubes or bridges (probably used for pathfinding)
-struct ZoneConnectionClass
-{
-	CellStruct	FromMapCoords;
-	CellStruct	ToMapCoords;
-	bool		unknown_bool_08;
-	CellClass*	Cell;
-
-	//need to define a == operator so it can be used in array classes
-	bool operator==(const ZoneConnectionClass &other) const {
-		return (FromMapCoords == other.FromMapCoords
-			&& ToMapCoords == other.ToMapCoords
-			&& unknown_bool_08 == other.unknown_bool_08
-			&& Cell == other.Cell);
-	}
-};
-
-struct SubzoneConnectionStruct
-{
-	//DWORD unknown_dword_0;
-	AStarQueueNodeHierarchical* queueBuffer;
-	BYTE unknown_byte_4;
-
-	//need to define a == operator so it can be used in array classes
-	bool operator==(const SubzoneConnectionStruct &other) const {
-		return (queueBuffer == other.queueBuffer
-			&& unknown_byte_4 == other.unknown_byte_4);
-	}
-};
-
-struct SubzoneTrackingStruct
-{
-public:
-	DynamicVectorClass<SubzoneConnectionStruct> SubzoneConnections;
-	WORD unknown_word_18;
-	DWORD unknown_dword_1C;
-	DWORD unknown_dword_20;
-
-	//need to define a == operator so it can be used in array classes
-	bool operator==(const SubzoneTrackingStruct &other) const {
-		return (unknown_word_18 != other.unknown_word_18
-			&& unknown_dword_1C == other.unknown_dword_1C
-			&& unknown_dword_20 == other.unknown_dword_20);
-	}
 };
 
 // helper class with static methods to detect projectile collisions

@@ -1,7 +1,6 @@
 #pragma once
-#include <YRPP.h>
-#include <FootClass.h>
-#include <lib/priorityqueue.h>
+
+#include <PriorityQueueClass.h>
 
 enum MoveType
 {
@@ -40,6 +39,70 @@ enum AStarPostProcessType
 	ASTAR_PASS_0 = 0x0,
 	ASTAR_PASS_1 = 0x1,
 	ASTAR_PASS_2 = 0x2,
+};
+
+struct CellLevelPassabilityStruct
+{
+	char CellPassability;
+	char CellLevel;
+	unsigned short ZoneArrayIndex;
+};
+
+struct LevelAndPassabilityStruct2
+{
+	__int16 word_0[4];
+	char CellLevel;
+	char field_9;
+};
+
+//ZoneConnectionClass - Holding zone connection info from tubes or bridges (probably used for pathfinding)
+struct ZoneConnectionClass
+{
+	CellStruct	FromMapCoords;
+	CellStruct	ToMapCoords;
+	bool		unknown_bool_08;
+	CellClass* Cell;
+
+	//need to define a == operator so it can be used in array classes
+	bool operator==(const ZoneConnectionClass& other) const
+	{
+		return (FromMapCoords == other.FromMapCoords
+			&& ToMapCoords == other.ToMapCoords
+			&& unknown_bool_08 == other.unknown_bool_08
+			&& Cell == other.Cell);
+	}
+};
+
+struct AStarQueueNodeHierarchical;
+struct SubzoneConnectionStruct
+{
+	//DWORD unknown_dword_0;
+	AStarQueueNodeHierarchical* queueBuffer;
+	BYTE unknown_byte_4;
+
+	//need to define a == operator so it can be used in array classes
+	bool operator==(const SubzoneConnectionStruct& other) const
+	{
+		return (queueBuffer == other.queueBuffer
+			&& unknown_byte_4 == other.unknown_byte_4);
+	}
+};
+
+struct SubzoneTrackingStruct
+{
+public:
+	DynamicVectorClass<SubzoneConnectionStruct> SubzoneConnections;
+	WORD unknown_word_18;
+	DWORD unknown_dword_1C;
+	DWORD unknown_dword_20;
+
+	//need to define a == operator so it can be used in array classes
+	bool operator==(const SubzoneTrackingStruct& other) const
+	{
+		return (unknown_word_18 != other.unknown_word_18
+			&& unknown_dword_1C == other.unknown_dword_1C
+			&& unknown_dword_20 == other.unknown_dword_20);
+	}
 };
 
 struct __declspec(align(4)) AStarQueueNodeHierarchical
@@ -92,16 +155,14 @@ struct __declspec(align(4)) PathType
 	CellStruct LastFixup;
 };
 
-int __fastcall AStarHelperFacing(CellStruct* a1, CellStruct* a2)
+inline int __fastcall AStarHelperFacing(CellStruct* a1, CellStruct* a2)
 { JMP_STD(0x42AA40); }
-CellStruct* __fastcall AStar_FindAdjacentCell0(CellStruct* a1, CellStruct* a2, int a3)
+inline CellStruct* __fastcall AStar_FindAdjacentCell0(CellStruct* a1, CellStruct* a2, int a3)
 { JMP_STD(0x42D490); }
-CellStruct* __fastcall TubeFacings(CellStruct* retstr, CellStruct* cell, int count, int* path)
-{
-	JMP_STD(0x429780);
-}
+inline CellStruct* __fastcall Find_Some_Cell(CellStruct* retstr, CellStruct* cell, int count, int* path)
+{ JMP_STD(0x429780); }
 
-
+class FootClass;
 class NOVTABLE __declspec(align(4)) AStarClass
 {
 public:
