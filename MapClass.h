@@ -66,7 +66,7 @@ struct ZoneConnectionClass
 struct SubzoneConnectionStruct
 {
 	//DWORD unknown_dword_0;
-	QueueNodeHierarchical* queueBuffer;
+	AStarQueueNodeHierarchical* queueBuffer;
 	BYTE unknown_byte_4;
 
 	//need to define a == operator so it can be used in array classes
