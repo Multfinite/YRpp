@@ -5,6 +5,8 @@
 #include <CellClass.h>
 #include <AnimTypeClass.h>
 
+#include "AStarClass.h"
+
 class BulletTypeClass;
 class ObjectClass;
 class WarheadTypeClass;
@@ -63,12 +65,13 @@ struct ZoneConnectionClass
 
 struct SubzoneConnectionStruct
 {
-	DWORD unknown_dword_0;
+	//DWORD unknown_dword_0;
+	QueueNodeHierarchical* queueBuffer;
 	BYTE unknown_byte_4;
 
 	//need to define a == operator so it can be used in array classes
 	bool operator==(const SubzoneConnectionStruct &other) const {
-		return (unknown_dword_0 == other.unknown_dword_0
+		return (queueBuffer == other.queueBuffer
 			&& unknown_byte_4 == other.unknown_byte_4);
 	}
 };
