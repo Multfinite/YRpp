@@ -127,6 +127,8 @@ public:
 	bool MoveToWeed(int radius)
 		{ JMP_THIS(0x4DDB90); }
 
+	double GetThreatAvoidance() { JMP_THIS(0x4DC760); }
+
 	//Constructor
 	FootClass(HouseClass* pOwner) noexcept : FootClass(noinit_t())
 		{ JMP_THIS(0x4D31E0); }
@@ -142,15 +144,14 @@ protected:
 
 public:
 
-	int             PlanningPathIdx; // which planning path am I following?
+	int					PlanningPathIdx; // which planning path am I following?
 	CellStruct      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
 	CellStruct      WaypointCell; // current waypoint cell
-	DWORD           unknown_52C;	//unused?
-	DWORD           unknown_530;
-	DWORD           unknown_534;
-	int				WalkedFramesSoFar;
-	bool            unknown_bool_53C;
-	DWORD           unknown_540;
+	DWORD        unknown_52C;	//unused?
+	double			ThreatAvoidanceCoefficient;
+	DWORD         WalkedFramesSoFar;
+	int					PlayingMovingSound; // WalkedFramesSoFar;
+	DWORD         MovingSoundDelay;
 
 	DECLARE_PROPERTY(AudioController, Audio7);
 
@@ -158,63 +159,70 @@ public:
 	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
 	CellStruct      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
 	CellStruct      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
-	CoordStruct     unknown_coords_568;
-	PROTECTED_PROPERTY(DWORD,   unused_574);
+	CoordStruct     Sqrt_ed_val_568;
 	double          SpeedPercentage;
 	double          SpeedMultiplier;
-	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_588);
-	AbstractClass*  unknown_5A0;
-	AbstractClass*  Destination; // possibly other objects as well
-	AbstractClass*  LastDestination;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue2);
+	AbstractClass* someabstract_5A0_followingmaybe;
+	AbstractClass* NavCom; // possibly other objects as well
+	AbstractClass* SuspendedNavCom;
 	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue); // Stores sequence of movement destinations
-	int             unknown_int_5C4;
-	DWORD           unknown_5C8;
-	DWORD           unknown_5CC;
+	int             state5C4;
+	FootClass*           target5C8_CandidateTarget;
+	FootClass* CandidateTarget;
 	BYTE            unknown_5D0;	//unused?
-	bool            unknown_bool_5D1;
+	bool            newtargetassigned_5D1;
 	TeamClass*      Team;
 	FootClass*      NextTeamMember;        //next unit in team
-	DWORD           unknown_5DC;
-	int             PathDirections[24]; // list of directions to move in next, like tube directions
+	CellClass*           cellptr5DC;
+	FacingType             Path[24]; // list of directions to move in next, like tube directions
 	DECLARE_PROPERTY(CDTimerClass, PathDelayTimer);
-	int             unknown_int_64C;
-	DECLARE_PROPERTY(CDTimerClass, unknown_timer_650);
+	int             TryTryAgain;
+	DECLARE_PROPERTY(CDTimerClass, BaseAttackTimer);
 	DECLARE_PROPERTY(CDTimerClass, SightTimer);
 	DECLARE_PROPERTY(CDTimerClass, BlockagePathTimer);
 	DECLARE_PROPERTY(ILocomotionPtr, Locomotor);
-	CoordStruct       unknown_point3d_678;
-	signed char       TubeIndex;	//I'm in this tunnel
-	bool              unknown_bool_685;
-	signed char       WaypointIndex; // which waypoint in my planning path am I following?
-	bool              unknown_bool_687;
-	bool              unknown_bool_688;
+	CoordStruct       HeadTo;
+	byte       CurrentTube;	//I'm in this tunnel
+	byte              CurrentDirectionInTube;
+	byte       WaypointIndex; // which waypoint in my planning path am I following?
+	bool              IsToScatter;
+	bool              IsScanLimited;
 	bool              IsInitiated; // Is a fully joined member of a team, used for regroup etc. checks
-	bool              ShouldScanForTarget;
-	bool              unknown_bool_68B;
+	bool              IsNewNavCom; // ShouldScanForTarget;
+	bool              IsPlanningToLook;
 	bool              IsDeploying;
 	bool              IsFiring;
-	bool              unknown_bool_68E;
+	bool              AssignNewThreat;
 	bool              ShouldEnterAbsorber; // orders the unit to enter the closest bio reactor
 	bool              ShouldEnterOccupiable; // orders the unit to enter the closest battle bunker
 	bool              ShouldGarrisonStructure; // orders the unit to enter the closest neutral building
+	WORD			unknown_692; // unused ?
 	FootClass*        ParasiteEatingMe; // the tdrone/squid that's eating me
-	DWORD             unknown_698;
+	DWORD             ParasiteFireBlock;
 	ParasiteClass*    ParasiteImUsing;	// my parasitic half, nonzero for, eg, terror drone or squiddy
 	DECLARE_PROPERTY(CDTimerClass, ParalysisTimer); // for squid victims
 	bool              unknown_bool_6AC;
 	bool              IsAttackedByLocomotor; // the unit's locomotor is jammed by a magnetron
 	bool              IsLetGoByLocomotor; // a magnetron attacked this unit and let it go. falling, landing, or sitting on the ground
-	bool              unknown_bool_6AF;
-	bool              unknown_bool_6B0;
-	bool              unknown_bool_6B1;
-	bool              unknown_bool_6B2;
-	bool              unknown_bool_6B3;
-	bool              unknown_bool_6B4;
-	bool              unknown_bool_6B5;
+	bool              IsRotating;
+	bool              IsUnloading;
+	bool              IsNavQueueLoop;
+	bool              IsScattering;
+	bool              isidle_6B3;
+	bool              height_subtract_6B4;
+	bool              iscrusher_6B5;
 	bool              FrozenStill; // frozen in first frame of the proper facing - when magnetron'd or warping
-	bool              unknown_bool_6B7;
-	bool              unknown_bool_6B8;
-	PROTECTED_PROPERTY(DWORD,   unused_6BC);	//???
+	bool              blockage6B7;
+	bool              removed;
+	char field_6B9;
+	char field_6BA;
+	char field_6BB;
+	char field_6BC;
+	char field_6BD;
+	char field_6BE;
+	char field_6BF;
 };
 
-static_assert(sizeof(FootClass) == 0x6C0);
+static constexpr size_t FootClassSize = sizeof(FootClass);
+static_assert(FootClassSize == 0x6C0);

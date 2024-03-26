@@ -93,13 +93,13 @@ public:
 	{
 		return
 			(BuildingTypeIndex == tBaseNode.BuildingTypeIndex) &&
-			(MapCoords == tBaseNode.MapCoords) &&
+			(Position == tBaseNode.Position) &&
 			(Placed == tBaseNode.Placed) &&
 			(Attempts == tBaseNode.Attempts);
 	}
 
 	int        BuildingTypeIndex;
-	CellStruct MapCoords;
+	CellStruct Position;
 	bool       Placed;
 	int        Attempts;
 };

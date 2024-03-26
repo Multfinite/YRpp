@@ -964,9 +964,11 @@ enum class Mission : int
 	SpyplaneOverfly = 31
 };
 
-enum class MovementZone : int
+enum class MovementZone : unsigned __int32
 {
-	None = -1,
+	// at 0042D170
+	CELL_TEST_WALK_SPECIAL = 0x7FFFFFFF, // INT32 MAX
+	None = 0xFFFFFFFF, // = -1
 	Normal = 0,
 	Crusher = 1,
 	Destroyer = 2,
@@ -1669,6 +1671,61 @@ enum class ZoneType : int
 	East = 2,
 	South = 3,
 	West = 4
+};
+
+enum MoveType
+{
+	MOVE_OK = 0x0,
+	MOVE_CLOAK = 0x1,
+	MOVE_MOVING_BLOCK = 0x2,
+	MOVE_CLOSED_GATE = 0x3,
+	MOVE_FRIENDLY_DESTROYABLE = 0x4,
+	MOVE_DESTROYABLE = 0x5,
+	MOVE_TEMP = 0x6,
+	MOVE_NO = 0x7,
+	MOVE_COUNT = 0x8,
+};
+
+// Taken from TS++
+enum PassabilityType : __int32
+{
+	PASSABLE_NONE_maybe = 0x0,
+	PASSABLE_OK = 0x1,
+	PASSABLE_CRUSH = 0x2,
+	PASSABLE_WALL = 0x3,
+	PASSABLE_WATER = 0x4,
+	PASSABLE_FREE_SPOTS = 0x5,
+	PASSABLE_NO = 0x6,
+	PASSABLE_OUTSIDE = 0x7,
+};
+
+enum PassabilityType_int8 : __int8
+{};
+
+template<typename T>
+class DynamicVectorClass;
+
+template<typename K, typename T>
+struct __declspec(align(4)) HashObject
+{
+	using key_type = K;
+	using value_type = T;
+
+	key_type Key;
+	value_type Value;
+};
+
+template<typename K, typename T>
+struct __declspec(align(4)) HashTable
+{
+	using key_type = K;
+	using value_type = T;
+	using object_type = HashObject<key_type, value_type>;
+
+	DynamicVectorClass<object_type>* Buckets;
+	void* BucketHashFunction;
+	int BucketCount;
+	int BucketGrowth;
 };
 
 //Westwood custom messages (e.g. for SendMessage)

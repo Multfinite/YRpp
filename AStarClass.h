@@ -1,74 +1,53 @@
 #pragma once
 
+#include <GeneralDefinitions.h>
+#include <ArrayClasses.h>
 #include <PriorityQueueClass.h>
 
-enum MoveType
+class CellClass;
+
+// In-game pathfinding present 3 stages for calculating.
+enum HierarchicalStage
 {
-	MOVE_OK = 0x0,
-	MOVE_CLOAK = 0x1,
-	MOVE_MOVING_BLOCK = 0x2,
-	MOVE_CLOSED_GATE = 0x3,
-	MOVE_FRIENDLY_DESTROYABLE = 0x4,
-	MOVE_DESTROYABLE = 0x5,
-	MOVE_TEMP = 0x6,
-	MOVE_NO = 0x7,
-	MOVE_COUNT = 0x8,
+	STAGE_0 = 0x0,
+	STAGE_1 = 0x1,
+	STAGE_2 = 0x2,
+	STAGE_COUNT = 0x3
 };
 
-enum MZoneType : __int32
+using subzone_index = unsigned __int16;
+
+// Propably a Subzone struct itself. Contains only subzone-related data.
+struct SubzoneInfo
 {
-	MZONE_NONE = -1, //18446744073709551615,
-	MZONE_NORMAL = 0,
-	MZONE_CRUSHER = 1,
-	MZONE_DESTROYER = 2,
-	MZONE_AMPH_DESTROYER = 3,
-	MZONE_AMPH_CRUSHER = 4,
-	MZONE_AMPH = 5,
-	MZONE_SUBTERRANEAN = 6,
-	MZONE_INFANTRY = 7,
-	MZONE_INFANTRY_DESTROYER = 8,
-	MZONE_FLY = 9,
-	MZONE_WATER = 10,
-	MZONE_WATERBEACH = 11,
-	MZONE_CRUSHER_ALL = 12,
-	MZONE_COUNT = 13,
+	PassabilityType_int8 Passability;
+	unsigned __int8 CellLevel;
+	subzone_index SubzoneIndex;
 };
 
-enum AStarPostProcessType
+// Propably a Subzone connection struct beween path stages. Used to move between subzones at different stages in pathfinding.
+struct SubzoneLinking
 {
-	ASTAR_PASS_0 = 0x0,
-	ASTAR_PASS_1 = 0x1,
-	ASTAR_PASS_2 = 0x2,
-};
-
-struct CellLevelPassabilityStruct
-{
-	char CellPassability;
+	subzone_index SubzoneHierarchy[HierarchicalStage::STAGE_COUNT];
+	subzone_index SubzoneIndex;
 	char CellLevel;
-	unsigned short ZoneArrayIndex;
-};
-
-struct LevelAndPassabilityStruct2
-{
-	__int16 word_0[4];
-	char CellLevel;
-	char field_9;
+	PassabilityType_int8 Passability_MAYBE;
 };
 
 //ZoneConnectionClass - Holding zone connection info from tubes or bridges (probably used for pathfinding)
 struct ZoneConnectionClass
 {
-	CellStruct	FromMapCoords;
-	CellStruct	ToMapCoords;
-	bool		unknown_bool_08;
+	CellStruct	From;
+	CellStruct	To;
+	bool		IsUnhandled_Maybe;
 	CellClass* Cell;
 
 	//need to define a == operator so it can be used in array classes
 	bool operator==(const ZoneConnectionClass& other) const
 	{
-		return (FromMapCoords == other.FromMapCoords
-			&& ToMapCoords == other.ToMapCoords
-			&& unknown_bool_08 == other.unknown_bool_08
+		return (From == other.From
+			&& To == other.To
+			&& IsUnhandled_Maybe == other.IsUnhandled_Maybe
 			&& Cell == other.Cell);
 	}
 };
@@ -92,15 +71,15 @@ struct SubzoneTrackingStruct
 {
 public:
 	DynamicVectorClass<SubzoneConnectionStruct> SubzoneConnections;
-	WORD unknown_word_18;
-	DWORD unknown_dword_1C;
+	WORD SubzoneIndex;
+	PassabilityType Passability;
 	DWORD unknown_dword_20;
 
 	//need to define a == operator so it can be used in array classes
 	bool operator==(const SubzoneTrackingStruct& other) const
 	{
-		return (unknown_word_18 != other.unknown_word_18
-			&& unknown_dword_1C == other.unknown_dword_1C
+		return (SubzoneIndex != other.SubzoneIndex
+			&& Passability == other.Passability
 			&& unknown_dword_20 == other.unknown_dword_20);
 	}
 };
@@ -115,11 +94,10 @@ struct __declspec(align(4)) AStarQueueNodeHierarchical
 
 struct AStarWorkPathStructNode
 {
-	CellClass** Cells;
+	CellClass* Cell;
 	int CellLevel;
 	AStarWorkPathStructNode* Prev;
 };
-
 
 struct __declspec(align(8)) AStarWorkPathStruct
 {
@@ -130,7 +108,7 @@ struct __declspec(align(8)) AStarWorkPathStruct
 };
 
 
-struct __unaligned __declspec(align(4)) AStarWorkPathStructHeap
+struct __declspec(align(4)) AStarWorkPathStructHeap
 {
 	AStarWorkPathStruct Nodes[65536];
 	unsigned __int32 Count;
@@ -167,7 +145,6 @@ class NOVTABLE __declspec(align(4)) AStarClass
 {
 public:
 	static constexpr reference<AStarClass, 0x87E8B8> const Instance {};
-	static constexpr reference<DynamicVectorClass<SubzoneTrackingStruct*>, 0x87F874> const SubzoneTracking {};
 
 	char bool_0;
 	bool ScaleMovementCost;
@@ -177,7 +154,7 @@ public:
 	char CheckLocomotor;
 	AStarWorkPathStructDataHeap* WorkingNodesBuffer;
 	AStarWorkPathStructHeap* WorkingNodes;
-	PriorityQueueClass<AStarQueueNodeHierarchical>* OpenNodes;
+	PriorityQueueClass<AStarWorkPathStruct>* OpenNodes;
 	int* celllevel_costarray2_alt;
 	int* celllevel_costarray1;
 	float* MovementCosts;
@@ -187,7 +164,7 @@ public:
 	int CurrentCellLevel;
 	int DestCellLevel;
 	bool boolpathfind_38;
-	AStarPostProcessType __Blockage;
+	HierarchicalStage __Blockage;
 	int* ints_40_costs[3];
 	int* ints_4C_costs[3];
 	float* HierarchicalCosts[3];
@@ -207,7 +184,7 @@ public:
 	PathType* FindPathRegular(
 		  CellStruct* from, CellStruct* to
 		, FootClass* object, FacingType* moves
-		, signed int maxLoops, AStarPostProcessType postProcess
+		, signed int maxLoops, HierarchicalStage postProcess
 	) { JMP_THIS(0x429A90); }
 	AStarWorkPathStruct* CreateNode(
 		AStarWorkPathStructNode** pathNodes
@@ -237,20 +214,20 @@ public:
 	DWORD* ClearPointers() { JMP_THIS(0x42C1C0); }
 	bool FindPathHierarchical(
 		  CellStruct* from, CellStruct* to
-		, MZoneType zoneType, FootClass* object)
+		, MovementZone movementZone, FootClass* object)
 	{ JMP_THIS(0x42C290); }
 	PathType* FindPath(
 		CellStruct* from, CellStruct* to
 		, FootClass* object
-		, FacingType* moves, int maxLoop, MZoneType zoneType, AStarPostProcessType postProcess)
+		, FacingType* moves, int maxLoop, MovementZone movementZoneOverride, HierarchicalStage postProcess)
 	{ JMP_THIS(0x42C900); }
 	void InitCellIndexSets(int a2) { JMP_THIS(0x42CCD0); }
 	bool IsCellIndexSetRegistered(int xPos, int yPos, int vectorNum) { JMP_THIS(0x42CEB0); }
 	void RegisterCellIndexSet(unsigned int xPos, unsigned int yPos, int vectorNum)
 	{ JMP_THIS(0x42CF10); }
-	void RegisterCellIndexSets(SubzoneTrackingStruct* tracking, AStarPostProcessType postProcess)
+	void RegisterCellIndexSets(SubzoneTrackingStruct* tracking, HierarchicalStage postProcess)
 	{ JMP_THIS(0x42CF80); }
-	unsigned int TestCellWalk(CellStruct* a2, CellStruct* a3, FootClass* object, bool bridge1, int bridge2, MZoneType zoneType)
+	unsigned int TestCellWalk(CellStruct* a2, CellStruct* a3, FootClass* object, bool bridge1, int bridge2, MovementZone zoneType)
 	{ JMP_THIS(0x42D170); }
 };
 

@@ -33,7 +33,7 @@ public:
 	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
 
 	//SmudgeTypeClass
-	virtual void DrawIt(const Point2D& Point, const RectangleStruct& Rect, int SmudgeData, int Height, const CellStruct& MapCoords) RX;
+	virtual void DrawIt(const Point2D& Point, const RectangleStruct& Rect, int SmudgeData, int Height, const CellStruct& Position) RX;
 
 	static void __fastcall LoadFromIniList(int idxTheatre)
 		{ JMP_STD(0x6B5490); }

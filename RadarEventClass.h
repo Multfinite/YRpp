@@ -34,7 +34,7 @@ public:
 	float RotationSpeed;
 	float ColorValue;
 	float ColorSpeed;
-	CellStruct MapCoords;
+	CellStruct Position;
 	CDTimerClass DurationTimer;	//Rotation timer?
 	CDTimerClass VisibilityTimer;	//Color timer?
 	bool Rotating;

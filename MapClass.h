@@ -145,8 +145,8 @@ public:
 	virtual void SetVisibleRect(const RectangleStruct& mapRect) RX;
 
 	//Non-virtual
-	CellClass* TryGetCellAt(const CellStruct& MapCoords) const {
-		int idx = GetCellIndex(MapCoords);
+	CellClass* TryGetCellAt(const CellStruct& Position) const {
+		int idx = GetCellIndex(Position);
 		return (idx >= 0 && idx < MaxCells) ? Cells[idx] : nullptr;
 	}
 
@@ -155,12 +155,12 @@ public:
 		return TryGetCellAt(cell);
 	}
 
-	CellClass* GetCellAt(const CellStruct &MapCoords) const {
-		auto pCell = TryGetCellAt(MapCoords);
+	CellClass* GetCellAt(const CellStruct &Position) const {
+		auto pCell = TryGetCellAt(Position);
 
 		if(!pCell) {
 			pCell = &InvalidCell;
-			pCell->MapCoords = MapCoords;
+			pCell->Position = Position;
 		}
 
 		return pCell;
@@ -174,8 +174,8 @@ public:
 	CellClass* GetTargetCell(Point2D& location)
 		{ JMP_THIS(0x565730); }
 
-	bool CellExists(const CellStruct &MapCoords) const {
-		return TryGetCellAt(MapCoords) != nullptr;
+	bool CellExists(const CellStruct &Position) const {
+		return TryGetCellAt(Position) != nullptr;
 	}
 
 	int GetThreatPosed(const CellStruct& cell, HouseClass* pHouse) const
@@ -184,8 +184,33 @@ public:
 	bool IsLocationShrouded(const CoordStruct &crd) const
 		{ JMP_THIS(0x586360); }
 
-	static int GetCellIndex(const CellStruct &MapCoords) {
-		return (MapCoords.Y << 9) + MapCoords.X;
+	static int GetCellIndex(const CellStruct &Position) {
+		return (Position.Y << 9) + Position.X;
+	}
+
+	inline int GetCellIndex_Safe(const CoordStruct& position)
+	{
+		//JMP_THIS(0x56D3F0)
+		int w = MapRect.Width;
+		int h = MapRect.Height;
+		int linearIndex = position.X + position.Y * (w + h + 1);
+		if (linearIndex < 0)
+			return 0;
+		if (linearIndex >= ValidMapCellCount)
+			return ValidMapCellCount - 1;
+		return linearIndex;
+	}
+
+	inline int GetCellIndex_Safe(int x, int y)
+	{
+		int w = MapRect.Width;
+		int h = MapRect.Height;
+		int linearIndex = x + y * (w + h + 1);
+		if (linearIndex < 0)
+			return 0;
+		if (linearIndex >= ValidMapCellCount)
+			return ValidMapCellCount - 1;
+		return linearIndex;
 	}
 
 	// gets a coordinate in a random direction a fixed distance in leptons away from coords
@@ -221,7 +246,7 @@ public:
 	CellClass* CellIteratorNext()
 		{ CALL(0x578290); }
 
-	int GetMovementZoneType(const CellStruct& MapCoords, MovementZone movementZone, bool isBridge)
+	int GetMovementZoneType(const CellStruct& Position, MovementZone movementZone, bool isBridge)
 		{ JMP_THIS(0x56D230); }
 
 // the key damage delivery
@@ -316,6 +341,9 @@ public:
 
 	bool IsLinkedBridgeDestroyed(const CellStruct& cell) const
 		{ JMP_THIS(0x587410); }
+
+	CellStruct SubzoneBridgeCheck_583180(CellClass* pCell, int onBridge)
+		{ JMP_THIS(0x583180); }
 
 // ====================================
 //         FIRESTORM RELATED
@@ -447,6 +475,8 @@ public:
 	void BuildingToWall(CellStruct const& cell, HouseClass* pHouse, BuildingTypeClass* pBldType)
 		{ JMP_THIS(0x588750); }
 
+	int GetCellIndex_Safe(CellStruct* position) { JMP_THIS(0x56D3F0); }
+
 protected:
 	//Constructor
 	MapClass() {}	//don't need this
@@ -456,22 +486,25 @@ protected:
 	//===========================================================================
 
 public:
+	using hash_table = HashTable<DWORD, DWORD>;
+
 	DWORD unknown_10;
-	void* unknown_pointer_14;
-	void* MovementZones [13];
-	DWORD somecount_4C;
+	__declspec(align(4)) hash_table* HashTable;
+	ZoneType MovementZones [13];
+	DWORD goodMapCellCount_MAYBE;
 	DynamicVectorClass<ZoneConnectionClass> ZoneConnections;
-	CellLevelPassabilityStruct* LevelAndPassability;
+	SubzoneInfo* SubzonesInfo;
 	int ValidMapCellCount;
-	LevelAndPassabilityStruct2* LevelAndPassabilityStruct2pointer_70;
+	SubzoneLinking* SubzonesLinking;
 	DWORD unknown_74;
 	DWORD unknown_78;
 	DWORD unknown_7C;
-	DWORD unknown_80[3]; // somehow connected to the 3 vectors below
-	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking1;
-	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking2;
-	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking3;
-	DynamicVectorClass<CellStruct> CellStructs1;
+	__declspec(align(4)) hash_table* SubzoneTrackingHashTable[3]; // somehow connected to the 3 vectors below
+	//DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking1;
+	//DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking2;
+	//DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking3;
+	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking[3];
+	DynamicVectorClass<CellStruct> BridgeCells1;
 	RectangleStruct MapRect;
 	RectangleStruct VisibleRect;
 	int CellIterator_NextX;

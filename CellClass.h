@@ -251,20 +251,20 @@ public:
 		{ JMP_THIS(0x487D00); }
 
 	// helper
-	bool ContainsBridge() const
+	inline bool ContainsBridge() const
 	{
 		return static_cast<bool>(this->Flags & CellFlags::BridgeHead);
 	}
-	bool ContainsBridgeEx() const
+	inline bool ContainsBridgeEx() const
 	{
 		return static_cast<bool>(this->Flags & CellFlags::Bridge);
 	}
 
 	// helper mimicking game's behaviour
-	ObjectClass* GetContent() const
+	inline ObjectClass* GetContent() const
 		{ return this->ContainsBridge() ? this->AltObject : this->FirstObject; }
 
-	int GetLevel() const
+	inline int GetLevel() const
 		{ return this->Level + (this->ContainsBridge() ? BridgeLevels : 0); }
 
 	// tilesets
@@ -330,7 +330,7 @@ public:
 
 	void ChainReaction()
 	{
-		CellStruct* cell = &this->MapCoords;
+		CellStruct* cell = &this->Position;
 		SET_REG32(ecx, cell);
 		CALL(0x489270);
 	}
@@ -392,10 +392,10 @@ protected:
 
 public:
 
-	CellStruct MapCoords;	//Where on the map does this Cell lie?
+	CellStruct Position;	//Where on the map does this Cell lie?
 	DynamicVectorClass<FoggedObjectClass*>* FoggedObjects;
 	CellClass*         BridgeOwnerCell;
-	DWORD              unknown_30;
+	DWORD              dword30_pointermaybe;
 	LightConvertClass* LightConvert;
 	int                IsoTileTypeIndex;	//What tile is this Cell?
 	TagClass*          AttachedTag;			// The cell tag
@@ -403,12 +403,12 @@ public:
 	int                OverlayTypeIndex;	//What Overlay lies on this Cell?
 	int                SmudgeTypeIndex;	//What Smudge lies on this Cell?
 
-	DWORD              Passability;
+	PassabilityType              Passability;
 	int                WallOwnerIndex; // Which House owns the wall placed in this Cell?
 	                                              // Determined by finding the nearest BuildingType and taking its owner
 	int                InfantryOwnerIndex;
 	int                AltInfantryOwnerIndex;
-	DWORD              unknown_5C;
+	DWORD              __lastVisiblityUpdate;
 	DWORD              unknown_60;
 	DWORD              RedrawFrame;
 	RectangleStruct    InViewportRect;
@@ -449,13 +449,13 @@ public:
 	WORD               Color2_Blue;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
-	char               unknown_118;
+	char               RedrawCountMAYBE;
 	char               IsIceGrowthAllowed;
-	char               Height;
+	char               Height; // IDA: Tile
 	char               Level;
 
 	BYTE               SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
-	BYTE               unknown_11D;
+	BYTE               yOffset_11D;
 
 	unsigned char      OverlayData;	//The crate type on this cell. Also indicates some other weird properties
 
@@ -474,7 +474,7 @@ public:
 	int                ShroudCounter;
 	DWORD              GapsCoveringThisCell; // actual count of gapgens in this cell, no idea why they need a second layer
 	bool               VisibilityChanged;
-	PROTECTED_PROPERTY(BYTE,     align_139[0x3]);
+	PROTECTED_PROPERTY(BYTE,     align_139[0x3]); // IDA here: _DWORD field_13C_gapgen;
 	DWORD              unknown_13C;
 
 	CellFlags          Flags;	//Various settings.

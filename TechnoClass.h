@@ -561,7 +561,7 @@ public:
 	DECLARE_PROPERTY(IndexBitfield<HouseClass *>, DisplayProductionTo); // each bit corresponds to one player on the map, telling us whether that player has (1) or hasn't (0) spied this building, and the game should display what's being produced inside it to that player. The bits are arranged by player ID, i.e. bit 0 refers to house #0 in HouseClass::Array, 1 to 1, etc.; query like ((1 << somePlayer->ArrayIndex) & someFactory->DisplayProductionToHouses) != 0
 
 	int              Group; //0-9, assigned by CTRL+Number, these kinds // also set by aimd TeamType->Group !
-	AbstractClass*   Focus; // when told to guard a unit or such; distinguish undeploy and selling
+	TechnoClass*   Focus; // when told to guard a unit or such; distinguish undeploy and selling
 	HouseClass*      Owner;
 	CloakState       CloakState;
 	DECLARE_PROPERTY(StageClass, CloakProgress); // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
