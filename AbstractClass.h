@@ -110,6 +110,7 @@ public:
 	virtual bool IsInAir() const R0;
 	virtual CoordStruct* GetCenterCoords(CoordStruct* pCrd) const R0;
 	virtual void Update() RX;
+	virtual void AI() RX; //{ JMP_THIS(0x410570); }
 
 	//non-virtual
 	static void __fastcall AnnounceExpiredPointer(AbstractClass* pAbstract, bool removed = true)

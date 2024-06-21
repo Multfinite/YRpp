@@ -37,6 +37,8 @@ public:
 	void DamageArea(const CoordStruct& location) const
 		{ JMP_THIS(0x75F330); }
 
+	void AI() override { JMP_THIS(0x0760F50); }
+
 	//Constructor
 	WaveClass(
 		const CoordStruct& From, const CoordStruct& To, TechnoClass *Owner,

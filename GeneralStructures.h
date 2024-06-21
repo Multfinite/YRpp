@@ -13,6 +13,8 @@ using CellStruct = Vector2D<short>;
 using Point2D = Vector2D<int>;
 using CoordStruct = Vector3D<int>;
 
+static constexpr reference<CellStruct, 0x8B3D88u> const DefaultCell {};
+
 struct BasePlanningCell {
 	int Weight;
 	CellStruct Position;
