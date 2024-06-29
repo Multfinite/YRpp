@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Fundamentals.h>
+#include <Windows.h>
 
 template<typename T>
 concept TimerType = std::convertible_to<T, int> && requires (T t)
