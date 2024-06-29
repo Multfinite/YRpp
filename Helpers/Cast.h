@@ -150,3 +150,42 @@ template <>
 __forceinline const FootClass* abstract_cast<const FootClass*>(const AbstractClass* pAbstract) {
 	return generic_cast<const FootClass*>(pAbstract);
 };
+
+// types with missing AbstractType values.
+
+__forceinline bool __specific_cast__is_any_of(AbstractType type, AbstractType types...)
+{
+	for (auto t : { types })
+		if (type == types) return true;
+	return false;
+}
+
+template <> __forceinline const TechnoTypeClass* specific_cast(const AbstractClass* pAbstract)
+{
+	if (pAbstract && __specific_cast__is_any_of(pAbstract->WhatAmI()
+		, AbstractType::AircraftType
+		, AbstractType::BuildingType
+		, AbstractType::InfantryType
+		, AbstractType::UnitType
+	)) {
+		return reinterpret_cast<const TechnoTypeClass*>(pAbstract);
+	}
+	return nullptr;
+};
+
+template <> __forceinline const ObjectTypeClass* specific_cast(const AbstractClass* pAbstract)
+{
+	if (pAbstract && __specific_cast__is_any_of(pAbstract->WhatAmI()
+		, AbstractType::AnimType
+		, AbstractType::BulletType
+		, AbstractType::IsotileType
+		, AbstractType::OverlayType
+		, AbstractType::ParticleSystemType
+		, AbstractType::ParticleType
+		, AbstractType::TerrainType
+		, AbstractType::VoxelAnimType
+	)) {
+		return reinterpret_cast<const ObjectTypeClass*>(pAbstract);
+	}
+	return reinterpret_cast<const ObjectTypeClass*>(specific_cast<const TechnoTypeClass*>(pAbstract));
+};
