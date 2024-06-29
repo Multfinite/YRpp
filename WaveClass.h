@@ -1,6 +1,8 @@
 #pragma once
 
 #include <GeneralDefinitions.h>
+#include <CellClass.h>
+#include <ObjectClass.h>
 
 class TechnoClass;
 
