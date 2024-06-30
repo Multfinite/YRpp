@@ -74,7 +74,8 @@ struct WeaponStruct
 class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
+	static const AbstractBaseType AbsTypeBase = AbstractBaseType::TechnoType;
+	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array {};
 
 	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
 	{

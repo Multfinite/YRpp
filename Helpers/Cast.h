@@ -1,8 +1,10 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include <Utilities/Concepts.h>
 #include "VTable.h"
 
+class AbstractClass;
+class AbstractTypeClass;
 class ObjectClass;
 class MissionClass;
 class RadioClass;
@@ -151,41 +153,87 @@ __forceinline const FootClass* abstract_cast<const FootClass*>(const AbstractCla
 	return generic_cast<const FootClass*>(pAbstract);
 };
 
-// types with missing AbstractType values.
-
-__forceinline bool __specific_cast__is_any_of(AbstractType type, AbstractType types...)
+struct type_cast_data
 {
-	for (auto t : { types })
-		if (type == types) return true;
-	return false;
+	inline static char BytesData[76] = {
+		0, 0, 0, 7, 0, 3, 0, 7, 0, 3, 1, 0,
+		0, 0, 1, 0, 7, 0, 3, 0, 0, 3, 0, 3,
+		0, 3, 0, 1, 1, 0, 3, 0, 1, 0, 0, 1,
+		0, 3, 0, 1, 7, 0, 3, 0, 0, 1, 1, 0,
+		0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0
+	};
+};
+
+template<typename T>
+struct type_cast_impl
+{
+	using Base = std::remove_const_t<std::remove_pointer_t<T>>;
+
+	static constexpr bool IsTechnoType(const AbstractType key) noexcept
+	{
+		return ((type_cast_data::BytesData[(int)key] & 4) != 0);
+	}
+
+	static constexpr bool IsObjectType(const AbstractType key) noexcept
+	{
+		return ((type_cast_data::BytesData[(int)key] & 2) != 0);
+	}
+
+	T operator()(const AbstractTypeClass* pAbstract) noexcept
+	{
+		if constexpr (Base::AbsID == AbstractType::Abstract)
+		{
+			if constexpr (Base::AbsTypeBase == AbstractBaseType::TechnoType)
+			{
+				return IsTechnoType(pAbstract->WhatAmI())
+					? static_cast<T>(pAbstract) : nullptr;
+			}
+			else
+				if constexpr (Base::AbsTypeBase == AbstractBaseType::ObjectType)
+				{
+					return IsObjectType(pAbstract->WhatAmI()) ? static_cast<T>(pAbstract) : nullptr;
+				}
+				else
+				{
+					return VTable::Get(pAbstract) == Base::AbsVTable ? static_cast<T>(pAbstract) : nullptr;
+				}
+
+		}
+		else
+		{
+			return VTable::Get(pAbstract) == Base::AbsVTable ? static_cast<T>(pAbstract) : nullptr;
+		}
+	}
+};
+
+template <typename T, bool Check = true>
+__forceinline T type_cast(AbstractTypeClass* pAbstract)
+{
+	using Base = std::remove_pointer_t<T>;
+	return const_cast<Base*>(type_cast<const Base*, Check>(static_cast<const AbstractTypeClass*>(pAbstract)));
+};
+
+template <typename T, bool Check = true>
+__forceinline const T type_cast(const AbstractTypeClass* pAbstract)
+{
+	using Base = std::remove_const_t<std::remove_pointer_t<T>>;
+
+	static_assert(std::is_const<std::remove_pointer_t<T>>::value,
+	"type_cast: T is required to be const.");
+
+	static_assert(std::is_base_of<AbstractTypeClass, Base>::value,
+	"type_cast: T is required to be a type derived from ObjectTypeClass.");
+
+	/*
+	static_assert(!std::bool_constant<Base::AbsID == AbstractType::Abstract && Base::AbsTypeBase == AbstractBaseType::Root>::value,
+	"type_cast: T from AbstractTypeClass is unsupported.");
+	*/
+
+	if constexpr (Check)
+		return pAbstract ? type_cast_impl<T>()(pAbstract) : nullptr;
+	else
+		return type_cast_impl<T>()(pAbstract);
 }
 
-template <> __forceinline const TechnoTypeClass* specific_cast(const AbstractClass* pAbstract)
-{
-	if (pAbstract && __specific_cast__is_any_of(pAbstract->WhatAmI()
-		, AbstractType::AircraftType
-		, AbstractType::BuildingType
-		, AbstractType::InfantryType
-		, AbstractType::UnitType
-	)) {
-		return reinterpret_cast<const TechnoTypeClass*>(pAbstract);
-	}
-	return nullptr;
-};
-
-template <> __forceinline const ObjectTypeClass* specific_cast(const AbstractClass* pAbstract)
-{
-	if (pAbstract && __specific_cast__is_any_of(pAbstract->WhatAmI()
-		, AbstractType::AnimType
-		, AbstractType::BulletType
-		, AbstractType::IsotileType
-		, AbstractType::OverlayType
-		, AbstractType::ParticleSystemType
-		, AbstractType::ParticleType
-		, AbstractType::TerrainType
-		, AbstractType::VoxelAnimType
-	)) {
-		return reinterpret_cast<const ObjectTypeClass*>(pAbstract);
-	}
-	return reinterpret_cast<const ObjectTypeClass*>(specific_cast<const TechnoTypeClass*>(pAbstract));
-};

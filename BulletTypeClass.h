@@ -19,6 +19,7 @@ class NOVTABLE BulletTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::BulletType;
+	static constexpr uintptr_t AbsVTable = 0x7E492C;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);

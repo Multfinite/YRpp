@@ -9,6 +9,13 @@
 //forward declarations
 class CCINIClass;
 
+enum class AbstractBaseType : int
+{
+	Root = 0,
+	ObjectType = 1,
+	TechnoType = 2
+};
+
 //Macro for the static Array of every AbstractTypeClass!
 #define ABSTRACTTYPE_ARRAY(class_name, address)	public:\
 	static constexpr constant_ptr<DynamicVectorClass<class_name*>, address> const Array{};\
@@ -42,6 +49,7 @@ class NOVTABLE AbstractTypeClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Abstract;
+	static const AbstractBaseType AbsTypeBase = AbstractBaseType::Root;
 
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<AbstractTypeClass*>, 0xA8E968u> const Array{};

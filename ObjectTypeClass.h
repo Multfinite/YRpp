@@ -10,6 +10,7 @@
 #include <Drawing.h>
 #include <IndexClass.h>
 
+
 //forward declarations
 class TechnoTypeClass;
 class HouseTypeClass;
@@ -19,6 +20,14 @@ class BuildingClass;
 class NOVTABLE ObjectTypeClass : public AbstractTypeClass
 {
 public:
+	static const AbstractBaseType AbsTypeBase = AbstractBaseType::ObjectType;
+	static constexpr constant_ptr<DynamicVectorClass<ObjectTypeClass*>, 0xAC1418u> const Array {};
+
+	static int __fastcall FindIndexById(const char* pID)
+	{
+		JMP_STD(0x5F9990);
+	}
+
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
