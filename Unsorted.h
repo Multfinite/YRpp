@@ -583,6 +583,9 @@ namespace Unsorted
 	static constexpr reference<TacticalSelectableStruct, 0xB0CEC8, 500> TacticalSelectables {};
 	static constexpr reference<bool, 0xB0FE65> TypeSelecting {};
 
+	static constexpr reference<CoordStruct, 0xB0EA90> TechnoDefaultCoords {};
+	static constexpr reference<CoordStruct, 0x89C848> BuildingDefaultCoords {};
+
 struct ColorPacker
 {
 	int _R_SHL;
