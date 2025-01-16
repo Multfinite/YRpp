@@ -31,7 +31,7 @@ class NOVTABLE AbstractTypeClass : public AbstractClass
 {
 public:
 	static constexpr uintptr_t AbsVTable = 0x7E2000;
-	static constexpr AbstractType AbsID = AbstractType::Abstract;
+	static constexpr RTTIType AbsID = RTTIType::Abstract;
 
 	static constexpr constant_ptr<DynamicVectorClass<AbstractTypeClass*>, 0xA8E968u> const Array{};
 public:
