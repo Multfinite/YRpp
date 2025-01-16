@@ -8,9 +8,9 @@ MSVC++
 */
 
 //Jump
-#define JMP(address) \
+#define JMP(address) { \
 	_asm{mov eax, address} \
-	_asm{jmp eax}
+	_asm{jmp eax} }
 
 //MSVC++ stackframes
 #define EPILOG_THISCALL \
