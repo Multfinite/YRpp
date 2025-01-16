@@ -62,3 +62,4 @@ virtual void alla(double malla) RX;
 #define NOVTABLE __declspec(novtable)
 
 struct noinit_t final {};
+struct fake_noinit_t final {};
