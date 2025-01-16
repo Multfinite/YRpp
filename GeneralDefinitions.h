@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GeneralStructures.h>
-#include <YRPPCore.h>
+#include "GeneralStructures.h"
+#include "YRPPCore.h"
 
 //Scalar Deleting Destructor Flags
 #define SDDTOR_NODELETE				0x00
@@ -17,7 +17,7 @@ enum class AbstractFlags : unsigned int
 
 MAKE_ENUM_FLAGS(AbstractFlags);
 
-enum class AbstractType : unsigned int
+enum class RTTIType : unsigned int
 {
 	None = 0,
 	Unit = 1,
@@ -94,6 +94,7 @@ enum class AbstractType : unsigned int
 	SlaveManager = 72,
 	DiskLaser = 73
 };
+using AbstractType = RTTIType;
 
 enum class RecordFlag : unsigned int
 {

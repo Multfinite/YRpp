@@ -2,9 +2,9 @@
 
 #include <windows.h>
 #include <atlbase.h>
-#include <GeneralDefinitions.h>
-
 #include <comdef.h>
+
+#include "GeneralDefinitions.h"
 
 __interface __declspec(uuid("5FF0CA70-8B12-11D1-B708-00A024DDAFD1"))
 ISwizzle : IUnknown

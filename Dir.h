@@ -3,6 +3,9 @@
 #include <bit>
 
 enum class DirType : unsigned char;
+#include "YRPPCore.h"
+#include "YRMath.h"
+
 
 // North -> 0x0000
 // South -> 0x8000
