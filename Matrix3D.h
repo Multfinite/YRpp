@@ -1,9 +1,9 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <GeneralStructures.h>
+#include "YRPPCore.h"
+#include "GeneralStructures.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 template <typename T>
 class Vector4D

@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <ArrayClasses.h>
-#include <GeneralStructures.h>
-#include <HashTable.h>
+#include "ArrayClasses.h"
+#include "GeneralStructures.h"
+#include "HashTable.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class LightConvertClass;
 

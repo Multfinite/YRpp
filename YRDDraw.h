@@ -1,7 +1,7 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <Helpers/CompileTime.h>
+#include "YRPPCore.h"
+#include "Helpers/CompileTime.h"
 
 //We don't want YR++ to depend on the DirectX7 SDK (yet), so
 //here are a few definitions taken from the MSDN:

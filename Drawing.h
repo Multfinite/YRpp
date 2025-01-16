@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <ColorScheme.h>
-#include <GeneralDefinitions.h>
-#include <Helpers/CompileTime.h>
-#include <Surface.h>
+#include "ColorScheme.h"
+#include "GeneralDefinitions.h"
+#include "Helpers/CompileTime.h"
+#include "Surface.h"
 
 #pragma pack(push, 1)
 class RGBClass

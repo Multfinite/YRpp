@@ -4,13 +4,13 @@
 
 #pragma once
 
-#include <ConvertClass.h>
-#include <GeneralStructures.h>
-#include <CCFileClass.h>
-#include <Memory.h>
-
-#include <FileFormats/_Loader.h>
-#include <Helpers/CompileTime.h>
+#include "ConvertClass.h"
+#include "GeneralStructures.h"
+#include "CCFileClass.h"
+#include "Memory.h"
+			 
+#include "FileFormats/_Loader.h"
+#include "Helpers/CompileTime.h"
 
 class DSurface;
 

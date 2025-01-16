@@ -1,7 +1,7 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <GenericList.h>
+#include "YRPPCore.h"
+#include "GenericList.h"
 
 /*
 * IndexClass, most impl from CCR

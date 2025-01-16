@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../ASMMacros.h"
+
 // HVA file
 
 class CCFileClass;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BasicStructures.h>
+#include "BasicStructures.h"
 
 /*
 *	SHP structs come in different forms: the plain file data, and a kind of
