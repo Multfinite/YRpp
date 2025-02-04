@@ -80,40 +80,129 @@ public:
 	virtual int __stdcall Fetch_ID() const override JMP_THIS(0x410220);
 	virtual void __stdcall Create_ID() override JMP_THIS(0x410230);
 
-	/*00:0x00*/virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_THIS(0x410260);
-	/*01:0x04*/virtual ULONG __stdcall AddRef() override JMP_THIS(0x410300);
-	/*02:0x08*/virtual ULONG __stdcall Release() override JMP_THIS(0x410310);
-	/*04:0x10*/virtual HRESULT __stdcall IsDirty() override JMP_THIS(0x410450);
-	/*07:0x1C*/virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x4103E0);
+	/*00:0x00*/
+	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_THIS(0x410260);
+	/*01:0x04*/
+	virtual ULONG __stdcall AddRef() override JMP_THIS(0x410300);
+	/*02:0x08*/
+	virtual ULONG __stdcall Release() override JMP_THIS(0x410310);
+	/*04:0x10*/
+	virtual HRESULT __stdcall IsDirty() override JMP_THIS(0x410450);
+	/*07:0x1C*/
+	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x4103E0);
 
-	/*08:0x20*/virtual ~AbstractClass(/*DestructorFlags flags*/) JMP_THIS(0x4105A0);
-	/*09:0x24*/virtual void Init() JMP_THIS(0x410470);
+	/*08:0x20*/
+	virtual ~AbstractClass(/*DestructorFlags flags*/) JMP_THIS(0x4105A0);
+
+	/*!
+	* @note original_name Init
+	* @note vtable_index 09:0x24
+	* @note address 0x410470
+	*/
+	virtual void Init() JMP_THIS(0x410470);
+
 	/*!
 	* @brief Invalidate pointers to instance (clear fields which containing it). Broadcast.
+	* @note original_name Clear_Occupy_Bit
 	* @note vtable_index 10:0x28
+	* @note address 0x410480
 	*/
 	virtual void Detach(AbstractClass* instance, bool all = true) JMP_THIS(0x410480);
-	/*11:0x2C*/virtual RTTIType KindOf() const = 0;
-	/*12:0x30*/virtual int SizeOf() const = 0;
-	/*13:0x34*/virtual void ComputeCRC(CRCEngine& crc) const JMP_THIS(0x410410);
-	/*14:0x38*/virtual int Owner() const  JMP_THIS(0x410490);
-	/*15:0x3C*/virtual HouseClass* OwningHouse() const JMP_THIS(0x4104A0);
-	/*16:0x40*/virtual int ArrayIndex() const JMP_THIS(0x4104B0);
-	/*17:0x44*/virtual bool IsInactive() const JMP_THIS(0x410440);
-	/*18:0x48*/virtual Coordinate Center() const JMP_THIS(0x4104C0);
+
+	/*!
+	* @note original_name Kind_Of
+	* @note vtable_index 11:0x2C
+	* @note address 0x0
+	*/
+	virtual RTTIType KindOf() const = 0;
+
+	/*!
+	* @note original_name Size_Of
+	* @note vtable_index 12:0x30
+	* @note address 0x0
+	*/
+	virtual int SizeOf() const = 0;
+
+	/*!
+	* @note original_name Compute_CRC
+	* @note vtable_index 13:0x34
+	* @note address 0x410410
+	*/
+	virtual void ComputeCRC(CRCEngine& crc) const JMP_THIS(0x410410);
+
+	/*!
+	* @brief returns owner house ID (index)
+	* @note original_name Owner
+	* @note vtable_index 14:0x38
+	* @note address 0x410490
+	*/
+	virtual int Owner() const  JMP_THIS(0x410490);
+
+	/*!
+	* @brief returns owner house
+	* @note original_name Owning_House
+	* @note vtable_index 15:0x3C
+	* @note address 0x4104A0
+	*/
+	virtual HouseClass* OwningHouse() const JMP_THIS(0x4104A0);
+
+	/*!
+	* @note original_name Get_Heap_ID
+	* @note vtable_index 16:0x40
+	* @note address 0x4104B0
+	*/
+	virtual int ArrayIndex() const JMP_THIS(0x4104B0);
+
+	/*!
+	* @note original_name Is_Inactive
+	* @note vtable_index 17:0x44
+	* @note address 0x410440
+	*/
+	virtual bool IsInactive() const JMP_THIS(0x410440);
+
+	/*!
+	* @note original_name Center_Coord
+	* @note vtable_index 18:0x48
+	* @note address 0x4104C0
+	*/
+	virtual Coordinate Center() const JMP_THIS(0x4104C0);
+
 	/*!
 	* @brief Where this is moving, or a building's dock for a techno. iow, a rendez-vous point.
+	* @note original_name Target_Coord
 	* @note vtable_index 19:0x4C
+	* @note address 0x4104F0
 	*/
 	virtual Coordinate Destination(TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
-	/*20:0x50*/virtual bool OnGround() const JMP_THIS(0x410520);
-	/*21:0x54*/virtual bool InAir() const JMP_THIS(0x410530);
+	
+	/*!
+	* @note original_name On_Ground
+	* @note vtable_index 20:0x50
+	* @note address 0x410520
+	*/
+	virtual bool OnGround() const JMP_THIS(0x410520);
+
+	/*!
+	* @note original_name In_Air
+	* @note vtable_index 21:0x54
+	* @note address 0x410530
+	*/
+	virtual bool InAir() const JMP_THIS(0x410530);
+
 	/*!
 	* @brief DO NOT USE THIS WHEN YOU NEED A CENTER. This is some specific-special functions. It used in BulletClass to get coords of the targets. It's overriden only in CellClass.
+	* @note original_name Get_Coord
 	* @note vtable_index 22:0x58
+	* @note address 0x410540
 	*/
 	virtual Coordinate TargetingCoord() const JMP_THIS(0x410540);
-	/*23:0x5C*/virtual void AI() JMP_THIS(0x410570);
+	/*!
+	* @brief Process object per frame.
+	* @note original_name AI
+	* @note vtable_index 23:0x5C
+	* @note address 0x410570
+	*/
+	virtual void AI() JMP_THIS(0x410570);
 
 	static void __fastcall DetachFromAll(AbstractClass* instance, bool all = true) JMP_THIS(0x7258D0); 
 	inline void DetachFromAll(bool all = true) { DetachFromAll(this, all); }

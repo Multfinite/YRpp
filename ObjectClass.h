@@ -4,12 +4,12 @@
 
 #pragma once
 
-#include <AbstractClass.h>
-#include <Audio.h>
-#include <ObjectTypeClass.h>
-#include <TagClass.h>
+#include "AbstractClass.h"
+#include "Audio.h"
+#include "ObjectTypeClass.h"
+#include "TagClass.h"
 
-#include <Helpers/Template.h>
+#include "Helpers/Template.h"
 
 struct SHPStruct;
 class LightConvertClass;
