@@ -22,9 +22,9 @@ public:
 	virtual ~NeuronClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
+	virtual RTTIType KindOf() const RT(AbstractType);
 
-	virtual int Size() const R0;
+	virtual int SizeOf() const R0;
 
 	//Constructor
 	NeuronClass() noexcept

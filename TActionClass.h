@@ -29,8 +29,8 @@ public:
 
 	//AbstractClass
 	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) override RX;
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
+	virtual RTTIType KindOf() const override RT(AbstractType);
+	virtual int SizeOf() const override R0;
 	virtual void ComputeCRC(CRCEngine& crc) const override RX;
 	virtual int GetArrayIndex() const override R0;
 

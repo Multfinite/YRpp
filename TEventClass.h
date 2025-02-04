@@ -26,8 +26,8 @@ public:
 	virtual ~TEventClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	// you are responsible for doing INI::ReadString and strtok'ing it before calling
 	// this func only calls strtok again, doesn't know anything about buffers

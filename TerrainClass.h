@@ -27,8 +27,8 @@ public:
 	virtual ~TerrainClass() RX;
 
 	//identification
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	//Constructor, Destructor
 	TerrainClass(TerrainTypeClass* tt, CellStruct coords) noexcept

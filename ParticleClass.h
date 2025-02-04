@@ -29,8 +29,8 @@ public:
 	virtual ~ParticleClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	//ParticleClass
 	virtual int vt_entry_1E8() R0;

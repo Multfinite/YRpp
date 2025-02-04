@@ -29,8 +29,8 @@ public:
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	//Destructor
 	virtual ~SuperClass() RX;

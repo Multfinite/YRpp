@@ -67,8 +67,8 @@ public:
 	virtual ~TiberiumClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	//TiberiumClass
 

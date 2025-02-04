@@ -43,7 +43,7 @@ public:
 	virtual ~TeleportLocomotionClass() RX;
 
 	//LocomotionClass
-	virtual	int Size() R0;
+	virtual	int SizeOf() R0;
 
 	//TeleportLocomotionClass
 	virtual void vt_entry_28(DWORD dwUnk) RX;

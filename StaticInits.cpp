@@ -14,7 +14,7 @@ void SlaveManagerClass::ZeroOutSlaves() {
 }
 
 int HouseClass::CountOwnedNow(const TechnoTypeClass* const pItem) const {
-	switch(pItem->WhatAmI()) {
+	switch(pItem->KindOf()) {
 	case AbstractType::BuildingType:
 		return this->CountOwnedNow(
 			static_cast<BuildingTypeClass const*>(pItem));
@@ -37,7 +37,7 @@ int HouseClass::CountOwnedNow(const TechnoTypeClass* const pItem) const {
 }
 
 int HouseClass::CountOwnedAndPresent(const TechnoTypeClass* const pItem) const {
-	switch(pItem->WhatAmI()) {
+	switch(pItem->KindOf()) {
 	case AbstractType::BuildingType:
 		return this->CountOwnedAndPresent(
 			static_cast<BuildingTypeClass const*>(pItem));
@@ -60,7 +60,7 @@ int HouseClass::CountOwnedAndPresent(const TechnoTypeClass* const pItem) const {
 }
 
 int HouseClass::CountOwnedEver(TechnoTypeClass const* const pItem) const {
-	switch(pItem->WhatAmI()) {
+	switch(pItem->KindOf()) {
 	case AbstractType::BuildingType:
 		return this->CountOwnedEver(
 			static_cast<BuildingTypeClass const*>(pItem));

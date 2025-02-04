@@ -33,7 +33,7 @@ __forceinline T specific_cast(const AbstractClass* pAbstract) {
 	static_assert(!std::is_abstract<Base>::value,
 		"specific_cast: Abstract types (not fully implemented classes) are not supported.");
 
-	if(pAbstract && pAbstract->WhatAmI() == Base::AbsID) {
+	if(pAbstract && pAbstract->KindOf() == Base::AbsID) {
 		return static_cast<T>(pAbstract);
 	}
 	return nullptr;

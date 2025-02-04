@@ -42,7 +42,7 @@ public:
 	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) { JMP_STD(0x55AB40); }
 
 	virtual ~LocomotionClass() = default;
-	virtual int Size() = 0;
+	virtual int SizeOf() = 0;
 
 	// ILocomotion
 	// virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) { JMP_STD(0x4D0510); }

@@ -20,8 +20,8 @@ public:
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
+	virtual RTTIType KindOf() const override RT(AbstractType);
+	virtual int SizeOf() const override R0;
 
 	//ObjectClass
 	virtual ObjectTypeClass* GetType() const override R0;

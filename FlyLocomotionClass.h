@@ -36,7 +36,7 @@ public:
 	virtual ~FlyLocomotionClass() RX;
 
 	//LocomotionClass
-	virtual	int Size() R0;
+	virtual	int SizeOf() R0;
 
 	//FlyLocomotionClass
 

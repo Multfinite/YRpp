@@ -34,8 +34,8 @@ public:
 
 	//AbstractClass
 	virtual void PointerExpired(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int	SizeOf() const R0;
 
 	//ObjectClass
 	//AnimClass

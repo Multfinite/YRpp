@@ -21,8 +21,8 @@ public:
 	virtual ~WaveClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	void Draw_Magnetic(const CoordStruct& xyzFrom, const CoordStruct& xyzTo)
 		{ JMP_THIS(0x762070); }

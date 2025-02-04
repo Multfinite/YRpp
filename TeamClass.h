@@ -42,8 +42,8 @@ public:
 		JMP_THIS(0x6E9050);
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	//Constructor
 	TeamClass(TeamTypeClass* pType, HouseClass* pOwner, int _unknown_44) noexcept

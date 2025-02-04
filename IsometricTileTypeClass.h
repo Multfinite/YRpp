@@ -18,8 +18,8 @@ public:
 
 	//AbstractClass
 	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) RX;
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 	virtual void ComputeCRC(CRCEngine& crc) const RX;
 
 	virtual int GetArrayIndex() const R0;

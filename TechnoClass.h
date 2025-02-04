@@ -508,7 +508,7 @@ public:
 		// what TS does
 		if (maxHealth > 0 && this->Health > maxHealth)
 		{
-			return (this->WhatAmI() == AbstractType::Building) ? 3 : 1;
+			return (this->KindOf() == AbstractType::Building) ? 3 : 1;
 		}
 
 		return this->GetIonCannonValue(difficulty);

@@ -33,8 +33,8 @@ public:
 	virtual ~TeamTypeClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
 
 	static bool LoadFromINIList(CCINIClass *pINI, bool IsGlobal)
 		{ PUSH_VAR8(IsGlobal); SET_REG32(ECX, pINI); CALL(0x6F19B0); }

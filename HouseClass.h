@@ -212,8 +212,8 @@ public:
 	virtual ~HouseClass() RX;
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int	SizeOf() const R0;
 
 	bool IsAlliedWith(int idxHouse) const
 		//{ JMP_THIS(0x4F9A10); }
@@ -597,7 +597,7 @@ public:
 	}
 
 	bool HasFactoryForObject(const TechnoTypeClass* const pItem) const {
-		auto const abs = pItem->WhatAmI();
+		auto const abs = pItem->KindOf();
 		auto const naval = pItem->Naval;
 		for(auto const& pBld : this->Buildings) {
 			auto pType = pBld->Type;

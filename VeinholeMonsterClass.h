@@ -70,9 +70,9 @@ public:
 	virtual ~VeinholeMonsterClass() JMP_THIS(0x74C9F0);
 
 	//AbstractClass
-	virtual AbstractType WhatAmI() const override JMP_THIS(0x74F310);
-	virtual int Size() const override JMP_THIS(0x74F320);
 	virtual void Update() override JMP_THIS(0x74CE50);
+	virtual RTTIType KindOf() const override JMP_THIS(0x74F310);
+	virtual int SizeOf() const override JMP_THIS(0x74F320);
 
 	//ObjectClass
 	virtual void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override
