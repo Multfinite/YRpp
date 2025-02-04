@@ -32,7 +32,7 @@ public:
 	void StartTimer10(double time)
 		{ JMP_THIS(0x4A5240); }
 
-	void Update()
+	void AI()
 		{ JMP_THIS(0x4A5290); }
 
 	double PercentageDone()

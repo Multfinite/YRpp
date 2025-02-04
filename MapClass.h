@@ -165,7 +165,7 @@ public:
 	void RemoveObject(ObjectClass* pObject)
 		{ JMP_THIS(0x55BAE0); }
 
-	void Update()
+	void AI()
 		{ JMP_THIS(0x55AFB0); }
 };
 

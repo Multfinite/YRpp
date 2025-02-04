@@ -70,9 +70,9 @@ public:
 	virtual ~VeinholeMonsterClass() JMP_THIS(0x74C9F0);
 
 	//AbstractClass
-	virtual void Update() override JMP_THIS(0x74CE50);
 	virtual RTTIType KindOf() const override JMP_THIS(0x74F310);
 	virtual int SizeOf() const override JMP_THIS(0x74F320);
+	virtual void AI() override JMP_THIS(0x74CE50);
 
 	//ObjectClass
 	virtual void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override
@@ -182,7 +182,7 @@ public:
 		for (auto const& pVeins : *Array())
 		{
 			if (!pVeins->InLimbo)
-				pVeins->Update();
+				pVeins->AI();
 		}
 	}
 

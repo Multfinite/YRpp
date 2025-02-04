@@ -29,7 +29,7 @@ public:
 	}
 
 	// returns whether the value changed.
-	bool Update()
+	bool AI()
 	{
 		if (Timer.Expired() && Rate != 0)
 		{

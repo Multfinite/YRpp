@@ -29,7 +29,7 @@ public:
 	virtual ~ToolTipManager() RX;
 
 	// ToolTipManager
-	virtual bool Update(ToolTipManagerData& from) R0;
+	virtual bool AI(ToolTipManagerData& from) R0;
 	virtual void MarkToRedraw(ToolTipManagerData& from) RX;
 	virtual void Draw(bool bOnSidebar) RX;
 	virtual void DrawText(ToolTipManagerData& from) RX;

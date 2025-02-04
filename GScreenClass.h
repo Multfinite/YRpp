@@ -32,7 +32,7 @@ public:
 	virtual void Init_Clear() RX;
 	virtual void Init_IO() RX;
 	virtual void GetInputAndUpdate(DWORD& outKeyCode, int& outMouseX, int& outMouseY) RX;
-	virtual void Update(const int& keyCode, const Point2D& mouseCoords) RX;
+	virtual void AI(const int& keyCode, const Point2D& mouseCoords) RX;
 	virtual bool SetButtons(GadgetClass* pGadget) R0;
 	virtual bool AddButton(GadgetClass* pGadget) R0;
 	virtual bool RemoveButton(GadgetClass* pGadget) R0;

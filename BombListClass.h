@@ -16,7 +16,7 @@ public:
 	static constexpr reference<BombListClass, 0x87F5D8u> const Instance{};
 
 	// draws all the visible bombs, expires the outdated ones
-	void Update()
+	void AI()
 		{ JMP_THIS(0x438BF0); }
 
 	// the main one, ivan planting a bomb (creates a BombClass inside)

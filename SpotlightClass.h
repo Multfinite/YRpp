@@ -18,7 +18,7 @@ public:
 	void Draw()
 		{ JMP_THIS(0x5FF850); }
 
-	void Update()
+	void AI()
 		{ JMP_THIS(0x5FF320); }
 
 	static void __fastcall DrawAll()

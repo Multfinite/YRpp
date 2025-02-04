@@ -30,7 +30,7 @@ public:
 	void Remove(AircraftClass* pAircraft)
 		{ JMP_THIS(0x54E590); }
 
-	void Update()
+	void AI()
 		{ JMP_THIS(0x54E4D0); }
 
 	void Clear()

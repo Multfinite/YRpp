@@ -175,7 +175,7 @@ public:
 	static void PrintMessage()
 		{ CALL(0x53AE00); }
 
-	static void Update()
+	static void AI()
 		{ JMP_STD(0x53A6C0); }
 
 	static void Init()
@@ -194,7 +194,7 @@ public:
 		{ PUSH_VAR32(coords); SET_REG32(ECX, pOwner);
 			CALL(0x53AE50); }
 
-	static void Update()
+	static void AI()
 		{ CALL(0x53AF40); }
 
 	static void Fire()
@@ -217,7 +217,7 @@ public:
 		{ SET_REG32(ECX, duration);
 			CALL(0x53B460); }
 
-	static void Update()
+	static void AI()
 		{ CALL(0x53B560); }
 
 	static bool Active()

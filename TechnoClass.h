@@ -152,7 +152,7 @@ struct FlashData
 	int DurationRemaining;
 	bool FlashingNow;
 
-	bool Update()
+	bool AI()
 	{ JMP_THIS(0x4CC770); }
 };
 
@@ -172,7 +172,7 @@ struct RecoilData
 	RecoilState State;
 	int TravelFramesLeft;
 
-	void Update()
+	void AI()
 	{ JMP_THIS(0x70ED10); }
 
 	void Fire()
