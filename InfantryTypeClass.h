@@ -56,8 +56,8 @@ public:
 	virtual int	SizeOf() const R0;
 
 	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
 
 	//Constructor
 	InfantryTypeClass(const char* pID) noexcept

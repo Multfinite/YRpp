@@ -34,8 +34,8 @@ public:
 	//ObjectTypeClass
 	virtual CoordStruct* vt_entry_6C(CoordStruct* pDest,CoordStruct* pSrc) const R0;
 
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
+	virtual bool InstantiateAt(CellStruct* pMapCoords,HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
 
 	//OverlayTypeClass
 	virtual void Draw(Point2D* pClientCoords, RectangleStruct* pClipRect, int nFrame) RX;

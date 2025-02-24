@@ -36,8 +36,8 @@ public:
 
 	//AbstractTypeClass
 	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
+	virtual bool InstantiateAt(CellStruct* pMapCoords,HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* owner) R0;
 
 	bool Rotates() const {
 		return !this->NoRotate;

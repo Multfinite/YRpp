@@ -28,8 +28,8 @@ public:
 	virtual int	SizeOf() const R0;
 
 	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
 
 	//AnimTypeClass
 	virtual SHPStruct* LoadImage() R0;

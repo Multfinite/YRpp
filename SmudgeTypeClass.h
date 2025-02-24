@@ -29,8 +29,8 @@ public:
 	virtual int SizeOf() const R0;
 
 	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
 
 	//SmudgeTypeClass
 	virtual void DrawIt(const Point2D& Point, const RectangleStruct& Rect, int SmudgeData, int Height, const CellStruct& MapCoords) RX;

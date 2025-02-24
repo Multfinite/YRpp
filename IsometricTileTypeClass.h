@@ -27,9 +27,9 @@ public:
 	//ObjectTypeClass
 	virtual CoordStruct* vt_entry_6C(CoordStruct* pDest, CoordStruct* pSrc) const R0;
 
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
 
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
 	virtual void vt_entry_90(DWORD dwUnk) RX;
 
 	virtual SHPStruct* GetImage() const R0;

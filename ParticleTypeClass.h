@@ -30,8 +30,8 @@ public:
 	virtual int SizeOf() const R0;
 
 	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* mcoords, HouseClass* owner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
+	virtual bool InstantiateAt(CellStruct* mcoords, HouseClass* owner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* owner) R0;
 
 	//Destructor
 	virtual ~ParticleTypeClass() RX;
