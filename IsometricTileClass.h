@@ -24,7 +24,7 @@ public:
 	virtual int SizeOf() const override R0;
 
 	//ObjectClass
-	virtual ObjectTypeClass* GetType() const override R0;
+	virtual ObjectTypeClass* Type() const override R0;
 	virtual bool Limbo() override R0;
 	virtual bool Unlimbo(const CoordStruct& Crd, DirType dFaceDir) override R0;
 	virtual void Draw(Point2D* pLocation, RectangleStruct* pBounds) const override RX;

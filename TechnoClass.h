@@ -363,7 +363,7 @@ public:
 	// smooth operator
 	const char* get_ID() const
 	{
-		auto const pType = this->GetType();
+		auto const pType = this->Type();
 		return pType ? pType->get_ID() : nullptr;
 	}
 
