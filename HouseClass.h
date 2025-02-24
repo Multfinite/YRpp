@@ -235,7 +235,7 @@ public:
 	bool IsAlliedWith(ObjectClass const* pObject) const
 		//	{ JMP_THIS(0x4F9A90); }
 	{
-		return pObject && this->IsAlliedWith(pObject->GetOwningHouse());
+		return pObject && this->IsAlliedWith(pObject->OwningHouse());
 	}
 
 	bool IsAlliedWith(AbstractClass const* pAbstract) const
