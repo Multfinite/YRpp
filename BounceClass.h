@@ -29,12 +29,12 @@ public:
 			double maxVelocity, const Vector3D<float>& velocity, double angularVelocity)
 		{ JMP_THIS(0x4397E0); }
 
-	CoordStruct* GetCoords(CoordStruct* pBuffer) const
+	CoordStruct* Center(CoordStruct* pBuffer) const
 		{ JMP_THIS(0x4399A0); }
 
-	CoordStruct GetCoords() const {
+	CoordStruct Center() const {
 		CoordStruct buffer;
-		this->GetCoords(&buffer);
+		this->Center(&buffer);
 		return buffer;
 	}
 

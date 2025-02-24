@@ -68,7 +68,7 @@ public:
 	virtual int GetY()
 		{ JMP_THIS(0x7BA350); }
 
-	virtual Point2D* GetCoords(Point2D *buffer)
+	virtual Point2D* Center(Point2D *buffer)
 		{ JMP_THIS(0x7BA360); }
 
 	virtual void SetCoords(Point2D buffer)

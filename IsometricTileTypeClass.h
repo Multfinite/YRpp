@@ -25,7 +25,7 @@ public:
 	virtual int GetArrayIndex() const R0;
 
 	//ObjectTypeClass
-	virtual CoordStruct* vt_entry_6C(CoordStruct* pDest, CoordStruct* pSrc) const R0;
+	virtual CoordStruct* FixupCoord(CoordStruct* pDest, CoordStruct* pSrc) const R0;
 
 	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
 

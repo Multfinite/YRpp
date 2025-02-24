@@ -100,11 +100,11 @@ public:
 		{ JMP_THIS(0x46B310); }
 
 	// helpers
-	CoordStruct GetTargetCoords() const {
+	CoordStruct TargetCoord() const {
 		if(this->Target) {
-			return this->Target->GetCoords();
+			return this->Target->Center();
 		} else {
-			return this->GetCoords();
+			return this->Center();
 		}
 	}
 
