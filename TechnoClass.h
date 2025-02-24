@@ -195,8 +195,60 @@ public:
 	//Destructor
 	virtual ~TechnoClass() RX;
 
-	//ObjectClass
-	virtual bool Limbo() override JMP_THIS(0x6F6AC0);
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x70BF50);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x70C250);
+	void Init() override JMP_THIS(0x6F3F40);
+	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x70C270);
+	int Owner() const override JMP_THIS(0x6F9DB0);
+	HouseClass* OwningHouse() const override JMP_THIS(0x6F9DC0);
+	void AI() override JMP_THIS(0x6F9E50);
+	void DetachAnim(AnimClass* anim) override JMP_THIS(0x710410);
+	bool IsSelectable() const override JMP_THIS(0x6F32D0);
+	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x703860);
+	Action MouseOverCell(CellStruct const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x6FFEC0);
+	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x700600);
+	TechnoTypeClass* TechnoType() const override JMP_THIS(0x6F3270);
+	DWORD Ownable() const override JMP_THIS(0x708B30);
+	bool Repairable() const override JMP_THIS(0x701140);
+	bool IsActive() const override JMP_THIS(0x7010D0);
+	bool IsControllable() const override JMP_THIS(0x700C40);
+	CoordStruct FLH(int idxWeapon, CoordStruct BaseCoords) const override JMP_THIS(0x6F3AD0);
+	bool IsDisguised() const override JMP_THIS(0x41C010);
+	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x41C020);
+	bool Limbo() override JMP_THIS(0x6F6AC0);
+	bool Unlimbo(const CoordStruct& position, Dir256 dir) override JMP_THIS(0x6F6CA0);
+	void RegisterKillByObject(ObjectClass const* destroyedBy) override JMP_THIS(0x702D40);
+	void RegisterKillByHouse(HouseClass const* destroyedBy) override JMP_THIS(0x703230);
+	void Reveal() override JMP_THIS(0x703850);
+	KickOutResult KickOutUnit(TechnoClass* pTechno, CellStruct Cell) override JMP_THIS(0x7099D0);
+	void DrawBehind(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x6F60D0);
+	void DrawExtras(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x6F5190);
+	void Undiscover() override JMP_THIS(0x6F4A40);
+	void See(bool incremental, int32_t arg_4) override JMP_THIS(0x70ADC0);
+	bool Mark(MarkType value) override JMP_THIS(0x6F4A70);
+	bool CanBeSelectedNow() const override JMP_THIS(0x6FC030);
+	void ClickedAsTarget(int duration) override JMP_THIS(0x6F9DD0);
+	bool Select() override JMP_THIS(0x6FBFA0);
+	DamageState IronCurtain(int nDuration, HouseClass* pSource, bool ForceShield) override JMP_THIS(0x70E2B0);
+	void StopAirstrikeTimer() override JMP_THIS(0x70E340);
+	void StartAirstrikeTimer(int duration) override JMP_THIS(0x70E300);
+	bool IsIronCurtained() const override JMP_THIS(0x41BF40);
+	bool InRange(Coordinate coord, int idxWeapon) const override JMP_THIS(0x6F7970);
+	int WeaponRange(int idxWeapon) const override JMP_THIS(0x7012C0);
+	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x701900);
+	void Destroy() override JMP_THIS(0x710460);
+	DWORD PointsValue() const override JMP_THIS(0x707DD0);
+	void UpdatePosition(PCPType how) override JMP_THIS(0x6F5090);
+	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x6F4AB0);
+	bool DiscoveredBy(HouseClass* pHouse) override JMP_THIS(0x6F4960);
+	bool IsBeingWarpedOut() const override JMP_THIS(0x70C5B0);
+	bool IsWarpingIn() const override JMP_THIS(0x70C5C0);
+	bool IsWarpingSomethingOut() const override JMP_THIS(0x70C5D0);
+	bool IsNotWarping() const override JMP_THIS(0x70C5F0);
+	LightConvertClass* RemapColor() const override JMP_THIS(0x705D70);
+	void OverrideMission(Mission mission, AbstractClass* target, AbstractClass* destination) override JMP_THIS(0x7013A0);
+	bool RestoreMission() override JMP_THIS(0x7013E0);
 
 	/*!
 	* @note original_name Is_Unit_Factory
