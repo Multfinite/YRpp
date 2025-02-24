@@ -17,7 +17,7 @@ public:
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
 	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) RX;
+	virtual void Detach(AbstractClass* pAbstract, bool removed) RX;
 	virtual RTTIType KindOf() const RT(AbstractType);
 	virtual int SizeOf() const R0;
 	virtual void ComputeCRC(CRCEngine& crc) const RX;

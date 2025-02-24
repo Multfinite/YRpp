@@ -33,7 +33,7 @@ public:
 	virtual ~AnimClass() RX;
 
 	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
+	virtual void Detach(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
 	virtual RTTIType KindOf() const RT(AbstractType);
 	virtual int	SizeOf() const R0;
 

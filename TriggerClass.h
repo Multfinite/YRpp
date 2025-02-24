@@ -30,7 +30,7 @@ public:
 	virtual ~TriggerClass() RX;
 
 	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) override RX;
+	virtual void Detach(AbstractClass* pAbstract, bool removed) override RX;
 	virtual RTTIType KindOf() const override RT(AbstractType);
 	virtual int SizeOf() const override R0;
 	virtual void ComputeCRC(CRCEngine& crc) const override RX;
