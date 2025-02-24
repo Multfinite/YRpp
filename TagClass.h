@@ -1,6 +1,6 @@
 #pragma once
 
-#include <TagTypeClass.h>
+#include "TagTypeClass.h"
 
 //forward declarations
 class TriggerClass;

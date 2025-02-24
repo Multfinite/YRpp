@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
-#include <ScriptTypeClass.h>
-#include <TaskForceClass.h>
+#include "AbstractTypeClass.h"
+#include "ScriptTypeClass.h"
+#include "TaskForceClass.h"
 
 //forward declarations
 class FootClass;

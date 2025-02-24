@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <StageClass.h>
+#include "GeneralDefinitions.h"
+#include "StageClass.h"
 
 class LaserDrawClass
 {

@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <ObjectTypeClass.h>
-#include <RulesClass.h>
-#include <WeaponTypeClass.h>
+#include "ObjectTypeClass.h"
+#include "RulesClass.h"
+#include "WeaponTypeClass.h"
 
 //forward declarations
 class AircraftTypeClass;

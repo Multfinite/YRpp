@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <ObjectClass.h>
+#include "ObjectClass.h"
 
 class CCINIClass;
 

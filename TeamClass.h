@@ -1,6 +1,6 @@
 #pragma once
 
-#include <TeamTypeClass.h>
+#include "TeamTypeClass.h"
 
 class HouseClass;
 class FootClass;

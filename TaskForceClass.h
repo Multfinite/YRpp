@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
 //forward declarations
 class TechnoTypeClass;

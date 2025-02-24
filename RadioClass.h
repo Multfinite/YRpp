@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <MissionClass.h>
+#include "MissionClass.h"
 
 //forward declarations
 class TechnoClass;
