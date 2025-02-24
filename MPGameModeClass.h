@@ -166,7 +166,7 @@ public:
 	virtual void vt_entry_74(DWORD dwUnk1, DWORD dwUnk2)
 		{ }
 
-	virtual void vt_entry_78(DWORD dwUnk1)
+	virtual void PixelDimensions(DWORD dwUnk1)
 		{ }
 
 	virtual bool UnfixAlliances()
