@@ -11,7 +11,10 @@
 //used for cell coordinates/vectors
 using CellStruct = Vector2D<short>;
 using Point2D = Vector2D<int>;
-using CoordStruct = Vector3D<int>;
+using Point3D = Vector3D<int>;
+using Point3Df = Vector3D<float>;
+using Coordinate = Vector3D<int>;
+using CoordStruct = Coordinate;
 
 struct BasePlanningCell {
 	int Weight;
