@@ -9,7 +9,8 @@
 #include "Facing.h"
 
 //used for cell coordinates/vectors
-using CellStruct = Vector2D<short>;
+using Cell = Vector2D<short>;
+using CellStruct = Cell;
 using Point2D = Vector2D<int>;
 using Point3D = Vector3D<int>;
 using Point3Df = Vector3D<float>;
