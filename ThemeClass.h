@@ -35,7 +35,7 @@ public:
 	const char* GetFilename(unsigned int index) const
 		JMP_THIS(0x720E10);
 
-	const wchar_t* GetUIName(unsigned int index) const
+	const wchar_t* FullName(unsigned int index) const
 		JMP_THIS(0x7209B0);
 
 	int GetLength(unsigned int index) const

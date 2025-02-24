@@ -151,7 +151,7 @@ public:
 		{ JMP_THIS(0x47FB90); }
 
 	// don't laugh, it returns the uiname of contained tiberium... which nobody ever sets
-	const wchar_t* GetUIName() const
+	const wchar_t* FullName() const
 		{ JMP_THIS(0x484FF0); }
 
 	// returns whether a cell behaves as if it contained overlay (for gates and wall towers)
