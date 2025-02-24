@@ -20,7 +20,7 @@ public:
 		DesiredFacing = facing;
 	}
 
-	explicit FacingClass(DirType dir) noexcept
+	explicit FacingClass(Dir256 dir) noexcept
 	{
 		DesiredFacing.SetDir(dir);
 	}
@@ -121,7 +121,7 @@ public:
 	{
 		if (rate > 127)
 			rate = 127;
-		ROT.SetDir(static_cast<DirType>(rate));
+		ROT.SetDir(static_cast<Dir256>(rate));
 	}
 
 private:

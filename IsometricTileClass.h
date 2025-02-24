@@ -26,7 +26,7 @@ public:
 	//ObjectClass
 	virtual ObjectTypeClass* Type() const override R0;
 	virtual bool Limbo() override R0;
-	virtual bool Unlimbo(const CoordStruct& Crd, DirType dFaceDir) override R0;
+	virtual bool Unlimbo(const CoordStruct& Crd, Dir256 dFaceDir) override R0;
 	virtual void Draw(Point2D* pLocation, RectangleStruct* pBounds) const override RX;
 
 	//Destructor

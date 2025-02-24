@@ -105,7 +105,7 @@ enum class RecordFlag : unsigned int
 
 MAKE_ENUM_FLAGS(RecordFlag);
 
-enum class DirType : unsigned char
+enum class Dir256 : unsigned char
 {
 	North = 0 << 5,
 	NorthEast = 1 << 5,
@@ -117,7 +117,7 @@ enum class DirType : unsigned char
 	NorthWest = 7 << 5,
 	Max = 255,
 };
-MAKE_ENUM_FLAGS(DirType);
+MAKE_ENUM_FLAGS(Dir256);
 
 enum class Action : unsigned int
 {
