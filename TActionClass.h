@@ -32,7 +32,7 @@ public:
 	virtual RTTIType KindOf() const override RT(AbstractType);
 	virtual int SizeOf() const override R0;
 	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-	virtual int GetArrayIndex() const override R0;
+	virtual int ArrayIndex() const override R0;
 
 	// you are responsible for doing INI::ReadString and strtok'ing it before calling
 	// this func only calls strtok again, doesn't know anything about buffers

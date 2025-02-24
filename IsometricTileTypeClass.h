@@ -22,7 +22,7 @@ public:
 	virtual int SizeOf() const R0;
 	virtual void ComputeCRC(CRCEngine& crc) const RX;
 
-	virtual int GetArrayIndex() const R0;
+	virtual int ArrayIndex() const R0;
 
 	//ObjectTypeClass
 	virtual CoordStruct* FixupCoord(CoordStruct* pDest, CoordStruct* pSrc) const R0;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
 //forward declarations
 class CCINIClass;
@@ -30,7 +30,7 @@ public:
 	virtual void ComputeCRC(CRCEngine& crc) const override RX;
 
 	//AbstractTypeClass
-	virtual int GetArrayIndex() const override R0;
+	virtual int ArrayIndex() const override R0;
 	virtual bool LoadFromINI(CCINIClass* pINI) override R0;
 	virtual bool SaveToINI(CCINIClass* pINI) override R0;
 
