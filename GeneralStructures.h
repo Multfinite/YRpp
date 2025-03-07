@@ -37,3 +37,10 @@ struct BasePlanningCellContainer {
 	static int __cdecl Comparator(const void *, const void *)
 		{ JMP_STD(0x5108F0); }
 };
+
+struct __declspec(align(4)) VoxelCalcStruct
+{
+	RectangleStruct rect;
+	int datalength;
+	int spanmaybe;
+};

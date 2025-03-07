@@ -18,6 +18,7 @@
 #include "PlanningTokenClass.h"
 #include "GeneralStructures.h"
 #include "Timer.h"
+#include "EBolt.h"
 
 //forward declarations
 class AirstrikeClass;
@@ -1502,14 +1503,660 @@ public:
 	*/
 	virtual bool RefreshMegaMission() JMP_THIS(0x70F110);
 
-	//non-virtual
+	/* --------------- */
 
-	// (re-)starts the reload timer
-	void StartReloading()
-	{ JMP_THIS(0x6FB080); }
+	/*!
+	* @brief (re-)starts the reload timer
+	* @note original_name Reload_Timer
+	* @note address 0x6FB080
+	*/
+	void StartReloading() JMP_THIS(0x6FB080);
 
-	bool ShouldSuppress(CellStruct* coords) const
-	{ JMP_THIS(0x6F79A0); }
+	/*!
+	* @brief
+	* @note original_name Area_Modify
+	* @note address 0x6F79A0
+	*/
+	bool ShouldSuppress(CellStruct* coords) const JMP_THIS(0x6F79A0);
+
+	/*!
+	* @brief
+	* @note original_name Time_To_Build
+	* @note address 0x6F47A0
+	*/
+	int TimeToBuild() const JMP_THIS(0x6F47A0);
+
+	/*!
+	* @brief
+	* @note original_name Is_Mind_Controlled_By_Unit
+	* @note address 0x7105E0
+	*/
+	bool IsMindControlled() const JMP_THIS(0x7105E0);
+
+	/*!
+	* @brief
+	* @note original_name Laser_Zap
+	* @note address 0x6FD210
+	*/
+	LaserDrawClass* CreateLaser(ObjectClass* pTarget, int idxWeapon, WeaponTypeClass* pWeapon, const CoordStruct& Coords) JMP_THIS(0x6FD210);
+
+	/*!
+	* @brief Cell->AddThreat(this->Owner, -this->ThreatPosed);
+	* @brief this->ThreatPosed = 0;
+	* @brief int Threat = this->CalculateThreat(); // this is another gem of a function, to be revealed another time...
+	* @brief this->ThreatPosed = Threat;
+	* @brief Cell->AddThreat(this->Owner, Threat);
+	* @note original_name Calc_Threats
+	* @note address 0x70F6E0
+	*/
+	void UpdateThreatInCell(CellClass* Cell) JMP_THIS(0x70F6E0);
+
+	/*!
+	* @brief Used in TryAutoTargetObject
+	* @brief CanTargetWhatAmI is a bitfield, if(!(CanTargetWhatAmI & (1 << tgt->WhatAmI())) { fail; }
+	* @note original_name Evaluate_Object
+	* @note address 0x6F7CA0
+	*/
+	bool CanAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, int wantedDistance, TechnoClass* pTarget, int* pThreatPosed, DWORD dwUnk, CoordStruct* pSourceCoords) const JMP_THIS(0x6F7CA0);
+
+	/*!
+	* @brief called by AITeam Attack Target Type and autoscan
+	* @note original_name Evaluate_Cell
+	* @note address 0x6F8960
+	*/
+	bool TryAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, CellStruct* pCoords, DWORD dwUnk1, DWORD* dwUnk2, int* pThreatPosed, DWORD dwUnk3) JMP_THIS(0x6F8960);
+
+	/*!
+	* @brief
+	* @note original_name Activate
+	* @note address 0x70FBE0
+	*/
+	void Reactivate() JMP_THIS(0x70FBE0);
+
+	/*!
+	* @brief
+	* @note original_name Deactivate
+	* @note address 0x70FC90
+	*/
+	void Deactivate() JMP_THIS(0x70FC90);
+
+	/*!
+	* @brief this should be the transport, but it's unused
+	* @brief marks passenger as "InOpenTopped" for targeting, range scanning and other purposes
+	* @note original_name Process_Open_Topped_710470
+	* @note address 0x710470
+	*/
+	void EnteredOpenTopped(TechnoClass* pWho) JMP_THIS(0x710470);
+
+	/*!
+	* @brief this should be the transport, but it's unused
+	* @brief reverses the above
+	* @note original_name Disable_Open_Topped
+	* @note address 0x7104A0
+	*/
+	void ExitedOpenTopped(TechnoClass* pWho) JMP_THIS(0x7104A0);
+
+	/*!
+	* @brief lled when the source unit dies - passengers are about to get kicked out, this basically calls ->ExitedOpenTransport on each passenger
+	* @note original_name Disable_Open_Topped_For_Cargo
+	* @note address 0x7104C0
+	*/
+	void MarkPassengersAsExited() JMP_THIS(0x7104C0);
+
+	/*!
+	* @brief for gattlings
+	* @note original_name Set_Gattling_Stage
+	* @note address 0x70DDD0
+	*/
+	void SetCurrentWeaponStage(int idx) JMP_THIS(0x70DDD0);
+
+	/*!
+	* @brief
+	* @note original_name Set_Archive
+	* @note address 0x70C610
+	*/
+	void SetArchiveTarget(AbstractClass* pTarget) JMP_THIS(0x70C610);
+
+	/*!
+	* @brief
+	* @note original_name Draw_Voxel_Shadow
+	* @note address 0x706BD0
+	*/
+	void DrawVoxelShadow(VoxelStruct* vxl, int shadow_index, VoxelIndexKey vxl_index_key, IndexClass<ShadowVoxelIndexKey, VoxelCacheStruct*>* shadow_cache, RectangleStruct* bound, Point2D* a3, Matrix3D* matrix, bool again, Surface* surface, Point2D shadow_point) JMP_THIS(0x706BD0);
+
+	/*!
+	* @brief
+	* @note original_name Set_Gattling_Value
+	* @note address 0x70DE00
+	*/
+	int SetGattlingValue(int State) JMP_THIS(0x70DE00);
+
+	/*!
+	* @brief
+	* @note original_name Kill_Cargo
+	* @note address 0x707CB0
+	*/
+	void KillPassengers(TechnoClass* pSource) JMP_THIS(0x707CB0);
+
+	/*!
+	* @brief
+	* @note original_name Get_True_Owner
+	* @note address 0x70F820
+	*/
+	HouseClass* GetOriginalOwner() const JMP_THIS(0x70F820);
+
+	/*!
+	* @brief returns the house that created this object (factoring in Mind Control)
+	* @note original_name Fire_Death_Weapon
+	* @note address 0x70D690
+	*/
+	void FireDeathWeapon(int additionalDamage) JMP_THIS(0x70D690);
+
+	/*!
+	* @brief
+	* @note original_name Has_Ability
+	* @note address 0x70D0D0
+	*/
+	bool HasAbility(Ability ability) const JMP_THIS(0x70D0D0);
+
+	/*!
+	* @brief
+	* @note original_name Tint_Stage
+	* @note address 0x70E360
+	*/
+	int GetEffectTintIntensity(int currentIntensity) JMP_THIS(0x70E360);
+
+	/*!
+	* @brief
+	* @note original_name Iron_Tint_Stage
+	* @note address 0x70E380
+	*/
+	int GetInvulnerabilityTintIntensity(int currentIntensity) JMP_THIS(0x70E380);
+
+	/*!
+	* @brief
+	* @note original_name Airstrike_Tint_Stage
+	* @note address 0x70E4B0
+	*/
+	int GetAirstrikeTintIntensity(int currentIntensity) JMP_THIS(0x70E4B0);
+
+	/*!
+	* @brief
+	* @note original_name Combat_Damage
+	* @note address 0x6F3970
+	*/
+	int CombatDamage(int nWeaponIndex) const JMP_THIS(0x6F3970);
+
+	/*!
+	* @brief
+	* @note original_name Planning_6385C0
+	* @note address 0x6385C0
+	*/
+	bool TryNextPlanningTokenNode() JMP_THIS(0x6385C0);
+
+	/*!
+	* @brief  Invokes AI response on their 'base' being attacked. 
+	* @bruef Used by buildings, ToProtect=true technos and Whiner=true team members.
+	* @note original_name Base_Is_Attacked
+	* @note address 0x708080
+	*/
+	void BaseIsAttacked(TechnoClass* pEnemy) JMP_THIS(0x708080);
+
+	/*!
+	* @note original_name Airstrike_Timer_AI
+	* @note address 0x70E920
+	*/
+	void AirstrikeTimerAI() JMP_THIS(0x70E920);
+
+	/*!
+	* @note original_name As_Building
+	* @note address 0x459F40
+	*/
+	BuildingClass* AsBuilding() JMP_THIS(0x459F40);
+
+	/*!
+	* @note original_name Beam
+	* @note address 0x6FD620
+	*/
+	RadBeam* Beam(AbstractClass* target, int32_t type) JMP_THIS(0x6FD620);
+
+	/*!
+	* @note original_name Bridge_Stuff_703CC0
+	* @note address 0x703CC0
+	*/
+	bool BridgeStuff_703CC0() JMP_THIS(0x703CC0);
+
+	/*!
+	* @note original_name Calc_Threat
+	* @note address 0x70F670
+	*/
+	void CalculateThreat(CellClass* cell) JMP_THIS(0x70F670);
+
+	/*!
+	* @note original_name Calc_Threat_0
+	* @note address 0x70F6A0
+	*/
+	void CalcuclateThreat_0(CellClass* a1) JMP_THIS(0x70F6A0);
+
+	/*!
+	* @note original_name Can_Be_Bunkered
+	* @note address 0x70FB50
+	*/
+	bool CanBeBunkered() JMP_THIS(0x70FB50);
+
+	/*!
+	* @note original_name Can_Interrupt_Mission
+	* @note address 0x7094E0
+	*/
+	int32_t CanInterruptMission() JMP_THIS(0x7094E0);
+
+	/*!
+	* @note original_name Can_Opportunity_Fire
+	* @note address 0x709290
+	*/
+	bool CanOpportunityFire() JMP_THIS(0x709290);
+
+	/*!
+	* @note original_name Can_Passive_Aquire
+	* @note address 0x7091D0
+	*/
+	bool CanPassiveAquire() JMP_THIS(0x7091D0);
+
+	/*!
+	* @note original_name Cant_Interrupt_Mission
+	* @note address 0x709500
+	*/
+	int32_t CantInterruptMission() JMP_THIS(0x709500);
+
+	/*!
+	* @note original_name Change_House
+	* @note address 0x7018C0
+	*/
+	int32_t ChangeHouse(HouseClass* house) JMP_THIS(0x7018C0);
+
+	/*!
+	* @note original_name Coefficient_Stuff_70CD10
+	* @note address 0x70CD10
+	*/
+	double CoefficientStuff_70CD10(AbstractClass* a2, Coordinate* a3) JMP_THIS(0x70CD10);
+
+	/*!
+	* @note original_name Cot_Coord_70C690
+	* @note address 0x70C690
+	*/
+	Coordinate* CotCoord_70C690(void* retstr, Coordinate* a3, CellClass* a4, int32_t a5) JMP_THIS(0x70C690);
+
+	/*!
+	* @note original_name Create_Talk_Bubble
+	* @note address 0x70F120
+	*/
+	void CreateTalkBubble(int32_t frame) JMP_THIS(0x70F120);
+
+	/*!
+	* @note original_name Decrease_Gattling_Value
+	* @note address 0x70DE40
+	*/
+	void DecreaseGattlingValue(int32_t dv) JMP_THIS(0x70DE40);
+
+	/*!
+	* @note original_name Distrubuted_Fire_709550
+	* @note address 0x709550
+	*/
+	void DistrubutedFire_709550() JMP_THIS(0x709550);
+
+	/*!
+	* @note original_name Do_On_Linked_Building
+	* @note address 0x70D7E0
+	*/
+	bool DoOnLinkedBuilding() JMP_THIS(0x70D7E0);
+
+	/*!
+	* @note original_name Drain_AI
+	* @note address 0x70FE50
+	*/
+	void DrainAI() JMP_THIS(0x70FE50);
+
+	/*!
+	* @note original_name Draw_705270
+	* @note address 0x705270
+	*/
+	void Draw_705270(int32_t a1, int32_t a2, int32_t a3, int32_t a4, int32_t a5, int32_t a6, int32_t a7, int8_t a8) JMP_THIS(0x705270);
+
+	/*!
+	* @note original_name Draw_705860
+	* @note address 0x705860
+	*/
+	void Draw_705860(Coordinate* a2, int32_t a3_1, int32_t a4_1, Coordinate* a4) JMP_THIS(0x705860);
+
+	/*!
+	* @note original_name Draw_Behind
+	* @note address 0x70F1D0
+	*/
+	void DrawBehind(Point2D* point, int32_t a3) JMP_THIS(0x70F1D0);
+
+	/*!
+	* @note original_name Draw_Line
+	* @note address 0x6F6030
+	*/
+	static void DrawLine(Coordinate* coord2, int32_t color) JMP_THIS(0x6F6030);
+
+	/*!
+	* @note original_name Draw_Line_On_Tactical
+	* @note address 0x6F5EF0
+	*/
+	void DrawLineOnTactical(Coordinate* coord2, int32_t color) JMP_THIS(0x6F5EF0);
+
+	/*!
+	* @note original_name Draw_Mind_Control_Link
+	* @note address 0x704E40
+	*/
+	void DrawMindControlLink(Coordinate from, Coordinate to, ColorStruct color) JMP_THIS(0x704E40);
+
+	/*!
+	* @note original_name Draw_Target_Laser
+	* @note address 0x6FF960
+	*/
+	void DrawTargetLaser() JMP_THIS(0x6FF960);
+
+	/*!
+	* @note original_name Draw_Voxel_706ED0
+	* @note address 0x706ED0
+	*/
+	VoxelCalcStruct* DrawVoxel_706ED0(VoxelCalcStruct* edx0, VoxelStruct* arg0, Matrix3D* matrix, Point2D* draw_point, RectangleStruct* rect, int32_t frame, uint32_t flags, int32_t alpha_val, int32_t Blit_Move_2_arg) JMP_THIS(0x706ED0);
+
+	/*!
+	* @note original_name Electric_Bolt
+	* @note address 0x6FD570
+	*/
+	EBolt* ElectricBolt(AbstractClass* target) JMP_THIS(0x6FD570);
+
+	/*!
+	* @note original_name Electric_Zap
+	* @note address 0x6FD460
+	*/
+	EBolt* ElectricZap(AbstractClass* target, WeaponTypeClass* weapon, Coordinate* target_coord) JMP_THIS(0x6FD460);
+
+	/*!
+	* @note original_name Elevation_Increment_Sqrt
+	* @note address 0x7011A0
+	*/
+	int32_t ElevationIncrementSqrt() JMP_THIS(0x7011A0);
+
+	/*!
+	* @note original_name Elevation_Value
+	* @note address 0x6F70E0
+	*/
+	uint32_t ElevationValue(TechnoClass* techno) JMP_THIS(0x6F70E0);
+
+	/*!
+	* @note original_name Elevation_Value_Sqrt
+	* @note address 0x6F6F60
+	*/
+	uint32_t ElevationValueSqrt(TechnoClass* techno) JMP_THIS(0x6F6F60);
+
+	/*!
+	* @note original_name Equip_Turret
+	* @note address 0x70DC70
+	*/
+	void EquipTurret(int32_t turret_index) JMP_THIS(0x70DC70);
+
+	/*!
+	* @note original_name Evaluate_Just_Cell
+	* @note address 0x6F8C10
+	*/
+	int32_t EvaluateJustCell(::Cell* a2) JMP_THIS(0x6F8C10);
+
+	/*!
+	* @note original_name Gattling_Wind_Down
+	* @note address 0x70E000
+	*/
+	void GattlingWindDown(int32_t rate) JMP_THIS(0x70E000);
+
+	/*!
+	* @note original_name Gattling_Wind_Up
+	* @note address 0x70DE70
+	*/
+	void GattlingWindUp(int32_t rate) JMP_THIS(0x70DE70);
+
+	/*!
+	* @note original_name Get_Coord_70BCB0
+	* @note address 0x70BCB0
+	*/
+	Coordinate GetCoord_70BCB0() JMP_THIS(0x70BCB0);
+
+	/*!
+	* @note original_name Get_Gattling_Slot
+	* @note address 0x70DD20
+	*/
+	int32_t GetGattlingSlot() JMP_THIS(0x70DD20);
+
+	/*!
+	* @note original_name Get_Gattling_Stage
+	* @note address 0x70DDC0
+	*/
+	int32_t GetGattlingStage() JMP_THIS(0x70DDC0);
+
+	/*!
+	* @note original_name Get_Gattling_Value
+	* @note address 0x70DDF0
+	*/
+	int32_t GetGattlingValue() JMP_THIS(0x70DDF0);
+
+	/*!
+	* @note original_name Get_ID_For_Warp_70BE50
+	* @note address 0x70BE50
+	*/
+	int32_t GetIDForWarp_70BE50() JMP_THIS(0x70BE50);
+
+	/*!
+	* @note original_name Get_Open_Topped_For_Cargo_Max_Range
+	* @note address 0x710590
+	*/
+	int32_t GetOpenToppedForCargoMaxRange() JMP_THIS(0x710590);
+
+	/*!
+	* @note original_name Get_PlanningToken
+	* @note address 0x705D20
+	*/
+	PlanningTokenClass* GetPlanningToken() JMP_THIS(0x705D20);
+
+	/*!
+	* @note original_name Get_Sight_Increase_From_Z
+	* @note address 0x6F6F40
+	*/
+	int32_t GetSightIncreaseFromZ(Coordinate* coord) JMP_THIS(0x6F6F40);
+
+	/*!
+	* @note original_name Get_Turret_Index
+	* @note address 0x70DCF0
+	*/
+	int32_t GetTurretIndex() JMP_THIS(0x70DCF0);
+
+	/*!
+	* @note original_name Get_Turret_Weapons_Same
+	* @note address 0x70DD00
+	*/
+	int32_t GetTurretWeaponsSame() JMP_THIS(0x70DD00);
+
+	/*!
+	* @note original_name Get_Weapon_Type
+	* @note address 0x70E260
+	*/
+	int32_t GetWeaponType() JMP_THIS(0x70E260);
+
+	/*!
+	* @note original_name Go_Bezerk
+	* @note address 0x70F890
+	*/
+	void GoBezerk(int32_t duration) JMP_THIS(0x70F890);
+
+	/*!
+	* @note original_name Has_A_Turret
+	* @note address 0x70DC60
+	*/
+	bool HasATurret() JMP_THIS(0x70DC60);
+
+	/*!
+	* @note original_name Has_Drain_Target
+	* @note address 0x70FEB0
+	*/
+	bool HasDrainTarget() JMP_THIS(0x70FEB0);
+
+	/*!
+	* @note original_name Has_Drainer
+	* @note address 0x70FEC0
+	*/
+	int32_t HasDrainer() JMP_THIS(0x70FEC0);
+
+	/*!
+	* @note original_name Has_Gunner_Weapon
+	* @note address 0x70DCE0
+	*/
+	int32_t HasGunnerWeapon() JMP_THIS(0x70DCE0);
+
+	/*!
+	* @note original_name Has_Planning_Nodes
+	* @note address 0x705D30
+	*/
+	bool HasPlanningNodes() JMP_THIS(0x705D30);
+
+	/*!
+	* @note original_name Has_Team
+	* @note address 0x41C050
+	*/
+	int32_t HasTeam() JMP_THIS(0x41C050);
+
+	/*!
+	* @note original_name Has_Turret_Count
+	* @note address 0x70E1E0
+	*/
+	int32_t HasTurretCount(int32_t a2) JMP_THIS(0x70E1E0);
+
+	/*!
+	* @note original_name Has_Turret_Tooltips
+	* @note address 0x70DC50
+	*/
+	int8_t HasTurretTooltips() JMP_THIS(0x70DC50);
+
+	/*!
+	* @note original_name Imbue_Locomotor
+	* @note address 0x710000
+	*/
+	void ImbueLocomotor(FootClass* ppv, _GUID rclsid) JMP_THIS(0x710000);
+
+	/*!
+	* @note original_name Increase_Gattling_Value
+	* @note address 0x70DE20
+	*/
+	void IncreaseGattlingValue(int32_t dv) JMP_THIS(0x70DE20);
+
+	/*!
+	* @note original_name Iron_Timer_AI
+	* @note address 0x70E5A0
+	*/
+	void IronTimerAI() JMP_THIS(0x70E5A0);
+
+	/*!
+	* @note original_name Is_Allowed_To_Retaliate
+	* @note address 0x7087C0
+	*/
+	bool IsAllowedToRetaliate(TechnoClass* source, WarheadTypeClass* warhead) JMP_THIS(0x7087C0);
+
+	/*!
+	* @note original_name Is_Deactivated
+	* @note address 0x70FBD0
+	*/
+	int8_t IsDeactivated() JMP_THIS(0x70FBD0);
+
+	/*!
+	* @note original_name Is_Drainable
+	* @note address 0x70FED0
+	*/
+	int8_t IsDrainable() JMP_THIS(0x70FED0);
+
+	/*!
+	* @note original_name Is_Machine
+	* @note address 0x710600
+	*/
+	int32_t IsMachine() JMP_THIS(0x710600);
+
+	/*!
+	* @note original_name Is_Organic
+	* @note address 0x710630
+	*/
+	int32_t IsOrganic() JMP_THIS(0x710630);
+
+	/*!
+	* @note original_name Is_Target_In_Range
+	* @note address 0x70D590
+	*/
+	bool IsTargetInRange(int32_t which) JMP_THIS(0x70D590);
+
+	/*!
+	* @note original_name Is_Z_Fudge_Bridge
+	* @note address 0x703B10
+	*/
+	bool IsZFudgeBridge() JMP_THIS(0x703B10);
+
+	/*!
+	* @note original_name Is_Z_Fudge_Cliff
+	* @note address 0x704240
+	*/
+	int32_t IsZFudgeCliff() JMP_THIS(0x704240);
+
+	/*!
+	* @note original_name Is_Z_Fudge_Column
+	* @note address 0x703E70
+	*/
+	int32_t IsZFudgeColumn() JMP_THIS(0x703E70);
+
+	/*!
+	* @note original_name Is_Z_Fudge_Tunnel
+	* @note address 0x704000
+	*/
+	int32_t IsZFudgeTunnel() JMP_THIS(0x704000);
+
+	/*!
+	* @brief Can this object be permanently mind controlled?
+	* @note original_name CanBePermaMindControlled
+	* @note address 0x53C450
+	*/
+	bool CanBePermaMindControlled() const JMP_THIS(0x53C450);
+
+	/*!
+	* @brief Clears the sidebar tab object
+	* @note original_name ClearSidebarTabObject
+	* @note address 0x734270
+	*/
+	void ClearSidebarTabObject() const JMP_THIS(0x734270);
+
+	/*!
+	* @brief Returns the drawer for this object
+	* @note original_name GetDrawer
+	* @note address 0x705D70
+	*/
+	LightConvertClass* GetDrawer() const JMP_THIS(0x705D70);
+
+	/*!
+	* @brief Returns the primary weapon of this object
+	* @note original_name GetPrimaryWeapon
+	* @note address 0x70E1A0
+	*/
+	WeaponStruct* GetPrimaryWeapon() const JMP_THIS(0x70E1A0);
+
+	/*!
+	* @brief Clears planning tokens for this object
+	* @note original_name ClearPlanningTokens
+	* @note address 0x6386E0
+	*/
+	int __fastcall ClearPlanningTokens(EventClass* pEvent) JMP_STD(0x6386E0);
+
+	/*!
+	* @brief Sets the target for passengers of this object
+	* @note original_name SetTargetForPassengers
+	* @note address 0x710550
+	*/
+	void SetTargetForPassengers(AbstractClass* pTarget) JMP_THIS(0x710550);
 
 	// smooth operator
 	const char* get_ID() const
@@ -1517,140 +2164,6 @@ public:
 		auto const pType = this->Type();
 		return pType ? pType->get_ID() : nullptr;
 	}
-
-	int TimeToBuild() const
-	{ JMP_THIS(0x6F47A0); }
-
-	bool IsMindControlled() const
-	{ JMP_THIS(0x7105E0); }
-
-	bool CanBePermaMindControlled() const
-	{ JMP_THIS(0x53C450); }
-
-	LaserDrawClass* CreateLaser(ObjectClass* pTarget, int idxWeapon, WeaponTypeClass* pWeapon, const CoordStruct& Coords)
-	{ JMP_THIS(0x6FD210); }
-
-	/*
-	 *  Cell->AddThreat(this->Owner, -this->ThreatPosed);
-	 *  this->ThreatPosed = 0;
-	 *  int Threat = this->CalculateThreat(); // this is another gem of a function, to be revealed another time...
-	 *  this->ThreatPosed = Threat;
-	 *  Cell->AddThreat(this->Owner, Threat);
-	 */
-	void UpdateThreatInCell(CellClass* Cell)
-	{ JMP_THIS(0x70F6E0); }
-
-	// CanTargetWhatAmI is a bitfield, if(!(CanTargetWhatAmI & (1 << tgt->WhatAmI())) { fail; }
-
-	// slave of the next one
-	bool CanAutoTargetObject(
-		ThreatType targetFlags,
-		int canTargetWhatAmI,
-		int wantedDistance,
-		TechnoClass* pTarget,
-		int* pThreatPosed,
-		DWORD dwUnk,
-		CoordStruct* pSourceCoords) const
-	{
-		JMP_THIS(0x6F7CA0);
-	}
-
-	// called by AITeam Attack Target Type and autoscan
-	bool TryAutoTargetObject(
-		ThreatType targetFlags,
-		int canTargetWhatAmI,
-		CellStruct* pCoords,
-		DWORD dwUnk1,
-		DWORD* dwUnk2,
-		int* pThreatPosed,
-		DWORD dwUnk3)
-	{
-		JMP_THIS(0x6F8960);
-	}
-
-	void Reactivate()
-	{ JMP_THIS(0x70FBE0); }
-
-	void Deactivate()
-	{ JMP_THIS(0x70FC90); }
-
-
-	// this should be the transport, but it's unused
-	// marks passenger as "InOpenTopped" for targeting, range scanning and other purposes
-	void EnteredOpenTopped(TechnoClass* pWho)
-	{ JMP_THIS(0x710470); }
-
-	// this should be the transport, but it's unused
-	// reverses the above
-	void ExitedOpenTopped(TechnoClass* pWho)
-	{ JMP_THIS(0x7104A0); }
-
-	// called when the source unit dies - passengers are about to get kicked out, this basically calls ->ExitedOpenTransport on each passenger
-	void MarkPassengersAsExited()
-	{ JMP_THIS(0x7104C0); }
-
-	// for gattlings
-	void SetCurrentWeaponStage(int idx)
-	{ JMP_THIS(0x70DDD0); }
-
-	void SetArchiveTarget(AbstractClass* pTarget)
-	{ JMP_THIS(0x70C610); }
-
-	void DrawVoxelShadow(VoxelStruct* vxl, int shadow_index, VoxelIndexKey vxl_index_key, IndexClass<ShadowVoxelIndexKey, VoxelCacheStruct*>* shadow_cache,
-		RectangleStruct* bound, Point2D* a3, Matrix3D* matrix, bool again, Surface* surface, Point2D shadow_point)
-	{
-		JMP_THIS(0x706BD0);
-	}
-
-	void DrawObject(SHPStruct* pSHP, int nFrame, Point2D* pLocation, RectangleStruct* pBounds,
-		int, int, int nZAdjust, ZGradient eZGradientDescIdx, int, int nBrightness, int TintColor,
-		SHPStruct* pZShape, int nZFrame, int nZOffsetX, int nZOffsetY, int);
-
-	int sub_70DE00(int State)
-	{ JMP_THIS(0x70DE00); }
-
-	int __fastcall ClearPlanningTokens(EventClass* pEvent)
-	{ JMP_STD(0x6386E0); }
-
-	void SetTargetForPassengers(AbstractClass* pTarget)
-	{ JMP_THIS(0x710550); }
-
-	void KillPassengers(TechnoClass* pSource)
-	{ JMP_THIS(0x707CB0); }
-
-	// returns the house that created this object (factoring in Mind Control)
-	HouseClass* GetOriginalOwner() const
-	{ JMP_THIS(0x70F820); }
-
-	void FireDeathWeapon(int additionalDamage)
-	{ JMP_THIS(0x70D690); }
-
-	bool HasAbility(Ability ability) const
-	{ JMP_THIS(0x70D0D0); }
-
-	void ClearSidebarTabObject() const
-	{ JMP_THIS(0x734270); }
-
-	LightConvertClass* GetDrawer() const
-	{ JMP_THIS(0x705D70); }
-
-	int GetEffectTintIntensity(int currentIntensity)
-	{ JMP_THIS(0x70E360); }
-
-	int GetInvulnerabilityTintIntensity(int currentIntensity)
-	{ JMP_THIS(0x70E380); }
-
-	int GetAirstrikeTintIntensity(int currentIntensity)
-	{ JMP_THIS(0x70E4B0); }
-
-	int CombatDamage(int nWeaponIndex) const
-	{ JMP_THIS(0x6F3970); }
-
-	WeaponStruct* GetPrimaryWeapon() const
-	{ JMP_THIS(0x70E1A0); }
-
-	bool TryNextPlanningTokenNode()
-	{ JMP_THIS(0x6385C0); }
 
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
@@ -1665,19 +2178,10 @@ public:
 		return this->GetIonCannonValue(difficulty);
 	}
 
-	// Invokes AI response on their 'base' being attacked. Used by buildings, ToProtect=true technos and Whiner=true team members.
-	void BaseIsAttacked(TechnoClass* pEnemy)
-	{ JMP_THIS(0x708080); }
-
-	//Constructor
-	TechnoClass(HouseClass* pOwner) noexcept
-		: TechnoClass(noinit_t())
-	{
-		JMP_THIS(0x6F2B40);
-	}
-
 protected:
-	explicit __forceinline TechnoClass(noinit_t) noexcept
-		: RadioClass(noinit_t())
-	{ }
+
+	/*! @brief FAKE CTOR */
+	explicit __forceinline TechnoClass(fake_noinit_t) noexcept : RadioClass(fake_noinit_t{}) {}
+	TechnoClass(noinit_t) : RadioClass(fake_noinit_t{}) JMP_THIS(0x6F4300);
+	TechnoClass(HouseClass* house) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x6F2B40);
 };
