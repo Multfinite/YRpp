@@ -309,15 +309,15 @@ public:
 	*/
 	virtual int MissionSpyplaneOverfly() JMP_THIS(0x5B2FC0);
 
-	MissionControlClass* CurrentMissionControl() JMP_THIS(0x5B3A00);
-	static bool __fastcall IsRecruitableMission(const char* pName) JMP(0x5B36E0);
-	static Mission MissionByName() JMP_THIS(0x5B3910);
-	static const char* MissionNameOf(Mission mission) JMP_THIS(0x5B3950);
-	int MissionTime() JMP_THIS(0x5B3A20);
+	constexpr MissionControlClass* CurrentMissionControl() JMP_THIS(0x5B3A00);
+	constexpr static bool __fastcall IsRecruitableMission(const char* pName) JMP(0x5B36E0);
+	constexpr static Mission MissionByName() JMP_THIS(0x5B3910);
+	constexpr static const char* MissionNameOf(Mission mission) JMP_THIS(0x5B3950);
+	constexpr int MissionTime() JMP_THIS(0x5B3A20);
 
 protected:
 	/*! @brief FAKE CTOR */
-	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
-	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {};
-	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
+	constexpr explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
+	constexpr MissionClass(noinit_t) : MissionClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {};
+	constexpr MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };
