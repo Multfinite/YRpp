@@ -204,27 +204,27 @@ public:
 	*/
 	virtual void AI() JMP_THIS(0x410570);
 
-	static void __fastcall DetachFromAll(AbstractClass* instance, bool all = true) JMP_THIS(0x7258D0); 
-	inline void DetachFromAll(bool all = true) { DetachFromAll(this, all); }
+	constexpr static void __fastcall DetachFromAll(AbstractClass* instance, bool all = true) JMP_THIS(0x7258D0);
+	constexpr void DetachFromAll(bool all = true) { DetachFromAll(this, all); }
 
-	inline static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
+	constexpr static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
 
 	/*! @brief It is not VIRTUAL <IPersistStream::Load> functions, it is proxy which used at EACH override of virtual. */
-	inline HRESULT Load(IStream* stream) JMP_THIS(0x410380);
+	constexpr HRESULT Load(IStream* stream) JMP_THIS(0x410380);
 	/*! @brief It is not VIRTUAL <IPersistStream::Save> functions, it is proxy which used at EACH override of virtual. */
-	inline HRESULT Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
+	constexpr HRESULT Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN ACTION SELECTION.*/
-	inline TechnoClass* AsTechno() JMP_THIS(0x40DD20);
+	constexpr TechnoClass* AsTechno() JMP_THIS(0x40DD20);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN DAMAGE/SELECTION/PER CELL PROCESS.*/
-	inline TechnoClass* _AsTechno() JMP_THIS(0x40DD70);
+	constexpr TechnoClass* _AsTechno() JMP_THIS(0x40DD70);
 
-	inline bool operator<(const AbstractClass &rhs) const { return this->UniqueID < rhs.UniqueID; }
+	constexpr bool operator<(const AbstractClass &rhs) const { return this->UniqueID < rhs.UniqueID; }
 
 protected:
 	/*! @brief FAKE CTOR */
-	explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
-	AbstractClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
-	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
+	constexpr explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
+	constexpr AbstractClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
+	constexpr AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
 };
 
 template<typename T>
