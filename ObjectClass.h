@@ -809,7 +809,7 @@ public:
 
 	// technically it takes an ecx<this> , but it's not used and ecx is immediately overwritten on entry
 	// draws the mind control line when unit is selected
-	static void DrawALinkTo(int src_X, int src_Y, int src_Z, int dst_X, int dst_Y, int dst_Z, ColorStruct color)
+	constexpr static void DrawALinkTo(int src_X, int src_Y, int src_Z, int dst_X, int dst_Y, int dst_Z, ColorStruct color)
 		{ PUSH_VAR32(color); PUSH_VAR32(dst_Z); PUSH_VAR32(dst_Y); PUSH_VAR32(dst_X);
 			PUSH_VAR32(src_Z); PUSH_VAR32(src_Y); PUSH_VAR32(src_X); CALL(0x704E40); }
 
@@ -853,7 +853,7 @@ public:
 protected:
 
 	/*! @brief FAKE CTOR */
-	explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
-	ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
-	ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
+	constexpr explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+	constexpr ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
+	constexpr ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
 };
