@@ -317,7 +317,7 @@ public:
 
 protected:
 	/*! @brief FAKE CTOR */
-	constexpr explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
-	constexpr MissionClass(noinit_t) : MissionClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {};
-	constexpr MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
+	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {}
+	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}) {};
+	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };

@@ -853,7 +853,7 @@ public:
 protected:
 
 	/*! @brief FAKE CTOR */
-	constexpr explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
-	constexpr ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
-	constexpr ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
+	explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+	ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
+	ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
 };

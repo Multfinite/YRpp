@@ -1,7 +1,3 @@
-/*
-	Base class for WHAT?? I DUNNO =(
-*/
-
 #pragma once
 
 #include "MissionClass.h"
@@ -9,6 +5,9 @@
 //forward declarations
 class TechnoClass;
 
+/*
+	Base class for WHAT?? I DUNNO =(
+*/
 class NOVTABLE RadioClass : public MissionClass
 {
 public:
@@ -116,7 +115,7 @@ public:
 protected:
 
 	/*! @brief FAKE CTOR */
-	constexpr explicit __forceinline RadioClass(fake_noinit_t) noexcept : MissionClass(fake_noinit_t{}) {}
-	constexpr RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);
-	constexpr RadioClass() : RadioClass(fake_noinit_t{}) JMP_THIS(0x65A750);
+	explicit __forceinline RadioClass(fake_noinit_t) noexcept : MissionClass(fake_noinit_t{}) {}
+	RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);
+	RadioClass() : RadioClass(fake_noinit_t{}) JMP_THIS(0x65A750);
 };

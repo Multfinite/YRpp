@@ -222,9 +222,9 @@ public:
 
 protected:
 	/*! @brief FAKE CTOR */
-	constexpr explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
-	constexpr AbstractClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
-	constexpr AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
+	explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
+	AbstractClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
+	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
 };
 
 template<typename T>
