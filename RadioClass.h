@@ -12,66 +12,111 @@ class TechnoClass;
 class NOVTABLE RadioClass : public MissionClass
 {
 public:
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	// new command updates these
+	RadioCommand LastCommands[3];
+	// Docked units etc
+	DECLARE_PROPERTY(VectorClass<TechnoClass*>, RadioLinks);
+public:
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x65AB80);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x65AC40);
 
-	//Destructor
+	// 0x65AEB0 SDTOR
 	virtual ~RadioClass() RX;
 
-	//RadioClass
+	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x65AAC0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x65AB10);
+	bool Limbo() override JMP_THIS(0x65AA80);
 
 	// these are oogly, westwood themselves admitted it, so it's probably even more of a wtf than the rest
-	virtual RadioCommand SendToFirstLink(RadioCommand command) RT(RadioCommand);
-	virtual RadioCommand SendCommand(RadioCommand command, TechnoClass* pRecipient) RT(RadioCommand);
-	virtual RadioCommand SendCommandWithData(RadioCommand command, AbstractClass* &pInOut, TechnoClass* pRecipient) RT(RadioCommand);
-	virtual void SendToEachLink(RadioCommand command) RX;
 
-	// get specific link
-	TechnoClass* const& GetNthLink(int idx = 0) const {
-		return this->RadioLinks[idx];
-	}
+	/*!
+	* @original_name Transmit_Message_To_First
+	* @note vtable_index 157:0x274
+	* @note address 0x65ACB0
+	*/
+	virtual RadioCommand SendToFirstLink(RadioCommand command) JMP_THIS(0x65ACB0);
+	
+	/*!
+	* @original_name Transmit_Message
+	* @note vtable_index 158:0x278
+	* @note address 0x65AAA0
+	*/
+	virtual RadioCommand SendCommand(RadioCommand command, TechnoClass* pRecipient) JMP_THIS(0x65AAA0);
+	
+	/*!
+	* @original_name Transmit_Message_Param
+	* @note vtable_index 159:0x27C
+	* @note address 0x65A970
+	*/
+	virtual RadioCommand SendCommandWithData(RadioCommand command, AbstractClass* &pInOut, TechnoClass* pRecipient) JMP_THIS(0x65A970);
+	
+	/*!
+	* @original_name Transmit_Message_To_All
+	* @note vtable_index 160:0x280
+	* @note address 0x65ACE0
+	*/
+	virtual void SendToEachLink(RadioCommand command) JMP_THIS(0x65ACE0);
 
-	// whether any link is pLink
-	bool ContainsLink(TechnoClass const* pLink) const
-		{ JMP_THIS(0x65AD50); }
+	/*!
+	* @original_name Contact_With_Whom
+	* @brief get specific link
+	* @note address 0x65AD30
+	*/
+	constexpr TechnoClass* const& GetNthLink(int idx = 0) const { return this->RadioLinks[idx]; }
 
-	// note: null pointers will always return -1
-	int FindLinkIndex(TechnoClass const* pLink) const
-		{ JMP_THIS(0x65AD90); }
+	/*!
+	* @original_name Contact_With_Whom_Building
+	* @brief get specific link
+	* @note address 0x65AD40
+	*/
+	constexpr BuildingClass* const& GetNthLinkAsBuilding(int idx = 0) const JMP_THIS(0x65AD40);
 
-	// iow: not full
-	bool HasFreeLink() const
-		{ JMP_THIS(0x65ADC0); }
+	/*!
+	* @original_name Has_Contact_Index
+	* @note address 0x65AD50
+	* @brief whether any link is pLink
+	*/
+	constexpr bool ContainsLink(TechnoClass const* pLink) const JMP_THIS(0x65AD50);
 
-	// iow: not full; consider pIgnore's link empty
-	bool HasFreeLink(TechnoClass const* pIgnore) const
-		{ JMP_THIS(0x65ADF0); }
+	/*!
+	* @original_name Has_Contact_Index
+	* @note address 0x65AD90
+	* @brief null pointers will always return -1
+	*/
+	constexpr int FindLinkIndex(TechnoClass const* pLink) const JMP_THIS(0x65AD90);
 
-	// iow. at least one link used
-	bool HasAnyLink() const
-		{ JMP_THIS(0x65AE30); }
+	/*!
+	* @original_name Has_Free_Slots
+	* @note address 0x65ADC0
+	* @brief iow: not full
+	*/
+	constexpr bool HasFreeLink() const JMP_THIS(0x65ADC0);
 
-	// resizes the vector and nulls the new elements
-	void SetLinkCount(int count)
-		{ JMP_THIS(0x65AE60); }
+	/*!
+	* @original_name In_Radio_Contact
+	* @note address 0x65ADF0
+	* @brief iow: iow: not full; consider pIgnore's link empty
+	*/
+	constexpr bool HasFreeLink(TechnoClass const* pIgnore) const JMP_THIS(0x65ADF0);
 
-	//Constructor
-	RadioClass() noexcept
-		: RadioClass(noinit_t())
-	{ JMP_THIS(0x65A750); }
+	/*!
+	* @original_name Is_In_Radio_Contact
+	* @note address 0x65AE30
+	* @brief iow. at least one link used
+	*/
+	constexpr bool HasAnyLink() const JMP_THIS(0x65AE30);
+
+	/*!
+	* @original_name Set_Radio_Count
+	* @note address 0x65AE60
+	* @brief resizes the vector and nulls the new elements
+	*/
+	constexpr void SetLinkCount(int count) JMP_THIS(0x65AE60);
 
 protected:
-	explicit __forceinline RadioClass(noinit_t) noexcept
-		: MissionClass(noinit_t())
-	{ }
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	RadioCommand LastCommands[3]; // new command updates these
-	DECLARE_PROPERTY(VectorClass<TechnoClass*>, RadioLinks);	//Docked units etc
+	/*! @brief FAKE CTOR */
+	constexpr explicit __forceinline RadioClass(fake_noinit_t) noexcept : MissionClass(fake_noinit_t{}) {}
+	constexpr RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);
+	constexpr RadioClass() : RadioClass(fake_noinit_t{}) JMP_THIS(0x65A750);
 };
