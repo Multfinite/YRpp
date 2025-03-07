@@ -29,84 +29,84 @@ public:
 	// these are oogly, westwood themselves admitted it, so it's probably even more of a wtf than the rest
 
 	/*!
-	* @original_name Transmit_Message_To_First
+	* @note original_name Transmit_Message_To_First
 	* @note vtable_index 157:0x274
 	* @note address 0x65ACB0
 	*/
 	virtual RadioCommand SendToFirstLink(RadioCommand command) JMP_THIS(0x65ACB0);
 	
 	/*!
-	* @original_name Transmit_Message
+	* @note original_name Transmit_Message
 	* @note vtable_index 158:0x278
 	* @note address 0x65AAA0
 	*/
 	virtual RadioCommand SendCommand(RadioCommand command, TechnoClass* pRecipient) JMP_THIS(0x65AAA0);
 	
 	/*!
-	* @original_name Transmit_Message_Param
+	* @note original_name Transmit_Message_Param
 	* @note vtable_index 159:0x27C
 	* @note address 0x65A970
 	*/
 	virtual RadioCommand SendCommandWithData(RadioCommand command, AbstractClass* &pInOut, TechnoClass* pRecipient) JMP_THIS(0x65A970);
 	
 	/*!
-	* @original_name Transmit_Message_To_All
+	* @note original_name Transmit_Message_To_All
 	* @note vtable_index 160:0x280
 	* @note address 0x65ACE0
 	*/
 	virtual void SendToEachLink(RadioCommand command) JMP_THIS(0x65ACE0);
 
 	/*!
-	* @original_name Contact_With_Whom
+	* @note original_name Contact_With_Whom
 	* @brief get specific link
 	* @note address 0x65AD30
 	*/
 	constexpr TechnoClass* const& GetNthLink(int idx = 0) const { return this->RadioLinks[idx]; }
 
 	/*!
-	* @original_name Contact_With_Whom_Building
+	* @note original_name Contact_With_Whom_Building
 	* @brief get specific link
 	* @note address 0x65AD40
 	*/
 	constexpr BuildingClass* const& GetNthLinkAsBuilding(int idx = 0) const JMP_THIS(0x65AD40);
 
 	/*!
-	* @original_name Has_Contact_Index
+	* @note original_name Has_Contact_Index
 	* @note address 0x65AD50
 	* @brief whether any link is pLink
 	*/
 	constexpr bool ContainsLink(TechnoClass const* pLink) const JMP_THIS(0x65AD50);
 
 	/*!
-	* @original_name Has_Contact_Index
+	* @note original_name Has_Contact_Index
 	* @note address 0x65AD90
 	* @brief null pointers will always return -1
 	*/
 	constexpr int FindLinkIndex(TechnoClass const* pLink) const JMP_THIS(0x65AD90);
 
 	/*!
-	* @original_name Has_Free_Slots
+	* @note original_name Has_Free_Slots
 	* @note address 0x65ADC0
 	* @brief iow: not full
 	*/
 	constexpr bool HasFreeLink() const JMP_THIS(0x65ADC0);
 
 	/*!
-	* @original_name In_Radio_Contact
+	* @note original_name In_Radio_Contact
 	* @note address 0x65ADF0
 	* @brief iow: iow: not full; consider pIgnore's link empty
 	*/
 	constexpr bool HasFreeLink(TechnoClass const* pIgnore) const JMP_THIS(0x65ADF0);
 
 	/*!
-	* @original_name Is_In_Radio_Contact
+	* @note original_name Is_In_Radio_Contact
 	* @note address 0x65AE30
 	* @brief iow. at least one link used
 	*/
 	constexpr bool HasAnyLink() const JMP_THIS(0x65AE30);
 
 	/*!
-	* @original_name Set_Radio_Count
+	* @note original_name Set_Radio_Count
 	* @note address 0x65AE60
 	* @brief resizes the vector and nulls the new elements
 	*/
