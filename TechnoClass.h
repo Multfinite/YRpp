@@ -130,23 +130,16 @@ public:
 	int NumPassengers;
 	FootClass* FirstPassenger;
 
-	void AddPassenger(FootClass* pPassenger)
-	{ JMP_THIS(0x4733A0); }
+	constexpr void Attach(FootClass* object) JMP_THIS(0x4733A0);
+	constexpr void Detach(FootClass* object) JMP_THIS(0x4734B0);
+	constexpr FootClass* DetachObject() JMP_THIS(0x473430);
+	constexpr FootClass* AttachedObject() JMP_THIS(0x473450);
+	constexpr int Count() const JMP_THIS(0x473460);
+	constexpr int IndexOf(FootClass* object) const JMP_THIS(0x473500);
 
-	FootClass* GetFirstPassenger() const
-	{ return this->FirstPassenger; }
-
-	FootClass* RemoveFirstPassenger()
-	{ JMP_THIS(0x473430); }
-
-	int GetTotalSize() const
-	{ JMP_THIS(0x473460); }
-
-	int IndexOf(FootClass* candidate) const
-	{ JMP_THIS(0x473500); }
+	constexpr FootClass* GetFirstPassenger() const { return this->FirstPassenger; }
 
 	CargoClass() : NumPassengers(0), FirstPassenger(nullptr) { };
-
 	~CargoClass() { };
 };
 
