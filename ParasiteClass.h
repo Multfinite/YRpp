@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
 class AnimClass;
 class FootClass;
@@ -11,7 +11,17 @@ public:
 	static const AbstractType AbsID = AbstractType::Parasite;
 
 	static constexpr constant_ptr<DynamicVectorClass<ParasiteClass*>, 0xAC4910u> const Array{};
-
+public:
+	FootClass* Owner;
+	FootClass* Victim;
+	CDTimerClass    SuppressionTimer;
+	CDTimerClass    DamageDeliveryTimer;
+	AnimClass* GrappleAnim;
+	ParasiteState   GrappleState;
+	int             GrappleAnimFrame;
+	int             GrappleAnimDelay;
+	bool            GrappleAnimGotInvalid;
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -54,20 +64,4 @@ protected:
 	explicit __forceinline ParasiteClass(noinit_t) noexcept
 		: AbstractClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	FootClass*      Owner;
-	FootClass*      Victim;
-	CDTimerClass    SuppressionTimer;
-	CDTimerClass    DamageDeliveryTimer;
-	AnimClass*      GrappleAnim;
-	ParasiteState   GrappleState;
-	int             GrappleAnimFrame;
-	int             GrappleAnimDelay;
-	bool            GrappleAnimGotInvalid;
 };
