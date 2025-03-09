@@ -224,7 +224,7 @@ public:
 	* @note vtable_index 39:0x9C
 	* @note address 0x5F42D0
 	*/
-	virtual bool IsActive() const JMP_THIS(0x5F42D0);
+	virtual bool CanPlayerFire() const JMP_THIS(0x5F42D0);
 
 	/*!
 	* @note original_name Can_Player_Move
@@ -721,7 +721,7 @@ public:
 	* @note vtable_index 109:0x1B4
 	* @note address 0x5F6940
 	*/
-	virtual void SetLocation(const CoordStruct& crd) JMP_THIS(0x5F6940);
+	virtual void SetLocation(const Coordinate& crd) JMP_THIS(0x5F6940);
 
 	/*!
 	* @note original_name Coord_Cell

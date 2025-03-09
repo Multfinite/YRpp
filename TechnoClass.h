@@ -425,7 +425,7 @@ public:
 	TechnoTypeClass* TechnoType() const override JMP_THIS(0x6F3270);
 	DWORD Ownable() const override JMP_THIS(0x708B30);
 	bool Repairable() const override JMP_THIS(0x701140);
-	bool IsActive() const override JMP_THIS(0x7010D0);
+	bool CanPlayerFire() const override JMP_THIS(0x7010D0);
 	bool IsControllable() const override JMP_THIS(0x700C40);
 	CoordStruct FLH(int idxWeapon, CoordStruct BaseCoords) const override JMP_THIS(0x6F3AD0);
 	bool IsDisguised() const override JMP_THIS(0x41C010);
