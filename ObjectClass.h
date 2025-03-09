@@ -684,7 +684,7 @@ public:
 	* @note vtable_index 104:0x1A0
 	* @note address 0x5F4400
 	*/
-	virtual void Sell(DWORD dwUnk) JMP_THIS(0x5F4400);
+	virtual void Sell(DWORD control) JMP_THIS(0x5F4400);
 
 	/*!
 	* @note original_name Assign_Planning_Path
