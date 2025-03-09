@@ -148,8 +148,7 @@ struct FlasherClass
 	int DurationRemaining;
 	bool FlashingNow;
 
-	bool AI()
-	{ JMP_THIS(0x4CC770); }
+	bool AI() JMP_THIS(0x4CC770);
 };
 
 struct RecoilData
@@ -168,11 +167,8 @@ struct RecoilData
 	RecoilState State;
 	int TravelFramesLeft;
 
-	void AI()
-	{ JMP_THIS(0x70ED10); }
-
-	void Fire()
-	{ JMP_THIS(0x70ECE0); }
+	void AI() JMP_THIS(0x70ED10);
+	void Fire() JMP_THIS(0x70ECE0);
 };
 
 class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public StageClass, public CargoClass
