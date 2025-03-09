@@ -20,8 +20,8 @@ public:
 	static constexpr constant_ptr<DynamicVectorClass<FootClass*>, 0x8B3DC0u> const Array{};
 public:
 	int             PlanningPathIdx; // which planning path am I following?
-	CellStruct      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
-	CellStruct      WaypointCell; // current waypoint cell
+	::Cell      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
+	::Cell      WaypointCell; // current waypoint cell
 	DWORD           __gap_52C;
 	double           ThreatAvoidanceCoefficient;
 	int				WalkedFramesSoFar;
@@ -30,11 +30,11 @@ public:
 
 	DECLARE_PROPERTY(AudioController, MoveSoundAudioController);
 
-	CellStruct      CurrentMapCoords;
-	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
-	CellStruct      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
-	CellStruct      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
-	CoordStruct     Sqrt_ed_val_568;
+	::Cell      CurrentMapCoords;
+	::Cell      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
+	::Cell      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
+	::Cell      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
+	Coordinate     Sqrt_ed_val_568;
 	PROTECTED_PROPERTY(DWORD, unused_574);
 	double          SpeedPercentage;
 	double          SpeedMultiplier;
@@ -61,7 +61,7 @@ public:
 	DECLARE_PROPERTY(CDTimerClass, SightTimer);
 	DECLARE_PROPERTY(CDTimerClass, BlockagePathTimer);
 	DECLARE_PROPERTY(ILocomotionPtr, Locomotor);
-	CoordStruct       HeadTo;
+	Coordinate       HeadTo;
 	uint8_t      CurrentTubeIndex;
 	uint8_t              CurrentDirectionInTube;
 	uint8_t       WaypointIndex; // which waypoint in my planning path am I following?
@@ -119,15 +119,15 @@ public:
 	virtual bool IsLeavingMap() const R0;
 	virtual bool vt_entry_4E0() const R0;
 	virtual bool CanDeployNow() const R0;
-	virtual void AddSensorsAt(CellStruct cell) RX;
-	virtual void RemoveSensorsAt(CellStruct cell) RX;
-	virtual CoordStruct* vt_entry_4F0(CoordStruct* pCrd) R0;
+	virtual void AddSensorsAt(::Cell cell) RX;
+	virtual void RemoveSensorsAt(::Cell cell) RX;
+	virtual Coordinate* vt_entry_4F0(Coordinate* pCrd) R0;
 	virtual void vt_entry_4F4() RX;
 	virtual bool vt_entry_4F8() R0;
-	virtual bool MoveTo(CoordStruct* pCrd) R0;
+	virtual bool MoveTo(Coordinate* pCrd) R0;
 	virtual bool StopMoving() R0;
 	virtual bool vt_entry_504() R0;
-	virtual bool ChronoWarpTo(CoordStruct pDest) R0; // fsds... only implemented for one new YR map trigger, other chrono events repeat the code...
+	virtual bool ChronoWarpTo(Coordinate pDest) R0; // fsds... only implemented for one new YR map trigger, other chrono events repeat the code...
 	virtual void Draw_A_SHP(
 		SHPStruct *SHP, int idxFacing, Point2D * Coords, RectangleStruct *Rectangle,
 		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, ZGradient ZGradient,
@@ -160,16 +160,19 @@ public:
 
 	// non-virtual
 
-	// only used by squid damage routines, normal wakes are created differently it seems
-	// creates 3 wake animations behind the unit
-	void CreateWakes(CoordStruct coords)
-		{ JMP_THIS(0x629E90); }
+	/*!
+	* @brief only used by squid damage routines, normal wakes are created differently it seems
+	* @brief creates 3 wake animations behind the unit
+	* @note original_name Wake_Anim
+	* @note address 0x629E90
+	*/
+	void CreateWakes(Coordinate coords) JMP_THIS(0x629E90);
 
 	// can this jumpjet stay in this cell or not? (two jumpjets in one cell are not okay, locomotor kicks one of them out in the next frame)
 	bool Jumpjet_LocationClear() const
 		{ JMP_THIS(0x4135A0); }
 
-	void Jumpjet_OccupyCell(CellStruct Cell)
+	void Jumpjet_OccupyCell(::Cell Cell)
 		{ JMP_THIS(0x4E00B0); }
 
 	// changes locomotor to the given one, Magnetron style
@@ -184,7 +187,7 @@ public:
 	void AbortMotion()
 		{ JMP_THIS(0x4DF0D0); }
 
-	bool UpdatePathfinding(CellStruct unkCell, CellStruct unkCell2, int unk3)
+	bool UpdatePathfinding(::Cell unkCell, ::Cell unkCell2, int unk3)
 		{ JMP_THIS(0x4D3920); }
 
 	// Removes the first passenger and updates the Gunner.

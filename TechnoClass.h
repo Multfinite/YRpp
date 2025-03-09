@@ -234,7 +234,7 @@ public:
 	DECLARE_PROPERTY(CDTimerClass, CloakDelayTimer); // delay before cloaking again
 	float            WarpFactor; // don't ask! set to 0 in CTOR, never modified, only used as ((this->Fetch_ID) + this->WarpFactor) % 400 for something in cloak ripple
 	bool             unknown_bool_250;
-	CoordStruct      LastSightCoords;
+	Coordinate      LastSightCoords;
 	int              LastSightRange;
 	int              LastSightHeight;
 	bool             GapSuperCharged; // GapGenerator, when SuperGapRadiusInCells != GapRadiusInCells, you can deploy the gap to boost radius
@@ -249,7 +249,7 @@ public:
 	bool             IsImmobilized; // by chrono aftereffects
 	DWORD            unknown_280;
 	int              ChronoLockRemaining; // countdown after chronosphere warps things around
-	CoordStruct      ChronoDestCoords; // teleport loco and chsphere set this
+	Coordinate      ChronoDestCoords; // teleport loco and chsphere set this
 	AirstrikeClass* Airstrike; //Boris
 	bool             Berzerk;
 	DWORD            BerzerkDurationLeft;
@@ -420,22 +420,22 @@ public:
 	void DetachAnim(AnimClass* anim) override JMP_THIS(0x710410);
 	bool IsSelectable() const override JMP_THIS(0x6F32D0);
 	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x703860);
-	Action MouseOverCell(CellStruct const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x6FFEC0);
+	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x6FFEC0);
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x700600);
 	TechnoTypeClass* TechnoType() const override JMP_THIS(0x6F3270);
 	DWORD Ownable() const override JMP_THIS(0x708B30);
 	bool Repairable() const override JMP_THIS(0x701140);
 	bool CanPlayerFire() const override JMP_THIS(0x7010D0);
 	bool IsControllable() const override JMP_THIS(0x700C40);
-	CoordStruct FLH(int idxWeapon, CoordStruct BaseCoords) const override JMP_THIS(0x6F3AD0);
+	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x6F3AD0);
 	bool IsDisguised() const override JMP_THIS(0x41C010);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x41C020);
 	bool Limbo() override JMP_THIS(0x6F6AC0);
-	bool Unlimbo(const CoordStruct& position, Dir256 dir) override JMP_THIS(0x6F6CA0);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x6F6CA0);
 	void RegisterKillByObject(ObjectClass const* destroyedBy) override JMP_THIS(0x702D40);
 	void RegisterKillByHouse(HouseClass const* destroyedBy) override JMP_THIS(0x703230);
 	void Reveal() override JMP_THIS(0x703850);
-	KickOutResult KickOutUnit(TechnoClass* pTechno, CellStruct Cell) override JMP_THIS(0x7099D0);
+	KickOutResult KickOutUnit(TechnoClass* pTechno, ::Cell Cell) override JMP_THIS(0x7099D0);
 	void DrawBehind(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x6F60D0);
 	void DrawExtras(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x6F5190);
 	void Undiscover() override JMP_THIS(0x6F4A40);
@@ -595,7 +595,7 @@ public:
 	* @note vtable_index 179:0x2CC
 	* @note address 0x707F60
 	*/
-	virtual bool IsInSameZoneAsCoords(const CoordStruct& coord) JMP_THIS(0x707F60);
+	virtual bool IsInSameZoneAsCoords(const Coordinate& coord) JMP_THIS(0x707F60);
 
 	/*!
 	* @note original_name How_Many_Survivors
@@ -665,14 +665,14 @@ public:
 	* @note vtable_index 189:0x2F4
 	* @note address 0x459DB0
 	*/
-	virtual CellStruct GetLastFlightMapCoords() const JMP_THIS(0x459DB0);
+	virtual ::Cell GetLastFlightMapCoords() const JMP_THIS(0x459DB0);
 
 	/*!
 	* @note original_name Set_Last_Flight_Coord
 	* @note vtable_index 190:0x2F8
 	* @note address 0x459DC0
 	*/
-	virtual void SetLastFlightMapCoords(CellStruct coord) JMP_THIS(0x459DC0);
+	virtual void SetLastFlightMapCoords(::Cell coord) JMP_THIS(0x459DC0);
 
 	/*!
 	* @note original_name Find_Exit_Cell
@@ -686,7 +686,7 @@ public:
 	* @note vtable_index 192:0x300
 	* @note address 0x6F3D60
 	*/
-	virtual CoordStruct FiringOffset() const JMP_THIS(0x6F3D60);
+	virtual Coordinate FiringOffset() const JMP_THIS(0x6F3D60);
 
 	/*!
 	* @note original_name Desired_Load_Dir
@@ -742,7 +742,7 @@ public:
 	* @note vtable_index 200:0x320
 	* @note address 0x459DD0
 	*/
-	virtual bool IsAllowedTo_Leave_Map() const JMP_THIS(0x459DD0);
+	virtual bool IsAllowedToLeaveMap() const JMP_THIS(0x459DD0);
 
 	/*!
 	* @note original_name Is_Visible_On_Radar
@@ -784,7 +784,7 @@ public:
 	* @note vtable_index 206:0x338
 	* @note address 0x70F8F0
 	*/
-	virtual CellStruct* ScanForTiberium(CellStruct*, int range, DWORD dwUnk3) const JMP_THIS(0x70F8F0);
+	virtual ::Cell ScanForTiberium(int range) const JMP_THIS(0x70F8F0);
 
 	/*!
 	* @note original_name Try_Grinding
@@ -945,7 +945,7 @@ public:
 	* @note vtable_index 229:0x394
 	* @note address 0x710670
 	*/
-	virtual void AddPassenger(FootClass* pPassenger) JMP_THIS(0x710670);
+	virtual void AttachCargo(FootClass* pPassenger) JMP_THIS(0x710670);
 
 	/*!
 	* @note original_name Can_Target_Terrain_Or_Disguise
@@ -959,7 +959,7 @@ public:
 	* @note vtable_index 231:0x39C
 	* @note address 0x709820
 	*/
-	virtual bool TargetAndEstimateDamage(CoordStruct& coord, ThreatType threat) JMP_THIS(0x709820);
+	virtual bool TargetAndEstimateDamage(Coordinate& coord, ThreatType threat) JMP_THIS(0x709820);
 
 	/*!
 	* @note original_name Stun
@@ -994,7 +994,7 @@ public:
 	* @note vtable_index 236:0x3B0
 	* @note address 0x6F7930
 	*/
-	virtual bool IsCloseEnoughToAttackCoords(const CoordStruct& Coords) const JMP_THIS(0x6F7930);
+	virtual bool IsCloseEnoughToAttackCoords(const Coordinate& Coords) const JMP_THIS(0x6F7930);
 
 	/*!
 	* @note original_name In_Range1
@@ -1029,7 +1029,7 @@ public:
 	* @note vtable_index 241:0x3C4
 	* @note address 0x6F8DF0
 	*/
-	virtual AbstractClass* GreatestThreat(ThreatType threat, CoordStruct* pCoord, bool onlyTargetHouseEnemy) JMP_THIS(0x6F8DF0);
+	virtual AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) JMP_THIS(0x6F8DF0);
 
 	/*!
 	* @note original_name Assign_Target
@@ -1071,7 +1071,7 @@ public:
 	* @note vtable_index 247:0x3DC
 	* @note address 0x459E50
 	*/
-	virtual bool Crash(ObjectClass* Killer) JMP_THIS(0x459E50);
+	virtual bool Crash(ObjectClass* killer) JMP_THIS(0x459E50);
 
 	/*!
 	* @note original_name Can_Area_Fire
@@ -1211,7 +1211,7 @@ public:
 	* @note vtable_index 267:0x42C
 	* @note address 0x705CA0
 	*/
-	virtual CoordStruct* GetAttackCoordinates(CoordStruct* pCrd) const JMP_THIS(0x705CA0);
+	virtual Coordinate GetAttackCoordinates() const JMP_THIS(0x705CA0);
 
 	/*!
 	* @note original_name Is_Not_Warping_Out
@@ -1232,7 +1232,7 @@ public:
 	* @note vtable_index 270:0x438
 	* @note address 0x459E60
 	*/
-	virtual void DrawActionLines(bool Force, DWORD dwUnk2) JMP_THIS(0x459E60);
+	virtual void DrawActionLines(bool force, DWORD unkColorComponent) JMP_THIS(0x459E60);
 
 	/*!
 	* @note original_name Disguise_Blit_Flags
@@ -1349,6 +1349,7 @@ public:
 	virtual bool RandomAnimate() JMP_THIS(0x41C040);
 
 	/*!
+	* @brief set following maybe? see FootClass
 	* @note original_name FootClass_4D94A0
 	* @note vtable_index 287:0x47C
 	* @note address 0x709A20
@@ -1388,7 +1389,7 @@ public:
 	* @note vtable_index 292:0x490
 	* @note address 0x0
 	*/
-	virtual bool ForceCreate(CoordStruct& coord, DWORD dwUnk = 0) = 0;
+	virtual bool ForceCreate(Coordinate& coord, DWORD dwUnk = 0) = 0;
 
 	/*!
 	* @note original_name Radar_Track_Object
@@ -1458,7 +1459,7 @@ public:
 	* @note vtable_index 302:0x4B8
 	* @note address 0x70F050
 	*/
-	virtual Coordinate* GetAttackMoveCoords(void* retstr) JMP_THIS(0x70F050);
+	virtual Coordinate GetAttackMoveCoords() const JMP_THIS(0x70F050);
 
 	/*!
 	* @note original_name Can_Use_Waypoint
@@ -1516,7 +1517,7 @@ public:
 	* @note original_name Area_Modify
 	* @note address 0x6F79A0
 	*/
-	bool ShouldSuppress(CellStruct* coords) const JMP_THIS(0x6F79A0);
+	bool ShouldSuppress(::Cell* coords) const JMP_THIS(0x6F79A0);
 
 	/*!
 	* @brief
@@ -1537,7 +1538,7 @@ public:
 	* @note original_name Laser_Zap
 	* @note address 0x6FD210
 	*/
-	LaserDrawClass* CreateLaser(ObjectClass* pTarget, int idxWeapon, WeaponTypeClass* pWeapon, const CoordStruct& Coords) JMP_THIS(0x6FD210);
+	LaserDrawClass* CreateLaser(ObjectClass* pTarget, int idxWeapon, WeaponTypeClass* pWeapon, const Coordinate& Coords) JMP_THIS(0x6FD210);
 
 	/*!
 	* @brief Cell->AddThreat(this->Owner, -this->ThreatPosed);
@@ -1556,14 +1557,14 @@ public:
 	* @note original_name Evaluate_Object
 	* @note address 0x6F7CA0
 	*/
-	bool CanAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, int wantedDistance, TechnoClass* pTarget, int* pThreatPosed, DWORD dwUnk, CoordStruct* pSourceCoords) const JMP_THIS(0x6F7CA0);
+	bool CanAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, int wantedDistance, TechnoClass* pTarget, int* pThreatPosed, DWORD dwUnk, Coordinate* pSourceCoords) const JMP_THIS(0x6F7CA0);
 
 	/*!
 	* @brief called by AITeam Attack Target Type and autoscan
 	* @note original_name Evaluate_Cell
 	* @note address 0x6F8960
 	*/
-	bool TryAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, CellStruct* pCoords, DWORD dwUnk1, DWORD* dwUnk2, int* pThreatPosed, DWORD dwUnk3) JMP_THIS(0x6F8960);
+	bool TryAutoTargetObject(ThreatType targetFlags, int canTargetWhatAmI, ::Cell* pCoords, DWORD dwUnk1, DWORD* dwUnk2, int* pThreatPosed, DWORD dwUnk3) JMP_THIS(0x6F8960);
 
 	/*!
 	* @brief

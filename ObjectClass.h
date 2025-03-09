@@ -74,7 +74,7 @@ public:
 	bool               IsInLogic;      // has this object been added to the logic collection?
 	bool               IsVisible;      // was this object in viewport when drawn?
 	PROTECTED_PROPERTY(BYTE, align_99[0x2]);
-	CoordStruct        Location;       // Absolute current 3D location (in leptons)
+	Coordinate        Location;       // Absolute current 3D location (in leptons)
 	LineTrail* LineTrailer;
 public:
 	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x5F5E80);
@@ -124,7 +124,7 @@ public:
 	* @note vtable_index 28:0x70
 	* @note address 0x5F4250
 	*/
-	virtual Action MouseOverCell(CellStruct const* pCell, bool checkFog = false, bool ignoreForce = false) const JMP_THIS(0x5F4250);
+	virtual Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const JMP_THIS(0x5F4250);
 
 	/*!
 	* @note original_name What_Action_Object
@@ -248,28 +248,28 @@ public:
 	* @note vtable_index 42:0xA8
 	* @note address 0x5F6C80
 	*/
-	virtual CoordStruct DockingCoord(TechnoClass* docker) const  JMP_THIS(0x5F6C80);
+	virtual Coordinate DockingCoord(TechnoClass* docker) const  JMP_THIS(0x5F6C80);
 
 	/*!
 	* @note original_name Render_Coord
 	* @note vtable_index 43:0xAC
 	* @note address 0x41BE00
 	*/
-	virtual CoordStruct RenderCoord() const JMP_THIS(0x41BE00);
+	virtual Coordinate RenderCoord() const JMP_THIS(0x41BE00);
 
 	/*!
 	* @note original_name Fire_Coord
 	* @note vtable_index 44:0xB0
 	* @note address 0x4263D0
 	*/
-	virtual CoordStruct FLH(int idxWeapon, CoordStruct BaseCoords) const JMP_THIS(0x4263D0);
+	virtual Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const JMP_THIS(0x4263D0);
 
 	/*!
 	* @note original_name Exit_Coord
 	* @note vtable_index 45:0xB4
 	* @note address 0x41BE30
 	*/
-	virtual CoordStruct ExitCoord() const JMP_THIS(0x41BE30);
+	virtual Coordinate ExitCoord() const JMP_THIS(0x41BE30);
 
 	/*!
 	* @note vtable_index 46:0xB8
@@ -327,7 +327,7 @@ public:
 	* @note vtable_index 54:0xD8
 	* @note address 0x5F4EC0
 	*/
-	virtual bool Unlimbo(const CoordStruct& position, Dir256 dir) JMP_THIS(0x5F4EC0);
+	virtual bool Unlimbo(const Coordinate& position, Dir256 dir) JMP_THIS(0x5F4EC0);
 
 	/*!
 	* @brief Cleanup things (lose line trail, deselect, etc). Permanently: destroyed/removed/gone opposed to just going out of sight.
@@ -358,7 +358,7 @@ public:
 	* @note vtable_index 58:0xE8
 	* @note address 0x5F5940
 	*/
-	virtual bool SpawnParachuted(const CoordStruct& coords) JMP_THIS(0x5F5940);
+	virtual bool SpawnParachuted(const Coordinate& coords) JMP_THIS(0x5F5940);
 
 	/*!
 	* @note original_name Drop_As_Bomb
@@ -372,14 +372,14 @@ public:
 	* @note vtable_index 60:0xF0
 	* @note address 0x5F60A0
 	*/
-	virtual void MarkAllOccupationBits(const CoordStruct& coords) JMP_THIS(0x5F60A0);
+	virtual void MarkAllOccupationBits(const Coordinate& coords) JMP_THIS(0x5F60A0);
 
 	/*!
 	* @note original_name Clear_Occupy_Bit
 	* @note vtable_index 61:0xF4
 	* @note address 0x5F6120
 	*/
-	virtual void UnmarkAllOccupationBits(const CoordStruct& coords) JMP_THIS(0x5F6120);
+	virtual void UnmarkAllOccupationBits(const Coordinate& coords) JMP_THIS(0x5F6120);
 
 	/*!
 	* @note original_name Remove_This
@@ -401,7 +401,7 @@ public:
 	* @note vtable_index 64:0x100
 	* @note address 0x5F4320
 	*/
-	virtual KickOutResult KickOutUnit(TechnoClass* pTechno, CellStruct Cell) JMP_THIS(0x5F4320);
+	virtual KickOutResult KickOutUnit(TechnoClass* pTechno, ::Cell Cell) JMP_THIS(0x5F4320);
 
 	/*!
 	* @note original_name Render
@@ -415,7 +415,7 @@ public:
 	* @note vtable_index 66:0x108
 	* @note address 0x5F5B90
 	*/
-	virtual CellStruct const* OccupiedCells(bool includeBib = false) const JMP_THIS(0x5F5B90);
+	virtual ::Cell const* OccupiedCells(bool includeBib = false) const JMP_THIS(0x5F5B90);
 
 	/*!
 	* @note original_name Draw_Lines_On_Buildings
@@ -522,7 +522,7 @@ public:
 	* @note vtable_index 81:0x144
 	* @note address 0x5F4350
 	*/
-	virtual bool CellClickedAction(Action action, CellStruct* pCell, CellStruct* pCell1, bool bUnk) JMP_THIS(0x5F4350);
+	virtual bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) JMP_THIS(0x5F4350);
 
 	/*!
 	* @note original_name Clicked_As_Target
@@ -606,7 +606,7 @@ public:
 	* @note vtable_index 93:0x174
 	* @note address 0x5F43A0
 	*/
-	virtual void Scatter(const CoordStruct& crd, bool ignoreMission, bool ignoreDestination) JMP_THIS(0x5F43A0);
+	virtual void Scatter(const Coordinate& crd, bool ignoreMission, bool ignoreDestination) JMP_THIS(0x5F43A0);
 
 	/*!
 	* @note original_name Catch_Fire
@@ -728,7 +728,7 @@ public:
 	* @note vtable_index 110:0x1B8
 	* @note address 0x41BEA0
 	*/
-	virtual CellStruct Coord() const JMP_THIS(0x41BEA0);
+	virtual ::Cell Coord() const JMP_THIS(0x41BEA0);
 
 	/*!
 	* @note original_name Coord_Cell_Ptr
@@ -742,7 +742,7 @@ public:
 	* @note vtable_index 112:0x1C0
 	* @note address 0x5F69C0
 	*/
-	virtual CellStruct DestinationCoord() const JMP_THIS(0x5F69C0);
+	virtual ::Cell DestinationCoord() const JMP_THIS(0x5F69C0);
 
 	/*!
 	* @note original_name Coord_Target_Cell_Ptr
