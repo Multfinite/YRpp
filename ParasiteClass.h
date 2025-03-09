@@ -8,6 +8,7 @@ class FootClass;
 class NOVTABLE ParasiteClass : public AbstractClass
 {
 public:
+	static constexpr uintptr_t AbsVTable = 0x7EF890;
 	static const AbstractType AbsID = AbstractType::Parasite;
 
 	static constexpr constant_ptr<DynamicVectorClass<ParasiteClass*>, 0xAC4910u> const Array{};
