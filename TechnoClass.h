@@ -189,10 +189,13 @@ public:
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
 public:
-	TechnoClass* Transporter; // unit carrying me
+	// unit carrying me
+	TechnoClass* Transporter;
 	int              LastFireBulletFrame;
-	int              CurrentTurretNumber; // for IFV/gattling/charge turrets
-	int              unknown_int_128;
+	// for IFV/gattling/charge turrets
+	int              CurrentTurretNumber;
+	// idk for what, was called TurretWeapon2
+	int              CurrentWeaponNumber2;
 	AnimClass* BehindAnim;
 	AnimClass* DeployAnim;
 	bool             InAir;
@@ -201,7 +204,8 @@ public:
 	int              CurrentGattlingStage;
 	int              GattlingValue; // sum of RateUps and RateDowns
 	int              TurretAnimFrame;
-	HouseClass* InitialOwner; // only set in ctor
+	// only set in ctor
+	HouseClass* InitialOwner;
 	DECLARE_PROPERTY(VeterancyStruct, Veterancy);
 	DWORD            align_154;
 	double           ArmorMultiplier;
@@ -229,8 +233,9 @@ public:
 	Point2D          RadarPosition;
 
 	// WARNING! this is actually an index of HouseTypeClass es, but it's being changed to fix typical WW bugs.
-	DECLARE_PROPERTY(IndexBitfield<HouseClass*>, DisplayProductionTo); // each bit corresponds to one player on the map, telling us whether that player has (1) or hasn't (0) spied this building, and the game should display what's being produced inside it to that player. The bits are arranged by player ID, i.e. bit 0 refers to house #0 in HouseClass::Array, 1 to 1, etc.; query like ((1 << somePlayer->ArrayIndex) & someFactory->DisplayProductionToHouses) != 0
-
+	// each bit corresponds to one player on the map, telling us whether that player has (1) or hasn't (0) spied this building, and the game should display what's being produced inside it to that player. The bits are arranged by player ID, i.e. bit 0 refers to house #0 in HouseClass::Array, 1 to 1, etc.; query like ((1 << somePlayer->ArrayIndex) & someFactory->DisplayProductionToHouses) != 0
+	DECLARE_PROPERTY(IndexBitfield<HouseClass*>, DisplayProductionTo); 
+	
 	int              Group; //0-9, assigned by CTRL+Number, these kinds // also set by aimd TeamType->Group !
 	AbstractClass* ArchiveTarget; // Set when told to guard a unit or such, or to distinguish undeploy and selling. Also used by rally points as well as harvesters for remembering ore fields etc.
 	HouseClass* Owner;
@@ -323,13 +328,13 @@ public:
 	DECLARE_PROPERTY(FacingClass, SecondaryFacing);
 	int              CurrentBurstIndex;
 	DECLARE_PROPERTY(CDTimerClass, TargetLaserTimer);
-	short            unknown_short_3C8;
-	WORD             unknown_3CA;
+	short            SoundRandomSeed;
+	WORD             SinkingYOffset;
 	bool             CountedAsOwned; // is this techno contained in OwningPlayer->Owned... counts?
 	bool             IsSinking;
 	bool             WasSinkingAlready; // if(IsSinking && !WasSinkingAlready) { play SinkingSound; WasSinkingAlready = 1; }
-	bool             unknown_bool_3CF;
-	bool             unknown_bool_3D0;
+	bool             IsNeedingRescue;
+	bool             IsUseless;
 	bool             HasBeenAttacked; // ReceiveDamage when not HouseClass_IsAlly
 	bool             Cloakable;
 	bool             IsPrimaryFactory; // doubleclicking a warfac/barracks sets it as primary
@@ -342,12 +347,12 @@ public:
 	bool             IsOwnedByCurrentPlayer; // Returns true if owned by the player on this computer
 	bool             DiscoveredByCurrentPlayer;
 	bool             DiscoveredByComputer;
-	bool             unknown_bool_41D;
+	bool             IsALemon;
 	bool             unknown_bool_41E;
 	bool             unknown_bool_41F;
 	char             SightIncrease; // used for LeptonsPerSightIncrease
-	bool             RecruitableA; // these two are like Lenny and Carl, weird purpose and never seen separate
-	bool             RecruitableB; // they're usually set on preplaced objects in maps
+	bool             IsRecruitable; // these two are like Lenny and Carl, weird purpose and never seen separate
+	bool             IsAIRecruitable; // they're usually set on preplaced objects in maps
 	bool             IsRadarTracked;
 	bool             IsOnCarryall;
 	bool             IsCrashing;
@@ -356,14 +361,18 @@ public:
 	TechnoClass* BeingManipulatedBy; // set when something is being molested by a locomotor such as magnetron
 	// the pointee will be marked as the killer of whatever the victim falls onto
 	HouseClass* ChronoWarpedByHouse;
-	bool             unknown_bool_430;
+	bool             MissionPatrol_430;
 	bool             IsMouseHovering;
 	bool             ShouldBeReselectOnUnlimbo;
 	TeamClass* OldTeam;
-	bool             CountedAsOwnedSpecial; // for absorbers, infantry uses this to manually control OwnedInfantry count
-	bool             Absorbed; // in UnitAbsorb/InfantryAbsorb or smth, lousy memory
-	bool             unknown_bool_43A;
-	DWORD            unknown_43C;
+	// IsTracked
+	// for absorbers, infantry uses this to manually control OwnedInfantry count
+	bool             CountedAsOwnedSpecial;
+	// IsTechnician
+	// in UnitAbsorb/InfantryAbsorb or smth, lousy memory
+	bool             Absorbed; 
+	bool             ForceAttack_ForceMove_FirendlyTarget_43A;
+	DWORD            RadialFireCounter;
 	DECLARE_PROPERTY(DynamicVectorClass<int>, CurrentTargetThreatValues);
 	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, CurrentTargets);
 
@@ -372,25 +381,28 @@ public:
 
 	DECLARE_PROPERTY(AudioController, Audio3);
 
-	BOOL            unknown_BOOL_49C; // Turret is moving?
+	// Turret is moving?
+	BOOL            TurretStatedWord_49C; 
 	BOOL            TurretIsRotating;
 
 	DECLARE_PROPERTY(AudioController, Audio4);
 
-	bool             unknown_bool_4B8;
+	bool             GattlingSound_4B8;
 	DWORD            unknown_4BC;
 
 	DECLARE_PROPERTY(AudioController, Audio5);
 
-	bool             unknown_bool_4D4;
+	bool             GattlingSound_4D4;
 	DWORD            unknown_4D8;
 
 	DECLARE_PROPERTY(AudioController, Audio6);
 
 	DWORD            QueuedVoiceIndex;
-	DWORD            unknown_4F4;
-	bool             unknown_bool_4F8;
-	DWORD            unknown_4FC;	//gets initialized with the current Frame, but this is NOT a TimerStruct!
+	DWORD            LastPlayedVoice;
+	bool             Deploy_4F8;
+	//gets initialized with the current Frame, but this is NOT a TimerStruct!
+	DWORD            CreationFrame;
+	// LinkedBuilding
 	TechnoClass* QueueUpToEnter;
 	DWORD            EMPLockRemaining;
 	DWORD            ThreatPosed; // calculated to include cargo etc
