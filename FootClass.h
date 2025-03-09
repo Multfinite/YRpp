@@ -97,21 +97,99 @@ public:
 	bool              blockage_6B7;
 	bool              Removed;
 	PROTECTED_PROPERTY(DWORD, unused_6BC);	//???
+public:
+	virtual ~FootClass() JMP_THIS(0x4D3590); // i am not sure about the address
 
-	//IPersistStream
-	//Destructor
-	virtual ~FootClass() RX;
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x4DB3C0);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x4DB690);
 
-	//AbstractClass
-	//ObjectClass
-	//MissionClass
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
+	void ComputeCRC(CRCEngine & crc) const override JMP_THIS(0x4DBAD0);
+	Coordinate Destination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
+	bool InAir() const override JMP_THIS(0x4DE620);
+	void AI() override JMP_THIS(0x4DA530);
+	
+	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x4DA4E0);
+	SHPStruct* GetImage() const override JMP_THIS(0x4DED70);
+	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x4DDDE0);
+	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x4DDED0);
+	Layer InWhichLayer() const override JMP_THIS(0x4DB7E0);
+	bool Soldable() const override JMP_THIS(0x4D9E70);
+	bool IsOnBridge(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DDC40);
+	bool IsStandingStill() const override JMP_THIS(0x41C070);
+	bool Limbo() override JMP_THIS(0x4DB260);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x4D7170);
+	void DetachAll(bool permanently) override JMP_THIS(0x4D9720);
+	void UnInit() override JMP_THIS(0x4DE5D0);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x4DB250);
+	bool Mark(MarkType value) override JMP_THIS(0x4D3780);
+	bool CanBeSelected() const override JMP_THIS(0x4DFA50);
+	bool ObjectClickedAction(Action action, ObjectClass * pTarget, bool bUnk) override JMP_THIS(0x4D7D50);
+	bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) override JMP_THIS(0x4D74E0);
+	DamageState IronCurtain(int nDuration, HouseClass* pSource, bool ForceShield) override JMP_THIS(0x4DEAE0);
+	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x4D7330);
+	void UpdatePosition(PCPType how) override JMP_THIS(0x4D85D0);
+	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x4D8FB0);
+	void Sell(DWORD control) override JMP_THIS(0x4D9F70);
+	void AssignPlanningPath(signed int idxPath, signed char idxWP) override JMP_THIS(0x4DC810);
+	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x4D9C10);
+	DWORD CanChangeLevel(CellClass* cell, Dir256 dir, int* targetLevel, bool* useAltObject, ::Cell targetCoord) override JMP_THIS(0x4D9C60);
+	void SetLocation(const Coordinate& crd)override JMP_THIS(0x4DB810);
+	
+	void OverrideMission(Mission mission, AbstractClass* target, AbstractClass* destination) override JMP_THIS(0x4D8F40);
+	bool RestoreMission() override JMP_THIS(0x4D8F80);
+	int32_t MissionAttack() override JMP_THIS(0x4D4DC0);
+	int32_t MissionCapture() override JMP_THIS(0x4D4B20);
+	int32_t MissionEaten() override JMP_THIS(0x4D4CB0);
+	int32_t MissionGuard() override JMP_THIS(0x4D5070);
+	int32_t MissionGuardArea() override JMP_THIS(0x4D6AA0);
+	int32_t MissionHunt() override JMP_THIS(0x4D5350);
+	int32_t MissionMove() override JMP_THIS(0x4D4200);
+	int32_t MissionRetreat() override JMP_THIS(0x4DA2C0);
+	int32_t MissionUnload() override JMP_THIS(0x4DA2B0);
+	int32_t MissionEnter() override JMP_THIS(0x4D9290);
+	int32_t MissionRescue() override JMP_THIS(0x4DDF90);
+	int32_t MissionPatrol() override JMP_THIS(0x4D4280);
 
-	virtual int Mission_AreaGuard() override { JMP_THIS(0x4D6AA0); }
-
-	//TechnoClass
-	virtual void Destroyed(ObjectClass *Killer) RX;
-	virtual bool ForceCreate(CoordStruct& coord, DWORD dwUnk = 0) R0;
-	virtual AbstractClass* GreatestThreat(ThreatType threat, CoordStruct* pCoord, bool onlyTargetHouseEnemy) override { JMP_THIS(0x4D9920) };
+	bool IsCloakable() const override JMP_THIS(0x4DBDA0);
+	bool BelongsToATeam() const override JMP_THIS(0x41C050);
+	bool IsInSameZoneAs(AbstractClass* pTarget) override JMP_THIS(0x4DBA50);
+	bool IsInSameZoneAsCoords(const Coordinate& coord) override JMP_THIS(0x4D3810);
+	int GetZAdjustment() const override JMP_THIS(0x4DAFC0);
+	ZGradient GetZGradient() const override JMP_THIS(0x4DB0A0);
+	::Cell GetLastFlightMapCoords() const override JMP_THIS(0x41C150);
+	void SetLastFlightMapCoords(::Cell coord) override JMP_THIS(0x41C160);
+	bool IsAllowedToLeaveMap() const override JMP_THIS(0x4DA1D0);
+	void ProceedToNextPlanningWaypoint() override JMP_THIS(0x4DE580);
+	::Cell ScanForTiberium(int range) const override JMP_THIS(0x4DD0A0);
+	bool EnterGrinder() override JMP_THIS(0x4DFA70);
+	bool EnterBioReactor() override JMP_THIS(0x4DFB70);
+	bool EnterTankBunker() override JMP_THIS(0x4DFF40);
+	bool EnterBattleBunker() override JMP_THIS(0x4DFCB0);
+	bool GarrisonStructure() override JMP_THIS(0x4DFE00);
+	bool IsParalyzed() const override JMP_THIS(0x4DE770);
+	void AttachCargo(FootClass* cargo) override JMP_THIS(0x4DE630);
+	void Stun() override JMP_THIS(0x4D5660);
+	void Destroyed(ObjectClass* Killer) override JMP_THIS(0x4D98C0);
+	AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) override JMP_THIS(0x4D9920);
+	bool SetOwningHouse(HouseClass* pHouse, bool announce = true) override JMP_THIS(0x4DBED0);
+	bool Crash(ObjectClass* killer) override JMP_THIS(0x4DEBB0);
+	virtual Coordinate GetAttackCoordinates() const override JMP_THIS(0x4D8560);
+	void DrawActionLines(bool force, DWORD unkColorComponent) override JMP_THIS(0x4DC060);
+	void vt_entry_47C(DWORD dwUnk) override JMP_THIS(0x4D94A0);
+	void SetDestination(AbstractClass* target, bool a2) override JMP_THIS(0x4D94B0);
+	bool EnterIdleMode(bool initial, bool a2) override JMP_THIS(0x4D82B0);
+	bool ForceCreate(Coordinate& coord, DWORD dwUnk = 0) override JMP_THIS(0x4DF510);
+	int RespondMegaEventMission(EventClass* pRespondTo) override JMP_THIS(0x4DF0E0);
+	void ClearMegaMissionData() override JMP_THIS(0x4DF1A0);
+	bool HaveMegaMission() const override JMP_THIS(0x4DF1C0);
+	bool HaveAttackMoveTarget() const override JMP_THIS(0x4DF1D0);
+	Mission GetMegaMission() const override JMP_THIS(0x4DF1E0);
+	Coordinate GetAttackMoveCoords() const override JMP_THIS(0x4DF1F0);
+	bool MegaMissionIsAttackMove() const override JMP_THIS(0x4DF310);
+	bool ContinueMegaMission() override JMP_THIS(0x4DF320);
+	void UpdateAttackMove() override JMP_THIS(0x4DF3A0);
+	bool RefreshMegaMission() override JMP_THIS(0x4DF4B0);
 
 	//FootClass
 	virtual void ReceiveGunner(FootClass* Gunner) RX;
