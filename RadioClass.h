@@ -11,6 +11,8 @@ class TechnoClass;
 class NOVTABLE RadioClass : public MissionClass
 {
 public:
+	static constexpr uintptr_t AbsVTable = 0x7F0508;
+public:
 	// new command updates these
 	RadioCommand LastCommands[3];
 	// Docked units etc

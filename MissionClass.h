@@ -47,6 +47,8 @@ class MissionControlClass
 class NOVTABLE MissionClass : public ObjectClass
 {
 public:
+	static constexpr uintptr_t AbsVTable = 0x7EDCC0;
+public:
 	Mission  CurrentMission;
 	Mission  SuspendedMission;
 	Mission  QueuedMission;
