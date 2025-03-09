@@ -211,15 +211,12 @@ public:
 	bool MoveToWeed(int radius)
 		{ JMP_THIS(0x4DDB90); }
 
-	//Constructor
-	FootClass(HouseClass* pOwner) noexcept : FootClass(noinit_t())
-		{ JMP_THIS(0x4D31E0); }
-
 protected:
-	explicit __forceinline FootClass(noinit_t) noexcept
-		: TechnoClass(noinit_t())
-	{ }
 
+	/*! @brief FAKE CTOR */
+	explicit __forceinline FootClass(fake_noinit_t) noexcept : TechnoClass(fake_noinit_t{}) {}
+	FootClass(noinit_t) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x4D3540);
+	FootClass(HouseClass* house) : FootClass(fake_noinit_t{}) JMP_THIS(0x4D31E0);
 };
 
 static_assert(sizeof(FootClass) == 0x6C0);
