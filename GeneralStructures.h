@@ -44,3 +44,15 @@ struct __declspec(align(4)) VoxelCalcStruct
 	int datalength;
 	int spanmaybe;
 };
+
+struct __declspec(align(4)) PathType
+{
+	CellStruct Start;
+	int Cost;
+	int Length;
+	FacingType* Command;
+	int field_10;
+	int* Overlap;
+	CellStruct LastOverlap;
+	CellStruct LastFixup;
+};

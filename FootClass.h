@@ -191,49 +191,269 @@ public:
 	void UpdateAttackMove() override JMP_THIS(0x4DF3A0);
 	bool RefreshMegaMission() override JMP_THIS(0x4DF4B0);
 
-	//FootClass
-	virtual void ReceiveGunner(FootClass* Gunner) RX;
-	virtual void RemoveGunner(FootClass* Gunner) RX;
-	virtual bool IsLeavingMap() const R0;
-	virtual bool vt_entry_4E0() const R0;
-	virtual bool CanDeployNow() const R0;
-	virtual void AddSensorsAt(::Cell cell) RX;
-	virtual void RemoveSensorsAt(::Cell cell) RX;
-	virtual Coordinate* vt_entry_4F0(Coordinate* pCrd) R0;
-	virtual void vt_entry_4F4() RX;
-	virtual bool vt_entry_4F8() R0;
-	virtual bool MoveTo(Coordinate* pCrd) R0;
-	virtual bool StopMoving() R0;
-	virtual bool vt_entry_504() R0;
-	virtual bool ChronoWarpTo(Coordinate pDest) R0; // fsds... only implemented for one new YR map trigger, other chrono events repeat the code...
-	virtual void Draw_A_SHP(
-		SHPStruct *SHP, int idxFacing, Point2D * Coords, RectangleStruct *Rectangle,
+	/*!
+	* @brief
+	* @note original_name vthk_0x4D4_FootClass
+	* @note vtable_index 309:0x4D4
+	* @note address 0x4DE750
+	*/
+	virtual void ReceiveGunner(FootClass* Gunner) JMP_THIS(0x4DE750);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x4D8_FootClass
+	* @note vtable_index 310:0x4D8
+	* @note address 0x4DE760
+	*/
+	virtual void RemoveGunner(FootClass* Gunner) JMP_THIS(0x4DE760);
+
+	/*!
+	* @brief
+	* @note original_name FootClass_traincrap
+	* @note vtable_index 311:0x4DC
+	* @note address 0x4DC790
+	*/
+	virtual bool IsLeavingMap() const JMP_THIS(0x4DC790);
+
+	/*!
+	* @brief
+	* @note original_name someallow
+	* @note vtable_index 312:0x4E0
+	* @note address 0x4DBFD0
+	*/
+	virtual bool vt_entry_4E0() const JMP_THIS(0x4DBFD0);
+
+	/*!
+	* @brief
+	* @note original_name TechnoClasssub_41C060
+	* @note vtable_index 313:0x4E4
+	* @note address 0x41C060
+	*/
+	virtual bool CanDeployNow() const JMP_THIS(0x41C060);
+
+	/*!
+	* @brief
+	* @note original_name FootClass_SensorsSight_0
+	* @note vtable_index 314:0x4E8
+	* @note address 0x4DE7B0
+	*/
+	virtual void AddSensorsAt(::Cell cell) JMP_THIS(0x4DE7B0);
+
+	/*!
+	* @brief
+	* @note original_name FootClass_SensorsSight
+	* @note vtable_index 315:0x4EC
+	* @note address 0x4DE940
+	*/
+	virtual void RemoveSensorsAt(::Cell cell) JMP_THIS(0x4DE940);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x4F0_FootClass
+	* @note vtable_index 316:0x4F0
+	* @note address 0x4D9FF0
+	*/
+	virtual Coordinate* vt_entry_4F0(Coordinate* pCrd) JMP_THIS(0x4D9FF0);
+
+	/*!
+	* @brief
+	* @note original_name Stop_Hunting
+	* @note vtable_index 317:0x4F4
+	* @note address 0x4DC030
+	*/
+	virtual void StopHunting() JMP_THIS(0x4DC030);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x4F8_FootClass
+	* @note vtable_index 318:0x4F8
+	* @note address 0x41C080
+	*/
+	virtual bool vt_entry_4F8() JMP_THIS(0x41C080);
+
+	/*!
+	* @brief
+	* @note original_name Start_Driver
+	* @note vtable_index 319:0x4FC
+	* @note address 0x4D55F0
+	*/
+	virtual bool MoveTo(Coordinate* pCrd) JMP_THIS(0x4D55F0);
+
+	/*!
+	* @brief
+	* @note original_name Stop_Driver
+	* @note vtable_index 320:0x500
+	* @note address 0x4D55C0
+	*/
+	virtual bool StopDriver() JMP_THIS(0x4D55C0);
+
+	/*!
+	* @brief
+	* @note original_name FootClass_4DB9B0
+	* @note vtable_index 321:0x504
+	* @note address 0x4DB9B0
+	*/
+	virtual bool vt_entry_504() JMP_THIS(0x4DB9B0);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x508_FootClass
+	* @note vtable_index 322:0x508
+	* @note address 0x4DF7F0
+	*/
+	virtual bool ChronoWarpTo(Coordinate pDest) JMP_THIS(0x4DF7F0);
+
+	/*!
+	* @brief
+	* @note original_name Techno_Draw_Object2
+	* @note vtable_index 323:0x50C
+	* @note address 0x41C090
+	*/
+	virtual void DrawShape(
+		SHPStruct* SHP, int idxFacing, Point2D* Coords, RectangleStruct* Rectangle,
 		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, ZGradient ZGradient,
 		DWORD dwUnk9, int extraLight, DWORD dwUnk11, DWORD dwUnk12,
-		DWORD dwUnk13, DWORD dwUnk14, DWORD dwUnk15, DWORD dwUnk16) RX;
+		DWORD dwUnk13, DWORD dwUnk14, DWORD dwUnk15, DWORD dwUnk16) JMP_THIS(0x41C090);
 
-	virtual void Draw_A_VXL(
-		VoxelStruct *VXL, int HVAFrameIndex, int Flags, IndexClass<int, int> *Cache, RectangleStruct *Rectangle,
-		Point2D *CenterPoint, Matrix3D *Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) RX;
+	/*!
+	* @brief
+	* @note original_name Draw_Voxel
+	* @note vtable_index 324:0x510
+	* @note address 0x4DAF10
+	*/
+	virtual void DrawVoxel(
+		VoxelStruct* VXL, int HVAFrameIndex, int Flags, IndexClass<int, int>* Cache, RectangleStruct* Rectangle,
+		Point2D* CenterPoint, Matrix3D* Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) JMP_THIS(0x4DAF10);
 
-	virtual void GoBerzerk() RX;
-	virtual void Panic() RX;
-	virtual void UnPanic() RX; //never
-	virtual void PlayIdleAnim(int nIdleAnimNumber) RX;
-	virtual DWORD vt_entry_524() R0;
-	virtual BuildingClass* TryNearestDockBuilding(TypeList<BuildingTypeClass*>* bList, DWORD dwUnk2, DWORD dwUnk3) const R0;
-	virtual BuildingClass* FindCloserDockBuilding(BuildingTypeClass* bType, DWORD dwUnk2, DWORD dwUnk3, int* pDistance) const R0;
-	virtual BuildingClass* FindNearestDockBuilding(BuildingTypeClass* bType, DWORD dwUnk2, DWORD dwUnk3) const R0;
-	virtual void vt_entry_534(DWORD dwUnk, DWORD dwUnk2) RX;
-	virtual int GetCurrentSpeed() const R0;
-	virtual AbstractClass* vt_entry_53C(DWORD dwUnk) R0;
-	virtual void vt_entry_540(DWORD dwUnk) RX;
-	virtual void SetSpeedPercentage(double percentage) RX;
-	virtual void vt_entry_548() RX;
-	virtual void vt_entry_54C() RX;
-	virtual bool IsLandZoneClear(AbstractClass* pDestination) R0;
+	/*!
+	* @brief
+	* @note original_name Make_Bezerk_Permanent
+	* @note vtable_index 325:0x514
+	* @note address 0x41C0F0
+	*/
+	virtual void GoBerzerk() JMP_THIS(0x41C0F0);
 
-	bool CanBeRecruited(HouseClass *ByWhom) const
+	/*!
+	* @brief
+	* @note original_name Make_Afraid
+	* @note vtable_index 326:0x518
+	* @note address 0x41C100
+	*/
+	virtual void Panic() JMP_THIS(0x41C100);
+
+	/*!
+	* @brief
+	* @note original_name Make_Calm
+	* @note vtable_index 327:0x51C
+	* @note address 0x41C110
+	*/
+	virtual void UnPanic() JMP_THIS(0x41C110);
+
+	/*!
+	* @brief
+	* @note original_name Make_Go_Idle
+	* @note vtable_index 328:0x520
+	* @note address 0x41C120
+	*/
+	virtual void PlayIdleAnim(int nIdleAnimNumber) JMP_THIS(0x41C120);
+
+	/*!
+	* @brief
+	* @note original_name Offload_Tiberium_Bail
+	* @note vtable_index 329:0x524
+	* @note address 0x4D9C00
+	*/
+	virtual DWORD OffloadTiberiumBail() JMP_THIS(0x4D9C00);
+
+	/*!
+	* @brief
+	* @note original_name Find_Docking_Bay_In_Vector
+	* @note vtable_index 330:0x528
+	* @note address 0x4DF040
+	*/
+	virtual BuildingClass* TryNearestDockBuilding(TypeList<BuildingTypeClass*>* bList, DWORD dwUnk2, DWORD dwUnk3) const JMP_THIS(0x4DF040);
+
+	/*!
+	* @brief
+	* @note original_name Find_Docking_Bay_By_Type
+	* @note vtable_index 331:0x52C
+	* @note address 0x4DEE80
+	*/
+	virtual BuildingClass* FindCloserDockBuilding(BuildingTypeClass* bType, DWORD dwUnk2, DWORD dwUnk3, int* pDistance) const JMP_THIS(0x4DEE80);
+
+	/*!
+	* @brief
+	* @note original_name Find_Docking_Bay
+	* @note vtable_index 332:0x530
+	* @note address 0x4DEE50
+	*/
+	virtual BuildingClass* FindNearestDockBuilding(BuildingTypeClass* bType, DWORD dwUnk2, DWORD dwUnk3) const JMP_THIS(0x4DEE50);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x534_FootClass
+	* @note vtable_index 333:0x534
+	* @note address 0x41C130
+	*/
+	virtual void vt_entry_534(DWORD dwUnk, DWORD dwUnk2) JMP_THIS(0x41C130);
+
+	/*!
+	* @brief
+	* @note original_name Get_Movement_Speed
+	* @note vtable_index 334:0x538
+	* @note address 0x4DB1A0
+	*/
+	virtual int GetCurrentSpeed() const JMP_THIS(0x4DB1A0);
+
+	/*!
+	* @brief
+	* @note original_name Approach_Target
+	* @note vtable_index 335:0x53C
+	* @note address 0x4D5690
+	*/
+	virtual AbstractClass* ApproachTarget(bool assign) JMP_THIS(0x4D5690);
+
+	/*!
+	* @brief
+	* @note original_name Fixup_Path
+	* @note vtable_index 336:0x540
+	* @note address 0x41C140
+	*/
+	virtual void FixupPath(PathType& path) JMP_THIS(0x41C140);
+
+	/*!
+	* @brief
+	* @note original_name vthk_0x544_FootClass
+	* @note vtable_index 337:0x544
+	* @note address 0x4D3710
+	*/
+	virtual void SetSpeedPercentage(double percentage) JMP_THIS(0x4D3710);
+
+	/*!
+	* @brief
+	* @note original_name Stop_Moving
+	* @note vtable_index 338:0x548
+	* @note address 0x4DBA30
+	*/
+	virtual void StopMoving() JMP_THIS(0x4DBA30);
+
+	/*!
+	* @brief
+	* @note original_name Force_Deploy
+	* @note vtable_index 339:0x54C
+	* @note address 0x4DBA40
+	*/
+	virtual void ForceDeploy() JMP_THIS(0x4DBA40);
+
+	/*!
+	* @brief
+	* @note original_name FootClass_Is_LZ_Clear_4DDC60
+	* @note vtable_index 340:0x550
+	* @note address 0x4DDC60
+	*/
+	virtual bool IsLandZoneClear(AbstractClass* pDestination) JMP_THIS(0x4DDC60);
+
+	bool CanBeRecruited(HouseClass *byWhom) const
 		{ JMP_THIS(0x4DA230); }
 
 	// non-virtual
