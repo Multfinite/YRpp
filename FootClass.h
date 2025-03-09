@@ -18,6 +18,85 @@ public:
 	static const auto AbsDerivateID = AbstractFlags::Foot;
 
 	static constexpr constant_ptr<DynamicVectorClass<FootClass*>, 0x8B3DC0u> const Array{};
+public:
+	int             PlanningPathIdx; // which planning path am I following?
+	CellStruct      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
+	CellStruct      WaypointCell; // current waypoint cell
+	DWORD           __gap_52C;
+	double           ThreatAvoidanceCoefficient;
+	int				WalkedFramesSoFar;
+	bool            IsMoveSoundPlaying;
+	int             MoveSoundDelay;
+
+	DECLARE_PROPERTY(AudioController, MoveSoundAudioController);
+
+	CellStruct      CurrentMapCoords;
+	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
+	CellStruct      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
+	CellStruct      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
+	CoordStruct     Sqrt_ed_val_568;
+	PROTECTED_PROPERTY(DWORD, unused_574);
+	double          SpeedPercentage;
+	double          SpeedMultiplier;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue2);
+	AbstractClass* FollowingMaybe_5A0;
+	// NavCom
+	// possibly other objects as well
+	AbstractClass* Destination;
+	// SuspendedNavCom
+	AbstractClass* LastDestination;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue); // Stores sequence of movement destinations
+	Mission         MegaMission; // only Mission::AttackMove or Mission::None
+	AbstractClass* MegaDestination; // when AttackMove target is a cell
+	AbstractClass* MegaTarget; // when AttackMove target is an object
+	BYTE            __gap_5D0;	//unused?
+	bool            HaveAttackMoveTarget; // fighting an enemy on the way
+	TeamClass* Team;
+	FootClass* NextTeamMember;        //next unit in team
+	CellClass*           SomeCell_5DC;
+	int             PathDirections[24]; // list of directions to move in next, like tube directions
+	DECLARE_PROPERTY(CDTimerClass, PathDelayTimer);
+	int             TryTryAgain;
+	DECLARE_PROPERTY(CDTimerClass, BaseAttackTimer);
+	DECLARE_PROPERTY(CDTimerClass, SightTimer);
+	DECLARE_PROPERTY(CDTimerClass, BlockagePathTimer);
+	DECLARE_PROPERTY(ILocomotionPtr, Locomotor);
+	CoordStruct       HeadTo;
+	uint8_t      CurrentTubeIndex;
+	uint8_t              CurrentDirectionInTube;
+	uint8_t       WaypointIndex; // which waypoint in my planning path am I following?
+	bool              IsToScatter;
+	bool              IsScanLimited;
+	bool              IsInitiated; // Is a fully joined member of a team, used for regroup etc. checks
+	// IsNewNavCom
+	bool              ShouldScanForTarget;
+	bool              IsPlanningToLook;
+	bool              IsDeploying;
+	bool              IsFiring;
+	bool              AssignNewThreat;
+	bool              ShouldEnterAbsorber; // orders the unit to enter the closest bio reactor
+	bool              ShouldEnterOccupiable; // orders the unit to enter the closest battle bunker
+	bool              ShouldGarrisonStructure; // orders the unit to enter the closest neutral building
+	FootClass* ParasiteEatingMe; // the tdrone/squid that's eating me
+	int               LastBeParasitedStartFrame;
+	ParasiteClass* ParasiteImUsing;	// my parasitic half, nonzero for, eg, terror drone or squiddy
+	DECLARE_PROPERTY(CDTimerClass, ParalysisTimer); // for squid victims
+	bool              unknown_bool_6AC;
+	bool              IsAttackedByLocomotor; // the unit's locomotor is jammed by a magnetron
+	bool              IsLetGoByLocomotor; // a magnetron attacked this unit and let it go. falling, landing, or sitting on the ground
+	bool              IsRotating;
+	bool              IsUnloading;
+	bool              IsNavQueueLoop;
+	bool              IsScattering;
+	bool              IsIdle_6B3;
+	bool              HeightSubtract_6B4;
+	bool              IsCrusher_6B5;
+	// also called aircraft state - from db
+	// frozen in first frame of the proper facing - when magnetron'd or warping
+	bool              FrozenStill;
+	bool              blockage_6B7;
+	bool              Removed;
+	PROTECTED_PROPERTY(DWORD, unused_6BC);	//???
 
 	//IPersistStream
 	//Destructor
@@ -141,85 +220,6 @@ protected:
 		: TechnoClass(noinit_t())
 	{ }
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	int             PlanningPathIdx; // which planning path am I following?
-	CellStruct      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
-	CellStruct      WaypointCell; // current waypoint cell
-	DWORD           unknown_52C;	//unused?
-	DWORD           unknown_530;
-	DWORD           unknown_534;
-	int				WalkedFramesSoFar;
-	bool            IsMoveSoundPlaying;
-	int             MoveSoundDelay;
-
-	DECLARE_PROPERTY(AudioController, MoveSoundAudioController);
-
-	CellStruct      CurrentMapCoords;
-	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
-	CellStruct      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
-	CellStruct      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
-	CoordStruct     unknown_coords_568;
-	PROTECTED_PROPERTY(DWORD,   unused_574);
-	double          SpeedPercentage;
-	double          SpeedMultiplier;
-	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_588);
-	AbstractClass*  unknown_5A0;
-	AbstractClass*  Destination; // possibly other objects as well
-	AbstractClass*  LastDestination;
-	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue); // Stores sequence of movement destinations
-	Mission         MegaMission; // only Mission::AttackMove or Mission::None
-	AbstractClass*  MegaDestination; // when AttackMove target is a cell
-	AbstractClass*  MegaTarget; // when AttackMove target is an object
-	BYTE            unknown_5D0;	//unused?
-	bool            HaveAttackMoveTarget; // fighting an enemy on the way
-	TeamClass*      Team;
-	FootClass*      NextTeamMember;        //next unit in team
-	DWORD           unknown_5DC;
-	int             PathDirections[24]; // list of directions to move in next, like tube directions
-	DECLARE_PROPERTY(CDTimerClass, PathDelayTimer);
-	int             unknown_int_64C;
-	DECLARE_PROPERTY(CDTimerClass, unknown_timer_650);
-	DECLARE_PROPERTY(CDTimerClass, SightTimer);
-	DECLARE_PROPERTY(CDTimerClass, BlockagePathTimer);
-	DECLARE_PROPERTY(ILocomotionPtr, Locomotor);
-	CoordStruct       unknown_point3d_678;
-	signed char       TubeIndex;	//I'm in this tunnel
-	bool              unknown_bool_685;
-	signed char       WaypointIndex; // which waypoint in my planning path am I following?
-	bool              unknown_bool_687;
-	bool              unknown_bool_688;
-	bool              IsInitiated; // Is a fully joined member of a team, used for regroup etc. checks
-	bool              ShouldScanForTarget;
-	bool              unknown_bool_68B;
-	bool              IsDeploying;
-	bool              IsFiring;
-	bool              unknown_bool_68E;
-	bool              ShouldEnterAbsorber; // orders the unit to enter the closest bio reactor
-	bool              ShouldEnterOccupiable; // orders the unit to enter the closest battle bunker
-	bool              ShouldGarrisonStructure; // orders the unit to enter the closest neutral building
-	FootClass*        ParasiteEatingMe; // the tdrone/squid that's eating me
-	int               LastBeParasitedStartFrame;
-	ParasiteClass*    ParasiteImUsing;	// my parasitic half, nonzero for, eg, terror drone or squiddy
-	DECLARE_PROPERTY(CDTimerClass, ParalysisTimer); // for squid victims
-	bool              unknown_bool_6AC;
-	bool              IsAttackedByLocomotor; // the unit's locomotor is jammed by a magnetron
-	bool              IsLetGoByLocomotor; // a magnetron attacked this unit and let it go. falling, landing, or sitting on the ground
-	bool              unknown_bool_6AF;
-	bool              unknown_bool_6B0;
-	bool              unknown_bool_6B1;
-	bool              unknown_bool_6B2;
-	bool              unknown_bool_6B3;
-	bool              unknown_bool_6B4;
-	bool              unknown_bool_6B5;
-	bool              FrozenStill; // frozen in first frame of the proper facing - when magnetron'd or warping
-	bool              unknown_bool_6B7;
-	bool              unknown_bool_6B8;
-	PROTECTED_PROPERTY(DWORD,   unused_6BC);	//???
 };
 
 static_assert(sizeof(FootClass) == 0x6C0);
