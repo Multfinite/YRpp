@@ -124,7 +124,7 @@ struct VeterancyStruct
 	float Veterancy { 0.0f };
 };
 
-class PassengersClass
+class CargoClass
 {
 public:
 	int NumPassengers;
@@ -145,12 +145,12 @@ public:
 	int IndexOf(FootClass* candidate) const
 	{ JMP_THIS(0x473500); }
 
-	PassengersClass() : NumPassengers(0), FirstPassenger(nullptr) { };
+	CargoClass() : NumPassengers(0), FirstPassenger(nullptr) { };
 
-	~PassengersClass() { };
+	~CargoClass() { };
 };
 
-struct FlashData
+struct FlasherClass
 {
 	int DurationRemaining;
 	bool FlashingNow;
@@ -182,16 +182,13 @@ struct RecoilData
 	{ JMP_THIS(0x70ECE0); }
 };
 
-class NOVTABLE TechnoClass : public RadioClass
+class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public StageClass, public CargoClass
 {
 public:
 	static const auto AbsDerivateID = AbstractFlags::Techno;
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
 public:
-	DECLARE_PROPERTY(FlashData, Flashing);
-	DECLARE_PROPERTY(StageClass, Animation); // how the unit animates
-	DECLARE_PROPERTY(PassengersClass, Passengers);
 	TechnoClass* Transporter; // unit carrying me
 	int              LastFireBulletFrame;
 	int              CurrentTurretNumber; // for IFV/gattling/charge turrets
