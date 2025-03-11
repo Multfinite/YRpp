@@ -12,6 +12,7 @@ class NOVTABLE RadioClass : public MissionClass
 {
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F0508;
+	static constexpr size_t ClassSize = 0xF0;
 public:
 	// new command updates these
 	RadioCommand LastCommands[3];

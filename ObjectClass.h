@@ -35,6 +35,7 @@ class NOVTABLE ObjectClass : public AbstractClass
 public:
 	static constexpr uintptr_t AbsVTable = 0x7EF060;
 	static constexpr auto AbsDerivateID = AbstractFlags::Object;
+	static constexpr size_t ClassSize = 0xAC;
 
 	static constexpr reference<DynamicVectorClass<ObjectClass*>, 0xA8ECB8u> const CurrentObjects{};
 	static constexpr reference<DynamicVectorClass<ObjectClass*>, 0xA8E360u> const Array{};

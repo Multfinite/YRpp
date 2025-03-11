@@ -44,6 +44,7 @@ class NOVTABLE AbstractClass : public IPersistStream, public IRTTITypeInfo, publ
 public:
 	static constexpr uintptr_t AbsVTable = 0x7E1F50;
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
+	static constexpr size_t ClassSize = 0x24;
 
 	static constexpr constant_ptr<DynamicVectorClass<AbstractClass*>, 0xB0F720u> const Array{};
 	static constexpr reference<IndexClass<int, int>, 0xB0E840u> const TargetIndex{};

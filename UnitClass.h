@@ -13,8 +13,9 @@ class EBolt;
 class NOVTABLE UnitClass : public FootClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Unit;
+	static constexpr AbstractType AbsID = AbstractType::Unit;
 	static constexpr uintptr_t AbsVTable = 0x7F5C70;
+	static constexpr size_t ClassSize = 0x8E8;
 
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<UnitClass*>, 0x8B4108u> const Array{};

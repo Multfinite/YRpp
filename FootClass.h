@@ -15,7 +15,8 @@ class NOVTABLE FootClass : public TechnoClass
 {
 public:
 	static constexpr uintptr_t AbsVTable = 0x7E8C94;
-	static const auto AbsDerivateID = AbstractFlags::Foot;
+	static constexpr auto AbsDerivateID = AbstractFlags::Foot;
+	static constexpr size_t ClassSize = 0x6C0;
 
 	static constexpr constant_ptr<DynamicVectorClass<FootClass*>, 0x8B3DC0u> const Array{};
 public:

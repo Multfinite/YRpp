@@ -48,6 +48,7 @@ class NOVTABLE MissionClass : public ObjectClass
 {
 public:
 	static constexpr uintptr_t AbsVTable = 0x7EDCC0;
+	static constexpr size_t ClassSize = 0xD4;
 public:
 	Mission  CurrentMission;
 	Mission  SuspendedMission;
