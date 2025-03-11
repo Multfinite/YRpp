@@ -43,27 +43,55 @@ public:
 
 	wchar_t ToolTipText[0x100];
 public:
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x746DE0);
+	HRESULT __stdcall Load(IStream* pStm)  override JMP_THIS(0x744470);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x744600);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	virtual ~UnitClass() JMP_THIS(0x735780);
 
-	//Destructor
-	virtual ~UnitClass() RX;
+	/*0:0x0*/virtual void UnitClass_sink_746100() JMP_THIS(0x746100);
 
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
+	void Init() override JMP_THIS(0x746810);
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x7446E0);
+	RTTIType KindOf() const override JMP_THIS(0x746E20);
+	int SizeOf() const override JMP_THIS(0x746DD0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x744640);
+	void AI() override JMP_THIS(0x7360C0);
 
-	//ObjectClass
+	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x7404B0);
+	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x73FD50);
+	bool IsStrange() const override JMP_THIS(0x746400);
+	ObjectTypeClass* Type() const override JMP_THIS(0x741490);
+	const wchar_t* FullName() const override JMP_THIS(0x746B20);
+	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x746750);
+	ObjectTypeClass* Disguise(bool disguisedAgainstAllies) const override JMP_THIS(0x7465B0);
+	HouseClass* DisguiseHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x7465F0);
+	bool Limbo() override JMP_THIS(0x7440B0);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x737BA0);
+	void RegisterKillByObject(ObjectClass const* destroyedBy) override JMP_THIS(0x744720);
+	void MarkAllOccupationBits(const Coordinate& coords) override JMP_THIS(0x7441B0);
+	void UnmarkAllOccupationBits(const Coordinate& coords) override JMP_THIS(0x744210);
+	bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x73B0B0);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x73CEC0);
+	bool ObjectClickedAction(Action action, ObjectClass* pTarget, bool bUnk) override JMP_THIS(0x738910);
+	bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) override JMP_THIS(0x738890);
+	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x737C90);
+	void Destroy() override JMP_THIS(0x746D60);
+	void Scatter(const Coordinate& crd, bool ignoreMission, bool ignoreDestination) override JMP_THIS(0x743A50);
+	void UpdatePosition(PCPType how) override JMP_THIS(0x739EC0);
+	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x737430);
+	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x73F0A0);
+	
+	bool IsReadyToCommence() override JMP_THIS(0x744270);
+	int MissionAttack() override JMP_THIS(0x7447A0);
+	int MissionGuard() override JMP_THIS(0x740810);
+	int MissionGuardArea() override JMP_THIS(0x744100);
+	int MissionHarvest() override JMP_THIS(0x73E5E0);
+	int MissionMove() override JMP_THIS(0x740A90);
+	int MissionPatrol() override JMP_THIS(0x740B10);
+	int MissionRepair() override JMP_THIS(0x740EF0);
+	int MissionUnload() override JMP_THIS(0x73D630);
 
-	virtual Action MouseOverCell(CellStruct const* pCell, bool checkFog = false, bool ignoreForce = false) const override { JMP_THIS(0x7404B0) };
-	virtual Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override { JMP_THIS(0x73FD50) };
-
-	virtual void MarkAllOccupationBits(const CoordStruct& coords) override { JMP_THIS(0x7441B0) };
-	virtual void UnmarkAllOccupationBits(const CoordStruct& coords) override { JMP_THIS(0x744210) };
 	// ...and so on
 	// FIXME other virtual function explicit addresses
 
