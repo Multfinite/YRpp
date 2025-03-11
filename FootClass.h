@@ -466,51 +466,88 @@ public:
 	*/
 	void CreateWakes(Coordinate coords) JMP_THIS(0x629E90);
 
-	// can this jumpjet stay in this cell or not? (two jumpjets in one cell are not okay, locomotor kicks one of them out in the next frame)
-	bool Jumpjet_LocationClear() const
-		{ JMP_THIS(0x4135A0); }
+	/*!
+	* @brief can this jumpjet stay in this cell or not? 
+	* @brief (two jumpjets in one cell are not okay, locomotor kicks one of them out in the next frame)
+	* @note original_name Jumpjet_LocationClear
+	* @note address 0x4135A0
+	*/
+	bool JumpjetsIsColliding() const JMP_THIS(0x4135A0);
 
-	void Jumpjet_OccupyCell(::Cell Cell)
-		{ JMP_THIS(0x4E00B0); }
+	/*!
+	* @note original_name JumpjetOccupyCell
+	* @note address 0x4E00B0
+	*/
+	void JumpjetOccupyCell(::Cell Cell) JMP_THIS(0x4E00B0);
 
-	// changes locomotor to the given one, Magnetron style
-	// mind that this locks up the source too, Magnetron style
-	void FootClass_ImbueLocomotor(FootClass *target, CLSID clsid)
-		{ JMP_THIS(0x710000); }
+	/*!
+	* @brief Changes locomotor to the given one, Magnetron style
+	* @brief Mind that this locks up the source too, Magnetron style
+	* @note original_name FootClass_ImbueLocomotor
+	* @note address 0x710000
+	*/
+	void ImbueLocomotor(FootClass *target, CLSID clsid) JMP_THIS(0x710000);
 
-	// var $this = this; $.each($this.Passengers, function(ix, p) { p.Location = $this.Location; });
-	void UpdatePassengerCoords()
-		{ JMP_THIS(0x7104F0); }
+	/*!
+	* @brief var $this = this; $.each($this.Passengers, function(ix, p) { p.Location = $this.Location; });
+	* @note original_name Set_Cargo_Coords
+	* @note address 0x7104F0
+	*/
+	void UpdateCargoCoords() JMP_THIS(0x7104F0);
 
-	void AbortMotion()
-		{ JMP_THIS(0x4DF0D0); }
+	/*!
+	* @note original_name Abort_Motion
+	* @note address 0x4DF0D0
+	*/
+	void AbortMotion() JMP_THIS(0x4DF0D0);
 
-	bool UpdatePathfinding(::Cell unkCell, ::Cell unkCell2, int unk3)
-		{ JMP_THIS(0x4D3920); }
+	/*!
+	* @note original_name Basic_Path
+	* @note address 0x4D3920
+	*/
+	bool UpdatePathfinding(::Cell unkCell, ::Cell unkCell2, int unk3) JMP_THIS(0x4D3920);
 
-	// Removes the first passenger and updates the Gunner.
-	FootClass* RemoveFirstPassenger()
-		{ JMP_THIS(0x4DE710); }
+	/*!
+	* @brief Removes the first passenger and updates the Gunner.
+	* @note original_name Kick_Out_Passenger
+	* @note address 0x4DE710
+	*/
+	FootClass* LeaveTransport() JMP_THIS(0x4DE710);
 
-	// Removes a specific passenger and updates the Gunner.
-	FootClass* RemovePassenger(FootClass* pPassenger)
-		{ JMP_THIS(0x4DE670); }
+	/*!
+	* @brief Removes a specific passenger and updates the Gunner.
+	* @note original_name Leave_Transport
+	* @note address 0x4DE670
+	*/
+	FootClass* LeaveTransport(FootClass* pPassenger) JMP_THIS(0x4DE670);
 
-	// Adds a specific passenger and updates the Gunner.
-	void EnterAsPassenger(FootClass* pPassenger)
-		{ JMP_THIS(0x4DE630); }
+	/*!
+	* @brief Adds a specific passenger and updates the Gunner.
+	* @note original_name Leave_Transport
+	* @note address 0x4DE630
+	*/
+	void EnterTransport(FootClass* pPassenger) JMP_THIS(0x4DE630);
 
-	// Clears NavQueue
-	void ClearNavQueue()
-		{ JMP_THIS(0x4DA1C0); }
+	/*!
+	* @brief Clears NavQueue
+	* @note original_name Clear_Navigation_List
+	* @note address 0x4DA1C0
+	*/
+	void ClearNavQueue() JMP_THIS(0x4DA1C0);
 
-	// searches cell, sets destination, and returns whether unit is on that cell
-	bool MoveToTiberium(int radius, bool scanClose = false)
-		{ JMP_THIS(0x4DCFE0); }
+	/*!
+	* @brief searches cell, sets destination, and returns whether unit is on that 
+	* @note original_name Assign_Tiberium_As_Destination
+	* @note address 0x4DCFE0
+	*/
+	bool MoveToTiberium(int radius, bool scanClose = false) JMP_THIS(0x4DCFE0);
 
-	// searches cell, sets destination, and returns whether unit is on that cell
-	bool MoveToWeed(int radius)
-		{ JMP_THIS(0x4DDB90); }
+	/*!
+	* @brief  searches cell, sets destination, and returns whether unit is on that cell
+	* @note original_name Assign_Weed_As_Destination
+	* @note address 0x4DDB90
+	*/
+	bool MoveToWeed(int radius) JMP_THIS(0x4DDB90);
 
 protected:
 
