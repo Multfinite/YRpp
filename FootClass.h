@@ -392,11 +392,11 @@ public:
 
 	/*!
 	* @brief
-	* @note original_name vthk_0x534_FootClass
+	* @note original_name Overrun_Square
 	* @note vtable_index 333:0x534
 	* @note address 0x41C130
 	*/
-	virtual void vt_entry_534(DWORD dwUnk, DWORD dwUnk2) JMP_THIS(0x41C130);
+	virtual void OverrunSquare(volatile ::Cell* a2, ::Cell a3) JMP_THIS(0x41C130);
 
 	/*!
 	* @brief
