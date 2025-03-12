@@ -176,6 +176,7 @@ class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public Stag
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F4960;
 	static constexpr auto AbsDerivateID = AbstractFlags::Techno;
+	static constexpr size_t ClassSize = 0x520;
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
 public:
@@ -2185,3 +2186,4 @@ protected:
 	TechnoClass(noinit_t) : RadioClass(fake_noinit_t{}) JMP_THIS(0x6F4300);
 	TechnoClass(HouseClass* house) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x6F2B40);
 };
+static_assert(sizeof(TechnoClass) == TechnoClass::ClassSize);
