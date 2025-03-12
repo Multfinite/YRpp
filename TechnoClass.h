@@ -175,7 +175,7 @@ class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public Stag
 {
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F4960;
-	static const auto AbsDerivateID = AbstractFlags::Techno;
+	static constexpr auto AbsDerivateID = AbstractFlags::Techno;
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
 public:
