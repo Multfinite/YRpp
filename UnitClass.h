@@ -92,26 +92,54 @@ public:
 	int MissionRepair() override JMP_THIS(0x740EF0);
 	int MissionUnload() override JMP_THIS(0x73D630);
 
-	// ...and so on
-	// FIXME other virtual function explicit addresses
+	void SetDestination(AbstractClass* target, bool a2) override JMP_THIS(0x741970);
+	FireError GetFireError(AbstractClass* pTarget, int nWeaponIndex, bool ignoreRange) const override JMP_THIS(0x740FD0);
+	void Stun() override JMP_THIS(0x746C90);
+	bool SetOwningHouse(HouseClass* pHouse, bool announce = true) override JMP_THIS(0x7463A0);
+	InfantryTypeClass* ClearDisguise() override JMP_THIS(0x746720);
+	InfantryTypeClass* GetCrew() const override JMP_THIS(0x740EE0);
+	FacingType DesiredLoadDir(ObjectClass const* object, ::Cell* cell) const JMP_THIS(0x740B60);
+	bool EnterIdleMode(bool initial, bool a2) override JMP_THIS(0x738970);
+	BulletClass* Fire(AbstractClass* pTarget, int nWeaponIndex) override JMP_THIS(0x741340);
+	DirStruct GetRealFacing() const override JMP_THIS(0x740F80);
+	bool CanAttackOnTheMove() const override JMP_THIS(0x746CC0);
+	AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) override JMP_THIS(0x743190);
+	bool IsDoorClosed() override JMP_THIS(0x744180);
+	int GetPipFillLevel() const override JMP_THIS(0x740E50);
+	void Reload() override JMP_THIS(0x736CA0);
+	void DisguiseAs(AbstractClass* target) override JMP_THIS(0x746670);
+	double GetStoragePercentage() const override JMP_THIS(0x7414A0);
+	DirStruct TurretFacing() const override JMP_THIS(0x746E30);
+	int SelectWeapon(AbstractClass* pTarget) const override JMP_THIS(0x746CD0);
 
-	virtual FireError GetFireError(AbstractClass* pTarget, int nWeaponIndex, bool ignoreRange) const override JMP_THIS(0x740FD0);
+	AbstractClass* ApproachTarget(bool assign) override JMP_THIS(0x7414E0);
+	void OverrunSquare(volatile ::Cell* a2, ::Cell a3) override JMP_THIS(0x7416A0);
 
-	//UnitClass
-	// main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
-	virtual void DrawAsVXL(Point2D Coords, RectangleStruct BoundingRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73B470); }
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__Draw_Voxel
+	* @note vtable_index 341:x554
+	* @note address 0x73B470
+	*/
+	virtual void DrawAsVXL(Point2D coords, RectangleStruct boundingRect, int brightness, int tint) JMP_THIS(0x73B470);
+	
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__drawcode
+	* @note vtable_index 342x558
+	* @note address 0x73C5F0
+	*/
+	virtual void DrawAsSHP(Point2D coords, RectangleStruct boundingRect, int brightness, int tint) JMP_THIS(0x73C5F0);
 
-	virtual void DrawAsSHP(Point2D Coords, RectangleStruct BoundingRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73C5F0); }
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__Draw_Object343
+	* @note vtable_index 343x55C
+	* @note address 0x73B140
+	*/
+	virtual void DrawObject(Surface* surface, Point2D coords, RectangleStruct cacheRect, int brightness, int tint) JMP_THIS(0x73B140);
 
-	virtual void DrawObject(Surface* pSurface, Point2D Coords, RectangleStruct CacheRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73B140); }
-
-	// non-virtual
-
-	bool IsDeactivated() const
-		{ JMP_THIS(0x70FBD0); }
+	bool IsDeactivated() const JMP_THIS(0x70FBD0);
 
 	void UpdateTube() JMP_THIS(0x7359F0);
 	void UpdateRotation() JMP_THIS(0x736990);
@@ -126,6 +154,29 @@ public:
 	bool TryToDeploy() JMP_THIS(0x7393C0);
 	void Deploy() JMP_THIS(0x739AC0);
 	void Undeploy() JMP_THIS(0x739CD0);
+
+	/*!
+	* @brief Object deployed.
+	* @note original_name HasDeployed
+	* @note address 0x746D80
+	*/
+	bool HasDeployed() JMP_THIS(0x746D80);
+
+	/*!
+	* @brief Object deployed already or deploying now
+	* @note original_name IsDeploying
+	* @note address 0x746D90
+	*/
+	bool IsDeployed() JMP_THIS(0x746D90);
+
+	/*!
+	* @brief Object changes it's state: being deploying or undeploying
+	* @note original_name IsDeploying
+	* @note address 0x746DB0
+	*/
+	bool InDeployTansition() JMP_THIS(0x746DB0);
+
+	bool IsSimpleDeployerDeployToLand() JMP_THIS(0x746D10);
 
 	bool Harvesting() JMP_THIS(0x73D450);
 
@@ -143,6 +194,9 @@ public:
 	AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
 	bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
 
+	int32_t DisguiseStuff(ObjectTypeClass* type) JMP_THIS(0x746630);
+	int64_t CreditLoad() JMP_THIS(0x7438B0);
+	bool DeployFire() const JMP_THIS(0x746D00);
 protected:
 
 	/*! @brief FAKE CTOR */
