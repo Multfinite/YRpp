@@ -227,6 +227,7 @@ protected:
 	AbstractClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
 	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
 };
+static_assert(sizeof(AbstractClass) == AbstractClass::ClassSize);
 
 template<typename T>
 concept HasAbsVTable = std::is_base_of_v<AbstractClass,T> && requires {

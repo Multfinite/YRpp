@@ -858,3 +858,4 @@ protected:
 	ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
 	ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
 };
+static_assert(sizeof(ObjectClass) == ObjectClass::ClassSize);

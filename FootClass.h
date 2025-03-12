@@ -559,5 +559,4 @@ protected:
 	FootClass(noinit_t) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x4D3540);
 	FootClass(HouseClass* house) : FootClass(fake_noinit_t{}) JMP_THIS(0x4D31E0);
 };
-
-static_assert(sizeof(FootClass) == 0x6C0);
+static_assert(sizeof(FootClass) == FootClass::ClassSize);

@@ -324,3 +324,4 @@ protected:
 	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}) {};
 	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };
+static_assert(sizeof(MissionClass) == MissionClass::ClassSize);

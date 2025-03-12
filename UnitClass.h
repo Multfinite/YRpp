@@ -151,3 +151,4 @@ public:
 	UnitClass(noinit_t) : FootClass(fake_noinit_t{}) {};
 	UnitClass(UnitTypeClass* type, HouseClass* house) : UnitClass(fake_noinit_t{}) JMP_THIS(0x7353C0);
 };
+static_assert(sizeof(UnitClass) == UnitClass::ClassSize);

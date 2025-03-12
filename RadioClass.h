@@ -122,3 +122,4 @@ protected:
 	RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);
 	RadioClass() : RadioClass(fake_noinit_t{}) JMP_THIS(0x65A750);
 };
+static_assert(sizeof(RadioClass) == RadioClass::ClassSize);
