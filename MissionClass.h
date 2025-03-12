@@ -53,7 +53,7 @@ public:
 	Mission  CurrentMission;
 	Mission  SuspendedMission;
 	Mission  QueuedMission;
-	bool     unknown_bool_B8;
+	bool     AssignmentState;
 	int      MissionStatus;
 	//in frames
 	int      CurrentMissionStartTime;	
