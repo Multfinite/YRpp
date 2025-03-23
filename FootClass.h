@@ -13,6 +13,19 @@ class TeamClass;
 class NOVTABLE FootClass : public TechnoClass
 {
 public:
+	using base_type = TechnoClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E8C94;
+			this->IRTTITypeInfo = 0x7E8C78;
+			this->INoticeSink = 0x7E8C70;
+			this->INoticeSource = 0x7E8C68;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7E8C94;
 	static constexpr auto AbsDerivateID = AbstractFlags::Foot;
 	static constexpr size_t ClassSize = 0x6C0;

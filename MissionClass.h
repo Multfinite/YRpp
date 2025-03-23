@@ -46,6 +46,19 @@ class MissionControlClass
 class NOVTABLE MissionClass : public ObjectClass
 {
 public:
+	using base_type = ObjectClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EDCC0;
+			this->IRTTITypeInfo = 0x7EDCA4;
+			this->INoticeSink = 0x7EDC9C;
+			this->INoticeSource = 0x7EDC94;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7EDCC0;
 	static constexpr size_t ClassSize = 0xD4;
 public:
@@ -320,7 +333,7 @@ public:
 protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {}
-	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}) {};
+	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}) { vtables.init(this); };
 	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };
 static_assert(sizeof(MissionClass) == MissionClass::ClassSize);

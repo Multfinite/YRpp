@@ -9,6 +9,19 @@
 class NOVTABLE InfantryClass : public FootClass
 {
 public:
+	using base_type = FootClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EB058;
+			this->IRTTITypeInfo = 0x7EB03C;
+			this->INoticeSink = 0x7EB034;
+			this->INoticeSource = 0x7EB02C;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::Infantry;
 	static constexpr uintptr_t AbsVTable = 0x7EB058;
 	static constexpr size_t ClassSize = 0x6F0;
@@ -133,6 +146,6 @@ protected:
 	explicit __forceinline InfantryClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 
 public:
-	InfantryClass(noinit_t) : FootClass(fake_noinit_t{}) {};
+	InfantryClass(noinit_t) : FootClass(fake_noinit_t{}) { vtables.init(this); };
 	InfantryClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : InfantryClass(fake_noinit_t()) JMP_THIS(0x517A50);
 };

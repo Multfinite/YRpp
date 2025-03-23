@@ -173,6 +173,19 @@ struct RecoilData
 class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public StageClass, public CargoClass
 {
 public:
+	using base_type = RadioClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F4960;
+			this->IRTTITypeInfo = 0x7F4944;
+			this->INoticeSink = 0x7F493C;
+			this->INoticeSource = 0x7F4934;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7F4960;
 	static constexpr auto AbsDerivateID = AbstractFlags::Techno;
 	static constexpr size_t ClassSize = 0x520;

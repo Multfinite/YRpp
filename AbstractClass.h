@@ -42,6 +42,27 @@ struct StorageClass
 class NOVTABLE AbstractClass : public IPersistStream, public IRTTITypeInfo, public INoticeSink, public INoticeSource
 {
 public:
+	/*!
+	* @brief use only for setting virtual tables in missing noinit ctors
+	*/
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t
+	{
+		uintptr_t IPersistStream;
+		uintptr_t IRTTITypeInfo;
+		uintptr_t INoticeSink;
+		uintptr_t INoticeSource;
+
+		constexpr vtables_t() noexcept :
+			  IPersistStream(0x7E1F50)
+			, IRTTITypeInfo(0x7E1F34)
+			, INoticeSink(0x7E1F2C)
+			, INoticeSource(0x7E1F24)
+		{}
+
+		constexpr void init(AbstractClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7E1F50;
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 	static constexpr size_t ClassSize = 0x24;

@@ -11,6 +11,19 @@ class TechnoClass;
 class NOVTABLE RadioClass : public MissionClass
 {
 public:
+	using base_type = MissionClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F0508;
+			this->IRTTITypeInfo = 0x7F04EC;
+			this->INoticeSink = 0x7F04E4;
+			this->INoticeSource = 0x7F04DC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7F0508;
 	static constexpr size_t ClassSize = 0xF0;
 public:

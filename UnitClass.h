@@ -13,6 +13,19 @@ class EBolt;
 class NOVTABLE UnitClass : public FootClass
 {
 public:
+	using base_type = FootClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F5C70;
+			this->IRTTITypeInfo = 0x7F5C54;
+			this->INoticeSink = 0x7F5C4C;
+			this->INoticeSource = 0x7F5C44;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr AbstractType AbsID = AbstractType::Unit;
 	static constexpr uintptr_t AbsVTable = 0x7F5C70;
 	static constexpr size_t ClassSize = 0x8E8;
@@ -202,7 +215,7 @@ protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline UnitClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 public:
-	UnitClass(noinit_t) : FootClass(fake_noinit_t{}) {};
+	UnitClass(noinit_t) : FootClass(fake_noinit_t{}) { vtables.init(this); };
 	UnitClass(UnitTypeClass* type, HouseClass* house) : UnitClass(fake_noinit_t{}) JMP_THIS(0x7353C0);
 };
 static_assert(sizeof(UnitClass) == UnitClass::ClassSize);
