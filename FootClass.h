@@ -253,7 +253,7 @@ public:
 	* @note vtable_index 316:0x4F0
 	* @note address 0x4D9FF0
 	*/
-	virtual Coordinate* vt_entry_4F0(Coordinate* pCrd) JMP_THIS(0x4D9FF0);
+	virtual Coordinate vt_entry_4F0() JMP_THIS(0x4D9FF0);
 
 	/*!
 	* @brief
@@ -264,20 +264,20 @@ public:
 	virtual void StopHunting() JMP_THIS(0x4DC030);
 
 	/*!
-	* @brief
+	* @brief It is controls jumpjet walk and fly.
 	* @note original_name vthk_0x4F8_FootClass
 	* @note vtable_index 318:0x4F8
 	* @note address 0x41C080
 	*/
-	virtual bool vt_entry_4F8() JMP_THIS(0x41C080);
+	virtual bool JumpJet_UnknownMovement() JMP_THIS(0x41C080);
 
 	/*!
-	* @brief
+	* @brief 
 	* @note original_name Start_Driver
 	* @note vtable_index 319:0x4FC
 	* @note address 0x4D55F0
 	*/
-	virtual bool MoveTo(Coordinate* pCrd) JMP_THIS(0x4D55F0);
+	virtual bool MoveTo(Coordinate* crd) JMP_THIS(0x4D55F0);
 
 	/*!
 	* @brief
@@ -293,7 +293,7 @@ public:
 	* @note vtable_index 321:0x504
 	* @note address 0x4DB9B0
 	*/
-	virtual bool vt_entry_504() JMP_THIS(0x4DB9B0);
+	virtual bool vt_entry_504_MoveToRepair_Maybe() JMP_THIS(0x4DB9B0);
 
 	/*!
 	* @brief
@@ -301,7 +301,7 @@ public:
 	* @note vtable_index 322:0x508
 	* @note address 0x4DF7F0
 	*/
-	virtual bool ChronoWarpTo(Coordinate pDest) JMP_THIS(0x4DF7F0);
+	virtual bool ChronoWarpTo(Coordinate dest) JMP_THIS(0x4DF7F0);
 
 	/*!
 	* @brief
