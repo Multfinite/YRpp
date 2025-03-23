@@ -5,8 +5,8 @@
 //forward declarations
 class TechnoClass;
 
-/*
-	Base class for WHAT?? I DUNNO =(
+/*!
+* Base class for any object that can respobd via radio
 */
 class NOVTABLE RadioClass : public MissionClass
 {

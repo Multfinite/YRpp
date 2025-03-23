@@ -1,7 +1,3 @@
-/*
-	Base class for buildable objects
-*/
-
 #pragma once
 
 #include "Matrix3D.h"
@@ -171,6 +167,9 @@ struct RecoilData
 	void Fire() JMP_THIS(0x70ECE0);
 };
 
+/*!
+	@brief Base class for buildable objects
+*/
 class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public StageClass, public CargoClass
 {
 public:

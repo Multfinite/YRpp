@@ -1,7 +1,3 @@
-/*
-	Base class for all game objects with missions (yeah... not many).
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -44,6 +40,9 @@ class MissionControlClass
 		double AARate; //default 0.016
 };
 
+/*!
+* @brief Base class for all game objects with missions (yeah... not many).
+*/
 class NOVTABLE MissionClass : public ObjectClass
 {
 public:

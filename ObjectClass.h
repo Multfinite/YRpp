@@ -1,7 +1,3 @@
-/*
-	Base class for all game objects.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -30,6 +26,9 @@ class HouseTypeClass;
 class LineTrail;
 struct WeaponStruct;
 
+/*!
+* @brief Base class for all game objects.
+*/
 class NOVTABLE ObjectClass : public AbstractClass
 {
 public:
