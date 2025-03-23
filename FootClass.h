@@ -1,7 +1,3 @@
-/*
-	Base class for units that can move (that have "feet")
-*/
-
 #pragma once
 
 #include "TechnoClass.h"
@@ -11,6 +7,9 @@
 class LocomotionClass;
 class TeamClass;
 
+/*!
+	@brief Base class for units that can move (that have "feet")
+*/
 class NOVTABLE FootClass : public TechnoClass
 {
 public:
