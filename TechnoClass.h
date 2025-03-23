@@ -403,11 +403,10 @@ public:
 	HouseClass* DisguisedAsHouse;
 public:
 	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	virtual HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x70BF50);
+	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x70C250);
 
-	//Destructor
-	virtual ~TechnoClass() RX;
+	virtual ~TechnoClass() JMP_THIS(0x6F4500);
 
 	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x70BF50);
 	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x70C250);
