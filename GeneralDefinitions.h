@@ -1230,7 +1230,7 @@ enum class Rank : int
 	Rookie = 2
 };
 
-enum class Sequence : int
+enum class InfantryState : int
 {
 	Ready = 0,
 	Guard = 1,
@@ -1276,6 +1276,7 @@ enum class Sequence : int
 	SecondaryProne = 41,
 	Nothing = -1
 };
+using Sequence = InfantryState;
 
 enum class SequenceFacing : unsigned int
 {
