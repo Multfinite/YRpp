@@ -59,8 +59,8 @@ public:
 	int      MissionAccumulateTime;
 	DECLARE_PROPERTY(CDTimerClass, UpdateTimer);
 public:
-	//Destructor (inlined)
-	//virtual ~MissionClass() { ~ObjectClass(); }
+	//SDTOR 0x5B3A60
+	virtual ~MissionClass() RX;
 
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5B3970);
 	void AI() override JMP_THIS(0x5B3060);

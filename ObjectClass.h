@@ -77,9 +77,9 @@ public:
 	Coordinate        Location;       // Absolute current 3D location (in leptons)
 	LineTrail* LineTrailer;
 public:
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x5F5E80);
-	
 	virtual ~ObjectClass() JMP_THIS(0x5F3B80);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x5F5E80);
 
 	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x5F5230);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5F6250);
