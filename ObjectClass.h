@@ -358,7 +358,7 @@ public:
 	* @note vtable_index 58:0xE8
 	* @note address 0x5F5940
 	*/
-	virtual bool SpawnParachuted(const Coordinate& coords) JMP_THIS(0x5F5940);
+	virtual bool SpawnParachuted(Coordinate const& coords) JMP_THIS(0x5F5940);
 
 	/*!
 	* @note original_name Drop_As_Bomb
@@ -372,14 +372,14 @@ public:
 	* @note vtable_index 60:0xF0
 	* @note address 0x5F60A0
 	*/
-	virtual void MarkAllOccupationBits(const Coordinate& coords) JMP_THIS(0x5F60A0);
+	virtual void MarkAllOccupationBits(Coordinate const& coords) JMP_THIS(0x5F60A0);
 
 	/*!
 	* @note original_name Clear_Occupy_Bit
 	* @note vtable_index 61:0xF4
 	* @note address 0x5F6120
 	*/
-	virtual void UnmarkAllOccupationBits(const Coordinate& coords) JMP_THIS(0x5F6120);
+	virtual void UnmarkAllOccupationBits(Coordinate const& coords) JMP_THIS(0x5F6120);
 
 	/*!
 	* @note original_name Remove_This
