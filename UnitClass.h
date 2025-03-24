@@ -152,64 +152,64 @@ public:
 	*/
 	virtual void DrawObject(Surface* surface, Point2D coords, RectangleStruct cacheRect, int brightness, int tint) JMP_THIS(0x73B140);
 
-	bool IsDeactivated() const JMP_THIS(0x70FBD0);
+	constexpr bool IsDeactivated() const JMP_THIS(0x70FBD0);
 
-	void UpdateTube() JMP_THIS(0x7359F0);
-	void UpdateRotation() JMP_THIS(0x736990);
-	void UpdateEdgeOfWorld() JMP_THIS(0x736C10); // inlined in game
-	void UpdateFiring() JMP_THIS(0x736DF0);
-	void UpdateVisceroid() JMP_THIS(0x737180);
-	void UpdateDisguise() JMP_THIS(0x7468C0);
+	constexpr void UpdateTube() JMP_THIS(0x7359F0);
+	constexpr void UpdateRotation() JMP_THIS(0x736990);
+	constexpr void UpdateEdgeOfWorld() JMP_THIS(0x736C10); // inlined in game
+	constexpr void UpdateFiring() JMP_THIS(0x736DF0);
+	constexpr void UpdateVisceroid() JMP_THIS(0x737180);
+	constexpr void UpdateDisguise() JMP_THIS(0x7468C0);
 
-	void Explode() JMP_THIS(0x738680);
+	constexpr void Explode() JMP_THIS(0x738680);
 
-	bool GotoClearSpot() JMP_THIS(0x738D30);
-	bool TryToDeploy() JMP_THIS(0x7393C0);
-	void Deploy() JMP_THIS(0x739AC0);
-	void Undeploy() JMP_THIS(0x739CD0);
+	constexpr bool GotoClearSpot() JMP_THIS(0x738D30);
+	constexpr bool TryToDeploy() JMP_THIS(0x7393C0);
+	constexpr void Deploy() JMP_THIS(0x739AC0);
+	constexpr void Undeploy() JMP_THIS(0x739CD0);
 
 	/*!
 	* @brief Object deployed.
 	* @note original_name HasDeployed
 	* @note address 0x746D80
 	*/
-	bool HasDeployed() JMP_THIS(0x746D80);
+	constexpr bool HasDeployed() JMP_THIS(0x746D80);
 
 	/*!
 	* @brief Object deployed already or deploying now
 	* @note original_name IsDeploying
 	* @note address 0x746D90
 	*/
-	bool IsDeployed() JMP_THIS(0x746D90);
+	constexpr bool IsDeployed() JMP_THIS(0x746D90);
 
 	/*!
 	* @brief Object changes it's state: being deploying or undeploying
 	* @note original_name IsDeploying
 	* @note address 0x746DB0
 	*/
-	bool InDeployTansition() JMP_THIS(0x746DB0);
+	constexpr bool InDeployTansition() JMP_THIS(0x746DB0);
 
-	bool IsSimpleDeployerDeployToLand() JMP_THIS(0x746D10);
+	constexpr bool IsSimpleDeployerDeployToLand() JMP_THIS(0x746D10);
 
-	bool Harvesting() JMP_THIS(0x73D450);
+	constexpr bool Harvesting() JMP_THIS(0x73D450);
 
-	bool FlagAttach(int nHouseIdx) JMP_THIS(0x740DF0);
-	bool FlagRemove() JMP_THIS(0x740E20);
+	constexpr bool FlagAttach(int nHouseIdx) JMP_THIS(0x740DF0);
+	constexpr bool FlagRemove() JMP_THIS(0x740E20);
 
-	void APCCloseDoor() JMP_THIS(0x740E60); // inlined in game
-	void APCOpenDoor() JMP_THIS(0x740E80); // inlined in game
+	constexpr void APCCloseDoor() JMP_THIS(0x740E60); // inlined in game
+	constexpr void APCOpenDoor() JMP_THIS(0x740E80); // inlined in game
 
-	static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x743270);
-	static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x7436E0);
+	constexpr static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x743270);
+	constexpr static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x7436E0);
 
-	bool ShouldCrashIt(TechnoClass* pTarget) JMP_THIS(0x7438F0);
+	constexpr bool ShouldCrashIt(TechnoClass* pTarget) JMP_THIS(0x7438F0);
 
-	AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
-	bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
+	constexpr AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
+	constexpr bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
 
-	int32_t DisguiseStuff(ObjectTypeClass* type) JMP_THIS(0x746630);
-	int64_t CreditLoad() JMP_THIS(0x7438B0);
-	bool DeployFire() const JMP_THIS(0x746D00);
+	constexpr int32_t DisguiseStuff(ObjectTypeClass* type) JMP_THIS(0x746630);
+	constexpr int64_t CreditLoad() JMP_THIS(0x7438B0);
+	constexpr bool DeployFire() const JMP_THIS(0x746D00);
 protected:
 
 	/*! @brief FAKE CTOR */
