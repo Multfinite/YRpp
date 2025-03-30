@@ -417,11 +417,9 @@ public:
 public:
 	virtual ~TechnoClass() JMP_THIS(0x6F4500);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x70BF50);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x70C250);
-
 	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x70BF50);
 	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x70C250);
+	
 	void Init() override JMP_THIS(0x6F3F40);
 	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x70C270);
