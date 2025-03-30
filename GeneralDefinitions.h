@@ -634,32 +634,36 @@ enum class BuildCat : unsigned int
 	Combat = 5
 };
 
-enum class BuildingAnimSlot : int
+enum class BuildingAnimSlot : unsigned int
 {
-	All = -2,
-	None = -1,
-	Upgrade1 = 0,
-	Upgrade2 = 1,
-	Upgrade3 = 2,
-	Active = 3,
-	ActiveTwo = 4,
-	ActiveThree = 5,
-	ActiveFour = 6,
-	PreProduction = 7,
-	Production = 8,
-	Turret = 9,
-	Special = 10,
-	SpecialTwo = 11,
-	SpecialThree = 12,
-	SpecialFour = 13,
-	Super = 14,
-	SuperTwo = 15,
-	SuperThree = 16,
-	SuperFour = 17,
-	Idle = 18,
-	LowPower = 19,
-	SuperLowPower = 20
+	Count = 0x15
+
+	, All = 0xFFFFFFFE // -2
+	, None = 0xFFFFFFFF // -1
+
+	, Upgrade_1 = 0x0
+	, Upgrade_2 = 0x1
+	, Upgrade_3 = 0x2
+	, Active_1 = 0x3
+	, Active_2 = 0x4
+	, Active_3 = 0x5
+	, Active_4 = 0x6
+	, PreProduction = 0x7
+	, Production = 0x8
+	, Turret = 0x9
+	, Special_1 = 0xA
+	, Special_2 = 0xB
+	, Special_3 = 0xC
+	, Special_4 = 0xD
+	, Super_1 = 0xE
+	, Super_2 = 0xF
+	, Super_3 = 0x10
+	, Super_4 = 0x11
+	, Idale = 0x12
+	, LowPower = 0x13
+	, SuperLowPower = 0x14	
 };
+using BAnimType = BuildingAnimSlot;
 
 enum class Category : int
 {
