@@ -57,21 +57,25 @@ public:
 	const wchar_t* UIName;
 	char Name[0x31];
 public:
+	virtual ~AbstractTypeClass() JMP_THIS(0x4109C0);
+
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x410BE0);
 
-	virtual ~AbstractTypeClass() JMP_THIS(0x4109C0);
 	/*!
 	* @brief It's commonly empty. Only AnimClass override this.
+	* @note original_name Load_Image
 	* @note vtable_index 24:0x60
 	* @note address 0x410C20
 	*/
 	virtual void LoadTheaterSpecificArt(TheaterType th_type) JMP_THIS(0x410C20);
 	/*!
+	* @note original_name Read_INI
 	* @note vtable_index 25:0x64
 	* @note address 0x410A60
 	*/
 	virtual bool LoadFromINI(CCINIClass* pINI) JMP_THIS(0x410A60);
 	/*!
+	* @note original_name Write_INI
 	* @note vtable_index 26:0x68
 	* @note address 0x410B90
 	*/
@@ -79,8 +83,12 @@ public:
 
 	const char* get_ID() const { return this->ID; }
 
+	bool SameName(const char* name) JMP_THIS(0x410A40);
+
 protected:
+	/*! @brief FAKE CTOR */
 	explicit __forceinline AbstractTypeClass(fake_noinit_t) noexcept{ }
+
 	AbstractTypeClass(noinit_t) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410960);
 	AbstractTypeClass(char* pId) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410800);
 };
