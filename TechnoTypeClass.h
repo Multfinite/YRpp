@@ -74,7 +74,23 @@ struct WeaponStruct
 class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
+	using base_type = ObjectTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F4ED8;
+			this->IRTTITypeInfo = 0x7F4EBC;
+			this->INoticeSink = 0x7F4EB4;
+			this->INoticeSource = 0x7F4EAC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F4ED8;
+
 	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
+	static constexpr auto MaxWeapons = 18;
 public:
 
 	int             WalkRate;
@@ -416,33 +432,103 @@ public:
 	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x716DC0);
 	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7170A0);
 
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x7171A0);
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x712170);
+	DWORD Ownable() const override JMP_THIS(0x711EC0);
+	int MaxPips() const override JMP_THIS(0x716290);
+	int CostOf(HouseClass* pHouse) const override JMP_THIS(0x711F00);
+	int TimeToBuild() const override JMP_THIS(0x711EE0);
+	SHPStruct* GetCameo() const override JMP_THIS(0x712040);
 
-	virtual bool CanUseWaypoint() const R0;
-	virtual bool CanAttackMove() const R0;
-	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const R0;
-	virtual int GetCost() const R0;
-	virtual int GetRepairStepCost() const R0;
-	virtual int GetRepairStep() const R0;
-	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const R0;
-	virtual int GetFlightLevel() const R0;
+	/*!
+	* @brief
+	* @note original_name new_theater_A0_5247B0
+	* @note vtable_index 40:0xA0
+	* @note address 0x711E80
+	*/
+	virtual bool CanUseWaypoint() const JMP_THIS(0x711E80);
 
-	// non-virtual
-	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
+	/*!
+	* @brief
+	* @note original_name Can_Attack_Move
+	* @note vtable_index 41:0xA4
+	* @note address 0x711E90
+	*/
+	virtual bool CanAttackMove() const JMP_THIS(0x711E90);
 
-	bool HasMultipleTurrets() const { return this->TurretCount > 0; }
-	CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
+	/*!
+	* @brief
+	* @note original_name Legal_Placement
+	* @note vtable_index 42:0xA8
+	* @note address 0x716150
+	*/
+	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const JMP_THIS(0x716150);
 
-	bool InOwners(DWORD const bitHouseType) const { return 0u != (this-GetOwners() & bitHouseType); }
+	/*!
+	* @brief
+	* @note original_name Raw_Cost
+	* @note vtable_index 43:0xAC
+	* @note address 0x711EB0
+	*/
+	virtual int GetCost() const JMP_THIS(0x711EB0);
 
-	bool InRequiredHouses(DWORD const bitHouseType) const {
+	/*!
+	* @brief
+	* @note original_name Repair_Cost
+	* @note vtable_index 44:0xB0
+	* @note address 0x7120D0
+	*/
+	virtual int GetRepairStepCost() const JMP_THIS(0x7120D0);
+
+	/*!
+	* @brief
+	* @note original_name Repair_Step
+	* @note vtable_index 45:0xB4
+	* @note address 0x712120
+	*/
+	virtual int GetRepairStep() const JMP_THIS(0x712120);
+
+	/*!
+	* @brief
+	* @note original_name Refund_Amount
+	* @note vtable_index 46:0xB8
+	* @note address 0x711F60
+	*/
+	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const JMP_THIS(0x711F60);
+
+	/*!
+	* @brief
+	* @note original_name Flight_Level
+	* @note vtable_index 47:0xBC
+	* @note address 0x717800
+	*/
+	virtual int GetFlightLevel() const JMP_THIS(0x717800);
+
+	constexpr WeaponStruct* GetWeapon(int index) JMP_THIS(0x7177C0);
+	constexpr WeaponStruct* GetEliteWeapon(int index) JMP_THIS(0x7177E0);
+	constexpr int GetTurretWeapon(int index) JMP_THIS(0x7178B0);
+	constexpr bool HasTurret() const JMP_THIS(0x717880);
+	// looks like this function return true if weapon burst more than 1
+	constexpr bool IsTwoShooter() JMP_THIS(0x712130);
+	constexpr void SetPalette() JMP_THIS(0x717820);
+	constexpr int SetPalettes() JMP_THIS(0x717840);
+	constexpr void SetTurretWeapon(int index, int weapon) JMP_THIS(0x717890);
+
+	constexpr static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
+
+	constexpr bool HasMultipleTurrets() const { return this->TurretCount > 0; }
+	constexpr CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
+
+	bool InOwners(DWORD const bitHouseType) const { return 0u != (Ownable() & bitHouseType); }
+
+	constexpr bool InRequiredHouses(DWORD const bitHouseType) const {
 		auto const test = this->RequiredHouses;
 		if(static_cast<int>(test) == -1) {
 			return true;
 		}
 		return 0u != (test & bitHouseType);
 	}
-
-	bool InForbiddenHouses(DWORD const bitHouseType) const {
+	constexpr bool InForbiddenHouses(DWORD const bitHouseType) const {
 		auto const test = this->ForbiddenHouses;
 		if(static_cast<int>(test) == -1) {
 			return false;
@@ -450,7 +536,6 @@ public:
 		return 0u != (test & bitHouseType);
 	}
 
-	static constexpr auto MaxWeapons = 18;
 	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
 	{
 		for (auto pItem : *Array) {
@@ -471,22 +556,11 @@ public:
 		return -1;
 	}
 
-	WeaponStruct& GetWeapon(size_t const index, bool const elite) {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
-	WeaponStruct const& GetWeapon(size_t const index, bool const elite) const {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
-	//Constructor
-	TechnoTypeClass(const char* id, SpeedType speedtype) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ JMP_THIS(0x710AF0); }
+	constexpr WeaponStruct& GetWeapon(size_t const index, bool const elite) { return elite ? this->EliteWeapon[index] : this->Weapon[index]; }
+	constexpr WeaponStruct const& GetWeapon(size_t const index, bool const elite) const { return elite ? this->EliteWeapon[index] : this->Weapon[index]; }
 
 protected:
-	explicit __forceinline TechnoTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
-
+	explicit __forceinline TechnoTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
+	TechnoTypeClass(noinit_t) : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x711840);
+	TechnoTypeClass(const char* pId, ::SpeedType speed) : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x710AF0);
 };
