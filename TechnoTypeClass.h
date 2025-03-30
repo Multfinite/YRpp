@@ -75,111 +75,6 @@ class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
 	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
-
-	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
-	{
-		for(auto pItem : *Array) {
-			if(!_strcmpi(pItem->ID, pID)) {
-				return pItem;
-			}
-		}
-		return nullptr;
-	}
-
-	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
-	{
-		for(int i = 0; i < Array->Count; ++i) {
-			if(!_strcmpi(Array->Items[i]->get_ID(), pID)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	static constexpr auto MaxWeapons = 18;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
-
-	//Destructor
-	virtual ~TechnoTypeClass() RX;
-
-	//ObjectTypeClass
-
-	//TechnoTypeClass
-	virtual bool CanUseWaypoint() const R0;
-	virtual bool CanAttackMove() const R0;
-	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const R0;
-	virtual int GetCost() const R0;
-	virtual int GetRepairStepCost() const R0;
-	virtual int GetRepairStep() const R0;
-	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const R0;
-	virtual int GetFlightLevel() const R0;
-
-	// non-virtual
-	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index)
-		{ JMP_THIS(0x48DCD0); }
-
-	bool HasMultipleTurrets() const
-	{
-		return this->TurretCount > 0;
-	}
-
-	CoordStruct* GetParticleSysOffset(CoordStruct* pBuffer) const
-		{ JMP_THIS(0x7178C0); }
-
-	CoordStruct GetParticleSysOffset() const
-	{
-		CoordStruct buffer;
-		GetParticleSysOffset(&buffer);
-		return buffer;
-	}
-
-	bool InOwners(DWORD const bitHouseType) const {
-		return 0u != (this->GetOwners() & bitHouseType);
-	}
-
-	bool InRequiredHouses(DWORD const bitHouseType) const {
-		auto const test = this->RequiredHouses;
-		if(static_cast<int>(test) == -1) {
-			return true;
-		}
-		return 0u != (test & bitHouseType);
-	}
-
-	bool InForbiddenHouses(DWORD const bitHouseType) const {
-		auto const test = this->ForbiddenHouses;
-		if(static_cast<int>(test) == -1) {
-			return false;
-		}
-		return 0u != (test & bitHouseType);
-	}
-
-	// weapon related
-	WeaponStruct& GetWeapon(size_t const index, bool const elite) {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
-	WeaponStruct const& GetWeapon(size_t const index, bool const elite) const {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
-	//Constructor
-	TechnoTypeClass(const char* id, SpeedType speedtype) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ JMP_THIS(0x710AF0); }
-
-protected:
-	explicit __forceinline TechnoTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
 
 	int             WalkRate;
@@ -228,8 +123,8 @@ public:
 	int             PipWrap;
 	TypeList<BuildingTypeClass*> Dock;
 	BuildingTypeClass* DeploysInto;
-	UnitTypeClass*  UndeploysInto;
-	UnitTypeClass*  PowersUnit;
+	UnitTypeClass* UndeploysInto;
+	UnitTypeClass* PowersUnit;
 	bool            PoweredUnit;
 	TypeList<int> VoiceSelect;
 	TypeList<int> VoiceSelectEnslaved;
@@ -333,8 +228,8 @@ public:
 	bool            DistributedFire;
 	bool            DamageReducesReadiness;
 	int             ReadinessReductionMultiplier;
-	UnitTypeClass*  UnloadingClass;
-	AnimTypeClass*  DeployingAnim;
+	UnitTypeClass* UnloadingClass;
+	AnimTypeClass* DeployingAnim;
 	bool            AttackFriendlies;
 	bool            AttackCursorOnFriendlies;
 	int             UndeployDelay;
@@ -344,12 +239,12 @@ public:
 	bool            StupidHunt;
 	bool            AllowedToStartInMultiplayer;
 	char            CameoFile[0x19];
-	PROTECTED_PROPERTY(BYTE,  align_6EF);
-	SHPStruct*      Cameo;
+	PROTECTED_PROPERTY(BYTE, align_6EF);
+	SHPStruct* Cameo;
 	bool            CameoAllocated;
 	char            AltCameoFile[0x19];
-	PROTECTED_PROPERTY(BYTE,  align_70E[2]);
-	SHPStruct*      AltCameo;
+	PROTECTED_PROPERTY(BYTE, align_70E[2]);
+	SHPStruct* AltCameo;
 	bool            AltCameoAllocated;
 	int             RotCount;
 	int             ROT;
@@ -426,8 +321,8 @@ public:
 	bool            Teleporter;
 	bool            IsGattling;
 	int             WeaponStages;
-	int WeaponStage [6];
-	int EliteStage [6];
+	int WeaponStage[6];
+	int EliteStage[6];
 	int             RateUp;
 	int             RateDown;
 	bool            SelfHealing;
@@ -512,6 +407,86 @@ public:
 	int             ZFudgeTunnel;
 	int             ZFudgeBridge;
 	char            PaletteFile[0x20];
-	DynamicVectorClass<ColorScheme*>*           Palette; //no... idea....
+	DynamicVectorClass<ColorScheme*>* Palette; //no... idea....
 	DWORD           align_DF4;
+public:
+	virtual ~TechnoTypeClass() JMP_THIS(0x711AE0);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x7162F0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x716DC0);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7170A0);
+
+
+	virtual bool CanUseWaypoint() const R0;
+	virtual bool CanAttackMove() const R0;
+	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const R0;
+	virtual int GetCost() const R0;
+	virtual int GetRepairStepCost() const R0;
+	virtual int GetRepairStep() const R0;
+	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const R0;
+	virtual int GetFlightLevel() const R0;
+
+	// non-virtual
+	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
+
+	bool HasMultipleTurrets() const { return this->TurretCount > 0; }
+	CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
+
+	bool InOwners(DWORD const bitHouseType) const { return 0u != (this-GetOwners() & bitHouseType); }
+
+	bool InRequiredHouses(DWORD const bitHouseType) const {
+		auto const test = this->RequiredHouses;
+		if(static_cast<int>(test) == -1) {
+			return true;
+		}
+		return 0u != (test & bitHouseType);
+	}
+
+	bool InForbiddenHouses(DWORD const bitHouseType) const {
+		auto const test = this->ForbiddenHouses;
+		if(static_cast<int>(test) == -1) {
+			return false;
+		}
+		return 0u != (test & bitHouseType);
+	}
+
+	static constexpr auto MaxWeapons = 18;
+	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
+	{
+		for (auto pItem : *Array) {
+			if (!_strcmpi(pItem->ID, pID)) {
+				return pItem;
+			}
+		}
+		return nullptr;
+	}
+
+	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
+	{
+		for (int i = 0; i < Array->Count; ++i) {
+			if (!_strcmpi(Array->Items[i]->get_ID(), pID)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	WeaponStruct& GetWeapon(size_t const index, bool const elite) {
+		return elite ? this->EliteWeapon[index] : this->Weapon[index];
+	}
+
+	WeaponStruct const& GetWeapon(size_t const index, bool const elite) const {
+		return elite ? this->EliteWeapon[index] : this->Weapon[index];
+	}
+
+	//Constructor
+	TechnoTypeClass(const char* id, SpeedType speedtype) noexcept
+		: TechnoTypeClass(noinit_t())
+	{ JMP_THIS(0x710AF0); }
+
+protected:
+	explicit __forceinline TechnoTypeClass(noinit_t) noexcept
+		: ObjectTypeClass(noinit_t())
+	{ }
+
 };
