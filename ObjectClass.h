@@ -261,7 +261,7 @@ public:
 	* @note vtable_index 42:0xA8
 	* @note address 0x5F6C80
 	*/
-	virtual Coordinate DockingCoord(TechnoClass* docker) const  JMP_THIS(0x5F6C80);
+	virtual Coordinate DockingCoord(TechnoClass* docker) const JMP_THIS(0x5F6C80);
 
 	/*!
 	* @note original_name Render_Coord
