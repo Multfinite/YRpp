@@ -30,6 +30,19 @@ class CCINIClass;
 class NOVTABLE AbstractTypeClass : public AbstractClass
 {
 public:
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x07E2000;
+			this->IRTTITypeInfo = 0x7E1FE4;
+			this->INoticeSink = 0x7E1FDC;
+			this->INoticeSource = 0x7E1FD4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7E2000;
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 
@@ -50,10 +63,19 @@ public:
 	/*!
 	* @brief It's commonly empty. Only AnimClass override this.
 	* @note vtable_index 24:0x60
+	* @note address 0x410C20
 	*/
 	virtual void LoadTheaterSpecificArt(TheaterType th_type) JMP_THIS(0x410C20);
-	/*25:0x64*/virtual bool LoadFromINI(CCINIClass* pINI) JMP_THIS(0x410A60);
-	/*26:0x68*/virtual bool SaveToINI(CCINIClass* pINI) JMP_THIS(0x410B90);
+	/*!
+	* @note vtable_index 25:0x64
+	* @note address 0x410A60
+	*/
+	virtual bool LoadFromINI(CCINIClass* pINI) JMP_THIS(0x410A60);
+	/*!
+	* @note vtable_index 26:0x68
+	* @note address 0x410B90
+	*/
+	virtual bool SaveToINI(CCINIClass* pINI) JMP_THIS(0x410B90);
 
 	const char* get_ID() const { return this->ID; }
 
