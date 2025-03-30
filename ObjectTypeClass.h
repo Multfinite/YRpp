@@ -18,6 +18,19 @@ class BuildingClass;
 class NOVTABLE ObjectTypeClass : public AbstractTypeClass
 {
 public:
+	using base_type = AbstractTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EF2D8;
+			this->IRTTITypeInfo = 0x7EF2BC;
+			this->INoticeSink = 0xEF2B4;
+			this->INoticeSource = 0x7EF2AC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7EF2D8;
 
 	static constexpr constant_ptr<DynamicVectorClass<ObjectTypeClass*>, 0xAC1418u> const Array{};
