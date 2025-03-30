@@ -1959,6 +1959,12 @@ enum SmudgeType : uint32_t
 	First = 0x0,
 };
 
+enum CheckPointType
+{
+	Stack = 0x0,
+	Downwind = 0x1,
+	Crosswind = 0x2,
+};
 
 //Westwood custom messages (e.g. for SendMessage)
 #define	WW_SLIDER_GETVALUE			0x400
