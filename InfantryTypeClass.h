@@ -120,5 +120,5 @@ protected:
 	explicit __forceinline InfantryTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:
 	InfantryTypeClass(noinit_t) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x523980);
-	InfantryTypeClass(const char* pId, ::SpeedType speed) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x5236A0);
+	InfantryTypeClass(const char* pId) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x5236A0);
 };
