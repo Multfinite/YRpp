@@ -1,10 +1,6 @@
-/*
-	AnimTypes are initialized by INI files.
-*/
-
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
 
 struct SubSequenceStruct
 {
@@ -38,8 +34,49 @@ public:
 	static const AbstractType AbsID = AbstractType::InfantryType;
 	static constexpr uintptr_t AbsVTable = 0x7EB610;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(InfantryTypeClass, 0xA8E348u);
+public:
+	int ArrayIndex;
+	PipIndex Pip;
+	PipIndex OccupyPip;
+	WeaponStruct OccupyWeapon;
+	WeaponStruct EliteOccupyWeapon;
+	SequenceStruct* Sequence;
+	int FireUp;
+	int FireProne;
+	int SecondaryFire;
+	int SecondaryProne;
+	TypeList<AnimTypeClass*> DeadBodies;
+	TypeList<AnimTypeClass*> DeathAnims;
+	TypeList<int> VoiceComment;
+	int EnterWaterSound;
+	int LeaveWaterSound;
+	bool Cyborg;
+	bool NotHuman;
+	// Used for the bomb attack cursor...
+	bool Ivan;
+	int DirectionDistance;
+	bool Occupier;
+	bool Assaulter;
+	int HarvestRate;
+	bool Fearless;
+	bool Crawls;
+	bool Infiltrate;
+	bool Fraidycat;
+	bool TiberiumProof;
+	bool Civilian;
+	bool C4;
+	bool Engineer;
+	bool Agent;
+	bool Thief;
+	bool VehicleThief;
+	bool Doggie;
+	bool Deployer;
+	bool DeployedCrushable;
+	bool UseOwnName;
+	bool JumpJetTurn;
+protected: DWORD align_ECC;
+public:
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -68,50 +105,4 @@ protected:
 	explicit __forceinline InfantryTypeClass(noinit_t) noexcept
 		: TechnoTypeClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	int ArrayIndex;
-	PipIndex Pip;
-	PipIndex OccupyPip;
-	WeaponStruct OccupyWeapon;
-	WeaponStruct EliteOccupyWeapon;
-	SequenceStruct* Sequence;
-	int FireUp;
-	int FireProne;
-	int SecondaryFire;
-	int SecondaryProne;
-	TypeList<AnimTypeClass*> DeadBodies;
-	TypeList<AnimTypeClass*> DeathAnims;
-	TypeList<int> VoiceComment;
-	int EnterWaterSound;
-	int LeaveWaterSound;
-	bool Cyborg;
-	bool NotHuman;
-	bool Ivan; //used for the bomb attack cursor...
-	int DirectionDistance;
-	bool Occupier;
-	bool Assaulter;
-	int HarvestRate;
-	bool Fearless;
-	bool Crawls;
-	bool Infiltrate;
-	bool Fraidycat;
-	bool TiberiumProof;
-	bool Civilian;
-	bool C4;
-	bool Engineer;
-	bool Agent;
-	bool Thief;
-	bool VehicleThief;
-	bool Doggie;
-	bool Deployer;
-	bool DeployedCrushable;
-	bool UseOwnName;
-	bool JumpJetTurn;
-private: DWORD align_ECC;
 };
