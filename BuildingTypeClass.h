@@ -1,6 +1,7 @@
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
+
 class OverlayTypeClass;
 class IsometricTileTypeClass;
 
@@ -31,81 +32,8 @@ public:
 	static const AbstractType AbsID = AbstractType::BuildingType;
 	static constexpr uintptr_t AbsVTable = 0x7E4570;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	//Destructor
-	virtual ~BuildingTypeClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//AbstractTypeClass
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
-
-	//TechnoTypeClass
-	//BuildingTypeClass
-	virtual SHPStruct* LoadBuildup() R0;
-
-	//non-virtual
-	void ClearBuildUp()
-		{ JMP_THIS(0x465AF0); }
-
-	bool IsVehicle() const
-		{ JMP_THIS(0x465D40); }
-
-	short GetFoundationWidth() const
-		{ JMP_THIS(0x45EC90); }
-	short GetFoundationHeight(bool bIncludeBib) const
-		{ JMP_THIS(0x45ECA0); }
-
-	bool CanPlaceHere(CellStruct* cell, HouseClass* owner) const
-		{ JMP_THIS(0x464AC0); }
-
-	// helpers
-	bool HasSuperWeapon(int index) const {
-		return (this->SuperWeapon == index || this->SuperWeapon2 == index);
-	}
-
-	bool HasSuperWeapon() const {
-		return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1);
-	}
-
-	bool CanTogglePower() const {
-		return this->TogglePower && (this->PowerDrain > 0 || this->Powered);
-	}
-
-	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
-	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
-	//Constructor
-	BuildingTypeClass(const char* pID) noexcept
-		: BuildingTypeClass(noinit_t())
-	{ JMP_THIS(0x45DD90); }
-
-protected:
-	explicit __forceinline BuildingTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	CellStruct* FoundationData;
 	SHPStruct* Buildup;
@@ -124,7 +52,7 @@ public:
 	Point2D SecondaryFirePixelOffset;
 	OverlayTypeClass* ToOverlay;
 	IsometricTileTypeClass* ToTile;
-	char BuildupFile [0x10];
+	char BuildupFile[0x10];
 	int BuildupSound;
 	int PackupSound;
 	int CreateUnitSound;
@@ -132,7 +60,7 @@ public:
 	int UnitExitSound;
 	int WorkingSound;
 	int NotWorkingSound;
-	char PowersUpBuilding [0x18];
+	char PowersUpBuilding[0x18];
 	UnitTypeClass* FreeUnit;
 	InfantryTypeClass* SecretInfantry;
 	UnitTypeClass* SecretUnit;
@@ -295,7 +223,7 @@ public:
 	bool ConcentricRadialIndicator;
 	int PsychicDetectionRadius;
 	int BarrelStartPitch;
-	char VoxelBarrelFile [0x1C];
+	char VoxelBarrelFile[0x1C];
 	CoordStruct VoxelBarrelOffsetToPitchPivotPoint;
 	CoordStruct VoxelBarrelOffsetToRotatePivotPoint;
 	CoordStruct VoxelBarrelOffsetToBuildingPivotPoint;
@@ -310,8 +238,74 @@ public:
 	bool CrateBeneath;
 	bool LeaveRubble;
 	bool CrateBeneathIsMoney;
-	char TheaterSpecificID [0x13];
+	char TheaterSpecificID[0x13];
 	int NumberOfDocks;
 	VectorClass<CoordStruct> DockingOffsets;
-private: DWORD align_1794;
+protected: DWORD align_1794;
+public:
+	//IPersist
+	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+
+	//IPersistStream
+	//Destructor
+	virtual ~BuildingTypeClass() RX;
+
+	//AbstractClass
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
+
+	//AbstractTypeClass
+	//ObjectTypeClass
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
+
+	//TechnoTypeClass
+	//BuildingTypeClass
+	virtual SHPStruct* LoadBuildup() R0;
+
+	//non-virtual
+	void ClearBuildUp()
+		{ JMP_THIS(0x465AF0); }
+
+	bool IsVehicle() const
+		{ JMP_THIS(0x465D40); }
+
+	short GetFoundationWidth() const
+		{ JMP_THIS(0x45EC90); }
+	short GetFoundationHeight(bool bIncludeBib) const
+		{ JMP_THIS(0x45ECA0); }
+
+	bool CanPlaceHere(CellStruct* cell, HouseClass* owner) const
+		{ JMP_THIS(0x464AC0); }
+
+	// helpers
+	bool HasSuperWeapon(int index) const {
+		return (this->SuperWeapon == index || this->SuperWeapon2 == index);
+	}
+
+	bool HasSuperWeapon() const {
+		return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1);
+	}
+
+	bool CanTogglePower() const {
+		return this->TogglePower && (this->PowerDrain > 0 || this->Powered);
+	}
+
+	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) {
+		return this->BuildingAnim[static_cast<int>(slot)];
+	}
+
+	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const {
+		return this->BuildingAnim[static_cast<int>(slot)];
+	}
+
+	//Constructor
+	BuildingTypeClass(const char* pID) noexcept
+		: BuildingTypeClass(noinit_t())
+	{ JMP_THIS(0x45DD90); }
+
+protected:
+	explicit __forceinline BuildingTypeClass(noinit_t) noexcept
+		: TechnoTypeClass(noinit_t())
+	{ }
 };
