@@ -31,6 +31,19 @@ struct SequenceStruct
 class NOVTABLE InfantryTypeClass : public TechnoTypeClass
 {
 public:
+	using base_type = TechnoTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EB610;
+			this->IRTTITypeInfo = 0x7EB5F4;
+			this->INoticeSink = 0x7EB5EC;
+			this->INoticeSource = 0x7EB5E4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::InfantryType;
 	static constexpr uintptr_t AbsVTable = 0x7EB610;
 
@@ -77,32 +90,35 @@ public:
 	bool JumpJetTurn;
 protected: DWORD align_ECC;
 public:
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
+	// SDTOR: 0x524D70
 	virtual ~InfantryTypeClass() RX;
 
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x524C70);
 
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x524960);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x524B60);
 
-	//Constructor
-	InfantryTypeClass(const char* pID) noexcept
-		: InfantryTypeClass(noinit_t())
-	{ JMP_THIS(0x5236A0); }
+	RTTIType KindOf() const override JMP_THIS(0x524D40);
+	int SizeOf() const override JMP_THIS(0x524D50);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x524840);
+	int ArrayIndex() const override JMP_THIS(0x524D60);
+
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5240A0);
+
+	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x5247D0);
+	Point3D LeptonDimensions() const override JMP_THIS(0x524760);
+	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
+	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x523B10);
+	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x523C20);
+
+	bool CanUseWaypoint() const override JMP_THIS(0x5247B0);
+	bool CanAttackMove() const override JMP_THIS(0x5247C0);
+	int GetRepairStepCost() const override JMP_THIS(0x5247A0);
+	int GetRepairStep() const override JMP_THIS(0x524790);
 
 protected:
-	explicit __forceinline InfantryTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
+	explicit __forceinline InfantryTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
+public:
+	InfantryTypeClass(noinit_t) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x523980);
+	InfantryTypeClass(const char* pId, ::SpeedType speed) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x5236A0);
 };
