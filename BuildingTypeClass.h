@@ -29,6 +29,19 @@ struct BuildingAnimFrameStruct
 class NOVTABLE BuildingTypeClass : public TechnoTypeClass
 {
 public:
+	using base_type = TechnoTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E4570;
+			this->IRTTITypeInfo = 0x7E4554;
+			this->INoticeSink = 0x7E454C;
+			this->INoticeSource = 0x7E4544;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::BuildingType;
 	static constexpr uintptr_t AbsVTable = 0x7E4570;
 
@@ -240,69 +253,49 @@ public:
 	VectorClass<CoordStruct> DockingOffsets;
 protected: DWORD align_1794;
 public:
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	virtual ~BuildingTypeClass() JMP_THIS(0x45E580);
 
-	//IPersistStream
-	//Destructor
-	virtual ~BuildingTypeClass() RX;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) JMP_THIS(0x465380);
 
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
+	RTTIType KindOf() const override JMP_THIS(0x465D90);
+	int SizeOf() const override JMP_THIS(0x465DA0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x464B30);
+	int ArrayIndex() const override JMP_THIS(0x465DB0);
+	
+	bool LoadFromINI(CCINIClass* ini) override JMP_THIS(0x45FE50);
 
-	//AbstractTypeClass
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
+	Coordinate FixupCoord(Coordinate& coord) const override JMP_THIS(0x464A70);
+	int MaxPips() const override JMP_THIS(0x45ECE0);
+	Point3D PixelDimensions() const override JMP_THIS(0x45EBD0);
+	Point3D LeptonDimensions() const override JMP_THIS(0x464AF0);
+	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
+	int CostOf(HouseClass* pHouse) const override JMP_THIS(0x45EDD0);
+	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x45E880);
+	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x45EC20);
+	SHPStruct* GetImage() const override JMP_THIS(0x45F040);
 
-	//TechnoTypeClass
-	//BuildingTypeClass
-	virtual SHPStruct* LoadBuildup() R0;
+	bool CanUseWaypoint() const override JMP_THIS(0x465910);
+	bool CanAttackMove() const override JMP_THIS(0x465920);
+	bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const override JMP_THIS(0x464AC0);
+	int GetCost() const override JMP_THIS(0x45ED50);
 
-	//non-virtual
-	void ClearBuildUp()
-		{ JMP_THIS(0x465AF0); }
+	virtual SHPStruct* LoadBuildup() JMP_THIS(0x465960);
 
-	bool IsVehicle() const
-		{ JMP_THIS(0x465D40); }
+	constexpr void ClearBuildUp() JMP_THIS(0x465AF0);
+	constexpr bool IsVehicle() const JMP_THIS(0x465D40);
 
-	short GetFoundationWidth() const
-		{ JMP_THIS(0x45EC90); }
-	short GetFoundationHeight(bool bIncludeBib) const
-		{ JMP_THIS(0x45ECA0); }
+	constexpr short GetFoundationWidth() const JMP_THIS(0x45EC90);
+	constexpr short GetFoundationHeight(bool bIncludeBib) const JMP_THIS(0x45ECA0);
 
-	bool CanPlaceHere(CellStruct* cell, HouseClass* owner) const
-		{ JMP_THIS(0x464AC0); }
-
-	// helpers
-	bool HasSuperWeapon(int index) const {
-		return (this->SuperWeapon == index || this->SuperWeapon2 == index);
-	}
-
-	bool HasSuperWeapon() const {
-		return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1);
-	}
-
-	bool CanTogglePower() const {
-		return this->TogglePower && (this->PowerDrain > 0 || this->Powered);
-	}
-
-	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
-	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
-	//Constructor
-	BuildingTypeClass(const char* pID) noexcept
-		: BuildingTypeClass(noinit_t())
-	{ JMP_THIS(0x45DD90); }
+	constexpr bool HasSuperWeapon(int index) const { return (this->SuperWeapon == index || this->SuperWeapon2 == index); }
+	constexpr bool HasSuperWeapon() const { return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1); }
+	constexpr bool CanTogglePower() const { return this->TogglePower && (this->PowerDrain > 0 || this->Powered); }
+	constexpr BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) { return this->BuildingAnim[static_cast<int>(slot)]; }
+	constexpr const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const { return this->BuildingAnim[static_cast<int>(slot)]; }
 
 protected:
-	explicit __forceinline BuildingTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
+	explicit __forceinline BuildingTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
+public:
+	BuildingTypeClass(noinit_t) : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45E520);
+	BuildingTypeClass(const char* pId) : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45DD90);
 };
