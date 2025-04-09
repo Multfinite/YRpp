@@ -108,10 +108,7 @@ public:
 	int AntiArmorValue;
 	int AntiInfantryValue;
 	Point2D ZShapePointMove;
-	int unknown_1538;
-	int unknown_153C;
-	int unknown_1540;
-	int unknown_1544;
+	RectangleStruct unknown_1538;
 	WORD ExtraLight;
 	bool TogglePower;
 	bool HasSpotlight;
