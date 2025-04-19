@@ -1,6 +1,6 @@
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
 
 class NOVTABLE AircraftTypeClass : public TechnoTypeClass
 {
@@ -10,7 +10,19 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(AircraftTypeClass, 0xA8B218u);
-
+public:
+	int ArrayIndex;
+	bool Carryall;
+	AnimTypeClass* Trailer;
+	int SpawnDelay;
+	bool Rotors;
+	bool CustomRotor;
+	bool Landable;
+	bool FlyBy;
+	bool FlyBack;
+	bool AirportBound;
+	bool Fighter;
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -36,22 +48,4 @@ protected:
 	explicit __forceinline AircraftTypeClass(noinit_t) noexcept
 		: TechnoTypeClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	int ArrayIndex;
-	bool Carryall;
-	AnimTypeClass* Trailer;
-	int SpawnDelay;
-	bool Rotors;
-	bool CustomRotor;
-	bool Landable;
-	bool FlyBy;
-	bool FlyBack;
-	bool AirportBound;
-	bool Fighter;
 };
