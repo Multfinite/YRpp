@@ -257,6 +257,9 @@ public:
 
 	HRESULT __stdcall GetClassID(CLSID* pClassID) JMP_THIS(0x465380);
 
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x465010);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x465300);
+
 	RTTIType KindOf() const override JMP_THIS(0x465D90);
 	int SizeOf() const override JMP_THIS(0x465DA0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x464B30);
