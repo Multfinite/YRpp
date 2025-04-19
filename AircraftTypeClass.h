@@ -37,18 +37,25 @@ public:
 public:
 	virtual ~AircraftTypeClass() JMP_THIS(0x41CA20);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x41CEB0);
 
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x41CE20);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41CE90);
 
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
+	RTTIType KindOf() const override JMP_THIS(0x41CFB0);
+	int SizeOf() const override JMP_THIS(0x41CFC0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41CDB0);
+	int ArrayIndex() const override JMP_THIS(0x41CFD0);
 
-	//TechnoTypeClass
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41CC20);
+
+	Point3D LeptonDimensions() const override JMP_THIS(0x41CBF0);
+	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x41CBE0);
+	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x41CB20);
+	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x41CB70);
+
+	bool CanUseWaypoint() const override JMP_THIS(0x41CB50);
+	bool CanAttackMove() const override JMP_THIS(0x41CB60);
 
 protected:
 	explicit __forceinline AircraftTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
