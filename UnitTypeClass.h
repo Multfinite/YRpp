@@ -1,6 +1,6 @@
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
 
 class TechnoClass;
 
@@ -12,45 +12,7 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(UnitTypeClass, 0xA83CE0u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~UnitTypeClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//AbstractTypeClass
-
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
-
-	//TechnoTypeClass
-
-	//Constructor
-	UnitTypeClass(const char* pID) noexcept
-		: UnitTypeClass(noinit_t())
-	{ JMP_THIS(0x7470D0); }
-
-protected:
-	explicit __forceinline UnitTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	LandType MovementRestrictedTo;
 	CoordStruct HalfDamageSmokeLocation;
@@ -88,5 +50,37 @@ public:
 	SHPStruct* AltImage;
 	char WalkFrames;
 	char FiringFrames;
-	char AltImageFile [0x19];
+	char AltImageFile[0x19];
+public:
+	//IPersist
+	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+
+	//IPersistStream
+	virtual HRESULT __stdcall Load(IStream* pStm) R0;
+	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+
+	//Destructor
+	virtual ~UnitTypeClass() RX;
+
+	//AbstractClass
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int SizeOf() const R0;
+
+	//AbstractTypeClass
+
+	//ObjectTypeClass
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* pOwner) R0;
+
+	//TechnoTypeClass
+
+	//Constructor
+	UnitTypeClass(const char* pID) noexcept
+		: UnitTypeClass(noinit_t())
+	{ JMP_THIS(0x7470D0); }
+
+protected:
+	explicit __forceinline UnitTypeClass(noinit_t) noexcept
+		: TechnoTypeClass(noinit_t())
+	{ }
 };
