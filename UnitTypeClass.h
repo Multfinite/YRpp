@@ -7,6 +7,19 @@ class TechnoClass;
 class NOVTABLE UnitTypeClass : public TechnoTypeClass
 {
 public:
+	using base_type = TechnoTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F6218;
+			this->IRTTITypeInfo = 0x7F61FC;
+			this->INoticeSink = 0x7F61F4;
+			this->INoticeSource = 0x7F61EC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::UnitType;
 	static constexpr uintptr_t AbsVTable = 0x7F6218;
 
