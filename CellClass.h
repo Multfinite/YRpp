@@ -1,10 +1,6 @@
-/*
-	Cells
-*/
-
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
 //forward declarations
 class ObjectClass;
