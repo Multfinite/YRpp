@@ -135,20 +135,18 @@ public:
 	PROTECTED_PROPERTY(BYTE, padding_144[4]);
 
 public:
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	virtual ~CellClass() JMP_THIS(0x47BB60);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x485200);
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x4839F0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x483C10);
+	
+	RTTIType KindOf() const override JMP_THIS(0x487E60);
+	int SizeOf() const override JMP_THIS(0x487E70);
 
-	//Destructor
-	virtual ~CellClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
+	Coordinate Center() const override JMP_THIS(0x486840);
+	bool OnGround() const override JMP_THIS(0x4867E0);
+	Coordinate TargetingCoord() const override JMP_THIS(0x486890);
 public:
 	constexpr TechnoClass* FindTechnoNearestTo(Point2D const& offsetPixel, bool alt, TechnoClass const* pExcludeThis = nullptr) const JMP_THIS(0x47C3D0);
 	constexpr ObjectClass* FindObjectOfType(AbstractType abs, bool alt) const JMP_THIS(0x47C4D0);
@@ -244,7 +242,6 @@ public:
 
 	// Rad Sites
 	constexpr void SetRadSite(RadSiteClass* pRad) { this->RadSite = pRad; }
-
 	constexpr RadSiteClass* GetRadSite() const { return this->RadSite; }
 	constexpr bool IsRadiated() const JMP_THIS(0x487C90);
 	constexpr int GetRadLevel() const JMP_THIS(0x487CB0);
