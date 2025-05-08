@@ -149,230 +149,119 @@ public:
 	virtual RTTIType KindOf() const RT(AbstractType);
 	virtual int SizeOf() const R0;
 
-	// non-virtual
-
-	// get content objects
-	TechnoClass* FindTechnoNearestTo(Point2D const& offsetPixel, bool alt, TechnoClass const* pExcludeThis = nullptr) const
-		{ JMP_THIS(0x47C3D0); }
-
-	ObjectClass* FindObjectOfType(AbstractType abs, bool alt) const
-		{ JMP_THIS(0x47C4D0); }
-
-	BuildingClass* GetBuilding() const
-		{ JMP_THIS(0x47C520); }
-
-	UnitClass* GetUnit(bool alt) const
-		{ JMP_THIS(0x47EBA0); }
-
-	InfantryClass* GetInfantry(bool alt) const
-		{ JMP_THIS(0x47EC40); }
-
-	AircraftClass* GetAircraft(bool alt) const
-		{ JMP_THIS(0x47EBF0); }
-
-	TerrainClass* GetTerrain(bool alt) const
-		{ JMP_THIS(0x47C550); }
+public:
+	constexpr TechnoClass* FindTechnoNearestTo(Point2D const& offsetPixel, bool alt, TechnoClass const* pExcludeThis = nullptr) const JMP_THIS(0x47C3D0);
+	constexpr ObjectClass* FindObjectOfType(AbstractType abs, bool alt) const JMP_THIS(0x47C4D0);
+	constexpr BuildingClass* GetBuilding() const JMP_THIS(0x47C520);
+	constexpr UnitClass* GetUnit(bool alt) const JMP_THIS(0x47EBA0);
+	constexpr InfantryClass* GetInfantry(bool alt) const JMP_THIS(0x47EC40);
+	constexpr AircraftClass* GetAircraft(bool alt) const JMP_THIS(0x47EBF0);
+	constexpr TerrainClass* GetTerrain(bool alt) const JMP_THIS(0x47C550);
 
 	/* craziest thing... first iterates Content looking to Aircraft,
 	 * failing that, calls FindTechnoNearestTo,
 	 * if that fails too, reiterates Content looking for Terrain
 	 */
-	ObjectClass* GetSomeObject(const CoordStruct& coords, bool alt) const
-		{ JMP_THIS(0x47C5A0); }
+	constexpr ObjectClass* GetSomeObject(const CoordStruct& coords, bool alt) const JMP_THIS(0x47C5A0);
+	
+	constexpr void SetWallOwner() JMP_THIS(0x47D210);
 
-	// misc
-	void SetWallOwner()
-		{ JMP_THIS(0x47D210); }
-
-	void IncreaseShroudCounter()
-		{ JMP_THIS(0x487690); }
-
-	void ReduceShroudCounter()
-		{ JMP_THIS(0x487630); }
-
-	bool IsShrouded() const
-		{ JMP_THIS(0x487950); }
-
-	void Unshroud()
-		{ JMP_THIS(0x4876F0); }
-
-	RectangleStruct* ShapeRect(RectangleStruct* pRet)
-		{ JMP_THIS(0x47FDE0); }
-
-	bool IsFogged() // Check Fog maybe?
-		{ JMP_THIS(0x4879B0); }
-
-	void FogCell()
-		{ JMP_THIS(0x486A70); }
-
-	void CleanFog()
-		{ JMP_THIS(0x486BF0); }
-
-	void ClearFoggedObjects()
-		{ JMP_THIS(0x486C50); }
-
+	constexpr void IncreaseShroudCounter() JMP_THIS(0x487690);
+	constexpr void ReduceShroudCounter() JMP_THIS(0x487630);
+	constexpr bool IsShrouded() const JMP_THIS(0x487950);
+	constexpr void Unshroud() JMP_THIS(0x4876F0);
+	constexpr RectangleStruct ShapeRect() JMP_THIS(0x47FDE0);
+	// Check Fog maybe? 
+	constexpr bool IsFogged() JMP_THIS(0x4879B0);
+	constexpr void FogCell() JMP_THIS(0x486A70);
+	constexpr void CleanFog() JMP_THIS(0x486BF0);
+	constexpr void ClearFoggedObjects() JMP_THIS(0x486C50);
 	// adjusts LAT
-	void SetupLAT()
-		{ JMP_THIS(0x47CA80); }
+	constexpr void SetupLAT()  JMP_THIS(0x47CA80);
 
 	// Recalculates cell attributes.
 	// Checks for nearby cliff impassability, calls SetupLAT(), sets up TubeClass if tunnel, cell anim if attached etc.
 	// Set cellLevel to -1 if you wish to not change it.
-	void RecalcAttributes(int cellLevel)
-		{ JMP_THIS(0x47D2B0); }
+	constexpr void RecalcAttributes(int cellLevel) JMP_THIS(0x47D2B0);
+	constexpr void BlowUpBridge() JMP_THIS(0x47DD70);
 
-	void BlowUpBridge()
-		{ JMP_THIS(0x47DD70); }
-
-	bool CanThisExistHere(SpeedType SpeedType, BuildingTypeClass* pObject, HouseClass* pOwner) const
-		{ JMP_THIS(0x47C620); }
-
+	constexpr bool CanThisExistHere(SpeedType SpeedType, BuildingTypeClass* pObject, HouseClass* pOwner) const JMP_THIS(0x47C620);
 	// those unks are passed to TechnoClass::Scatter in that same order
-	void ScatterContent(const CoordStruct &crd, bool ignoreMission, bool ignoreDestination, bool alt)
-		{ JMP_THIS(0x481670); }
+	constexpr void ScatterContent(const CoordStruct &crd, bool ignoreMission, bool ignoreDestination, bool alt) JMP_THIS(0x481670);
 
-	CellClass* GetNeighbourCell(FacingType facing) const
-		{ JMP_THIS(0x481810); }
+	constexpr CellClass* GetNeighbourCell(FacingType facing) const JMP_THIS(0x481810);
 
 	// called whenever anything moves, first to remove threat from source cell, second time to add threat to dest cell
-	void UpdateThreat(unsigned int SourceHouse, int ThreatLevel)
-		{ JMP_THIS(0x481870); }
+	constexpr void UpdateThreat(unsigned int SourceHouse, int ThreatLevel) JMP_THIS(0x481870);
+	constexpr void CollectCrate(FootClass* pCollector) JMP_THIS(0x481A00);
 
-	void CollectCrate(FootClass* pCollector)
-		{ JMP_THIS(0x481A00); }
+	constexpr void ProcessColourComponents(int* arg0, int* pIntensity, int* pAmbient, int* a5, int* a6, int* tintR, int* tintG, int* tintB) JMP_THIS(0x484180);
+	constexpr TubeClass* GetTunnel() JMP_THIS(0x484F20);
 
-	void ProcessColourComponents(int* arg0, int* pIntensity, int* pAmbient, int* a5, int* a6, int* tintR, int* tintG, int* tintB)
-		{ JMP_THIS(0x484180); }
-
-	TubeClass* GetTunnel()
-		{ JMP_THIS(0x484F20); }
-
-	RectangleStruct* GetContainingRect(RectangleStruct* dest) const
-		{ JMP_THIS(0x47FB90); }
+	constexpr RectangleStruct* GetContainingRect(RectangleStruct* dest) const JMP_THIS(0x47FB90);
 
 	// don't laugh, it returns the uiname of contained tiberium... which nobody ever sets
-	const wchar_t* FullName() const
-		{ JMP_THIS(0x484FF0); }
-
+	constexpr const wchar_t* FullName() const JMP_THIS(0x484FF0);
 	// returns whether a cell behaves as if it contained overlay (for gates and wall towers)
-	bool ConnectsToOverlay(int idxOverlay = -1, int direction = -1) const
-		{ JMP_THIS(0x480510); }
-
+	constexpr bool ConnectsToOverlay(int idxOverlay = -1, int direction = -1) const JMP_THIS(0x480510);
 	// returns the tiberium's index in OverlayTypes
-	int GetContainedTiberiumIndex() const
-		{ JMP_THIS(0x485010); }
-
-	int GetContainedTiberiumValue() const
-		{ JMP_THIS(0x485020); }
-
-	bool SpreadTiberium(bool forced)
-		{ JMP_THIS(0x483780); }
+	constexpr int GetContainedTiberiumIndex() const JMP_THIS(0x485010);
+	constexpr int GetContainedTiberiumValue() const JMP_THIS(0x485020);
+	constexpr bool SpreadTiberium(bool forced) JMP_THIS(0x483780);
 
 	// add or create tiberium of the specified type
-	bool IncreaseTiberium(int idxTiberium, int amount)
-		{ JMP_THIS(0x487190); }
+	constexpr bool IncreaseTiberium(int idxTiberium, int amount) JMP_THIS(0x487190);
 
 	// decreases thze tiberium in the cell
-	void ReduceTiberium(int amount)
-		{ JMP_THIS(0x480A80); }
+	constexpr void ReduceTiberium(int amount) JMP_THIS(0x480A80);
+	constexpr bool CanTiberiumGerminate(TiberiumClass* tib) JMP_THIS(0x4838E0);
 
-	bool CanTiberiumGerminate(TiberiumClass* tib)
-		{ JMP_THIS(0x4838E0); }
-
-	void SetMapCoords(const CoordStruct& coords)
-		{ JMP_THIS(0x485240); }
-
-	int GetFloorHeight(Point2D const& subcoords) const
-		{ JMP_THIS(0x47B3A0); }
+	constexpr void SetMapCoords(CoordStruct const& coords) JMP_THIS(0x485240);
+	constexpr int GetFloorHeight(Point2D const& subcoords) const JMP_THIS(0x47B3A0);
 
 	// Factors in cell height from ramps, level etc.
-	CoordStruct* GetCellCoords(CoordStruct* pOutBuffer) const
-		{ JMP_THIS(0x480A30); }
+	constexpr CoordStruct GetCellCoords() const JMP_THIS(0x480A30);
 
-	CoordStruct GetCellCoords() const
-	{
-		CoordStruct buffer;
-		GetCellCoords(&buffer);
-		return buffer;
-	}
-
-	void ActivateVeins()
-		{ JMP_THIS(0x486920); }
+	constexpr void ActivateVeins() JMP_THIS(0x486920);
 
 	// cloak generators
-	bool CloakGen_InclHouse(unsigned int idx) const
-		{ return ((1 << idx) & this->CloakedByHouses) != 0; }
-
-	void CloakGen_AddHouse(unsigned int idx)
-		{ this->CloakedByHouses |= 1 << idx; }
-
-	void CloakGen_RemHouse(unsigned int idx)
-		{ this->CloakedByHouses &= ~(1 << idx); }
+	constexpr bool CloakGen_InclHouse(unsigned int idx) const { return ((1 << idx) & this->CloakedByHouses) != 0; }
+	constexpr void CloakGen_AddHouse(unsigned int idx) { this->CloakedByHouses |= 1 << idx; }
+	constexpr void CloakGen_RemHouse(unsigned int idx) { this->CloakedByHouses &= ~(1 << idx); }
 
 	// unused, returns 0 if that house doesn't have cloakgens covering this cell or Player has sensors over this cell
-	bool DrawObjectsCloaked(int OwnerHouseIdx) const
-		{ JMP_THIS(0x486800); }
+	bool DrawObjectsCloaked(int OwnerHouseIdx) const JMP_THIS(0x486800);
 
 	// sensors
-	bool Sensors_InclHouse(unsigned int idx) const
-		{ return this->SensorsOfHouses[idx] > 0; }
-
-	void Sensors_AddOfHouse(unsigned int idx)
-		{ ++this->SensorsOfHouses[idx]; }
-
-	void Sensors_RemOfHouse(unsigned int idx)
-		{ --this->SensorsOfHouses[idx]; }
+	constexpr bool Sensors_InclHouse(unsigned int idx) const { return this->SensorsOfHouses[idx] > 0; }
+	constexpr void Sensors_AddOfHouse(unsigned int idx) { ++this->SensorsOfHouses[idx]; }
+	constexpr void Sensors_RemOfHouse(unsigned int idx) { --this->SensorsOfHouses[idx]; }
 
 	// disguise sensors
-	bool DisguiseSensors_InclHouse(unsigned int idx) const
-		{ return this->DisguiseSensorsOfHouses[idx] > 0; }
-
-	void DisguiseSensors_AddOfHouse(unsigned int idx)
-		{ ++this->DisguiseSensorsOfHouses[idx]; }
-
-	void DisguiseSensors_RemOfHouse(unsigned int idx)
-		{ --this->DisguiseSensorsOfHouses[idx]; }
+	constexpr bool DisguiseSensors_InclHouse(unsigned int idx) const { return this->DisguiseSensorsOfHouses[idx] > 0; }
+	constexpr void DisguiseSensors_AddOfHouse(unsigned int idx) { ++this->DisguiseSensorsOfHouses[idx]; }
+	constexpr void DisguiseSensors_RemOfHouse(unsigned int idx) 	{ --this->DisguiseSensorsOfHouses[idx]; }
 
 	// Rad Sites
-	void SetRadSite(RadSiteClass* pRad)
-		{ this->RadSite = pRad; }
+	constexpr void SetRadSite(RadSiteClass* pRad) { this->RadSite = pRad; }
 
-	RadSiteClass* GetRadSite() const
-		{ return this->RadSite; }
-
-	bool IsRadiated() const
-		{ JMP_THIS(0x487C90); }
-
-	int GetRadLevel() const
-		{ JMP_THIS(0x487CB0); }
-
-	void RadLevel_Increase(double amount)
-		{ JMP_THIS(0x487CE0); }
-
-	void RadLevel_Decrease(double amount)
-		{ JMP_THIS(0x487D00); }
+	constexpr RadSiteClass* GetRadSite() const { return this->RadSite; }
+	constexpr bool IsRadiated() const JMP_THIS(0x487C90);
+	constexpr int GetRadLevel() const JMP_THIS(0x487CB0);
+	constexpr void RadLevel_Increase(double amount) JMP_THIS(0x487CE0);
+	constexpr void RadLevel_Decrease(double amount) JMP_THIS(0x487D00);
 
 	// helper
-	bool ContainsBridge() const
-	{
-		return static_cast<bool>(this->Flags & CellFlags::BridgeHead);
-	}
-	bool ContainsBridgeEx() const
-	{
-		return static_cast<bool>(this->Flags & CellFlags::Bridge);
-	}
+	constexpr bool ContainsBridge() const { return static_cast<bool>(this->Flags & CellFlags::BridgeHead); }
+	constexpr bool ContainsBridgeEx() const { return static_cast<bool>(this->Flags & CellFlags::Bridge); }
 
 	// helper mimicking game's behaviour
-	ObjectClass* GetContent() const
-		{ return this->ContainsBridge() ? this->AltObject : this->FirstObject; }
-
-	int GetLevel() const
-		{ return this->Level + (this->ContainsBridge() ? BridgeLevels : 0); }
+	constexpr ObjectClass* GetContent() const { return this->ContainsBridge() ? this->AltObject : this->FirstObject; }
+	constexpr int GetLevel() const { return this->Level + (this->ContainsBridge() ? BridgeLevels : 0); }
 
 	// tilesets
 #define ISTILE(tileset, addr) \
-	bool Tile_Is_ ## tileset() const \
-		{ JMP_THIS(addr); }
+	constexpr bool Tile_Is_ ## tileset() const JMP_THIS(addr);
 
 	ISTILE(Tunnel, 0x484AB0);
 	ISTILE(Water, 0x485060);
@@ -395,7 +284,7 @@ public:
 	ISTILE(NotWater, 0x4867E0);
 	ISTILE(DestroyableCliff, 0x486900);
 
-	static CoordStruct Cell2Coord(const CellStruct &cell, int z = 0)
+	constexpr static CoordStruct Cell2Coord(CellStruct const& cell, int z = 0)
 	{
 		CoordStruct ret;
 		ret.X = cell.X * 256 + 128;
@@ -404,7 +293,7 @@ public:
 		return ret;
 	}
 
-	static CellStruct Coord2Cell(const CoordStruct &crd)
+	constexpr  static CellStruct Coord2Cell(CoordStruct const& crd)
 	{
 		CellStruct ret;
 		ret.X = static_cast<short>(crd.X / 256);
@@ -412,7 +301,7 @@ public:
 		return ret;
 	}
 
-	CoordStruct FixHeight(CoordStruct crd) const
+	constexpr CoordStruct FixHeight(CoordStruct crd) const
 	{
 		if (this->ContainsBridge())
 			crd.Z += BridgeHeight;
@@ -421,62 +310,36 @@ public:
 	}
 
 	// helper - gets coords and fixes height for bridge
-	CoordStruct GetCoordsWithBridge() const
+	constexpr  CoordStruct GetCoordsWithBridge() const
 	{
 		CoordStruct buffer = this->Center();
 		return FixHeight(buffer);
 	}
 
-	void MarkForRedraw()
-		{ JMP_THIS(0x486E70); }
+	constexpr  void MarkForRedraw() JMP_THIS(0x486E70);
 
-	void ChainReaction()
+	constexpr  void ChainReaction()
 	{
 		CellStruct* cell = &this->MapCoords;
 		SET_REG32(ecx, cell);
 		CALL(0x489270);
 	}
 
-	CoordStruct* FindInfantrySubposition(CoordStruct* pOutBuffer, const CoordStruct& coords, bool ignoreContents, bool alt, bool useCellCoords)
-		{ JMP_THIS(0x481180); }
+	CoordStruct* FindInfantrySubposition(const CoordStruct& coords, bool ignoreContents, bool alt, bool useCellCoords) JMP_THIS(0x481180);
 
-	CoordStruct FindInfantrySubposition(const CoordStruct& coords, bool ignoreContents, bool alt, bool useCellCoords)
-	{
-		CoordStruct outBuffer;
-		this->FindInfantrySubposition(&outBuffer, coords, ignoreContents, alt, useCellCoords);
-		return outBuffer;
-	}
+	constexpr bool TryAssignJumpjet(FootClass* pObject) JMP_THIS(0x487D70);
+	constexpr void AddContent(ObjectClass* Content, bool onBridge) JMP_THIS(0x47E8A0);
+	constexpr void RemoveContent(ObjectClass* pContent, bool onBridge) JMP_THIS(0x47EA90);
+	constexpr void ReplaceTag(TagClass* pTag) JMP_THIS(0x485250)
+	constexpr void UpdateCellLighting() JMP_THIS(0x484680); 
+	constexpr void CalculateLightSourceLighting(int& nIntensity, int& nAmbient, int& Red1, int& Green1, int& Blue1, int& Red2, int& Green2, int& Blue2) JMP_THIS(0x484180);
 
-	bool TryAssignJumpjet(FootClass* pObject)
-		{ JMP_THIS(0x487D70); }
+	constexpr void InitLightConvert(LightConvertClass* pDrawer = nullptr, int nIntensity = 0x10000,
+		int nAmbient = 0, int Red1 = 1000, int Green1 = 1000, int Blue1 = 1000) JMP_THIS(0x483E30);
 
-	void  AddContent(ObjectClass* Content, bool onBridge)
-		{ JMP_THIS(0x47E8A0); }
-
-	void  RemoveContent(ObjectClass* pContent, bool onBridge)
-		{ JMP_THIS(0x47EA90); }
-
-	void ReplaceTag(TagClass* pTag)
-		{ JMP_THIS(0x485250) }
-
-	void UpdateCellLighting()
-		{ JMP_THIS(0x484680); }
-
-	void CalculateLightSourceLighting(int& nIntensity, int& nAmbient, int& Red1, int& Green1, int& Blue1, int& Red2, int& Green2, int& Blue2)
-		{ JMP_THIS(0x484180); }
-
-	void InitLightConvert(LightConvertClass* pDrawer = nullptr, int nIntensity = 0x10000,
-		int nAmbient = 0, int Red1 = 1000, int Green1 = 1000, int Blue1 = 1000)
-		{ JMP_THIS(0x483E30); }
-
-	void DrawOverlay(const Point2D& Location, const RectangleStruct& Bound)
-		{ JMP_THIS(0x47F6A0); }
-
-	void DrawOverlayShadow(const Point2D& Location, const RectangleStruct& Bound)
-		{ JMP_THIS(0x47F510); }
-
-	bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, int zone, MovementZone movementZone, int level, bool isBridge)
-		{ JMP_THIS(0x4834A0); }
+	constexpr void DrawOverlay(const Point2D& Location, const RectangleStruct& Bound) JMP_THIS(0x47F6A0);
+	constexpr void DrawOverlayShadow(const Point2D& Location, const RectangleStruct& Bound) JMP_THIS(0x47F510);
+	constexpr bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, int zone, MovementZone movementZone, int level, bool isBridge) JMP_THIS(0x4834A0);
 
 protected:
 	/*! @brief FAKE CTOR */
