@@ -2,7 +2,6 @@
 
 #include "AbstractClass.h"
 
-//forward declarations
 class ObjectClass;
 class TechnoClass;
 class BuildingClass;
@@ -23,8 +22,24 @@ class PixelFXClass;
 class NOVTABLE CellClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Cell;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E4EEC;
+			this->IRTTITypeInfo = 0x7E4ED0;
+			this->INoticeSink = 0x7E4EC8;
+			this->INoticeSource = 0x7E4EC0;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E4EEC;
+	static constexpr AbstractType AbsID = AbstractType::Cell;
+	static constexpr size_t ClassSize = 0x148;
 
+public:
 	static constexpr int BridgeLevels = 4;
 
 	// the height of a bridge in leptons
@@ -464,12 +479,10 @@ public:
 		{ JMP_THIS(0x4834A0); }
 
 protected:
-	//Constructor
-	CellClass() noexcept
-		: CellClass(noinit_t())
-	{ JMP_THIS(0x47BBF0); }
-
-	explicit __forceinline CellClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
+	/*! @brief FAKE CTOR */
+	explicit __forceinline CellClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+public:
+	CellClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x47B360);
+	CellClass() : CellClass(fake_noinit_t{}) JMP_THIS(0x47BBF0);
 };
+static_assert(sizeof(CellClass) == CellClass::ClassSize);
