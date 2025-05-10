@@ -64,6 +64,16 @@ public:
 	void StartMission(ObjectClass* pTarget)
 		{ JMP_THIS(0x41D830); }
 
+	/*
+	bool Can_Strike(int32_t target) JMP_THIS(0x41D7E0);
+	void Detach(TechnoClass* arg0) JMP_THIS(0x41D540);
+	FootClass* Remove_Member(FootClass* a2) JMP_THIS(0x41DC80);
+	void Reset_Target() JMP_THIS(0x41DB40);
+	void Set_Target(TechnoClass* target) JMP_THIS(0x41DA20);
+	void Setup(TechnoClass* target) JMP_THIS(0x41D860);
+	void Setup_Target(TechnoClass* techno) JMP_THIS(0x41D830);
+	*/
+
 protected:
 	explicit __forceinline AirstrikeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
