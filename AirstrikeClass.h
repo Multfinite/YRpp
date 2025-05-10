@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
 //forward declarations
 class AircraftTypeClass;
@@ -13,7 +13,24 @@ class NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Airstrike;
-
+public:
+	int AirstrikeTeam;			//As in the INI files.
+	int EliteAirstrikeTeam;	//As in the INI files.
+	int AirstrikeTeamTypeIndex;	//As in the INI files.
+	int EliteAirstrikeTeamTypeIndex;	//As in the INI files.
+	DWORD unknown_34;
+	DWORD unknown_38;	//unused?
+	bool IsOnMission;	//Is the Aircraft on its way?
+	bool unknown_bool_3D;
+	DWORD TeamDissolveFrame;	//when was the last time this team was invoked and subsequently dissolved
+	int AirstrikeRechargeTime;	//As in the INI files.
+	int EliteAirstrikeRechargeTime;	//As in the INI files.
+	TechnoClass* Owner;		//The unit that called the Airstrike (usually Boris).
+	ObjectClass* Target;	//The Airstrike's target.
+	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
+	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
+	FootClass* FirstObject;
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -41,27 +58,4 @@ protected:
 	explicit __forceinline AirstrikeClass(noinit_t) noexcept
 		: AbstractClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	int AirstrikeTeam;			//As in the INI files.
-	int EliteAirstrikeTeam;	//As in the INI files.
-	int AirstrikeTeamTypeIndex;	//As in the INI files.
-	int EliteAirstrikeTeamTypeIndex;	//As in the INI files.
-	DWORD unknown_34;
-	DWORD unknown_38;	//unused?
-	bool IsOnMission;	//Is the Aircraft on its way?
-	bool unknown_bool_3D;
-	DWORD TeamDissolveFrame;	//when was the last time this team was invoked and subsequently dissolved
-	int AirstrikeRechargeTime;	//As in the INI files.
-	int EliteAirstrikeRechargeTime;	//As in the INI files.
-	TechnoClass* Owner;		//The unit that called the Airstrike (usually Boris).
-	ObjectClass* Target;	//The Airstrike's target.
-	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
-	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
-	FootClass* FirstObject;
 };
