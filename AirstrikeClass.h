@@ -12,7 +12,22 @@ class FootClass;
 class NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Airstrike;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E29A8;
+			this->IRTTITypeInfo = 0x7E298C;
+			this->INoticeSink = 0x7E2984;
+			this->INoticeSource = 0x7E297C;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E29A8;
+	static constexpr AbstractType AbsID = AbstractType::Airstrike;
+	static constexpr size_t ClassSize = 0x60;
 public:
 	int AirstrikeTeam;			//As in the INI files.
 	int EliteAirstrikeTeam;	//As in the INI files.
@@ -29,33 +44,30 @@ public:
 	ObjectClass* Target;	//The Airstrike's target.
 	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
 	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
+	// TeamPointer
 	FootClass* FirstObject;
 public:
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AirstrikeClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
+	// scalar: 0x41DD50
+	virtual ~AirstrikeClass() {}
+	
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x41D7A0);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x41D6F0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41D780);
+	
+	RTTIType KindOf() const override JMP_THIS(0x41DD40);
+	int SizeOf() const override JMP_THIS(0x41DD30);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41D6E0);
+	void AI() override JMP_THIS(0x41DC50);
 
 	//non-virtual
 	void StartMission(ObjectClass* pTarget)
 		{ JMP_THIS(0x41D830); }
 
-	//Constructor
-	AirstrikeClass(TechnoClass* pOwner) noexcept
-		: AirstrikeClass(noinit_t())
-	{ JMP_THIS(0x41D380); }
-
 protected:
-	explicit __forceinline AirstrikeClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
+	explicit __forceinline AirstrikeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+public:
+	AirstrikeClass(noinit_t) : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
+	AirstrikeClass(TechnoClass* pOwner) : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D380);
 };
+static_assert(sizeof(AirstrikeClass) == AirstrikeClass::ClassSize);
