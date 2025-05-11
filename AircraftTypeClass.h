@@ -20,6 +20,7 @@ public:
 public:
 	static const AbstractType AbsID = AbstractType::AircraftType;
 	static constexpr uintptr_t AbsVTable = 0x7E2868;
+	static constexpr size_t ClassSize = 0xE10;
 
 	ABSTRACTTYPE_ARRAY(AircraftTypeClass, 0xA8B218u);
 public:
@@ -63,3 +64,4 @@ public:
 	AircraftTypeClass(noinit_t) : AircraftTypeClass(fake_noinit_t{}) JMP_THIS(0x41C9F0);
 	AircraftTypeClass(const char* pId) : AircraftTypeClass(fake_noinit_t{}) JMP_THIS(0x41C8B0);
 };
+static_assert(sizeof(AircraftTypeClass) == AircraftTypeClass::ClassSize);
