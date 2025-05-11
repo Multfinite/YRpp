@@ -61,8 +61,7 @@ public:
 	void AI() override JMP_THIS(0x41DC50);
 
 	//non-virtual
-	void StartMission(ObjectClass* pTarget)
-		{ JMP_THIS(0x41D830); }
+	void StartMission(ObjectClass* pTarget) JMP_THIS(0x41D830);
 
 	/*
 	bool Can_Strike(int32_t target) JMP_THIS(0x41D7E0);
