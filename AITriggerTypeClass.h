@@ -67,16 +67,15 @@ public:
 public:
 	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x41E500);
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x41E540);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41E5C0);
+	RTTIType KindOf() const override JMP_THIS(0x41FFD0);
+	int SizeOf() const override JMP_THIS(0x41FFE0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41E5E0);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41F580);
+	bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x41FB10);
 
 	constexpr static bool LoadFromINIList(CCINIClass *pINI) JMP_STD(0x41F2E0);
 
