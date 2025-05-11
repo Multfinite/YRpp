@@ -24,6 +24,7 @@ public:
 	static inline vtables_t vtables{};
 public:
 	static const AbstractType AbsID = AbstractType::HouseType;
+	static constexpr uintptr_t AbsVTable = 0x7EAB58;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
@@ -103,7 +104,7 @@ public:
 	constexpr HouseTypeClass* FindParentCountry() const { return HouseTypeClass::Find(this->ParentCountry); }
 	constexpr int FindParentCountryIndex() const { return HouseTypeClass::FindIndexOfName(this->ParentCountry); }
 	constexpr static signed int __fastcall FindIndexOfName(const char* name) JMP_STD(0x5117D0);
-	constexpr static HouseTypeClass* __fastcall FindOrMake(const char* name) JMP_THIS(0x512680);
+	constexpr static HouseTypeClass* __fastcall FindOrMake(const char* name) JMP_STD(0x512680);
 
 protected:
 	explicit __forceinline HouseTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
