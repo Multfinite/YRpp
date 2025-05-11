@@ -170,4 +170,20 @@ protected:
 public:
 	AITriggerTypeClass(noinit_t) : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
 	AITriggerTypeClass(const char* pId) : AITriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x41E350);
+
+/*
+	bool Chronosphere_Near_Ready(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F180);
+	bool Enemy_Owns(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41EAF0);
+	bool Enemy_Red_Power(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F080);
+	bool Enemy_Yellow_Power(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F030);
+	AITriggerTypeClass* Find_Or_Make() JMP_THIS(0x41FCA0);
+	bool Iron_Curtain_Near_Ready(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F0D0);
+	bool Neutral_Owns(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41EC90);
+	int8_t New_Team(HouseClass* house1, HouseClass* house2, bool skip) JMP_THIS(0x41E720);
+	uint64_t Read_Scenario_INI() JMP_THIS(0x41F2E0);
+	void Set_Team_1(int32_t a2) JMP_THIS(0x41FD40);
+	void Set_Team_2(int32_t a2) JMP_THIS(0x41FD50);
+	int32_t Write_Scenario_INI() JMP_THIS(0x41F490);
+*/
+
 };
