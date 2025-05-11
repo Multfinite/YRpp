@@ -1,13 +1,10 @@
-/*
-	[AITriggerTypes]
-*/
-
 #pragma once
 
-#include <YRPP.h>
-#include <HouseTypeClass.h>
-#include <TeamTypeClass.h>
-#include <AbstractTypeClass.h>
+#include "YRPP.h"
+#include "HouseTypeClass.h"
+#include "TeamTypeClass.h"
+#include "AbstractTypeClass.h"
+#include "TechnoTypeClass.h"
 
 //forward declarations
 class TechnoTypeClass;
@@ -19,10 +16,27 @@ struct AITriggerConditionComparator
 	int ComparatorOperand;
 };
 
+/*!
+* @brief[AITriggerTypes]
+*/
 class NOVTABLE AITriggerTypeClass : public AbstractTypeClass
 {
 public:
+	using base_type = AbstractTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E2A50;
+			this->IRTTITypeInfo = 0x7E2A34;
+			this->INoticeSink = 0x7E2A2C;
+			this->INoticeSource = 0x7E2A24;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::AITriggerType;
+	static constexpr uintptr_t AbsVTable = 0x7E2A50;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
