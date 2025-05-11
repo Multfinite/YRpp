@@ -28,6 +28,7 @@ public:
 public:
 	static const AbstractType AbsID = AbstractType::Aircraft;
 	static constexpr uintptr_t AbsVTable = 0x7E22A4;
+	static constexpr size_t ClassSize = 0x6D8;
 
 	static constexpr constant_ptr<DynamicVectorClass<AircraftClass*>, 0xA8E390u> const Array{};
 public:
@@ -134,3 +135,4 @@ public:
 	AircraftClass(noinit_t) : FootClass(fake_noinit_t{}) { vtables.init(this); }
 	AircraftClass(AircraftTypeClass* type, HouseClass* owner) : AircraftClass(fake_noinit_t{}) JMP_THIS(0x413D20);
 };
+static_assert(sizeof(AircraftClass) == AircraftClass::ClassSize);
