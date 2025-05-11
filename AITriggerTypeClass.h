@@ -38,9 +38,33 @@ public:
 	static const AbstractType AbsID = AbstractType::AITriggerType;
 	static constexpr uintptr_t AbsVTable = 0x7E2A50;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
+public:
+	AITriggerCondition ConditionType;
+	int              IsGlobal;
+	AITriggerHouseType OwnerHouseType;
+	bool             IsEnabled;
+	int              HouseIndex;
+	int              SideIndex;
+	int              TechLevel;
+	int              unknown_B4;
+	double           Weight_Current;
+	double           Weight_Minimum;
+	double           Weight_Maximum;
+	bool             IsForSkirmish;
+	bool             IsForBaseDefense;
+	bool             Enabled_Easy;
+	bool             Enabled_Normal;
+	bool             Enabled_Hard;
+	TechnoTypeClass* ConditionObject;
+	TeamTypeClass* Team1;
+	TeamTypeClass* Team2;
+	AITriggerConditionComparator Conditions[4]; // don't ask
+	int              TimesExecuted;
+	int              TimesCompleted;
+	int              unknown_10C;
 
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -169,35 +193,5 @@ protected:
 	explicit __forceinline AITriggerTypeClass(noinit_t) noexcept
 		: AbstractTypeClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	AITriggerCondition ConditionType;
-	int              IsGlobal;
-	AITriggerHouseType OwnerHouseType;
-	bool             IsEnabled;
-	int              HouseIndex;
-	int              SideIndex;
-	int              TechLevel;
-	int              unknown_B4;
-	double           Weight_Current;
-	double           Weight_Minimum;
-	double           Weight_Maximum;
-	bool             IsForSkirmish;
-	bool             IsForBaseDefense;
-	bool             Enabled_Easy;
-	bool             Enabled_Normal;
-	bool             Enabled_Hard;
-	TechnoTypeClass* ConditionObject;
-	TeamTypeClass*   Team1;
-	TeamTypeClass*   Team2;
-	AITriggerConditionComparator Conditions [4]; // don't ask
-	int              TimesExecuted;
-	int              TimesCompleted;
-	int              unknown_10C;
 
 };
