@@ -65,15 +65,14 @@ public:
 	int              unknown_10C;
 
 public:
+	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
+
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AITriggerTypeClass() RX;
 
 	//AbstractClass
 	virtual RTTIType KindOf() const RT(AbstractType);
@@ -181,17 +180,11 @@ public:
 			this->Enabled_Normal,
 			this->Enabled_Hard
 		);
-
 	}
 
-	//Constructor
-	AITriggerTypeClass(const char* pID) noexcept
-		: AITriggerTypeClass(noinit_t())
-	{ JMP_THIS(0x41E350); }
-
 protected:
-	explicit __forceinline AITriggerTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
+	explicit __forceinline AITriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
+public:
+	AITriggerTypeClass(noinit_t) : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
+	AITriggerTypeClass(const char* pId) : AITriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x41E350);
 };
