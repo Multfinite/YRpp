@@ -83,19 +83,22 @@ public:
 	bool           SmartAI; //"smart"?
 	PROTECTED_PROPERTY(BYTE, padding_1A9[7]);
 public:
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
 	virtual ~HouseTypeClass() JMP_THIS(0x5116A0);
 
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
+	HRESULT QueryInterface(REFIID riid, void** ppvObject) override JMP_THIS(0x5125A0);
+	ULONG AddRef() override JMP_THIS(0x512740);
+	ULONG Release() override JMP_THIS(0x512750);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x512640);
+	HRESULT IsDirty() override JMP_THIS(0x512280);
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x512290);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x512480);
+	HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x512570);
+	
+	RTTIType KindOf() const override JMP_THIS(0x512710);
+	int SizeOf() const override JMP_THIS(0x512720);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x512170);
+	int ArrayIndex() const override JMP_THIS(0x512730);
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x511850);
 
 	//helpers
 	HouseTypeClass* FindParentCountry() const {
