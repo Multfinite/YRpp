@@ -77,14 +77,13 @@ public:
 	DECLARE_PROPERTY(AudioController, Audio4);
 
 public:
+	virtual ~AnimClass() JMP_THIS(0x4228E0);
+
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
 	//IPersistStream
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AnimClass() RX;
 
 	//AbstractClass
 	virtual void Detach(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
@@ -96,8 +95,7 @@ public:
 	virtual int AnimExtras() R0; // tumbling for IsMeteor and Bouncer anims
 	virtual int GetEnd() const R0; //End tag from the AnimType
 
-	void SetOwnerObject(ObjectClass *pOwner)
-		{ JMP_THIS(0x424B50); }
+	void SetOwnerObject(ObjectClass *pOwner) JMP_THIS(0x424B50);
 
 	void Pause() {
 		this->Paused = true;
@@ -115,6 +113,22 @@ public:
 
 	// Anim midpoint logic: particle spawning, smudges etc.
 	bool Middle() const JMP_THIS(0x424F00);
+
+/*
+	void Attach_To(ObjectClass * obj) JMP_THIS(0x424B50);
+	void Do_Atom_Damage(Cell * cell) JMP_THIS(0x4251F0);
+	void Flaming_Guy_AI() JMP_THIS(0x425670);
+	bool Flaming_Guy_Allowed(Cell * a2) JMP_THIS(0x4260F0);
+	int32_t Flaming_Guy_Coords(Coordinate * a2) JMP_THIS(0x425D10);
+	int32_t Init() JMP_THIS(0x4261D0);
+	void Middle() JMP_THIS(0x424F00);
+	void Power_Off() JMP_THIS(0x425260);
+	void Power_On() JMP_THIS(0x425270);
+	void Set_House(int32_t house) JMP_THIS(0x424CA0);
+	void Set_Projectile(int32_t a2) JMP_THIS(0x424C90);
+	void Start() JMP_THIS(0x424CE0);
+	void Stop_Attached_Anim() JMP_THIS(0x422B80);
+*/
 
 protected:
 	explicit __forceinline AnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
