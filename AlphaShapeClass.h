@@ -1,14 +1,13 @@
-/*
-	RadSites
-*/
-
 #pragma once
 
-#include <FileSystem.h>
-#include <AbstractClass.h>
+#include "FileSystem.h"
+#include "AbstractClass.h"
 
 class ObjectClass;
 
+/*!
+* @brief RadSites
+*/
 class NOVTABLE AlphaShapeClass : public AbstractClass
 {
 public:
@@ -16,7 +15,12 @@ public:
 
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<AlphaShapeClass*>, 0x88A0F0u> const Array{};
-
+public:
+	ObjectClass* AttachedTo;	//To which object is this AlphaShape attached?
+	RectangleStruct Rect;
+	SHPStruct* AlphaImage;
+	bool IsObjectGone;	//Set if AttachedTo is NULL.
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -40,15 +44,4 @@ protected:
 	explicit __forceinline AlphaShapeClass(noinit_t) noexcept
 		: AbstractClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	ObjectClass* AttachedTo;	//To which object is this AlphaShape attached?
-	RectangleStruct Rect;
-	SHPStruct* AlphaImage;
-	bool IsObjectGone;	//Set if AttachedTo is NULL.
 };
