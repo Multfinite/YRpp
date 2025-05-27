@@ -1,20 +1,18 @@
-/*
-	Animations
-*/
-
 #pragma once
 
-#include <ObjectClass.h>
-#include <AnimTypeClass.h>
-#include <BounceClass.h>
-#include <StageClass.h>
+#include "ObjectClass.h"
+#include "AnimTypeClass.h"
+#include "BounceClass.h"
+#include "StageClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class BulletClass;
 class HouseClass;
 class LightConvertClass;
 
+/*!
+* @brief Animations
+*/
 class NOVTABLE AnimClass : public ObjectClass
 {
 public:
@@ -23,6 +21,50 @@ public:
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<AnimClass*>, 0xA8E9A8u> const Array{};
 
+public:
+	DECLARE_PROPERTY(StageClass, Animation);
+	AnimTypeClass* Type; //The AnimType.
+	ObjectClass* OwnerObject; // set by AnimClass::SetOwnerObject (0x424B50)
+	DWORD unknown_D0;
+	LightConvertClass* LightConvert;	 //Palette?
+	int LightConvertIndex; // assert( (*ColorScheme::Array)[this->LightConvertIndex] == this->LightConvert ;
+	char PaletteName[0x20]; // filename set for destroy anims
+	int TintColor;
+	int ZAdjust;
+	int YSortAdjust; // same as YSortAdjust from Type
+	CoordStruct FlamingGuyCoords; // the destination the anim tries to reach
+	int FlamingGuyRetries; // number of failed attemts to reach water. the random destination generator stops if >= 7
+	bool IsBuildingAnim; // whether this anim will invalidate on buildings, and whether it's tintable
+	bool UnderTemporal; // temporal'd building's active anims
+	bool Paused; // if paused, does not advance anim, does not deliver damage
+	bool Unpaused; // set when unpaused
+	int PausedAnimFrame; // the animation value when paused
+	bool Reverse; // anim is forced to be played from end to start
+	DWORD unknown_124;
+	DECLARE_PROPERTY(BounceClass, Bounce);
+	BYTE TranslucencyLevel; // on a scale of 1 - 100
+	bool TimeToDie; // or something to that effect, set just before UnInit
+	BulletClass* AttachedBullet;
+	HouseClass* Owner; //Used for remap (AltPalette).
+	int LoopDelay; // randomized value, depending on RandomLoopDelay
+	double Accum; // Stores accumulated fractional animation damage and gets added to Type->Damage if at least 1.0 or above. Defaults to 1.0.
+	BlitterFlags AnimFlags; // argument that's 0x600 most of the time
+	bool HasExtras; // enables IsMeteor and Bouncer special behavior (AnimExtras)
+	byte RemainingIterations; // defaulted to deleteAfterIterations, when reaches zero, UnInit() is called
+	byte unknown_196;
+	byte unknown_197;
+	bool IsInert; // Not official name, only set to true on TActionClass-created animations and prevents sounds, damage and TiberiumChainReaction from working.
+	bool IsFogged;
+	bool FlamingGuyExpire; // finish animation and remove
+	bool UnableToContinue; // set when something prevents the anim from going on: cell occupied, veins destoyed or unit gone, ...
+	bool SkipProcessOnce; // set in constructor, cleared during Update. skips damage, veins, tiberium chain reaction and animation progress
+	bool Invisible; // don't draw, but Update state anyway
+	bool PowerOff; // powered animation has no power
+	PROTECTED_PROPERTY(BYTE, unused_19F);
+	DECLARE_PROPERTY(AudioController, Audio3);
+	DECLARE_PROPERTY(AudioController, Audio4);
+
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -75,52 +117,4 @@ protected:
 	explicit __forceinline AnimClass(noinit_t) noexcept
 		: ObjectClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	DECLARE_PROPERTY(StageClass, Animation);
-	AnimTypeClass* Type; //The AnimType.
-	ObjectClass * OwnerObject; // set by AnimClass::SetOwnerObject (0x424B50)
-	DWORD unknown_D0;
-	LightConvertClass* LightConvert;	 //Palette?
-	int LightConvertIndex; // assert( (*ColorScheme::Array)[this->LightConvertIndex] == this->LightConvert ;
-	char PaletteName[0x20]; // filename set for destroy anims
-	int TintColor;
-	int ZAdjust;
-	int YSortAdjust; // same as YSortAdjust from Type
-	CoordStruct FlamingGuyCoords; // the destination the anim tries to reach
-	int FlamingGuyRetries; // number of failed attemts to reach water. the random destination generator stops if >= 7
-	bool IsBuildingAnim; // whether this anim will invalidate on buildings, and whether it's tintable
-	bool UnderTemporal; // temporal'd building's active anims
-	bool Paused; // if paused, does not advance anim, does not deliver damage
-	bool Unpaused; // set when unpaused
-	int PausedAnimFrame; // the animation value when paused
-	bool Reverse; // anim is forced to be played from end to start
-	DWORD unknown_124;
-	DECLARE_PROPERTY(BounceClass, Bounce);
-	BYTE TranslucencyLevel; // on a scale of 1 - 100
-	bool TimeToDie; // or something to that effect, set just before UnInit
-	BulletClass* AttachedBullet;
-	HouseClass* Owner; //Used for remap (AltPalette).
-	int LoopDelay; // randomized value, depending on RandomLoopDelay
-	double Accum; // Stores accumulated fractional animation damage and gets added to Type->Damage if at least 1.0 or above. Defaults to 1.0.
-	BlitterFlags AnimFlags; // argument that's 0x600 most of the time
-	bool HasExtras; // enables IsMeteor and Bouncer special behavior (AnimExtras)
-	byte RemainingIterations; // defaulted to deleteAfterIterations, when reaches zero, UnInit() is called
-	byte unknown_196;
-	byte unknown_197;
-	bool IsInert; // Not official name, only set to true on TActionClass-created animations and prevents sounds, damage and TiberiumChainReaction from working.
-	bool IsFogged;
-	bool FlamingGuyExpire; // finish animation and remove
-	bool UnableToContinue; // set when something prevents the anim from going on: cell occupied, veins destoyed or unit gone, ...
-	bool SkipProcessOnce; // set in constructor, cleared during Update. skips damage, veins, tiberium chain reaction and animation progress
-	bool Invisible; // don't draw, but Update state anyway
-	bool PowerOff; // powered animation has no power
-	PROTECTED_PROPERTY(BYTE, unused_19F);
-	DECLARE_PROPERTY(AudioController, Audio3);
-	DECLARE_PROPERTY(AudioController, Audio4);
 };
