@@ -37,17 +37,22 @@ public:
 	// scalar: 0x421730
 	virtual ~AlphaShapeClass() {}
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x420D40);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x420DE0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x420E40);
+	
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x420E70);
+	RTTIType KindOf() const override JMP_THIS(0x420D80);
+	int SizeOf() const override JMP_THIS(0x420D90);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x420DA0);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
-
+	/*
+	void AI() JMP_THIS(0x420E90);
+	int32_t Blit(tagRECT* edx0) JMP_THIS(0x420F40);
+	int32_t Blit_Rect() JMP_THIS(0x421350);
+	uint32_t Init_Array() JMP_THIS(0x4216C0);
+	*/
 protected:
 	explicit __forceinline AlphaShapeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
