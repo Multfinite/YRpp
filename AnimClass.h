@@ -104,7 +104,17 @@ public:
 	bool Mark(MarkType value) override JMP_THIS(0x4238B0);
 	int Z() const override JMP_THIS(0x425630);
 
+	/*!
+	* @note original_name BounceAI
+	* @note vtable_index 122:0x1E8
+	* @note address 0x423930
+	*/
 	virtual int BounceAI() JMP_THIS(0x423930);
+	/*!
+	* @note original_name GetEnd
+	* @note vtable_index 123:0x1EC
+	* @note address 0x425510
+	*/
 	virtual int GetEndFrame() JMP_THIS(0x425510);
 
 	void SetOwnerObject(ObjectClass *pOwner) JMP_THIS(0x424B50);
