@@ -1,8 +1,6 @@
 #pragma once
 
-#include <YRPP.h>
-
-class BitFont;
+#include "BitFont.h"
 
 class BitText
 {
