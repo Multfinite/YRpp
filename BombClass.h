@@ -39,16 +39,12 @@ public:
 public:
 	virtual ~BombClass() JMP_THIS(0x438670);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x438B00);
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x438B40);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x438BD0);
+	RTTIType KindOf() const override JMP_THIS(0x4393E0);
+	int SizeOf() const override JMP_THIS(0x4393D0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x438A90);
 
 	void Detonate() JMP_THIS(0x438720); 
 	void Disarm() JMP_THIS(0x4389B0); 
