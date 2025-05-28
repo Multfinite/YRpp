@@ -1,59 +1,24 @@
-/*
-	AnimTypes are initialized by INI files.
-*/
-
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
-//forward declarations
 class OverlayTypeClass;
 class ParticleTypeClass;
 class WarheadTypeClass;
 
+/*!
+* @brief AnimTypes are initialized by INI files.
+*/
 class NOVTABLE AnimTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::AnimType;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(AnimTypeClass, 0x8B4150u);
 	static AnimTypeClass* __fastcall FindOrAllocate(const char* id)
 	{ JMP_STD(0x428B80); }
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
-
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
-
-	//AnimTypeClass
-	virtual SHPStruct* LoadImage() R0;
-	virtual void Load2DArt() RX;
-
-	//Destructor
-	virtual ~AnimTypeClass() RX;
-
-	//Constructor
-	AnimTypeClass(const char* pID) noexcept
-		: AnimTypeClass(noinit_t())
-	{ JMP_THIS(0x427530); }
-
-protected:
-	explicit __forceinline AnimTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 
 public:
-
 	int ArrayIndex;
 	int MiddleFrameIndex;
 	int MiddleFrameWidth;
@@ -124,4 +89,32 @@ public:
 	bool Shadow;
 	bool PsiWarning;
 	bool ShouldFogRemove;
+public:
+	//IPersist
+	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+
+	//AbstractClass
+	virtual RTTIType KindOf() const RT(AbstractType);
+	virtual int	SizeOf() const R0;
+
+	//ObjectTypeClass
+	virtual bool InstantiateAt(CellStruct* pMapCoords, HouseClass* pOwner) R0;
+	virtual ObjectClass* Instantiate(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
+
+	//AnimTypeClass
+	virtual SHPStruct* LoadImage() R0;
+	virtual void Load2DArt() RX;
+
+	//Destructor
+	virtual ~AnimTypeClass() RX;
+
+	//Constructor
+	AnimTypeClass(const char* pID) noexcept
+		: AnimTypeClass(noinit_t())
+	{ JMP_THIS(0x427530); }
+
+protected:
+	explicit __forceinline AnimTypeClass(noinit_t) noexcept
+		: ObjectTypeClass(noinit_t())
+	{ }
 };
