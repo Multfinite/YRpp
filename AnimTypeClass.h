@@ -12,7 +12,21 @@ class WarheadTypeClass;
 class NOVTABLE AnimTypeClass : public ObjectTypeClass
 {
 public:
+	using base_type = ObjectTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3608;
+			this->IRTTITypeInfo = 0x7E35EC;
+			this->INoticeSink = 0x7E35E4;
+			this->INoticeSource = 0x7E35DC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::AnimType;
+	static constexpr uintptr_t AbsVTable = 0x7E3608;
 
 	ABSTRACTTYPE_ARRAY(AnimTypeClass, 0x8B4150u);
 	static AnimTypeClass* __fastcall FindOrAllocate(const char* id)
@@ -90,6 +104,9 @@ public:
 	bool PsiWarning;
 	bool ShouldFogRemove;
 public:
+	// scalar 0x428EA0
+	virtual ~AnimTypeClass() RX;
+
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -105,16 +122,9 @@ public:
 	virtual SHPStruct* LoadImage() R0;
 	virtual void Load2DArt() RX;
 
-	//Destructor
-	virtual ~AnimTypeClass() RX;
-
-	//Constructor
-	AnimTypeClass(const char* pID) noexcept
-		: AnimTypeClass(noinit_t())
-	{ JMP_THIS(0x427530); }
-
 protected:
-	explicit __forceinline AnimTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
+	explicit __forceinline AnimTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
+public:
+	AnimTypeClass(noinit_t) : AnimTypeClass(fake_noinit_t{}) JMP_THIS(0x427850);
+	AnimTypeClass(const char* pId) : AnimTypeClass(fake_noinit_t{}) JMP_THIS(0x427530);
 };
