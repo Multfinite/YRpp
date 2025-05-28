@@ -1,9 +1,8 @@
 #pragma once
 
-#include <AbstractClass.h>
-#include <Audio.h>
+#include "AbstractClass.h"
+#include "Audio.h"
 
-//forward declarations
 class ObjectClass;
 class TechnoClass;
 class HouseClass;
@@ -12,7 +11,18 @@ class NOVTABLE BombClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Bomb;
-
+public:
+	TechnoClass* Owner;		//Most likely Ivan.
+	HouseClass* OwnerHouse;
+	ObjectClass* Target; // attaching to objects is possible, but it will never detonate
+	BOOL DeathBomb; // unused - if so, [General]CanDetonateDeathBomb applies instead of CanDetonateTimeBomb
+	int PlantingFrame;
+	int DetonationFrame;
+	AudioController Audio;
+	int TickSound;
+	BOOL ShouldPlayTickingSound; // seems so
+	bool Harmless; // (mostly) set to 0 on plant, 1 on detonation/removal ?
+public:
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -53,21 +63,4 @@ protected:
 	explicit __forceinline BombClass(noinit_t) noexcept
 		: AbstractClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	TechnoClass* Owner;		//Most likely Ivan.
-	HouseClass* OwnerHouse;
-	ObjectClass* Target; // attaching to objects is possible, but it will never detonate
-	BOOL DeathBomb; // unused - if so, [General]CanDetonateDeathBomb applies instead of CanDetonateTimeBomb
-	int PlantingFrame;
-	int DetonationFrame;
-	AudioController Audio;
-	int TickSound;
-	BOOL ShouldPlayTickingSound; // seems so
-	bool Harmless; // (mostly) set to 0 on plant, 1 on detonation/removal ?
 };
