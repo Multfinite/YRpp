@@ -122,6 +122,11 @@ public:
 	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x428E90);
 	SHPStruct* GetImage() const override JMP_THIS(0x428C30);
 	
+	/*!
+	* @note original_name Load2DArt
+	* @note vtable_index 40:0xA0
+	* @note address 0x427B50
+	*/
 	virtual void Load2DArt() JMP_THIS(0x427B50);
 
 /*
