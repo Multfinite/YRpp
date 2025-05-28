@@ -79,21 +79,33 @@ public:
 public:
 	virtual ~AnimClass() JMP_THIS(0x4228E0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x426540);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x425280);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4253B0);
+	
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x425150);
+	RTTIType KindOf() const override JMP_THIS(0x426580);
+	int SizeOf() const override JMP_THIS(0x426530);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x425410);
+	Coordinate Center() const override JMP_THIS(0x422BE0);
+	void AI() override JMP_THIS(0x423AC0);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	Layer InWhichLayer() const override JMP_THIS(0x424CB0);
+	ObjectTypeClass* Type() const override JMP_THIS(0x425520);
+	int YSort() const override JMP_THIS(0x422BC0);
+	 bool Limbo() override JMP_THIS(0x425530);
+	void MarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426270);
+	void UnmarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426300);
+	void UnInit() override JMP_THIS(0x4255B0);
+	bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x422C70);
+	CellStruct const* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x4238D0);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x422CA0);
+	bool Mark(MarkType value) override JMP_THIS(0x4238B0);
+	int Z() const override JMP_THIS(0x425630);
 
-	//AbstractClass
-	virtual void Detach(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
-
-	//ObjectClass
-	//AnimClass
-	virtual int AnimExtras() R0; // tumbling for IsMeteor and Bouncer anims
-	virtual int GetEnd() const R0; //End tag from the AnimType
+	virtual int BounceAI() JMP_THIS(0x423930);
+	virtual int GetEndFrame() JMP_THIS(0x425510);
 
 	void SetOwnerObject(ObjectClass *pOwner) JMP_THIS(0x424B50);
 
