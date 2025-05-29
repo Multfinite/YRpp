@@ -6,7 +6,23 @@
 class NOVTABLE BuildingLightClass : public ObjectClass
 {
 public:
+	using base_type = ObjectClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3AD0;
+			this->IRTTITypeInfo = 0x7E3AB4;
+			this->INoticeSink = 0x7E3AAC;
+			this->INoticeSource = 0x7E3AA4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static const AbstractType AbsID = AbstractType::BuildingLight;
+	static constexpr uintptr_t AbsVTable = 0x7E3AD0;
+public:
+	static constexpr constant_ptr<DynamicVectorClass<BuildingLightClass*>, 0x8B4190u> const Array{};
 public:
 	double Speed;
 	CoordStruct field_B8;
@@ -17,8 +33,7 @@ public:
 	ObjectClass* FollowingObject;
 	TechnoClass* OwnerObject;
 public:
-	//Static
-	static constexpr constant_ptr<DynamicVectorClass<BuildingLightClass*>, 0x8B4190u> const Array{};
+	virtual ~BuildingLightClass() JMP_THIS(0x435B50);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -30,20 +45,12 @@ public:
 	virtual RTTIType KindOf() const RT(AbstractType);
 	virtual int	SizeOf() const R0;
 
-	//Destructor
-	virtual ~BuildingLightClass() RX;
-
 	// non-virtual
-	void SetBehaviour(SpotlightBehaviour mode)
-		{ JMP_THIS(0x436BE0); }
-
-	//Constructor
-	BuildingLightClass(ObjectClass* pOwner) noexcept
-		: BuildingLightClass(noinit_t())
-	{ JMP_THIS(0x435820); }
+	void SetBehaviour(SpotlightBehaviour mode) JMP_THIS(0x436BE0);
 
 protected:
-	explicit __forceinline BuildingLightClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
+	explicit __forceinline BuildingLightClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
+public:
+	BuildingLightClass(noinit_t) : BuildingLightClass(fake_noinit_t{}) { vtables.init(this); }
+	BuildingLightClass(ObjectClass* pOwner) : BuildingLightClass(fake_noinit_t{}) JMP_THIS(0x435820);
 };
