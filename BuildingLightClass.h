@@ -1,13 +1,22 @@
 #pragma once
 
-#include <GeneralStructures.h>
-#include <ObjectClass.h>
+#include "GeneralStructures.h"
+#include "ObjectClass.h"
 
 class NOVTABLE BuildingLightClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::BuildingLight;
-
+public:
+	double Speed;
+	CoordStruct field_B8;
+	CoordStruct field_C4;
+	double Acceleration;
+	bool Direction;
+	SpotlightBehaviour BehaviourMode;
+	ObjectClass* FollowingObject;
+	TechnoClass* OwnerObject;
+public:
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<BuildingLightClass*>, 0x8B4190u> const Array{};
 
@@ -37,19 +46,4 @@ protected:
 	explicit __forceinline BuildingLightClass(noinit_t) noexcept
 		: ObjectClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	double Speed;
-	CoordStruct field_B8;
-	CoordStruct field_C4;
-	double Acceleration;
-	bool Direction;
-	SpotlightBehaviour BehaviourMode;
-	ObjectClass * FollowingObject;
-	TechnoClass * OwnerObject;
 };
