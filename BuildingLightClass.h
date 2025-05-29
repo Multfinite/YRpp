@@ -34,19 +34,27 @@ public:
 	TechnoClass* OwnerObject;
 public:
 	virtual ~BuildingLightClass() JMP_THIS(0x435B50);
+	
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x436910);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x436950);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4369C0);
+	
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x436A00);
+	RTTIType KindOf() const override JMP_THIS(0x4370B0);
+	int SizeOf() const override JMP_THIS(0x436900);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x436F40);
+	void AI() override JMP_THIS(0x4361D0);
+	
+	Layer InWhichLayer() const override JMP_THIS(0x4369F0);
+	ObjectTypeClass* Type() const override JMP_THIS(0x4369E0);
+	bool Limbo() override JMP_THIS(0x437030);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x437050);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x435BE0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int	SizeOf() const R0;
-
-	// non-virtual
 	void SetBehaviour(SpotlightBehaviour mode) JMP_THIS(0x436BE0);
+	int32_t MovementRadius() JMP_THIS(0x436E80);
+	int32_t SpotlightRadius() JMP_THIS(0x436DA0);
 
 protected:
 	explicit __forceinline BuildingLightClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
