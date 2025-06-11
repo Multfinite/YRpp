@@ -1,12 +1,7 @@
-/*
-	Projectiles
-*/
-
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class BulletClass;
 class ColorScheme;
@@ -24,6 +19,52 @@ public:
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);
 	static BulletTypeClass* __fastcall FindOrAllocate(const char* id)
 	{ JMP_STD(0x46C790); }
+public:
+	bool Airburst;
+	bool Floater;
+	bool SubjectToCliffs;
+	bool SubjectToElevation;
+	bool SubjectToWalls;
+	bool VeryHigh;
+	bool Shadow;
+	bool Arcing;
+	bool Dropping;
+	bool Level;
+	bool Inviso;
+	bool Proximity;
+	bool Ranged;
+	// actually has opposite meaning of Rotates. false means Rotates=yes.
+	bool NoRotate;
+	bool Inaccurate;
+	bool FlakScatter;
+	bool AA;
+	bool AG;
+	bool Degenerates;
+	bool Bouncy;
+	bool AnimPalette;
+	bool FirersPalette;
+	int Cluster;
+	WeaponTypeClass* AirburstWeapon;
+	WeaponTypeClass* ShrapnelWeapon;
+	int ShrapnelCount;
+	int DetonationAltitude;
+	bool Vertical;
+	double Elasticity;
+	int Acceleration;
+	ColorScheme* Color;
+	AnimTypeClass* Trailer;
+	int ROT;
+	int CourseLockDuration;
+	int SpawnDelay;
+	int ScaledSpawnDelay;
+	bool Scalable;
+	int Arm;
+	byte AnimLow;
+	byte AnimHigh;
+	byte AnimRate;
+	bool Flat;
+public:
+
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
@@ -66,53 +107,4 @@ protected:
 	explicit __forceinline BulletTypeClass(noinit_t) noexcept
 		: ObjectTypeClass(noinit_t())
 	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	bool Airburst;
-	bool Floater;
-	bool SubjectToCliffs;
-	bool SubjectToElevation;
-	bool SubjectToWalls;
-	bool VeryHigh;
-	bool Shadow;
-	bool Arcing;
-	bool Dropping;
-	bool Level;
-	bool Inviso;
-	bool Proximity;
-	bool Ranged;
-	bool NoRotate; // actually has opposite meaning of Rotates. false means Rotates=yes.
-	bool Inaccurate;
-	bool FlakScatter;
-	bool AA;
-	bool AG;
-	bool Degenerates;
-	bool Bouncy;
-	bool AnimPalette;
-	bool FirersPalette;
-	int Cluster;
-	WeaponTypeClass* AirburstWeapon;
-	WeaponTypeClass* ShrapnelWeapon;
-	int ShrapnelCount;
-	int DetonationAltitude;
-	bool Vertical;
-	double Elasticity;
-	int Acceleration;
-	ColorScheme* Color;
-	AnimTypeClass* Trailer;
-	int ROT;
-	int CourseLockDuration;
-	int SpawnDelay;
-	int ScaledSpawnDelay;
-	bool Scalable;
-	int Arm;
-	byte AnimLow;
-	byte AnimHigh;
-	byte AnimRate;
-	bool Flat;
 };
