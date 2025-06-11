@@ -79,17 +79,20 @@ public:
 public:
 	virtual ~BulletTypeClass() JMP_THIS(0x46BE10);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//AbstractTypeClass
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* owner) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x46C750);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x46C6A0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x46C730);
+	
+	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x46C820);
+	RTTIType KindOf() const override JMP_THIS(0x46C850);
+	int SizeOf() const override JMP_THIS(0x46C860);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x46C560);
+	
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46BEE0);
+	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x46C4F0);
+	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
+	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x46C880);
 
 	bool Rotates() const { return !this->NoRotate; }
 
@@ -104,8 +107,13 @@ public:
 		int Damage,
 		WarheadTypeClass *WH,
 		int Speed,
-		bool Bright)
-		{ JMP_STD(0x46B050); }
+		bool Bright) JMP_STD(0x46B050);
+
+/*
+		int32_t From_Name() JMP_THIS(0x46C440);
+		int8_t * Name_From() JMP_THIS(0x46C4D0);
+		void Set_Scaled_Spawn_Delay(int32_t scaled_spawn_delay) JMP_THIS(0x46C840);
+*/
 
 protected:
 	explicit __forceinline BulletTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
