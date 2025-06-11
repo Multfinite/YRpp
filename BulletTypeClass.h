@@ -13,7 +13,7 @@ class WarheadTypeClass;
 class NOVTABLE BulletTypeClass : public ObjectTypeClass
 {
 public:
-	using base_type = AbstractTypeClass;
+	using base_type = ObjectTypeClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		constexpr vtables_t() noexcept : base_type::vtables_t()
