@@ -49,7 +49,7 @@ public:
     int OverloadDamageDelay;
 
 public:
-    virtual ~CaptureManagerClass() JMP_THIS(0x4729C0);
+    virtual ~CaptureManagerClass() JMP_THIS(0x4719A0);
 
     HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x472960);
 
