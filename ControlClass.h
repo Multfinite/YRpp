@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GadgetClass.h>
+#include "GadgetClass.h"
 
 class NOVTABLE ControlClass : public GadgetClass
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GeneralStructures.h>
+#include "GeneralStructures.h"
 
 class CellSpread
 {

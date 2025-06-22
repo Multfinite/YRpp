@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ListClass.h>
+#include "ListClass.h"
 
 class NOVTABLE ColorListClass : public ListClass
 {

@@ -14,8 +14,8 @@
 
 #pragma once
 
-#include <ArrayClasses.h>
-#include <Randomizer.h>
+#include "ArrayClasses.h"
+#include "Randomizer.h"
 
 #include <utility>
 
