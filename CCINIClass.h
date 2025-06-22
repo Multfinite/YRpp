@@ -1,11 +1,11 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <GenericList.h>
-#include <ArrayClasses.h>
-#include <CCFileClass.h>
-#include <IndexClass.h>
-#include <Helpers/CompileTime.h>
+#include "YRPPCore.h"
+#include "GenericList.h"
+#include "ArrayClasses.h"
+#include "CCFileClass.h"
+#include "IndexClass.h"
+#include "Helpers/CompileTime.h"
 
 struct ColorStruct;
 class TechnoTypeClass;
