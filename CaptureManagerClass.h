@@ -1,7 +1,3 @@
-/*
-	CaptureManager - used for mind control.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -11,86 +7,91 @@ class TechnoClass;
 
 struct ControlNode
 {
-	explicit ControlNode() noexcept { }
+    explicit ControlNode() noexcept {}
 
-	TechnoClass* Unit;
-	HouseClass* OriginalOwner;
-	DECLARE_PROPERTY(CDTimerClass, LinkDrawTimer);
+    TechnoClass* Unit;
+    HouseClass* OriginalOwner;
+    DECLARE_PROPERTY(CDTimerClass, LinkDrawTimer);
 };
 
+/*!
+* @brief CaptureManager - used for mind control.
+*/
 class NOVTABLE CaptureManagerClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::CaptureManager;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7E4B40;
+            this->IRTTITypeInfo = 0x7E4B24;
+            this->INoticeSink = 0x7E4B1C;
+            this->INoticeSource = 0x7E4B14;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//Static
-	static constexpr constant_ptr<DynamicVectorClass<CaptureManagerClass*>, 0x89E0F0u> const Array{};
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~CaptureManagerClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//non-virtual
-	bool CaptureUnit(TechnoClass* pUnit)
-		{ JMP_THIS(0x471D40); }
-	bool FreeUnit(TechnoClass* pUnit)
-		{ JMP_THIS(0x471FF0); }
-	void FreeAll()
-		{ JMP_THIS(0x472140); }
-
-	int NumControlNodes() const
-		{ return ControlNodes.Count; }
-
-	bool CanCapture(TechnoClass *Target) const
-		{ JMP_THIS(0x471C90); }
-	bool CannotControlAnyMore() const
-		{ JMP_THIS(0x4722A0); }
-	bool IsControllingSomething() const
-		{ JMP_THIS(0x4722C0); }
-	bool IsOverloading(bool *wasDamageApplied) const
-		{ JMP_THIS(0x4726C0); }
-	void HandleOverload()
-		{ JMP_THIS(0x471A50); }
-	bool NeedsToDrawLinks() const
-		{ JMP_THIS(0x472640); }
-	bool DrawLinks()
-		{ JMP_THIS(0x472160); }
-	void DecideUnitFate(TechnoClass *Unit)
-		{ JMP_THIS(0x4723B0); }
-	HouseClass* GetOriginalOwner(TechnoClass *Unit) const
-		{ JMP_THIS(0x4722F0); }
-
-	//Constructor
-	CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
-		: CaptureManagerClass(noinit_t())
-	{ JMP_THIS(0x4717D0); }
-
-protected:
-	explicit __forceinline CaptureManagerClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::CaptureManager;
+    static constexpr uintptr_t AbsVTable = 0x7E4B40;
+    static constexpr size_t ClassSize = 0x50;
 
 public:
+    static constexpr constant_ptr<DynamicVectorClass<CaptureManagerClass*>, 0x89E0F0u> const Array{};
 
-	DynamicVectorClass<ControlNode*> ControlNodes;
-	int MaxControlNodes;
-	bool InfiniteMindControl;
-	bool OverloadDeathSoundPlayed; // Has the mind control death sound played already?
-	int OverloadPipState; // Used to create the red overloading pip by returning true in IsOverloading's wasDamageApplied for 10 frames.
-	TechnoClass* Owner;
-	int OverloadDamageDelay; // Decremented every frame. If it reaches zero, OverloadDamage is applied.
+public:
+    DynamicVectorClass<ControlNode*> ControlNodes;
+    int MaxControlNodes;
+    bool InfiniteMindControl;
+    bool OverloadDeathSoundPlayed;
+    int OverloadPipState;
+    TechnoClass* Owner;
+    int OverloadDamageDelay;
+
+public:
+    virtual ~CaptureManagerClass() JMP_THIS(0x4729C0);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x472960);
+
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x472720);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4728E0);
+    
+    RTTIType KindOf() const override JMP_THIS(0x4729B0);
+    int SizeOf() const override JMP_THIS(0x4729A0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4726F0);
+
+    bool CaptureUnit(TechnoClass* pUnit) JMP_THIS(0x471D40);
+    bool FreeUnit(TechnoClass* pUnit) JMP_THIS(0x471FF0);
+    void FreeAll() JMP_THIS(0x472140);
+    int NumControlNodes() const JMP_THIS(0x4722D0);
+    bool CanCapture(TechnoClass* Target) const JMP_THIS(0x471C90);
+    bool CannotControlAnyMore() const JMP_THIS(0x4722A0);
+    bool IsControllingSomething() const JMP_THIS(0x4722C0);
+    bool IsOverloading(bool* wasDamageApplied) const JMP_THIS(0x4726C0);
+    void HandleOverload() JMP_THIS(0x471A50);
+    bool NeedsToDrawLinks() const JMP_THIS(0x472640);
+    bool DrawLinks() JMP_THIS(0x472160);
+    /*! @brief AI_Capture */
+    void DecideUnitFate(TechnoClass* Unit) JMP_THIS(0x4723B0);
+    HouseClass* GetOriginalOwner(TechnoClass* Unit) const JMP_THIS(0x4722F0);
+/*
+    int32_t Can_Control_Only_One() JMP_THIS(0x4722E0);
+    int8_t Detach(int32_t a2) JMP_THIS(0x471F90);
+    HouseClass* GetOriginalOwner(int32_t a2) JMP_THIS(0x4722F0);
+    bool Set_Owner_To_Civilian(TechnoClass* techno) JMP_THIS(0x472330);
+*/
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline CaptureManagerClass(fake_noinit_t) noexcept
+        : AbstractClass(fake_noinit_t())
+    { }
+
+public:
+    CaptureManagerClass(noinit_t) : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(00471950);
+    CaptureManagerClass() : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471890);
+    CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
+        : CaptureManagerClass(fake_noinit_t{})
+    JMP_THIS(0x4717D0);
 };
+static_assert(sizeof(CaptureManagerClass) == CaptureManagerClass::ClassSize);
