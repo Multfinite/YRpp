@@ -1,9 +1,10 @@
 #pragma once
 
-#include <GScreenClass.h>
-#include <ArrayClasses.h>
-#include <CellClass.h>
-#include <AnimTypeClass.h>
+#include "GScreenClass.h"
+#include "ArrayClasses.h"
+#include "CellClass.h"
+#include "AnimTypeClass.h"
+#include "Timer.h"
 
 class BulletTypeClass;
 class ObjectClass;
