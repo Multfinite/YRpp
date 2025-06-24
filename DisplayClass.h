@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MapClass.h>
+#include "MapClass.h"
 
 class CCINIClass;
 class ObjectTypeClass;
