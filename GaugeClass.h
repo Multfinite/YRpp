@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ControlClass.h>
+#include "ControlClass.h"
 
 class NOVTABLE GaugeClass : public ControlClass
 {
