@@ -2,6 +2,8 @@
 
 #include "EditClass.h"
 #include "ListClass.h"
+#include "FileFormats/SHP.h"
+#include "ShapeButtonClass.h"
 
 class NOVTABLE DropListClass : public EditClass
 {
