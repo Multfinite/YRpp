@@ -1,6 +1,6 @@
 #pragma once
 
-#include <LinkClass.h>
+#include "LinkClass.h"
 
 enum class KeyModifier : int
 {
