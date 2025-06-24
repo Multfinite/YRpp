@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <YRPPCore.h>
+#include "GeneralDefinitions.h"
+#include "YRPPCore.h"
 
 class LinkClass
 {
