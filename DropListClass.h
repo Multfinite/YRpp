@@ -1,7 +1,7 @@
 #pragma once
 
-#include <EditClass.h>
-#include <ListClass.h>
+#include "EditClass.h"
+#include "ListClass.h"
 
 class NOVTABLE DropListClass : public EditClass
 {
