@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Memory.h>
+#include <functional>
 
 template<typename T, typename Pr = std::less<T>>
 class PriorityQueueClass

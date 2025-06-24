@@ -1,6 +1,9 @@
 #pragma once
 #include <windows.h>
 #include <Memory.h>
+
+#include "ASMMacros.h"
+
 #pragma pack(push, 1)
 
 class FieldClass

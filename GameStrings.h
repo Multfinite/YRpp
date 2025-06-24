@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 #ifndef GAMEMD_STRING
 #define GAMEMD_STRING(name,addr)\

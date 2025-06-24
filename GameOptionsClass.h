@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ASMMacros.h>
-#include <Helpers/CompileTime.h>
+#include "ASMMacros.h"
+#include "Helpers/CompileTime.h"
 
 class GameOptionsClass
 {

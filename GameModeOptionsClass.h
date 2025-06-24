@@ -2,7 +2,7 @@
 
 #include <wchar.h>
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class StartingSlotClass;
 

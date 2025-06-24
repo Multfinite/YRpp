@@ -1,8 +1,8 @@
 #pragma once
 
-#include <GameOptionsClass.h>
-
-#include <Helpers/CompileTime.h>
+#include "GameOptionsClass.h"
+#include "Helpers/CompileTime.h"
+#include "YRPPCore.h"
 
 class InputManagerClass {
 public:

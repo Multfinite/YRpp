@@ -1,6 +1,6 @@
 #pragma once
 
-#include <YRPP.h>
+#include "YRPPCore.h"
 
 class DSurface;
 class INIClass;

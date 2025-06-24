@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
 class NOVTABLE SideClass : public AbstractTypeClass
 {

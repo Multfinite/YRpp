@@ -1,9 +1,9 @@
 #pragma once
 
-#include <ArrayClasses.h>
-#include <GeneralDefinitions.h>
-#include <CCFileClass.h>
-#include <Helpers/CompileTime.h>
+#include "ArrayClasses.h"
+#include "GeneralDefinitions.h"
+#include "CCFileClass.h"
+#include "Helpers/CompileTime.h"
 
 struct TacticalSelectableStruct;
 class SideClass;

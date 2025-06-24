@@ -12,10 +12,10 @@ NOTE:
 
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <MPTeams.h>
-#include <Wstring.h>
-#include <ArrayClasses.h>
+#include "GeneralDefinitions.h"
+#include "MPTeams.h"
+#include "Wstring.h"
+#include "ArrayClasses.h"
 
 //forward declarations
 class HouseClass;

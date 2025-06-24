@@ -1,8 +1,8 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <ArrayClasses.h>
-#include <Helpers/String.h>
+#include "GeneralDefinitions.h"
+#include "ArrayClasses.h"
+#include "Helpers/String.h"
 
 class FileEntryClass {
 public:

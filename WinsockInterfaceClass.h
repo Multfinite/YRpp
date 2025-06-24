@@ -1,7 +1,7 @@
 #pragma once
-#include <YRPPCore.h>
-#include <ArrayClasses.h>
-#include <Helpers/CompileTime.h>
+#include "YRPPCore.h"
+#include "ArrayClasses.h"
+#include "Helpers/CompileTime.h"
 
 struct __declspec(align(4)) WinsockBufferType
 {

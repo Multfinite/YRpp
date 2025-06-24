@@ -1,10 +1,10 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <Randomizer.h>
-#include <ArrayClasses.h>
-#include <TechnoTypeClass.h>
-#include <Helpers/CompileTime.h>
+#include "GeneralDefinitions.h"
+#include "Randomizer.h"
+#include "ArrayClasses.h"
+#include "TechnoTypeClass.h"
+#include "Helpers/CompileTime.h"
 
 class INIClass;
 

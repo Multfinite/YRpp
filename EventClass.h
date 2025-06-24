@@ -1,8 +1,9 @@
 #pragma once
 
-#include <ScenarioClass.h>
-#include <TargetClass.h>
-#include <Unsorted.h>
+#include "ScenarioClass.h"
+#include "TargetClass.h"
+#include "Unsorted.h"
+#include "GeneralDefinitions.h"
 
 #pragma pack(push, 1)
 

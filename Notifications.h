@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ArrayClasses.h>
+#include "ArrayClasses.h"
+#include "GeneralStructures.h"
 
 class AbstractClass;
 
