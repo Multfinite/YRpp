@@ -1,8 +1,8 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <Interfaces.h>
-#include <Helpers/CompileTime.h>
+#include "YRPPCore.h"
+#include "Interfaces.h"
+#include "Helpers/CompileTime.h"
 
 class DSurface;
 struct RectangleStruct;
