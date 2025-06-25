@@ -10,6 +10,23 @@
 class LocomotionClass : public IPersistStream, public ILocomotion
 {
 public:
+	/*!
+	* @brief use only for setting virtual tables in missing noinit ctors
+	*/
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t
+	{
+		uintptr_t IPersistStream;
+		uintptr_t ILocomotion;
+
+		constexpr vtables_t() noexcept :
+			IPersistStream(0x7EAEC0)
+			, ILocomotion(0x7EADF4)
+		{}
+
+		constexpr void init(AbstractClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
 	class CLSIDs
 	{
 	public:
@@ -25,6 +42,13 @@ public:
 		static constexpr reference<CLSID const, 0x7E9AC0u> const Jumpjet {};
 		static constexpr reference<CLSID const, 0x7E9AD0u> const Rocket {};
 	};
+public:
+	FootClass* Owner;
+	FootClass* LinkedTo;
+	bool Powered;
+	bool Dirty;
+	int RefCount;
+public:
 
 	//IUnknown
 	virtual HRESULT __stdcall QueryInterface(REFIID iid, LPVOID* ppvObject) { JMP_STD(0x55A9B0); }
@@ -163,15 +187,6 @@ public:
 
 protected:
 	explicit __forceinline LocomotionClass(noinit_t) noexcept { }
-
-	//Properties
-public:
-
-	FootClass* Owner;
-	FootClass* LinkedTo;
-	bool Powered;
-	bool Dirty;
-	int RefCount;
 };
 
 namespace detail
