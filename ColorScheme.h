@@ -1,7 +1,3 @@
-/*
-	[Colors]
-*/
-
 #pragma once
 
 #include "ArrayClasses.h"
@@ -12,6 +8,9 @@
 
 class LightConvertClass;
 
+/*!
+* @brief [Colors]
+*/
 class ColorScheme
 {
 public:
@@ -30,9 +29,20 @@ public:
 
 	//global array
 	static constexpr constant_ptr<DynamicVectorClass<ColorScheme*>, 0xB054D0u> const Array{};
-/*
- * trap! most schemes are duplicated - ShadeCount 1 and ShadeCount 53
-*/
+public:
+	int ArrayIndex; // this is off by one (always one higher than the actual index). that's because consistency and reason suck.
+	BytePalette Colors;
+	char* ID;
+	ColorStruct BaseColor;
+	LightConvertClass* LightConvert;	//??? remap - indices #16-#31 are changed to mathefuckikally derived shades of BaseColor, think unittem.pal
+	int   ShadeCount;
+	PROTECTED_PROPERTY(BYTE, unknown_314[0x1C]);
+	int   MainShadeIndex;
+	PROTECTED_PROPERTY(BYTE, unknown_334[0x8]);
+public:
+	/*!
+	 * @brief trap! most schemes are duplicated - ShadeCount 1 and ShadeCount 53
+	*/
 	static ColorScheme* Find(const char* pID, int ShadeCount = 1) {
 		int index = FindIndex(pID, ShadeCount);
 		return Array->GetItemOrDefault(index);
@@ -50,41 +60,21 @@ public:
 		return -1;
 	}
 
-	static ColorScheme * __fastcall FindByName(const char* pID, const ColorStruct &BaseColor, const BytePalette &Pal1, const BytePalette &Pal2, int ShadeCount)
-		{ JMP_THIS(0x68C9C0); }
-
-	static int __fastcall GetNumberOfSchemes()
-		{ JMP_STD(0x626C60); }
-
-	static DynamicVectorClass<ColorScheme*>* __fastcall GeneratePalette(char* name)
-		{ JMP_STD(0x6263D0); }
+	static ColorScheme * __fastcall FindByName(
+		 const char* pID, const ColorStruct &BaseColor
+		, const BytePalette &Pal1, const BytePalette &Pal2, int ShadeCount)
+		JMP_THIS(0x68C9C0);
+	static int __fastcall GetNumberOfSchemes() JMP_STD(0x626C60); 
+	static DynamicVectorClass<ColorScheme*>* __fastcall GeneratePalette(char* name) JMP_STD(0x6263D0);
 
 	// Game uses a hash table to store color scheme vectors for extra palettes, this table can be iterated by calling this function.
-	static DynamicVectorClass<ColorScheme*>* __fastcall GetPaletteSchemesFromIterator(HashIterator* it)
-		{ JMP_STD(0x626690); }
+	static DynamicVectorClass<ColorScheme*>* __fastcall GetPaletteSchemesFromIterator(HashIterator* it) JMP_STD(0x626690);
 
-	//Constructor, Destructor
-	ColorScheme(const char* pID, const ColorStruct &BaseColor, const BytePalette &Pal1, const BytePalette &Pal2, int ShadeCount, bool AddToArray)
-		{ JMP_THIS(0x68C710); }
+	ColorScheme(
+		  const char* pID, const ColorStruct &BaseColor
+		, const BytePalette &Pal1, const BytePalette &Pal2
+		, int ShadeCount, bool AddToArray)
+	JMP_THIS(0x68C710);
 
-	~ColorScheme()
-		{ JMP_THIS(0x68C8D0); }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	int                ArrayIndex; // this is off by one (always one higher than the actual index). that's because consistency and reason suck.
-
-	BytePalette Colors;
-
-	char*              ID;
-	ColorStruct BaseColor;
-	LightConvertClass* LightConvert;	//??? remap - indices #16-#31 are changed to mathefuckikally derived shades of BaseColor, think unittem.pal
-	int   ShadeCount;
-	PROTECTED_PROPERTY(BYTE,     unknown_314[0x1C]);
-	int   MainShadeIndex;
-	PROTECTED_PROPERTY(BYTE,     unknown_334[0x8]);
+	~ColorScheme() JMP_THIS(0x68C8D0);
 };
