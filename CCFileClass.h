@@ -5,7 +5,8 @@
 #include "YRPPCore.h"
 #include "GenericList.h"
 
-enum class FileAccessMode : unsigned int {
+enum class FileAccessMode : unsigned int
+{
 	None = 0,
 	Read = 1,
 	Write = 2,
@@ -14,19 +15,21 @@ enum class FileAccessMode : unsigned int {
 
 MAKE_ENUM_FLAGS(FileAccessMode);
 
-enum class FileSeekMode : unsigned int {
+enum class FileSeekMode : unsigned int
+{
 	Set = 0, // SEEK_SET
 	Current = 1, // SEEK_CUR
 	End = 2 // SEEK_END
 };
 
-//--------------------------------------------------------------------
-//Abstract File class
-//--------------------------------------------------------------------
+/*! @brief Abstract File class */
 class NOVTABLE FileClass
 {
 public:
-	//Destructor
+	bool SkipCDCheck;
+private:
+	BYTE padding_5[3];
+public:
 	virtual	~FileClass() RX;
 	//FileClass
 	virtual const char* GetFileName() const = 0;
@@ -60,24 +63,24 @@ public:
 	}
 
 protected:
-	explicit __forceinline FileClass(noinit_t)
-	{ }
-
-	//Properties
-
-public:
-	bool SkipCDCheck;
-private:
-	BYTE padding_5[3];
+	explicit __forceinline FileClass(noinit_t) { }
 };
 
-//--------------------------------------------------------------------
-//Files in the game directory
-//--------------------------------------------------------------------
+/*! @brief Files in the game directory */
 class NOVTABLE RawFileClass : public FileClass
 {
 public:
-	//Destructor
+	FileAccessMode FileAccess;
+	int FilePointer;
+	int FileSize;
+	HANDLE Handle;
+	const char* FileName;
+	short unknown_short_1C;	//FatTime?
+	short unknown_short_1E;	//FatDate?
+	bool FileNameAllocated;
+private:
+	BYTE padding_21[3];
+public:
 	virtual ~RawFileClass() RX;
 
 	//FileClass
@@ -99,64 +102,15 @@ public:
 	virtual void CDCheck(DWORD errorCode, bool lUnk, const char* pFilename) override JMP_THIS(0x65CA70);
 
 	void Bias(int offset = 0, int length = -1) { JMP_THIS(0x65D2B0); }
-
-	//Constructor
-	RawFileClass(const char* pFileName)
-		: RawFileClass(noinit_t())
-	{ JMP_THIS(0x65CA80); }
-
 protected:
-	explicit __forceinline RawFileClass(noinit_t)
-		: FileClass(noinit_t())
-	{ }
-
-	//Properties
-
+	explicit __forceinline RawFileClass(noinit_t) : FileClass(noinit_t()) { }
 public:
-	FileAccessMode FileAccess;
-	int FilePointer;
-	int FileSize;
-	HANDLE Handle;
-	const char* FileName;
-	short unknown_short_1C;	//FatTime?
-	short unknown_short_1E;	//FatDate?
-	bool FileNameAllocated;
-private:
-	BYTE padding_21[3];
+	RawFileClass(const char* pFileName) : RawFileClass(noinit_t()) JMP_THIS(0x65CA80);
 };
 
-//--------------------------------------------------------------------
-//Files that get buffered in some way?
-//--------------------------------------------------------------------
+/*! @brief Files that get buffered in some way? */
 class NOVTABLE BufferIOFileClass : public RawFileClass
 {
-public:
-	//Destructor
-	virtual ~BufferIOFileClass() override JMP_THIS(0x431B80);
-	//FileClass
-	virtual const char* SetFileName(const char* pFileName) override JMP_THIS(0x431E80);
-	virtual bool Exists(bool writeShared = false) override JMP_THIS(0x431F10);
-	virtual bool HasHandle() override JMP_THIS(0x431F30);
-	virtual bool Open(FileAccessMode access) override JMP_THIS(0x431F70);
-	virtual bool OpenEx(const char* pFileName, FileAccessMode access) override JMP_THIS(0x431F50);
-	virtual int ReadBytes(void* pBuffer, int nNumBytes) override JMP_THIS(0x4322A0);
-	virtual int Seek(int offset, FileSeekMode seek) override JMP_THIS(0x4324B0);
-	virtual int GetFileSize() override JMP_THIS(0x4325A0);
-	virtual int WriteBytes(void* pBuffer, int nNumBytes) override JMP_THIS(0x432050);
-	virtual void Close() override JMP_THIS(0x4325C0);
-
-	//Constructor
-	BufferIOFileClass()
-		: BufferIOFileClass(noinit_t())
-	{ JMP_THIS(0x431B20); }
-
-protected:
-	explicit __forceinline BufferIOFileClass(noinit_t)
-		: RawFileClass(noinit_t())
-	{ }
-
-	//Properties
-
 public:
 	bool unknown_bool_24;
 	bool unknown_bool_25;
@@ -174,44 +128,52 @@ public:
 	int unknown_int_48;
 	DWORD unknown_4C;
 	DWORD unknown_50;
+public:
+	virtual ~BufferIOFileClass() override JMP_THIS(0x431B80);
+	//FileClass
+	virtual const char* SetFileName(const char* pFileName) override JMP_THIS(0x431E80);
+	virtual bool Exists(bool writeShared = false) override JMP_THIS(0x431F10);
+	virtual bool HasHandle() override JMP_THIS(0x431F30);
+	virtual bool Open(FileAccessMode access) override JMP_THIS(0x431F70);
+	virtual bool OpenEx(const char* pFileName, FileAccessMode access) override JMP_THIS(0x431F50);
+	virtual int ReadBytes(void* pBuffer, int nNumBytes) override JMP_THIS(0x4322A0);
+	virtual int Seek(int offset, FileSeekMode seek) override JMP_THIS(0x4324B0);
+	virtual int GetFileSize() override JMP_THIS(0x4325A0);
+	virtual int WriteBytes(void* pBuffer, int nNumBytes) override JMP_THIS(0x432050);
+	virtual void Close() override JMP_THIS(0x4325C0);
+protected:
+	explicit __forceinline BufferIOFileClass(noinit_t) : RawFileClass(noinit_t()) {}
+public:
+	BufferIOFileClass() : BufferIOFileClass(noinit_t()) JMP_THIS(0x431B20);
 };
 
-//--------------------------------------------------------------------
-//Files on a CD?
-//--------------------------------------------------------------------
+/*! @brief Files on a CD? */
 class NOVTABLE CDFileClass : public BufferIOFileClass
 {
 public:
-	//Destructor
+	bool IsDisabled;
+public:
 	virtual ~CDFileClass() RX;
 	//FileClass
 	virtual const char* SetFileName(const char* pFileName) override JMP_THIS(0x47AE10);
 	virtual bool Open(FileAccessMode access) override JMP_THIS(0x47AAB0);
 	virtual bool OpenEx(const char* pFileName, FileAccessMode access) override JMP_THIS(0x47AF10);
-
-	//Constructor
-	CDFileClass()
-		: CDFileClass(noinit_t())
-	{ JMP_THIS(0x47AA30); }
-
 protected:
 	explicit __forceinline CDFileClass(noinit_t)
 		: BufferIOFileClass(noinit_t())
 	{ }
-
-	//Property
-
 public:
-	bool IsDisabled;
+	CDFileClass() : CDFileClass(noinit_t()) JMP_THIS(0x47AA30);
 };
 
-//--------------------------------------------------------------------
-//Files in MIXes
-//--------------------------------------------------------------------
+/*! @brief Files in MIXes */
 class NOVTABLE CCFileClass : public CDFileClass
 {
 public:
-	//Destructor
+	MemoryBuffer Buffer;
+	DWORD Position;
+	DWORD Availablility;
+public:
 	virtual ~CCFileClass() RX;
 
 	//FileClass
@@ -229,22 +191,10 @@ public:
 	virtual bool SetFileTime(DWORD FileTime) override JMP_THIS(0x473F00);
 	virtual void CDCheck(DWORD errorCode, bool lUnk, const char* pFilename) override JMP_THIS(0x473AB0);
 
-	//Constructor
-	CCFileClass(const char* pFileName)
-		: CCFileClass(noinit_t())
-	{ JMP_THIS(0x4739F0); }
-
 protected:
-	explicit __forceinline CCFileClass(noinit_t)
-		: CDFileClass(noinit_t())
-	{ }
-
-	//Properties
-
+	explicit __forceinline CCFileClass(noinit_t): CDFileClass(noinit_t())	{ }
 public:
-	MemoryBuffer Buffer;
-	DWORD Position;
-	DWORD Availablility;
+	CCFileClass(const char* pFileName)	: CCFileClass(noinit_t()) JMP_THIS(0x4739F0);
 };
 
 //TO BE CREATED WHEN NEEDED
