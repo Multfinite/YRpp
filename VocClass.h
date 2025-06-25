@@ -1,14 +1,10 @@
-/*
-	Sound effects!
-*/
-
 #pragma once
 
-#include <ArrayClasses.h>
-#include <GeneralDefinitions.h>
-#include <Audio.h>
+#include "ArrayClasses.h"
+#include "GeneralDefinitions.h"
+#include "Audio.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 struct VocClassHeader
 {
@@ -29,13 +25,54 @@ struct VolumeStruct	//pretty uncreative name, but it's all I can come up with at
 	int   unknown_int_1C; // default is 16384
 };
 
+/*!
+* @brief Sound effects!
+*/
 class VocClass
 {
 public:
 	static constexpr constant_ptr<DynamicVectorClass<VocClass*>, 0xB1D378u> const Array {};
 
 	static constexpr reference<bool, 0x8464ACu> const VoicesEnabled {};
+public:
+	VocClassHeader Header;
+	int SamplesOK;         //0 or 1, determines whether all samples are OK to use
+	SoundControl Control;
+	SoundType Type;
+	VolumeStruct Volume;
+	DWORD unknown_38;
+	DWORD unknown_3C;
+	SoundPriority Priority;
+	DWORD unknown_44;
+	int Limit;          //as in sound.ini
+	int Loop;           //as in sound.ini
+	int Range;          //as in sound.ini
+	float MinVolume;    //as in sound.ini
+	int MinDelay;       //as in sound.ini
+	int MaxDelay;       //as in sound.ini
+	int MinFDelta;      //as in sound.ini
+	int MaxFDelta;      //as in sound.ini
+	int VShift;         //as in sound.ini
+	char Name[0x20];    //as in sound.ini
+	DWORD unknown_8C;
+	DWORD unknown_90;
+	DWORD unknown_94;
+	DWORD unknown_98;
+	DWORD unknown_9C;
+	DWORD unknown_A0;
+	DWORD unknown_A4;
+	DWORD unknown_A8;
+	DWORD unknown_AC;
+	DWORD unknown_B0;
 
+	int SampleIndex[0x20];
+
+	int NumSamples;
+	int Attack;
+	int Decay;
+	DWORD unknown_140;
+	DWORD unknown_144;
+public:
 	static VocClass* Find(const char* pName)
 	{
 		for (int i = 0; i < Array->Count; ++i)
@@ -74,48 +111,7 @@ public:
 	static void __fastcall PlayIndexAtPos(int n, const CoordStruct& coords, int a3 = 0)
 		JMP_STD(0x750E20);
 
-	//Properties
-
 public:
-
-	VocClassHeader Header;
-	int SamplesOK;         //0 or 1, determines whether all samples are OK to use
-	SoundControl Control;
-	SoundType Type;
-	VolumeStruct Volume;
-	DWORD unknown_38;
-	DWORD unknown_3C;
-	SoundPriority Priority;
-	DWORD unknown_44;
-	int Limit;          //as in sound.ini
-	int Loop;           //as in sound.ini
-	int Range;          //as in sound.ini
-	float MinVolume;    //as in sound.ini
-	int MinDelay;       //as in sound.ini
-	int MaxDelay;       //as in sound.ini
-	int MinFDelta;      //as in sound.ini
-	int MaxFDelta;      //as in sound.ini
-	int VShift;         //as in sound.ini
-	char Name[0x20];    //as in sound.ini
-	DWORD unknown_8C;
-	DWORD unknown_90;
-	DWORD unknown_94;
-	DWORD unknown_98;
-	DWORD unknown_9C;
-	DWORD unknown_A0;
-	DWORD unknown_A4;
-	DWORD unknown_A8;
-	DWORD unknown_AC;
-	DWORD unknown_B0;
-
-	int SampleIndex[0x20];
-
-	int NumSamples;
-	int Attack;
-	int Decay;
-	DWORD unknown_140;
-	DWORD unknown_144;
-
 	//constructor and destructor should never be needed
 	VocClass() = delete;
 	~VocClass() = delete;
