@@ -1,6 +1,3 @@
-/*!
-* @brief WaveClass - handles various wave effects in the game
-*/
 #pragma once
 
 #include "GeneralDefinitions.h"
@@ -8,6 +5,9 @@
 
 class TechnoClass;
 
+/*!
+* @brief WaveClass - handles various wave effects in the game
+*/
 class NOVTABLE WaveClass : public ObjectClass
 {
 public:
