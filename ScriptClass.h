@@ -1,68 +1,68 @@
-/*
-	Actual AI Team Scripts
+/*!
+* @brief ScriptClass - handles AI team script execution
 */
-
 #pragma once
 
-#include <AbstractClass.h>
-
-//forward declarations
-#include <ScriptTypeClass.h>
+#include "AbstractClass.h"
+#include "ScriptTypeClass.h"
 
 class NOVTABLE ScriptClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Script;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F0F78;
+            this->IRTTITypeInfo = 0x7F0F5C;
+            this->INoticeSink = 0x7F0F54;
+            this->INoticeSource = 0x7F0F4C;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~ScriptClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	ScriptActionNode* GetCurrentAction(ScriptActionNode *buffer) const
-		{ JMP_THIS(0x691500); }
-
-	ScriptActionNode* GetNextAction(ScriptActionNode *buffer) const
-		{ JMP_THIS(0x691540); }
-
-	bool ClearMission()
-		{ JMP_THIS(0x691590); }
-
-	bool SetMission(int nLine)
-		{ JMP_THIS(0x6915A0); }
-
-	bool NextMission()
-		{ ++this->CurrentMission; return this->HasNextMission(); }
-
-	bool HasNextMission() const
-		{ JMP_THIS(0x6915B0); }
-
-	//Constructor
-	ScriptClass(ScriptTypeClass* pType) noexcept
-		: AbstractClass(noinit_t())
-	{ JMP_THIS(0x6913C0); }
-
-protected:
-	explicit __forceinline ScriptClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::Script;
+    static constexpr uintptr_t AbsVTable = 0x7F0F78;
+    static constexpr size_t ClassSize = 0x30;
 
 public:
+    ScriptTypeClass* Type;
+    int field_28;
+    int CurrentMission;
 
-	ScriptTypeClass * Type;
-	int field_28;
-	int CurrentMission;
+public:
+    virtual ~ScriptClass() JMP_THIS(0x691460);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6915F0);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x691630);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x691690);
+    
+    RTTIType KindOf() const override JMP_THIS(0x691EC0);
+    int SizeOf() const override JMP_THIS(0x691ED0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6914E0);
+
+    ScriptActionNode* GetCurrentAction(ScriptActionNode* buffer) const JMP_THIS(0x691500);
+    ScriptActionNode* GetNextAction(ScriptActionNode* buffer) const JMP_THIS(0x691540);
+    bool ClearMission() JMP_THIS(0x691590);
+    bool SetMission(int nLine) JMP_THIS(0x6915A0);
+    bool HasNextMission() const JMP_THIS(0x6915B0);
+    bool HasMissionsRemaining() JMP_THIS(0x6915D0);
+
+    // Helper method
+    bool NextMission() {
+        ++this->CurrentMission;
+        return this->HasNextMission();
+    }
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline ScriptClass(fake_noinit_t) noexcept
+        : AbstractClass(fake_noinit_t())
+    {}
+
+public:
+    ScriptClass(ScriptTypeClass* pType) noexcept : ScriptClass(fake_noinit_t())
+        JMP_THIS(0x6913C0);
 };
+static_assert(sizeof(ScriptClass) == ScriptClass::ClassSize);
