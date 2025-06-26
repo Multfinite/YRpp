@@ -1,110 +1,98 @@
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
-//forward declarations
 class CCINIClass;
 class HouseTypeClass;
 class TActionClass;
 class TEventClass;
+class TagTypeClass;
 
+/*!
+* @brief TriggerTypeClass - handles trigger definitions and behaviors
+*/
 class NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TriggerType;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F5904;
+            this->IRTTITypeInfo = 0x7F58E8;
+            this->INoticeSink = 0x7F58E0;
+            this->INoticeSource = 0x7F58D8;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override R0;
-
-	virtual HRESULT __stdcall Load(IStream* pStm) override R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
-
-	//Destructor
-	virtual ~TriggerTypeClass() RX;
-
-	//AbstractClass
-	virtual void Detach(AbstractClass* pAbstract, bool removed) override RX;
-	virtual RTTIType KindOf() const override RT(AbstractType);
-	virtual int SizeOf() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-
-	//AbstractTypeClass
-	virtual int ArrayIndex() const override R0;
-	virtual bool LoadFromINI(CCINIClass* pINI) override R0;
-	virtual bool SaveToINI(CCINIClass* pINI) override R0;
-
-	//static
-	static void __fastcall LoadFromINIList(CCINIClass* pINI)
-		{ JMP_STD(0x7275D0); }
-
-	static void __fastcall SaveToINIList(CCINIClass* pINI)
-		{ JMP_STD(0x727880); }
-
-	TagTypeClass* __fastcall FindByNameOrID(char const* pName)
-		{ JMP_STD(0x727120); }
-
-	//non-virtual
-	using Flags = BYTE; // same as trigger and event flags?
-	Flags GetFlags() const
-		{ JMP_THIS(0x7271E0); }
-
-	// contains at least one Allow Win action
-	bool HasAllowWinAction() const
-		{ JMP_THIS(0x726FE0); }
-
-	// contains at least one Global Set or Global Cleared event
-	bool HasGlobalSetOrClearedEvent(int idxGlobal) const
-		{ JMP_THIS(0x727010); }
-
-	// contains at least one Local Set or Local Cleared event
-	bool HasLocalSetOrClearedEvent(int idxLocal) const
-		{ JMP_THIS(0x727050); }
-
-	// contains at least one Crosses Horizontal Line event
-	bool HasCrossesHorizontalLineEvent() const
-		{ JMP_THIS(0x726F80); }
-
-	// contains at least one Crosses Vertical Line event
-	bool HasCrossesVerticalLineEvent() const
-		{ JMP_THIS(0x726F50); }
-
-	// contains at least one Zone Entry By event
-	bool HasZoneEntryByEvent() const
-		{ JMP_THIS(0x726FB0); }
-
-	// deletes an action from the list
-	bool RemoveAction(TActionClass* pAction)
-		{ JMP_THIS(0x7279E0); }
-
-	// deletes an event from the list
-	bool RemoveEvent(TEventClass* pEvent)
-		{ JMP_THIS(0x727A40); }
-
-	//Constructor
-	TriggerTypeClass(char const* pName)
-		: TriggerTypeClass(noinit_t())
-	{ JMP_THIS(0x726C80); }
-
-protected:
-	explicit __forceinline TriggerTypeClass(noinit_t)
-		: AbstractTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::TriggerType;
+    static constexpr uintptr_t AbsVTable = 0x7F5904;
+    static constexpr size_t ClassSize = 0xB4;
 
 public:
-	int ArrayIndex;
-	bool Difficulty[3]; // easy = 0, normal = 1, hard = 2
-	bool Enabled;
-	bool MustTransfer; // vehicle thieves must take Tag with it when hijacking
-	PROTECTED_PROPERTY(BYTE, align_A1[3]);
-	HouseTypeClass* House;
-	TriggerTypeClass* NextTrigger;
-	TEventClass* FirstEvent;
-	TActionClass* FirstAction;
+    ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
+
+public:
+    int ArrayIndex;
+    bool Difficulty[3]; // easy = 0, normal = 1, hard = 2
+    bool Enabled;
+    bool MustTransfer;
+    PROTECTED_PROPERTY(BYTE, align_A1[3]);
+    HouseTypeClass* House;
+    TriggerTypeClass* NextTrigger;
+    TEventClass* FirstEvent;
+    TActionClass* FirstAction;
+
+public:
+    virtual ~TriggerTypeClass() JMP_THIS(0x726E00);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x727BB0);
+
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x727BF0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x727CD0);
+
+    void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x727090);
+    RTTIType KindOf() const override JMP_THIS(0x727CA0);
+    int SizeOf() const override JMP_THIS(0x727CB0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x727B30);
+
+    int ArrayIndex() const override JMP_THIS(0x727CC0);
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x727240);
+    bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x7276A0);
+
+public:
+    static void __fastcall LoadFromINIList(CCINIClass* pINI) JMP_STD(0x7275D0);
+    static void __fastcall SaveToINIList(CCINIClass* pINI) JMP_STD(0x727880);
+    TagTypeClass* __fastcall FindByNameOrID(char const* pName) JMP_STD(0x727120);
+
+    using Flags = BYTE;
+    Flags GetFlags() const JMP_THIS(0x7271E0);
+    bool HasAllowWinAction() const JMP_THIS(0x726FE0);
+    bool HasGlobalSetOrClearedEvent(int idxGlobal) const JMP_THIS(0x727010);
+    bool HasLocalSetOrClearedEvent(int idxLocal) const JMP_THIS(0x727050);
+    bool HasCrossesHorizontalLineEvent() const JMP_THIS(0x726F80);
+    bool HasCrossesVerticalLineEvent() const JMP_THIS(0x726F50);
+    bool HasZoneEntryByEvent() const JMP_THIS(0x726FB0);
+    bool RemoveAction(TActionClass* pAction) JMP_THIS(0x7279E0);
+    bool RemoveEvent(TEventClass* pEvent) JMP_THIS(0x727A40);
+
+/*
+    AttachType Attaches_To() JMP_THIS(0x7271E0);
+    int32_t Clear_INI_Entries() JMP_THIS(0x727880);
+    TriggerTypeClass * Find_Or_Make() JMP_THIS(0x727AA0);
+    int8_t * Name_From_Persistance() JMP_THIS(0x7271D0);
+    int32_t Persistance_From_Name() JMP_THIS(0x727190);
+    void Read_INI() JMP_THIS(0x7275D0);
+*/
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) {}
+
+public:
+    TriggerTypeClass(char const* pName) noexcept : TriggerTypeClass(fake_noinit_t())
+        JMP_THIS(0x726C80);
+
 };
+static_assert(sizeof(TriggerTypeClass) == TriggerTypeClass::ClassSize);
