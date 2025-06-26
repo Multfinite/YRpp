@@ -1,6 +1,3 @@
-/*!
-* @brief TeamClass - handles team behaviors and management
-*/
 #pragma once
 
 #include "TeamTypeClass.h"
@@ -12,6 +9,9 @@ class CellClass;
 class ScriptClass;
 class TagClass;
 
+/*!
+* @brief TeamClass - handles team behaviors and management
+*/
 class NOVTABLE TeamClass : public AbstractClass
 {
 public:

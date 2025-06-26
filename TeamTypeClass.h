@@ -1,18 +1,17 @@
-/*!
-* @brief TeamTypeClass - handles team type definitions and behaviors
-*/
 #pragma once
 
 #include "AbstractTypeClass.h"
 #include "ScriptTypeClass.h"
 #include "TaskForceClass.h"
 
-// Forward declarations
 class FootClass;
 class TagClass;
 class TeamClass;
 class TechnoTypeClass;
 
+/*!
+* @brief TeamTypeClass - handles team type definitions and behaviors
+*/
 class NOVTABLE TeamTypeClass : public AbstractTypeClass
 {
 public:
