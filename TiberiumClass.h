@@ -1,121 +1,115 @@
-/*
-	Tiberiums are initialized by INI files.
-*/
-
 #pragma once
 
-#include <AbstractTypeClass.h>
-#include <PriorityQueueClass.h>
+#include "AbstractTypeClass.h"
+#include "PriorityQueueClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class OverlayTypeClass;
 
-class TiberiumLogic
-{
-public:
-	void Construct(int nCount = PriorityQueueClassNode::SurfaceDataCount())
-	{
-		Nodes = (PriorityQueueClassNode*)YRMemory::Allocate(sizeof(PriorityQueueClassNode) * nCount);
-		CellIndexesWithTiberium = (bool*)YRMemory::Allocate(sizeof(bool) * nCount);
-
-		Queue = GameCreate<PriorityQueueClass<PriorityQueueClassNode>>(nCount);
-	}
-
-	void Destruct()
-	{
-		GameDelete(Queue);
-		Queue = nullptr;
-
-		if (Nodes)
-		{
-			YRMemory::Deallocate(Nodes);
-			Nodes = nullptr;
-		}
-
-		if (CellIndexesWithTiberium)
-		{
-			YRMemory::Deallocate(CellIndexesWithTiberium);
-			CellIndexesWithTiberium = nullptr;
-		}
-	}
-
-	int Count;
-	PriorityQueueClass<PriorityQueueClassNode>* Queue;
-	bool* CellIndexesWithTiberium;
-	PriorityQueueClassNode* Nodes;
-	CDTimerClass Timer;
-};
-
+/*!
+* @brief Tiberiums are initialized by INI files.
+*/
 class NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Tiberium;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        {
+            this->IPersistStream =0x7F5728;
+            this->IRTTITypeInfo = 0x7F570C;
+            this->INoticeSink = 0x7F5704;
+            this->INoticeSource = 0x7F56FC;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
-
-	//Destructor
-	virtual ~TiberiumClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//TiberiumClass
-
-	void RegisterForGrowth(CellStruct* cell)
-		{ JMP_THIS(0x7235A0); }
-
-	//Static helpers
-
-	static int FindIndex(int idxOverlayType) {
-		SET_REG32(ecx, idxOverlayType);
-		CALL(0x5FDD20);
-	}
-
-	static TiberiumClass* Find(int idxOverlayType) {
-		int idx = FindIndex(idxOverlayType);
-		return Array->GetItemOrDefault(idx);
-	}
-
-	//Constructor
-	TiberiumClass(const char* pID)
-		: TiberiumClass(noinit_t())
-	{ JMP_THIS(0x7216C0); }
-
-protected:
-	explicit __forceinline TiberiumClass(noinit_t)
-		: AbstractTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::Tiberium;
+    static constexpr uintptr_t AbsVTable = 0x7F5728;
+    static constexpr size_t ClassSize = 0x128;
 
 public:
+    ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
 
-	int ArrayIndex;
-	int Spread;
-	double SpreadPercentage;
-	int Growth;
-	double GrowthPercentage;
-	int Value;
-	int Power;
-	int Color;
-	DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Debris);
-	OverlayTypeClass* Image;
-	int NumFrames;
-	int NumImages;
-	int NumSlopes;
-	DECLARE_PROPERTY(TiberiumLogic, SpreadLogic);
-	DECLARE_PROPERTY(TiberiumLogic, GrowthLogic);
+public:
+    int ArrayIndex;
+    int Spread;
+    double SpreadPercentage;
+    int Growth;
+    double GrowthPercentage;
+    int Value;
+    int Power;
+    int Color;
+    DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Debris);
+    OverlayTypeClass* Image;
+    int NumFrames;
+    int NumImages;
+    int NumSlopes;
+
+    int SpreadCount;
+    PriorityQueueClass<PriorityQueueClassNode>* SpreadQueue;
+    bool* SpreadCellIndexesWithTiberium;
+    PriorityQueueClassNode* SpreadNodes;
+    CDTimerClass SpreadTimer;
+
+    int GrowthCount;
+    PriorityQueueClass<PriorityQueueClassNode>* GrowthQueue;
+    bool* GrowthCellIndexesWithTiberium;
+    PriorityQueueClassNode* GrowthNodes;
+    CDTimerClass GrowthTimer;
+
+public:
+    virtual ~TiberiumClass() noexcept JMP_THIS(0x721880);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x721E40);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x721E80);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x7220D0);
+    
+    HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
+    
+    void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x722140);
+    RTTIType KindOf() const override JMP_THIS(0x7236F0);
+    int SizeOf() const override JMP_THIS(0x7236E0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x721DC0);
+    int ArrayIndex() const override JMP_THIS(0x723700);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x721A50);
+
+    void RegisterForGrowth(CellStruct* cell) JMP_THIS(0x7235A0);
+
+/*
+    void Delete_Growth_Data() JMP_THIS(0x723510);
+    void Delete_Spread_Data() JMP_THIS(0x722A20);
+    void Grow() JMP_THIS(0x722F00);
+    void Init() JMP_THIS(0x7236D0);
+    void Init_Growth_Data() JMP_THIS(0x723260);
+    CellClass* Init_Spread_Data() JMP_THIS(0x722770);
+    void Queue_Growth_At_Cell(Cell* a2) JMP_THIS(0x7235A0);
+    void Queue_Spread_At_Cell(Cell* a2) JMP_THIS(0x722AF0);
+    void Recalc_Growth_Data() JMP_THIS(0x7233A0);
+    void Recalc_Spread_Data() JMP_THIS(0x7228B0);
+    void Spread() JMP_THIS(0x722440);
+*/
+
+    static int FindIndex(int idxOverlayType) {
+        SET_REG32(ecx, idxOverlayType);
+        CALL(0x5FDD20);
+    }
+
+    static TiberiumClass* Find(int idxOverlayType) {
+        int idx = FindIndex(idxOverlayType);
+        return Array->GetItemOrDefault(idx);
+    }
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TiberiumClass(fake_noinit_t) noexcept
+        : AbstractTypeClass(fake_noinit_t())
+    {
+    }
+
+public:
+    TiberiumClass(const char* pID) noexcept : TiberiumClass(fake_noinit_t{}) { JMP_THIS(0x7216C0); }
 };
+static_assert(sizeof(TiberiumClass) == TiberiumClass::ClassSize);
