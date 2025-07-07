@@ -2,97 +2,81 @@
 
 #include "AbstractTypeClass.h"
 
-//forward declarations
 class CCINIClass;
 class TriggerTypeClass;
 
+/*!
+* @brief TagTypeClass - handles tag type definitions and behaviors
+*/
 class NOVTABLE TagTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TagType;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F45C4;
+            this->IRTTITypeInfo = 0x7F45A8;
+            this->INoticeSink = 0x7F45A0;
+            this->INoticeSource = 0x7F4598;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override R0;
-
-	virtual HRESULT __stdcall Load(IStream* pStm) override R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
-
-	//Destructor
-	virtual ~TagTypeClass() RX;
-
-	//AbstractClass
-	virtual void Detach(AbstractClass* pAbstract, bool removed) override RX;
-	virtual RTTIType KindOf() const override RT(AbstractType);
-	virtual int SizeOf() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-
-	//AbstractTypeClass
-	virtual int ArrayIndex() const override R0;
-	virtual bool LoadFromINI(CCINIClass* pINI) override R0;
-	virtual bool SaveToINI(CCINIClass* pINI) override R0;
-
-	//static
-	static void __fastcall LoadFromINIList(CCINIClass* pINI)
-		{ JMP_STD(0x6E5ED0); }
-
-	static void __fastcall SaveToINIList(CCINIClass* pINI)
-		{ JMP_STD(0x6E5FE0); }
-
-	static TagTypeClass* __fastcall FindByNameOrID(char const* pName)
-		{ JMP_STD(0x6E5E70); }
-
-	//non-virtual
-	using Flags = BYTE; // same as trigger and event flags?
-	Flags GetFlags() const
-		{ JMP_THIS(0x6E61F0); }
-
-	// contains at least one Allow Win action
-	bool HasAllowWinAction() const
-		{ JMP_THIS(0x6E6220); }
-
-	// contains at least one Crosses Horizontal Line event
-	bool HasCrossesHorizontalLineEvent() const
-		{ JMP_THIS(0x6E6250); }
-
-	// contains at least one Crosses Vertical Line event
-	bool HasCrossesVerticalLineEvent() const
-		{ JMP_THIS(0x6E6280); }
-
-	// contains at least one Zone Entry By event
-	bool HasZoneEntryByEvent() const
-		{ JMP_THIS(0x6E62B0); }
-
-	// adds a trigger to the list
-	bool AddTrigger(TriggerTypeClass* pTrigger)
-		{ JMP_THIS(0x6E5DD0); }
-
-	// removes a trigger from the list
-	bool RemoveTrigger(TriggerTypeClass* pTrigger)
-		{ JMP_THIS(0x6E5E00); }
-
-	// check whether the trigger is contained in the list
-	bool ContainsTrigger(TriggerTypeClass* pTrigger) const
-		{ JMP_THIS(0x6E62E0); }
-
-	//Constructor
-	TagTypeClass(char const* pName) noexcept
-		: TagTypeClass(noinit_t())
-	{ JMP_THIS(0x5447C0); }
-
-protected:
-	explicit __forceinline TagTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::TagType;
+    static constexpr uintptr_t AbsVTable = 0x7F45C4;
+    static constexpr size_t ClassSize = 0xA4;
 
 public:
-	int ArrayIndex;
-	TriggerPersistence Persistence;
-	TriggerTypeClass* FirstTrigger;
+    ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
+
+public:
+    int ArrayIndex;
+    TriggerPersistence Persistence;
+    TriggerTypeClass* FirstTrigger;
+
+public:
+    virtual ~TagTypeClass() noexcept JMP_THIS(0x6E5CA0);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E63A0);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x6E6410);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E6470);
+    
+    void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x6E5E50);
+    RTTIType KindOf() const override JMP_THIS(0x6E6490);
+    int SizeOf() const override JMP_THIS(0x6E64A0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E63E0);
+    int ArrayIndex() const override JMP_THIS(0x6E64B0);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6E6080);
+    bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6E6160);
+
+public:
+    static void __fastcall LoadFromINIList(CCINIClass* pINI) JMP_STD(0x6E5ED0);
+    static void __fastcall SaveToINIList(CCINIClass* pINI) JMP_STD(0x6E5FE0);
+    static TagTypeClass* __fastcall FindByNameOrID(char const* pName) JMP_STD(0x6E5E70);
+
+    using Flags = BYTE;
+    Flags GetFlags() const JMP_THIS(0x6E61F0);
+    bool HasAllowWinAction() const JMP_THIS(0x6E6220);
+    bool HasCrossesHorizontalLineEvent() const JMP_THIS(0x6E6250);
+    bool HasCrossesVerticalLineEvent() const JMP_THIS(0x6E6280);
+    bool HasZoneEntryByEvent() const JMP_THIS(0x6E62B0);
+    bool AddTrigger(TriggerTypeClass* pTrigger) JMP_THIS(0x6E5DD0);
+    bool RemoveTrigger(TriggerTypeClass* pTrigger) JMP_THIS(0x6E5E00);
+    bool ContainsTrigger(TriggerTypeClass* pTrigger) const JMP_THIS(0x6E62E0);
+
+/*
+    TagTypeClass * Find_Or_Make_0() JMP_THIS(0x6E6310);
+*/
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TagTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) { }
+
+public:
+    TagTypeClass(char const* pName) noexcept : TagTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
+    TagTypeClass(noinit_t) noexcept : TagTypeClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(TagTypeClass) == TagTypeClass::ClassSize);
