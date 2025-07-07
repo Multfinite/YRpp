@@ -2,76 +2,77 @@
 
 #include "AbstractClass.h"
 
-//forward declarations
 class SuperClass;
 class TechnoClass;
 
-//The AirstrikeClass handles the airstrikes Boris calls in.
 class NOVTABLE TemporalClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Temporal;
-	static constexpr uintptr_t AbsVTable = 0x7F5180;
+    using base_type = AbstractClass;
 
-	//Static
-	static constexpr constant_ptr<DynamicVectorClass<TemporalClass*>, 0xB0EC60u> const Array{};
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F5180;
+            this->IRTTITypeInfo = 0x7F5164;
+            this->INoticeSink = 0x7F515C;
+            this->INoticeSource = 0x7F5154;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~TemporalClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//non-virtual
-	void Fire(TechnoClass* pTarget)
-		{ JMP_THIS(0x71AF20); }
-	bool CanWarpTarget(TechnoClass* pTarget) const
-		{ JMP_THIS(0x71AE50); }
-
-	// hardcoded to accumulate only up to 50 helpers
-	int GetWarpPerStep( int nHelperCount = 0 ) const
-		{ JMP_THIS(0x71AB10); }
-
-	void LetGo()
-		{ JMP_THIS(0x71ABC0); }
-	void JustLetGo()
-		{ JMP_THIS(0x71AD40); }
-	void Detach()
-		{ JMP_THIS(0x71ADE0); }
-
-	//Constructor
-	TemporalClass(TechnoClass* pOwnerUnit) noexcept
-		: TemporalClass(noinit_t())
-	{ JMP_THIS(0x71A4E0); }
-
-protected:
-	explicit __forceinline TemporalClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::Temporal;
+    static constexpr uintptr_t AbsVTable = 0x7F5180;
+    static constexpr size_t ClassSize = 0x50;
 
 public:
+    static constexpr constant_ptr<DynamicVectorClass<TemporalClass*>, 0xB0EC60u> const Array{};
 
-	TechnoClass*       Owner;
-	TechnoClass*       Target;
-	CDTimerClass       LifeTimer;
-	void*              unknown_pointer_38;
-	SuperClass*        SourceSW;
+public:
+    TechnoClass* Owner;
+    TechnoClass* Target;
+    CDTimerClass LifeTimer;
+    void* unknown_pointer_38;
+    SuperClass* SourceSW;
+    TemporalClass* NextTemporal;
+    TemporalClass* PrevTemporal;
+    int WarpRemaining;
+    int WarpPerStep;
 
-	TemporalClass*     NextTemporal;
-	TemporalClass*     PrevTemporal;
+public:
+    virtual ~TemporalClass() RX;
 
-	int                WarpRemaining;
-	int                WarpPerStep;
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x71A720);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x71A660);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x71A700);
+    
+    RTTIType KindOf() const override JMP_THIS(0x71B1A0);
+    int SizeOf() const override JMP_THIS(0x71B190);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71A650);
+    void AI() override JMP_THIS(0x71A760);
+
+    void Fire(TechnoClass* pTarget) JMP_THIS(0x71AF20);
+    bool CanWarpTarget(TechnoClass* pTarget) const JMP_THIS(0x71AE50);
+    int GetWarpPerStep(int nHelperCount = 0) const JMP_THIS(0x71AB10);
+    void LetGo() JMP_THIS(0x71ABC0);
+    void JustLetGo() JMP_THIS(0x71AD40);
+    void Detach() JMP_THIS(0x71ADE0);
+
+/*
+    void Clear_Target() JMP_THIS(0x71ACB0);
+    void Clear_Target_Building() JMP_THIS(0x71ACD0);
+    BuildingClass* Detach(int32_t a2) JMP_THIS(0x71AB60);
+    int32_t Release() JMP_THIS(0x71ADB0);
+*/
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TemporalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
+
+public:
+    TemporalClass() noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A450);
+    TemporalClass(TechnoClass* pOwnerUnit) noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A4E0);
 };
+static_assert(sizeof(TemporalClass) == TemporalClass::ClassSize);
