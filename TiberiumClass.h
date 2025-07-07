@@ -12,9 +12,11 @@ class OverlayTypeClass;
 class NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
-    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
-        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        constexpr vtables_t() noexcept : base_type::vtables_t()
         {
             this->IPersistStream =0x7F5728;
             this->IRTTITypeInfo = 0x7F570C;

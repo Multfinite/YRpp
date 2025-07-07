@@ -11,9 +11,11 @@ class WeaponTypeClass;
 class NOVTABLE RadSiteClass : public AbstractClass
 {
 public:
-    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
-        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        constexpr vtables_t() noexcept : base_type::vtables_t()
         {
             this->IPersistStream = 0x7F0810;
             this->IRTTITypeInfo = 0x7F07F4;

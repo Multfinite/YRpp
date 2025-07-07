@@ -14,9 +14,11 @@ class TagTypeClass;
 class NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {
 public:
-    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
-        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        constexpr vtables_t() noexcept : base_type::vtables_t()
         {
             this->IPersistStream = 0x7F5904;
             this->IRTTITypeInfo = 0x7F58E8;

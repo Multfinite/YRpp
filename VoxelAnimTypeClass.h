@@ -12,9 +12,11 @@ class WarheadTypeClass;
 class NOVTABLE VoxelAnimTypeClass : public ObjectTypeClass
 {
 public:
-    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public ObjectTypeClass::vtables_t
+    using base_type = ObjectTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
-        constexpr vtables_t() noexcept : ObjectTypeClass::vtables_t()
+        constexpr vtables_t() noexcept : base_type::vtables_t()
         {
             this->IPersistStream = 0x7F6548;
             this->IRTTITypeInfo = 0x7F652C;
