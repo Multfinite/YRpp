@@ -1,8 +1,7 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
-//forward declarations
 class SuperClass;
 class TechnoClass;
 class TagTypeClass;
@@ -12,61 +11,93 @@ class TriggerClass;
 class NOVTABLE TActionClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Action;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F443C;
+			this->IRTTITypeInfo = 0x7F4420;
+			this->INoticeSink = 0x7F4418;
+			this->INoticeSource = 0x7F4410;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F443C;
+	static constexpr AbstractType AbsID = AbstractType::Action;
+	static constexpr size_t ClassSize = 0x94;
 
-	//Static
 	static constexpr constant_ptr<DynamicVectorClass<TActionClass*>, 0xB0E658u> const Array{};
+public:
+	int                ArrayIndex;
+	TActionClass* NextAction;
+	TriggerAction      ActionKind;
+	TeamTypeClass* TeamType;
+	union
+	{
+		RectangleStruct    Bounds; // map bounds for use with action 40
+		struct
+		{
+			int Param3;
+			int Param4;
+			int Param5;
+			int Param6;
+		};
+	}; // It's enough for calling Bounds.X, just use a union here now. - secsome
+	int                Waypoint;
+	int                Value2; // multipurpose
+	TagTypeClass* TagType;
+	TriggerTypeClass* TriggerType;
+	char               TechnoID[0x19];
+	char               Text[0x20];
+	PROTECTED_PROPERTY(BYTE, align_8D[3]);
+	int                Value; // multipurpose
+public:
+	virtual ~TActionClass() noexcept JMP_THIS(0x6DD1B0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E3D70);
+	
+	HRESULT Load(IStream* pStm) override JMP_THIS(0x6E3DB0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E3E30);
+	
+	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x6DD2C0);
+	RTTIType KindOf() const override JMP_THIS(0x6E4640);
+	int SizeOf() const override JMP_THIS(0x6E4630);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E3E50);
+	int ArrayIndex() const override JMP_THIS(0x6E4650);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~TActionClass() RX;
-
-	//AbstractClass
-	virtual void Detach(AbstractClass* pAbstract, bool removed) override RX;
-	virtual RTTIType KindOf() const override RT(AbstractType);
-	virtual int SizeOf() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-	virtual int ArrayIndex() const override R0;
+	HouseClass* TriggerOwner(TriggerClass* trigger, int houseId) JMP_THIS(0x6E45E0);
+	Coordinate Waypoint() JMP_THIS(0x6E3F70);
 
 	// you are responsible for doing INI::ReadString and strtok'ing it before calling
 	// this func only calls strtok again, doesn't know anything about buffers
-	void LoadFromINI()
-		{ JMP_THIS(0x6DD5B0); }
+	void LoadFromINI() JMP_THIS(0x6DD5B0);
 
 	// you allocate the buffer for this, and save it to ini yourself after this returns
 	// this func only sprintf's the stuff it needs into buffer
-	void PrepareSaveToINI(char *buffer) const
-		{ JMP_THIS(0x6DD300); }
+	void PrepareSaveToINI(char *buffer) const JMP_THIS(0x6DD300);
 
 	// fuck if I know what's the purpose of this, returns a bitfield of flags for trigger logic
-	static int GetFlags(int actionKind)
-		{ JMP_STD(0x6E3EE0); }
+	static int GetFlags(int actionKind) JMP_STD(0x6E3EE0);
 
 	// transforms actionKind to a number saying what to parse arguments as (team/tag/trigger id, waypoint, integer, etc)
-	static int GetMode(int actionKind)
-		{ JMP_STD(0x6E3B60); }
+	static int GetMode(int actionKind) JMP_STD(0x6E3B60); 
+
+	HouseClass* FindHouseByIndex(TriggerClass* pTrigger, int idxHouse) const JMP_THIS(0x6E45E0);
 
 	// main brain, returns whether succeeded (mostly, no consistency in results what so ever)
 	// trigger fires all actions regardless of result of this
 	bool Execute(HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
-		{ JMP_THIS(0x6DD8B0); }
+		JMP_THIS(0x6DD8B0);
 
 	// BIG LIST OF EXECUTE'S SLAVE FUNCTIONS - feel free to use
 
 	// NOTE: most of these are defined as separate functions AS WELL AS inlined in Execute() above.
 	// Ergo, hooking into them by their address will not always override builtin handling.
 	// If you need to know which are inlined, poke me.
-#pragma push_macro("ACTION_FUNC")
-
 #define ACTION_FUNC(name, addr) \
-	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, CellStruct const& location) \
-		{ JMP_THIS(addr); }
+	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, CellStruct const& location) JMP_THIS(addr);
 
 	ACTION_FUNC(LightningStrikeAt, 0x6E0050);
 	ACTION_FUNC(RemoveParticleSystemsAt, 0x6E0080);
@@ -259,50 +290,12 @@ public:
 	ACTION_FUNC(ResetBaseCenter, 0x6E4540);
 
 	ACTION_FUNC(FlashBuildingsOfType, 0x6E4560);
-
 #undef ACTION_FUNC
-#pragma pop_macro("ACTION_FUNC")
-	// WHEEEEEW. End of slave functions.
-
-	HouseClass* FindHouseByIndex(TriggerClass* pTrigger, int idxHouse) const
-		{ JMP_THIS(0x6E45E0); }
-
-	//Constructor
-	TActionClass() noexcept
-		: TActionClass(noinit_t())
-	{ JMP_THIS(0x71E6A0); }
 
 protected:
-	explicit __forceinline TActionClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
+	explicit __forceinline TActionClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
-	int                ArrayIndex;
-	TActionClass*      NextAction;
-	TriggerAction      ActionKind;
-	TeamTypeClass*     TeamType;
-	union
-	{
-		RectangleStruct    Bounds; // map bounds for use with action 40
-		struct
-		{
-			int Param3;
-			int Param4;
-			int Param5;
-			int Param6;
-		};
-	}; // It's enough for calling Bounds.X, just use a union here now. - secsome
-	int                Waypoint;
-	int                Value2; // multipurpose
-	TagTypeClass*      TagType;
-	TriggerTypeClass*  TriggerType;
-	char               TechnoID[0x19];
-	char               Text[0x20];
-	PROTECTED_PROPERTY(BYTE, align_8D[3]);
-	int                Value; // multipurpose
+	TActionClass() noexcept : TActionClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
+	TActionClass(noinit_t) noexcept : TActionClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(TActionClass) == TActionClass::ClassSize);
