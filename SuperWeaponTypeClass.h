@@ -1,92 +1,93 @@
-/*
-	SuperWeaponTypes!! =D
-*/
-
 #pragma once
 
-#include <FileSystem.h>
-#include <AbstractTypeClass.h>
+#include "FileSystem.h"
+#include "AbstractTypeClass.h"
 
-//forward declarations
 class BuildingTypeClass;
 class ObjectClass;
 class WeaponTypeClass;
 
+/*!
+* @brief SuperWeaponTypeClass - handles super weapon type definitions and behaviors
+*/
 class NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::SuperWeaponType;
+    using base_type = AbstractTypeClass;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(SuperWeaponTypeClass, 0xA8E330u);
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F4090;
+            this->IRTTITypeInfo = 0x7F4074;
+            this->INoticeSink = 0x7F406C;
+            this->INoticeSource = 0x7F4064;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~SuperWeaponTypeClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//SuperWeaponTypeClass
-	virtual Action MouseOverObject(CellStruct const& cell, ObjectClass* pObjBelowMouse) const RT(::Action);
-
-	// non-virtual
-	static SuperWeaponTypeClass * __fastcall FindFirstOfAction(Action Action)
-		{ JMP_STD(0x6CEEB0); }
-
-	//Constructor
-	SuperWeaponTypeClass(const char* pID) noexcept
-		: SuperWeaponTypeClass(noinit_t())
-	{ JMP_THIS(0x6CE5B0); }
-
-protected:
-	explicit __forceinline SuperWeaponTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::SuperWeaponType;
+    static constexpr uintptr_t AbsVTable = 0x7F4090;
+    static constexpr size_t ClassSize = 0x100;
 
 public:
+    ABSTRACTTYPE_ARRAY(SuperWeaponTypeClass, 0xA8E330u);
 
-	int     ArrayIndex;
-	WeaponTypeClass* WeaponType;
+public:
+    int ArrayIndex;
+    WeaponTypeClass* WeaponType;
+    int RechargeVoice;
+    int ChargingVoice;
+    int ImpatientVoice;
+    int SuspendVoice;
+    int RechargeTime;
+    SuperWeaponType Type;
+    SHPStruct* SidebarImage;
+    Action Action;
+    int SpecialSound;
+    int StartSound;
+    BuildingTypeClass* AuxBuilding;
+    char SidebarImageFile[0x18];
+    PROTECTED_PROPERTY(BYTE, zero_E4);
+    bool UseChargeDrain;
+    bool IsPowered;
+    bool DisableableFromShell;
+    int FlashSidebarTabFrames;
+    bool AIDefendAgainst;
+    bool PreClick;
+    bool PostClick;
+    int PreDependent;
+    bool ShowTimer;
+    bool ManualControl;
+    float Range;
+    int LineMultiplier;
 
-	//I believe these four are the leftover TS sounds
-	int     RechargeVoice; // not read, unused
-	int     ChargingVoice; // not read, unused
-	int     ImpatientVoice; // not read, unused
-	int     SuspendVoice; // not read, unused
-	//---
+public:
+    virtual ~SuperWeaponTypeClass() noexcept JMP_THIS(0x6CE740);
 
-	int     RechargeTime; //in frames
-	SuperWeaponType Type;
-	SHPStruct* SidebarImage;
-	Action Action;
-	int     SpecialSound;
-	int     StartSound;
-	BuildingTypeClass* AuxBuilding;
-	char SidebarImageFile [0x18];
-	PROTECTED_PROPERTY(BYTE, zero_E4);
-	bool    UseChargeDrain;
-	bool    IsPowered;
-	bool    DisableableFromShell;
-	int     FlashSidebarTabFrames;
-	bool    AIDefendAgainst;
-	bool    PreClick;
-	bool    PostClick;
-	int		PreDependent;
-	bool    ShowTimer;
-	bool    ManualControl;
-	float   Range;
-	int     LineMultiplier;
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6CE7C0);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x6CE800);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6CE8D0);
+    
+    RTTIType KindOf() const override JMP_THIS(0x6CE8F0);
+    int SizeOf() const override JMP_THIS(0x6CE900);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6CE910);
+    int ArrayIndex() const override JMP_THIS(0x6CEA10);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6CEA20);
+    
+    virtual ::Action MouseOverObject(CellStruct const& cell, ObjectClass* pObjBelowMouse) const JMP_THIS(0x6CEF80);
+    
+    static SuperWeaponTypeClass* __fastcall FindFirstOfAction(::Action action) JMP_STD(0x6CEEB0);
 
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline SuperWeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+
+public:
+    SuperWeaponTypeClass(const char* pID) noexcept : SuperWeaponTypeClass(fake_noinit_t()) JMP_THIS(0x6CE5B0);
+    SuperWeaponTypeClass(noinit_t) noexcept : SuperWeaponTypeClass(fake_noinit_t()) JMP_THIS(0x6CE700);
 };
+static_assert(sizeof(SuperWeaponTypeClass) == SuperWeaponTypeClass::ClassSize);
