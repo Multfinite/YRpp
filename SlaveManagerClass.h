@@ -1,3 +1,6 @@
+/*!
+* @brief SlaveManagerClass - handles Tiberium slave miner management
+*/
 #pragma once
 
 #include "AbstractClass.h"
@@ -6,115 +9,127 @@ class HouseClass;
 class InfantryClass;
 
 enum class SlaveManagerStatus : unsigned int {
-	Ready = 0,
-	Scanning = 1,
-	Travelling = 2,
-	Deploying = 3,
-	Working = 4,
-	ScanningAgain = 5,
-	PackingUp = 6
+    Ready = 0,
+    Scanning = 1,
+    Travelling = 2,
+    Deploying = 3,
+    Working = 4,
+    ScanningAgain = 5,
+    PackingUp = 6
 };
 
 enum class SlaveControlStatus : unsigned int {
-	Unknown = 0,
-	ScanningForTiberium = 1,
-	MovingToTiberium = 2,
-	Harvesting = 3,
-	BringingItBack = 4,
-	Respawning = 5,
-	Dead = 6
+    Unknown = 0,
+    ScanningForTiberium = 1,
+    MovingToTiberium = 2,
+    Harvesting = 3,
+    BringingItBack = 4,
+    Respawning = 5,
+    Dead = 6
 };
 
 class NOVTABLE SlaveManagerClass : public AbstractClass
 {
 public:
+    using base_type = AbstractClass;
 
-	struct SlaveControl {
-		InfantryClass* Slave;
-		SlaveControlStatus State;
-		CDTimerClass RespawnTimer;
-	};
+    struct SlaveControl {
+        InfantryClass* Slave;
+        SlaveControlStatus State;
+        CDTimerClass RespawnTimer;
+    };
 
-	static const AbstractType AbsID = AbstractType::SlaveManager;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F31C8;
+            this->IRTTITypeInfo = 0x7F31AC;
+            this->INoticeSink = 0x7F31A4;
+            this->INoticeSource = 0x7F319C;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//Static
-	static constexpr constant_ptr<DynamicVectorClass<SlaveManagerClass*>, 0xB0B5F0u> const Array{};
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~SlaveManagerClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	// non-virtual
-	void SetOwner(TechnoClass *NewOwner)
-		{ JMP_THIS(0x6AF580); }
-
-	void CreateSlave(SlaveControl *Node)
-		{ JMP_THIS(0x6AF650); }
-
-	void LostSlave(InfantryClass *Slave)
-		{ JMP_THIS(0x6B0A20); }
-
-	void Deploy2()
-		{ JMP_THIS(0x6B0D60); }
-
-	// switches the slaves to the killer house with cheers and hoorahs
-	// note that this->Owner will be NULL once this function is done
-	void Killed(TechnoClass *Killer, HouseClass * ForcedOwnerHouse = nullptr)
-		{ JMP_THIS(0x6B0AE0); }
-
-	bool ShouldWakeUpNow()
-		{ JMP_THIS(0x6B1020); }
-
-	// the slaves will become free citizens without any announcements or cheers, if you don't call Killed() beforehand
-	void ZeroOutSlaves();
-
-	// stops scanning, spawning slaves and driving around.
-	void SuspendWork() {
-		this->RespawnTimer.StartTime = -1;
-		if(!this->RespawnTimer.TimeLeft) {
-			this->RespawnTimer.TimeLeft = 1;
-		}
-	}
-
-	// resumes to harvest automatically.
-	void ResumeWork() {
-		this->RespawnTimer.Resume();
-	}
-
-	//Constructor
-	SlaveManagerClass(
-		TechnoClass* pOwner, InfantryTypeClass* pSlave, int num, int RegenRate,
-		int ReloadRate) noexcept : SlaveManagerClass(noinit_t())
-	{ JMP_THIS(0x6AF1A0); }
-
-protected:
-	explicit __forceinline SlaveManagerClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
+    static const AbstractType AbsID = AbstractType::SlaveManager;
+    static constexpr uintptr_t AbsVTable = 0x7F31C8;
+    static constexpr size_t ClassSize = 0x64;
 
 public:
+    static constexpr constant_ptr<DynamicVectorClass<SlaveManagerClass*>, 0xB0B5F0u> const Array{};
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+public:
+    TechnoClass* Owner;
+    InfantryTypeClass* SlaveType;
+    int SlaveCount;
+    int RegenRate;
+    int ReloadRate;
+    DynamicVectorClass<SlaveControl*> SlaveNodes;
+    CDTimerClass RespawnTimer;
+    SlaveManagerStatus State;
+    int LastScanFrame;
 
-	TechnoClass* Owner;
-	InfantryTypeClass* SlaveType;
-	int SlaveCount;
-	int RegenRate;
-	int ReloadRate;
-	DynamicVectorClass<SlaveControl*> SlaveNodes;
-	CDTimerClass RespawnTimer;
-	SlaveManagerStatus State;
-	int LastScanFrame;
+public:
+    virtual ~SlaveManagerClass() JMP_THIS(0x6AF4A0);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6B1130);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x6B1170);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6B1300);
+    
+    RTTIType KindOf() const override JMP_THIS(0x6B1380);
+    int SizeOf() const override JMP_THIS(0x6B1370);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6B10F0);
+    void AI() override JMP_THIS(0x6AF5F0);
+
+    void SetOwner(TechnoClass* NewOwner) JMP_THIS(0x6AF580);
+    void CreateSlave(SlaveControl* Node) JMP_THIS(0x6AF650);
+    void LostSlave(InfantryClass* Slave) JMP_THIS(0x6B0A20);
+    void Deploy2() JMP_THIS(0x6B0D60);
+    void Killed(TechnoClass* Killer, HouseClass* ForcedOwnerHouse = nullptr) JMP_THIS(0x6B0AE0);
+    bool ShouldWakeUpNow() JMP_THIS(0x6B1020);
+
+/*
+    Cell* Cell1(Cell* a2) JMP_THIS(0x6B0690);
+    Cell* Cell2(Cell* a2) JMP_THIS(0x6B0750);
+    bool Cell3(InfantryClass* infantry, CellClass* cell) JMP_THIS(0x6B0880);
+    void Create_Slave(SlaveControl* ctrl) JMP_THIS(0x6AF650);
+    void Deploy1() JMP_THIS(0x6B0D10);
+    uint32_t* Find_More_Ore(uint32_t* a2) JMP_THIS(0x6B02C0);
+    int32_t Found_More_Ore() JMP_THIS(0x6B0260);
+    void Guard() JMP_THIS(0x6B0CC0);
+    void Harvest() JMP_THIS(0x6B0DB0);
+    void Idle() JMP_THIS(0x6B0C80);
+    void Owner_AI() JMP_THIS(0x6AFD60);
+    void Recall_Slaves() JMP_THIS(0x6B0490);
+    void Release_A_Slave(int32_t a2) JMP_THIS(0x6B0A90);
+    void Send_Slaves() JMP_THIS(0x6B04C0);
+    void Set_State(int32_t a2) JMP_THIS(0x6B10D0);
+    uint64_t Slave_AI() JMP_THIS(0x6AF6C0);
+    int** Where_To_Deploy(int** a2, int32_t a3) JMP_THIS(0x6B0300);
+*/
+
+    // Helper methods
+    void ZeroOutSlaves();
+    void SuspendWork() {
+        this->RespawnTimer.StartTime = -1;
+        if (!this->RespawnTimer.TimeLeft) {
+            this->RespawnTimer.TimeLeft = 1;
+        }
+    }
+    void ResumeWork() {
+        this->RespawnTimer.Resume();
+    }
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline SlaveManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+
+public:
+    SlaveManagerClass(TechnoClass* pOwner, InfantryTypeClass* pSlave, int num, int RegenRate, int ReloadRate) noexcept
+        : SlaveManagerClass(fake_noinit_t()) JMP_THIS(0x6AF1A0);
+    SlaveManagerClass() : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF360);
+    SlaveManagerClass(noinit_t) : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF440);
 };
+
+static_assert(sizeof(SlaveManagerClass) == SlaveManagerClass::ClassSize);
