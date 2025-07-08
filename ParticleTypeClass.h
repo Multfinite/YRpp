@@ -1,86 +1,89 @@
-/*
-	ParticleTypes are initialized by INI files.
-*/
-
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
-//forward declarations
 class WarheadTypeClass;
 class RGBClass;
 
 class NOVTABLE ParticleTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::ParticleType;
+    using base_type = ObjectTypeClass;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F0188;
+            this->IRTTITypeInfo = 0x7F016C;
+            this->INoticeSink = 0x7F0164;
+            this->INoticeSource = 0x7F015C;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	//ObjectTypeClass
-	virtual bool InstantiateAt(CellStruct* mcoords, HouseClass* owner) R0;
-	virtual ObjectClass* Instantiate(HouseClass* owner) R0;
-
-	//Destructor
-	virtual ~ParticleTypeClass() RX;
-
-	//Constructor
-	ParticleTypeClass(const char* pID) noexcept
-		: ParticleTypeClass(noinit_t())
-	{ JMP_THIS(0x644BE0); }
-
-protected:
-	explicit __forceinline ParticleTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::ParticleType;
+    static constexpr uintptr_t AbsVTable = 0x7F0188;
+    static constexpr size_t ClassSize = 0x318;
 
 public:
+    ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
 
-	CoordStruct NextParticleOffset;
-	int    XVelocity;
-	int    YVelocity;
-	int    MinZVelocity;
-	int    ZVelocityRange;
-	double ColorSpeed;
-	TypeList<RGBClass*> ColorList;
-	ColorStruct StartColor1;
-	ColorStruct StartColor2;
-	int    MaxDC;
-	int    MaxEC;
-	WarheadTypeClass* Warhead;
-	int    Damage;
-	int    StartFrame;
-	int    NumLoopFrames;
-	int    Translucency;
-	int    WindEffect;
-	float  Velocity;
-	float  Deacc;
-	int    Radius;
-	bool   DeleteOnStateLimit;
-	BYTE   EndStateAI;
-	BYTE   StartStateAI;
-	BYTE   StateAIAdvance;
-	BYTE   FinalDamageState;
-	BYTE   Translucent25State;
-	BYTE   Translucent50State;
-	bool   Normalized;
-	ParticleTypeClass* NextParticle;
-	BehavesLike BehavesLike;
+public:
+    CoordStruct NextParticleOffset;
+    int XVelocity;
+    int YVelocity;
+    int MinZVelocity;
+    int ZVelocityRange;
+    double ColorSpeed;
+    TypeList<RGBClass*> ColorList;
+    ColorStruct StartColor1;
+    ColorStruct StartColor2;
+    int MaxDC;
+    int MaxEC;
+    WarheadTypeClass* Warhead;
+    int Damage;
+    int StartFrame;
+    int NumLoopFrames;
+    int Translucency;
+    int WindEffect;
+    float Velocity;
+    float Deacc;
+    int Radius;
+    bool DeleteOnStateLimit;
+    BYTE EndStateAI;
+    BYTE StartStateAI;
+    BYTE StateAIAdvance;
+    BYTE FinalDamageState;
+    BYTE Translucent25State;
+    BYTE Translucent50State;
+    bool Normalized;
+    ParticleTypeClass* NextParticle;
+    BehavesLike BehavesLike;
 
+public:
+    virtual ~ParticleTypeClass() JMP_THIS(0x644E40);
+    
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x645620);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x645660);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6457A0);
+    
+    void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x6458B0);
+    RTTIType KindOf() const override JMP_THIS(0x645920);
+    int SizeOf() const override JMP_THIS(0x645910);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6454E0);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x644F50);
+    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x645930);
+    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x645940);
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline ParticleTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+
+public:
+    ParticleTypeClass(const char* pID) noexcept : ParticleTypeClass(fake_noinit_t()) JMP_THIS(0x644BE0);
+    ParticleTypeClass(noinit_t) noexcept : ParticleTypeClass(fake_noinit_t{}) JMP_THIS(0x644DD0);
 };
+static_assert(sizeof(ParticleTypeClass) == ParticleTypeClass::ClassSize);
