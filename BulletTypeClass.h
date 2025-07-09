@@ -26,9 +26,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::BulletType;
-
+	static constexpr AbstractType AbsID = AbstractType::BulletType;
 	static constexpr uintptr_t AbsVTable = 0x7E4948;
+	static constexpr size_t ClassSize = 0x2F8;
 
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);
 	static BulletTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x46C790);
@@ -121,3 +121,4 @@ public:
 	BulletTypeClass(noinit_t) : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BDE0);
 	BulletTypeClass(const char* pId) : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BBC0);
 };
+static_assert(sizeof(BulletTypeClass) == BulletTypeClass::ClassSize);
