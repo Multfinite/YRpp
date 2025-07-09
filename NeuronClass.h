@@ -1,62 +1,72 @@
-/*
-	I have not the slightest idea what this is good for...
-*/
-
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
 class NOVTABLE NeuronClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Neuron;
+    using base_type = AbstractClass;
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7E3DF0;
+            this->IRTTITypeInfo = 0x7E3DD4;
+            this->INoticeSink = 0x7E3DCC;
+            this->INoticeSource = 0x7E3DC4;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~NeuronClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-
-	virtual int SizeOf() const R0;
-
-	//Constructor
-	NeuronClass() noexcept
-		: NeuronClass(noinit_t())
-	{ JMP_THIS(0x43A350); }
-
-protected:
-	explicit __forceinline NeuronClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+    static const AbstractType AbsID = AbstractType::Neuron;
+    static constexpr uintptr_t AbsVTable = 0x7E3DF0;
+    static constexpr size_t ClassSize = 0x38;
 
 public:
+/*
+    void* unknown_ptr_24;
+    void* unknown_ptr_28;
+    void* unknown_ptr_2C;
+    CDTimerClass unknown_timer_30;
+*/
 
-	void* unknown_ptr_24;
-	void* unknown_ptr_28;
-	void* unknown_ptr_2C;
-	CDTimerClass unknown_timer_30;
+    int swizzledword_24;
+    int swizzledword_28;
+    int swizzledword_2C;
+    int timer_30;
+    char field_34;
+    char field_35;
+    char field_36;
+    char field_37;
+
+public:
+    virtual ~NeuronClass() noexcept JMP_THIS(0x43A440);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x43A500);
+    
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x43A540);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x43A5B0);
+    
+    RTTIType KindOf() const override JMP_THIS(0x43A9A0);
+    int SizeOf() const override JMP_THIS(0x43A9B0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x43A5D0);
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline NeuronClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+
+public:
+    NeuronClass() noexcept : NeuronClass(fake_noinit_t()) JMP_THIS(0x43A350);
 };
+static_assert(sizeof(NeuronClass) == NeuronClass::ClassSize);
 
-//Even more questions marks on the use of this... >.<
 class BrainClass
 {
 public:
-	virtual ~BrainClass() RX;
+	virtual ~BrainClass() JMP_THIS(0x43AA90);
 
-	BrainClass()
-		{ THISCALL(0x43A600); }
+	BrainClass() { THISCALL(0x43A600); }
 
-	//Properties
-	VectorClass<NeuronClass*> Neurons;	//???
+	VectorClass<NeuronClass*> Neurons;
 };
