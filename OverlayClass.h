@@ -1,7 +1,3 @@
-/*
-	Overlays (mainly Ore and Gems)
-*/
-
 #pragma once
 
 /*
@@ -33,47 +29,69 @@
 #define OVERLAY_LOBRIDGE3 0x7C
 #define OVERLAY_LOBRIDGE4 0x7D
 
-#include <ObjectClass.h>
-#include <OverlayTypeClass.h>
+#include "ObjectClass.h"
+#include "OverlayTypeClass.h"
 
+ /*!
+ * @brief Overlays (mainly Ore and Gems)
+ */
 class NOVTABLE OverlayClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Overlay;
+    using base_type = ObjectClass;
 
-	//Static
-	static constexpr constant_ptr<DynamicVectorClass<OverlayClass*>, 0xA8EC50u> const Array{};
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7EF3D4;
+            this->IRTTITypeInfo = 0x7EF3CC;
+            this->INoticeSink = 0x7EF3B0;
+            this->INoticeSource = 0x7EF3A8;
+        }
+    };
+    static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~OverlayClass() RX;
-
-	//AbstractClass
-	virtual RTTIType KindOf() const RT(AbstractType);
-	virtual int SizeOf() const R0;
-
-	// Gets overlay's tiberium type
-	static int __fastcall GetTiberiumType(int overlayTypeIndex)
-		{ JMP_THIS(0x5FDD20); }
-
-	//Constructor
-	OverlayClass(OverlayTypeClass* pType, const CellStruct& mapCoord, int flag) noexcept : OverlayClass(noinit_t())
-		{ JMP_THIS(0x5FC380); }
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-protected:
-	explicit OverlayClass(noinit_t) noexcept : ObjectClass(noinit_t())
-		{}
+    static const AbstractType AbsID = AbstractType::Overlay;
+    static constexpr uintptr_t AbsVTable = 0x7EF3D4;
+    static constexpr size_t ClassSize = 0xB0;
 
 public:
+    static constexpr constant_ptr<DynamicVectorClass<OverlayClass*>, 0xA8EC50u> const Array{};
 
-	OverlayTypeClass* Type;
+public:
+    OverlayTypeClass* Type;
+
+public:
+    virtual ~OverlayClass() noexcept JMP_THIS(0x5FC4D0);
+
+    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x5FDF10);
+   
+    HRESULT Load(IStream* pStm) override JMP_THIS(0x5FD8F0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x5FD950);
+   
+    RTTIType KindOf() const override JMP_THIS(0x5FDF50);
+    int SizeOf() const override JMP_THIS(0x5FDF00);
+   
+    ObjectTypeClass* Type() const override JMP_THIS(0x5FDDE0);
+    bool Unlimbo(const Coordinate& coords, Dir256 dir) override JMP_THIS(0x5FD270);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x5FDF60);
+    void DrawAgain(const Point2D& location, const RectangleStruct& bounds) const override JMP_THIS(0x5FD970);
+    bool Mark(MarkType mark) override JMP_THIS(0x5FC570);
+
+    static int __fastcall GetTiberiumType(int overlayTypeIndex) JMP_STD(0x5FDD20);
+
+/*
+    int32_t Read_INI() JMP_THIS(0x5FD2E0);
+    void Write_INI(OverlayClass* pThis) JMP_THIS(0x5FD6A0);
+*/
+
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+
+public:
+    OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) noexcept : OverlayClass(fake_noinit_t()) JMP_THIS(0x5FC380);
+    OverlayClass(noinit_t) noexcept : OverlayClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(OverlayClass) == OverlayClass::ClassSize);
