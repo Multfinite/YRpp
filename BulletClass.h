@@ -113,6 +113,16 @@ public:
     void InitScalable() JMP_THIS(0x46B280);
     void NukeMaker() JMP_THIS(0x46B310);
 
+/*
+    void Adjust_Target() JMP_THIS(0x468430);
+    void Draw_Voxel(VoxelStruct* voxel, Matrix3D_Union* matrix, Point2D* point, Rect* rect, uint32_t frame, int32_t flags, int32_t alphaval) JMP_THIS(0x46B0C0);
+    WeaponTypeClass* Get_WeaponType() JMP_THIS(0x46B270);
+    bool Is_Forced_To_Explode(Coordinate* coords) JMP_THIS(0x468BB0);
+    bool Is_Homing() JMP_THIS(0x46B030);
+    void Radiation(Cell* cell, int32_t radius, int32_t amount) JMP_THIS(0x46ADE0);
+    void Set_WeaponType(WeaponTypeClass* a2) JMP_THIS(0x46B260);
+*/
+
     bool IsHoming() const { return this->Type->ROT > 0; }
     void SetWeaponType(WeaponTypeClass* weapon) { this->WeaponType = weapon; }
     WeaponTypeClass* GetWeaponType() const { return this->WeaponType; }
@@ -126,5 +136,4 @@ public:
     BulletClass() noexcept : BulletClass(fake_noinit_t()) JMP_THIS(0x466380);
     BulletClass(noinit_t) noexcept : BulletClass(fake_noinit_t{}) { vtables.init(this); }
 };
-
 static_assert(sizeof(BulletClass) == BulletClass::ClassSize);
