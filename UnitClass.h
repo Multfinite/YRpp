@@ -1,7 +1,3 @@
-/*
-	Ground & Naval Vehicles
-*/
-
 #pragma once
 
 #include "FootClass.h"
@@ -10,6 +6,9 @@
 //forward declarations
 class EBolt;
 
+/*!
+* @brief Ground & Naval Vehicles
+*/
 class NOVTABLE UnitClass : public FootClass
 {
 public:
