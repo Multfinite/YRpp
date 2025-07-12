@@ -1017,7 +1017,7 @@ public:
 	* @note vtable_index 238:0x3BC
 	* @note address 0x4C9150
 	*/
-	virtual void Destroyed(ObjectClass* Killer) = 0;
+	virtual void Destroyed(ObjectClass* killer) = 0;
 
 	/*!
 	* @note original_name Can_Fire_With_Range
