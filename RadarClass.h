@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DisplayClass.h>
+#include "DisplayClass.h"
 
 class NOVTABLE RadarClass : public DisplayClass
 {

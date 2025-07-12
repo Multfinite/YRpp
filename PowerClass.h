@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RadarClass.h>
+#include "RadarClass.h"
 
 class NOVTABLE PowerClass : public RadarClass
 {

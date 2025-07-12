@@ -1,10 +1,10 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <ArrayClasses.h>
-#include <Interfaces.h>
+#include "YRPPCore.h"
+#include "ArrayClasses.h"
+#include "Interfaces.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class SwizzlePointerClass
 {
