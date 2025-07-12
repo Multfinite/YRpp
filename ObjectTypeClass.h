@@ -89,9 +89,9 @@ public:
 public:
 	virtual ~ObjectTypeClass() JMP_THIS(0x5F7400);
 	
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x5F9720);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x5F9950);
-	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x5F9970);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5F9720);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5F9950);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x5F9970);
 
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5F92D0);
 
@@ -226,6 +226,6 @@ protected:
 		, VoxelMainCache{}, VoxelTurretWeaponCache{}, VoxelShadowCache{}, VoxelTurretBarrelCache{}
 	{ }
 
-	ObjectTypeClass(noinit_t) : ObjectTypeClass(fake_noinit_t{}) JMP_THIS(0x5F7320);
+	ObjectTypeClass(noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) JMP_THIS(0x5F7320);
 	ObjectTypeClass(const char* pId) : ObjectTypeClass(fake_noinit_t{}) JMP_THIS(0x5F7090);
 };

@@ -1,11 +1,9 @@
-/*!
-* @brief TerrainTypeClass - handles terrain type definitions and behaviors
-*/
 #pragma once
 
 #include "ObjectTypeClass.h"
 
-class NOVTABLE TerrainTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE7B-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE TerrainTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -22,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::TerrainType;
+    static constexpr AbstractType AbsID = AbstractType::TerrainType;
     static constexpr uintptr_t AbsVTable = 0x7F5458;
     static constexpr size_t ClassSize = 0x2BC;
 
@@ -47,10 +45,10 @@ public:
 public:
     virtual ~TerrainTypeClass() JMP_THIS(0x71DC00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x71E260);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71E260);
 
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x71E1D0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x71E240);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x71E1D0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71E240);
 
     RTTIType KindOf() const override JMP_THIS(0x71E330);
     int SizeOf() const override JMP_THIS(0x71E340);
@@ -71,13 +69,13 @@ public:
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TerrainTypeClass(fake_noinit_t) noexcept
-        : ObjectTypeClass(fake_noinit_t())
+        : ObjectTypeClass(fake_noinit_t{})
     {}
 
 public:
-    TerrainTypeClass(const char* pID) noexcept : TerrainTypeClass(fake_noinit_t())
+    TerrainTypeClass(const char* pID) : TerrainTypeClass(fake_noinit_t{})
         JMP_THIS(0x71DA80);
-    TerrainTypeClass(noinit_t) noexcept : TerrainTypeClass(fake_noinit_t())
+    TerrainTypeClass(noinit_t) noexcept : TerrainTypeClass(fake_noinit_t{})
         JMP_THIS(0x71DBD0);
 };
 static_assert(sizeof(TerrainTypeClass) == TerrainTypeClass::ClassSize);

@@ -5,7 +5,8 @@
 class WarheadTypeClass;
 class RGBClass;
 
-class NOVTABLE ParticleTypeClass : public ObjectTypeClass
+class __declspec(uuid("703E044B-0FB1-11D2-8172-006008055BB5"))
+NOVTABLE ParticleTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -22,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::ParticleType;
+    static constexpr AbstractType AbsID = AbstractType::ParticleType;
     static constexpr uintptr_t AbsVTable = 0x7F0188;
     static constexpr size_t ClassSize = 0x318;
 
@@ -64,10 +65,10 @@ public:
 public:
     virtual ~ParticleTypeClass() JMP_THIS(0x644E40);
     
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x645620);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x645620);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x645660);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6457A0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x645660);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6457A0);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x6458B0);
     RTTIType KindOf() const override JMP_THIS(0x645920);
@@ -80,10 +81,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline ParticleTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline ParticleTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    ParticleTypeClass(const char* pID) noexcept : ParticleTypeClass(fake_noinit_t()) JMP_THIS(0x644BE0);
+    ParticleTypeClass(const char* pID) : ParticleTypeClass(fake_noinit_t{}) JMP_THIS(0x644BE0);
     ParticleTypeClass(noinit_t) noexcept : ParticleTypeClass(fake_noinit_t{}) JMP_THIS(0x644DD0);
 };
 static_assert(sizeof(ParticleTypeClass) == ParticleTypeClass::ClassSize);

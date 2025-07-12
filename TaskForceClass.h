@@ -10,10 +10,8 @@ struct TaskForceEntryStruct
     TechnoTypeClass* Type;
 };
 
-/*!
-* @brief TaskForceClass - handles AI task force definitions
-*/
-class NOVTABLE TaskForceClass : public AbstractTypeClass
+class __declspec(uuid("61DE341E-0774-11D2-ACA5-006008055BB5"))
+NOVTABLE TaskForceClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -30,7 +28,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::TaskForce;
+    static constexpr AbstractType AbsID = AbstractType::TaskForce;
     static constexpr uintptr_t AbsVTable = 0x7F4680;
     static constexpr size_t ClassSize = 0xD4;
 
@@ -44,12 +42,12 @@ public:
     TaskForceEntryStruct Entries[0x6];
 
 public:
-    virtual ~TaskForceClass() noexcept JMP_THIS(0x6E7F80);
+    virtual ~TaskForceClass() JMP_THIS(0x6E7F80);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E8710);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E8710);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6E86A0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E8680);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6E86A0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x6E8680);
     
     RTTIType KindOf() const override JMP_THIS(0x6E87D0);
     int SizeOf() const override JMP_THIS(0x6E87E0);
@@ -63,7 +61,7 @@ protected:
     explicit __forceinline TaskForceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    TaskForceClass(const char* pID) noexcept : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7E80);
-    TaskForceClass(noinit_t) noexcept : TaskForceClass(fake_noinit_t{}) { vtables.init(this); }
+    TaskForceClass(const char* pID) : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7E80);
+    TaskForceClass(noinit_t) noexcept : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7F50);
 };
 static_assert(sizeof(TaskForceClass) == TaskForceClass::ClassSize);

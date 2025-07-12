@@ -22,7 +22,8 @@ using BulletVelocity = Vector3D<double>;
 /*!
 * @brief Projectiles
 */
-class NOVTABLE BulletClass : public ObjectClass
+class __declspec(uuid("0E272DC9-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE BulletClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -39,7 +40,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Bullet;
+    static constexpr AbstractType AbsID = AbstractType::Bullet;
     static constexpr uintptr_t AbsVTable = 0x7E46E4;
     static constexpr size_t ClassSize = 0x160;
 
@@ -78,15 +79,15 @@ public:
     int Range;
 
 public:
-    virtual ~BulletClass() noexcept JMP_THIS(0x466560);
+    virtual ~BulletClass() JMP_THIS(0x466560);
 
-    ULONG AddRef() override JMP_THIS(0x46AFD0);
-    ULONG Release() override JMP_THIS(0x46AFF0);
+    ULONG AddRef() override JMP_STD(0x46AFD0);
+    ULONG Release() override JMP_STD(0x46AFF0);
     
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x46B560);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46B560);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x46AE70);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x46AFB0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x46AE70);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46AFB0);
     
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x4684E0);
     RTTIType KindOf() const override JMP_THIS(0x46B550);
@@ -130,10 +131,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline BulletClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline BulletClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    BulletClass() noexcept : BulletClass(fake_noinit_t()) JMP_THIS(0x466380);
+    BulletClass() : BulletClass(fake_noinit_t{}) JMP_THIS(0x466380);
     BulletClass(noinit_t) noexcept : BulletClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(BulletClass) == BulletClass::ClassSize);

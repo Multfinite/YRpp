@@ -2,7 +2,8 @@
 
 #include "ObjectTypeClass.h"
 
-class NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE7A-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -19,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::IsotileType;
+    static constexpr AbstractType AbsID = AbstractType::IsotileType;
     static constexpr uintptr_t AbsVTable = 0x7ECC48;
     static constexpr size_t ClassSize = 0x30C;
 
@@ -56,12 +57,12 @@ public:
 	DWORD unk_308;
 
 public:
-    virtual ~IsometricTileTypeClass() noexcept JMP_THIS(0x544A70);
+    virtual ~IsometricTileTypeClass() JMP_THIS(0x544A70);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x549D90);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x549D90);
    
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x549C80);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x549D70);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x549C80);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x549D70);
    
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x549DD0);
     RTTIType KindOf() const override JMP_THIS(0x54A140);
@@ -98,12 +99,11 @@ public:
 */
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline IsometricTileTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline IsometricTileTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
     IsometricTileTypeClass(int ArrayIndex, int Minus65, int Zero1,
-        const char* pName, int Zero2) noexcept : IsometricTileTypeClass(fake_noinit_t()) JMP_THIS(0x5447C0);
-	IsometricTileTypeClass(noinit_t) noexcept : IsometricTileTypeClass(fake_noinit_t()) JMP_THIS(0x544A00);
+        const char* pName, int Zero2) noexcept : IsometricTileTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
+	IsometricTileTypeClass(noinit_t) noexcept : IsometricTileTypeClass(fake_noinit_t{}) JMP_THIS(0x544A00);
 };
-
 static_assert(sizeof(IsometricTileTypeClass) == IsometricTileTypeClass::ClassSize);

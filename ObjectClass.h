@@ -10,7 +10,6 @@
 struct SHPStruct;
 class LightConvertClass;
 
-//forward declarations
 class AnimClass;
 class BombClass;
 class BuildingTypeClass;
@@ -92,7 +91,7 @@ public:
 public:
 	virtual ~ObjectClass() JMP_THIS(0x5F3B80);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x5F5E80);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5F5E80);
 
 	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x5F5230);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5F6250);
@@ -867,7 +866,7 @@ protected:
 
 	/*! @brief FAKE CTOR */
 	explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
-	ObjectClass(noinit_t) : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
+	ObjectClass(noinit_t) noexcept : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
 	ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
 };
 static_assert(sizeof(ObjectClass) == ObjectClass::ClassSize);

@@ -19,7 +19,8 @@ class TagClass;
 class TiberiumClass;
 class PixelFXClass;
 
-class NOVTABLE CellClass : public AbstractClass
+class __declspec(uuid("C1BF99CE-1A8C-11D2-8175-006008055BB5"))
+NOVTABLE CellClass : public AbstractClass
 {
 public:
 	using base_type = AbstractClass;
@@ -137,9 +138,10 @@ public:
 public:
 	virtual ~CellClass() JMP_THIS(0x47BB60);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x485200);
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x4839F0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x483C10);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x485200);
+
+	HRESULT Load(IStream* pStm) override JMP_STD(0x4839F0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x483C10);
 	
 	RTTIType KindOf() const override JMP_THIS(0x487E60);
 	int SizeOf() const override JMP_THIS(0x487E70);
@@ -342,10 +344,10 @@ protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline CellClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-	CellClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x47B360);
+	CellClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x47B360);
 	CellClass() : CellClass(fake_noinit_t{}) JMP_THIS(0x47BBF0);
 
-	/*
+/*
 	CellClass * Adjacent_Cell(int32_t dir) JMP_THIS(0x481810);
 	void Adjust_Threat(int32_t house, int32_t threat_value) JMP_THIS(0x481870);
 	int32_t Attach_Tag(TagClass * celltag) JMP_THIS(0x485250);
@@ -434,6 +436,6 @@ public:
 	bool Valid_Tube_Cell() JMP_THIS(0x484AB0);
 	bool Wall_Check(int32_t overlay_type, int32_t a3) JMP_THIS(0x480510);
 	void Wall_Update(bool a2) JMP_THIS(0x480630);
-	*/
+*/
 };
 static_assert(sizeof(CellClass) == CellClass::ClassSize);

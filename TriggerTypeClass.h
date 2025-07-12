@@ -8,10 +8,8 @@ class TActionClass;
 class TEventClass;
 class TagTypeClass;
 
-/*!
-* @brief TriggerTypeClass - handles trigger definitions and behaviors
-*/
-class NOVTABLE TriggerTypeClass : public AbstractTypeClass
+class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
+NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -28,7 +26,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::TriggerType;
+    static constexpr AbstractType AbsID = AbstractType::TriggerType;
     static constexpr uintptr_t AbsVTable = 0x7F5904;
     static constexpr size_t ClassSize = 0xB4;
 
@@ -49,10 +47,10 @@ public:
 public:
     virtual ~TriggerTypeClass() JMP_THIS(0x726E00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x727BB0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x727BB0);
 
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x727BF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x727CD0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x727BF0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x727CD0);
 
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x727090);
     RTTIType KindOf() const override JMP_THIS(0x727CA0);
@@ -90,11 +88,8 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) {}
-
+    explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
-    TriggerTypeClass(char const* pName) noexcept : TriggerTypeClass(fake_noinit_t())
-        JMP_THIS(0x726C80);
-
+    TriggerTypeClass(char const* pName) : TriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x726C80);
 };
 static_assert(sizeof(TriggerTypeClass) == TriggerTypeClass::ClassSize);

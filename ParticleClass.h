@@ -5,7 +5,8 @@
 
 class ParticleSystemClass;
 
-class NOVTABLE ParticleClass : public ObjectClass
+class __declspec(uuid("0E272DCC-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE ParticleClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -22,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Particle;
+    static constexpr AbstractType AbsID = AbstractType::Particle;
     static constexpr uintptr_t AbsVTable = 0x7EF954;
     static constexpr size_t ClassSize = 0x138;
 
@@ -96,12 +97,12 @@ public:
 */
 
 public:
-    virtual ~ParticleClass() noexcept JMP_THIS(0x62BCC0);
+    virtual ~ParticleClass() JMP_THIS(0x62BCC0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x62D930);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x62D930);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x62D7A0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x62D810);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x62D7A0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x62D810);
    
     RTTIType KindOf() const override JMP_THIS(0x62D980);
     int SizeOf() const override JMP_THIS(0x62D970);
@@ -130,14 +131,13 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline ParticleClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline ParticleClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
     ParticleClass(ParticleTypeClass* pParticleType, Coordinate* pCrd1,
-        Coordinate* pCrd2, ParticleSystemClass* pParticleSystem) noexcept
-        : ParticleClass(fake_noinit_t()) JMP_THIS(0x62B5E0);
-    ParticleClass() noexcept : ParticleClass(fake_noinit_t()) JMP_THIS(0x62BB20);
+        Coordinate* pCrd2, ParticleSystemClass* pParticleSystem)
+        : ParticleClass(fake_noinit_t{}) JMP_THIS(0x62B5E0);
+    ParticleClass() : ParticleClass(fake_noinit_t{}) JMP_THIS(0x62BB20);
     ParticleClass(noinit_t) noexcept : ParticleClass(fake_noinit_t{}) { vtables.init(this); }
 };
-
 static_assert(sizeof(ParticleClass) == ParticleClass::ClassSize);

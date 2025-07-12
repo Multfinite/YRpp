@@ -8,8 +8,11 @@ class ObjectClass;
 class TechnoClass;
 class FootClass;
 
-//The AirstrikeClass handles the airstrikes Boris calls in.
-class NOVTABLE AirstrikeClass : public AbstractClass
+/*!
+* @brief The AirstrikeClass handles the airstrikes Boris calls in.
+*/
+class /*__declspec(uuid(""))*/
+NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
 	using base_type = AbstractClass;
@@ -47,23 +50,21 @@ public:
 	// TeamPointer
 	FootClass* FirstObject;
 public:
-	// scalar: 0x41DD50
-	virtual ~AirstrikeClass() {}
+	virtual ~AirstrikeClass() JMP_THIS(0x41D4C0);
 	
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x41D7A0);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x41D7A0);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x41D6F0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41D780);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x41D6F0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41D780);
 	
 	RTTIType KindOf() const override JMP_THIS(0x41DD40);
 	int SizeOf() const override JMP_THIS(0x41DD30);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41D6E0);
 	void AI() override JMP_THIS(0x41DC50);
 
-	//non-virtual
 	void StartMission(ObjectClass* pTarget) JMP_THIS(0x41D830);
 
-	/*
+/*
 	bool Can_Strike(int32_t target) JMP_THIS(0x41D7E0);
 	void Detach(TechnoClass* arg0) JMP_THIS(0x41D540);
 	FootClass* Remove_Member(FootClass* a2) JMP_THIS(0x41DC80);
@@ -71,12 +72,13 @@ public:
 	void Set_Target(TechnoClass* target) JMP_THIS(0x41DA20);
 	void Setup(TechnoClass* target) JMP_THIS(0x41D860);
 	void Setup_Target(TechnoClass* techno) JMP_THIS(0x41D830);
-	*/
+*/
 
 protected:
 	explicit __forceinline AirstrikeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-	AirstrikeClass(noinit_t) : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
+	AirstrikeClass(noinit_t) noexcept : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
 	AirstrikeClass(TechnoClass* pOwner) : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D380);
+	AirstrikeClass() : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
 };
 static_assert(sizeof(AirstrikeClass) == AirstrikeClass::ClassSize);

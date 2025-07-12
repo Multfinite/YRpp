@@ -157,7 +157,8 @@ struct DropshipStruct
 /*!
 * @brief Players
 */
-class NOVTABLE HouseClass : public AbstractClass, public IHouse, public IPublicHouse, public IConnectionPointContainer
+class __declspec(uuid("D9D4A910-87C6-11D1-B707-00A024DDAFD1"))
+NOVTABLE HouseClass : public AbstractClass, public IHouse, public IPublicHouse, public IConnectionPointContainer
 {
 public:
 	using base_type = AbstractClass;
@@ -480,33 +481,33 @@ public:
 	int PowerSurplus;
 
 public:
-	virtual ~HouseClass() noexcept JMP_THIS(0x4F7140);
+	virtual ~HouseClass() JMP_THIS(0x4F7140);
 	
-	HRESULT STDMETHODCALLTYPE EnumConnectionPoints(__RPC__deref_out_opt IEnumConnectionPoints** ppEnum) override JMP_THIS(0x5024F0);
-	HRESULT STDMETHODCALLTYPE FindConnectionPoint(__RPC__in REFIID riid, __RPC__deref_out_opt IConnectionPoint** ppCP) override JMP_THIS(0x502550);
+	HRESULT STDMETHODCALLTYPE EnumConnectionPoints(__RPC__deref_out_opt IEnumConnectionPoints** ppEnum) override JMP_STD(0x5024F0);
+	HRESULT STDMETHODCALLTYPE FindConnectionPoint(__RPC__in REFIID riid, __RPC__deref_out_opt IConnectionPoint** ppCP) override JMP_STD(0x502550);
 
-	long __stdcall Apparent_Category_Quantity(Category category) const override JMP_THIS(0x4F6A80);
-	long __stdcall Apparent_Category_Power(Category category) const override JMP_THIS(0x4F6B50);
-	CellStruct __stdcall Apparent_Base_Center() const override JMP_THIS(0x4F6D10);
-	bool __stdcall Is_Powered() const override JMP_THIS(0x4F6910);
+	long __stdcall Apparent_Category_Quantity(Category category) const override JMP_STD(0x4F6A80);
+	long __stdcall Apparent_Category_Power(Category category) const override JMP_STD(0x4F6B50);
+	CellStruct __stdcall Apparent_Base_Center() const override JMP_STD(0x4F6D10);
+	bool __stdcall Is_Powered() const override JMP_STD(0x4F6910);
 
-	long __stdcall ID_Number() const override JMP_THIS(0x4F6E60);
-	BSTR __stdcall Name() const override JMP_THIS(0x4F6950);
-	IApplication* __stdcall Get_Application() override JMP_THIS(0x4F6930);
-	long __stdcall Available_Money() const override JMP_THIS(0x4F6990);
-	long __stdcall Available_Storage() const override JMP_THIS(0x4F69D0);
-	long __stdcall Power_Output() const override JMP_THIS(0x4F6A00);
-	long __stdcall Power_Drain() const override JMP_THIS(0x4F6A10);
-	long __stdcall Category_Quantity(Category category) const override JMP_THIS(0x4F6A20);
-	long __stdcall Category_Power(Category category) const override JMP_THIS(0x4F6AE0);
-	CellStruct __stdcall Base_Center() const override JMP_THIS(0x4F6BC0);
-	HRESULT __stdcall Fire_Sale() const override JMP_THIS(0x5013A0);
-	HRESULT __stdcall All_To_Hunt() override JMP_THIS(0x501400);
+	long __stdcall ID_Number() const override JMP_STD(0x4F6E60);
+	BSTR __stdcall Name() const override JMP_STD(0x4F6950);
+	IApplication* __stdcall Get_Application() override JMP_STD(0x4F6930);
+	long __stdcall Available_Money() const override JMP_STD(0x4F6990);
+	long __stdcall Available_Storage() const override JMP_STD(0x4F69D0);
+	long __stdcall Power_Output() const override JMP_STD(0x4F6A00);
+	long __stdcall Power_Drain() const override JMP_STD(0x4F6A10);
+	long __stdcall Category_Quantity(Category category) const override JMP_STD(0x4F6A20);
+	long __stdcall Category_Power(Category category) const override JMP_STD(0x4F6AE0);
+	CellStruct __stdcall Base_Center() const override JMP_STD(0x4F6BC0);
+	HRESULT __stdcall Fire_Sale() const override JMP_STD(0x5013A0);
+	HRESULT __stdcall All_To_Hunt() override JMP_STD(0x501400);
 	
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x5046F0);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x5046F0);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x503040);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x504080);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x503040);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x504080);
 	
 	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x4FB9B0);
 	RTTIType KindOf() const override JMP_THIS(0x50E360);
@@ -1192,7 +1193,7 @@ public:
 protected:
 	explicit __forceinline HouseClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-	HouseClass(HouseTypeClass* pCountry) noexcept : HouseClass(fake_noinit_t{}) JMP_THIS(0x4F54A0);
+	HouseClass(HouseTypeClass* pCountry) : HouseClass(fake_noinit_t{}) JMP_THIS(0x4F54A0);
 	HouseClass(noinit_t) noexcept : HouseClass(fake_noinit_t{}) JMP_THIS(0x4F5190);
 };
 static_assert(sizeof(HouseClass) == HouseClass::ClassSize);

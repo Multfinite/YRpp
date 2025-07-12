@@ -28,7 +28,8 @@ struct SequenceStruct
 	SubSequenceStruct Sequences[42];
 };
 
-class NOVTABLE InfantryTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33D8-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE InfantryTypeClass : public TechnoTypeClass
 {
 public:
 	using base_type = TechnoTypeClass;
@@ -44,8 +45,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::InfantryType;
+	static constexpr AbstractType AbsID = AbstractType::InfantryType;
 	static constexpr uintptr_t AbsVTable = 0x7EB610;
+	static constexpr size_t ClassSize = 0xED0;
 
 	ABSTRACTTYPE_ARRAY(InfantryTypeClass, 0xA8E348u);
 public:
@@ -90,13 +92,12 @@ public:
 	bool JumpJetTurn;
 protected: DWORD align_ECC;
 public:
-	// SDTOR: 0x524D70
-	virtual ~InfantryTypeClass() RX;
+	virtual ~InfantryTypeClass() JMP_THIS(0x5239D0);
 
-	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x524C70);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x524C70);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x524960);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x524B60);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x524960);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x524B60);
 
 	RTTIType KindOf() const override JMP_THIS(0x524D40);
 	int SizeOf() const override JMP_THIS(0x524D50);
@@ -119,6 +120,7 @@ public:
 protected:
 	explicit __forceinline InfantryTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:
-	InfantryTypeClass(noinit_t) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x523980);
+	InfantryTypeClass(noinit_t) noexcept : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x523980);
 	InfantryTypeClass(const char* pId) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x5236A0);
 };
+static_assert(sizeof(InfantryTypeClass) == InfantryTypeClass::ClassSize);

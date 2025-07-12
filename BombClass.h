@@ -7,7 +7,8 @@ class ObjectClass;
 class TechnoClass;
 class HouseClass;
 
-class NOVTABLE BombClass : public AbstractClass
+class __declspec(uuid("0679E983-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE BombClass : public AbstractClass
 {
 public:
 	using base_type = AbstractClass;
@@ -23,8 +24,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::Bomb;
+	static constexpr AbstractType AbsID = AbstractType::Bomb;
 	static constexpr uintptr_t AbsVTable = 0x7E3D10;
+	static constexpr size_t ClassSize = 0x5C;
 public:
 	TechnoClass* Owner;		//Most likely Ivan.
 	HouseClass* OwnerHouse;
@@ -39,9 +41,11 @@ public:
 public:
 	virtual ~BombClass() JMP_THIS(0x438670);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x438B00);
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x438B40);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x438BD0);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x438B00);
+
+	HRESULT Load(IStream* pStm) override JMP_STD(0x438B40);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x438BD0);
+
 	RTTIType KindOf() const override JMP_THIS(0x4393E0);
 	int SizeOf() const override JMP_THIS(0x4393D0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x438A90);
@@ -56,6 +60,7 @@ public:
 protected:
 	explicit __forceinline BombClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-	BombClass(noinit_t) : BombClass(fake_noinit_t{}) JMP_THIS(0x4386F0);
+	BombClass(noinit_t) noexcept : BombClass(fake_noinit_t{}) JMP_THIS(0x4386F0);
 	BombClass() : BombClass(fake_noinit_t{}) JMP_THIS(0x4385D0);	
 };
+static_assert(sizeof(BombClass) == BombClass::ClassSize);

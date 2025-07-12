@@ -35,7 +35,8 @@
  /*!
  * @brief Overlays (mainly Ore and Gems)
  */
-class NOVTABLE OverlayClass : public ObjectClass
+class __declspec(uuid("0E272DC7-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE OverlayClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -52,7 +53,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Overlay;
+    static constexpr AbstractType AbsID = AbstractType::Overlay;
     static constexpr uintptr_t AbsVTable = 0x7EF3D4;
     static constexpr size_t ClassSize = 0xB0;
 
@@ -63,12 +64,12 @@ public:
     OverlayTypeClass* Type;
 
 public:
-    virtual ~OverlayClass() noexcept JMP_THIS(0x5FC4D0);
+    virtual ~OverlayClass() JMP_THIS(0x5FC4D0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x5FDF10);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x5FDF10);
    
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x5FD8F0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x5FD950);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x5FD8F0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FD950);
    
     RTTIType KindOf() const override JMP_THIS(0x5FDF50);
     int SizeOf() const override JMP_THIS(0x5FDF00);
@@ -88,10 +89,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) noexcept : OverlayClass(fake_noinit_t()) JMP_THIS(0x5FC380);
+    OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) : OverlayClass(fake_noinit_t{}) JMP_THIS(0x5FC380);
     OverlayClass(noinit_t) noexcept : OverlayClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(OverlayClass) == OverlayClass::ClassSize);

@@ -10,7 +10,8 @@ class TechnoClass;
 class WeaponTypeClass;
 class WarheadTypeClass;
 
-class NOVTABLE BulletTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE77-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE NOVTABLE BulletTypeClass : public ObjectTypeClass
 {
 public:
 	using base_type = ObjectTypeClass;
@@ -79,10 +80,10 @@ public:
 public:
 	virtual ~BulletTypeClass() JMP_THIS(0x46BE10);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x46C750);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46C750);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x46C6A0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x46C730);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x46C6A0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46C730);
 	
 	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x46C820);
 	RTTIType KindOf() const override JMP_THIS(0x46C850);
@@ -118,7 +119,7 @@ public:
 protected:
 	explicit __forceinline BulletTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
 public:
-	BulletTypeClass(noinit_t) : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BDE0);
+	BulletTypeClass(noinit_t) noexcept : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BDE0);
 	BulletTypeClass(const char* pId) : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BBC0);
 };
 static_assert(sizeof(BulletTypeClass) == BulletTypeClass::ClassSize);

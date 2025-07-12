@@ -17,7 +17,8 @@ struct ControlNode
 /*!
 * @brief CaptureManager - used for mind control.
 */
-class NOVTABLE CaptureManagerClass : public AbstractClass
+class __declspec(uuid("0679E982-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE CaptureManagerClass : public AbstractClass
 {
 public:
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
@@ -32,7 +33,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::CaptureManager;
+    static constexpr AbstractType AbsID = AbstractType::CaptureManager;
     static constexpr uintptr_t AbsVTable = 0x7E4B40;
     static constexpr size_t ClassSize = 0x50;
 
@@ -51,10 +52,10 @@ public:
 public:
     virtual ~CaptureManagerClass() JMP_THIS(0x4719A0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x472960);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x472960);
 
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x472720);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4728E0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x472720);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4728E0);
     
     RTTIType KindOf() const override JMP_THIS(0x4729B0);
     int SizeOf() const override JMP_THIS(0x4729A0);
@@ -84,11 +85,11 @@ public:
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline CaptureManagerClass(fake_noinit_t) noexcept
-        : AbstractClass(fake_noinit_t())
+        : AbstractClass(fake_noinit_t{})
     { }
 
 public:
-    CaptureManagerClass(noinit_t) : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(00471950);
+    CaptureManagerClass(noinit_t) noexcept : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(00471950);
     CaptureManagerClass() : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471890);
     CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
         : CaptureManagerClass(fake_noinit_t{})

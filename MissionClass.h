@@ -333,7 +333,7 @@ public:
 protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {}
-	MissionClass(noinit_t) : MissionClass(fake_noinit_t{}) { vtables.init(this); };
+	MissionClass(noinit_t) noexcept : MissionClass(fake_noinit_t{}) { vtables.init(this); };
 	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };
 static_assert(sizeof(MissionClass) == MissionClass::ClassSize);

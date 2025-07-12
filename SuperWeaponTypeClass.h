@@ -7,10 +7,8 @@ class BuildingTypeClass;
 class ObjectClass;
 class WeaponTypeClass;
 
-/*!
-* @brief SuperWeaponTypeClass - handles super weapon type definitions and behaviors
-*/
-class NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
+class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
+NOVTABLE NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -27,7 +25,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::SuperWeaponType;
+    static constexpr AbstractType AbsID = AbstractType::SuperWeaponType;
     static constexpr uintptr_t AbsVTable = 0x7F4090;
     static constexpr size_t ClassSize = 0x100;
 
@@ -64,12 +62,12 @@ public:
     int LineMultiplier;
 
 public:
-    virtual ~SuperWeaponTypeClass() noexcept JMP_THIS(0x6CE740);
+    virtual ~SuperWeaponTypeClass() JMP_THIS(0x6CE740);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6CE7C0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6CE7C0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6CE800);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6CE8D0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6CE800);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6CE8D0);
     
     RTTIType KindOf() const override JMP_THIS(0x6CE8F0);
     int SizeOf() const override JMP_THIS(0x6CE900);
@@ -84,10 +82,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SuperWeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SuperWeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    SuperWeaponTypeClass(const char* pID) noexcept : SuperWeaponTypeClass(fake_noinit_t()) JMP_THIS(0x6CE5B0);
-    SuperWeaponTypeClass(noinit_t) noexcept : SuperWeaponTypeClass(fake_noinit_t()) JMP_THIS(0x6CE700);
+    SuperWeaponTypeClass(const char* pID) : SuperWeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x6CE5B0);
+    SuperWeaponTypeClass(noinit_t) noexcept : SuperWeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x6CE700);
 };
 static_assert(sizeof(SuperWeaponTypeClass) == SuperWeaponTypeClass::ClassSize);

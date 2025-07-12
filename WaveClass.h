@@ -5,10 +5,8 @@
 
 class TechnoClass;
 
-/*!
-* @brief WaveClass - handles various wave effects in the game
-*/
-class NOVTABLE WaveClass : public ObjectClass
+class __declspec(uuid("0E272DCD-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE WaveClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -25,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Wave;
+    static constexpr AbstractType AbsID = AbstractType::Wave;
     static constexpr uintptr_t AbsVTable = 0x7F6BF4;
     static constexpr size_t ClassSize = 0x240;
 
@@ -73,10 +71,10 @@ public:
 public:
     virtual ~WaveClass() JMP_THIS(0x75ED30);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x75F840);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x75F840);
 
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x75F650);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x75F7D0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x75F650);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75F7D0);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x75F610);
     RTTIType KindOf() const override JMP_THIS(0x7631F0);
@@ -114,7 +112,7 @@ protected:
     explicit __forceinline WaveClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    WaveClass(CoordStruct const& From, CoordStruct const& To, TechnoClass* Owner, WaveType mode, AbstractClass* Target) noexcept
+    WaveClass(CoordStruct const& From, CoordStruct const& To, TechnoClass* Owner, WaveType mode, AbstractClass* Target)
         : WaveClass(fake_noinit_t{})
     JMP_THIS(0x75E950);
     WaveClass() : WaveClass(fake_noinit_t{}) JMP_THIS(0x75EBE0);

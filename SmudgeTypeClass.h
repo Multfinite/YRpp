@@ -2,10 +2,8 @@
 
 #include "ObjectTypeClass.h"
 
-/*!
-* @brief SmudgeTypeClass - handles smudge type definitions
-*/
-class NOVTABLE SmudgeTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE78-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE SmudgeTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -22,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::SmudgeType;
+    static constexpr AbstractType AbsID = AbstractType::SmudgeType;
     static constexpr uintptr_t AbsVTable = 0x7F3528;
     static constexpr size_t ClassSize = 0x2A4;
 
@@ -37,12 +35,12 @@ public:
     bool Burn;
 
 public:
-    virtual ~SmudgeTypeClass() noexcept JMP_THIS(0x6B53A0);
+    virtual ~SmudgeTypeClass() JMP_THIS(0x6B53A0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6B58D0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B58D0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6B5850);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6B58B0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6B5850);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B58B0);
    
     RTTIType KindOf() const override JMP_THIS(0x6B6130);
     int SizeOf() const override JMP_THIS(0x6B6140);
@@ -67,11 +65,11 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SmudgeTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SmudgeTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    SmudgeTypeClass(const char* pID) noexcept : SmudgeTypeClass(fake_noinit_t()) JMP_THIS(0x6B5260);
-    SmudgeTypeClass(noinit_t) noexcept : SmudgeTypeClass(fake_noinit_t{}) JMP_THIS(0x6B5370);
+    SmudgeTypeClass(const char* pID) noexcept : SmudgeTypeClass(fake_noinit_t{}) JMP_THIS(0x6B5260);
+    SmudgeTypeClass(noinit_t) : SmudgeTypeClass(fake_noinit_t{}) JMP_THIS(0x6B5370);
 };
 
 static_assert(sizeof(SmudgeTypeClass) == SmudgeTypeClass::ClassSize);

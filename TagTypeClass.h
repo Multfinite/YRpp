@@ -5,10 +5,8 @@
 class CCINIClass;
 class TriggerTypeClass;
 
-/*!
-* @brief TagTypeClass - handles tag type definitions and behaviors
-*/
-class NOVTABLE TagTypeClass : public AbstractTypeClass
+class __declspec(uuid("54F6E433-09ED-11D2-ACA5-006008055BB5"))
+NOVTABLE TagTypeClass : public AbstractTypeClass
 {
 public:
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
@@ -23,7 +21,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::TagType;
+    static constexpr AbstractType AbsID = AbstractType::TagType;
     static constexpr uintptr_t AbsVTable = 0x7F45C4;
     static constexpr size_t ClassSize = 0xA4;
 
@@ -36,12 +34,12 @@ public:
     TriggerTypeClass* FirstTrigger;
 
 public:
-    virtual ~TagTypeClass() noexcept JMP_THIS(0x6E5CA0);
+    virtual ~TagTypeClass() JMP_THIS(0x6E5CA0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E63A0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E63A0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6E6410);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E6470);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6E6410);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E6470);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x6E5E50);
     RTTIType KindOf() const override JMP_THIS(0x6E6490);
@@ -73,10 +71,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TagTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) { }
+    explicit __forceinline TagTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 
 public:
-    TagTypeClass(char const* pName) noexcept : TagTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
+    TagTypeClass(char const* pName) : TagTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
     TagTypeClass(noinit_t) noexcept : TagTypeClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(TagTypeClass) == TagTypeClass::ClassSize);

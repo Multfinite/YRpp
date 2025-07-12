@@ -9,10 +9,8 @@ class TagClass;
 class TeamClass;
 class TechnoTypeClass;
 
-/*!
-* @brief TeamTypeClass - handles team type definitions and behaviors
-*/
-class NOVTABLE TeamTypeClass : public AbstractTypeClass
+class __declspec(uuid("D1DBA64E-0778-11D2-ACA5-006008055BB5"))
+NOVTABLE TeamTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -29,7 +27,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::TeamType;
+    static constexpr AbstractType AbsID = AbstractType::TeamType;
     static constexpr uintptr_t AbsVTable = 0x7F47D0;
     static constexpr size_t ClassSize = 0xF8;
 
@@ -83,10 +81,10 @@ public:
 public:
     virtual ~TeamTypeClass() JMP_THIS(0x6F08F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6F1C40);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6F1C40);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6F1BB0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6F1B90);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6F1BB0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6F1B90);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x6F1030);
     RTTIType KindOf() const override JMP_THIS(0x6F20A0);
@@ -121,9 +119,9 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TeamTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) {}
+    explicit __forceinline TeamTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 
 public:
-    TeamTypeClass(const char* pID) noexcept : TeamTypeClass(fake_noinit_t()) JMP_THIS(0x6F06E0);
+    TeamTypeClass(const char* pID) : TeamTypeClass(fake_noinit_t{}) JMP_THIS(0x6F06E0);
 };
 static_assert(sizeof(TeamTypeClass) == TeamTypeClass::ClassSize);

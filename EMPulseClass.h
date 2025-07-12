@@ -2,7 +2,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE EMPulseClass : public AbstractClass
+class __declspec(uuid("B825CB22-200E-11D2-9FA9-0060089AD458"))
+NOVTABLE EMPulseClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -19,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::EMPulse;
+    static constexpr AbstractType AbsID = AbstractType::EMPulse;
     static constexpr uintptr_t AbsVTable = 0x7E87A8;
     static constexpr size_t ClassSize = 0x34;
 
@@ -35,10 +36,10 @@ public:
 public:
     virtual ~EMPulseClass() JMP_THIS(0x4C53E0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x4C59F0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4C59F0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x4C5A30);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4C5A80);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x4C5A30);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4C5A80);
     
     RTTIType KindOf() const override JMP_THIS(0x4C5AB0);
     int SizeOf() const override JMP_THIS(0x4C5AA0);
@@ -52,10 +53,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline EMPulseClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline EMPulseClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 public:
-    EMPulseClass(CellStruct dwCrd, int nSpread, int nDuration, TechnoClass* pGenerator) noexcept : EMPulseClass(fake_noinit_t()) JMP_THIS(0x4C52B0);
-    EMPulseClass() noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C5370);
+    EMPulseClass(CellStruct dwCrd, int nSpread, int nDuration, TechnoClass* pGenerator) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C52B0);
+    EMPulseClass() : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C5370);
     EMPulseClass(noinit_t) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C53B0);
 };
 static_assert(sizeof(EMPulseClass) == EMPulseClass::ClassSize);

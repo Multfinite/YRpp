@@ -5,7 +5,8 @@
 /*!
 * @brief LightSource - used for light posts and radiation
 */
-class NOVTABLE LightSourceClass : public AbstractClass
+class __declspec(uuid("6F9C48F0-1207-11D2-8174-006008055BB5"))
+NOVTABLE LightSourceClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -22,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::LightSource;
+    static constexpr AbstractType AbsID = AbstractType::LightSource;
     static constexpr uintptr_t AbsVTable = 0x7ED028;
     static constexpr size_t ClassSize = 0x4C;
 
@@ -37,12 +38,12 @@ public:
     bool Activated;
 
 public:
-    virtual ~LightSourceClass() RX;
+    virtual ~LightSourceClass() JMP_THIS(0x554910);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x555080);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x555080);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x5550C0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x555110);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x5550C0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x555110);
     
     RTTIType KindOf() const override JMP_THIS(0x555140);
     int SizeOf() const override JMP_THIS(0x555130);
@@ -60,16 +61,16 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline LightSourceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline LightSourceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    LightSourceClass(int X, int Y, int Z, int nVisibility, int nIntensity, int Red, int Green, int Blue) noexcept
-        : LightSourceClass(fake_noinit_t()) JMP_THIS(0x554760);
+    LightSourceClass(int X, int Y, int Z, int nVisibility, int nIntensity, int Red, int Green, int Blue)
+        : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554760);
 
-    LightSourceClass(CoordStruct Crd, int nVisibility, int nIntensity, TintStruct Tint) noexcept
-        : LightSourceClass(fake_noinit_t()) JMP_THIS(0x554760);
+    LightSourceClass(CoordStruct Crd, int nVisibility, int nIntensity, TintStruct Tint)
+        : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554760);
 
-    LightSourceClass() noexcept : LightSourceClass(fake_noinit_t{}) { vtables.init(this); }
+    LightSourceClass() : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554830);
+    LightSourceClass(noinit_t) noexcept : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x5548E0);
 };
-
 static_assert(sizeof(LightSourceClass) == LightSourceClass::ClassSize);

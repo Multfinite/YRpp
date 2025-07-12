@@ -26,10 +26,8 @@ struct SpawnControl {
     BOOL IsSpawnMissile;
 };
 
-/*!
-* @brief SpawnManagerClass - handles aircraft spawn management
-*/
-class NOVTABLE SpawnManagerClass : public AbstractClass
+class __declspec(uuid("0679E981-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE SpawnManagerClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -46,7 +44,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::SpawnManager;
+    static constexpr AbstractType AbsID = AbstractType::SpawnManager;
     static constexpr uintptr_t AbsVTable = 0x7F3650;
     static constexpr size_t ClassSize = 0x74;
 
@@ -67,12 +65,12 @@ public:
     SpawnManagerStatus Status;
 
 public:
-    virtual ~SpawnManagerClass() noexcept JMP_THIS(0x6B7010);
+    virtual ~SpawnManagerClass() JMP_THIS(0x6B7010);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6B7ED0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B7ED0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6B7F10);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6B80B0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6B7F10);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B80B0);
     
     RTTIType KindOf() const override JMP_THIS(0x6B8130);
     int SizeOf() const override JMP_THIS(0x6B8120);
@@ -90,12 +88,13 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SpawnManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SpawnManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
     SpawnManagerClass(TechnoClass* pOwner, AircraftTypeClass* pSpawnType, int nMaxNodes,
-        int RegenRate, int ReloadRate) noexcept : SpawnManagerClass(fake_noinit_t()) JMP_THIS(0x6B6C90);
-    SpawnManagerClass() noexcept : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6EA0);
+        int RegenRate, int ReloadRate) : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6C90);
+    SpawnManagerClass() : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6EA0);
+    SpawnManagerClass(noinit_t) noexcept : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6FA0);
 };
 
 static_assert(sizeof(SpawnManagerClass) == SpawnManagerClass::ClassSize);

@@ -6,7 +6,8 @@
 /*!
 * @brief Infantry
 */
-class NOVTABLE InfantryClass : public FootClass
+class __declspec(uuid("0E272DC4-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE InfantryClass : public FootClass
 {
 public:
 	using base_type = FootClass;
@@ -22,7 +23,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::Infantry;
+	static constexpr AbstractType AbsID = AbstractType::Infantry;
 	static constexpr uintptr_t AbsVTable = 0x7EB058;
 	static constexpr size_t ClassSize = 0x6F0;
 
@@ -50,8 +51,8 @@ public:
 
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x523300);
 
-	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x521960);
-	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x521B00);
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_STD(0x521960);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x521B00);
 
 	void Init() override JMP_THIS(0x517CC0);
 	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x51AA10);
@@ -141,40 +142,42 @@ public:
 	*/
 	virtual bool TryChangeState(Sequence index, bool force = false, bool randomStartFrame = false) JMP_THIS(0x51D6F0);
 
-	constexpr bool IsDeployer() const JMP_THIS(0x5224E0);
-	constexpr bool InDeployTansition() const JMP_THIS(0x522510);
-	constexpr int Deploy() JMP_THIS(0x522550);
-	constexpr bool DeployFire() const JMP_THIS(0x522540);
+	bool IsDeployer() const JMP_THIS(0x5224E0);
+	bool InDeployTansition() const JMP_THIS(0x522510);
+	int Deploy() JMP_THIS(0x522550);
+	bool DeployFire() const JMP_THIS(0x522540);
 
-	constexpr void UpdateTube() JMP_THIS(0x51B350);
-	constexpr void UpdateMovement() JMP_THIS(0x520F40);
-	constexpr bool UpdateEdgeOfWorld() JMP_THIS(0x520260);
-	constexpr void UpdateFiring() JMP_THIS(0x5206B0);
-	constexpr int UpdateStateMachine() JMP_THIS(0x520AE0);
-	constexpr void UpdateFear() JMP_THIS(0x5200B0);	
-	constexpr bool UpdateThief() JMP_THIS(0x5202F0);	
-	constexpr int UpdateStorage(TechnoClass* techno) JMP_THIS(0x522D50);
+	void UpdateTube() JMP_THIS(0x51B350);
+	void UpdateMovement() JMP_THIS(0x520F40);
+	bool UpdateEdgeOfWorld() JMP_THIS(0x520260);
+	void UpdateFiring() JMP_THIS(0x5206B0);
+	int UpdateStateMachine() JMP_THIS(0x520AE0);
+	void UpdateFear() JMP_THIS(0x5200B0);	
+	bool UpdateThief() JMP_THIS(0x5202F0);	
+	int UpdateStorage(TechnoClass* techno) JMP_THIS(0x522D50);
 
 	// Shape_Number
-	constexpr int32_t ShapeIndex() const JMP_THIS(0x518D80);
+	int32_t ShapeIndex() const JMP_THIS(0x518D80);
 
-	constexpr void ForceGuard() JMP_THIS(0x522D20);
-	constexpr void ForceHarvest() JMP_THIS(0x522D00);
-	constexpr void InfantryEnteredThing(FootClass* foot) JMP_THIS(0x522910);
+	void ForceGuard() JMP_THIS(0x522D20);
+	void ForceHarvest() JMP_THIS(0x522D00);
+	void InfantryEnteredThing(FootClass* foot) JMP_THIS(0x522910);
 
-	constexpr bool IsDying() const JMP_THIS(0x522CB0);
+	bool IsDying() const JMP_THIS(0x522CB0);
 
-	constexpr bool HasTiberiumLoad() JMP_THIS(0x522D30);
-	constexpr bool HasUndeployDelay() JMP_THIS(0x5224F0);
-	constexpr bool Harvesting() JMP_THIS(0x522FC0);
+	bool HasTiberiumLoad() JMP_THIS(0x522D30);
+	bool HasUndeployDelay() JMP_THIS(0x5224F0);
+	bool Harvesting() JMP_THIS(0x522FC0);
 	
-	constexpr static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x51FB00);
-	constexpr static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x51FEF0);
+	static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x51FB00);
+	static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x51FEF0);
 protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline InfantryClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 
 public:
-	InfantryClass(noinit_t) : FootClass(fake_noinit_t{}) { vtables.init(this); };
-	InfantryClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : InfantryClass(fake_noinit_t()) JMP_THIS(0x517A50);
+	//InfantryClass() {}
+	InfantryClass(noinit_t) noexcept : FootClass(fake_noinit_t{}) { vtables.init(this); };
+	InfantryClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : InfantryClass(fake_noinit_t{}) JMP_THIS(0x517A50);
 };
+static_assert(sizeof(InfantryClass) == InfantryClass::ClassSize);

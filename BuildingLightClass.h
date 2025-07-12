@@ -3,7 +3,8 @@
 #include "GeneralStructures.h"
 #include "ObjectClass.h"
 
-class NOVTABLE BuildingLightClass : public ObjectClass
+class __declspec(uuid("54822258-D8A8-11D1-B462-006097C6A979"))
+NOVTABLE BuildingLightClass : public ObjectClass
 {
 public:
 	using base_type = ObjectClass;
@@ -19,8 +20,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::BuildingLight;
+	static constexpr AbstractType AbsID = AbstractType::BuildingLight;
 	static constexpr uintptr_t AbsVTable = 0x7E3AD0;
+	static constexpr size_t ClassSize = 0xE8;
 public:
 	static constexpr constant_ptr<DynamicVectorClass<BuildingLightClass*>, 0x8B4190u> const Array{};
 public:
@@ -35,10 +37,10 @@ public:
 public:
 	virtual ~BuildingLightClass() JMP_THIS(0x435B50);
 	
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x436910);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x436910);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x436950);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4369C0);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x436950);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4369C0);
 	
 	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x436A00);
 	RTTIType KindOf() const override JMP_THIS(0x4370B0);
@@ -59,6 +61,7 @@ public:
 protected:
 	explicit __forceinline BuildingLightClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 public:
-	BuildingLightClass(noinit_t) : BuildingLightClass(fake_noinit_t{}) { vtables.init(this); }
+	BuildingLightClass(noinit_t) noexcept : BuildingLightClass(fake_noinit_t{}) { vtables.init(this); }
 	BuildingLightClass(ObjectClass* pOwner) : BuildingLightClass(fake_noinit_t{}) JMP_THIS(0x435820);
 };
+static_assert(sizeof(BuildingLightClass) == BuildingLightClass::ClassSize);

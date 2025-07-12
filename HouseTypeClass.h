@@ -7,7 +7,8 @@ class AircraftTypeClass;
 class InfantryTypeClass;
 class UnitTypeClass;
 
-class NOVTABLE HouseTypeClass : public AbstractTypeClass
+class __declspec(uuid("1DD43928-046B-11D2-ACA4-006008055BB5"))
+NOVTABLE HouseTypeClass : public AbstractTypeClass
 {
 public:
 	using base_type = AbstractTypeClass;
@@ -23,8 +24,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::HouseType;
+	static constexpr AbstractType AbsID = AbstractType::HouseType;
 	static constexpr uintptr_t AbsVTable = 0x7EAB58;
+	static constexpr size_t ClassSize = 0x1B0;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
@@ -86,14 +88,16 @@ public:
 public:
 	virtual ~HouseTypeClass() JMP_THIS(0x5116A0);
 
-	HRESULT QueryInterface(REFIID riid, void** ppvObject) override JMP_THIS(0x5125A0);
-	ULONG AddRef() override JMP_THIS(0x512740);
-	ULONG Release() override JMP_THIS(0x512750);
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x512640);
-	HRESULT IsDirty() override JMP_THIS(0x512280);
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x512290);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x512480);
-	HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x512570);
+	HRESULT QueryInterface(REFIID riid, void** ppvObject) override JMP_STD(0x5125A0);
+	ULONG AddRef() override JMP_STD(0x512740);
+	ULONG Release() override JMP_STD(0x512750);
+
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x512640);
+
+	HRESULT IsDirty() override JMP_STD(0x512280);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x512290);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x512480);
+	HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x512570);
 	
 	RTTIType KindOf() const override JMP_THIS(0x512710);
 	int SizeOf() const override JMP_THIS(0x512720);
@@ -109,6 +113,7 @@ public:
 protected:
 	explicit __forceinline HouseTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
-	HouseTypeClass(noinit_t) : HouseTypeClass(fake_noinit_t{}) JMP_THIS(0x511650);
+	HouseTypeClass(noinit_t) noexcept : HouseTypeClass(fake_noinit_t{}) JMP_THIS(0x511650);
 	HouseTypeClass(const char* pId) : HouseTypeClass(fake_noinit_t{}) JMP_THIS(0x5113F0);
 };
+static_assert(sizeof(HouseTypeClass) == HouseTypeClass::ClassSize);

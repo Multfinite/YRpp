@@ -9,7 +9,8 @@ class WeaponTypeClass;
 /*!
 * @brief DiskLasers are the floating disks' purple lasers.
 */
-class NOVTABLE DiskLaserClass : public AbstractClass
+class __declspec(uuid("5230C9A8-846A-47EC-BDA2-7E95445E1D49"))
+NOVTABLE DiskLaserClass : public AbstractClass
 {
 public:
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
@@ -24,7 +25,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::DiskLaser;
+    static constexpr AbstractType AbsID = AbstractType::DiskLaser;
     static constexpr uintptr_t AbsVTable = 0x7E5FB8;
     static constexpr size_t ClassSize = 0x40;
 
@@ -45,10 +46,10 @@ public:
 public:
     virtual ~DiskLaserClass() JMP_THIS(0x4A7B00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x4A7C30);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4A7C30);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x4A7B90);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4A7C10);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x4A7B90);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4A7C10);
    
     RTTIType KindOf() const override JMP_THIS(0x4A7C80);
     int SizeOf() const override JMP_THIS(0x4A7C70);
@@ -60,11 +61,9 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline DiskLaserClass(fake_noinit_t) noexcept
-        : AbstractClass(fake_noinit_t())
-    { }
-
+    explicit __forceinline DiskLaserClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
-    DiskLaserClass() noexcept : DiskLaserClass(fake_noinit_t()) JMP_THIS(0x4A7A30);
+    DiskLaserClass() : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7A30);
+    DiskLaserClass(noinit_t) noexcept : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7AD0);
 };
 static_assert(sizeof(DiskLaserClass) == DiskLaserClass::ClassSize);

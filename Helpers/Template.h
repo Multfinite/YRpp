@@ -104,4 +104,4 @@ public:
 	DWORD data{ 0 };
 };
 
-#include <Helpers/Cast.h>
+#include "Cast.h"

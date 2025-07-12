@@ -5,10 +5,8 @@
 class AnimClass;
 class HouseClass;
 
-/*!
-* @brief SuperClass - handles super weapon behaviors and effects
-*/
-class NOVTABLE SuperClass : public AbstractClass
+class __declspec(uuid("D7F754C6-391C-11D2-9B64-00104B972FE8"))
+NOVTABLE SuperClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -25,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Super;
+    static constexpr AbstractType AbsID = AbstractType::Super;
     static constexpr uintptr_t AbsVTable = 0x7F3FE8;
     static constexpr size_t ClassSize = 0x80;
 
@@ -62,17 +60,16 @@ public:
 public:
     virtual ~SuperClass() noexcept JMP_THIS(0x6CB120);
     
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6CDEB0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6CDEB0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6CDEF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6CDFD0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6CDEF0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6CDFD0);
     
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x6CDFF0);
     RTTIType KindOf() const override JMP_THIS(0x6CE200);
     int SizeOf() const override JMP_THIS(0x6CE210);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6CE020);
 
-    // Super weapon operations
     void CreateChronoAnim(CoordStruct coords) JMP_THIS(0x6CB3A0);
     void Reset() JMP_THIS(0x6CE0B0);
     bool SetOnHold(bool onHold) JMP_THIS(0x6CB4D0);
@@ -103,10 +100,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SuperClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SuperClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    SuperClass(SuperWeaponTypeClass* pSWType, HouseClass* pOwner) noexcept : SuperClass(fake_noinit_t()) JMP_THIS(0x6CAF90);
+    SuperClass(SuperWeaponTypeClass* pSWType, HouseClass* pOwner) noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAF90);
     SuperClass() noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAEC0);
 };
 static_assert(sizeof(SuperClass) == SuperClass::ClassSize);

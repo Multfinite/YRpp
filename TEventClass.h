@@ -6,10 +6,8 @@ class SuperClass;
 class TechnoClass;
 class TeamTypeClass;
 
-/*!
-* @brief TEventClass - handles trigger events and their conditions
-*/
-class NOVTABLE TEventClass : public AbstractClass
+class __declspec(uuid("4F0EC393-0A55-11D2-ACA7-006008055BB5"))
+NOVTABLE TEventClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -26,7 +24,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Event;
+    static constexpr AbstractType AbsID = AbstractType::Event;
     static constexpr uintptr_t AbsVTable = 0x7F5578;
     static constexpr size_t ClassSize = 0x58;
 
@@ -43,13 +41,13 @@ public:
     HouseClass* House;
 
 public:
-    virtual ~TEventClass() noexcept { JMP_THIS(0x71E830); }
+    virtual ~TEventClass() JMP_THIS(0x71E830);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x71F880);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71F880);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x71F8C0);
-    
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x71F930);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x71F8C0);    
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71F930);
+
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x71F800);
     RTTIType KindOf() const override JMP_THIS(0x71FA60);
     int SizeOf() const override JMP_THIS(0x71FA50);
@@ -75,10 +73,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TEventClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t()) {}
+    explicit __forceinline TEventClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-    TEventClass() noexcept : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
+    TEventClass() : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
     TEventClass(noinit_t) noexcept : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E800);
 };
 static_assert(sizeof(TEventClass) == TEventClass::ClassSize);

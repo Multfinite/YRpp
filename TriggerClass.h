@@ -6,10 +6,8 @@ class ObjectClass;
 class TechnoClass;
 class TriggerTypeClass;
 
-/*!
-* @brief TriggerClass - handles trigger instances and their runtime behaviors
-*/
-class NOVTABLE TriggerClass : public AbstractClass
+class __declspec(uuid("C02D1590-0A2A-11D2-ACA7-006008055BB5"))
+NOVTABLE TriggerClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -26,7 +24,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Trigger;
+    static constexpr AbstractType AbsID = AbstractType::Trigger;
     static constexpr uintptr_t AbsVTable = 0x7F5904;
     static constexpr size_t ClassSize = 0x48;
 
@@ -47,10 +45,10 @@ public:
 public:
     virtual ~TriggerClass() JMP_THIS(0x726140);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x726820);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x726820);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x726860);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x7268D0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x726860);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7268D0);
     
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x726690);
     RTTIType KindOf() const override JMP_THIS(0x726940);
@@ -73,14 +71,14 @@ public:
     static TriggerClass* __fastcall GetInstance(TriggerTypeClass* pType) JMP_STD(0x726630);
 
     // Helper methods
-    constexpr void MarkEventAsOccured(int idx) { this->OccuredEvents |= (1u << idx); }
-    constexpr void MarkEventAsNotOccured(int idx) { this->OccuredEvents &= ~(1u << idx); }
-    constexpr bool HasEventOccured(int idx) const { return (this->OccuredEvents & (1u << idx)) != 0u; }
-    constexpr bool HasBeenDestroyed() const { return this->Destroyed; }
-    /*0x726920*/ constexpr void SetHouse(HouseClass* pHouse) { this->House = pHouse; }
-    /*0x726910*/ constexpr HouseClass* GetHouse() const { return this->House; }
-    /*0x7268F0*/ constexpr void Enable() { this->Enabled = true; this->ResetTimers(); }
-    /*0x726900*/ constexpr void Disable() { this->Enabled = false; }
+    void MarkEventAsOccured(int idx) { this->OccuredEvents |= (1u << idx); }
+    void MarkEventAsNotOccured(int idx) { this->OccuredEvents &= ~(1u << idx); }
+    bool HasEventOccured(int idx) const { return (this->OccuredEvents & (1u << idx)) != 0u; }
+    bool HasBeenDestroyed() const { return this->Destroyed; }
+    /*0x726920*/ void SetHouse(HouseClass* pHouse) { this->House = pHouse; }
+    /*0x726910*/ HouseClass* GetHouse() const { return this->House; }
+    /*0x7268F0*/ void Enable() { this->Enabled = true; this->ResetTimers(); }
+    /*0x726900*/ void Disable() { this->Enabled = false; }
 
 /*
     TriggerClass* Find_Or_Make() JMP_THIS(0x726630);
@@ -88,10 +86,9 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TriggerClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t()) {}
+    explicit __forceinline TriggerClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-    TriggerClass(TriggerTypeClass* pType) noexcept  : TriggerClass(fake_noinit_t()) 
-        JMP_THIS(0x725FA0);
+    TriggerClass(TriggerTypeClass* pType) : TriggerClass(fake_noinit_t{}) JMP_THIS(0x725FA0);
 };
 static_assert(sizeof(TriggerClass) == TriggerClass::ClassSize);

@@ -9,7 +9,8 @@ class OverlayTypeClass;
 /*!
 * @brief Tiberiums are initialized by INI files.
 */
-class NOVTABLE TiberiumClass : public AbstractTypeClass
+class __declspec(uuid("C53DD373-151E-11D2-8175-006008055BB5"))
+NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -26,7 +27,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Tiberium;
+    static constexpr AbstractType AbsID = AbstractType::Tiberium;
     static constexpr uintptr_t AbsVTable = 0x7F5728;
     static constexpr size_t ClassSize = 0x128;
 
@@ -61,12 +62,12 @@ public:
     CDTimerClass GrowthTimer;
 
 public:
-    virtual ~TiberiumClass() noexcept JMP_THIS(0x721880);
+    virtual ~TiberiumClass() JMP_THIS(0x721880);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x721E40);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x721E40);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x721E80);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x7220D0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x721E80);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7220D0);
     
     HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
     
@@ -106,12 +107,8 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TiberiumClass(fake_noinit_t) noexcept
-        : AbstractTypeClass(fake_noinit_t())
-    {
-    }
-
+    explicit __forceinline TiberiumClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 public:
-    TiberiumClass(const char* pID) noexcept : TiberiumClass(fake_noinit_t{}) { JMP_THIS(0x7216C0); }
+    TiberiumClass(const char* pID) : TiberiumClass(fake_noinit_t{}) JMP_THIS(0x7216C0);
 };
 static_assert(sizeof(TiberiumClass) == TiberiumClass::ClassSize);

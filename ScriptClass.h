@@ -6,7 +6,8 @@
 #include "AbstractClass.h"
 #include "ScriptTypeClass.h"
 
-class NOVTABLE ScriptClass : public AbstractClass
+class __declspec(uuid("42F3A646-0789-11D2-ACA5-006008055BB5"))
+NOVTABLE ScriptClass : public AbstractClass
 {
 public:
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
@@ -21,7 +22,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Script;
+    static constexpr AbstractType AbsID = AbstractType::Script;
     static constexpr uintptr_t AbsVTable = 0x7F0F78;
     static constexpr size_t ClassSize = 0x30;
 
@@ -33,10 +34,10 @@ public:
 public:
     virtual ~ScriptClass() JMP_THIS(0x691460);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6915F0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6915F0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x691630);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x691690);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x691630);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691690);
     
     RTTIType KindOf() const override JMP_THIS(0x691EC0);
     int SizeOf() const override JMP_THIS(0x691ED0);
@@ -57,12 +58,8 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline ScriptClass(fake_noinit_t) noexcept
-        : AbstractClass(fake_noinit_t())
-    {}
-
+    explicit __forceinline ScriptClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-    ScriptClass(ScriptTypeClass* pType) noexcept : ScriptClass(fake_noinit_t())
-        JMP_THIS(0x6913C0);
+    ScriptClass(ScriptTypeClass* pType) : ScriptClass(fake_noinit_t{}) JMP_THIS(0x6913C0);
 };
 static_assert(sizeof(ScriptClass) == ScriptClass::ClassSize);

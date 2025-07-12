@@ -19,7 +19,8 @@ class CellClass;
 /*!
 * @brief TacticalClass - handles tactical map rendering and display
 */
-class NOVTABLE TacticalClass : public AbstractClass
+class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
+NOVTABLE TacticalClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -36,7 +37,7 @@ public:
     };
     static inline vtables_t vtables{};
 public:
-    static const AbstractType AbsID = AbstractType::SuperWeaponType;
+    static constexpr AbstractType AbsID = AbstractType::TacticalMap;
     static constexpr uintptr_t AbsVTable = 0x7F4348;
     static constexpr size_t ClassSize = 0xE18;
 
@@ -75,7 +76,9 @@ public:
     DWORD field_E14;
 
 public:
-    virtual bool DrawLine_6DBB60(RectangleStruct const& a2, RectangleStruct const& a3, COLORREF a4, bool bool1)JMP_THIS(0x6DBB60);
+    virtual ~TacticalClass() JMP_THIS(0x6D1C20);
+
+    virtual bool DrawLine_6DBB60(RectangleStruct const& a2, RectangleStruct const& a3, COLORREF a4, bool bool1) JMP_THIS(0x6DBB60);
 
     void SetTacticalPosition(CoordStruct* pCoord) JMP_THIS(0x6D6070);
     CellStruct* CoordsToCell(CellStruct* pDest, CoordStruct* pSource) JMP_THIS(0x6D6590);
@@ -139,9 +142,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TacticalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline TacticalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    TacticalClass() noexcept : TacticalClass(fake_noinit_t()) JMP_THIS(0x6D1D50);
+    TacticalClass() : TacticalClass(fake_noinit_t{}) JMP_THIS(0x6D1C20);
+    TacticalClass(noinit_t) noexcept : TacticalClass(fake_noinit_t{}) JMP_THIS(0x6D1E30);
 };
 static_assert(sizeof(TacticalClass) == TacticalClass::ClassSize);

@@ -113,8 +113,8 @@ public:
 public:
 	virtual ~FootClass() JMP_THIS(0x4D3590); // i am not sure about the address
 
-	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x4DB3C0);
-	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x4DB690);
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_STD(0x4DB3C0);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x4DB690);
 
 	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
 	void ComputeCRC(CRCEngine & crc) const override JMP_THIS(0x4DBAD0);
@@ -568,7 +568,7 @@ protected:
 
 	/*! @brief FAKE CTOR */
 	explicit __forceinline FootClass(fake_noinit_t) noexcept : TechnoClass(fake_noinit_t{}) {}
-	FootClass(noinit_t) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x4D3540);
+	FootClass(noinit_t) noexcept : TechnoClass(fake_noinit_t{}) JMP_THIS(0x4D3540);
 	FootClass(HouseClass* house) : FootClass(fake_noinit_t{}) JMP_THIS(0x4D31E0);
 };
 static_assert(sizeof(FootClass) == FootClass::ClassSize);

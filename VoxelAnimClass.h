@@ -10,7 +10,8 @@ class ParticleSystemClass;
 /*!
 * @brief Voxel Animations
 */
-class NOVTABLE VoxelAnimClass : public ObjectClass
+class __declspec(uuid("0E272DC1-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE VoxelAnimClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -27,7 +28,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::VoxelAnim;
+    static constexpr AbstractType AbsID = AbstractType::VoxelAnim;
     static constexpr uintptr_t AbsVTable = 0x7F6318;
     static constexpr size_t ClassSize = 0x148;
 
@@ -53,10 +54,10 @@ public:
 public:
     virtual ~VoxelAnimClass() JMP_THIS(0x7499F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x74AAD0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x74AAD0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x74A970);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x74AA10);
+    HRESULT Load(IStream* pStm) JMP_STD JMP_THIS(0x74A970);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) JMP_STD JMP_THIS(0x74AA10);
    
     RTTIType KindOf() const override JMP_THIS(0x74AB20);
     int SizeOf() const override JMP_THIS(0x74AB10);
@@ -75,10 +76,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline VoxelAnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t()) {}
+    explicit __forceinline VoxelAnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    VoxelAnimClass(VoxelAnimTypeClass* pVoxelAnimType, CoordStruct* pLocation, HouseClass* pOwnerHouse) noexcept
+    VoxelAnimClass(VoxelAnimTypeClass* pVoxelAnimType, CoordStruct* pLocation, HouseClass* pOwnerHouse)
         : VoxelAnimClass(fake_noinit_t{})
         JMP_THIS(0x7493B0);
     VoxelAnimClass() : VoxelAnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);

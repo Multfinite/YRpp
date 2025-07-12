@@ -35,7 +35,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Waypoint;
+    static constexpr AbstractType AbsID = AbstractType::Waypoint;
     static constexpr uintptr_t AbsVTable = 0x7F6E70;
     static constexpr size_t ClassSize = 0x40;
 
@@ -66,13 +66,13 @@ public:
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline WaypointPathClass(fake_noinit_t) noexcept
-        : AbstractClass(fake_noinit_t())
+        : AbstractClass(fake_noinit_t{})
     {}
 
 public:
-    WaypointPathClass(int idx) noexcept : WaypointPathClass(fake_noinit_t())
+    WaypointPathClass(int idx) noexcept : WaypointPathClass(fake_noinit_t{})
         JMP_THIS(0x763810);
-    WaypointPathClass() noexcept : WaypointPathClass(fake_noinit_t())
+    WaypointPathClass() noexcept : WaypointPathClass(fake_noinit_t{})
         JMP_THIS(0x763730);
 };
 static_assert(sizeof(WaypointPathClass) == WaypointPathClass::ClassSize);

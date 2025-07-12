@@ -4,7 +4,8 @@
 #include "ObjectTypeClass.h"
 #include "TerrainClass.h"
 
-class FoggedObjectClass : public AbstractClass
+class __declspec(uuid("1C470B0E-69D7-11D2-B8F2-006008C809ED"))
+NOVTABLE FoggedObjectClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -21,7 +22,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::FoggedObject;
+    static constexpr AbstractType AbsID = AbstractType::FoggedObject;
     static constexpr uintptr_t AbsVTable = 0x7E8B38;
     static constexpr size_t ClassSize = 0x78;
 public:
@@ -47,10 +48,10 @@ public:
 public:
     virtual ~FoggedObjectClass() JMP_THIS(0x4D1650);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x4D27D0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4D27D0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x4D2510);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4D24A0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x4D2510);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4D24A0);
     
     RTTIType KindOf() const override JMP_THIS(0x4D27B0);
     int SizeOf() const override JMP_THIS(0x4D27C0);

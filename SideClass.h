@@ -2,7 +2,8 @@
 
 #include "AbstractTypeClass.h"
 
-class NOVTABLE SideClass : public AbstractTypeClass
+class __declspec(uuid("C53DD372-151E-11D2-8175-006008055BB5"))
+NOVTABLE SideClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -19,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Side;
+    static constexpr AbstractType AbsID = AbstractType::Side;
     static constexpr uintptr_t AbsVTable = 0x7F2EC0;
     static constexpr size_t ClassSize = 0xB4;
 
@@ -31,12 +32,12 @@ public:
     TypeList<int> HouseTypes;
 
 public:
-    virtual ~SideClass() noexcept JMP_THIS(0x6A4610);
+    virtual ~SideClass() JMP_THIS(0x6A4610);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6A4740);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6A4740);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6A4780);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6A48A0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6A4780);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6A48A0);
     
     RTTIType KindOf() const override JMP_THIS(0x6A4920);
     int SizeOf() const override JMP_THIS(0x6A4910);
@@ -44,10 +45,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SideClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SideClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    SideClass(const char* pID) noexcept : SideClass(fake_noinit_t()) JMP_THIS(0x6A4550);
+    SideClass(const char* pID) : SideClass(fake_noinit_t{}) JMP_THIS(0x6A4550);
     SideClass(noinit_t) noexcept : SideClass(fake_noinit_t{}) { vtables.init(this); }
 };
 

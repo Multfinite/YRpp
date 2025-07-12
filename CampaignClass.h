@@ -7,14 +7,14 @@
 /*!
 * @brief Campaign class handling campaign data and progression.
 */
-class NOVTABLE CampaignClass : public AbstractTypeClass
+class __declspec(uuid("FFDAC848-1517-11D2-8175-006008055BB5"))
+NOVTABLE CampaignClass : public AbstractTypeClass
 {
 public:
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
 	{
 		constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
 		{
-			// Addresses will be zeroed as per requirements
 			this->IPersistStream = 0x7E4A28;
 			this->IRTTITypeInfo = 0x7E4A0C;
 			this->INoticeSink = 0x7E4A04;
@@ -23,7 +23,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 
-	static const AbstractType AbsID = AbstractType::Campaign;
+	static constexpr AbstractType AbsID = AbstractType::Campaign;
 	static constexpr uintptr_t AbsVTable = 0x7E4A28;
 	static constexpr size_t ClassSize = 0x3A0;
 public:
@@ -37,10 +37,10 @@ public:
 public:
 	virtual ~CampaignClass() JMP_THIS(0x46CC10);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x46CF80);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46CF80);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x46D000);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x46D050);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x46D000);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46D050);
 	
 	RTTIType KindOf() const override JMP_THIS(0x46D080);
 	int SizeOf() const override JMP_THIS(0x46D070);
@@ -56,7 +56,7 @@ protected:
 		: AbstractTypeClass(fake_noinit_t{}) { }
 
 public:
-	CampaignClass(noinit_t) : CampaignClass(fake_noinit_t{}) { vtables.init(this); }
+	CampaignClass(noinit_t) noexcept : CampaignClass(fake_noinit_t{}) { vtables.init(this); }
 	CampaignClass(const char* name) : CampaignClass(fake_noinit_t{})
 		JMP_THIS(0x46CB60);
 };

@@ -5,7 +5,8 @@
 class SuperClass;
 class TechnoClass;
 
-class NOVTABLE TemporalClass : public AbstractClass
+class __declspec(uuid("94112424-E403-11D3-8E6E-005004AAB2FB"))
+NOVTABLE TemporalClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -22,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Temporal;
+    static constexpr AbstractType AbsID = AbstractType::Temporal;
     static constexpr uintptr_t AbsVTable = 0x7F5180;
     static constexpr size_t ClassSize = 0x50;
 
@@ -41,12 +42,12 @@ public:
     int WarpPerStep;
 
 public:
-    virtual ~TemporalClass() RX;
+    virtual ~TemporalClass() JMP_THIS(0x71A5D0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x71A720);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71A720);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x71A660);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x71A700);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x71A660);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71A700);
     
     RTTIType KindOf() const override JMP_THIS(0x71B1A0);
     int SizeOf() const override JMP_THIS(0x71B190);
@@ -72,7 +73,8 @@ protected:
     explicit __forceinline TemporalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    TemporalClass() noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A450);
-    TemporalClass(TechnoClass* pOwnerUnit) noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A4E0);
+    TemporalClass() : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A450);
+    TemporalClass(noinit_t) noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A5A0);
+    TemporalClass(TechnoClass* pOwnerUnit) : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A4E0);
 };
 static_assert(sizeof(TemporalClass) == TemporalClass::ClassSize);

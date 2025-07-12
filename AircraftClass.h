@@ -6,7 +6,8 @@
 /*!
 * @brief Aircraft
 */
-class NOVTABLE AircraftClass : public FootClass, public IFlyControl
+class __declspec(uuid("0E272DC2-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE AircraftClass : public FootClass, public IFlyControl
 {
 public:
 	using base_type = TechnoClass;
@@ -26,7 +27,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::Aircraft;
+	static constexpr AbstractType AbsID = AbstractType::Aircraft;
 	static constexpr uintptr_t AbsVTable = 0x7E22A4;
 	static constexpr size_t ClassSize = 0x6D8;
 
@@ -51,22 +52,22 @@ public:
 public:
 	virtual ~AircraftClass() JMP_THIS(0x414080);
 
-	int __stdcall Landing_Altitude() override JMP_THIS(0x41B6A0);
-	int __stdcall Landing_Direction() override JMP_THIS(0x41B760);
-	long __stdcall Is_Loaded() override JMP_THIS(0x41B7D0);
-	long __stdcall Is_Strafe() override JMP_THIS(0x41B7F0);
-	long __stdcall Is_Fighter() override JMP_THIS(0x41B840);
-	long __stdcall Is_Locked() override JMP_THIS(0x41B860);
+	int __stdcall Landing_Altitude() override JMP_STD(0x41B6A0);
+	int __stdcall Landing_Direction() override JMP_STD(0x41B760);
+	long __stdcall Is_Loaded() override JMP_STD(0x41B7D0);
+	long __stdcall Is_Strafe() override JMP_STD(0x41B7F0);
+	long __stdcall Is_Fighter() override JMP_STD(0x41B840);
+	long __stdcall Is_Locked() override JMP_STD(0x41B860);
 
 	// Death weapon logic here
-	bool __stdcall Respond(DWORD command) override JMP_THIS(0x41BC30);
-	HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_THIS(0x414290);
-	ULONG __stdcall AddRef() override JMP_THIS(0x4142F0);
-	ULONG __stdcall Release() override JMP_THIS(0x414300);
-	HRESULT __stdcall GetClassID(CLSID* pClassID)  override JMP_THIS(0x41C190);
+	bool __stdcall Respond(DWORD command) override JMP_STD(0x41BC30);
+	HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_STD(0x414290);
+	ULONG __stdcall AddRef() override JMP_STD(0x4142F0);
+	ULONG __stdcall Release() override JMP_STD(0x414300);
+	HRESULT __stdcall GetClassID(CLSID* pClassID)  override JMP_STD(0x41C190);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x41B430);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41B5C0);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41B430);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41B5C0);
 
 	void Init() override JMP_THIS(0x413F80);
 	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x41B660);
@@ -132,7 +133,8 @@ protected:
 	explicit __forceinline AircraftClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 	
 public:
-	AircraftClass(noinit_t) : FootClass(fake_noinit_t{}) { vtables.init(this); }
+	//AircraftClass() {}
+	AircraftClass(noinit_t) noexcept : FootClass(fake_noinit_t{}) { vtables.init(this); }
 	AircraftClass(AircraftTypeClass* type, HouseClass* owner) : AircraftClass(fake_noinit_t{}) JMP_THIS(0x413D20);
 };
 static_assert(sizeof(AircraftClass) == AircraftClass::ClassSize);

@@ -1,13 +1,11 @@
-/*!
-* @brief TerrainClass - handles trees and terrain objects
-*/
 #pragma once
 
 #include "ObjectClass.h"
 #include "TerrainTypeClass.h"
 #include "StageClass.h"
 
-class NOVTABLE TerrainClass : public ObjectClass
+class __declspec(uuid("0E272DCE-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE TerrainClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -24,7 +22,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Terrain;
+    static constexpr AbstractType AbsID = AbstractType::Terrain;
     static constexpr uintptr_t AbsVTable = 0x7F522C;
     static constexpr size_t ClassSize = 0xE0;
 
@@ -42,9 +40,10 @@ public:
     virtual ~TerrainClass() JMP_THIS(0x71B7B0);
 
 public:
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x71D310);
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x71CDA0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x71CF30);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71D310);
+
+    HRESULT Load(IStream* pStm) override JMP_STD(0x71CDA0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71CF30);
     
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x71CFD0);
     RTTIType KindOf() const override JMP_THIS(0x71D300);
@@ -74,12 +73,12 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TerrainClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t()) {}
+    explicit __forceinline TerrainClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    TerrainClass(TerrainTypeClass* tt, CellStruct coords) noexcept : TerrainClass(fake_noinit_t())
+    TerrainClass(TerrainTypeClass* tt, CellStruct coords) : TerrainClass(fake_noinit_t{})
         JMP_THIS(0x71BB90);
-    TerrainClass() noexcept : TerrainClass(fake_noinit_t{})
+    TerrainClass() : TerrainClass(fake_noinit_t{})
         JMP_THIS(0x71BDF0);
 };
 static_assert(sizeof(TerrainClass) == TerrainClass::ClassSize);

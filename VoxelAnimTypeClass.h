@@ -9,7 +9,8 @@ class WarheadTypeClass;
 /*!
 * @brief VoxelAnimTypes are initialized by INI files.
 */
-class NOVTABLE VoxelAnimTypeClass : public ObjectTypeClass
+class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
+NOVTABLE VoxelAnimTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -26,7 +27,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::VoxelAnimType;
+    static constexpr AbstractType AbsID = AbstractType::VoxelAnimType;
     static constexpr uintptr_t AbsVTable = 0x7F6548;
     static constexpr size_t ClassSize = 0x308;
 
@@ -65,10 +66,10 @@ public:
 public:
     virtual ~VoxelAnimTypeClass() JMP_THIS(0x74AF70);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x74B7D0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x74B7D0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x74B810);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x74B8D0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x74B810);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x74B8D0);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x74B8F0);
     RTTIType KindOf() const override JMP_THIS(0x74B9F0);
@@ -88,11 +89,11 @@ public:
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline VoxelAnimTypeClass(fake_noinit_t) noexcept
-        : ObjectTypeClass(fake_noinit_t())
+        : ObjectTypeClass(fake_noinit_t{})
     {}
 
 public:
-    VoxelAnimTypeClass(const char* pID) noexcept : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AD80);
-    VoxelAnimTypeClass() noexcept : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AF70);
+    VoxelAnimTypeClass(const char* pID) : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AD80);
+    VoxelAnimTypeClass() : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AF70);
 };
 static_assert(sizeof(VoxelAnimTypeClass) == VoxelAnimTypeClass::ClassSize);

@@ -1,7 +1,3 @@
-/*
-	TechnoTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -71,6 +67,9 @@ struct WeaponStruct
 		{ return false; }
 };
 
+/*!
+* @brief TechnoTypes are initialized by INI files.
+*/
 class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
@@ -88,6 +87,7 @@ public:
 	static inline vtables_t vtables{};
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F4ED8;
+	static constexpr size_t ClassSize = 0xDF8;
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
 	static constexpr auto MaxWeapons = 18;
@@ -428,9 +428,10 @@ public:
 public:
 	virtual ~TechnoTypeClass() JMP_THIS(0x711AE0);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x7162F0);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x716DC0);
-	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7170A0);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x7162F0);
+
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x716DC0);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x7170A0);
 
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x7171A0);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x712170);
@@ -561,6 +562,7 @@ public:
 
 protected:
 	explicit __forceinline TechnoTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
-	TechnoTypeClass(noinit_t) : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x711840);
+	TechnoTypeClass(noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x711840);
 	TechnoTypeClass(const char* pId, ::SpeedType speed) : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x710AF0);
 };
+static_assert(sizeof(TechnoTypeClass) == TechnoTypeClass::ClassSize);

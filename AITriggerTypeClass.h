@@ -19,7 +19,8 @@ struct AITriggerConditionComparator
 /*!
 * @brief[AITriggerTypes]
 */
-class NOVTABLE AITriggerTypeClass : public AbstractTypeClass
+class __declspec(uuid("BA093524-4CF4-11D2-BC26-00104B8FB04D"))
+NOVTABLE AITriggerTypeClass : public AbstractTypeClass
 {
 public:
 	using base_type = AbstractTypeClass;
@@ -35,8 +36,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::AITriggerType;
+	static constexpr AbstractType AbsID = AbstractType::AITriggerType;
 	static constexpr uintptr_t AbsVTable = 0x7E2A50;
+	static constexpr size_t ClassSize = 0x110;
 
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
 public:
@@ -67,9 +69,11 @@ public:
 public:
 	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x41E500);
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x41E540);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41E5C0);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x41E500);
+
+	HRESULT Load(IStream* pStm) override JMP_STD(0x41E540);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41E5C0);
+
 	RTTIType KindOf() const override JMP_THIS(0x41FFD0);
 	int SizeOf() const override JMP_THIS(0x41FFE0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41E5E0);
@@ -167,7 +171,7 @@ public:
 protected:
 	explicit __forceinline AITriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
-	AITriggerTypeClass(noinit_t) : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
+	AITriggerTypeClass(noinit_t) noexcept : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
 	AITriggerTypeClass(const char* pId) : AITriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x41E350);
 
 /*
@@ -186,3 +190,4 @@ public:
 */
 
 };
+static_assert(sizeof(AITriggerTypeClass) == AITriggerTypeClass::ClassSize);

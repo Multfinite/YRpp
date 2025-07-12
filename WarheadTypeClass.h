@@ -16,10 +16,8 @@ struct WarheadFlags {
     };
 };
 
-/*!
-* @brief WarheadTypeClass - handles warhead type definitions and behaviors
-*/
-class NOVTABLE WarheadTypeClass : public AbstractTypeClass
+class __declspec(uuid("A8C54DA4-0F7B-11D2-8172-006008055BB5"))
+NOVTABLE WarheadTypeClass : public AbstractTypeClass
 {
 public:
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
@@ -34,7 +32,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::WarheadType;
+    static constexpr AbstractType AbsID = AbstractType::WarheadType;
     static constexpr uintptr_t AbsVTable = 0x7F6B30;
     static constexpr size_t ClassSize = 0x1D0;
 
@@ -106,10 +104,10 @@ public:
 public:
     virtual ~WarheadTypeClass() JMP_THIS(0x75D230);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x75E080);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x75E080);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x75E0C0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x75E2C0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x75E0C0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75E2C0);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x75E440);
     RTTIType KindOf() const override JMP_THIS(0x75E500);
@@ -126,10 +124,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline WarheadTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t()) {}
+    explicit __forceinline WarheadTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 
 public:
-    WarheadTypeClass(const char* pID) noexcept : WarheadTypeClass(fake_noinit_t{})
+    WarheadTypeClass(const char* pID) : WarheadTypeClass(fake_noinit_t{})
         JMP_THIS(0x75CEC0);
     WarheadTypeClass(noinit_t) noexcept : WarheadTypeClass(fake_noinit_t{})
         JMP_THIS(0x75D1B0);

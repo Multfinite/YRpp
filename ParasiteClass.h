@@ -5,11 +5,26 @@
 class AnimClass;
 class FootClass;
 
-class NOVTABLE ParasiteClass : public AbstractClass
+class __declspec(uuid("1D016B81-B24B-11D3-BE16-00104B62A16C"))
+NOVTABLE ParasiteClass : public AbstractClass
 {
 public:
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EF890;
+			this->IRTTITypeInfo = 0x7EF874;
+			this->INoticeSink = 0x7EF86C;
+			this->INoticeSource = 0x7EF864;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t AbsVTable = 0x7EF890;
-	static const AbstractType AbsID = AbstractType::Parasite;
+	static constexpr AbstractType AbsID = AbstractType::Parasite;
+	static constexpr size_t ClassSize = 0x58;
 
 	static constexpr constant_ptr<DynamicVectorClass<ParasiteClass*>, 0xAC4910u> const Array{};
 public:
@@ -23,17 +38,18 @@ public:
 	int             GrappleAnimDelay;
 	bool            GrappleAnimGotInvalid;
 public:
-	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x6296D0);
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x6295B0);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6296B0);
+	virtual ~ParasiteClass() JMP_THIS(0x6293E0);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6296D0);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6295B0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6296B0);
+
 	void Detach(AbstractClass* instance, bool all = true) JMP_THIS(0x410480);
 	RTTIType KindOf() const override JMP_THIS(0x62AF60);
 	int SizeOf() const override JMP_THIS(0x62AF50);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6294D0);
 	void AI() override JMP_THIS(0x629FD0);
-
-	virtual ~ParasiteClass() JMP_THIS(0x6293E0);
-
 public:
 	/*!
 	* @brief
@@ -94,6 +110,7 @@ protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline ParasiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-	ParasiteClass(noinit_t) : AbstractClass(fake_noinit_t{}) JMP_THIS(0x629210);
+	ParasiteClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x629210);
 	ParasiteClass(FootClass* owner = nullptr) : ParasiteClass(fake_noinit_t{}) JMP_THIS(0x6292B0);
 };
+static_assert(sizeof(ParasiteClass) == ParasiteClass::ClassSize);

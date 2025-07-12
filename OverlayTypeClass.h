@@ -7,7 +7,8 @@ class AnimTypeClass;
 /*!
 * @brief OverlayTypes are initialized by INI files.
 */
-class NOVTABLE OverlayTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE79-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE OverlayTypeClass : public ObjectTypeClass
 {
 public:
     using base_type = ObjectTypeClass;
@@ -24,7 +25,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::OverlayType;
+    static constexpr AbstractType AbsID = AbstractType::OverlayType;
     static constexpr uintptr_t AbsVTable = 0x7EF600;
     static constexpr size_t ClassSize = 0x2BC;
 
@@ -54,12 +55,12 @@ public:
     ColorStruct RadarColor;
 
 public:
-    virtual ~OverlayTypeClass() noexcept JMP_THIS(0x5FE3F0);
+    virtual ~OverlayTypeClass() JMP_THIS(0x5FE3F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x5FEC30);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x5FEC30);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x5FEAF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x5FEC10);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x5FEAF0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FEC10);
     
     RTTIType KindOf() const override JMP_THIS(0x5FEF00);
     int SizeOf() const override JMP_THIS(0x5FEF10);
@@ -84,11 +85,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline OverlayTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline OverlayTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    OverlayTypeClass(const char* pID) noexcept : OverlayTypeClass(fake_noinit_t()) JMP_THIS(0x5FE250);
-    OverlayTypeClass(noinit_t) noexcept : OverlayTypeClass(fake_noinit_t()) JMP_THIS(0x5FE3C0);
+    OverlayTypeClass(const char* pID) : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE250);
+    OverlayTypeClass(noinit_t) noexcept : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE3C0);
 };
-
 static_assert(sizeof(OverlayTypeClass) == OverlayTypeClass::ClassSize);

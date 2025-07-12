@@ -48,7 +48,8 @@ public:
 	bool* CellIndexesWithVeins;
 };
 
-class NOVTABLE VeinholeMonsterClass : public ObjectClass
+class __declspec(uuid("5192D06A-C632-11D2-B90B-006008C809ED"))
+NOVTABLE VeinholeMonsterClass : public ObjectClass
 {
 public:
 	using base_type = ObjectClass;
@@ -65,7 +66,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 
-	static const AbstractType AbsID = AbstractType::VeinholeMonster;
+	static constexpr AbstractType AbsID = AbstractType::VeinholeMonster;
 	static constexpr uintptr_t AbsVTable = 0x7F4680;
 	static constexpr size_t ClassSize = 0x108;
 
@@ -90,9 +91,9 @@ public:
 public:
 	virtual ~VeinholeMonsterClass() JMP_THIS(0x74C9F0);
 
-	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x74F2D0);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74F2D0);
 
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x74EEE0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x74EEE0);
 
 	RTTIType KindOf() const override JMP_THIS(0x74F310);
 	int SizeOf() const override JMP_THIS(0x74F320);
@@ -169,9 +170,9 @@ public:
 		}
 	}
 protected:
-	explicit __forceinline VeinholeMonsterClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t()) { }
+	explicit __forceinline VeinholeMonsterClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) { }
 public:
-	VeinholeMonsterClass(CellStruct* pWhere) noexcept	: VeinholeMonsterClass(fake_noinit_t()) JMP_THIS(0x74C5B0);
+	VeinholeMonsterClass(CellStruct* pWhere)	: VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C5B0);
 	VeinholeMonsterClass(noinit_t) noexcept : VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C420);
 };
 static_assert(sizeof(VeinholeMonsterClass) == VeinholeMonsterClass::ClassSize);

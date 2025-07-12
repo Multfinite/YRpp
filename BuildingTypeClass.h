@@ -26,7 +26,8 @@ struct BuildingAnimFrameStruct
 	int FrameDuration;
 };
 
-class NOVTABLE BuildingTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33DB-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE BuildingTypeClass : public TechnoTypeClass
 {
 public:
 	using base_type = TechnoTypeClass;
@@ -42,8 +43,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::BuildingType;
+	static constexpr AbstractType AbsID = AbstractType::BuildingType;
 	static constexpr uintptr_t AbsVTable = 0x7E4570;
+	static constexpr size_t ClassSize = 0x1798;
 
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
 public:
@@ -255,10 +257,10 @@ protected: DWORD align_1794;
 public:
 	virtual ~BuildingTypeClass() JMP_THIS(0x45E580);
 
-	HRESULT __stdcall GetClassID(CLSID* pClassID) JMP_THIS(0x465380);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) JMP_STD(0x465380);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x465010);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x465300);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x465010);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x465300);
 
 	RTTIType KindOf() const override JMP_THIS(0x465D90);
 	int SizeOf() const override JMP_THIS(0x465DA0);
@@ -299,6 +301,7 @@ public:
 protected:
 	explicit __forceinline BuildingTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:
-	BuildingTypeClass(noinit_t) : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45E520);
+	BuildingTypeClass(noinit_t) noexcept : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45E520);
 	BuildingTypeClass(const char* pId) : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45DD90);
 };
+static_assert(sizeof(BuildingTypeClass) == BuildingTypeClass::ClassSize);

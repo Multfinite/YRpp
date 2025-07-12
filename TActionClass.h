@@ -8,7 +8,8 @@ class TagTypeClass;
 class TriggerTypeClass;
 class TriggerClass;
 
-class NOVTABLE TActionClass : public AbstractClass
+class __declspec(uuid("4F0EC392-0A55-11D2-ACA7-006008055BB5"))
+NOVTABLE TActionClass : public AbstractClass
 {
 public:
 	using base_type = AbstractClass;
@@ -54,12 +55,12 @@ public:
 	PROTECTED_PROPERTY(BYTE, align_8D[3]);
 	int                Value; // multipurpose
 public:
-	virtual ~TActionClass() noexcept JMP_THIS(0x6DD1B0);
+	virtual ~TActionClass() JMP_THIS(0x6DD1B0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E3D70);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E3D70);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x6E3DB0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E3E30);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x6E3DB0);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E3E30);
 	
 	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x6DD2C0);
 	RTTIType KindOf() const override JMP_THIS(0x6E4640);
@@ -295,7 +296,7 @@ public:
 protected:
 	explicit __forceinline TActionClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
-	TActionClass() noexcept : TActionClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
-	TActionClass(noinit_t) noexcept : TActionClass(fake_noinit_t{}) { vtables.init(this); }
+	TActionClass() : TActionClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
+	TActionClass(noinit_t) noexcept : TActionClass(fake_noinit_t{}) JMP_STD(0x6DD180);
 };
 static_assert(sizeof(TActionClass) == TActionClass::ClassSize);

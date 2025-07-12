@@ -22,13 +22,11 @@ enum class BStateType : unsigned int
 	None = 0xFFFFFFFF,
 };
 
-
-
-
 /*!
 * @brief Buildings
 */
-class NOVTABLE BuildingClass : public TechnoClass
+class __declspec(uuid("0E272DC6-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE BuildingClass : public TechnoClass
 {
 public:
 	using base_type = TechnoClass;
@@ -44,7 +42,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::Building;
+	static constexpr AbstractType AbsID = AbstractType::Building;
 	static constexpr uintptr_t AbsVTable = 0x7E3EBC;
 	static constexpr size_t ClassSize = 0x720;
 
@@ -161,11 +159,10 @@ public:
 public:
 	virtual ~BuildingClass() JMP_THIS(0x43BCF0);
 
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x459E80);
 
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x459E80);
-
-	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x453E20);
-	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x454190);
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_STD(0x453E20);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x454190);
 
 	void Init() override JMP_THIS(0x442C40);
 	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x44E8F0);
@@ -522,6 +519,7 @@ protected:
 	explicit __forceinline BuildingClass(fake_noinit_t) noexcept : TechnoClass(fake_noinit_t{}) {}
 
 public:
-	BuildingClass(noinit_t) : TechnoClass(fake_noinit_t{}) { vtables.init(this); };
-	BuildingClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : BuildingClass(fake_noinit_t()) JMP_THIS(0x43B740);
+	BuildingClass(noinit_t) noexcept : TechnoClass(fake_noinit_t{}) { vtables.init(this); };
+	BuildingClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : BuildingClass(fake_noinit_t{}) JMP_THIS(0x43B740);
 };
+static_assert(sizeof(BuildingClass) == BuildingClass::ClassSize);

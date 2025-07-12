@@ -1,6 +1,3 @@
-/*!
-* @brief SlaveManagerClass - handles Tiberium slave miner management
-*/
 #pragma once
 
 #include "AbstractClass.h"
@@ -28,7 +25,8 @@ enum class SlaveControlStatus : unsigned int {
     Dead = 6
 };
 
-class NOVTABLE SlaveManagerClass : public AbstractClass
+class __declspec(uuid("335AAFE4-2DA6-11D5-BE22-00104B62A16C"))
+NOVTABLE SlaveManagerClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -51,7 +49,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::SlaveManager;
+    static constexpr AbstractType AbsID = AbstractType::SlaveManager;
     static constexpr uintptr_t AbsVTable = 0x7F31C8;
     static constexpr size_t ClassSize = 0x64;
 
@@ -72,10 +70,10 @@ public:
 public:
     virtual ~SlaveManagerClass() JMP_THIS(0x6AF4A0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6B1130);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B1130);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6B1170);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6B1300);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6B1170);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B1300);
     
     RTTIType KindOf() const override JMP_THIS(0x6B1380);
     int SizeOf() const override JMP_THIS(0x6B1370);
@@ -123,13 +121,12 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline SlaveManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline SlaveManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
     SlaveManagerClass(TechnoClass* pOwner, InfantryTypeClass* pSlave, int num, int RegenRate, int ReloadRate) noexcept
-        : SlaveManagerClass(fake_noinit_t()) JMP_THIS(0x6AF1A0);
+        : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF1A0);
     SlaveManagerClass() : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF360);
-    SlaveManagerClass(noinit_t) : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF440);
+    SlaveManagerClass(noinit_t) noexcept : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF440);
 };
-
 static_assert(sizeof(SlaveManagerClass) == SlaveManagerClass::ClassSize);

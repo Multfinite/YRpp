@@ -10,7 +10,8 @@ struct ScriptActionNode
 
 class TechnoTypeClass;
 
-class NOVTABLE ScriptTypeClass : public AbstractTypeClass
+class __declspec(uuid("42F3A647-0789-11D2-ACA5-006008055BB5"))
+NOVTABLE ScriptTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
@@ -27,7 +28,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::ScriptType;
+    static constexpr AbstractType AbsID = AbstractType::ScriptType;
     static constexpr uintptr_t AbsVTable = 0x7F1008;
     static constexpr size_t ClassSize = 0x234;
 
@@ -43,10 +44,10 @@ public:
 public:
     virtual ~ScriptTypeClass() noexcept JMP_THIS(0x691770);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x691D50);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x691D50);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x691D90);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x691DE0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x691D90);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691DE0);
     
     void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x691E30);
     RTTIType KindOf() const override JMP_THIS(0x691F70);
@@ -66,10 +67,9 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline ScriptTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline ScriptTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    ScriptTypeClass(const char* pID) noexcept : ScriptTypeClass(fake_noinit_t()) JMP_THIS(0x6916B0);
+    ScriptTypeClass(const char* pID) noexcept : ScriptTypeClass(fake_noinit_t{}) JMP_THIS(0x6916B0);
 };
-
 static_assert(sizeof(ScriptTypeClass) == ScriptTypeClass::ClassSize);

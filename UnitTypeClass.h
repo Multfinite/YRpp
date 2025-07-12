@@ -4,7 +4,8 @@
 
 class TechnoClass;
 
-class NOVTABLE UnitTypeClass : public TechnoTypeClass
+class __declspec(uuid("DCBD42EA-0546-11D2-ACA4-006008055BB5"))
+NOVTABLE UnitTypeClass : public TechnoTypeClass
 {
 public:
 	using base_type = TechnoTypeClass;
@@ -20,10 +21,10 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::UnitType;
+	static constexpr AbstractType AbsID = AbstractType::UnitType;
 	static constexpr uintptr_t AbsVTable = 0x7F6218;
+	static constexpr size_t ClassSize = 0xE78;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(UnitTypeClass, 0xA83CE0u);
 public:
 	int ArrayIndex;
@@ -67,10 +68,10 @@ public:
 public:
 	virtual ~UnitTypeClass() JMP_THIS(0x7472F0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x747F30);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x747F30);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x748010);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x7480B0);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x748010);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7480B0);
 	
 	RTTIType KindOf() const override JMP_THIS(0x748170);
 	int SizeOf() const override JMP_THIS(0x748160);
@@ -92,6 +93,7 @@ public:
 protected:
 	explicit __forceinline UnitTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:
-	UnitTypeClass(noinit_t) : UnitTypeClass(fake_noinit_t{}) JMP_THIS(0x7472C0);
+	UnitTypeClass(noinit_t) noexcept : UnitTypeClass(fake_noinit_t{}) JMP_THIS(0x7472C0);
 	UnitTypeClass(const char* pId) : UnitTypeClass(fake_noinit_t{}) JMP_THIS(0x7470D0);
 };
+static_assert(sizeof(UnitTypeClass) == UnitTypeClass::ClassSize);

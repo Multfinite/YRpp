@@ -2,7 +2,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE NeuronClass : public AbstractClass
+class __declspec(uuid("241AB316-4CF5-11D2-BC26-00104B8FB04D"))
+NOVTABLE NeuronClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -19,7 +20,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Neuron;
+    static constexpr AbstractType AbsID = AbstractType::Neuron;
     static constexpr uintptr_t AbsVTable = 0x7E3DF0;
     static constexpr size_t ClassSize = 0x38;
 
@@ -41,12 +42,12 @@ public:
     char field_37;
 
 public:
-    virtual ~NeuronClass() noexcept JMP_THIS(0x43A440);
+    virtual ~NeuronClass() JMP_THIS(0x43A440);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x43A500);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x43A500);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x43A540);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x43A5B0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x43A540);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x43A5B0);
     
     RTTIType KindOf() const override JMP_THIS(0x43A9A0);
     int SizeOf() const override JMP_THIS(0x43A9B0);
@@ -54,10 +55,10 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline NeuronClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline NeuronClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    NeuronClass() noexcept : NeuronClass(fake_noinit_t()) JMP_THIS(0x43A350);
+    NeuronClass() : NeuronClass(fake_noinit_t{}) JMP_THIS(0x43A350);
 };
 static_assert(sizeof(NeuronClass) == NeuronClass::ClassSize);
 

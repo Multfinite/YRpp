@@ -13,7 +13,8 @@ class LightConvertClass;
 /*!
 * @brief Animations
 */
-class NOVTABLE AnimClass : public ObjectClass
+class __declspec(uuid("0E272DC3-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE AnimClass : public ObjectClass
 {
 public:
 	using base_type = ObjectClass;
@@ -29,8 +30,9 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::Anim;
+	static constexpr AbstractType AbsID = AbstractType::Anim;
 	static constexpr uintptr_t AbsVTable = 0x7E3354;
+	static constexpr size_t ClassSize = 0x1C8;
 
 	static constexpr constant_ptr<DynamicVectorClass<AnimClass*>, 0xA8E9A8u> const Array{};
 public:
@@ -79,10 +81,10 @@ public:
 public:
 	virtual ~AnimClass() JMP_THIS(0x4228E0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x426540);
+	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x426540);
 	
-	HRESULT Load(IStream* pStm) override JMP_THIS(0x425280);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x4253B0);
+	HRESULT Load(IStream* pStm) override JMP_STD(0x425280);
+	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4253B0);
 	
 	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x425150);
 	RTTIType KindOf() const override JMP_THIS(0x426580);
@@ -155,9 +157,11 @@ public:
 protected:
 	explicit __forceinline AnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 public:
-	AnimClass(noinit_t) : AnimClass(fake_noinit_t{}) JMP_THIS(0x422720);
+	AnimClass() : AnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);
+	AnimClass(noinit_t) noexcept : AnimClass(fake_noinit_t{}) JMP_THIS(0x422720);
 	AnimClass(AnimTypeClass* pAnimType, const CoordStruct& Location, int LoopDelay = 0,
 		int LoopCount = 1, DWORD flags = 0x600, int ForceZAdjust = 0, bool reverse = false) noexcept
 		: AnimClass(noinit_t())
 	JMP_THIS(0x421EA0);
 };
+static_assert(sizeof(AnimClass) == AnimClass::ClassSize);

@@ -4,7 +4,8 @@
 #include "ParticleSystemTypeClass.h"
 #include "ParticleClass.h"
 
-class NOVTABLE ParticleSystemClass : public ObjectClass
+class __declspec(uuid("0E272DC8-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE ParticleSystemClass : public ObjectClass
 {
 public:
     using base_type = ObjectClass;
@@ -21,7 +22,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::ParticleSystem;
+    static constexpr AbstractType AbsID = AbstractType::ParticleSystem;
     static constexpr uintptr_t AbsVTable = 0x7EFB9C;
     static constexpr size_t ClassSize = 0x100;
 
@@ -45,12 +46,12 @@ public:
     HouseClass* OwnerHouse;
 
 public:
-    virtual ~ParticleSystemClass() noexcept JMP_THIS(0x62E070);
+    virtual ~ParticleSystemClass() JMP_THIS(0x62E070);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6301A0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6301A0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x62FF20);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x630090);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x62FF20);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x630090);
     
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x62FE90);
     RTTIType KindOf() const override JMP_THIS(0x630210);
@@ -79,14 +80,13 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline ParticleSystemClass(fake_noinit_t) noexcept : base_type(fake_noinit_t()) {}
+    explicit __forceinline ParticleSystemClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
     ParticleSystemClass(ParticleSystemTypeClass* pParticleSystemType, const CoordStruct& coords,
         AbstractClass* pTarget, ObjectClass* pOwner, const CoordStruct& targetCoords,
-        HouseClass* pOwnerHouse) noexcept : ParticleSystemClass(fake_noinit_t()) JMP_THIS(0x62DC50);
-    ParticleSystemClass()  noexcept : ParticleSystemClass(fake_noinit_t()) JMP_THIS(0x62DC50);
-    ParticleSystemClass(noinit_t)  noexcept : ParticleSystemClass(fake_noinit_t()) { vtables.init(this); }
+        HouseClass* pOwnerHouse) : ParticleSystemClass(fake_noinit_t{}) JMP_THIS(0x62DC50);
+    ParticleSystemClass() : ParticleSystemClass(fake_noinit_t{}) JMP_THIS(0x62DC50);
+    ParticleSystemClass(noinit_t)  noexcept : ParticleSystemClass(fake_noinit_t{}) { vtables.init(this); }
 };
-
 static_assert(sizeof(ParticleSystemClass) == ParticleSystemClass::ClassSize);

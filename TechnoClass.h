@@ -417,8 +417,8 @@ public:
 public:
 	virtual ~TechnoClass() JMP_THIS(0x6F4500);
 
-	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_THIS(0x70BF50);
-	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_THIS(0x70C250);
+	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_STD(0x70BF50);
+	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x70C250);
 	
 	void Init() override JMP_THIS(0x6F3F40);
 	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
@@ -2188,10 +2188,9 @@ public:
 	}
 
 protected:
-
 	/*! @brief FAKE CTOR */
 	explicit __forceinline TechnoClass(fake_noinit_t) noexcept : RadioClass(fake_noinit_t{}) {}
-	TechnoClass(noinit_t) : RadioClass(fake_noinit_t{}) JMP_THIS(0x6F4300);
+	TechnoClass(noinit_t) noexcept : RadioClass(fake_noinit_t{}) JMP_THIS(0x6F4300);
 	TechnoClass(HouseClass* house) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x6F2B40);
 };
 static_assert(sizeof(TechnoClass) == TechnoClass::ClassSize);

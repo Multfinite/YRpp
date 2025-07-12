@@ -2,7 +2,8 @@
 
 #include "TechnoTypeClass.h"
 
-class NOVTABLE AircraftTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33D9-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE AircraftTypeClass : public TechnoTypeClass
 {
 public:
 	using base_type = TechnoTypeClass;
@@ -18,7 +19,7 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-	static const AbstractType AbsID = AbstractType::AircraftType;
+	static constexpr AbstractType AbsID = AbstractType::AircraftType;
 	static constexpr uintptr_t AbsVTable = 0x7E2868;
 	static constexpr size_t ClassSize = 0xE10;
 
@@ -38,10 +39,10 @@ public:
 public:
 	virtual ~AircraftTypeClass() JMP_THIS(0x41CA20);
 
-	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x41CEB0);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41CEB0);
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x41CE20);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x41CE90);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41CE20);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41CE90);
 
 	RTTIType KindOf() const override JMP_THIS(0x41CFB0);
 	int SizeOf() const override JMP_THIS(0x41CFC0);

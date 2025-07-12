@@ -4,10 +4,8 @@
 
 class TriggerClass;
 
-/*!
-* @brief TagClass - handles tag behaviors and trigger associations
-*/
-class NOVTABLE TagClass : public AbstractClass
+class __declspec(uuid("54F6E432-09ED-11D2-ACA5-006008055BB5"))
+NOVTABLE TagClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -23,7 +21,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::Tag;
+    static constexpr AbstractType AbsID = AbstractType::Tag;
     static constexpr uintptr_t AbsVTable = 0x7F44E0;
     static constexpr size_t ClassSize = 0x38;
 
@@ -40,12 +38,12 @@ public:
     PROTECTED_PROPERTY(BYTE, padding_36[2]);
 
 public:
-    virtual ~TagClass() noexcept JMP_THIS(0x6E4F60);
+    virtual ~TagClass() JMP_THIS(0x6E4F60);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x6E56A0);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E56A0);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x6E5730);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x6E57A0);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x6E5730);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E57A0);
    
     void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x6E5610);
     RTTIType KindOf() const override JMP_THIS(0x6E58A0);
@@ -82,9 +80,9 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline TagClass(fake_noinit_t) noexcept  : AbstractClass(fake_noinit_t()) {}
+    explicit __forceinline TagClass(fake_noinit_t) noexcept  : AbstractClass(fake_noinit_t{}) {}
 public:
-    TagClass(TagTypeClass* pType) noexcept : TagClass(fake_noinit_t{}) JMP_THIS(0x6E4DE0);
+    TagClass(TagTypeClass* pType) : TagClass(fake_noinit_t{}) JMP_THIS(0x6E4DE0);
     TagClass(noinit_t) noexcept : TagClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(TagClass) == TagClass::ClassSize);

@@ -1,6 +1,3 @@
-/*!
-* @brief RadSiteClass - handles radiation effects and behaviors
-*/
 #pragma once
 
 #include "AbstractClass.h"
@@ -8,7 +5,8 @@
 class LightSourceClass;
 class WeaponTypeClass;
 
-class NOVTABLE RadSiteClass : public AbstractClass
+class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
+NOVTABLE RadSiteClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
@@ -25,7 +23,7 @@ public:
     };
     static inline vtables_t vtables{};
 
-    static const AbstractType AbsID = AbstractType::RadSite;
+    static constexpr AbstractType AbsID = AbstractType::RadSite;
     static constexpr uintptr_t AbsVTable = 0x7F0810;
     static constexpr size_t ClassSize = 0x74;
 
@@ -51,10 +49,10 @@ public:
 public:
     virtual ~RadSiteClass() JMP_THIS(0x65B2F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x65B470);
+    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x65B470);
    
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x65B3D0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x65B450);
+    HRESULT Load(IStream* pStm) override JMP_STD(0x65B3D0);
+    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x65B450);
    
     RTTIType KindOf() const override JMP_THIS(0x65B3C0);
     int SizeOf() const override JMP_THIS(0x65B3A0);
@@ -82,16 +80,16 @@ public:
 
 protected:
     /*! @brief FAKE CTOR */
-    explicit __forceinline RadSiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t()) {}
+    explicit __forceinline RadSiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-    RadSiteClass() noexcept : RadSiteClass(fake_noinit_t()) JMP_THIS(0x65B1E0);
-    RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) noexcept : RadSiteClass()
+    RadSiteClass() : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B1E0);
+    RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) : RadSiteClass()
     {
         SetBaseCell(&nBaseCoords);
         SetSpread(nSpread);
         SetRadLevel(nRadLevel);
     }
-    RadSiteClass(noinit_t) : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B2A0);
+    RadSiteClass(noinit_t) noexcept : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B2A0);
 };
 static_assert(sizeof(RadSiteClass) == RadSiteClass::ClassSize);
