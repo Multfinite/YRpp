@@ -108,8 +108,8 @@ public:
 
 	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x5247D0);
 	Point3D LeptonDimensions() const override JMP_THIS(0x524760);
-	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
-	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x523B10);
+	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
+	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x523B10);
 	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x523C20);
 
 	bool CanUseWaypoint() const override JMP_THIS(0x5247B0);

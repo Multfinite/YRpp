@@ -71,8 +71,8 @@ public:
     int ArrayIndex() const override JMP_THIS(0x54A160);
    
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x549B50);
-    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
-    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x549AE0);
+    bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
+    ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x549AE0);
     CellStruct* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x544D30);
     SHPStruct* GetImage() const override JMP_THIS(0x544CB0);
 

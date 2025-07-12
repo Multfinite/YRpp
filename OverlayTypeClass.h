@@ -69,8 +69,8 @@ public:
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5FE770);
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x5FEA30);
-    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x5FE530);
-    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x5FE570);
+    bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x5FE530);
+    ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x5FE570);
     CellStruct* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x5FE4C0);
     SHPStruct* GetImage() const override JMP_THIS(0x5FEDE0);
 

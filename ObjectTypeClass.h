@@ -141,7 +141,7 @@ public:
 	* @note vtable_index 32:0x80
 	* @note address 0x4C9150
 	*/
-	virtual bool InstantiateAt(CellStruct& position, HouseClass* pOwner) = 0;
+	virtual bool CreateAt(CellStruct& position, HouseClass* pOwner) = 0;
 
 	/*!
 	* @brief
@@ -165,7 +165,7 @@ public:
 	* @note vtable_index 35:0x8C
 	* @note address 0x4C9150
 	*/
-	virtual ObjectClass* Instantiate(HouseClass* pOwner) = 0;
+	virtual ObjectClass* Create(HouseClass* pOwner) = 0;
 
 	/*!
 	* @brief list of occypied cells. Foundation for buildings. placement was called includeBib

@@ -273,9 +273,9 @@ public:
 	int MaxPips() const override JMP_THIS(0x45ECE0);
 	Point3D PixelDimensions() const override JMP_THIS(0x45EBD0);
 	Point3D LeptonDimensions() const override JMP_THIS(0x464AF0);
-	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
+	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
 	int CostOf(HouseClass* pHouse) const override JMP_THIS(0x45EDD0);
-	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x45E880);
+	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x45E880);
 	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x45EC20);
 	SHPStruct* GetImage() const override JMP_THIS(0x45F040);
 

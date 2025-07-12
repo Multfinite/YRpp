@@ -122,8 +122,8 @@ public:
 	int ArrayIndex() const override JMP_THIS(0x428E60);
 	void LoadTheaterSpecificArt(TheaterType th_type) override JMP_THIS(0x427A80);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x427D00);
-	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x428E80);
-	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x428E90);
+	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x428E80);
+	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x428E90);
 	SHPStruct* GetImage() const override JMP_THIS(0x428C30);
 	
 	/*!

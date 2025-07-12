@@ -92,8 +92,8 @@ public:
 	
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46BEE0);
 	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x46C4F0);
-	bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
-	ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x46C880);
+	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
+	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x46C880);
 
 	bool Rotates() const { return !this->NoRotate; }
 

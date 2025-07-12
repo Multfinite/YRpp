@@ -65,8 +65,8 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x644700);
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6442D0);
-    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x644940);
-    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x644950);
+    bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x644940);
+    ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x644950);
 
     static ParticleSystemTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x644890);
 

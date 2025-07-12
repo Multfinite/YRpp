@@ -48,8 +48,8 @@ public:
     int ArrayIndex() const override JMP_THIS(0x6B6150);
    
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6B56D0);
-    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x6B5550);
-    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x6B55C0);
+    bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x6B5550);
+    ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x6B55C0);
     
     virtual void DrawIt(const Point2D& Point, const RectangleStruct& Rect, int SmudgeData, int Height, const CellStruct& MapCoords) JMP_THIS(0x6B55F0);
 

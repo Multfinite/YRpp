@@ -57,8 +57,8 @@ public:
     int ArrayIndex() const override JMP_THIS(0x71E350);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x71DEA0);
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x71E0D0);
-    bool InstantiateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
-    ObjectClass* Instantiate(HouseClass* pOwner) override JMP_THIS(0x71DE10);
+    bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
+    ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x71DE10);
     CellStruct* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x71DE40); cupy_List(bool placement) const override JMP_THIS(0x71DE40);
 
     static TerrainTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x71E2A0);
