@@ -45,6 +45,7 @@ public:
 public:
 	static constexpr uintptr_t AbsVTable = 0x7E2000;
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
+	static constexpr size_t ClassSize = 0x98;
 
 	static constexpr constant_ptr<DynamicVectorClass<AbstractTypeClass*>, 0xA8E968u> const Array{};
 public:
@@ -92,3 +93,4 @@ protected:
 	AbstractTypeClass(noinit_t) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410960);
 	AbstractTypeClass(char* pId) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410800);
 };
+static_assert(sizeof(AbstractTypeClass) == AbstractTypeClass::ClassSize);
