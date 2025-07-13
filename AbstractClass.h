@@ -247,7 +247,6 @@ protected:
 	explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
 	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
 	AbstractClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
-	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
 };
 static_assert(sizeof(AbstractClass) == AbstractClass::ClassSize);
 
