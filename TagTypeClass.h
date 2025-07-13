@@ -29,7 +29,7 @@ public:
     ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
 
 public:
-    int ArrIndex;
+    int ArrayIndex;
     TriggerPersistence Persistence;
     TriggerTypeClass* FirstTrigger;
 
