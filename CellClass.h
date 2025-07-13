@@ -283,7 +283,7 @@ public:
 	ISTILE(NotWater, 0x4867E0);
 	ISTILE(DestroyableCliff, 0x486900);
 
-	constexpr static CoordStruct Cell2Coord(CellStruct const& cell, int z = 0)
+	inline static CoordStruct Cell2Coord(CellStruct const& cell, int z = 0)
 	{
 		CoordStruct ret;
 		ret.X = cell.X * 256 + 128;
@@ -292,7 +292,7 @@ public:
 		return ret;
 	}
 
-	constexpr  static CellStruct Coord2Cell(CoordStruct const& crd)
+	inline static CellStruct Coord2Cell(CoordStruct const& crd)
 	{
 		CellStruct ret;
 		ret.X = static_cast<short>(crd.X / 256);
@@ -300,7 +300,7 @@ public:
 		return ret;
 	}
 
-	constexpr CoordStruct FixHeight(CoordStruct crd) const
+	inline CoordStruct FixHeight(CoordStruct crd) const
 	{
 		if (this->ContainsBridge())
 			crd.Z += BridgeHeight;
@@ -309,15 +309,15 @@ public:
 	}
 
 	// helper - gets coords and fixes height for bridge
-	constexpr  CoordStruct GetCoordsWithBridge() const
+	constexpr CoordStruct GetCoordsWithBridge() const
 	{
 		CoordStruct buffer = this->Center();
 		return FixHeight(buffer);
 	}
 
-	constexpr  void MarkForRedraw() JMP_THIS(0x486E70);
+	void MarkForRedraw() JMP_THIS(0x486E70);
 
-	constexpr  void ChainReaction()
+	void ChainReaction()
 	{
 		CellStruct* cell = &this->MapCoords;
 		SET_REG32(ecx, cell);
