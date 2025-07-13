@@ -44,10 +44,10 @@ public:
 public:
     virtual ~TaskForceClass() JMP_THIS(0x6E7F80);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E8710);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E8710);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6E86A0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x6E8680);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E86A0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x6E8680);
     
     RTTIType KindOf() const override JMP_THIS(0x6E87D0);
     int SizeOf() const override JMP_THIS(0x6E87E0);

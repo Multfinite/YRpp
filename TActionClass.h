@@ -57,10 +57,10 @@ public:
 public:
 	virtual ~TActionClass() JMP_THIS(0x6DD1B0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E3D70);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E3D70);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x6E3DB0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E3E30);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E3DB0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E3E30);
 	
 	void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x6DD2C0);
 	RTTIType KindOf() const override JMP_THIS(0x6E4640);

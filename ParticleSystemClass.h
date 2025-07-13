@@ -48,10 +48,10 @@ public:
 public:
     virtual ~ParticleSystemClass() JMP_THIS(0x62E070);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6301A0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6301A0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x62FF20);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x630090);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x62FF20);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x630090);
     
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x62FE90);
     RTTIType KindOf() const override JMP_THIS(0x630210);

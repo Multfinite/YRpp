@@ -52,10 +52,10 @@ public:
 public:
     virtual ~CaptureManagerClass() JMP_THIS(0x4719A0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x472960);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x472960);
 
-    HRESULT Load(IStream* pStm) override JMP_STD(0x472720);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4728E0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x472720);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4728E0);
     
     RTTIType KindOf() const override JMP_THIS(0x4729B0);
     int SizeOf() const override JMP_THIS(0x4729A0);

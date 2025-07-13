@@ -46,10 +46,10 @@ public:
 public:
     virtual ~WaypointPathClass() JMP_THIS(0x7638C0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_THIS(0x763C30);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x763C30);
     
-    HRESULT Load(IStream* pStm) override JMP_THIS(0x763C70);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x763D90);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x763C70);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x763D90);
     
     RTTIType KindOf() const override JMP_THIS(0x763E10);
     int SizeOf() const override JMP_THIS(0x763E00);

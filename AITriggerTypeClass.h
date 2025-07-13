@@ -69,10 +69,10 @@ public:
 public:
 	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x41E500);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41E500);
 
-	HRESULT Load(IStream* pStm) override JMP_STD(0x41E540);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41E5C0);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41E540);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41E5C0);
 
 	RTTIType KindOf() const override JMP_THIS(0x41FFD0);
 	int SizeOf() const override JMP_THIS(0x41FFE0);

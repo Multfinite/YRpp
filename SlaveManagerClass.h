@@ -70,10 +70,10 @@ public:
 public:
     virtual ~SlaveManagerClass() JMP_THIS(0x6AF4A0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B1130);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B1130);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6B1170);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B1300);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B1170);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B1300);
     
     RTTIType KindOf() const override JMP_THIS(0x6B1380);
     int SizeOf() const override JMP_THIS(0x6B1370);

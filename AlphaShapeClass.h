@@ -41,10 +41,10 @@ public:
 public:
 	virtual ~AlphaShapeClass() JMP_THIS(0x420C80);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x420D40);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x420D40);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x420DE0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x420E40);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x420DE0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x420E40);
 	
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x420E70);
 	RTTIType KindOf() const override JMP_THIS(0x420D80);

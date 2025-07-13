@@ -67,10 +67,10 @@ public:
 public:
     virtual ~SpawnManagerClass() JMP_THIS(0x6B7010);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B7ED0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B7ED0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6B7F10);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B80B0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B7F10);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B80B0);
     
     RTTIType KindOf() const override JMP_THIS(0x6B8130);
     int SizeOf() const override JMP_THIS(0x6B8120);

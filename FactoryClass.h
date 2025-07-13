@@ -53,10 +53,10 @@ public:
 public:
     virtual ~FactoryClass() JMP_THIS(0x4C9A10);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4CA230);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4CA230);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x4CA270);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4CA3C0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4CA270);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4CA3C0);
     
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x4CA580);
     RTTIType KindOf() const override JMP_THIS(0x4CA750);

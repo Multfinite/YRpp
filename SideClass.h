@@ -34,10 +34,10 @@ public:
 public:
     virtual ~SideClass() JMP_THIS(0x6A4610);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6A4740);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6A4740);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6A4780);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6A48A0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6A4780);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6A48A0);
     
     RTTIType KindOf() const override JMP_THIS(0x6A4920);
     int SizeOf() const override JMP_THIS(0x6A4910);

@@ -36,10 +36,10 @@ public:
 	void Clear()
 		{ JMP_THIS(0x54E6F0); }
 
-	HRESULT Save(IStream* pStm)
+	HRESULT __stdcall Save(IStream* pStm)
 		{ JMP_THIS(0x54E750); }
 
-	HRESULT Load(IStream* pStm)
+	HRESULT __stdcall Load(IStream* pStm)
 		{ JMP_THIS(0x54E7B0); }
 
 	CDTimerClass UpdateTimer;

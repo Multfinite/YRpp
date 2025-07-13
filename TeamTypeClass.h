@@ -81,10 +81,10 @@ public:
 public:
     virtual ~TeamTypeClass() JMP_THIS(0x6F08F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6F1C40);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6F1C40);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6F1BB0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6F1B90);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6F1BB0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6F1B90);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x6F1030);
     RTTIType KindOf() const override JMP_THIS(0x6F20A0);

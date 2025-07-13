@@ -26,8 +26,8 @@ public:
 	//GScreenClass
 	//MapClass
 	//DisplayClass
-	virtual HRESULT Load(IStream* pStm) RX;
-	virtual HRESULT Save(IStream* pStm) RX;
+	virtual HRESULT __stdcall Load(IStream* pStm) RX;
+	virtual HRESULT __stdcall Save(IStream* pStm) RX;
 	virtual void LoadFromINI(CCINIClass* pINI) RX; //Loads the map from a map file.
 	virtual const wchar_t* GetToolTip(UINT nDlgID) R0;
 	virtual void CloseWindow() RX; //prolly wrong naming

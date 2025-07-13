@@ -48,10 +48,10 @@ public:
 public:
     virtual ~FoggedObjectClass() JMP_THIS(0x4D1650);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4D27D0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4D27D0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x4D2510);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4D24A0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4D2510);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4D24A0);
     
     RTTIType KindOf() const override JMP_THIS(0x4D27B0);
     int SizeOf() const override JMP_THIS(0x4D27C0);

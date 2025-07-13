@@ -44,10 +44,10 @@ public:
 public:
     virtual ~TemporalClass() JMP_THIS(0x71A5D0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71A720);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71A720);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x71A660);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71A700);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71A660);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71A700);
     
     RTTIType KindOf() const override JMP_THIS(0x71B1A0);
     int SizeOf() const override JMP_THIS(0x71B190);

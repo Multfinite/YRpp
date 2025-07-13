@@ -60,10 +60,10 @@ public:
 public:
     virtual ~SuperClass() noexcept JMP_THIS(0x6CB120);
     
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6CDEB0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6CDEB0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6CDEF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6CDFD0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6CDEF0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6CDFD0);
     
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x6CDFF0);
     RTTIType KindOf() const override JMP_THIS(0x6CE200);

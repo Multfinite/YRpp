@@ -100,10 +100,10 @@ public:
 public:
     virtual ~WeaponTypeClass() JMP_THIS(0x771F50);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x772C90);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x772C90);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x772CD0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x772EB0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x772CD0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x772EB0);
     
     RTTIType KindOf() const override JMP_THIS(0x7730E0);
     int SizeOf() const override JMP_THIS(0x7730D0);

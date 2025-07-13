@@ -66,10 +66,10 @@ public:
 public:
     virtual ~VoxelAnimTypeClass() JMP_THIS(0x74AF70);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x74B7D0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74B7D0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x74B810);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x74B8D0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x74B810);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x74B8D0);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x74B8F0);
     RTTIType KindOf() const override JMP_THIS(0x74B9F0);

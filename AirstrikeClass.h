@@ -52,10 +52,10 @@ public:
 public:
 	virtual ~AirstrikeClass() JMP_THIS(0x41D4C0);
 	
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x41D7A0);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41D7A0);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x41D6F0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41D780);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41D6F0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41D780);
 	
 	RTTIType KindOf() const override JMP_THIS(0x41DD40);
 	int SizeOf() const override JMP_THIS(0x41DD30);

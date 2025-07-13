@@ -504,10 +504,10 @@ public:
 	HRESULT __stdcall Fire_Sale() const override JMP_STD(0x5013A0);
 	HRESULT __stdcall All_To_Hunt() override JMP_STD(0x501400);
 	
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x5046F0);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x5046F0);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x503040);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x504080);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x503040);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x504080);
 	
 	void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x4FB9B0);
 	RTTIType KindOf() const override JMP_THIS(0x50E360);

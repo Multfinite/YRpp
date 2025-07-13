@@ -40,10 +40,10 @@ public:
 public:
     virtual ~LightSourceClass() JMP_THIS(0x554910);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x555080);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x555080);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x5550C0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x555110);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5550C0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x555110);
     
     RTTIType KindOf() const override JMP_THIS(0x555140);
     int SizeOf() const override JMP_THIS(0x555130);

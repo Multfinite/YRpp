@@ -71,10 +71,10 @@ public:
 public:
     virtual ~WaveClass() JMP_THIS(0x75ED30);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x75F840);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x75F840);
 
-    HRESULT Load(IStream* pStm) override JMP_STD(0x75F650);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75F7D0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x75F650);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75F7D0);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x75F610);
     RTTIType KindOf() const override JMP_THIS(0x7631F0);

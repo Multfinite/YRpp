@@ -59,10 +59,10 @@ public:
 public:
     virtual ~IsometricTileTypeClass() JMP_THIS(0x544A70);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x549D90);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x549D90);
    
-    HRESULT Load(IStream* pStm) override JMP_STD(0x549C80);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x549D70);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x549C80);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x549D70);
    
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x549DD0);
     RTTIType KindOf() const override JMP_THIS(0x54A140);

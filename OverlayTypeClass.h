@@ -57,10 +57,10 @@ public:
 public:
     virtual ~OverlayTypeClass() JMP_THIS(0x5FE3F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x5FEC30);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x5FEC30);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x5FEAF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FEC10);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5FEAF0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FEC10);
     
     RTTIType KindOf() const override JMP_THIS(0x5FEF00);
     int SizeOf() const override JMP_THIS(0x5FEF10);

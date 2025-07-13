@@ -81,10 +81,10 @@ public:
 public:
 	virtual ~AnimClass() JMP_THIS(0x4228E0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x426540);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x426540);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x425280);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4253B0);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x425280);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4253B0);
 	
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x425150);
 	RTTIType KindOf() const override JMP_THIS(0x426580);

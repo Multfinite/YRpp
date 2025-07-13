@@ -138,10 +138,10 @@ public:
 public:
 	virtual ~CellClass() JMP_THIS(0x47BB60);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x485200);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x485200);
 
-	HRESULT Load(IStream* pStm) override JMP_STD(0x4839F0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x483C10);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4839F0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x483C10);
 	
 	RTTIType KindOf() const override JMP_THIS(0x487E60);
 	int SizeOf() const override JMP_THIS(0x487E70);

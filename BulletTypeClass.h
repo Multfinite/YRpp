@@ -80,10 +80,10 @@ public:
 public:
 	virtual ~BulletTypeClass() JMP_THIS(0x46BE10);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46C750);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46C750);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x46C6A0);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46C730);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x46C6A0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46C730);
 	
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x46C820);
 	RTTIType KindOf() const override JMP_THIS(0x46C850);

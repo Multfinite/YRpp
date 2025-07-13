@@ -43,10 +43,10 @@ public:
 public:
     virtual ~TEventClass() JMP_THIS(0x71E830);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71F880);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71F880);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x71F8C0);    
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71F930);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71F8C0);    
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71F930);
 
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x71F800);
     RTTIType KindOf() const override JMP_THIS(0x71FA60);

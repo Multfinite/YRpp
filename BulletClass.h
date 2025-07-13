@@ -84,10 +84,10 @@ public:
     ULONG AddRef() override JMP_STD(0x46AFD0);
     ULONG Release() override JMP_STD(0x46AFF0);
     
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46B560);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46B560);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x46AE70);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46AFB0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x46AE70);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46AFB0);
     
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x4684E0);
     RTTIType KindOf() const override JMP_THIS(0x46B550);

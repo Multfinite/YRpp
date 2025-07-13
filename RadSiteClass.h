@@ -49,10 +49,10 @@ public:
 public:
     virtual ~RadSiteClass() JMP_THIS(0x65B2F0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x65B470);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x65B470);
    
-    HRESULT Load(IStream* pStm) override JMP_STD(0x65B3D0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x65B450);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x65B3D0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x65B450);
    
     RTTIType KindOf() const override JMP_THIS(0x65B3C0);
     int SizeOf() const override JMP_THIS(0x65B3A0);

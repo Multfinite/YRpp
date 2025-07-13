@@ -40,10 +40,10 @@ public:
 public:
     virtual ~TagClass() JMP_THIS(0x6E4F60);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E56A0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E56A0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6E5730);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E57A0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E5730);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E57A0);
    
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x6E5610);
     RTTIType KindOf() const override JMP_THIS(0x6E58A0);

@@ -64,10 +64,10 @@ public:
 public:
     virtual ~TiberiumClass() JMP_THIS(0x721880);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x721E40);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x721E40);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x721E80);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7220D0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x721E80);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7220D0);
     
     HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
     

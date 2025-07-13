@@ -34,10 +34,10 @@ public:
 public:
     virtual ~ScriptClass() JMP_THIS(0x691460);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6915F0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6915F0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x691630);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691690);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x691630);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691690);
     
     RTTIType KindOf() const override JMP_THIS(0x691EC0);
     int SizeOf() const override JMP_THIS(0x691ED0);

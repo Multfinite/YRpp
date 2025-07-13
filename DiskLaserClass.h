@@ -46,10 +46,10 @@ public:
 public:
     virtual ~DiskLaserClass() JMP_THIS(0x4A7B00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x4A7C30);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4A7C30);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x4A7B90);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4A7C10);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4A7B90);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4A7C10);
    
     RTTIType KindOf() const override JMP_THIS(0x4A7C80);
     int SizeOf() const override JMP_THIS(0x4A7C70);

@@ -104,10 +104,10 @@ public:
 public:
     virtual ~WarheadTypeClass() JMP_THIS(0x75D230);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x75E080);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x75E080);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x75E0C0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75E2C0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x75E0C0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75E2C0);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x75E440);
     RTTIType KindOf() const override JMP_THIS(0x75E500);

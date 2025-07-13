@@ -99,10 +99,10 @@ public:
 public:
     virtual ~ParticleClass() JMP_THIS(0x62BCC0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x62D930);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x62D930);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x62D7A0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x62D810);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x62D7A0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x62D810);
    
     RTTIType KindOf() const override JMP_THIS(0x62D980);
     int SizeOf() const override JMP_THIS(0x62D970);

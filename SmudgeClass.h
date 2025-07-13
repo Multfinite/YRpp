@@ -34,10 +34,10 @@ public:
 public:
     virtual ~SmudgeClass() noexcept JMP_THIS(0x6B4B40);
    
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6B4F50);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B4F50);
    
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6B4EA0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B4F00);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B4EA0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B4F00);
     
     RTTIType KindOf() const override JMP_THIS(0x6B4F40);
     int SizeOf() const override JMP_THIS(0x6B4F30);

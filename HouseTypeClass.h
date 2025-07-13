@@ -92,11 +92,11 @@ public:
 	ULONG AddRef() override JMP_STD(0x512740);
 	ULONG Release() override JMP_STD(0x512750);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x512640);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x512640);
 
 	HRESULT IsDirty() override JMP_STD(0x512280);
-	HRESULT Load(IStream* pStm) override JMP_STD(0x512290);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x512480);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x512290);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x512480);
 	HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x512570);
 	
 	RTTIType KindOf() const override JMP_THIS(0x512710);

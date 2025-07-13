@@ -47,10 +47,10 @@ public:
 public:
     virtual ~TriggerTypeClass() JMP_THIS(0x726E00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x727BB0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x727BB0);
 
-    HRESULT Load(IStream* pStm) override JMP_STD(0x727BF0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x727CD0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x727BF0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x727CD0);
 
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x727090);
     RTTIType KindOf() const override JMP_THIS(0x727CA0);

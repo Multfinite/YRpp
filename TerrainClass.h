@@ -40,10 +40,10 @@ public:
     virtual ~TerrainClass() JMP_THIS(0x71B7B0);
 
 public:
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71D310);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71D310);
 
-    HRESULT Load(IStream* pStm) override JMP_STD(0x71CDA0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71CF30);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71CDA0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71CF30);
     
     void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x71CFD0);
     RTTIType KindOf() const override JMP_THIS(0x71D300);

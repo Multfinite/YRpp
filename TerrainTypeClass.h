@@ -45,10 +45,10 @@ public:
 public:
     virtual ~TerrainTypeClass() JMP_THIS(0x71DC00);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x71E260);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71E260);
 
-    HRESULT Load(IStream* pStm) override JMP_STD(0x71E1D0);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71E240);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71E1D0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71E240);
 
     RTTIType KindOf() const override JMP_THIS(0x71E330);
     int SizeOf() const override JMP_THIS(0x71E340);

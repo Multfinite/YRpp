@@ -44,10 +44,10 @@ public:
 public:
     virtual ~NeuronClass() JMP_THIS(0x43A440);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x43A500);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x43A500);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x43A540);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x43A5B0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x43A540);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x43A5B0);
     
     RTTIType KindOf() const override JMP_THIS(0x43A9A0);
     int SizeOf() const override JMP_THIS(0x43A9B0);

@@ -109,10 +109,10 @@ public:
 	// scalar 0x428EA0
 	virtual ~AnimTypeClass() RX;
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x428990);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x428990);
 
-	HRESULT Load(IStream* pStm) override JMP_STD(0x428800);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x428970);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x428800);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x428970);
 
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x428C10);
 	RTTIType KindOf() const override JMP_THIS(0x428E50);

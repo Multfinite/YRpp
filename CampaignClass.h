@@ -37,10 +37,10 @@ public:
 public:
 	virtual ~CampaignClass() JMP_THIS(0x46CC10);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x46CF80);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46CF80);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x46D000);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46D050);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x46D000);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46D050);
 	
 	RTTIType KindOf() const override JMP_THIS(0x46D080);
 	int SizeOf() const override JMP_THIS(0x46D070);

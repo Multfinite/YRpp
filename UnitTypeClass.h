@@ -68,10 +68,10 @@ public:
 public:
 	virtual ~UnitTypeClass() JMP_THIS(0x7472F0);
 
-	HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x747F30);
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x747F30);
 	
-	HRESULT Load(IStream* pStm) override JMP_STD(0x748010);
-	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7480B0);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x748010);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7480B0);
 	
 	RTTIType KindOf() const override JMP_THIS(0x748170);
 	int SizeOf() const override JMP_THIS(0x748160);

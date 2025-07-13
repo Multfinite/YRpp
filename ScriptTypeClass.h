@@ -44,10 +44,10 @@ public:
 public:
     virtual ~ScriptTypeClass() noexcept JMP_THIS(0x691770);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x691D50);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x691D50);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x691D90);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691DE0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x691D90);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691DE0);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x691E30);
     RTTIType KindOf() const override JMP_THIS(0x691F70);

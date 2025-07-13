@@ -35,10 +35,10 @@ public:
 public:
     virtual ~IsometricTileClass() JMP_THIS(0x543880);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x543AB0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x543AB0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x543990);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5439F0);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x543990);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5439F0);
     
     RTTIType KindOf() const override JMP_THIS(0x543AA0);
     int SizeOf() const override JMP_THIS(0x543A90);

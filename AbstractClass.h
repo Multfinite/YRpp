@@ -232,9 +232,9 @@ public:
 	static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
 
 	/*! @brief It is not VIRTUAL <IPersistStream::Load> functions, it is proxy which used at EACH override of virtual. */
-	HRESULT Load(IStream* stream) JMP_THIS(0x410380);
+	HRESULT __stdcall Load(IStream* stream) JMP_THIS(0x410380);
 	/*! @brief It is not VIRTUAL <IPersistStream::Save> functions, it is proxy which used at EACH override of virtual. */
-	HRESULT Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
+	HRESULT __stdcall Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN ACTION SELECTION.*/
 	TechnoClass* AsTechno() JMP_THIS(0x40DD20);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN DAMAGE/SELECTION/PER CELL PROCESS.*/
