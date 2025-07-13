@@ -59,7 +59,7 @@ public:
 			, INoticeSource(0x7E1F24)
 		{}
 
-		constexpr void init(AbstractClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+		__forceinline void init(AbstractClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
 	};
 	static inline vtables_t vtables{};
 public:
