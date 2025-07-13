@@ -41,7 +41,7 @@ public:
     
     RTTIType KindOf() const override JMP_THIS(0x6B4F40);
     int SizeOf() const override JMP_THIS(0x6B4F30);
-    ObjectTypeClass* Type() const override JMP_THIS(0x6B4F20);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x6B4F20);
     
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x6B4F90);
     bool Mark(MarkType value) override JMP_THIS(0x6B4BE0);

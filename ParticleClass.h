@@ -108,7 +108,7 @@ public:
     int SizeOf() const override JMP_THIS(0x62D970);
    
     Layer InWhichLayer() const override JMP_THIS(0x62D770);
-    ObjectTypeClass* Type() const override JMP_THIS(0x62D990);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x62D990);
     CellStruct* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x62D710);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x62CEC0);
     bool Mark(MarkType mark) override JMP_THIS(0x62D6F0);

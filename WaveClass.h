@@ -82,7 +82,7 @@ public:
     void AI() override JMP_THIS(0x760F50);
 
     Layer InWhichLayer() const override JMP_THIS(0x75F890);
-    ObjectTypeClass* Type() const override JMP_THIS(0x75F8A0);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x75F8A0);
     bool Limbo() override JMP_THIS(0x75F980);
     bool Unlimbo(const Coordinate& position, Dir256 direction) override JMP_THIS(0x75F8B0);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x75F9F0);

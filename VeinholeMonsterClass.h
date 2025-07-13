@@ -100,7 +100,7 @@ public:
 	void AI() override JMP_THIS(0x74CE50);
 	
 	Layer InWhichLayer() const override JMP_THIS(0x74F330);
-	ObjectTypeClass* Type() const override JMP_THIS(0x74EF00);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x74EF00);
 	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x74D490);
 	DamageState ReceiveDamage(
 		int* pDamage,

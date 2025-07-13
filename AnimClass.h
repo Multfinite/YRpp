@@ -94,7 +94,7 @@ public:
 	void AI() override JMP_THIS(0x423AC0);
 
 	Layer InWhichLayer() const override JMP_THIS(0x424CB0);
-	ObjectTypeClass* Type() const override JMP_THIS(0x425520);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x425520);
 	int YSort() const override JMP_THIS(0x422BC0);
 	 bool Limbo() override JMP_THIS(0x425530);
 	void MarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426270);

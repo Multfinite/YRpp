@@ -43,7 +43,7 @@ public:
     RTTIType KindOf() const override JMP_THIS(0x543AA0);
     int SizeOf() const override JMP_THIS(0x543A90);
     
-    ObjectTypeClass* Type() const override JMP_THIS(0x543AF0);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x543AF0);
     bool Limbo() override JMP_THIS(0x543A40);
     bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x543A10);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x543B00);

@@ -61,7 +61,7 @@ public:
     void AI() override JMP_THIS(0x62FD60);
     
     Layer InWhichLayer() const override JMP_THIS(0x62FE80);
-    ObjectTypeClass* Type() const override JMP_THIS(0x630220);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x630220);
     void UnInit() override JMP_THIS(0x6301E0);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x62E280);
 

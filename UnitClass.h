@@ -74,7 +74,7 @@ public:
 	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x7404B0);
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x73FD50);
 	bool IsStrange() const override JMP_THIS(0x746400);
-	ObjectTypeClass* Type() const override JMP_THIS(0x741490);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x741490);
 	const wchar_t* FullName() const override JMP_THIS(0x746B20);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x746750);
 	ObjectTypeClass* Disguise(bool disguisedAgainstAllies) const override JMP_THIS(0x7465B0);

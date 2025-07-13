@@ -95,7 +95,7 @@ public:
     void AI() override JMP_THIS(0x4666E0);
     
     Layer InWhichLayer() const override JMP_THIS(0x468B90);
-    ObjectTypeClass* Type() const override JMP_THIS(0x46B5B0);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x46B5B0);
     CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x466660);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x468090);
     bool Mark(MarkType mark) override JMP_THIS(0x4666C0);

@@ -64,7 +64,7 @@ public:
 	virtual SHPStruct* GetImage() const override JMP_THIS(0x5216C0);
 	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x51F800);
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x51E3B0);
-	ObjectTypeClass* Type() const override JMP_THIS(0x51FAF0);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x51FAF0);
 	const wchar_t* FullName() const override JMP_THIS(0x51F2C0);
 	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x523250);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x5227F0);

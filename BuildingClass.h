@@ -178,7 +178,7 @@ public:
 	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x447540);
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x447210);
 	bool IsStrange() const override JMP_THIS(0x457620);
-	ObjectTypeClass* Type() const override JMP_THIS(0x459EE0);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x459EE0);
 	const wchar_t* FullName() const override JMP_THIS(0x459ED0);
 	bool Repairable() const override JMP_THIS(0x452630);
 	bool Soldable() const override JMP_THIS(0x4494C0);

@@ -51,7 +51,7 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71CF50);
     void AI() override JMP_THIS(0x71C730);
    
-    ObjectTypeClass* Type() const override JMP_THIS(0x71D150);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x71D150);
     bool Limbo() override JMP_THIS(0x71C930);
     bool Unlimbo(const Coordinate& coords, Dir256 dir) override JMP_THIS(0x71D000);
     void MarkAllOccupationBits(const Coordinate& coord) override JMP_THIS(0x71C110);

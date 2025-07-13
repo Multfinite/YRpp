@@ -200,7 +200,7 @@ public:
 	* @note vtable_index 34:0x88
 	* @note address 0x4E0130
 	*/
-	virtual ObjectTypeClass* Type() const JMP_THIS(0x4E0130);
+	virtual ObjectTypeClass* ClassOf() const JMP_THIS(0x4E0130);
 
 	/*!
 	* @brief Returns the data for IndexBitfield<HouseTypeClass*>
@@ -848,7 +848,7 @@ public:
 	int32_t DistanceFrom3DSquared(AbstractClass* target) JMP_THIS(0x5F6500);
 	int32_t DistanceSquared(Coordinate coord) JMP_THIS(0x5F6560);	
 	float HealthRatio() JMP_THIS(0x5F5C60);
-	double HealthPercentage() const { return static_cast<double>(this->Strength) / this->Type()->MaxStrength; }
+	double HealthPercentage() const { return static_cast<double>(this->Strength) / this->ClassOf()->MaxStrength; }
 	bool IsRedHP() const JMP_THIS(0x5F5CD0);
 	bool IsYellowHP() const JMP_THIS(0x5F5D20);
 	bool IsGreenHP() const JMP_THIS(0x5F5D90);

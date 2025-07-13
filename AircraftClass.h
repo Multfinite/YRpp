@@ -82,7 +82,7 @@ public:
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x417CC0);
 	Layer InWhichLayer() const override JMP_THIS(0x41ADC0);
 	bool IsStrange() const override JMP_THIS(0x41B910);
-	ObjectTypeClass* Type() const override JMP_THIS(0x41C200);
+	ObjectTypeClass* ClassOf() const override JMP_THIS(0x41C200);
 	const wchar_t* FullName() const override JMP_THIS(0x41C1D0);
 	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x414310);
 	KickOutResult KickOutUnit(TechnoClass* pTechno, ::Cell Cell) override JMP_THIS(0x415B10);

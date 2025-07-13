@@ -65,7 +65,7 @@ public:
     
     void AI() override JMP_THIS(0x749F30);
     Layer InWhichLayer() const override JMP_THIS(0x74A960);
-    ObjectTypeClass* Type() const override JMP_THIS(0x74AB30);
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x74AB30);
     bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x749B20);
     CellStruct const* OccupiedCells(bool includeBib = false) const override JMP_THIS(0x74AB40);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x749B70);
