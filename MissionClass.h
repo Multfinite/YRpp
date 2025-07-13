@@ -324,11 +324,11 @@ public:
 	*/
 	virtual int MissionSpyplaneOverfly() JMP_THIS(0x5B2FC0);
 
-	constexpr MissionControlClass* CurrentMissionControl() JMP_THIS(0x5B3A00);
-	constexpr static bool __fastcall IsRecruitableMission(const char* pName) JMP(0x5B36E0);
-	constexpr static Mission MissionByName() JMP_THIS(0x5B3910);
-	constexpr static const char* MissionNameOf(Mission mission) JMP_THIS(0x5B3950);
-	constexpr int MissionTime() JMP_THIS(0x5B3A20);
+	MissionControlClass* CurrentMissionControl() JMP_THIS(0x5B3A00);
+	static bool __fastcall IsRecruitableMission(const char* pName) JMP(0x5B36E0);
+	static Mission MissionByName() JMP_THIS(0x5B3910);
+	static const char* MissionNameOf(Mission mission) JMP_THIS(0x5B3950);
+	int MissionTime() JMP_THIS(0x5B3A20);
 
 protected:
 	/*! @brief FAKE CTOR */

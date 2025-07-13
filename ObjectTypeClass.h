@@ -200,26 +200,26 @@ public:
 	virtual SHPStruct* GetImage() const JMP_THIS(0x41CFA0);
 
 	/*! @brief Return BuildCat for Buildings of BuildingTypes, otherwise - false*/
-	constexpr static bool __fastcall GetBuildCategoryForStructures(RTTIType type, int index) JMP_STD(0x5004E0);
-	constexpr static TechnoTypeClass* __fastcall TechnoType(RTTIType type, int idx) JMP_STD(0x48DCD0);
+	static bool __fastcall GetBuildCategoryForStructures(RTTIType type, int index) JMP_STD(0x5004E0);
+	static TechnoTypeClass* __fastcall TechnoType(RTTIType type, int idx) JMP_STD(0x48DCD0);
 	/*! @brief strcmpi used */
-	constexpr static ObjectTypeClass* FindByName(const char* name) JMP_THIS(0x5F9990);
+	static ObjectTypeClass* FindByName(const char* name) JMP_THIS(0x5F9990);
 
-	constexpr static void __fastcall DestroyAuxShapes() JMP_STD(0x5F77F0);
-	constexpr static void __fastcall DestroyVoxelCaches() JMP_THIS(0x5F99E0);
+	static void __fastcall DestroyAuxShapes() JMP_STD(0x5F77F0);
+	static void __fastcall DestroyVoxelCaches() JMP_THIS(0x5F99E0);
 	/*! @brief Executes one time per session for doing some static work. Usually it loads some static graphics. */
-	constexpr static void __fastcall OneTime() JMP_THIS(0x5F76B0);
+	static void __fastcall OneTime() JMP_THIS(0x5F76B0);
 
-	constexpr void DestroyChargerTurretVoxels() JMP_THIS(0x5F8080);
+	void DestroyChargerTurretVoxels() JMP_THIS(0x5F8080);
 
-	constexpr bool LoadChargerBarrelVoxel(char const* graphicName, int32_t turretIndex) JMP_THIS(0x5F7DB0);
-	constexpr bool LoadChargerTurretVoxel(char const* graphicName, int32_t turretIndex) JMP_THIS(0x5F7A90);
-	constexpr void LoadGraphics() JMP_THIS(0x5F9070);
-	constexpr void LoadTurret() JMP_THIS(0x5F8CE0);
-	constexpr void LoadVoxel() JMP_THIS(0x5F8110);
+	bool LoadChargerBarrelVoxel(char const* graphicName, int32_t turretIndex) JMP_THIS(0x5F7DB0);
+	bool LoadChargerTurretVoxel(char const* graphicName, int32_t turretIndex) JMP_THIS(0x5F7A90);
+	void LoadGraphics() JMP_THIS(0x5F9070);
+	void LoadTurret() JMP_THIS(0x5F8CE0);
+	void LoadVoxel() JMP_THIS(0x5F8110);
 
-	constexpr static void SetGenericTheaterLetter() JMP_THIS(0x5F9710);
-	constexpr static void SetTheaterLetter(TheaterType theater) JMP_THIS(0x5F96B0);
+	static void SetGenericTheaterLetter() JMP_THIS(0x5F9710);
+	static void SetTheaterLetter(TheaterType theater) JMP_THIS(0x5F96B0);
 protected:
 	explicit __forceinline ObjectTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{})
 		, RadialColor{}, Armor{}, MainVoxel{}, TurretVoxel{}, BarrelVoxel{}, LineTrailColor{}

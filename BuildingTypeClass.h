@@ -286,17 +286,17 @@ public:
 
 	virtual SHPStruct* LoadBuildup() JMP_THIS(0x465960);
 
-	constexpr void ClearBuildUp() JMP_THIS(0x465AF0);
-	constexpr bool IsVehicle() const JMP_THIS(0x465D40);
+	void ClearBuildUp() JMP_THIS(0x465AF0);
+	bool IsVehicle() const JMP_THIS(0x465D40);
 
-	constexpr short GetFoundationWidth() const JMP_THIS(0x45EC90);
-	constexpr short GetFoundationHeight(bool bIncludeBib) const JMP_THIS(0x45ECA0);
+	short GetFoundationWidth() const JMP_THIS(0x45EC90);
+	short GetFoundationHeight(bool bIncludeBib) const JMP_THIS(0x45ECA0);
 
-	constexpr bool HasSuperWeapon(int index) const { return (this->SuperWeapon == index || this->SuperWeapon2 == index); }
-	constexpr bool HasSuperWeapon() const { return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1); }
-	constexpr bool CanTogglePower() const { return this->TogglePower && (this->PowerDrain > 0 || this->Powered); }
-	constexpr BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) { return this->BuildingAnim[static_cast<int>(slot)]; }
-	constexpr const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const { return this->BuildingAnim[static_cast<int>(slot)]; }
+	bool HasSuperWeapon(int index) const { return (this->SuperWeapon == index || this->SuperWeapon2 == index); }
+	bool HasSuperWeapon() const { return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1); }
+	bool CanTogglePower() const { return this->TogglePower && (this->PowerDrain > 0 || this->Powered); }
+	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) { return this->BuildingAnim[static_cast<int>(slot)]; }
+	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const { return this->BuildingAnim[static_cast<int>(slot)]; }
 
 protected:
 	explicit __forceinline BuildingTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}

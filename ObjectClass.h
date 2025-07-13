@@ -821,46 +821,46 @@ public:
 
 	// technically it takes an ecx<this> , but it's not used and ecx is immediately overwritten on entry
 	// draws the mind control line when unit is selected
-	constexpr static void DrawALinkTo(int src_X, int src_Y, int src_Z, int dst_X, int dst_Y, int dst_Z, ColorStruct color)
+	static void DrawALinkTo(int src_X, int src_Y, int src_Z, int dst_X, int dst_Y, int dst_Z, ColorStruct color)
 		{ PUSH_VAR32(color); PUSH_VAR32(dst_Z); PUSH_VAR32(dst_Y); PUSH_VAR32(dst_X);
 			PUSH_VAR32(src_Z); PUSH_VAR32(src_Y); PUSH_VAR32(src_X); CALL(0x704E40); }
 
-	constexpr void AttachSound(int32_t customSound) JMP_THIS(0x5F6CB0);
-	constexpr bool AttachTrigger(TagClass* pTag) JMP_THIS(0x5F5B50);
-	constexpr static RectangleStruct BoundingBoxOf(DynamicVectorClass<ObjectClass>& vector) JMP_THIS(0x5F66A0);
-	constexpr static Coordinate AveragePointOf(DynamicVectorClass<ObjectClass>& vector) JMP_THIS(0x5F6790);
-	constexpr static ObjectClass* FindNearestOf(Coordinate& coord) JMP_THIS(0x5F6810);
-	constexpr HealthState HealthStatus() const JMP_THIS(0x5F5DD0);
-	constexpr void DestroyLinetrail() JMP_THIS(0x5F3D90);
+	void AttachSound(int32_t customSound) JMP_THIS(0x5F6CB0);
+	bool AttachTrigger(TagClass* pTag) JMP_THIS(0x5F5B50);
+	static RectangleStruct BoundingBoxOf(DynamicVectorClass<ObjectClass>& vector) JMP_THIS(0x5F66A0);
+	static Coordinate AveragePointOf(DynamicVectorClass<ObjectClass>& vector) JMP_THIS(0x5F6790);
+	static ObjectClass* FindNearestOf(Coordinate& coord) JMP_THIS(0x5F6810);
+	HealthState HealthStatus() const JMP_THIS(0x5F5DD0);
+	void DestroyLinetrail() JMP_THIS(0x5F3D90);
 	/*!
 	* @brief Direction from this object to target object.
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
-	constexpr DirStruct Direction(AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
+	DirStruct Direction(AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
 	/*!
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
-	constexpr int DistanceFrom(AbstractClass* that) const JMP_THIS(0x5F6440);
+	int DistanceFrom(AbstractClass* that) const JMP_THIS(0x5F6440);
 	/*!
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
-	constexpr int DistanceFrom3D(AbstractClass* that) const JMP_THIS(0x5F6360);
-	constexpr int32_t DistanceFrom3DSquared(AbstractClass* target) JMP_THIS(0x5F6500);
-	constexpr int32_t DistanceSquared(Coordinate coord) JMP_THIS(0x5F6560);	
-	constexpr float HealthRatio() JMP_THIS(0x5F5C60);
-	constexpr double HealthPercentage() const { return static_cast<double>(this->Strength) / this->Type()->MaxStrength; }
-	constexpr bool IsRedHP() const JMP_THIS(0x5F5CD0);
-	constexpr bool IsYellowHP() const JMP_THIS(0x5F5D20);
-	constexpr bool IsGreenHP() const JMP_THIS(0x5F5D90);
-	constexpr int32_t CellLevel() JMP_THIS(0x5F5F00);
-	constexpr bool SameName(int8_t* name) JMP_THIS(0x5F3E50);
-	constexpr void SetHealthPercentage(double percentage) JMP_THIS(0x5F5C80);
-	constexpr void SetZ(int32_t z) JMP_THIS(0x5F6060);
-	constexpr bool IsCrushableBy(TechnoClass* pCrusher) JMP_THIS(0x5F6CD0);
-	constexpr void BecomeUntargetable() JMP_THIS(0x70D4A0);
+	int DistanceFrom3D(AbstractClass* that) const JMP_THIS(0x5F6360);
+	int32_t DistanceFrom3DSquared(AbstractClass* target) JMP_THIS(0x5F6500);
+	int32_t DistanceSquared(Coordinate coord) JMP_THIS(0x5F6560);	
+	float HealthRatio() JMP_THIS(0x5F5C60);
+	double HealthPercentage() const { return static_cast<double>(this->Strength) / this->Type()->MaxStrength; }
+	bool IsRedHP() const JMP_THIS(0x5F5CD0);
+	bool IsYellowHP() const JMP_THIS(0x5F5D20);
+	bool IsGreenHP() const JMP_THIS(0x5F5D90);
+	int32_t CellLevel() JMP_THIS(0x5F5F00);
+	bool SameName(int8_t* name) JMP_THIS(0x5F3E50);
+	void SetHealthPercentage(double percentage) JMP_THIS(0x5F5C80);
+	void SetZ(int32_t z) JMP_THIS(0x5F6060);
+	bool IsCrushableBy(TechnoClass* pCrusher) JMP_THIS(0x5F6CD0);
+	void BecomeUntargetable() JMP_THIS(0x70D4A0);
 
-	constexpr bool operator>(ObjectClass* other) JMP_THIS(0x5F6220);
-	constexpr bool operator<(ObjectClass* other) JMP_THIS(0x5F61F0);
+	bool operator>(ObjectClass* other) JMP_THIS(0x5F6220);
+	bool operator<(ObjectClass* other) JMP_THIS(0x5F61F0);
 
 protected:
 

@@ -471,7 +471,7 @@ public:
 	* @note original_name Is_Recruitable
 	* @note address 0x4DA230
 	*/
-	constexpr bool CanBeRecruited(HouseClass *byWhom) const JMP_THIS(0x4DA230);
+	bool CanBeRecruited(HouseClass *byWhom) const JMP_THIS(0x4DA230);
 
 	/*!
 	* @brief only used by squid damage routines, normal wakes are created differently it seems
@@ -479,7 +479,7 @@ public:
 	* @note original_name Wake_Anim
 	* @note address 0x629E90
 	*/
-	constexpr void CreateWakes(Coordinate coords) JMP_THIS(0x629E90);
+	void CreateWakes(Coordinate coords) JMP_THIS(0x629E90);
 
 	/*!
 	* @brief can this jumpjet stay in this cell or not? 
@@ -487,13 +487,13 @@ public:
 	* @note original_name Jumpjet_LocationClear
 	* @note address 0x4135A0
 	*/
-	constexpr bool JumpjetsIsColliding() const JMP_THIS(0x4135A0);
+	bool JumpjetsIsColliding() const JMP_THIS(0x4135A0);
 
 	/*!
 	* @note original_name JumpjetOccupyCell
 	* @note address 0x4E00B0
 	*/
-	constexpr void JumpjetOccupyCell(::Cell Cell) JMP_THIS(0x4E00B0);
+	void JumpjetOccupyCell(::Cell Cell) JMP_THIS(0x4E00B0);
 
 	/*!
 	* @brief Changes locomotor to the given one, Magnetron style
@@ -501,68 +501,68 @@ public:
 	* @note original_name FootClass_ImbueLocomotor
 	* @note address 0x710000
 	*/
-	constexpr void ImbueLocomotor(FootClass *target, CLSID clsid) JMP_THIS(0x710000);
+	void ImbueLocomotor(FootClass *target, CLSID clsid) JMP_THIS(0x710000);
 
 	/*!
 	* @brief var $this = this; $.each($this.Passengers, function(ix, p) { p.Location = $this.Location; });
 	* @note original_name Set_Cargo_Coords
 	* @note address 0x7104F0
 	*/
-	constexpr void UpdateCargoCoords() JMP_THIS(0x7104F0);
+	void UpdateCargoCoords() JMP_THIS(0x7104F0);
 
 	/*!
 	* @note original_name Abort_Motion
 	* @note address 0x4DF0D0
 	*/
-	constexpr void AbortMotion() JMP_THIS(0x4DF0D0);
+	void AbortMotion() JMP_THIS(0x4DF0D0);
 
 	/*!
 	* @note original_name Basic_Path
 	* @note address 0x4D3920
 	*/
-	constexpr bool UpdatePathfinding(::Cell unkCell, ::Cell unkCell2, int unk3) JMP_THIS(0x4D3920);
+	bool UpdatePathfinding(::Cell unkCell, ::Cell unkCell2, int unk3) JMP_THIS(0x4D3920);
 
 	/*!
 	* @brief Removes the first passenger and updates the Gunner.
 	* @note original_name Kick_Out_Passenger
 	* @note address 0x4DE710
 	*/
-	constexpr FootClass* LeaveTransport() JMP_THIS(0x4DE710);
+	FootClass* LeaveTransport() JMP_THIS(0x4DE710);
 
 	/*!
 	* @brief Removes a specific passenger and updates the Gunner.
 	* @note original_name Leave_Transport
 	* @note address 0x4DE670
 	*/
-	constexpr FootClass* LeaveTransport(FootClass* pPassenger) JMP_THIS(0x4DE670);
+	FootClass* LeaveTransport(FootClass* pPassenger) JMP_THIS(0x4DE670);
 
 	/*!
 	* @brief Adds a specific passenger and updates the Gunner.
 	* @note original_name Leave_Transport
 	* @note address 0x4DE630
 	*/
-	constexpr void EnterTransport(FootClass* pPassenger) JMP_THIS(0x4DE630);
+	void EnterTransport(FootClass* pPassenger) JMP_THIS(0x4DE630);
 
 	/*!
 	* @brief Clears NavQueue
 	* @note original_name Clear_Navigation_List
 	* @note address 0x4DA1C0
 	*/
-	constexpr void ClearNavQueue() JMP_THIS(0x4DA1C0);
+	void ClearNavQueue() JMP_THIS(0x4DA1C0);
 
 	/*!
 	* @brief searches cell, sets destination, and returns whether unit is on that 
 	* @note original_name Assign_Tiberium_As_Destination
 	* @note address 0x4DCFE0
 	*/
-	constexpr bool MoveToTiberium(int radius, bool scanClose = false) JMP_THIS(0x4DCFE0);
+	bool MoveToTiberium(int radius, bool scanClose = false) JMP_THIS(0x4DCFE0);
 
 	/*!
 	* @brief  searches cell, sets destination, and returns whether unit is on that cell
 	* @note original_name Assign_Weed_As_Destination
 	* @note address 0x4DDB90
 	*/
-	constexpr bool MoveToWeed(int radius) JMP_THIS(0x4DDB90);
+	bool MoveToWeed(int radius) JMP_THIS(0x4DDB90);
 
 protected:
 

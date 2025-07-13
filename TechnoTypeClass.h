@@ -505,20 +505,20 @@ public:
 	*/
 	virtual int GetFlightLevel() const JMP_THIS(0x717800);
 
-	constexpr WeaponStruct* GetWeapon(int index) JMP_THIS(0x7177C0);
-	constexpr WeaponStruct* GetEliteWeapon(int index) JMP_THIS(0x7177E0);
-	constexpr int GetTurretWeapon(int index) JMP_THIS(0x7178B0);
-	constexpr bool HasTurret() const JMP_THIS(0x717880);
+	WeaponStruct* GetWeapon(int index) JMP_THIS(0x7177C0);
+	WeaponStruct* GetEliteWeapon(int index) JMP_THIS(0x7177E0);
+	int GetTurretWeapon(int index) JMP_THIS(0x7178B0);
+	bool HasTurret() const JMP_THIS(0x717880);
 	// looks like this function return true if weapon burst more than 1
-	constexpr bool IsTwoShooter() JMP_THIS(0x712130);
-	constexpr void SetPalette() JMP_THIS(0x717820);
-	constexpr int SetPalettes() JMP_THIS(0x717840);
-	constexpr void SetTurretWeapon(int index, int weapon) JMP_THIS(0x717890);
+	bool IsTwoShooter() JMP_THIS(0x712130);
+	void SetPalette() JMP_THIS(0x717820);
+	int SetPalettes() JMP_THIS(0x717840);
+	void SetTurretWeapon(int index, int weapon) JMP_THIS(0x717890);
 
-	constexpr static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
+	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
 
 	constexpr bool HasMultipleTurrets() const { return this->TurretCount > 0; }
-	constexpr CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
+	CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
 
 	bool InOwners(DWORD const bitHouseType) const { return 0u != (Ownable() & bitHouseType); }
 

@@ -77,56 +77,56 @@ public:
 	* @brief get specific link
 	* @note address 0x65AD30
 	*/
-	constexpr TechnoClass* const& GetNthLink(int idx = 0) const { return this->RadioLinks[idx]; }
+	TechnoClass* const& GetNthLink(int idx = 0) const { return this->RadioLinks[idx]; }
 
 	/*!
 	* @note original_name Contact_With_Whom_Building
 	* @brief get specific link
 	* @note address 0x65AD40
 	*/
-	constexpr BuildingClass* const& GetNthLinkAsBuilding(int idx = 0) const JMP_THIS(0x65AD40);
+	BuildingClass* const& GetNthLinkAsBuilding(int idx = 0) const JMP_THIS(0x65AD40);
 
 	/*!
 	* @note original_name Has_Contact_Index
 	* @note address 0x65AD50
 	* @brief whether any link is pLink
 	*/
-	constexpr bool ContainsLink(TechnoClass const* pLink) const JMP_THIS(0x65AD50);
+	bool ContainsLink(TechnoClass const* pLink) const JMP_THIS(0x65AD50);
 
 	/*!
 	* @note original_name Has_Contact_Index
 	* @note address 0x65AD90
 	* @brief null pointers will always return -1
 	*/
-	constexpr int FindLinkIndex(TechnoClass const* pLink) const JMP_THIS(0x65AD90);
+	int FindLinkIndex(TechnoClass const* pLink) const JMP_THIS(0x65AD90);
 
 	/*!
 	* @note original_name Has_Free_Slots
 	* @note address 0x65ADC0
 	* @brief iow: not full
 	*/
-	constexpr bool HasFreeLink() const JMP_THIS(0x65ADC0);
+	bool HasFreeLink() const JMP_THIS(0x65ADC0);
 
 	/*!
 	* @note original_name In_Radio_Contact
 	* @note address 0x65ADF0
 	* @brief iow: iow: not full; consider pIgnore's link empty
 	*/
-	constexpr bool HasFreeLink(TechnoClass const* pIgnore) const JMP_THIS(0x65ADF0);
+	bool HasFreeLink(TechnoClass const* pIgnore) const JMP_THIS(0x65ADF0);
 
 	/*!
 	* @note original_name Is_In_Radio_Contact
 	* @note address 0x65AE30
 	* @brief iow. at least one link used
 	*/
-	constexpr bool HasAnyLink() const JMP_THIS(0x65AE30);
+	bool HasAnyLink() const JMP_THIS(0x65AE30);
 
 	/*!
 	* @note original_name Set_Radio_Count
 	* @note address 0x65AE60
 	* @brief resizes the vector and nulls the new elements
 	*/
-	constexpr void SetLinkCount(int count) JMP_THIS(0x65AE60);
+	void SetLinkCount(int count) JMP_THIS(0x65AE60);
 
 protected:
 

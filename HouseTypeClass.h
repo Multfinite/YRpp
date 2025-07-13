@@ -105,10 +105,10 @@ public:
 	int ArrayIndex() const override JMP_THIS(0x512730);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x511850);
 
-	constexpr HouseTypeClass* FindParentCountry() const { return HouseTypeClass::Find(this->ParentCountry); }
-	constexpr int FindParentCountryIndex() const { return HouseTypeClass::FindIndexOfName(this->ParentCountry); }
-	constexpr static signed int __fastcall FindIndexOfName(const char* name) JMP_STD(0x5117D0);
-	constexpr static HouseTypeClass* __fastcall FindOrMake(const char* name) JMP_STD(0x512680);
+	HouseTypeClass* FindParentCountry() const { return HouseTypeClass::Find(this->ParentCountry); }
+	int FindParentCountryIndex() const { return HouseTypeClass::FindIndexOfName(this->ParentCountry); }
+	static signed int __fastcall FindIndexOfName(const char* name) JMP_STD(0x5117D0);
+	static HouseTypeClass* __fastcall FindOrMake(const char* name) JMP_STD(0x512680);
 
 protected:
 	explicit __forceinline HouseTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}

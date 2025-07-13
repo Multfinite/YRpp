@@ -126,12 +126,12 @@ public:
 	int NumPassengers;
 	FootClass* FirstPassenger;
 
-	constexpr void Attach(FootClass* object) JMP_THIS(0x4733A0);
-	constexpr void InvalidatePointer(FootClass* object) JMP_THIS(0x4734B0);
-	constexpr FootClass* DetachObject() JMP_THIS(0x473430);
-	constexpr FootClass* AttachedObject() JMP_THIS(0x473450);
-	constexpr int Count() const JMP_THIS(0x473460);
-	constexpr int IndexOf(FootClass* object) const JMP_THIS(0x473500);
+	void Attach(FootClass* object) JMP_THIS(0x4733A0);
+	void InvalidatePointer(FootClass* object) JMP_THIS(0x4734B0);
+	FootClass* DetachObject() JMP_THIS(0x473430);
+	FootClass* AttachedObject() JMP_THIS(0x473450);
+	int Count() const JMP_THIS(0x473460);
+	int IndexOf(FootClass* object) const JMP_THIS(0x473500);
 
 	constexpr FootClass* GetFirstPassenger() const { return this->FirstPassenger; }
 

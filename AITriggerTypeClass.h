@@ -81,28 +81,28 @@ public:
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41F580);
 	bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x41FB10);
 
-	constexpr static bool LoadFromINIList(CCINIClass *pINI) JMP_STD(0x41F2E0);
+	static bool LoadFromINIList(CCINIClass *pINI) JMP_STD(0x41F2E0);
 
 	// Global == saving into AI.ini as opposed to map?
 	// if !Global, [AITriggerTypesEnable] gets saved as well
-	constexpr static bool SaveToINIList(CCINIClass *pINI, bool Global) JMP_STD(0x41F490);
+	static bool SaveToINIList(CCINIClass *pINI, bool Global) JMP_STD(0x41F490);
 
 	// non-virtual
 
 	// teams finished script, and
-	constexpr void RegisterSuccess() JMP_THIS(0x41FD60);
-	constexpr void RegisterFailure() JMP_THIS(0x41FE20);
+	void RegisterSuccess() JMP_THIS(0x41FD60);
+	void RegisterFailure() JMP_THIS(0x41FE20);
 	
 	// the main condition
-	constexpr bool ConditionMet(HouseClass *CallingHouse, HouseClass *TargetHouse, bool EnoughBaseDefense) const JMP_THIS(0x41E720);
+	bool ConditionMet(HouseClass *CallingHouse, HouseClass *TargetHouse, bool EnoughBaseDefense) const JMP_THIS(0x41E720);
 
 	// slaves
-	constexpr bool OwnerHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EE90);
-	constexpr bool CivilianHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EC90); 
-	constexpr bool EnemyHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EAF0);
-	constexpr bool IronCurtainCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F0D0);
-	constexpr bool ChronoSphereCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F180); 
-	constexpr bool HouseCredits(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F230);
+	bool OwnerHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EE90);
+	bool CivilianHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EC90); 
+	bool EnemyHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EAF0);
+	bool IronCurtainCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F0D0);
+	bool ChronoSphereCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F180); 
+	bool HouseCredits(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F230);
 
 	constexpr void FormatForSaving(char * buffer, size_t size) const {
 		const char *Team1Name = "<none>";

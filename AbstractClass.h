@@ -226,19 +226,19 @@ public:
 	*/
 	virtual void AI() JMP_THIS(0x410570);
 
-	constexpr static void __fastcall DetachFromAll(AbstractClass* instance, bool all = true) JMP_THIS(0x7258D0);
-	constexpr void DetachFromAll(bool all = true) { DetachFromAll(this, all); }
+	static void __fastcall DetachFromAll(AbstractClass* instance, bool all = true) JMP_THIS(0x7258D0);
+	void DetachFromAll(bool all = true) { DetachFromAll(this, all); }
 
-	constexpr static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
+	static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
 
 	/*! @brief It is not VIRTUAL <IPersistStream::Load> functions, it is proxy which used at EACH override of virtual. */
-	constexpr HRESULT Load(IStream* stream) JMP_THIS(0x410380);
+	HRESULT Load(IStream* stream) JMP_THIS(0x410380);
 	/*! @brief It is not VIRTUAL <IPersistStream::Save> functions, it is proxy which used at EACH override of virtual. */
-	constexpr HRESULT Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
+	HRESULT Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN ACTION SELECTION.*/
-	constexpr TechnoClass* AsTechno() JMP_THIS(0x40DD20);
+	TechnoClass* AsTechno() JMP_THIS(0x40DD20);
 	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN DAMAGE/SELECTION/PER CELL PROCESS.*/
-	constexpr TechnoClass* _AsTechno() JMP_THIS(0x40DD70);
+	TechnoClass* _AsTechno() JMP_THIS(0x40DD70);
 
 	constexpr bool operator<(const AbstractClass &rhs) const { return this->UniqueID < rhs.UniqueID; }
 

@@ -371,96 +371,96 @@ public:
 
 	// non-vt
 
-	constexpr void UpdateFactory() JMP_THIS(0x4500F0);
-	constexpr void UpdateCharging() JMP_THIS(0x4503F0);
-	constexpr void UpdateOnFire() JMP_THIS(0x43C0D0);
-	constexpr void UpdateRepair() JMP_THIS(0x450630);
-	constexpr BuildingTypeClass* UpdateGarrison() JMP_THIS(0x458200);
-	constexpr void UpdateGarrisonAnim() JMP_THIS(0x458330);
-	constexpr void UpdateRadarSpied() JMP_THIS(0x44F7A0);
+	void UpdateFactory() JMP_THIS(0x4500F0);
+	void UpdateCharging() JMP_THIS(0x4503F0);
+	void UpdateOnFire() JMP_THIS(0x43C0D0);
+	void UpdateRepair() JMP_THIS(0x450630);
+	BuildingTypeClass* UpdateGarrison() JMP_THIS(0x458200);
+	void UpdateGarrisonAnim() JMP_THIS(0x458330);
+	void UpdateRadarSpied() JMP_THIS(0x44F7A0);
 
 	//  return Class->UnitAbsorb || Class->InfantryAbsorb;
-	constexpr int32_t IsAbsorber() JMP_THIS(0x4598A0);
-	constexpr int8_t AddOverpowerer(int32_t a2) JMP_THIS(0x452820);
+	int32_t IsAbsorber() JMP_THIS(0x4598A0);
+	int8_t AddOverpowerer(int32_t a2) JMP_THIS(0x452820);
 	// called in Unlimbo
-	constexpr int8_t Anim_Logic_1(int32_t a2) JMP_THIS(0x451400);
-	constexpr bool CanOccupy(InfantryClass* inf) JMP_THIS(0x457CE0);
-	constexpr bool CanUpgrade(BuildingTypeClass* a2, HouseClass* house) JMP_THIS(0x452670);
+	int8_t Anim_Logic_1(int32_t a2) JMP_THIS(0x451400);
+	bool CanOccupy(InfantryClass* inf) JMP_THIS(0x457CE0);
+	bool CanUpgrade(BuildingTypeClass* a2, HouseClass* house) JMP_THIS(0x452670);
 	
-	constexpr ::Cell CheckPoint(CheckPointType cp) JMP_THIS(0x44F6E0);
-	constexpr void ClearFactoryBib() JMP_THIS(0x449540);
-	constexpr void DoAnim(BAnimType anim, int32_t is_damaged, int32_t is_garrsioned, int32_t delay) JMP_THIS(0x451750);
-	constexpr void DropDebris(int32_t) JMP_THIS(0x442D90);
+	::Cell CheckPoint(CheckPointType cp) JMP_THIS(0x44F6E0);
+	void ClearFactoryBib() JMP_THIS(0x449540);
+	void DoAnim(BAnimType anim, int32_t is_damaged, int32_t is_garrsioned, int32_t delay) JMP_THIS(0x451750);
+	void DropDebris(int32_t) JMP_THIS(0x442D90);
 	
-	constexpr int32_t FlushForPlacement(TechnoClass* techno, int32_t a3) JMP_THIS(0x44EF80);
+	int32_t FlushForPlacement(TechnoClass* techno, int32_t a3) JMP_THIS(0x44EF80);
 	
-	constexpr TechnoTypeClass* GetSecretObject() JMP_THIS(0x459840);
-	constexpr bool IsImpassable(CellClass* a2) JMP_THIS(0x458A00);
-	constexpr int8_t occupier_lists() JMP_THIS(0x44E3A0);
+	TechnoTypeClass* GetSecretObject() JMP_THIS(0x459840);
+	bool IsImpassable(CellClass* a2) JMP_THIS(0x458A00);
+	int8_t occupier_lists() JMP_THIS(0x44E3A0);
 	
-	constexpr void Produce_Cash() JMP_THIS(0x458750);	
-	constexpr void Remove_Damage_Fires() JMP_THIS(0x43C2A0);
+	void Produce_Cash() JMP_THIS(0x458750);	
+	void Remove_Damage_Fires() JMP_THIS(0x43C2A0);
 	
-	constexpr void turret_stage_43EE50() JMP_THIS(0x43EE50);
+	void turret_stage_43EE50() JMP_THIS(0x43EE50);
 
-	constexpr void UpdateAnimations() JMP_THIS(0x4509D0);
-	constexpr int GetCurrentFrame() JMP_THIS(0x43EF90);
-	constexpr bool IsAllFogged() const JMP_THIS(0x457A10);
-	constexpr void SetRallypoint(::Cell* pTarget, bool bPlayEVA) JMP_THIS(0x443860);
-	constexpr void FreezeInFog(DynamicVectorClass<FoggedObjectClass*>* pFoggedArray, CellClass* pCell, bool Visible) JMP_THIS(0x457AA0);
-	constexpr void GoOnline() JMP_THIS(0x452260);
-	constexpr void GoOffline() JMP_THIS(0x452360);
-	constexpr int GetPowerOutput() const JMP_THIS(0x44E7B0); 
-	constexpr int GetPowerDrain() const JMP_THIS(0x44E880);
+	void UpdateAnimations() JMP_THIS(0x4509D0);
+	int GetCurrentFrame() JMP_THIS(0x43EF90);
+	bool IsAllFogged() const JMP_THIS(0x457A10);
+	void SetRallypoint(::Cell* pTarget, bool bPlayEVA) JMP_THIS(0x443860);
+	void FreezeInFog(DynamicVectorClass<FoggedObjectClass*>* pFoggedArray, CellClass* pCell, bool Visible) JMP_THIS(0x457AA0);
+	void GoOnline() JMP_THIS(0x452260);
+	void GoOffline() JMP_THIS(0x452360);
+	int GetPowerOutput() const JMP_THIS(0x44E7B0); 
+	int GetPowerDrain() const JMP_THIS(0x44E880);
 	// Firewall aka FirestormWall
 	// depending on what facings of this building
 	// are connected to another FWall,
 	// returns the index of the image file
 	// to draw.
-	constexpr DWORD GetFWFlags() const JMP_THIS(0x455B90);
-	constexpr void CreateEndPost(bool arg) JMP_THIS(0x4533A0);
+	DWORD GetFWFlags() const JMP_THIS(0x455B90);
+	void CreateEndPost(bool arg) JMP_THIS(0x4533A0);
 	// kick out content
-	constexpr void UnloadBunker() JMP_THIS(0x4593A0);
+	void UnloadBunker() JMP_THIS(0x4593A0);
 	// content is dead - chronosphered away or died inside
-	constexpr void ClearBunker() JMP_THIS(0x459470);
+	void ClearBunker() JMP_THIS(0x459470);
 	// kick out content, remove anims, etc... don't ask me what's different from kick out
-	constexpr void EmptyBunker() JMP_THIS(0x4595C0);
+	void EmptyBunker() JMP_THIS(0x4595C0);
 	// called after destruction - CrateBeneath, resetting foundation'ed cells
 	// Leave_Rubble
-	constexpr void AfterDestruction() JMP_THIS(0x441F60);
+	void AfterDestruction() JMP_THIS(0x441F60);
 	// destroys the specific animation (active, turret, special, etc)
-	constexpr void DestroyNthAnim(BuildingAnimSlot Slot) JMP_THIS(0x451E40);
-	constexpr void PlayAnim(const char* animName, BuildingAnimSlot Slot, bool Damaged, bool Garrisoned, int effectDelay = 0) JMP_THIS(0x451890);
+	void DestroyNthAnim(BuildingAnimSlot Slot) JMP_THIS(0x451E40);
+	void PlayAnim(const char* animName, BuildingAnimSlot Slot, bool Damaged, bool Garrisoned, int effectDelay = 0) JMP_THIS(0x451890);
 	// changes between building's damaged and undamaged animations.
-	constexpr void ToggleDamagedAnims(bool isDamaged) JMP_THIS(0x451EE0);
+	void ToggleDamagedAnims(bool isDamaged) JMP_THIS(0x451EE0);
 	// when the building is switched off
-	constexpr void DisableStuff() JMP_THIS(0x452480);
+	void DisableStuff() JMP_THIS(0x452480);
 	// when the building is switched on
-	constexpr void EnableStuff() JMP_THIS(0x452410);
+	void EnableStuff() JMP_THIS(0x452410);
 	// when the building is warped
-	constexpr void DisableTemporal() JMP_THIS(0x4521C0);
+	void DisableTemporal() JMP_THIS(0x4521C0);
 	// when the building warped back in
-	constexpr void EnableTemporal() JMP_THIS(0x452210);
+	void EnableTemporal() JMP_THIS(0x452210);
 	// returns Type->SuperWeapon, if its AuxBuilding is satisfied
-	constexpr int FirstActiveSWIdx() const JMP_THIS(0x457630);
-	constexpr int GetShapeNumber() const JMP_THIS(0x43EF90);
-	constexpr void BeginMode(BStateType bType) JMP_THIS(0x447780);
+	int FirstActiveSWIdx() const JMP_THIS(0x457630);
+	int GetShapeNumber() const JMP_THIS(0x43EF90);
+	void BeginMode(BStateType bType) JMP_THIS(0x447780);
 	// returns Type->SuperWeapon2, if its AuxBuilding is satisfied
-	constexpr int SecondActiveSWIdx() const JMP_THIS(0x457690);
-	constexpr void FireLaser(CoordStruct Coords) JMP_THIS(0x44ABD0);
-	constexpr bool IsBeingDrained() const JMP_THIS(0x70FEC0);
-	constexpr bool UpdateBunker() JMP_THIS(0x458E50);
-	constexpr void KillOccupants(TechnoClass* pAssaulter) JMP_THIS(0x4585C0);
+	int SecondActiveSWIdx() const JMP_THIS(0x457690);
+	void FireLaser(CoordStruct Coords) JMP_THIS(0x44ABD0);
+	bool IsBeingDrained() const JMP_THIS(0x70FEC0);
+	bool UpdateBunker() JMP_THIS(0x458E50);
+	void KillOccupants(TechnoClass* pAssaulter) JMP_THIS(0x4585C0);
 	// returns false if this is a gate that needs time to open, true otherwise
-	constexpr bool MakeTraversable() JMP_THIS(0x452540);
-	constexpr Matrix3D* GetVoxelBarrelOffsetMatrix(Matrix3D& ret) JMP_THIS(0x458810);
+	bool MakeTraversable() JMP_THIS(0x452540);
+	Matrix3D* GetVoxelBarrelOffsetMatrix(Matrix3D& ret) JMP_THIS(0x458810);
 	// returns false if this is a gate that is closed, true otherwise
-	constexpr bool IsTraversable() const JMP_THIS(0x4525F0);
-	constexpr int DrawInfoTipAndSpiedSelection(Point2D* pLocation, RectangleStruct* pRect) const JMP_THIS(0x43E7B0);
+	bool IsTraversable() const JMP_THIS(0x4525F0);
+	int DrawInfoTipAndSpiedSelection(Point2D* pLocation, RectangleStruct* pRect) const JMP_THIS(0x43E7B0);
 	
-	constexpr int8_t BuildINIEntry(CCINIClass* pINI) JMP_THIS(0x44FEC0);
-	constexpr static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x44F820);
-	constexpr static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x44FE60);
+	int8_t BuildINIEntry(CCINIClass* pINI) JMP_THIS(0x44FEC0);
+	static void __fastcall ReadINI(CCINIClass* pINI) JMP_STD(0x44F820);
+	static void __fastcall WriteINI(CCINIClass* pINI) JMP_STD(0x44FE60);
 
 	// helpers
 
