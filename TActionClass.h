@@ -66,7 +66,7 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x6E4640);
 	int SizeOf() const override JMP_THIS(0x6E4630);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E3E50);
-	int ArrayIndex() const override JMP_THIS(0x6E4650);
+	int GetArrayIndex() const override JMP_THIS(0x6E4650);
 
 	HouseClass* TriggerOwner(TriggerClass* trigger, int houseId) JMP_THIS(0x6E45E0);
 	Coordinate Waypoint() JMP_THIS(0x6E3F70);

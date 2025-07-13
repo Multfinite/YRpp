@@ -54,7 +54,7 @@ public:
     int SizeOf() const override JMP_THIS(0x71E340);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71E140);
     
-    int ArrayIndex() const override JMP_THIS(0x71E350);
+    int GetArrayIndex() const override JMP_THIS(0x71E350);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x71DEA0);
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x71E0D0);
     bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);

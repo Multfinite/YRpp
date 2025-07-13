@@ -102,7 +102,7 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x512710);
 	int SizeOf() const override JMP_THIS(0x512720);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x512170);
-	int ArrayIndex() const override JMP_THIS(0x512730);
+	int GetArrayIndex() const override JMP_THIS(0x512730);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x511850);
 
 	HouseTypeClass* FindParentCountry() const { return HouseTypeClass::Find(this->ParentCountry); }

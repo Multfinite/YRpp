@@ -119,7 +119,7 @@ public:
 	int SizeOf() const override JMP_THIS(0x428E70);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4289D0);
 	
-	int ArrayIndex() const override JMP_THIS(0x428E60);
+	int GetArrayIndex() const override JMP_THIS(0x428E60);
 	void LoadTheaterSpecificArt(TheaterType th_type) override JMP_THIS(0x427A80);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x427D00);
 	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x428E80);

@@ -513,7 +513,7 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x50E360);
 	int SizeOf() const override JMP_THIS(0x504730);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x502D60);
-	int ArrayIndex() const override JMP_THIS(0x50E370);
+	int GetArrayIndex() const override JMP_THIS(0x50E370);
 	void AI() override JMP_THIS(0x4F8440);
 
 public:

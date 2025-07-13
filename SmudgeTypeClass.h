@@ -45,7 +45,7 @@ public:
     RTTIType KindOf() const override JMP_THIS(0x6B6130);
     int SizeOf() const override JMP_THIS(0x6B6140);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6B57F0);
-    int ArrayIndex() const override JMP_THIS(0x6B6150);
+    int GetArrayIndex() const override JMP_THIS(0x6B6150);
    
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6B56D0);
     bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x6B5550);

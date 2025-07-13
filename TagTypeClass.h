@@ -45,7 +45,7 @@ public:
     RTTIType KindOf() const override JMP_THIS(0x6E6490);
     int SizeOf() const override JMP_THIS(0x6E64A0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E63E0);
-    int ArrayIndex() const override JMP_THIS(0x6E64B0);
+    int GetArrayIndex() const override JMP_THIS(0x6E64B0);
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6E6080);
     bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6E6160);

@@ -173,7 +173,7 @@ public:
 	* @note vtable_index 16:0x40
 	* @note address 0x4104B0
 	*/
-	virtual int ArrayIndex() const JMP_THIS(0x4104B0);
+	virtual int GetArrayIndex() const JMP_THIS(0x4104B0);
 
 	/*!
 	* @note original_name Is_Inactive

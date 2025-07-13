@@ -91,7 +91,7 @@ public:
     int SizeOf() const override JMP_THIS(0x6F20B0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6F1C80);
     
-    int ArrayIndex() const override JMP_THIS(0x6F20C0);
+    int GetArrayIndex() const override JMP_THIS(0x6F20C0);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6F1090);
     bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6F1550);
 

@@ -65,7 +65,7 @@ public:
     RTTIType KindOf() const override JMP_THIS(0x5FEF00);
     int SizeOf() const override JMP_THIS(0x5FEF10);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5FEA50);
-    int ArrayIndex() const override JMP_THIS(0x5FEF20);
+    int GetArrayIndex() const override JMP_THIS(0x5FEF20);
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5FE770);
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x5FEA30);
