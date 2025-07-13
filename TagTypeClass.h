@@ -29,17 +29,17 @@ public:
     ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
 
 public:
-    int ArrayIndex;
+    int ArrIndex;
     TriggerPersistence Persistence;
     TriggerTypeClass* FirstTrigger;
 
 public:
     virtual ~TagTypeClass() JMP_THIS(0x6E5CA0);
 
-    HRESULT GetClassID(CLSID* pClassID) override JMP_STD(0x6E63A0);
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E63A0);
     
-    HRESULT Load(IStream* pStm) override JMP_STD(0x6E6410);
-    HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E6470);
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E6410);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E6470);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x6E5E50);
     RTTIType KindOf() const override JMP_THIS(0x6E6490);
