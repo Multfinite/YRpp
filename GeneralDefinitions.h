@@ -118,6 +118,7 @@ enum class Dir256 : unsigned char
 	Max = 255,
 };
 MAKE_ENUM_FLAGS(Dir256);
+using DirType = Dir256;
 
 enum class Action : unsigned int
 {
@@ -741,20 +742,6 @@ enum class PassabilityType : DWORD
 	HasFreeSpots = 5,
 	Impassable = 6,
 	OutsideMap = 7
-};
-
-enum class FacingType : char
-{
-	North = 0,
-	NorthEast = 1,
-	East = 2,
-	SouthEast = 3,
-	South = 4,
-	SouthWest = 5,
-	West = 6,
-	NorthWest = 7,
-	Count = 8,
-	None = -1,
 };
 
 enum class CloakState : int
