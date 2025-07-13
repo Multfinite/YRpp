@@ -93,7 +93,7 @@ public:
 
 	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5F5E80);
 
-	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x5F5230);
+	void InvalidatePointer(AbstractClass* target, bool all) override JMP_THIS(0x5F5230);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5F6250);
 	bool IsInactive() const override JMP_THIS(0x5F6690);
 	Coordinate Center() const override JMP_THIS(0x5F65A0);	

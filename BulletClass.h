@@ -89,7 +89,7 @@ public:
     HRESULT Load(IStream* pStm) override JMP_STD(0x46AE70);
     HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46AFB0);
     
-    void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x4684E0);
+    void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x4684E0);
     RTTIType KindOf() const override JMP_THIS(0x46B550);
     int SizeOf() const override JMP_THIS(0x46B540);
     void AI() override JMP_THIS(0x4666E0);

@@ -65,7 +65,7 @@ public:
 	/*0:0x0*/virtual void UnitClass_sink_746100() JMP_THIS(0x746100);
 
 	void Init() override JMP_THIS(0x746810);
-	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x7446E0);
+	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x7446E0);
 	RTTIType KindOf() const override JMP_THIS(0x746E20);
 	int SizeOf() const override JMP_THIS(0x746DD0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x744640);

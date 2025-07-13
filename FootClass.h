@@ -116,7 +116,7 @@ public:
 	HRESULT STDMETHODCALLTYPE Load(__RPC__in_opt IStream* pStm) override JMP_STD(0x4DB3C0);
 	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x4DB690);
 
-	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
+	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
 	void ComputeCRC(CRCEngine & crc) const override JMP_THIS(0x4DBAD0);
 	Coordinate Destination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
 	bool InAir() const override JMP_THIS(0x4DE620);

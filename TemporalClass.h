@@ -59,7 +59,7 @@ public:
     int GetWarpPerStep(int nHelperCount = 0) const JMP_THIS(0x71AB10);
     void LetGo() JMP_THIS(0x71ABC0);
     void JustLetGo() JMP_THIS(0x71AD40);
-    void Detach() JMP_THIS(0x71ADE0);
+    void InvalidatePointer() JMP_THIS(0x71ADE0);
 
 /*
     void Clear_Target() JMP_THIS(0x71ACB0);

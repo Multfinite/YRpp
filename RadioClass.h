@@ -38,7 +38,7 @@ public:
 	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x65AB80);
 	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x65AC40);
 
-	void Detach(AbstractClass* target, bool all) override JMP_THIS(0x65AAC0);
+	void InvalidatePointer(AbstractClass* target, bool all) override JMP_THIS(0x65AAC0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x65AB10);
 	bool Limbo() override JMP_THIS(0x65AA80);
 

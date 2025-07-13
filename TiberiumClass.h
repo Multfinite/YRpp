@@ -71,7 +71,7 @@ public:
     
     HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
     
-    void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x722140);
+    void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x722140);
     RTTIType KindOf() const override JMP_THIS(0x7236F0);
     int SizeOf() const override JMP_THIS(0x7236E0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x721DC0);

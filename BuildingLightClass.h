@@ -42,7 +42,7 @@ public:
 	HRESULT Load(IStream* pStm) override JMP_STD(0x436950);
 	HRESULT Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4369C0);
 	
-	void Detach(AbstractClass* instance, bool all = true) override JMP_THIS(0x436A00);
+	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x436A00);
 	RTTIType KindOf() const override JMP_THIS(0x4370B0);
 	int SizeOf() const override JMP_THIS(0x436900);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x436F40);

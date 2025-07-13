@@ -125,11 +125,11 @@ public:
 
 	/*!
 	* @brief Invalidate pointers to instance (clear fields which containing it). Broadcast.
-	* @note original_name Clear_Occupy_Bit
+	* @note original_name Detach
 	* @note vtable_index 10:0x28
 	* @note address 0x410480
 	*/
-	virtual void Detach(AbstractClass* instance, bool all = true) JMP_THIS(0x410480);
+	virtual void InvalidatePointer(AbstractClass* instance, bool all = true) JMP_THIS(0x410480);
 
 	/*!
 	* @note original_name Kind_Of

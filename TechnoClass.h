@@ -127,7 +127,7 @@ public:
 	FootClass* FirstPassenger;
 
 	constexpr void Attach(FootClass* object) JMP_THIS(0x4733A0);
-	constexpr void Detach(FootClass* object) JMP_THIS(0x4734B0);
+	constexpr void InvalidatePointer(FootClass* object) JMP_THIS(0x4734B0);
 	constexpr FootClass* DetachObject() JMP_THIS(0x473430);
 	constexpr FootClass* AttachedObject() JMP_THIS(0x473450);
 	constexpr int Count() const JMP_THIS(0x473460);
@@ -421,7 +421,7 @@ public:
 	HRESULT STDMETHODCALLTYPE Save(__RPC__in_opt IStream* pStm, int32_t fClearDirty) override JMP_STD(0x70C250);
 	
 	void Init() override JMP_THIS(0x6F3F40);
-	void Detach(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
+	void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x70C270);
 	int Owner() const override JMP_THIS(0x6F9DB0);
 	HouseClass* OwningHouse() const override JMP_THIS(0x6F9DC0);
