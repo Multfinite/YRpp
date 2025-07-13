@@ -16,7 +16,7 @@ public:
 	//CommandClass
 	virtual ~CommandClass() = default;
 	virtual const char* GetName() const = 0;
-	virtual const wchar_t* FullName() const = 0;
+	virtual const wchar_t* GetUIName() const = 0;
 	virtual const wchar_t* GetUICategory() const = 0;
 	virtual const wchar_t* GetUIDescription() const = 0;
 
