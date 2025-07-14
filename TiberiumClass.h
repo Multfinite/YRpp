@@ -69,7 +69,7 @@ public:
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x721E80);
     HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7220D0);
     
-    HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
+    HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
     
     void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x722140);
     RTTIType KindOf() const override JMP_THIS(0x7236F0);
