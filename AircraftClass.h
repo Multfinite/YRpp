@@ -23,7 +23,7 @@ public:
 			this->INoticeSource = 0x7E2278;
 		}
 
-		constexpr void init(AircraftClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+		__forceinline void init(AircraftClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
 	};
 	static inline vtables_t vtables{};
 public:
