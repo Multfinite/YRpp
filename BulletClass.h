@@ -81,8 +81,8 @@ public:
 public:
     virtual ~BulletClass() JMP_THIS(0x466560);
 
-    ULONG AddRef() override JMP_STD(0x46AFD0);
-    ULONG Release() override JMP_STD(0x46AFF0);
+    ULONG __stdcall AddRef() override JMP_STD(0x46AFD0);
+    ULONG __stdcall Release() override JMP_STD(0x46AFF0);
     
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46B560);
     

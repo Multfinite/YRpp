@@ -88,17 +88,16 @@ public:
 public:
 	virtual ~HouseTypeClass() JMP_THIS(0x5116A0);
 
-	HRESULT QueryInterface(REFIID riid, void** ppvObject) override JMP_STD(0x5125A0);
-	ULONG AddRef() override JMP_STD(0x512740);
-	ULONG Release() override JMP_STD(0x512750);
+	HRESULT __stdcall QueryInterface(REFIID riid, void** ppvObject) override JMP_STD(0x5125A0);
+	ULONG __stdcall AddRef() override JMP_STD(0x512740);
+	ULONG __stdcall Release() override JMP_STD(0x512750);
 
 	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x512640);
 
-	HRESULT IsDirty() override JMP_STD(0x512280);
+	HRESULT __stdcall IsDirty() override JMP_STD(0x512280);
 	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x512290);
 	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x512480);
-	HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x512570);
-	
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x512570);
 	RTTIType KindOf() const override JMP_THIS(0x512710);
 	int SizeOf() const override JMP_THIS(0x512720);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x512170);
