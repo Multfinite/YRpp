@@ -8,7 +8,7 @@ class ObjectClass;
 class WeaponTypeClass;
 
 class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
-NOVTABLE NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
+NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
