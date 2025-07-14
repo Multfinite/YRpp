@@ -7,7 +7,6 @@
 #include "IndexClass.h"
 #include "GameStrings.h"
 
-//forward declarations
 class TechnoClass;
 class HouseClass;
 class CRCEngine;
