@@ -28,6 +28,7 @@
 #include "DiskLaserClass.h"
 #include "EMPulseClass.h"
 #include "FactoryClass.h"
+#include "FoggedObjectClass.h"
 #include "HouseClass.h"
 #include "InfantryClass.h"
 #include "LightSourceClass.h"
@@ -67,9 +68,14 @@
 
 //LocomotionClass Tree
 #include "LocomotionClass.h"
+#include "DriveLocomotionClass.h"
+#include "DropPodLocomotionClass.h"
 #include "FlyLocomotionClass.h"
+#include "JumpjetLocomotionClass.h"
 #include "RocketLocomotionClass.h"
+#include "ShipLocomotionClass.h"
 #include "TeleportLocomotionClass.h"
+#include "TunnelLocomotionClass.h"
 
 //GScreenClass Tree
 #include "SidebarClass.h"
