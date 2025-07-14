@@ -11,7 +11,7 @@ class WeaponTypeClass;
 class WarheadTypeClass;
 
 class __declspec(uuid("5AF2CE77-0634-11D2-ACA4-006008055BB5"))
-NOVTABLE NOVTABLE BulletTypeClass : public ObjectTypeClass
+NOVTABLE BulletTypeClass : public ObjectTypeClass
 {
 public:
 	using base_type = ObjectTypeClass;
