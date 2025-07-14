@@ -2170,7 +2170,7 @@ public:
 	// smooth operator
 	const char* get_ID() const
 	{
-		auto const pType = this->Type();
+		auto const pType = this->ClassOf();
 		return pType ? pType->get_ID() : nullptr;
 	}
 
