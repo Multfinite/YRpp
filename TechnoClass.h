@@ -426,6 +426,7 @@ public:
 	int Owner() const override JMP_THIS(0x6F9DB0);
 	HouseClass* OwningHouse() const override JMP_THIS(0x6F9DC0);
 	void AI() override JMP_THIS(0x6F9E50);
+
 	void DetachAnim(AnimClass* anim) override JMP_THIS(0x710410);
 	bool IsSelectable() const override JMP_THIS(0x6F32D0);
 	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x703860);
