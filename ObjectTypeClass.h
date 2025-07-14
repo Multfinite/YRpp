@@ -201,7 +201,7 @@ public:
 
 	/*! @brief Return BuildCat for Buildings of BuildingTypes, otherwise - false*/
 	static bool __fastcall GetBuildCategoryForStructures(RTTIType type, int index) JMP_STD(0x5004E0);
-	static TechnoTypeClass* __fastcall TechnoType(RTTIType type, int idx) JMP_STD(0x48DCD0);
+	static TechnoTypeClass* __fastcall GetTechnoType(RTTIType type, int idx) JMP_STD(0x48DCD0);
 	/*! @brief strcmpi used */
 	static ObjectTypeClass* FindByName(const char* name) JMP_THIS(0x5F9990);
 
