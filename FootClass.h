@@ -63,7 +63,7 @@ public:
 	AbstractClass* MegaDestination; // when AttackMove target is a cell
 	AbstractClass* MegaTarget; // when AttackMove target is an object
 	BYTE            __gap_5D0;	//unused?
-	bool            HaveAttackMoveTarget; // fighting an enemy on the way
+	bool            IsAttackMoveTargetAssigned; // fighting an enemy on the way
 	TeamClass* Team;
 	FootClass* NextTeamMember;        //next unit in team
 	CellClass*           SomeCell_5DC;
