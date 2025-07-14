@@ -118,7 +118,7 @@ public:
 
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
 	void ComputeCRC(CRCEngine & crc) const override JMP_THIS(0x4DBAD0);
-	Coordinate Destination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
+	Coordinate GetDestination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
 	bool InAir() const override JMP_THIS(0x4DE620);
 	void AI() override JMP_THIS(0x4DA530);
 	

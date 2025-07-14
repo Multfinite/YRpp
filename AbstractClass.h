@@ -194,7 +194,7 @@ public:
 	* @note vtable_index 19:0x4C
 	* @note address 0x4104F0
 	*/
-	virtual Coordinate Destination(TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
+	virtual Coordinate GetDestination(TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
 	
 	/*!
 	* @note original_name On_Ground

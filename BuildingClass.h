@@ -170,7 +170,7 @@ public:
 	int SizeOf() const override JMP_THIS(0x459E70);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x454260);
 	Coordinate Center() const override JMP_THIS(0x447AC0);
-	Coordinate Destination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x447E90);
+	Coordinate GetDestination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x447E90);
 	void AI() override JMP_THIS(0x43FB20);
 
 	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x4544A0);
