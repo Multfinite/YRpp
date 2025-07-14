@@ -21,7 +21,7 @@ public:
 	static constexpr uintptr_t ILocoVTable = 0x7F0B1C;
 	static constexpr size_t ClassSize = 0x60;
 public:
-	CoordStruct MovingDestination;
+	CoordStruct DestinationCoords;
 	RateTimer MissionTimer;
 	CDTimerClass TrailerTimer;
 	int MissionState;

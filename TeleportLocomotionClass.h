@@ -26,7 +26,7 @@ public:
 	static constexpr uintptr_t ILocoVTable = 0x7F5000;
 	static constexpr size_t ClassSize = 0x4C;
 public:
-	CoordStruct MovingDestination;	//Current destination
+	CoordStruct DestinationCoords;	//Current destination
 	CoordStruct LastCoords; //Marked occupation bits there
 	bool Moving;	//Is currently moving
 	bool unknown_bool_35;

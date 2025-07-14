@@ -29,7 +29,7 @@ public:
     DWORD PreviousRamp;
     DWORD CurrentRamp;
     RateTimer SlopeTimer;
-    CoordStruct Destination;
+    CoordStruct DestinationPos;
     CoordStruct HeadToCoord;
     int SpeedAccum;
     double movementspeed_50;

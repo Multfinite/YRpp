@@ -22,7 +22,7 @@ public:
 	static constexpr size_t ClassSize = 0x60;
 public:
 	bool AirportBound;
-	CoordStruct MovingDestination;
+	CoordStruct DestinationCoords;
 	CoordStruct XYZ2;
 	bool HasMoveOrder;
 	int FlightLevel;
