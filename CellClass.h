@@ -309,7 +309,7 @@ public:
 	}
 
 	// helper - gets coords and fixes height for bridge
-	constexpr CoordStruct GetCoordsWithBridge() const
+	CoordStruct GetCoordsWithBridge() const
 	{
 		CoordStruct buffer = this->Center();
 		return FixHeight(buffer);

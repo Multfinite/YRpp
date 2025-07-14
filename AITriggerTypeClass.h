@@ -104,7 +104,7 @@ public:
 	bool ChronoSphereCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F180); 
 	bool HouseCredits(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F230);
 
-	constexpr void FormatForSaving(char * buffer, size_t size) const {
+	void FormatForSaving(char * buffer, size_t size) const {
 		const char *Team1Name = "<none>";
 		const char *Team2Name = "<none>";
 		const char *HouseName = "<none>";
