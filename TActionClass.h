@@ -69,7 +69,7 @@ public:
 	int GetArrayIndex() const override JMP_THIS(0x6E4650);
 
 	HouseClass* TriggerOwner(TriggerClass* trigger, int houseId) JMP_THIS(0x6E45E0);
-	Coordinate Waypoint() JMP_THIS(0x6E3F70);
+	Coordinate GetWaypoint() JMP_THIS(0x6E3F70);
 
 	// you are responsible for doing INI::ReadString and strtok'ing it before calling
 	// this func only calls strtok again, doesn't know anything about buffers
