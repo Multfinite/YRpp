@@ -77,7 +77,7 @@ public:
 
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5B3970);
 	void AI() override JMP_THIS(0x5B3060);
-	Mission CurrentMission() const override JMP_THIS(0x5B3040);
+	Mission GetCurrentMission() const override JMP_THIS(0x5B3040);
 
 	/*!
 	* @note original_name Assign_Mission
@@ -335,5 +335,6 @@ protected:
 	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {}
 	MissionClass(noinit_t) noexcept : MissionClass(fake_noinit_t{}) { vtables.init(this); };
 	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
+	void g();
 };
 static_assert(sizeof(MissionClass) == MissionClass::ClassSize);

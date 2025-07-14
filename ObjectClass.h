@@ -646,7 +646,7 @@ public:
 	* @note vtable_index 97:0x184
 	* @note address 0x5F43E0
 	*/
-	virtual Mission CurrentMission() const JMP_THIS(0x5F43E0);
+	virtual Mission GetCurrentMission() const JMP_THIS(0x5F43E0);
 
 	/*!
 	* @note original_name Assign_Mission
