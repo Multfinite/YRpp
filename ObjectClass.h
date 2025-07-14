@@ -193,7 +193,7 @@ public:
 	* @note vtable_index 33:0x84
 	* @note address 0x5F6BC0
 	*/
-	virtual TechnoTypeClass* TechnoType() const JMP_THIS(0x5F6BC0);
+	virtual TechnoTypeClass* TechnoClassOf() const JMP_THIS(0x5F6BC0);
 
 	/*!
 	* @note original_name Class_Of

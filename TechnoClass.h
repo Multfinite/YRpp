@@ -431,7 +431,7 @@ public:
 	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x703860);
 	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x6FFEC0);
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x700600);
-	TechnoTypeClass* TechnoType() const override JMP_THIS(0x6F3270);
+	TechnoTypeClass* TechnoClassOf() const override JMP_THIS(0x6F3270);
 	DWORD Ownable() const override JMP_THIS(0x708B30);
 	bool Repairable() const override JMP_THIS(0x701140);
 	bool CanPlayerFire() const override JMP_THIS(0x7010D0);
