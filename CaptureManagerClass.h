@@ -89,7 +89,7 @@ protected:
     { }
 
 public:
-    CaptureManagerClass(noinit_t) noexcept : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(00471950);
+    CaptureManagerClass(noinit_t) noexcept : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471950);
     CaptureManagerClass() : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471890);
     CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
         : CaptureManagerClass(fake_noinit_t{})
