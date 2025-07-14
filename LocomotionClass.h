@@ -23,7 +23,7 @@ public:
 			, ILocomotion(0x7EADF4)
 		{}
 
-		constexpr void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
 	};
 	static inline vtables_t vtables{};
 

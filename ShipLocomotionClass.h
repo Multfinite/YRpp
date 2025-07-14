@@ -19,7 +19,7 @@ public:
             this->IPiggyBack = 0x7F2D68;
         }
 
-        constexpr void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+        __forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
     };
     static inline vtables_t vtables{};
 public:
