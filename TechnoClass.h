@@ -423,7 +423,7 @@ public:
 	void Init() override JMP_THIS(0x6F3F40);
 	void InvalidatePointer(AbstractClass* target, bool all = true) override JMP_THIS(0x7077C0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x70C270);
-	int Owner() const override JMP_THIS(0x6F9DB0);
+	int GetOwner() const override JMP_THIS(0x6F9DB0);
 	HouseClass* OwningHouse() const override JMP_THIS(0x6F9DC0);
 	void AI() override JMP_THIS(0x6F9E50);
 

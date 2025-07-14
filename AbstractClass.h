@@ -157,7 +157,7 @@ public:
 	* @note vtable_index 14:0x38
 	* @note address 0x410490
 	*/
-	virtual int Owner() const JMP_THIS(0x410490);
+	virtual int GetOwner() const JMP_THIS(0x410490);
 
 	/*!
 	* @brief returns owner house
