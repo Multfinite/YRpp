@@ -278,7 +278,7 @@ public:
 		{ JMP_THIS(0x477640); }
 
 
-	TechnoTypeClass* TechnoType(const char* pSection, const char* pKey)
+	TechnoTypeClass* GetTechnoType(const char* pSection, const char* pKey)
 		{ JMP_THIS(0x476EB0); }
 
 	// safer and more convenient overload for string reading
