@@ -56,8 +56,8 @@ public:
 
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74AAD0);
     
-    HRESULT __stdcall Load(IStream* pStm) JMP_STD JMP_THIS(0x74A970);
-    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) JMP_STD JMP_THIS(0x74AA10);
+    HRESULT __stdcall Load(IStream* pStm) JMP_STD(0x74A970);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x74AA10);
    
     RTTIType KindOf() const override JMP_THIS(0x74AB20);
     int SizeOf() const override JMP_THIS(0x74AB10);
