@@ -118,7 +118,7 @@ public:
 	CDTimerClass CashProductionTimer;
 	// AI_SELLABLE under [Structures]
 	bool IsAIAllowedToSell;
-	bool IsReadyToCommence;
+	bool ReadyToCommence;
 	// AI handholder for repair logic,
 	bool NeedsRepairs;
 	// C4Applied
