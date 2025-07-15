@@ -15,3 +15,4 @@
 #include "CommandClass.h"
 #include "GameClasses.h"
 #include "SwizzleManagerClass.h"
+#include "Helpers/Cast.h"
