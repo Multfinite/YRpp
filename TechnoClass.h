@@ -170,7 +170,7 @@ struct RecoilData
 /*!
 	@brief Base class for buildable objects
 */
-class NOVTABLE TechnoClass : public RadioClass, public FlasherClass, public StageClass, public CargoClass
+class NOVTABLE TechnoClass : public RadioClass/*, public FlasherClass, public StageClass*/
 {
 public:
 	using base_type = RadioClass;
@@ -192,6 +192,9 @@ public:
 
 	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
 public:
+	DECLARE_PROPERTY(FlasherClass, Flashing);
+	DECLARE_PROPERTY(StageClass, Animation); // how the unit animates
+	DECLARE_PROPERTY(CargoClass, Passengers);
 	// unit carrying me
 	TechnoClass* Transporter;
 	int              LastFireBulletFrame;
