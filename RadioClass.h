@@ -35,8 +35,8 @@ public:
 	// 0x65AEB0 SDTOR
 	virtual ~RadioClass() RX;
 
-	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x65AB80);
-	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x65AC40);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x65AB80);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x65AC40);
 
 	void InvalidatePointer(AbstractClass* target, bool all) override JMP_THIS(0x65AAC0);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x65AB10);
