@@ -77,6 +77,7 @@ public:
 
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5B3970);
 	void AI() override JMP_THIS(0x5B3060);
+
 	Mission GetCurrentMission() const override JMP_THIS(0x5B3040);
 
 	/*!

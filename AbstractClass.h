@@ -97,20 +97,20 @@ public:
 	bool Dirty;
 	PROTECTED_PROPERTY(BYTE, padding_21[0x3]);
 public:
-	virtual RTTIType __stdcall What_Am_I() const override JMP_STD(0x410210);
-	virtual int __stdcall Fetch_ID() const override JMP_STD(0x410220);
-	virtual void __stdcall Create_ID() override JMP_STD(0x410230);
+	RTTIType __stdcall What_Am_I() const override JMP_STD(0x410210);
+	int __stdcall Fetch_ID() const override JMP_STD(0x410220);
+	void __stdcall Create_ID() override JMP_STD(0x410230);
 
 	/*00:0x00*/
-	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_STD(0x410260);
+	HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_STD(0x410260);
 	/*01:0x04*/
-	virtual ULONG __stdcall AddRef() override JMP_STD(0x410300);
+	ULONG __stdcall AddRef() override JMP_STD(0x410300);
 	/*02:0x08*/
-	virtual ULONG __stdcall Release() override JMP_STD(0x410310);
+	ULONG __stdcall Release() override JMP_STD(0x410310);
 	/*04:0x10*/
-	virtual HRESULT __stdcall IsDirty() override JMP_STD(0x410450);
+	HRESULT __stdcall IsDirty() override JMP_STD(0x410450);
 	/*07:0x1C*/
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x4103E0);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x4103E0);
 
 	/*08:0x20*/
 	virtual ~AbstractClass(/*DestructorFlags flags*/) JMP_THIS(0x4105A0);
