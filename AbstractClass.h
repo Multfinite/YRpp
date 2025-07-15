@@ -97,6 +97,9 @@ public:
 	bool Dirty;
 	PROTECTED_PROPERTY(BYTE, padding_21[0x3]);
 public:
+	void __stdcall Issue() override JMP_STD(0x410590);
+	bool __stdcall Respond(DWORD command) override JMP_STD(0x410580);
+
 	RTTIType __stdcall What_Am_I() const override JMP_STD(0x410210);
 	int __stdcall Fetch_ID() const override JMP_STD(0x410220);
 	void __stdcall Create_ID() override JMP_STD(0x410230);
