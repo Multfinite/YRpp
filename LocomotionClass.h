@@ -6,6 +6,7 @@
 #include "YRCom.h"
 #include "Drawing.h"
 #include "Helpers/CompileTime.h"
+#include "Helpers/VTable.h"
 
 class LocomotionClass : public IPersistStream, public ILocomotion
 {
