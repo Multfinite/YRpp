@@ -66,7 +66,7 @@ class NOVTABLE SidebarClass : public PowerClass
 {
 public:
 	//Static
-	DEFINE_POINTER(SidebarClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(SidebarClass, Instance, 0x87F7E8u)
 
 	DEFINE_ARRAY_REFERENCE(wchar_t, [0x42u], TooltipBuffer, 0xB07BC4u)
 
