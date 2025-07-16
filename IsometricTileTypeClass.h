@@ -68,7 +68,7 @@ public:
     RTTIType KindOf() const override JMP_THIS(0x54A140);
     int SizeOf() const override JMP_THIS(0x54A150);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x549B70);
-    int ArrayIndex() const override JMP_THIS(0x54A160);
+    int GetArrayIndex() const override JMP_THIS(0x54A160);
    
     CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x549B50);
     bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
