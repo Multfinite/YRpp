@@ -201,7 +201,7 @@ public:
 	* @note vtable_index 21:0x54
 	* @note address 0x410530
 	*/
-	virtual bool InAir() const JMP_THIS(0x410530);
+	virtual bool IsInAir() const JMP_THIS(0x410530);
 
 	/*!
 	* @brief DO NOT USE THIS WHEN YOU NEED A CENTER. This is some specific-special functions. It used in BulletClass to get coords of the targets. It's overriden only in CellClass.

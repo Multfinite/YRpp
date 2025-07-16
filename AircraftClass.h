@@ -75,7 +75,7 @@ public:
 	int SizeOf() const override JMP_THIS(0x41C170);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41B610);
 	bool IsOnGround() const override JMP_THIS(0x41B980);
-	bool InAir() const override JMP_THIS(0x41B920);
+	bool IsInAir() const override JMP_THIS(0x41B920);
 	void AI() override JMP_THIS(0x414BB0);
 
 	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x417F80);
