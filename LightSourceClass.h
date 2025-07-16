@@ -27,7 +27,7 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7ED028;
     static constexpr size_t ClassSize = 0x4C;
 
-    DEFINE_POINTER(DynamicVectorClass<LightSourceClass*>, Array, 0xABCA10)
+    DEFINE_REFERENCE(DynamicVectorClass<LightSourceClass*>, Array, 0xABCA10)
 
 public:
     int LightIntensity;

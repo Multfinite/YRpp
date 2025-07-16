@@ -12,7 +12,7 @@
 class VoxClass
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<VoxClass*>, Array, 0xB1D4A0u)
+	DEFINE_REFERENCE(DynamicVectorClass<VoxClass*>, Array, 0xB1D4A0u)
 	DEFINE_REFERENCE(int, EVAIndex, 0xB1D4C8u)
 public:
 	char Name[0x28];
@@ -29,9 +29,9 @@ public:
 
 	static VoxClass* Find(const char* pName)
 	{
-		for(int i = 0; i < Array->Count; ++i) {
-			if(!_strcmpi(Array->Items[i]->Name, pName)) {
-				return Array->Items[i];
+		for(int i = 0; i < Array.Count; ++i) {
+			if(!_strcmpi(Array.Items[i]->Name, pName)) {
+				return Array.Items[i];
 			}
 		}
 		return nullptr;
@@ -39,8 +39,8 @@ public:
 
 	static int FindIndex(const char* pName)
 	{
-		for(int i = 0; i < Array->Count; ++i) {
-			if(!_strcmpi(Array->Items[i]->Name, pName)) {
+		for(int i = 0; i < Array.Count; ++i) {
+			if(!_strcmpi(Array.Items[i]->Name, pName)) {
 				return i;
 			}
 		}

@@ -26,7 +26,7 @@ public:
     static constexpr size_t ClassSize = 0x38;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<TagClass*>, Array, 0xB0E720u)
+    DEFINE_REFERENCE(DynamicVectorClass<TagClass*>, Array, 0xB0E720u)
 
 public:
     TagTypeClass* Type;

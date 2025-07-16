@@ -58,7 +58,7 @@ public:
     static constexpr size_t ClassSize = 0xB0;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
+    DEFINE_REFERENCE(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
 
 public:
     OverlayTypeClass* Type;

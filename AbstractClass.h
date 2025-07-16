@@ -66,7 +66,7 @@ public:
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 	static constexpr size_t ClassSize = 0x24;
 
-	DEFINE_POINTER(DynamicVectorClass<AbstractClass*>, Array, 0xB0F720u)
+	DEFINE_REFERENCE(DynamicVectorClass<AbstractClass*>, Array, 0xB0F720u)
 	DEFINE_REFERENCE((IndexClass<int, int>), TargetIndex, 0xB0E840u)
 
 	const char* GetRTTIName() const { return AbstractClass::GetRTTIName(this->KindOf()); }

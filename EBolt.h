@@ -10,7 +10,7 @@ class UnitClass;
 class EBolt
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<EBolt*>, Array, 0x8A0E88u)
+	DEFINE_REFERENCE(DynamicVectorClass<EBolt*>, Array, 0x8A0E88u)
 
 	//Constructor, Destructor
 	EBolt()

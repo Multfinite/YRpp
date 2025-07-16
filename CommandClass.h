@@ -10,7 +10,7 @@ class NOVTABLE CommandClass
 {
 public:
 	// static
-	DEFINE_POINTER(DynamicVectorClass<CommandClass*>, Array, 0x87F658u)
+	DEFINE_REFERENCE(DynamicVectorClass<CommandClass*>, Array, 0x87F658u)
 	DEFINE_REFERENCE((IndexClass<unsigned short, CommandClass*>), Hotkeys, 0x87F680u)
 
 	//CommandClass

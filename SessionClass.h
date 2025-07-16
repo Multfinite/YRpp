@@ -26,7 +26,7 @@ struct SessionOptionsClass
 
 #pragma pack(push, 1)
 struct NodeNameType {
-	DEFINE_POINTER(DynamicVectorClass<NodeNameType*>, Array, 0xA8DA74)
+	DEFINE_REFERENCE(DynamicVectorClass<NodeNameType*>, Array, 0xA8DA74)
 
 	wchar_t Name[20];
 	sockaddr_in Address;

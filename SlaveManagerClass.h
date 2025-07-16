@@ -54,7 +54,7 @@ public:
     static constexpr size_t ClassSize = 0x64;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<SlaveManagerClass*>, Array, 0xB0B5F0u)
+    DEFINE_REFERENCE(DynamicVectorClass<SlaveManagerClass*>, Array, 0xB0B5F0u)
 
 public:
     TechnoClass* Owner;

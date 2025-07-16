@@ -72,7 +72,7 @@ public:
 
 	DEFINE_REFERENCE(bool*, IsCurrentPosAffected, 0xA83DC8u)
 	DEFINE_REFERENCE(SHPStruct*, VeinSHPData, 0xB1D2ECu)
-	DEFINE_POINTER(DynamicVectorClass<VeinholeMonsterClass*>, Array, 0xB1D290u)
+	DEFINE_REFERENCE(DynamicVectorClass<VeinholeMonsterClass*>, Array, 0xB1D290u)
 public:
 	DECLARE_PROPERTY(VeinholeLogic, GrowthLogic);
 	int CurrentState;

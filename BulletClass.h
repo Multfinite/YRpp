@@ -45,7 +45,7 @@ public:
     static constexpr size_t ClassSize = 0x160;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
+    DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
     DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, ScalableBullets, 0x89DE18u)
 
 public:

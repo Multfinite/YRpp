@@ -38,7 +38,7 @@ public:
     static constexpr size_t ClassSize = 0x50;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
+    DEFINE_REFERENCE(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
 
 public:
     DynamicVectorClass<ControlNode*> ControlNodes;

@@ -20,7 +20,7 @@ class ConvertClass
 {
 public:
 	//global array
-	DEFINE_POINTER(DynamicVectorClass<ConvertClass*>, Array, 0x89ECF8u)
+	DEFINE_REFERENCE(DynamicVectorClass<ConvertClass*>, Array, 0x89ECF8u)
 
 	static ConvertClass* FindOrAllocate(const char* pFilename);
 
@@ -64,7 +64,7 @@ class LightConvertClass : public ConvertClass
 {
 public:
 	//global array
-	DEFINE_POINTER(DynamicVectorClass<LightConvertClass*>, Array, 0x87F698u)
+	DEFINE_REFERENCE(DynamicVectorClass<LightConvertClass*>, Array, 0x87F698u)
 public:
 	RGBClass* UsedPalette1;
 	RGBClass* UsedPalette2;

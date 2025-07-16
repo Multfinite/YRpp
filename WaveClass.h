@@ -28,7 +28,7 @@ public:
     static constexpr size_t ClassSize = 0x240;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
+    DEFINE_REFERENCE(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
 
 public:
     AbstractClass* Target;

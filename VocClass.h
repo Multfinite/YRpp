@@ -31,7 +31,7 @@ struct VolumeStruct	//pretty uncreative name, but it's all I can come up with at
 class VocClass
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<VocClass*>, Array, 0xB1D378u)
+	DEFINE_REFERENCE(DynamicVectorClass<VocClass*>, Array, 0xB1D378u)
 
 	DEFINE_REFERENCE(bool, VoicesEnabled, 0x8464ACu)
 public:
@@ -75,10 +75,10 @@ public:
 public:
 	static VocClass* Find(const char* pName)
 	{
-		for (int i = 0; i < Array->Count; ++i)
+		for (int i = 0; i < Array.Count; ++i)
 		{
-			if (!_strcmpi(Array->Items[i]->Name, pName))
-				return Array->Items[i];
+			if (!_strcmpi(Array.Items[i]->Name, pName))
+				return Array.Items[i];
 		}
 		return nullptr;
 	}

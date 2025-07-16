@@ -49,7 +49,7 @@ public:
     static constexpr size_t ClassSize = 0x74;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<SpawnManagerClass*>, Array, 0xB0B880u)
+    DEFINE_REFERENCE(DynamicVectorClass<SpawnManagerClass*>, Array, 0xB0B880u)
 
 public:
     TechnoClass* Owner;

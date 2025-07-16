@@ -42,7 +42,7 @@ public:
 class PlanningTokenClass
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<PlanningTokenClass*>, Array, 0xAC4C78u)
+	DEFINE_REFERENCE(DynamicVectorClass<PlanningTokenClass*>, Array, 0xAC4C78u)
 
 	//===========================================================================
 	//===== Properties ==========================================================

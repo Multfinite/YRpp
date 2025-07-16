@@ -30,7 +30,7 @@ public:
     static constexpr size_t ClassSize = 0x40;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
+    DEFINE_REFERENCE(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
     static constexpr auto Radius = 240;
     DEFINE_ARRAY_REFERENCE(Point2D, [16], DrawCoords, 0x8A0180u)
 

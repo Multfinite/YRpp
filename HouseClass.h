@@ -188,7 +188,7 @@ public:
 	// <Player @ A> and friends map to these constants
 	enum {PlayerAtA = 4475, PlayerAtB, PlayerAtC, PlayerAtD, PlayerAtE, PlayerAtF, PlayerAtG, PlayerAtH};
 
-	DEFINE_POINTER(DynamicVectorClass<HouseClass*>, Array, 0xA80228u)
+	DEFINE_REFERENCE(DynamicVectorClass<HouseClass*>, Array, 0xA80228u)
 
 	// House of player at this computer.
 	DEFINE_REFERENCE(HouseClass*, CurrentPlayer, 0xA83D4Cu)
@@ -707,7 +707,7 @@ public:
 
 	// gets the first house of a side with this name
 	static HouseClass* FindBySideIndex(int index) {
-		for(auto pHouse : *Array) {
+		for(auto pHouse : Array) {
 			if(pHouse->Type->SideIndex == index) {
 				return pHouse;
 			}
@@ -733,7 +733,7 @@ public:
 		ScenarioClass* pScenario = ScenarioClass::Instance;
 		for (int i = 0; i < 8; i++)
 		{
-			if (HouseClass::Array->GetItemOrDefault(pScenario->HouseIndices[i], nullptr) == this)
+			if (HouseClass::Array.GetItemOrDefault(pScenario->HouseIndices[i], nullptr) == this)
 				return i;
 		}
 		return -1;

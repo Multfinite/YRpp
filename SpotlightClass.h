@@ -9,7 +9,7 @@ class SpotlightClass
 {
 public:
 	//Static
-	DEFINE_POINTER(DynamicVectorClass<SpotlightClass*>, Array, 0xAC1678u)
+	DEFINE_REFERENCE(DynamicVectorClass<SpotlightClass*>, Array, 0xAC1678u)
 
 	//Destructor
 	~SpotlightClass()

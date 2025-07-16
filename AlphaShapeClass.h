@@ -29,7 +29,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E32A4;
 	static constexpr size_t ClassSize = 0x40;
 
-	DEFINE_POINTER(DynamicVectorClass<AlphaShapeClass*>, Array, 0x88A0F0u)
+	DEFINE_REFERENCE(DynamicVectorClass<AlphaShapeClass*>, Array, 0x88A0F0u)
 public:
 	//To which object is this AlphaShape attached?
 	ObjectClass* AttachedTo;

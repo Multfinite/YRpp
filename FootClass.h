@@ -30,7 +30,7 @@ public:
 	static constexpr auto AbsDerivateID = AbstractFlags::Foot;
 	static constexpr size_t ClassSize = 0x6C0;
 
-	DEFINE_POINTER(DynamicVectorClass<FootClass*>, Array, 0x8B3DC0u)
+	DEFINE_REFERENCE(DynamicVectorClass<FootClass*>, Array, 0x8B3DC0u)
 public:
 	int             PlanningPathIdx; // which planning path am I following?
 	::Cell      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot

@@ -28,7 +28,7 @@ public:
 	};
 
 	//global array
-	DEFINE_POINTER(DynamicVectorClass<ColorScheme*>, Array, 0xB054D0u)
+	DEFINE_REFERENCE(DynamicVectorClass<ColorScheme*>, Array, 0xB054D0u)
 public:
 	int ArrayIndex; // this is off by one (always one higher than the actual index). that's because consistency and reason suck.
 	BytePalette Colors;
@@ -45,12 +45,12 @@ public:
 	*/
 	static ColorScheme* Find(const char* pID, int ShadeCount = 1) {
 		int index = FindIndex(pID, ShadeCount);
-		return Array->GetItemOrDefault(index);
+		return Array.GetItemOrDefault(index);
 	}
 
 	static int FindIndex(const char* pID, int ShadeCount = 1) {
-		for(int i = 0; i < Array->Count; ++i) {
-			ColorScheme* pItem = Array->GetItem(i);
+		for(int i = 0; i < Array.Count; ++i) {
+			ColorScheme* pItem = Array.GetItem(i);
 			if(!_strcmpi(pItem->ID, pID)) {
 				if(pItem->ShadeCount == ShadeCount) {
 					return i;

@@ -27,7 +27,7 @@ public:
     static constexpr size_t ClassSize = 0xB0;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
+    DEFINE_REFERENCE(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
 
 public:
     IsometricTileTypeClass* Type;

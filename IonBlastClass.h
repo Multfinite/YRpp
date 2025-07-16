@@ -11,7 +11,7 @@
 class IonBlastClass
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<IonBlastClass*>, Array, 0xAA0118u)
+	DEFINE_REFERENCE(DynamicVectorClass<IonBlastClass*>, Array, 0xAA0118u)
 
 	static void UpdateAll()
 		{ JMP_STD(0x53D310); }

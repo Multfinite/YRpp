@@ -26,7 +26,7 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Parasite;
 	static constexpr size_t ClassSize = 0x58;
 
-	DEFINE_POINTER(DynamicVectorClass<ParasiteClass*>, Array, 0xAC4910u)
+	DEFINE_REFERENCE(DynamicVectorClass<ParasiteClass*>, Array, 0xAC4910u)
 public:
 	FootClass* Owner;
 	FootClass* Victim;

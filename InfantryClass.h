@@ -27,7 +27,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7EB058;
 	static constexpr size_t ClassSize = 0x6F0;
 
-	DEFINE_POINTER(DynamicVectorClass<InfantryClass*>, Array, 0xA83DE8u)
+	DEFINE_REFERENCE(DynamicVectorClass<InfantryClass*>, Array, 0xA83DE8u)
 public:
 	InfantryTypeClass* Type;
 	//IT IS MORE THAT JUST ANIMATION. IT IS INFANTRY STATE!

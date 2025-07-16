@@ -30,7 +30,7 @@ public:
 	static constexpr size_t ClassSize = 0x8E8;
 
 	//Static
-	DEFINE_POINTER(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
+	DEFINE_REFERENCE(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
 public:
 	int counter_6C0;
 	UnitTypeClass* Type;

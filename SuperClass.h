@@ -28,7 +28,7 @@ public:
     static constexpr size_t ClassSize = 0x80;
 
 public:
-    DEFINE_POINTER(DynamicVectorClass<SuperClass*>, Array, 0xA83CB8u)
+    DEFINE_REFERENCE(DynamicVectorClass<SuperClass*>, Array, 0xA83CB8u)
     DEFINE_REFERENCE(DynamicVectorClass<SuperClass*>, ShowTimers, 0xA83D50u)
 
 public:

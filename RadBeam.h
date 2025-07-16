@@ -9,7 +9,7 @@ class TechnoClass;
 class RadBeam
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<RadBeam*>, Array, 0xB04A60u)
+	DEFINE_REFERENCE(DynamicVectorClass<RadBeam*>, Array, 0xB04A60u)
 
 	// Constructor removed - do not use it, use Allocate instead
 

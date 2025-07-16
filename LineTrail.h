@@ -12,7 +12,7 @@ struct LineTrailNode
 class LineTrail
 {
 public:
-	DEFINE_POINTER(DynamicVectorClass<LineTrail*>, Array, 0xABCB78u)
+	DEFINE_REFERENCE(DynamicVectorClass<LineTrail*>, Array, 0xABCB78u)
 public:
 	ColorStruct Color;
 	ObjectClass* Owner;

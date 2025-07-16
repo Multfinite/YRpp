@@ -31,7 +31,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E22A4;
 	static constexpr size_t ClassSize = 0x6D8;
 
-	DEFINE_POINTER(DynamicVectorClass<AircraftClass*>, Array, 0xA8E390u)
+	DEFINE_REFERENCE(DynamicVectorClass<AircraftClass*>, Array, 0xA8E390u)
 public:
 	AircraftTypeClass* Type;
 	// Whether or not to deduct ammo after firing run (strafing) is over

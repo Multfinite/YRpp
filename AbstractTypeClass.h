@@ -47,7 +47,7 @@ public:
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 	static constexpr size_t ClassSize = 0x98;
 
-	DEFINE_POINTER(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
+	DEFINE_REFERENCE(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
 public:
 	char ID[0x19-1];
 	/*! @brief Nullterminator of ID (some cursed string handler class do this) */

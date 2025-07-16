@@ -24,7 +24,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3AD0;
 	static constexpr size_t ClassSize = 0xE8;
 public:
-	DEFINE_POINTER(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
+	DEFINE_REFERENCE(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
 public:
 	double Speed;
 	CoordStruct field_B8;
