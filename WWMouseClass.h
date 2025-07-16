@@ -22,11 +22,11 @@ public:
 
 		WWMouseClass::Instance->ShowCursor();
 
-		MouseClass::Instance->SetCursor(MouseCursorType::NoMove, false);
-		MouseClass::Instance->RestoreCursor();
+		MouseClass::Instance.SetCursor(MouseCursorType::NoMove, false);
+		MouseClass::Instance.RestoreCursor();
 
-		TabClass::Instance->Activate();
-		MouseClass::Instance->RedrawSidebar(0);
+		TabClass::Instance.Activate();
+		MouseClass::Instance.RedrawSidebar(0);
 	}
 
 	virtual ~WWMouseClass()

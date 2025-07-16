@@ -163,7 +163,7 @@ public:
 
 	static void __fastcall UpdateAll()
 	{
-		for (auto const& pVeins : *Array())
+		for (auto const& pVeins : Array)
 		{
 			if (!pVeins->InLimbo)
 				pVeins->AI();
