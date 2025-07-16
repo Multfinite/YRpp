@@ -204,7 +204,7 @@ public:
 	bool CanBeSelectedNow() const override JMP_THIS(0x459C00);
 	bool ObjectClickedAction(Action action, ObjectClass* pTarget, bool bUnk) override JMP_THIS(0x4436F0);
 	bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) override JMP_THIS(0x443410);
-	void ClickedAsTarget(int duration) override JMP_THIS(0x456E00);
+	void Flash(int duration) override JMP_THIS(0x456E00);
 	DamageState IronCurtain(int nDuration, HouseClass* pSource, bool ForceShield) override JMP_THIS(0x457C90);
 	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x442230);
 	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x43C2D0);

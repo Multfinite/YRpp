@@ -455,7 +455,7 @@ public:
 	void See(bool incremental, int32_t arg_4) override JMP_THIS(0x70ADC0);
 	bool Mark(MarkType value) override JMP_THIS(0x6F4A70);
 	bool CanBeSelectedNow() const override JMP_THIS(0x6FC030);
-	void ClickedAsTarget(int duration) override JMP_THIS(0x6F9DD0);
+	void Flash(int duration) override JMP_THIS(0x6F9DD0);
 	bool Select() override JMP_THIS(0x6FBFA0);
 	DamageState IronCurtain(int nDuration, HouseClass* pSource, bool ForceShield) override JMP_THIS(0x70E2B0);
 	void StopAirstrikeTimer() override JMP_THIS(0x70E340);

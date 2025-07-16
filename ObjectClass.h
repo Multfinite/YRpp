@@ -541,7 +541,7 @@ public:
 	* @note vtable_index 82:0x148
 	* @note address 0x5F4370
 	*/
-	virtual void ClickedAsTarget(int duration) JMP_THIS(0x5F4370);
+	virtual void Flash(int duration) JMP_THIS(0x5F4370);
 
 	/*!
 	* @note original_name Select
