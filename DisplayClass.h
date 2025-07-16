@@ -9,7 +9,7 @@ class NOVTABLE DisplayClass : public MapClass
 {
 public:
 	//Static
-	static constexpr constant_ptr<DisplayClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(DisplayClass, Instance, 0x87F7E8u)
 
 	//WIP: DisplayClass::TacticalClass goes HERE
 

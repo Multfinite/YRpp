@@ -25,7 +25,7 @@ public:
     static constexpr size_t ClassSize = 0x34;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<EMPulseClass*>, 0x8A3870u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<EMPulseClass*>, Array, 0x8A3870u)
 
 public:
     CellStruct BaseCoords;

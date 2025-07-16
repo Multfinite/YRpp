@@ -13,7 +13,7 @@ class CellClass;
 class AircraftTrackerClass
 {
 public:
-	static constexpr reference<AircraftTrackerClass, 0x887888u> Instance { };
+	DEFINE_REFERENCE(AircraftTrackerClass, Instance, 0x887888u)
 public:
 	DynamicVectorClass<TechnoClass*> TrackerVectors[20][20];
 	DynamicVectorClass<TechnoClass*> CurrentVector;

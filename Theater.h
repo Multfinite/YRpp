@@ -8,7 +8,7 @@
 struct Theater //US English spelling to keep it consistent with the game
 {
 public:
-	static constexpr reference<Theater, 0x7E1B78u, 6u> const Array {};
+	DEFINE_ARRAY_REFERENCE(Theater, [6u], Array, 0x7E1B78u)
 
 	static void __fastcall Init(TheaterType theater)
 	{

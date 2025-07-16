@@ -70,9 +70,9 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7F4680;
 	static constexpr size_t ClassSize = 0x108;
 
-	static constexpr reference<bool*, 0xA83DC8u> const IsCurrentPosAffected {};
-	static constexpr reference<SHPStruct*, 0xB1D2ECu> const VeinSHPData {};
-	static constexpr constant_ptr<DynamicVectorClass<VeinholeMonsterClass*>, 0xB1D290u> const Array {};
+	DEFINE_REFERENCE(bool*, IsCurrentPosAffected, 0xA83DC8u)
+	DEFINE_REFERENCE(SHPStruct*, VeinSHPData, 0xB1D2ECu)
+	DEFINE_POINTER(DynamicVectorClass<VeinholeMonsterClass*>, Array, 0xB1D290u)
 public:
 	DECLARE_PROPERTY(VeinholeLogic, GrowthLogic);
 	int CurrentState;

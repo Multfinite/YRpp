@@ -34,7 +34,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3354;
 	static constexpr size_t ClassSize = 0x1C8;
 
-	static constexpr constant_ptr<DynamicVectorClass<AnimClass*>, 0xA8E9A8u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<AnimClass*>, Array, 0xA8E9A8u)
 public:
 	DECLARE_PROPERTY(StageClass, Animation);
 	AnimTypeClass* Type; //The AnimType.

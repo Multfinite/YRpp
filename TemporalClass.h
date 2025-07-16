@@ -28,7 +28,7 @@ public:
     static constexpr size_t ClassSize = 0x50;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<TemporalClass*>, 0xB0EC60u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<TemporalClass*>, Array, 0xB0EC60u)
 
 public:
     TechnoClass* Owner;

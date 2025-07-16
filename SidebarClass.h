@@ -66,9 +66,9 @@ class NOVTABLE SidebarClass : public PowerClass
 {
 public:
 	//Static
-	static constexpr constant_ptr<SidebarClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(SidebarClass, Instance, 0x87F7E8u)
 
-	static constexpr reference<wchar_t, 0xB07BC4u, 0x42u> const TooltipBuffer{};
+	DEFINE_ARRAY_REFERENCE(wchar_t, [0x42u], TooltipBuffer, 0xB07BC4u)
 
 	void SidebarNeedsRepaint(int mode = 0) {
 		this->SidebarNeedsRedraw = true;

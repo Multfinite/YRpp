@@ -26,7 +26,7 @@ public:
     static constexpr size_t ClassSize = 0xB0;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<SmudgeClass*>, 0xA8B1E0u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<SmudgeClass*>, Array, 0xA8B1E0u)
 
 public:
     SmudgeTypeClass* Type;

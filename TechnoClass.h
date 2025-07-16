@@ -190,7 +190,7 @@ public:
 	static constexpr auto AbsDerivateID = AbstractFlags::Techno;
 	static constexpr size_t ClassSize = 0x520;
 
-	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array {};
+	DEFINE_POINTER(DynamicVectorClass<TechnoClass*>, Array, 0xA8EC78u)
 public:
 	DECLARE_PROPERTY(FlasherClass, Flashing);
 	DECLARE_PROPERTY(StageClass, Animation); // how the unit animates

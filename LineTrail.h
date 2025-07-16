@@ -12,7 +12,7 @@ struct LineTrailNode
 class LineTrail
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<LineTrail*>, 0xABCB78u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<LineTrail*>, Array, 0xABCB78u)
 public:
 	ColorStruct Color;
 	ObjectClass* Owner;

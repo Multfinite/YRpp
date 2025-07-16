@@ -4,7 +4,7 @@
 
 class MouseCursor {
 public:
-	static constexpr reference<MouseCursor, 0x82D028u, 86u> const Cursors{};
+	DEFINE_ARRAY_REFERENCE(MouseCursor, [86], Cursors, 0x82D028u);
 
 	static MouseCursor& GetCursor(MouseCursorType cursor) {
 		return Cursors[static_cast<int>(cursor)];
@@ -43,7 +43,7 @@ class TabClass : public SidebarClass, public INoticeSink
 {
 public:
 	//Static
-	static constexpr constant_ptr<TabClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(TabClass, Instance, 0x87F7E8u)
 
 	// non-virtual
 	void Activate(int control = 1)
@@ -62,7 +62,7 @@ class ScrollClass : public TabClass
 {
 public:
 	//Static
-	static constexpr constant_ptr<ScrollClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(ScrollClass, Instance, 0x87F7E8u)
 
 	DWORD unknown_int_5548;
 	BYTE unknown_byte_554C;
@@ -79,7 +79,7 @@ class NOVTABLE MouseClass : public ScrollClass
 {
 public:
 	//Static
-	static constexpr constant_ptr<MouseClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(MouseClass, Instance, 0x87F7E8u)
 
 	//Destructor
 	virtual ~MouseClass() RX;

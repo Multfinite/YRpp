@@ -10,7 +10,7 @@ class UnitClass;
 class EBolt
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<EBolt*>, 0x8A0E88u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<EBolt*>, Array, 0x8A0E88u)
 
 	//Constructor, Destructor
 	EBolt()

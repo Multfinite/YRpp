@@ -27,7 +27,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E4A28;
 	static constexpr size_t ClassSize = 0x3A0;
 public:
-	static constexpr reference<DynamicVectorClass<CampaignClass*>, 0x887300u> const Array{};
+	DEFINE_REFERENCE(DynamicVectorClass<CampaignClass*>, Array, 0x887300u)
 
 public:
 	int idxCD;

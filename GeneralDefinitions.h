@@ -742,6 +742,8 @@ enum class PassabilityType : DWORD
 	HasFreeSpots = 5,
 	Impassable = 6,
 	OutsideMap = 7
+
+	, Count = 8
 };
 
 enum class CloakState : int
@@ -984,6 +986,8 @@ enum class MovementZone : int
 	Water = 10,
 	WaterBeach = 11,
 	CrusherAll = 12
+
+	, Count = 13
 };
 
 enum class PipIndex : unsigned int

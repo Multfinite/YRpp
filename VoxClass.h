@@ -12,8 +12,8 @@
 class VoxClass
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<VoxClass*>, 0xB1D4A0u> const Array{};
-	static constexpr reference<int, 0xB1D4C8u> const EVAIndex{};
+	DEFINE_POINTER(DynamicVectorClass<VoxClass*>, Array, 0xB1D4A0u)
+	DEFINE_REFERENCE(int, EVAIndex, 0xB1D4C8u)
 public:
 	char Name[0x28];
 	float Volume;			//as in eva.ini

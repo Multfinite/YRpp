@@ -28,7 +28,7 @@ public:
     static constexpr size_t ClassSize = 0x74;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<RadSiteClass*>, 0xB04BD0u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<RadSiteClass*>, Array, 0xB04BD0u)
 
 public:
     LightSourceClass* LightSource;

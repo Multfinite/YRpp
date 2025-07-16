@@ -30,9 +30,9 @@ public:
     static constexpr size_t ClassSize = 0x40;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<DiskLaserClass*>, 0x8A0208u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
     static constexpr auto Radius = 240;
-    static constexpr reference<Point2D, 0x8A0180u, 16> DrawCoords{};
+    DEFINE_ARRAY_REFERENCE(Point2D, [16], DrawCoords, 0x8A0180u)
 
 public:
     TechnoClass* Owner;

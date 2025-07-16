@@ -29,7 +29,7 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Action;
 	static constexpr size_t ClassSize = 0x94;
 
-	static constexpr constant_ptr<DynamicVectorClass<TActionClass*>, 0xB0E658u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<TActionClass*>, Array, 0xB0E658u)
 public:
 	int                ArrayIndex;
 	TActionClass* NextAction;

@@ -33,17 +33,17 @@ public:
 	class CLSIDs
 	{
 	public:
-		static constexpr reference<CLSID const, 0x7E9A30u> const Drive {};
-		static constexpr reference<CLSID const, 0x7E9A40u> const Hover {};
-		static constexpr reference<CLSID const, 0x7E9A50u> const Tunnel {};
-		static constexpr reference<CLSID const, 0x7E9A60u> const Walk {};
-		static constexpr reference<CLSID const, 0x7E9A70u> const Droppod {};
-		static constexpr reference<CLSID const, 0x7E9A80u> const Fly {};
-		static constexpr reference<CLSID const, 0x7E9A90u> const Teleport {};
-		static constexpr reference<CLSID const, 0x7E9AA0u> const Mech {};
-		static constexpr reference<CLSID const, 0x7E9AB0u> const Ship {};
-		static constexpr reference<CLSID const, 0x7E9AC0u> const Jumpjet {};
-		static constexpr reference<CLSID const, 0x7E9AD0u> const Rocket {};
+		DEFINE_REFERENCE(CLSID const, Drive, 0x7E9A30u)
+		DEFINE_REFERENCE(CLSID const, Hover, 0x7E9A40u)
+		DEFINE_REFERENCE(CLSID const, Tunnel, 0x7E9A50u)
+		DEFINE_REFERENCE(CLSID const, Walk, 0x7E9A60u)
+		DEFINE_REFERENCE(CLSID const, Droppod, 0x7E9A70u)
+		DEFINE_REFERENCE(CLSID const, Fly, 0x7E9A80u)
+		DEFINE_REFERENCE(CLSID const, Teleport, 0x7E9A90u)
+		DEFINE_REFERENCE(CLSID const, Mech, 0x7E9AA0u)
+		DEFINE_REFERENCE(CLSID const, Ship, 0x7E9AB0u)
+		DEFINE_REFERENCE(CLSID const, Jumpjet, 0x7E9AC0u)
+		DEFINE_REFERENCE(CLSID const, Rocket, 0x7E9AD0u)
 	};
 public:
 	FootClass* Owner;

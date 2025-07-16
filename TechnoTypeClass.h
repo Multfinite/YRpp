@@ -89,7 +89,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7F4ED8;
 	static constexpr size_t ClassSize = 0xDF8;
 
-	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<TechnoTypeClass*>, Array, 0xA8EB00u)
 	static constexpr auto MaxWeapons = 18;
 public:
 

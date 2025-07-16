@@ -33,7 +33,7 @@ public:
     static constexpr size_t ClassSize = 0x74;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<FactoryClass*>, 0xA83E30u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<FactoryClass*>, Array, 0xA83E30u)
 
 public:
     StageClass Production;

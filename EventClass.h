@@ -23,17 +23,17 @@ public:
 class EventClass
 {
 public:
-	static constexpr reference<const char*, 0x0082091C, 47> const EventNames {};
+	DEFINE_REFERENCE(const char*, 0x0082091C, EventNames, 47)
 
-	static constexpr reference<EventList<0x80>, 0x00A802C8> OutList {};
-	static constexpr reference<EventList<0x4000>, 0x008B41F8> DoList {};
+	DEFINE_REFERENCE(EventList<0x80>, OutList, 0x00A802C8)
+	DEFINE_REFERENCE(EventList<0x4000>, DoList, 0x008B41F8)
 
 	// If the event is a MegaMission, then add it to this list
-	static constexpr reference<EventList<0x100>, 0x00A83ED0> MegaMissionList {};
+	DEFINE_REFERENCE(EventList<0x100>, MegaMissionList, 0x00A83ED0)
 
 	// this points to CRCs from 0x100 last frames
-	static constexpr reference<DWORD, 0x00B04474, 256> const LatestFramesCRC {};
-	static constexpr reference<DWORD, 0x00AC51FC> const CurrentFrameCRC {};
+	DEFINE_REFERENCE(DWORD, 0x00B04474, LatestFramesCRC, 256)
+	DEFINE_REFERENCE(DWORD, CurrentFrameCRC, 0x00AC51FC)
 
 	static bool AddEvent(const EventClass& event)
 	{

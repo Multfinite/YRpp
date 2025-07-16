@@ -20,7 +20,7 @@ public:
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7F5A24;
 	static constexpr size_t ClassSize = 0x3C;
-	static constexpr reference<double, 0x7F5B20u> const TunnelMovementSpeed {};
+	DEFINE_REFERENCE(double, TunnelMovementSpeed, 0x7F5B20u)
 public:
 	enum State : int
 	{

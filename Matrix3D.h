@@ -328,8 +328,8 @@ public:
 		*this = FromQuaternion(q) * *this;
 	}
 
-	static constexpr reference<Matrix3D, 0xB44318> VoxelDefaultMatrix{};
-	static constexpr reference<Matrix3D, 0xB45188, 21> VoxelRampMatrix{};
+	DEFINE_REFERENCE(Matrix3D, VoxelDefaultMatrix, 0xB44318)
+	DEFINE_ARRAY_REFERENCE(Matrix3D, [21], VoxelRampMatrix, 0xB45188)
 
 	static constexpr Matrix3D GetIdentity()
 	{

@@ -8,18 +8,18 @@ class CCINIClass;
 
 //Macro for the static Array of every AbstractTypeClass!
 #define ABSTRACTTYPE_ARRAY(class_name, address)	public:\
-	static constexpr constant_ptr<DynamicVectorClass<class_name*>, address> const Array{};\
+	DEFINE_REFERENCE(DynamicVectorClass<class_name*>, Array, address)\
 	static __declspec(noinline) class_name* __fastcall Find(const char* pID)\
 	{\
-		for(auto pItem : *Array)\
+		for(auto pItem : Array)\
 			if(!_strcmpi(pItem->ID, pID))\
 				return pItem;\
 		return nullptr;\
 	}\
 	static __declspec(noinline) int __fastcall FindIndex(const char* pID)\
 	{\
-		for(int i = 0; i < Array->Count; ++i)\
-			if(!_strcmpi(Array->Items[i]->ID, pID))\
+		for(int i = 0; i < Array.Count; ++i)\
+			if(!_strcmpi(Array[i]->ID, pID))\
 				return i;\
 		return -1;\
 	}
@@ -47,7 +47,7 @@ public:
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 	static constexpr size_t ClassSize = 0x98;
 
-	static constexpr constant_ptr<DynamicVectorClass<AbstractTypeClass*>, 0xA8E968u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
 public:
 	char ID[0x19-1];
 	/*! @brief Nullterminator of ID (some cursed string handler class do this) */

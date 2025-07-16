@@ -41,7 +41,7 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F4348;
     static constexpr size_t ClassSize = 0xE18;
 
-    static constexpr reference<TacticalClass*, 0x887324u> const Instance{};
+    DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)
 
     // Properties
     wchar_t ScreenText[64];
@@ -90,10 +90,10 @@ public:
     // Helper methods
     std::pair<Point2D, bool> CoordsToClient(const CoordStruct& coords) const
     {
-        constexpr reference<RectangleStruct, 0xB0CE28> view_bound{};
+		DEFINE_NONSTATIC_REFERENCE(RectangleStruct, view_bound, 0xB0CE28)
         Point2D point = CoordsToScreen(coords) - this->TacticalPos;
-        bool visible = point.X >= -360 && point.X <= view_bound->Width + 360
-            && point.Y >= -180 && point.Y <= view_bound->Height + 180;
+        bool visible = point.X >= -360 && point.X <= view_bound.Width + 360
+            && point.Y >= -180 && point.Y <= view_bound.Height + 180;
         return std::make_pair(point, visible);
     }
 

@@ -48,8 +48,8 @@ public:
 	static constexpr auto AbsDerivateID = AbstractFlags::Object;
 	static constexpr size_t ClassSize = 0xAC;
 
-	static constexpr reference<DynamicVectorClass<ObjectClass*>, 0xA8ECB8u> const CurrentObjects{};
-	static constexpr reference<DynamicVectorClass<ObjectClass*>, 0xA8E360u> const Array{};
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, CurrentObjects, 0xA8ECB8u)
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, Array, 0xA8E360u)
 
 public:
 	DWORD              unknown_24;

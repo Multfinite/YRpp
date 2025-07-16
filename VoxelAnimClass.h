@@ -33,7 +33,7 @@ public:
     static constexpr size_t ClassSize = 0x148;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<VoxelAnimClass*>, 0x887388u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<VoxelAnimClass*>, Array, 0x887388u)
 
 public:
     PROTECTED_PROPERTY(DWORD, unused_AC);

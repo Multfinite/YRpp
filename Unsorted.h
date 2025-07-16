@@ -14,55 +14,55 @@ class Game
 {
 public:
 	// the magic checksum for version validation - linked in StaticInits
-	static constexpr reference<DWORD, 0x83D560u> const Savegame_Magic {};
+	DEFINE_REFERENCE(DWORD, Savegame_Magic, 0x83D560u)
 
-	static constexpr reference<DynamicVectorClass<ULONG>, 0xB0BC88u> const COMClasses {};
+	DEFINE_REFERENCE(DynamicVectorClass<ULONG>, COMClasses, 0xB0BC88u)
 
-	static constexpr reference<HWND, 0xB73550u> const hWnd {};
-	static constexpr reference<HINSTANCE, 0xB732F0u> const hInstance {};
+	DEFINE_REFERENCE(HWND, hWnd, 0xB73550u)
+	DEFINE_REFERENCE(HINSTANCE, hInstance, 0xB732F0u)
 
-	static constexpr reference<bool, 0x887418u> const bVPLRead {};
-	static constexpr reference<bool, 0x840A6Cu> const bVideoBackBuffer {};
-	static constexpr reference<bool, 0xA8EB96u> const bAllowVRAMSidebar {};
+	DEFINE_REFERENCE(bool, bVPLRead, 0x887418u)
+	DEFINE_REFERENCE(bool, bVideoBackBuffer, 0x840A6Cu)
+	DEFINE_REFERENCE(bool, bAllowVRAMSidebar, 0xA8EB96u)
 
-	static constexpr reference<RecordFlag, 0xA8D5F8u> const RecordingFlag {};
-	static constexpr reference<CCFileClass, 0xA8D58Cu> const RecordFile {};
+	DEFINE_REFERENCE(RecordFlag, RecordingFlag, 0xA8D5F8u)
+	DEFINE_REFERENCE(CCFileClass, RecordFile, 0xA8D58Cu)
 
-	static constexpr reference<bool, 0x822CF1u> const bDrawShadow {};
-	static constexpr reference<bool, 0x8A0DEFu> const bAllowDirect3D {};
-	static constexpr reference<bool, 0x8A0DF0u> const bDirect3DIsUseable {};
+	DEFINE_REFERENCE(bool, bDrawShadow, 0x822CF1u)
+	DEFINE_REFERENCE(bool, bAllowDirect3D, 0x8A0DEFu)
+	DEFINE_REFERENCE(bool, bDirect3DIsUseable, 0x8A0DF0u)
 
-	static constexpr reference<bool, 0xA8E9A0u> const IsActive {};
-	static constexpr reference<bool, 0xA8ED80u> const IsFocused {};
-	static constexpr reference<int, 0xA8EDA0u> const SpecialDialog {};
-	static constexpr reference<bool, 0xAC48D4> const PCXInitialized {};
+	DEFINE_REFERENCE(bool, IsActive, 0xA8E9A0u)
+	DEFINE_REFERENCE(bool, IsFocused, 0xA8ED80u)
+	DEFINE_REFERENCE(int, SpecialDialog, 0xA8EDA0u)
+	DEFINE_REFERENCE(bool, PCXInitialized, 0xAC48D4)
 
-	static constexpr reference<int, 0xA8ED94u> const Seed {};
-	static constexpr reference<int, 0x822CF4u> const TechLevel {};
-	static constexpr reference<int, 0xA8B54Cu> const PlayerCount {};
-	static constexpr reference<int, 0xA8B394u> const PlayerColor {};
-	static constexpr reference<bool, 0xAC10C8u> const ObserverMode {};
-	static constexpr reference<char, 0xA8B8E0u> const ScenarioName {};
-	static constexpr reference<bool, 0xA8F7ACu> const DontSetExceptionHandler {};
-	static constexpr reference<bool, 0xB04880u> const EnableMPSyncDebug {};
+	DEFINE_REFERENCE(int, Seed, 0xA8ED94u)
+	DEFINE_REFERENCE(int, TechLevel, 0x822CF4u)
+	DEFINE_REFERENCE(int, PlayerCount, 0xA8B54Cu)
+	DEFINE_REFERENCE(int, PlayerColor, 0xA8B394u)
+	DEFINE_REFERENCE(bool, ObserverMode, 0xAC10C8u)
+	DEFINE_REFERENCE(char, ScenarioName, 0xA8B8E0u)
+	DEFINE_REFERENCE(bool, DontSetExceptionHandler, 0xA8F7ACu)
+	DEFINE_REFERENCE(bool, EnableMPSyncDebug, 0xB04880u)
 
-	static constexpr reference<Vector3D<float>, 0x887470> const VoxelLightSource { };
-	static constexpr reference<Vector3D<float>, 0x887420> const VoxelShadowLightSource { };
+	DEFINE_REFERENCE(Vector3D<float>, VoxelLightSource, 0x887470)
+	DEFINE_REFERENCE(Vector3D<float>, VoxelShadowLightSource, 0x887420)
 
 	static struct Network
 	{
 	public:
-		static constexpr reference<int, 0xB779C4u> const Tournament {};
-		static constexpr reference<DWORD, 0xB779D4u> const WOLGameID {};
-		static constexpr reference<time_t, 0xB77788u> const PlanetWestwoodStartTime {};
-		static constexpr reference<int, 0xB73814u> const GameStockKeepingUnit {};
-		static constexpr reference<int, 0xA8B24Cu> const ProtocolVersion {};
-		static constexpr reference<int, 0xA8B554u> const FrameSendRate {};
-		static constexpr reference<int, 0x83737Cu> const ReconnectTimeout {};
-		static constexpr reference<int, 0xA8B550u> const MaxAhead {};
-		static constexpr reference<int, 0xA8B568u> const MaxMaxAhead {};
-		static constexpr reference<int, 0xA8DB9Cu> const LatencyFudge {};
-		static constexpr reference<int, 0xA8B558u> const RequestedFPS {};
+		DEFINE_REFERENCE(int, Tournament, 0xB779C4u)
+		DEFINE_REFERENCE(DWORD, WOLGameID, 0xB779D4u)
+		DEFINE_REFERENCE(time_t, PlanetWestwoodStartTime, 0xB77788u)
+		DEFINE_REFERENCE(int, GameStockKeepingUnit, 0xB73814u)
+		DEFINE_REFERENCE(int, ProtocolVersion, 0xA8B24Cu)
+		DEFINE_REFERENCE(int, FrameSendRate, 0xA8B554u)
+		DEFINE_REFERENCE(int, ReconnectTimeout, 0x83737Cu)
+		DEFINE_REFERENCE(int, MaxAhead, 0xA8B550u)
+		DEFINE_REFERENCE(int, MaxMaxAhead, 0xA8B568u)
+		DEFINE_REFERENCE(int, LatencyFudge, 0xA8DB9Cu)
+		DEFINE_REFERENCE(int, RequestedFPS, 0xA8B558u)
 
 		static bool Init()
 		{ JMP_STD(0x5DA6C0); }
@@ -183,22 +183,22 @@ public:
 class IIDs
 {
 public:
-	static constexpr reference<IID const, 0x7F7C90u> const IUnknown {};
-	static constexpr reference<IID const, 0x7F7C80u> const IPersistStream {};
-	static constexpr reference<IID const, 0x7F7C70u> const IPersist {};
-	static constexpr reference<IID const, 0x7E9AE0u> const IRTTITypeInfo {};
-	static constexpr reference<IID const, 0x7EA768u> const IHouse {};
-	static constexpr reference<IID const, 0x7E9B00u> const IPublicHouse {};
-	static constexpr reference<IID const, 0x7F7CB0u> const IEnumConnections {};
-	static constexpr reference<IID const, 0x7F7CC0u> const IConnectionPoint {};
-	static constexpr reference<IID const, 0x7F7CD0u> const IConnectionPointContainer {};
-	static constexpr reference<IID const, 0x7F7CE0u> const IEnumConnectionPoints {};
-	static constexpr reference<IID const, 0x7E36C0u> const IApplication {};
-	static constexpr reference<IID const, 0x7EA6E8u> const IGameMap {};
-	static constexpr reference<IID const, 0x7ED358u> const ILocomotion {};
-	static constexpr reference<IID const, 0x7E9B10u> const IPiggyback {};
-	static constexpr reference<IID const, 0x7E9B40u> const IFlyControl {};
-	static constexpr reference<IID const, 0x7E9B20u> const ISwizzle {};
+	DEFINE_REFERENCE(IID const, IUnknown, 0x7F7C90u)
+	DEFINE_REFERENCE(IID const, IPersistStream, 0x7F7C80u)
+	DEFINE_REFERENCE(IID const, IPersist, 0x7F7C70u)
+	DEFINE_REFERENCE(IID const, IRTTITypeInfo, 0x7E9AE0u)
+	DEFINE_REFERENCE(IID const, IHouse, 0x7EA768u)
+	DEFINE_REFERENCE(IID const, IPublicHouse, 0x7E9B00u)
+	DEFINE_REFERENCE(IID const, IEnumConnections, 0x7F7CB0u)
+	DEFINE_REFERENCE(IID const, IConnectionPoint, 0x7F7CC0u)
+	DEFINE_REFERENCE(IID const, IConnectionPointContainer, 0x7F7CD0u)
+	DEFINE_REFERENCE(IID const, IEnumConnectionPoints, 0x7F7CE0u)
+	DEFINE_REFERENCE(IID const, IApplication, 0x7E36C0u)
+	DEFINE_REFERENCE(IID const, IGameMap, 0x7EA6E8u)
+	DEFINE_REFERENCE(IID const, ILocomotion, 0x7ED358u)
+	DEFINE_REFERENCE(IID const, IPiggyback, 0x7E9B10u)
+	DEFINE_REFERENCE(IID const, IFlyControl, 0x7E9B40u)
+	DEFINE_REFERENCE(IID const, ISwizzle, 0x7E9B20u)
 };
 
 // this class links to functions gamemd imports
@@ -206,7 +206,7 @@ public:
 class Imports
 {
 #define ALIAS(Obj, Addr)\
-static constexpr reference<FP_##Obj const, Addr> const Obj{}
+DEFINE_REFERENCE(FP_##Obj const, Obj, Addr)
 
 public:
 	// OleLoadFromStream
@@ -531,7 +531,7 @@ class MovieInfo
 public:
 	// technically, this is a DVC<const char*>
 	// and string management is done manually
-	static constexpr reference<DynamicVectorClass<MovieInfo>, 0xABF390u> const Array {};
+	DEFINE_REFERENCE(DynamicVectorClass<MovieInfo>, Array, 0xABF390u)
 
 	bool operator== (MovieInfo const& rhs) const
 	{
@@ -558,9 +558,9 @@ public:
 
 struct MovieUnlockableInfo
 {
-	static constexpr reference<MovieUnlockableInfo, 0x832C20u, 1u> const Common {};
-	static constexpr reference<MovieUnlockableInfo, 0x832C30u, 8u> const Allied {};
-	static constexpr reference<MovieUnlockableInfo, 0x832CA0u, 8u> const Soviet {};
+	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [1u], Common, 0x832C20u)
+	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Allied, 0x832C30u)
+	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Soviet, 0x832CA0u)
 
 	MovieUnlockableInfo() = default;
 
@@ -576,29 +576,29 @@ struct MovieUnlockableInfo
 namespace Unsorted
 {
 	// if != 0, EVA_SWxxxActivated is skipped
-	static constexpr reference<int, 0xA8B538> MuteSWLaunches {};
+	DEFINE_REFERENCE(int, MuteSWLaunches, 0xA8B538)
 
 	// skip unit selection and move command voices?
-	static constexpr reference<bool, 0x822CF2> MoveFeedback {};
+	DEFINE_REFERENCE(bool, MoveFeedback, 0x822CF2)
 
-	static constexpr reference<byte, 0xA8ED6B> ArmageddonMode {};
-	static constexpr constant_ptr<DynamicVectorClass<ObjectClass*>, 0x8A0360> ObjectsInLayers {};
+	DEFINE_REFERENCE(byte, ArmageddonMode, 0xA8ED6B)
+	DEFINE_POINTER(DynamicVectorClass<ObjectClass*>, ObjectsInLayers, 0x8A0360)
 
 	// checkbox states, afaik
-	static constexpr reference<byte, 0xA8B258> Bases {};
-	static constexpr reference<byte, 0xA8B260> BridgeDestruction {};
-	static constexpr reference<byte, 0xA8B261> Crates {};
-	static constexpr reference<byte, 0xA8B262> ShortGame {};
-	static constexpr reference<byte, 0xA8B263> SWAllowed {};
-	static constexpr reference<byte, 0xA8B26C> MultiEngineer {};
-	static constexpr reference<byte, 0xA8B31C> AlliesAllowed {};
-	static constexpr reference<byte, 0xA8B31D> HarvesterTruce {};
-	static constexpr reference<byte, 0xA8B31E> CTF {};
-	static constexpr reference<byte, 0xA8B31F> FOW {};
-	static constexpr reference<byte, 0xA8B320> MCVRedeploy {};
+	DEFINE_REFERENCE(byte, Bases, 0xA8B258)
+	DEFINE_REFERENCE(byte, BridgeDestruction, 0xA8B260)
+	DEFINE_REFERENCE(byte, Crates, 0xA8B261)
+	DEFINE_REFERENCE(byte, ShortGame, 0xA8B262)
+	DEFINE_REFERENCE(byte, SWAllowed, 0xA8B263)
+	DEFINE_REFERENCE(byte, MultiEngineer, 0xA8B26C)
+	DEFINE_REFERENCE(byte, AlliesAllowed, 0xA8B31C)
+	DEFINE_REFERENCE(byte, HarvesterTruce, 0xA8B31D)
+	DEFINE_REFERENCE(byte, CTF, 0xA8B31E)
+	DEFINE_REFERENCE(byte, FOW, 0xA8B31F)
+	DEFINE_REFERENCE(byte, MCVRedeploy, 0xA8B320)
 
-	static constexpr reference<TacticalSelectableStruct, 0xB0CEC8, 500> TacticalSelectables {};
-	static constexpr reference<bool, 0xB0FE65> TypeSelecting {};
+	DEFINE_ARRAY_REFERENCE(TacticalSelectableStruct, [500], TacticalSelectables, 0xB0CEC8)
+	DEFINE_REFERENCE(bool, TypeSelecting, 0xB0FE65)
 
 	struct ColorPacker
 	{
@@ -610,14 +610,14 @@ namespace Unsorted
 		int _G_SHR;
 	};
 
-	static constexpr constant_ptr<ColorPacker, 0x8A0DD0> ColorPackData {};
+	DEFINE_POINTER(ColorPacker, ColorPackData, 0x8A0DD0)
 
-	static constexpr constant_ptr<CellStruct, 0xABD490> CellSpreadTable {};
+	DEFINE_POINTER(CellStruct, CellSpreadTable, 0xABD490)
 
-	static constexpr reference<int, 0x8809A0> CurrentSWType {};
+	DEFINE_REFERENCE(int, CurrentSWType, 0x8809A0)
 
 	static const int except_txt_length = 0xFFFF;
-	static constexpr constant_ptr<char, 0x8A3A08> except_txt_content {};
+	DEFINE_POINTER(char, except_txt_content, 0x8A3A08)
 
 	/*
 	 * This thing is ridiculous
@@ -676,7 +676,7 @@ namespace Unsorted
 	and so on...
 	*/
 	// Note: SomeMutex has been renamed to this because it reflects the usage better
-	static constexpr reference<int, 0xA8E7AC> IKnowWhatImDoing {}; // h2ik
+	DEFINE_REFERENCE(int, IKnowWhatImDoing, 0xA8E7AC) // h2ik
 };
 
 struct CheatData
@@ -688,4 +688,4 @@ struct CheatData
 };
 
 // this holds four original cheats, keep that limit in mind
-static constexpr reference<CheatData, 0x825C28, 4> OriginalCheats {};
+DEFINE_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)

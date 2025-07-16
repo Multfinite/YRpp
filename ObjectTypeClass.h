@@ -33,7 +33,7 @@ public:
 public:
 	static constexpr uintptr_t AbsVTable = 0x7EF2D8;
 
-	static constexpr constant_ptr<DynamicVectorClass<ObjectTypeClass*>, 0xAC1418u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<ObjectTypeClass*>, Array, 0xAC1418u)
 public:
 	ColorStruct RadialColor;
 	BYTE          unused_9B;

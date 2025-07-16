@@ -188,12 +188,12 @@ public:
 	// <Player @ A> and friends map to these constants
 	enum {PlayerAtA = 4475, PlayerAtB, PlayerAtC, PlayerAtD, PlayerAtE, PlayerAtF, PlayerAtG, PlayerAtH};
 
-	static constexpr constant_ptr<DynamicVectorClass<HouseClass*>, 0xA80228u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<HouseClass*>, Array, 0xA80228u)
 
 	// House of player at this computer.
-	static constexpr reference<HouseClass*, 0xA83D4Cu> const CurrentPlayer{};
+	DEFINE_REFERENCE(HouseClass*, CurrentPlayer, 0xA83D4Cu)
 	// House of player that is observer.
-	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};
+	DEFINE_REFERENCE(HouseClass*, Observer, 0xAC1198u)
 
 public:
 	int                   ArrayIndex;
@@ -768,7 +768,7 @@ public:
 	// Whether any human player controls this house.
 	bool IsControlledByHuman() const { // { JMP_THIS(0x50B730); }
 		bool result = this->IsHumanPlayer;
-		if(SessionClass::Instance->GameMode == GameMode::Campaign) {
+		if(SessionClass::Instance.GameMode == GameMode::Campaign) {
 			result = result || this->IsInPlayerControl;
 		}
 		return result;
@@ -776,7 +776,7 @@ public:
 
 	// Whether the human player on this computer can control this house.
 	bool IsControlledByCurrentPlayer() const { // { JMP_THIS(0x50B6F0); }
-		if(SessionClass::Instance->GameMode != GameMode::Campaign) {
+		if(SessionClass::Instance.GameMode != GameMode::Campaign) {
 			return this->IsCurrentPlayer();
 		}
 		return this->IsHumanPlayer || this->IsInPlayerControl;

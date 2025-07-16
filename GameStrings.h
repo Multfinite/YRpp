@@ -4,7 +4,7 @@
 
 #ifndef GAMEMD_STRING
 #define GAMEMD_STRING(name,addr)\
-static constexpr constant_ptr<const char,addr> const name;
+DEFINE_POINTER(const char, name, addr)
 
 namespace GameStrings
 {

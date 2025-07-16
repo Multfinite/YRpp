@@ -28,7 +28,7 @@ public:
     static constexpr size_t ClassSize = 0x138;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<ParticleClass*>, 0xA83DC8u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<ParticleClass*>, Array, 0xA83DC8u)
 
 public:
     ParticleTypeClass* Type;

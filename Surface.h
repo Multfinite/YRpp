@@ -139,7 +139,7 @@ public:
 class NOVTABLE BSurface : public XSurface
 {
 public:
-	static constexpr constant_ptr<BSurface, 0xB2D928> VoxelSurface {};
+	DEFINE_POINTER(BSurface, VoxelSurface, 0xB2D928)
 
 	BSurface() : XSurface(), Buffer { this->Width * this->Height * 2 } { BytesPerPixel = 2; ((int*)this)[0] = 0x7E2070; }
 
@@ -186,17 +186,17 @@ static Point2D* Fancy_Text_Print_Wide(const Point2D& retBuffer, const wchar_t* T
 class NOVTABLE DSurface : public XSurface
 {
 public:
-	static constexpr reference<DSurface*, 0x8872FCu> const Tile {};
-	static constexpr reference<DSurface*, 0x887300u> const Sidebar {};
-	static constexpr reference<DSurface*, 0x887308u> const Primary {};
-	static constexpr reference<DSurface*, 0x88730Cu> const Hidden {};
-	static constexpr reference<DSurface*, 0x887310u> const Alternate {};
-	static constexpr reference<DSurface*, 0x887314u> const Temp {};
-	static constexpr reference<DSurface*, 0x88731Cu> const Composite {};
+	DEFINE_REFERENCE(DSurface*, Tile, 0x8872FCu)
+	DEFINE_REFERENCE(DSurface*, Sidebar, 0x887300u)
+	DEFINE_REFERENCE(DSurface*, Primary, 0x887308u)
+	DEFINE_REFERENCE(DSurface*, Hidden, 0x88730Cu)
+	DEFINE_REFERENCE(DSurface*, Alternate, 0x887310u)
+	DEFINE_REFERENCE(DSurface*, Temp, 0x887314u)
+	DEFINE_REFERENCE(DSurface*, Composite, 0x88731Cu)
 
-	static constexpr reference<RectangleStruct, 0x886F90u> const SidebarBounds {};
-	static constexpr reference<RectangleStruct, 0x886FA0u> const ViewBounds {};
-	static constexpr reference<RectangleStruct, 0x886FB0u> const WindowBounds {};
+	DEFINE_REFERENCE(RectangleStruct, SidebarBounds, 0x886F90u)
+	DEFINE_REFERENCE(RectangleStruct, ViewBounds, 0x886FA0u)
+	DEFINE_REFERENCE(RectangleStruct, WindowBounds, 0x886FB0u)
 
 	virtual bool DrawGradientLine(RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd,
 		ColorStruct* pStartColor, ColorStruct* pEndColor, float fStep, int nColor) R0;

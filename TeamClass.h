@@ -32,7 +32,7 @@ public:
     static constexpr size_t ClassSize = 0xA0;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<TeamClass*>, 0x8B40E8u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<TeamClass*>, Array, 0x8B40E8u)
 
 public:
     TeamTypeClass* Type;

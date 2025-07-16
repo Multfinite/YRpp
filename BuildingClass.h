@@ -46,7 +46,7 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3EBC;
 	static constexpr size_t ClassSize = 0x720;
 
-	static constexpr constant_ptr<DynamicVectorClass<BuildingClass*>, 0xA8EB40u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<BuildingClass*>, Array, 0xA8EB40u)
 public:
 	BuildingTypeClass* Type;
 	FactoryClass* Factory;

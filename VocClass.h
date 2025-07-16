@@ -31,9 +31,9 @@ struct VolumeStruct	//pretty uncreative name, but it's all I can come up with at
 class VocClass
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<VocClass*>, 0xB1D378u> const Array {};
+	DEFINE_POINTER(DynamicVectorClass<VocClass*>, Array, 0xB1D378u)
 
-	static constexpr reference<bool, 0x8464ACu> const VoicesEnabled {};
+	DEFINE_REFERENCE(bool, VoicesEnabled, 0x8464ACu)
 public:
 	VocClassHeader Header;
 	int SamplesOK;         //0 or 1, determines whether all samples are OK to use

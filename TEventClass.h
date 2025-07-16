@@ -29,7 +29,7 @@ public:
     static constexpr size_t ClassSize = 0x58;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<TEventClass*>, 0xB0F1A0u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<TEventClass*>, Array, 0xB0F1A0u)
 
 public:
     int ArrayIndex;

@@ -27,7 +27,7 @@ public:
     static constexpr size_t ClassSize = 0xE0;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<TerrainClass*>, 0xA8E988u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<TerrainClass*>, Array, 0xA8E988u)
 
 public:
     StageClass Animation;

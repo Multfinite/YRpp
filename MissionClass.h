@@ -7,8 +7,8 @@ class CCINIClass;
 class MissionControlClass
 {
 	public:
-		static constexpr reference<MissionControlClass, 0xA8E3A8, 0x20> const Array {};
-		static constexpr reference<const char*, 0xA8E3A8, 0x20> const Names {};
+		DEFINE_ARRAY_REFERENCE(MissionControlClass, [0x20], Array, 0xA8E3A8)
+		DEFINE_ARRAY_REFERENCE(const char*, [0x20], Names, 0xA8E3A8)
 
 		static MissionControlClass* __fastcall Find(const char* pName)
 			{ JMP_STD(0x5B3910); }

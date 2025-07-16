@@ -28,7 +28,7 @@ public:
 	};
 
 	//global array
-	static constexpr constant_ptr<DynamicVectorClass<ColorScheme*>, 0xB054D0u> const Array{};
+	DEFINE_POINTER(DynamicVectorClass<ColorScheme*>, Array, 0xB054D0u)
 public:
 	int ArrayIndex; // this is off by one (always one higher than the actual index). that's because consistency and reason suck.
 	BytePalette Colors;

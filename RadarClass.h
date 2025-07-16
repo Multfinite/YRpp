@@ -8,7 +8,7 @@ public:
 	//WIP: RadarClass::RTacticalClass goes HERE
 
 	//Static
-	static constexpr constant_ptr<RadarClass, 0x87F7E8u> const Instance{};
+	DEFINE_POINTER(RadarClass, Instance, 0x87F7E8u)
 
 	//Destructor
 	virtual ~RadarClass() RX;

@@ -10,7 +10,7 @@ struct SHPStruct;
 class WWMouseClass
 {
 public:
-	static constexpr reference<WWMouseClass*, 0x887640u> const Instance{};
+	DEFINE_REFERENCE(WWMouseClass*, Instance, 0x887640u)
 
 	static void PrepareScreen()
 	{

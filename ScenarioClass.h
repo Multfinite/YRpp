@@ -64,9 +64,9 @@ class ScenarioClass
 {
 public:
 	//Static
-	static constexpr reference<ScenarioClass*, 0xA8B230u> const Instance{};
-	static constexpr reference<int, 0xA8ED7Cu> const NewINIFormat{};
-	static constexpr reference<TheaterType, 0x822CF8> const LastTheater{};
+	DEFINE_REFERENCE(ScenarioClass*, Instance, 0xA8B230u)
+	DEFINE_REFERENCE(int, NewINIFormat, 0xA8ED7Cu)
+	DEFINE_REFERENCE(TheaterType, LastTheater, 0x822CF8)
 
 
 	static void __fastcall UpdateCellLighting()

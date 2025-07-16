@@ -29,7 +29,7 @@ public:
     static constexpr size_t ClassSize = 0x48;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<TriggerClass*>, 0xA8EAE8u> const Array{};
+    DEFINE_POINTER(DynamicVectorClass<TriggerClass*>, Array, 0xA8EAE8u)
 
 public:
     TriggerTypeClass* Type;

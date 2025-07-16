@@ -45,8 +45,8 @@ public:
     static constexpr size_t ClassSize = 0x160;
 
 public:
-    static constexpr constant_ptr<DynamicVectorClass<BulletClass*>, 0xA8ED40u> const Array{};
-    static constexpr reference<DynamicVectorClass<BulletClass*>, 0x89DE18u> const ScalableBullets{};
+    DEFINE_POINTER(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
+    DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, ScalableBullets, 0x89DE18u)
 
 public:
     BulletTypeClass* Type;
