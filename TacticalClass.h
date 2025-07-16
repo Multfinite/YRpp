@@ -8,9 +8,9 @@
 
 struct TacticalSelectableStruct
 {
-    TechnoClass* Techno;
-    int X;
-    int Y;
+	ObjectClass* Object;
+	int X;
+	int Y;
 };
 
 class DSurface;
