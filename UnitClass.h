@@ -32,7 +32,7 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
 public:
-	int counter_6C0;
+	int CurrentFiringFrame;
 	UnitTypeClass* Type;
 	// groovy - link defined in the map's [Units] section, looked up on startup
 	UnitClass* FollowerCar;
