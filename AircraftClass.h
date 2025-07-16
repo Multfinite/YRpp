@@ -74,7 +74,7 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x41C180);
 	int SizeOf() const override JMP_THIS(0x41C170);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41B610);
-	bool OnGround() const override JMP_THIS(0x41B980);
+	bool IsOnGround() const override JMP_THIS(0x41B980);
 	bool InAir() const override JMP_THIS(0x41B920);
 	void AI() override JMP_THIS(0x414BB0);
 

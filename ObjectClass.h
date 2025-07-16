@@ -97,7 +97,7 @@ public:
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5F6250);
 	bool IsInactive() const override JMP_THIS(0x5F6690);
 	Coordinate Center() const override JMP_THIS(0x5F65A0);	
-	bool OnGround() const override JMP_THIS(0x5F6B60);
+	bool IsOnGround() const override JMP_THIS(0x5F6B60);
 	bool InAir() const override JMP_THIS(0x5F6B90);
 	void AI() override JMP_THIS(0x5F3E70);
 

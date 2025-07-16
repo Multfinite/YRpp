@@ -147,7 +147,7 @@ public:
 	int SizeOf() const override JMP_THIS(0x487E70);
 
 	Coordinate Center() const override JMP_THIS(0x486840);
-	bool OnGround() const override JMP_THIS(0x4867E0);
+	bool IsOnGround() const override JMP_THIS(0x4867E0);
 	Coordinate TargetingCoord() const override JMP_THIS(0x486890);
 public:
 	TechnoClass* FindTechnoNearestTo(Point2D const& offsetPixel, bool alt, TechnoClass const* pExcludeThis = nullptr) const JMP_THIS(0x47C3D0);

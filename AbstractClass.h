@@ -194,7 +194,7 @@ public:
 	* @note vtable_index 20:0x50
 	* @note address 0x410520
 	*/
-	virtual bool OnGround() const JMP_THIS(0x410520);
+	virtual bool IsOnGround() const JMP_THIS(0x410520);
 
 	/*!
 	* @note original_name In_Air
