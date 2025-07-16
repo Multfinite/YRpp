@@ -319,13 +319,13 @@ public:
 	* @note vtable_index 51:0xCC
 	* @note address 0x41BE60
 	*/
-	virtual ObjectTypeClass* Disguise(bool disguisedAgainstAllies) const JMP_THIS(0x41BE60);
+	virtual ObjectTypeClass* DisguisedAs(bool disguisedAgainstAllies) const JMP_THIS(0x41BE60);
 
 	/*!
 	* @note vtable_index 52:0xD0
 	* @note address 0x41BE70
 	*/
-	virtual HouseClass* DisguiseHouse(bool disguisedAgainstAllies) const JMP_THIS(0x41BE70);
+	virtual HouseClass* DisguisedAsHouse(bool disguisedAgainstAllies) const JMP_THIS(0x41BE70);
 
 	/*!
 	* @brief Remove object from the map

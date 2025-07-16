@@ -68,8 +68,8 @@ public:
 	const wchar_t* FullName() const override JMP_THIS(0x51F2C0);
 	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x523250);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x5227F0);
-	ObjectTypeClass* Disguise(bool disguisedAgainstAllies) const override JMP_THIS(0x522640);
-	HouseClass* DisguiseHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x5226C0);
+	ObjectTypeClass* DisguisedAs(bool disguisedAgainstAllies) const override JMP_THIS(0x522640);
+	HouseClass* DisguisedAsHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x5226C0);
 	bool Limbo() override JMP_THIS(0x51DF10);
 	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x51DFF0);
 	bool SpawnParachuted(Coordinate const& coords) override JMP_THIS(0x521760);

@@ -416,7 +416,7 @@ public:
 	RadBeam* FiringRadBeam;
 	PlanningTokenClass* PlanningToken;
 	ObjectTypeClass* Disguise;
-	HouseClass* DisguisedAsHouse;
+	HouseClass* DisguiseHouse;
 public:
 	virtual ~TechnoClass() JMP_THIS(0x6F4500);
 

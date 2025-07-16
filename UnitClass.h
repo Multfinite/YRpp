@@ -77,8 +77,8 @@ public:
 	ObjectTypeClass* ClassOf() const override JMP_THIS(0x741490);
 	const wchar_t* FullName() const override JMP_THIS(0x746B20);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x746750);
-	ObjectTypeClass* Disguise(bool disguisedAgainstAllies) const override JMP_THIS(0x7465B0);
-	HouseClass* DisguiseHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x7465F0);
+	ObjectTypeClass* DisguisedAs(bool disguisedAgainstAllies) const override JMP_THIS(0x7465B0);
+	HouseClass* DisguisedAsHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x7465F0);
 	bool Limbo() override JMP_THIS(0x7440B0);
 	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x737BA0);
 	void RegisterKillByObject(ObjectClass const* destroyedBy) override JMP_THIS(0x744720);
