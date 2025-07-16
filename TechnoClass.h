@@ -2171,8 +2171,8 @@ public:
 	*/
 	void SetTargetForPassengers(AbstractClass* pTarget) JMP_THIS(0x710550);
 
-	void GattlingRateUp(int value) 	JMP_THIS(0x70DE70);
-	void GattlingRateDown(int value) 	JMP_THIS(0x70E000);
+	void GattlingRateUp(int value) JMP_THIS(0x70DE70);
+	void GattlingRateDown(int value) JMP_THIS(0x70E000);
 
 	// smooth operator
 	const char* get_ID() const
