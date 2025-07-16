@@ -9,7 +9,7 @@ class NOVTABLE DisplayClass : public MapClass
 {
 public:
 	//Static
-	DEFINE_POINTER(DisplayClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(DisplayClass, Instance, 0x87F7E8u)
 
 	//WIP: DisplayClass::TacticalClass goes HERE
 

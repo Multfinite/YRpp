@@ -8,7 +8,7 @@ public:
 	//WIP: RadarClass::RTacticalClass goes HERE
 
 	//Static
-	DEFINE_POINTER(RadarClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(RadarClass, Instance, 0x87F7E8u)
 
 	//Destructor
 	virtual ~RadarClass() RX;

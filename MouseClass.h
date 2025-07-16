@@ -43,7 +43,7 @@ class TabClass : public SidebarClass, public INoticeSink
 {
 public:
 	//Static
-	DEFINE_POINTER(TabClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(TabClass, Instance, 0x87F7E8u)
 
 	// non-virtual
 	void Activate(int control = 1)
@@ -62,7 +62,7 @@ class ScrollClass : public TabClass
 {
 public:
 	//Static
-	DEFINE_POINTER(ScrollClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(ScrollClass, Instance, 0x87F7E8u)
 
 	DWORD unknown_int_5548;
 	BYTE unknown_byte_554C;
@@ -79,7 +79,7 @@ class NOVTABLE MouseClass : public ScrollClass
 {
 public:
 	//Static
-	DEFINE_POINTER(MouseClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(MouseClass, Instance, 0x87F7E8u)
 
 	//Destructor
 	virtual ~MouseClass() RX;
