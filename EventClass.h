@@ -23,7 +23,7 @@ public:
 class EventClass
 {
 public:
-	DEFINE_REFERENCE(const char*, 0x0082091C, EventNames, 47)
+	DEFINE_ARRAY_REFERENCE(const char*, [47], EventNames, 0x0082091C)
 
 	DEFINE_REFERENCE(EventList<0x80>, OutList, 0x00A802C8)
 	DEFINE_REFERENCE(EventList<0x4000>, DoList, 0x008B41F8)
@@ -32,20 +32,20 @@ public:
 	DEFINE_REFERENCE(EventList<0x100>, MegaMissionList, 0x00A83ED0)
 
 	// this points to CRCs from 0x100 last frames
-	DEFINE_REFERENCE(DWORD, 0x00B04474, LatestFramesCRC, 256)
+	DEFINE_ARRAY_REFERENCE(DWORD, [256], LatestFramesCRC, 0x00B04474)
 	DEFINE_REFERENCE(DWORD, CurrentFrameCRC, 0x00AC51FC)
 
 	static bool AddEvent(const EventClass& event)
 	{
-		if (OutList->Count >= 128)
+		if (OutList.Count >= 128)
 			return false;
 
-		OutList->List[OutList->Tail] = event;
+		OutList.List[OutList.Tail] = event;
 
-		OutList->Timings[OutList->Tail] = static_cast<int>(Imports::TimeGetTime()());
+		OutList.Timings[OutList.Tail] = static_cast<int>(Imports::TimeGetTime()());
 
-		++OutList->Count;
-		OutList->Tail = (LOBYTE(OutList->Tail) + 1) & 127;
+		++OutList.Count;
+		OutList.Tail = (LOBYTE(OutList.Tail) + 1) & 127;
 
 		return true;
 	}
