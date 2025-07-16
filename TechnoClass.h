@@ -1324,7 +1324,7 @@ public:
 	* @note vtable_index 281:0x464
 	* @note address 0x70D190
 	*/
-	virtual int32_t FlashTintStage(int32_t tintStage) const JMP_THIS(0x70D190);
+	virtual int32_t GetFlashingIntensity(int32_t tintStage) const JMP_THIS(0x70D190);
 
 	/*!
 	* @note original_name Init_Particles

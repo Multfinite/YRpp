@@ -256,7 +256,7 @@ public:
 	int GetOccupyRangeBonus() const override JMP_THIS(0x458E00);
 	int GetOccupantCount() const override JMP_THIS(0x4581F0);
 	void UpdateCloak(bool bUnk = 1) override JMP_THIS(0x454DB0);
-	int32_t FlashTintStage(int32_t tintStage) const override JMP_THIS(0x456F80);
+	int32_t GetFlashingIntensity(int32_t tintStage) const override JMP_THIS(0x456F80);
 	void UpdateRefinerySmokeSystems() override JMP_THIS(0x459900);
 	void SetDestination(AbstractClass* target, bool a2) override JMP_THIS(0x455D50);
 	bool EnterIdleMode(bool initial, bool a2) override JMP_THIS(0x44D6A0);
