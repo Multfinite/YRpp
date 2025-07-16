@@ -6,6 +6,7 @@
 #include "ColorScheme.h"
 #include "Helpers/CompileTime.h"
 
+class ObjectClass;
 struct TacticalSelectableStruct
 {
 	ObjectClass* Object;
