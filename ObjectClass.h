@@ -859,8 +859,8 @@ public:
 	bool IsCrushableBy(TechnoClass* pCrusher) JMP_THIS(0x5F6CD0);
 	void BecomeUntargetable() JMP_THIS(0x70D4A0);
 
-	bool operator>(ObjectClass* other) JMP_THIS(0x5F6220);
-	bool operator<(ObjectClass* other) JMP_THIS(0x5F61F0);
+	//bool operator>(ObjectClass* other) JMP_THIS(0x5F6220);
+	//bool operator<(ObjectClass* other) JMP_THIS(0x5F61F0);
 
 protected:
 
