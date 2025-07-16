@@ -82,7 +82,7 @@ public:
 	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x517FA0);
 	void Scatter(const Coordinate& crd, bool ignoreMission, bool ignoreDestination) override JMP_THIS(0x51D0D0);
 	void UpdatePosition(PCPType how) override JMP_THIS(0x519630);
-	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x51BF90);
+	Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x51BF90);
 	
 	bool IsReadyToCommence() override JMP_THIS(0x521B60);
 	int MissionAttack() override JMP_THIS(0x51F3E0);

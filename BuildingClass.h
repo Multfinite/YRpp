@@ -211,7 +211,7 @@ public:
 	bool DiscoveredBy(HouseClass* pHouse) override JMP_THIS(0x44D5D0);
 	void SetRepairState(int state) override JMP_THIS(0x446FF0);
 	void Sell(DWORD control) override JMP_THIS(0x447110);
-	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x449440);
+	Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x449440);
 	
 	bool IsReadyToCommence() override JMP_THIS(0x454250);
 	int MissionAttack() override JMP_THIS(0x44ACF0);

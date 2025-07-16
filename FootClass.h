@@ -145,7 +145,7 @@ public:
 	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x4D8FB0);
 	void Sell(DWORD control) override JMP_THIS(0x4D9F70);
 	void AssignPlanningPath(signed int idxPath, signed char idxWP) override JMP_THIS(0x4DC810);
-	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x4D9C10);
+	Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x4D9C10);
 	DWORD CanChangeLevel(CellClass* cell, Dir256 dir, int* targetLevel, bool* useAltObject, ::Cell targetCoord) override JMP_THIS(0x4D9C60);
 	void SetLocation(const Coordinate& crd)override JMP_THIS(0x4DB810);
 	

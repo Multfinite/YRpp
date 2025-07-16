@@ -719,7 +719,7 @@ public:
 	* @note vtable_index 107:0x1AC
 	* @note address 0x4264C0
 	*/
-	virtual Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const JMP_THIS(0x4264C0);
+	virtual Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const JMP_THIS(0x4264C0);
 
 	/*!
 	* @note original_name Can_Change_Level
