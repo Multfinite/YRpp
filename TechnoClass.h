@@ -797,7 +797,7 @@ public:
 	* @note vtable_index 206:0x338
 	* @note address 0x70F8F0
 	*/
-	virtual ::Cell ScanForTiberium(int range) const JMP_THIS(0x70F8F0);
+	virtual ::Cell ScanForTiberium(int range, bool b = false) const JMP_THIS(0x70F8F0);
 
 	/*!
 	* @note original_name Try_Grinding

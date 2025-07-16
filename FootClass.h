@@ -174,7 +174,7 @@ public:
 	void SetLastFlightMapCoords(::Cell coord) override JMP_THIS(0x41C160);
 	bool IsAllowedToLeaveMap() const override JMP_THIS(0x4DA1D0);
 	void ProceedToNextPlanningWaypoint() override JMP_THIS(0x4DE580);
-	::Cell ScanForTiberium(int range) const override JMP_THIS(0x4DD0A0);
+	::Cell ScanForTiberium(int range, bool b = false) const override JMP_THIS(0x4DD0A0);
 	bool EnterGrinder() override JMP_THIS(0x4DFA70);
 	bool EnterBioReactor() override JMP_THIS(0x4DFB70);
 	bool EnterTankBunker() override JMP_THIS(0x4DFF40);
