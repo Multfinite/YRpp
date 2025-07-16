@@ -173,8 +173,7 @@ public:
 class NOVTABLE MapClass : public GScreenClass
 {
 public:
-	//Static
-	DEFINE_POINTER(MapClass, Instance, 0x87F7E8u)
+	DEFINE_REFERENCE(MapClass, Instance, 0x87F7E8u)
 
 	DEFINE_REFERENCE(CellClass, InvalidCell, 0xABDC50u)
 
