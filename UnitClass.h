@@ -93,7 +93,7 @@ public:
 	void Scatter(const Coordinate& crd, bool ignoreMission, bool ignoreDestination) override JMP_THIS(0x743A50);
 	void UpdatePosition(PCPType how) override JMP_THIS(0x739EC0);
 	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x737430);
-	Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x73F0A0);
+	Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x73F0A0);
 	
 	bool IsReadyToCommence() override JMP_THIS(0x744270);
 	int MissionAttack() override JMP_THIS(0x7447A0);

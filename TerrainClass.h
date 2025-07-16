@@ -64,7 +64,7 @@ public:
     DamageState ReceiveDamage(int* damage, int distance, WarheadTypeClass* warhead, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x71B920);
     bool Ignite() override JMP_THIS(0x71C5B0);
     void Extinguish() override JMP_THIS(0x71C6B0);
-    Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x71C4D0);
+    Move CanEnterCell(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x71C4D0);
 /*
     void Read_INI() JMP_THIS(0x71CA70);
     void Start_To_Crumble() JMP_THIS(0x71C8E0);
