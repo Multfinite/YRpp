@@ -2173,6 +2173,7 @@ public:
 
 	void GattlingRateUp(int value) JMP_THIS(0x70DE70);
 	void GattlingRateDown(int value) JMP_THIS(0x70E000);
+	void ReleaseLocomotor(bool setTarget) JMP_THIS(0x70FEE0);
 
 	// smooth operator
 	const char* get_ID() const
