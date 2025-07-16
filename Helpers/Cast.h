@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include "../AbstractClass.h"
 #include "VTable.h"
 
 class ObjectClass;
