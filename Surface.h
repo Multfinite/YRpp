@@ -12,6 +12,9 @@ struct SHPStruct;
 class NOVTABLE Surface
 {
 public:
+	DEFINE_ARRAY_REFERENCE(bool, [16], Pattern, 0x84310C)
+	DEFINE_ARRAY_REFERENCE(bool, [16], PatternLong, 0x843128)
+
 	Surface() = default;
 
 	virtual ~Surface() RX;
@@ -139,15 +142,21 @@ public:
 class NOVTABLE BSurface : public XSurface
 {
 public:
-	DEFINE_POINTER(BSurface, VoxelSurface, 0xB2D928)
+	DEFINE_REFERENCE(BSurface, VoxelSurface, 0xB2D928)
 
-	BSurface() : XSurface(), Buffer { this->Width * this->Height * 2 } { BytesPerPixel = 2; ((int*)this)[0] = 0x7E2070; }
+		BSurface() : XSurface(), Buffer { this->Width * this->Height * 2 } { BytesPerPixel = 2; ((int*)this)[0] = 0x7E2070; }
 
 	MemoryBuffer Buffer;
 };
 
 #pragma warning(push)
 #pragma warning( disable : 4505) // 'function' : unreferenced local function has been removed
+
+// The coordinate points will be modified
+static bool __fastcall Line_In_Bounds(Point2D* pStart, Point2D* pEnd, RectangleStruct* pBounds)
+{
+	JMP_STD(0x7BC2B0);
+}
 
 // Comments from thomassneddon
 static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
@@ -187,21 +196,29 @@ class NOVTABLE DSurface : public XSurface
 {
 public:
 	DEFINE_REFERENCE(DSurface*, Tile, 0x8872FCu)
-	DEFINE_REFERENCE(DSurface*, Sidebar, 0x887300u)
-	DEFINE_REFERENCE(DSurface*, Primary, 0x887308u)
-	DEFINE_REFERENCE(DSurface*, Hidden, 0x88730Cu)
-	DEFINE_REFERENCE(DSurface*, Alternate, 0x887310u)
-	DEFINE_REFERENCE(DSurface*, Temp, 0x887314u)
-	DEFINE_REFERENCE(DSurface*, Composite, 0x88731Cu)
+		DEFINE_REFERENCE(DSurface*, Sidebar, 0x887300u)
+		DEFINE_REFERENCE(DSurface*, Primary, 0x887308u)
+		DEFINE_REFERENCE(DSurface*, Hidden, 0x88730Cu)
+		DEFINE_REFERENCE(DSurface*, Alternate, 0x887310u)
+		DEFINE_REFERENCE(DSurface*, Temp, 0x887314u)
+		DEFINE_REFERENCE(DSurface*, Composite, 0x88731Cu)
 
-	DEFINE_REFERENCE(RectangleStruct, SidebarBounds, 0x886F90u)
-	DEFINE_REFERENCE(RectangleStruct, ViewBounds, 0x886FA0u)
-	DEFINE_REFERENCE(RectangleStruct, WindowBounds, 0x886FB0u)
+		DEFINE_REFERENCE(RectangleStruct, SidebarBounds, 0x886F90u)
+		DEFINE_REFERENCE(RectangleStruct, ViewBounds, 0x886FA0u)
+		DEFINE_REFERENCE(RectangleStruct, WindowBounds, 0x886FB0u)
 
-	virtual bool DrawGradientLine(RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd,
-		ColorStruct* pStartColor, ColorStruct* pEndColor, float fStep, int nColor) R0;
+		virtual bool DrawGradientLine(RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd,
+			ColorStruct* pStartColor, ColorStruct* pEndColor, float fStep, int nColor) R0;
 
 	virtual bool CanBlit() R0;
+
+	// The coordinate points will be modified
+	void DrawDashed(Point2D* pStart, Point2D* pEnd, int color,
+		int offset, bool* pPattern = Surface::PatternLong)
+	{
+		if (Line_In_Bounds(pStart, pEnd, &DSurface::ViewBounds))
+			this->DrawDashedLine_(pStart, pEnd, color, pPattern, offset, false);
+	}
 
 	// Comments from thomassneddon
 	void DrawSHP(ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
