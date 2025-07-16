@@ -523,18 +523,18 @@ public:
 	virtual bool CanBeSelectedNow() const JMP_THIS(0x5F6C70);
 
 	/*!
-	* @note original_name Active_Click_With_Object
-	* @note vtable_index 80:0x140
-	* @note address 0x5F4360
-	*/
-	virtual bool ObjectClickedAction(Action action, ObjectClass* pTarget, bool bUnk) JMP_THIS(0x5F4360);
-
-	/*!
 	* @note original_name Active_Click_With_Cell
-	* @note vtable_index 81:0x144
+	* @note vtable_index 80:0x140
 	* @note address 0x5F4350
 	*/
 	virtual bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) JMP_THIS(0x5F4350);
+
+	/*!
+	* @note original_name Active_Click_With_Object
+	* @note vtable_index 81:0x144
+	* @note address 0x5F4360
+	*/
+	virtual bool ObjectClickedAction(Action action, ObjectClass* pTarget, bool bUnk) JMP_THIS(0x5F4360);
 
 	/*!
 	* @note original_name Clicked_As_Target
