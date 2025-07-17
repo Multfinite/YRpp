@@ -27,70 +27,69 @@ public:
 static_assert(sizeof(MouseThreadClass) == 0x24);
 
 // things that I can't put into nice meaningful classes
-class Game
+struct Game
 {
-public:
 	DEFINE_REFERENCE(MouseThreadClass, MouseThread, 0xB78138u)
-		// the magic checksum for version validation - linked in StaticInits
-		DEFINE_REFERENCE(DWORD, Savegame_Magic, 0x83D560u)
+	// the magic checksum for version validation - linked in StaticInits
+	DEFINE_REFERENCE(DWORD, Savegame_Magic, 0x83D560u)
 
-		DEFINE_REFERENCE(DynamicVectorClass<ULONG>, COMClasses, 0xB0BC88u)
+	DEFINE_REFERENCE(DynamicVectorClass<ULONG>, COMClasses, 0xB0BC88u)
 
-		DEFINE_REFERENCE(HWND, hWnd, 0xB73550u)
-		DEFINE_REFERENCE(HINSTANCE, hInstance, 0xB732F0u)
+	DEFINE_REFERENCE(HWND, hWnd, 0xB73550u)
+	DEFINE_REFERENCE(HINSTANCE, hInstance, 0xB732F0u)
 
-		DEFINE_REFERENCE(bool, bVPLRead, 0x887418u)
-		DEFINE_REFERENCE(bool, bVideoBackBuffer, 0x840A6Cu)
-		DEFINE_REFERENCE(bool, bAllowVRAMSidebar, 0xA8EB96u)
+	DEFINE_REFERENCE(bool, bVPLRead, 0x887418u)
+	DEFINE_REFERENCE(bool, bVideoBackBuffer, 0x840A6Cu)
+	DEFINE_REFERENCE(bool, bAllowVRAMSidebar, 0xA8EB96u)
 
-		DEFINE_REFERENCE(RecordFlag, RecordingFlag, 0xA8D5F8u)
-		DEFINE_REFERENCE(CCFileClass, RecordFile, 0xA8D58Cu)
+	DEFINE_REFERENCE(RecordFlag, RecordingFlag, 0xA8D5F8u)
+	DEFINE_REFERENCE(CCFileClass, RecordFile, 0xA8D58Cu)
 
-		DEFINE_REFERENCE(bool, bDrawShadow, 0x822CF1u)
-		DEFINE_REFERENCE(bool, bAllowDirect3D, 0x8A0DEFu)
-		DEFINE_REFERENCE(bool, bDirect3DIsUseable, 0x8A0DF0u)
+	DEFINE_REFERENCE(bool, bDrawShadow, 0x822CF1u)
+	DEFINE_REFERENCE(bool, bAllowDirect3D, 0x8A0DEFu)
+	DEFINE_REFERENCE(bool, bDirect3DIsUseable, 0x8A0DF0u)
 
-		DEFINE_REFERENCE(bool, IsActive, 0xA8E9A0u)
-		DEFINE_REFERENCE(bool, IsFocused, 0xA8ED80u)
-		DEFINE_REFERENCE(int, SpecialDialog, 0xA8EDA0u)
-		DEFINE_REFERENCE(bool, PCXInitialized, 0xAC48D4)
+	DEFINE_REFERENCE(bool, IsActive, 0xA8E9A0u)
+	DEFINE_REFERENCE(bool, IsFocused, 0xA8ED80u)
+	DEFINE_REFERENCE(int, SpecialDialog, 0xA8EDA0u)
+	DEFINE_REFERENCE(bool, PCXInitialized, 0xAC48D4)
 
-		DEFINE_REFERENCE(int, Seed, 0xA8ED94u)
-		DEFINE_REFERENCE(int, TechLevel, 0x822CF4u)
-		DEFINE_REFERENCE(int, PlayerCount, 0xA8B54Cu)
-		DEFINE_REFERENCE(int, PlayerColor, 0xA8B394u)
-		DEFINE_REFERENCE(bool, ObserverMode, 0xAC10C8u)
-		DEFINE_POINTER(char, ScenarioName, 0xA8B8E0u)
-		DEFINE_REFERENCE(bool, DontSetExceptionHandler, 0xA8F7ACu)
-		DEFINE_REFERENCE(bool, EnableMPDebug, 0xA8B8B4u)
-		DEFINE_REFERENCE(bool, DrawMPDebugStats, 0xA8B8B5u)
-		DEFINE_REFERENCE(bool, EnableMPSyncDebug, 0xB04880u)
-		DEFINE_REFERENCE(bool, ScoreStuffLoad, 0xB0FBB8u)
+	DEFINE_REFERENCE(int, Seed, 0xA8ED94u)
+	DEFINE_REFERENCE(int, TechLevel, 0x822CF4u)
+	DEFINE_REFERENCE(int, PlayerCount, 0xA8B54Cu)
+	DEFINE_REFERENCE(int, PlayerColor, 0xA8B394u)
+	DEFINE_REFERENCE(bool, ObserverMode, 0xAC10C8u)
+	DEFINE_POINTER(char, ScenarioName, 0xA8B8E0u)
+	DEFINE_REFERENCE(bool, DontSetExceptionHandler, 0xA8F7ACu)
+	DEFINE_REFERENCE(bool, EnableMPDebug, 0xA8B8B4u)
+	DEFINE_REFERENCE(bool, DrawMPDebugStats, 0xA8B8B5u)
+	DEFINE_REFERENCE(bool, EnableMPSyncDebug, 0xB04880u)
+	DEFINE_REFERENCE(bool, ScoreStuffLoad, 0xB0FBB8u)
 
-		DEFINE_REFERENCE(Vector3D<float>, VoxelLightSource, 0x887470)
-		DEFINE_REFERENCE(Vector3D<float>, VoxelShadowLightSource, 0x887420)
+	DEFINE_REFERENCE(Vector3D<float>, VoxelLightSource, 0x887470)
+	DEFINE_REFERENCE(Vector3D<float>, VoxelShadowLightSource, 0x887420)
 
-		DEFINE_ARRAY_REFERENCE(byte, [8], ChatMask, 0xA8D108u);
+	DEFINE_ARRAY_REFERENCE(byte, [8], ChatMask, 0xA8D108u);
 
 	static struct Network
 	{
 	public:
 		DEFINE_REFERENCE(int, Tournament, 0xB779C4u)
-			DEFINE_REFERENCE(DWORD, WOLGameID, 0xB779D4u)
-			DEFINE_REFERENCE(time_t, PlanetWestwoodStartTime, 0xB77788u)
-			DEFINE_REFERENCE(int, GameStockKeepingUnit, 0xB73814u)
-			DEFINE_REFERENCE(int, ProtocolVersion, 0xA8B24Cu)
-			DEFINE_REFERENCE(int, FrameSendRate, 0xA8B554u)
-			DEFINE_REFERENCE(int, PreCalcFrameRate, 0xA8B570u)
-			DEFINE_REFERENCE(int, ReconnectTimeout, 0x83737Cu)
-			DEFINE_REFERENCE(int, MaxAhead, 0xA8B550u)
-			DEFINE_REFERENCE(int, MaxMaxAhead, 0xA8B568u)
-			DEFINE_REFERENCE(int, PreCalcMaxAhead, 0xA8B56Cu)
-			DEFINE_REFERENCE(int, LatencyFudge, 0xA8DB9Cu)
-			DEFINE_REFERENCE(int, RequestedFPS, 0xA8B558u)
-			DEFINE_REFERENCE(bool, OutOfSync, 0xA8B8C2)
+		DEFINE_REFERENCE(DWORD, WOLGameID, 0xB779D4u)
+		DEFINE_REFERENCE(time_t, PlanetWestwoodStartTime, 0xB77788u)
+		DEFINE_REFERENCE(int, GameStockKeepingUnit, 0xB73814u)
+		DEFINE_REFERENCE(int, ProtocolVersion, 0xA8B24Cu)
+		DEFINE_REFERENCE(int, FrameSendRate, 0xA8B554u)
+		DEFINE_REFERENCE(int, PreCalcFrameRate, 0xA8B570u)
+		DEFINE_REFERENCE(int, ReconnectTimeout, 0x83737Cu)
+		DEFINE_REFERENCE(int, MaxAhead, 0xA8B550u)
+		DEFINE_REFERENCE(int, MaxMaxAhead, 0xA8B568u)
+		DEFINE_REFERENCE(int, PreCalcMaxAhead, 0xA8B56Cu)
+		DEFINE_REFERENCE(int, LatencyFudge, 0xA8DB9Cu)
+		DEFINE_REFERENCE(int, RequestedFPS, 0xA8B558u)
+		DEFINE_REFERENCE(bool, OutOfSync, 0xA8B8C2)
 
-			static bool Init()
+		static bool Init()
 		{ JMP_STD(0x5DA6C0); }
 	} Network;
 
@@ -186,7 +185,7 @@ public:
 		}
 	}
 
-	static void __fastcall DrawRadialIndicator(bool drawLine, bool adjustColor, const CoordStruct pCoord, ColorStruct color, float lineMultiplier, bool unknown1, bool unknown2)
+	static void __fastcall DrawRadialIndicator(bool drawLine, bool adjustColor, Coordinate pCoord, ColorStruct color, float lineMultiplier, bool unknown1, bool unknown2)
 	{ JMP_STD(0x456980); }
 
 	static void __fastcall PlayMovie(
@@ -214,21 +213,21 @@ class IIDs
 {
 public:
 	DEFINE_REFERENCE(IID const, IUnknown, 0x7F7C90u)
-		DEFINE_REFERENCE(IID const, IPersistStream, 0x7F7C80u)
-		DEFINE_REFERENCE(IID const, IPersist, 0x7F7C70u)
-		DEFINE_REFERENCE(IID const, IRTTITypeInfo, 0x7E9AE0u)
-		DEFINE_REFERENCE(IID const, IHouse, 0x7EA768u)
-		DEFINE_REFERENCE(IID const, IPublicHouse, 0x7E9B00u)
-		DEFINE_REFERENCE(IID const, IEnumConnections, 0x7F7CB0u)
-		DEFINE_REFERENCE(IID const, IConnectionPoint, 0x7F7CC0u)
-		DEFINE_REFERENCE(IID const, IConnectionPointContainer, 0x7F7CD0u)
-		DEFINE_REFERENCE(IID const, IEnumConnectionPoints, 0x7F7CE0u)
-		DEFINE_REFERENCE(IID const, IApplication, 0x7E36C0u)
-		DEFINE_REFERENCE(IID const, IGameMap, 0x7EA6E8u)
-		DEFINE_REFERENCE(IID const, ILocomotion, 0x7ED358u)
-		DEFINE_REFERENCE(IID const, IPiggyback, 0x7E9B10u)
-		DEFINE_REFERENCE(IID const, IFlyControl, 0x7E9B40u)
-		DEFINE_REFERENCE(IID const, ISwizzle, 0x7E9B20u)
+	DEFINE_REFERENCE(IID const, IPersistStream, 0x7F7C80u)
+	DEFINE_REFERENCE(IID const, IPersist, 0x7F7C70u)
+	DEFINE_REFERENCE(IID const, IRTTITypeInfo, 0x7E9AE0u)
+	DEFINE_REFERENCE(IID const, IHouse, 0x7EA768u)
+	DEFINE_REFERENCE(IID const, IPublicHouse, 0x7E9B00u)
+	DEFINE_REFERENCE(IID const, IEnumConnections, 0x7F7CB0u)
+	DEFINE_REFERENCE(IID const, IConnectionPoint, 0x7F7CC0u)
+	DEFINE_REFERENCE(IID const, IConnectionPointContainer, 0x7F7CD0u)
+	DEFINE_REFERENCE(IID const, IEnumConnectionPoints, 0x7F7CE0u)
+	DEFINE_REFERENCE(IID const, IApplication, 0x7E36C0u)
+	DEFINE_REFERENCE(IID const, IGameMap, 0x7EA6E8u)
+	DEFINE_REFERENCE(IID const, ILocomotion, 0x7ED358u)
+	DEFINE_REFERENCE(IID const, IPiggyback, 0x7E9B10u)
+	DEFINE_REFERENCE(IID const, IFlyControl, 0x7E9B40u)
+	DEFINE_REFERENCE(IID const, ISwizzle, 0x7E9B20u)
 };
 
 #pragma warning(push)
@@ -594,10 +593,10 @@ public:
 struct MovieUnlockableInfo
 {
 	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [1u], Common, 0x832C20u)
-		DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Allied, 0x832C30u)
-		DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Soviet, 0x832CA0u)
+	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Allied, 0x832C30u)
+	DEFINE_ARRAY_REFERENCE(MovieUnlockableInfo, [8u], Soviet, 0x832CA0u)
 
-		MovieUnlockableInfo() = default;
+	MovieUnlockableInfo() = default;
 
 	explicit MovieUnlockableInfo(const char* pFilename, const char* pDescription = nullptr, int disk = 2)
 		: Filename(pFilename), Description(pDescription), DiskRequired(disk)
@@ -611,31 +610,31 @@ struct MovieUnlockableInfo
 namespace Unsorted
 {
 	// if != 0, EVA_SWxxxActivated is skipped
-	DEFINE_REFERENCE(int, MuteSWLaunches, 0xA8B538)
+	DEFINE_NONSTATIC_REFERENCE(int, MuteSWLaunches, 0xA8B538)
 
-		// skip unit selection and move command voices?
-		DEFINE_REFERENCE(bool, MoveFeedback, 0x822CF2)
+	// skip unit selection and move command voices?
+	DEFINE_NONSTATIC_REFERENCE(bool, MoveFeedback, 0x822CF2)
 
-		DEFINE_REFERENCE(byte, ArmageddonMode, 0xA8ED6B)
-		DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, ObjectsInLayers, 0x8A0360)
+	DEFINE_NONSTATIC_REFERENCE(byte, ArmageddonMode, 0xA8ED6B)
+	DEFINE_NONSTATIC_REFERENCE(DynamicVectorClass<ObjectClass*>, ObjectsInLayers, 0x8A0360)
 
-		// checkbox states, afaik
-		DEFINE_REFERENCE(byte, Bases, 0xA8B258)
-		DEFINE_REFERENCE(byte, BridgeDestruction, 0xA8B260)
-		DEFINE_REFERENCE(byte, Crates, 0xA8B261)
-		DEFINE_REFERENCE(byte, ShortGame, 0xA8B262)
-		DEFINE_REFERENCE(byte, SWAllowed, 0xA8B263)
-		DEFINE_REFERENCE(byte, MultiEngineer, 0xA8B26C)
-		DEFINE_REFERENCE(byte, AlliesAllowed, 0xA8B31C)
-		DEFINE_REFERENCE(byte, HarvesterTruce, 0xA8B31D)
-		DEFINE_REFERENCE(byte, CTF, 0xA8B31E)
-		DEFINE_REFERENCE(byte, FOW, 0xA8B31F)
-		DEFINE_REFERENCE(byte, MCVRedeploy, 0xA8B320)
+	// checkbox states, afaik
+	DEFINE_NONSTATIC_REFERENCE(byte, Bases, 0xA8B258)
+	DEFINE_NONSTATIC_REFERENCE(byte, BridgeDestruction, 0xA8B260)
+	DEFINE_NONSTATIC_REFERENCE(byte, Crates, 0xA8B261)
+	DEFINE_NONSTATIC_REFERENCE(byte, ShortGame, 0xA8B262)
+	DEFINE_NONSTATIC_REFERENCE(byte, SWAllowed, 0xA8B263)
+	DEFINE_NONSTATIC_REFERENCE(byte, MultiEngineer, 0xA8B26C)
+	DEFINE_NONSTATIC_REFERENCE(byte, AlliesAllowed, 0xA8B31C)
+	DEFINE_NONSTATIC_REFERENCE(byte, HarvesterTruce, 0xA8B31D)
+	DEFINE_NONSTATIC_REFERENCE(byte, CTF, 0xA8B31E)
+	DEFINE_NONSTATIC_REFERENCE(byte, FOW, 0xA8B31F)
+	DEFINE_NONSTATIC_REFERENCE(byte, MCVRedeploy, 0xA8B320)
 
-		DEFINE_ARRAY_REFERENCE(TacticalSelectableStruct, [500], TacticalSelectables, 0xB0CEC8)
-		DEFINE_REFERENCE(bool, TypeSelecting, 0xB0FE65)
+	DEFINE_NONSTATIC_ARRAY_REFERENCE(TacticalSelectableStruct, [500], TacticalSelectables, 0xB0CEC8)
+	DEFINE_NONSTATIC_REFERENCE(bool, TypeSelecting, 0xB0FE65)
 
-		struct ColorPacker
+	struct ColorPacker
 	{
 		int _R_SHL;
 		int _R_SHR;
@@ -645,76 +644,76 @@ namespace Unsorted
 		int _G_SHR;
 	};
 
-	DEFINE_REFERENCE(ColorPacker, ColorPackData, 0x8A0DD0)
+	DEFINE_NONSTATIC_REFERENCE(ColorPacker, ColorPackData, 0x8A0DD0)
 
-		DEFINE_REFERENCE(CellStruct, CellSpreadTable, 0xABD490)
+	DEFINE_NONSTATIC_REFERENCE(Cell, CellSpreadTable, 0xABD490)
 
-		DEFINE_REFERENCE(int, CurrentSWType, 0x8809A0)
+	DEFINE_NONSTATIC_REFERENCE(int, CurrentSWType, 0x8809A0)
 
-		static const int except_txt_length = 0xFFFF;
-	DEFINE_ARRAY_REFERENCE(char, [65536], except_txt_content, 0x8A3A08)
+	static const int except_txt_length = 0xFFFF;
+	DEFINE_NONSTATIC_ARRAY_REFERENCE(char, [65536], except_txt_content, 0x8A3A08)
 
-		DEFINE_ARRAY_REFERENCE(CellStruct, [8], AdjacentCell, 0x89F688)
-		DEFINE_ARRAY_REFERENCE(Point2D, [8], AdjacentCoord, 0x89F6D8)
+	DEFINE_NONSTATIC_ARRAY_REFERENCE(Cell, [8], AdjacentCell, 0x89F688)
+	DEFINE_NONSTATIC_ARRAY_REFERENCE(Point2D, [8], AdjacentCoord, 0x89F6D8)
 
-		/*
-		 * This thing is ridiculous
-		 * all xxTypeClass::Create functions use it:
+	/*
+	 * This thing is ridiculous
+	 * all xxTypeClass::Create functions use it:
 
-			// doing this makes no sense - it's just a wrapper around CTOR, which doesn't call any Mutex'd functions... but who cares
-			InfantryTypeClass *foo = something;
-			++SomeMutex;
-			InfantryClass *obj = foo->CreateObject();
-			--SomeMutex;
+		// doing this makes no sense - it's just a wrapper around CTOR, which doesn't call any Mutex'd functions... but who cares
+		InfantryTypeClass *foo = something;
+		++SomeMutex;
+		InfantryClass *obj = foo->CreateObject();
+		--SomeMutex;
 
-			// XXX do not do this if you aren't sure if the object can exist in this place
-			// - this flag overrides any placement checks so you can put Terror Drones into trees and stuff
-			++SomeMutex;
-			obj->Unlimbo(blah);
-			--SomeMutex;
+		// XXX do not do this if you aren't sure if the object can exist in this place
+		// - this flag overrides any placement checks so you can put Terror Drones into trees and stuff
+		++SomeMutex;
+		obj->Unlimbo(blah);
+		--SomeMutex;
 
-			AI base node generation uses it:
-			int level = SomeMutex;
-			SomeMutex = 0;
-			House->GenerateAIBuildList();
-			SomeMutex = level;
+		AI base node generation uses it:
+		int level = SomeMutex;
+		SomeMutex = 0;
+		House->GenerateAIBuildList();
+		SomeMutex = level;
 
-			Building destruction uses it:
-			if(!SomeMutex) {
-				Building->ShutdownSensorArray();
-				Building->ShutdownDisguiseSensor();
-			}
-
-			Building placement uses it:
-			if(!SomeMutex) {
-				UnitTypeClass *freebie = Building->Type->FreeUnit;
-				if(freebie) {
-					freebie->CreateObject(blah);
-				}
-			}
-
-			Building state animations use it:
-			if(SomeMutex) {
-				// foreach attached anim
-				// update anim state (normal | damaged | garrisoned) if necessary, play anim
-			}
-
-			building selling uses it:
-			if(blah) {
-				++SomeMutex;
-				this->Type->UndeploysInto->CreateAtMapCoords(blah);
-				--SomeMutex;
-			}
-
-			Robot Control Centers use it:
-			if ( !SomeMutex ) {
-				VoxClass::PlayFromName("EVA_RobotTanksOffline/BackOnline", -1, -1);
+		Building destruction uses it:
+		if(!SomeMutex) {
+			Building->ShutdownSensorArray();
+			Building->ShutdownDisguiseSensor();
 		}
 
-		and so on...
-		*/
-		// Note: SomeMutex has been renamed to this because it reflects the usage better
-		DEFINE_REFERENCE(int, ScenarioInit, 0xA8E7AC) // h2ik
+		Building placement uses it:
+		if(!SomeMutex) {
+			UnitTypeClass *freebie = Building->Type->FreeUnit;
+			if(freebie) {
+				freebie->CreateObject(blah);
+			}
+		}
+
+		Building state animations use it:
+		if(SomeMutex) {
+			// foreach attached anim
+			// update anim state (normal | damaged | garrisoned) if necessary, play anim
+		}
+
+		building selling uses it:
+		if(blah) {
+			++SomeMutex;
+			this->Type->UndeploysInto->CreateAtMapCoords(blah);
+			--SomeMutex;
+		}
+
+		Robot Control Centers use it:
+		if ( !SomeMutex ) {
+			VoxClass::PlayFromName("EVA_RobotTanksOffline/BackOnline", -1, -1);
+	}
+
+	and so on...
+	*/
+	// Note: SomeMutex has been renamed to this because it reflects the usage better
+	DEFINE_NONSTATIC_REFERENCE(int, ScenarioInit, 0xA8E7AC) // h2ik
 };
 
 struct CheatData
@@ -726,4 +725,4 @@ struct CheatData
 };
 
 // this holds four original cheats, keep that limit in mind
-DEFINE_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)
+DEFINE_NONSTATIC_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)
