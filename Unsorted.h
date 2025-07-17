@@ -610,29 +610,29 @@ struct MovieUnlockableInfo
 namespace Unsorted
 {
 	// if != 0, EVA_SWxxxActivated is skipped
-	DEFINE_NONSTATIC_REFERENCE(int, MuteSWLaunches, 0xA8B538)
+	DEFINE_REFERENCE(int, MuteSWLaunches, 0xA8B538)
 
 	// skip unit selection and move command voices?
-	DEFINE_NONSTATIC_REFERENCE(bool, MoveFeedback, 0x822CF2)
+	DEFINE_REFERENCE(bool, MoveFeedback, 0x822CF2)
 
-	DEFINE_NONSTATIC_REFERENCE(byte, ArmageddonMode, 0xA8ED6B)
-	DEFINE_NONSTATIC_REFERENCE(DynamicVectorClass<ObjectClass*>, ObjectsInLayers, 0x8A0360)
+	DEFINE_REFERENCE(byte, ArmageddonMode, 0xA8ED6B)
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, ObjectsInLayers, 0x8A0360)
 
 	// checkbox states, afaik
-	DEFINE_NONSTATIC_REFERENCE(byte, Bases, 0xA8B258)
-	DEFINE_NONSTATIC_REFERENCE(byte, BridgeDestruction, 0xA8B260)
-	DEFINE_NONSTATIC_REFERENCE(byte, Crates, 0xA8B261)
-	DEFINE_NONSTATIC_REFERENCE(byte, ShortGame, 0xA8B262)
-	DEFINE_NONSTATIC_REFERENCE(byte, SWAllowed, 0xA8B263)
-	DEFINE_NONSTATIC_REFERENCE(byte, MultiEngineer, 0xA8B26C)
-	DEFINE_NONSTATIC_REFERENCE(byte, AlliesAllowed, 0xA8B31C)
-	DEFINE_NONSTATIC_REFERENCE(byte, HarvesterTruce, 0xA8B31D)
-	DEFINE_NONSTATIC_REFERENCE(byte, CTF, 0xA8B31E)
-	DEFINE_NONSTATIC_REFERENCE(byte, FOW, 0xA8B31F)
-	DEFINE_NONSTATIC_REFERENCE(byte, MCVRedeploy, 0xA8B320)
+	DEFINE_REFERENCE(byte, Bases, 0xA8B258)
+	DEFINE_REFERENCE(byte, BridgeDestruction, 0xA8B260)
+	DEFINE_REFERENCE(byte, Crates, 0xA8B261)
+	DEFINE_REFERENCE(byte, ShortGame, 0xA8B262)
+	DEFINE_REFERENCE(byte, SWAllowed, 0xA8B263)
+	DEFINE_REFERENCE(byte, MultiEngineer, 0xA8B26C)
+	DEFINE_REFERENCE(byte, AlliesAllowed, 0xA8B31C)
+	DEFINE_REFERENCE(byte, HarvesterTruce, 0xA8B31D)
+	DEFINE_REFERENCE(byte, CTF, 0xA8B31E)
+	DEFINE_REFERENCE(byte, FOW, 0xA8B31F)
+	DEFINE_REFERENCE(byte, MCVRedeploy, 0xA8B320)
 
-	DEFINE_NONSTATIC_ARRAY_REFERENCE(TacticalSelectableStruct, [500], TacticalSelectables, 0xB0CEC8)
-	DEFINE_NONSTATIC_REFERENCE(bool, TypeSelecting, 0xB0FE65)
+	DEFINE_ARRAY_REFERENCE(TacticalSelectableStruct, [500], TacticalSelectables, 0xB0CEC8)
+	DEFINE_REFERENCE(bool, TypeSelecting, 0xB0FE65)
 
 	struct ColorPacker
 	{
@@ -644,17 +644,17 @@ namespace Unsorted
 		int _G_SHR;
 	};
 
-	DEFINE_NONSTATIC_REFERENCE(ColorPacker, ColorPackData, 0x8A0DD0)
+	DEFINE_REFERENCE(ColorPacker, ColorPackData, 0x8A0DD0)
 
-	DEFINE_NONSTATIC_REFERENCE(Cell, CellSpreadTable, 0xABD490)
+	DEFINE_REFERENCE(Cell, CellSpreadTable, 0xABD490)
 
-	DEFINE_NONSTATIC_REFERENCE(int, CurrentSWType, 0x8809A0)
+	DEFINE_REFERENCE(int, CurrentSWType, 0x8809A0)
 
 	static const int except_txt_length = 0xFFFF;
-	DEFINE_NONSTATIC_ARRAY_REFERENCE(char, [65536], except_txt_content, 0x8A3A08)
+	DEFINE_ARRAY_REFERENCE(char, [65536], except_txt_content, 0x8A3A08)
 
-	DEFINE_NONSTATIC_ARRAY_REFERENCE(Cell, [8], AdjacentCell, 0x89F688)
-	DEFINE_NONSTATIC_ARRAY_REFERENCE(Point2D, [8], AdjacentCoord, 0x89F6D8)
+	DEFINE_ARRAY_REFERENCE(Cell, [8], AdjacentCell, 0x89F688)
+	DEFINE_ARRAY_REFERENCE(Point2D, [8], AdjacentCoord, 0x89F6D8)
 
 	/*
 	 * This thing is ridiculous
@@ -713,7 +713,7 @@ namespace Unsorted
 	and so on...
 	*/
 	// Note: SomeMutex has been renamed to this because it reflects the usage better
-	DEFINE_NONSTATIC_REFERENCE(int, ScenarioInit, 0xA8E7AC) // h2ik
+	DEFINE_REFERENCE(int, ScenarioInit, 0xA8E7AC) // h2ik
 };
 
 struct CheatData
@@ -725,4 +725,4 @@ struct CheatData
 };
 
 // this holds four original cheats, keep that limit in mind
-DEFINE_NONSTATIC_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)
+DEFINE_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)
