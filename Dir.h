@@ -2,9 +2,6 @@
 
 #include <bit>
 
-#include "YRPPCore.h"
-#include "YRMath.h"
-
 enum class Dir256 : unsigned char;
 
 // North -> 0x0000
@@ -14,11 +11,11 @@ enum class Dir256 : unsigned char;
 struct DirStruct
 {
 public:
-	constexpr explicit DirStruct() noexcept : Raw { 0 }, Padding { 0 } { }
-	constexpr explicit DirStruct(int raw) noexcept : Raw { static_cast<unsigned short>(raw) }, Padding { 0 } { }
-	constexpr explicit DirStruct(double rad) noexcept : DirStruct() { SetRadian<65536>(rad); }
-	constexpr explicit DirStruct(const Dir256 dir) noexcept : DirStruct() { SetDir(dir); }
-	constexpr explicit DirStruct(const noinit_t&) noexcept : DirStruct() { }
+	constexpr explicit DirStruct() noexcept : Raw { 0 } { }
+	constexpr explicit DirStruct(int raw) noexcept : Raw { static_cast<unsigned short>(raw) } { }
+	constexpr explicit DirStruct(double rad) noexcept { SetRadian<65536>(rad); }
+	constexpr explicit DirStruct(const Dir256 dir) noexcept { SetDir(dir); }
+	constexpr explicit DirStruct(const noinit_t&) noexcept { }
 
 	constexpr bool operator==(const DirStruct& another) const
 	{
