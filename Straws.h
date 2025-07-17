@@ -60,7 +60,7 @@ class BufferStraw : public Straw
 {
 public:
 	explicit BufferStraw() = delete;
-	explicit BufferStraw(void* pBuffer, size_t nLength) : Straw {}, Buffer { pBuffer,nLength }
+	explicit BufferStraw(void* pBuffer, int nLength) : Straw {}, Buffer { pBuffer,nLength }
 	{ }
 
 	virtual ~BufferStraw() override final

@@ -73,7 +73,7 @@ class BufferPipe : public Pipe
 {
 public:
 	explicit BufferPipe() = delete;
-	explicit BufferPipe(void* pBuffer, size_t nLength) : Pipe {}, Buffer { pBuffer,nLength }
+	explicit BufferPipe(void* pBuffer, int nLength) : Pipe {}, Buffer { pBuffer,nLength }
 	{
 	}
 
