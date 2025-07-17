@@ -836,7 +836,7 @@ public:
 	* @brief Direction from this object to target object.
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
-	DirStruct Direction(AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
+	DirStruct DirectionTo(AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
 	/*!
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
