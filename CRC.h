@@ -10,63 +10,59 @@ public:
 	{
 		return Value();
 	}
-
 	// Commented out because Ares reimplemented it already!
-	// Uncommented during mapping revision -- Multfinite
-
-	void operator()(char datum)
-	{
-		StagingBuffer.Buffer[Index++] = datum;
-	
-		if (Index == sizeof(int))
-		{
-			CRC = Value();
-			StagingBuffer.Composite = 0;
-			Index = 0;
-		}
-	}
-	
-	int operator()(void* buffer, int length)
-	{
-		return (*this)((const void*)buffer, length);
-	}
-	
-	int operator()(const void* buffer, int length)
-	{
-		if (buffer != nullptr && length > 0)
-		{
-			const char* dataptr = (char const*)buffer;
-			int bytes_left = length;
-	
-			while (bytes_left && Buffer_Needs_Data())
-			{
-				operator()(*dataptr);
-				++dataptr;
-				--bytes_left;
-			}
-	
-			const int* intptr = (const int*)dataptr;
-			int intcount = bytes_left / sizeof(int);
-			while (intcount--)
-			{
-				CRC = Memory(intptr, 4, CRC);
-				++intptr;
-				bytes_left -= sizeof(int);
-			}
-	
-			dataptr = (char const*)intptr;
-			while (bytes_left)
-			{
-				operator()(*dataptr);
-				++dataptr;
-				--bytes_left;
-			}
-		}
-	
-		return Value();
-	}
-	// uncommented region end
-
+	//
+	// void operator()(char datum)
+	// {
+	// 	StagingBuffer.Buffer[Index++] = datum;
+	//
+	// 	if (Index == sizeof(int))
+	// 	{
+	// 		CRC = Value();
+	// 		StagingBuffer.Composite = 0;
+	// 		Index = 0;
+	// 	}
+	// }
+	//
+	// int operator()(void* buffer, int length)
+	// {
+	// 	return (*this)((const void*)buffer, length);
+	// }
+	//
+	// int operator()(const void* buffer, int length)
+	// {
+	// 	if (buffer != nullptr && length > 0)
+	// 	{
+	// 		const char* dataptr = (char const*)buffer;
+	// 		int bytes_left = length;
+	//
+	// 		while (bytes_left && Buffer_Needs_Data())
+	// 		{
+	// 			operator()(*dataptr);
+	// 			++dataptr;
+	// 			--bytes_left;
+	// 		}
+	//
+	// 		const int* intptr = (const int*)dataptr;
+	// 		int intcount = bytes_left / sizeof(int);
+	// 		while (intcount--)
+	// 		{
+	// 			CRC = Memory(intptr, 4, CRC);
+	// 			++intptr;
+	// 			bytes_left -= sizeof(int);
+	// 		}
+	//
+	// 		dataptr = (char const*)intptr;
+	// 		while (bytes_left)
+	// 		{
+	// 			operator()(*dataptr);
+	// 			++dataptr;
+	// 			--bytes_left;
+	// 		}
+	// 	}
+	//
+	// 	return Value();
+	// }
 	template<typename T>
 	int operator()(const T& data)
 	{
