@@ -115,7 +115,7 @@ struct CellRangeIterator<CellClass> {
 	template <typename Func>
 	void operator () (CellStruct const center, double radius, Func&& action) const {
 		for(CellRangeEnumerator cell(center, radius); cell; ++cell) {
-			if(auto const pCell = MapClass::Instance->TryGetCellAt(*cell)) {
+			if(auto const pCell = MapClass::Instance.TryGetCellAt(*cell)) {
 				if(!action(pCell)) {
 					return;
 				}
