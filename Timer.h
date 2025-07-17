@@ -1,4 +1,11 @@
 #pragma once
+
+#include <concepts>
+
+#include "YRPPCore.h"
+#include "ASMMacros.h"
+#include "Fundamentals.h"
+
 template<typename T>
 concept TimerType = std::convertible_to<T, int> && requires (T t)
 {
@@ -8,14 +15,14 @@ concept TimerType = std::convertible_to<T, int> && requires (T t)
 
 struct FrameTimer
 {
-	long operator()()const { return Unsorted::CurrentFrame; }
+	long operator()() const { return Unsorted::CurrentFrame; }
 	operator long() const { return Unsorted::CurrentFrame; }
 };
 
 struct SystemTimer
 {
 	static DWORD GetTime() JMP_STD(0x6C8C40);
-	long operator()()const { return SystemTimer::GetTime(); }
+	long operator()() const { return SystemTimer::GetTime(); }
 	operator long() const { return SystemTimer::GetTime(); }
 };
 
