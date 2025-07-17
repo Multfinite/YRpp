@@ -84,7 +84,7 @@ public:
     int CountAliveSpawns() const JMP_THIS(0x6B7D30);
     int CountDockedSpawns() const JMP_THIS(0x6B7D50);
     int CountLaunchingSpawns() const JMP_THIS(0x6B7D80);
-    void UnlinkPointer() JMP_THIS(0x6B7C60);
+    void UnlinkPointer(AbstractClass* pRemove) JMP_THIS(0x6B7C60);
 
 protected:
     /*! @brief FAKE CTOR */
