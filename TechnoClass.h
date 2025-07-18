@@ -440,7 +440,7 @@ public:
 	bool Repairable() const override JMP_THIS(0x701140);
 	bool CanPlayerFire() const override JMP_THIS(0x7010D0);
 	bool IsControllable() const override JMP_THIS(0x700C40);
-	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x6F3AD0);
+	Coordinate* __FLH(Coordinate* retstr, int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x6F3AD0);
 	bool IsDisguised() const override JMP_THIS(0x41C010);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x41C020);
 	bool Limbo() override JMP_THIS(0x6F6AC0);
@@ -545,7 +545,13 @@ public:
 	* @note vtable_index 170:0x2A8
 	* @note address 0x4E0150
 	*/
-	virtual DirStruct TurretFacing() const JMP_THIS(0x4E0150);
+	virtual DirStruct* __TurretFacing(DirStruct* retstr) const JMP_THIS(0x4E0150);
+	DirStruct TurretFacing() const
+	{
+		DirStruct ret;
+		__TurretFacing(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Is_Weapon_Equipped
@@ -601,7 +607,13 @@ public:
 	* @note vtable_index 178:0x2C8
 	* @note address 0x6FDA00
 	*/
-	virtual DirStruct UnknownFireangle(TechnoClass* techno) JMP_THIS(0x6FDA00);
+	virtual DirStruct* __UnknownFireangle(DirStruct* retstr, TechnoClass* techno) JMP_THIS(0x6FDA00);
+	DirStruct UnknownFireangle(TechnoClass* techno)
+	{
+		DirStruct ret;
+		__UnknownFireangle(&ret, techno);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Is_In_Same_Zone
@@ -678,7 +690,13 @@ public:
 	* @note vtable_index 189:0x2F4
 	* @note address 0x459DB0
 	*/
-	virtual ::Cell GetLastFlightMapCoords() const JMP_THIS(0x459DB0);
+	virtual ::Cell* __GetLastFlightMapCoords(::Cell* retstr) const JMP_THIS(0x459DB0);
+	::Cell GetLastFlightMapCoords() const
+	{
+		::Cell ret;
+		__GetLastFlightMapCoords(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Set_Last_Flight_Coord
@@ -692,14 +710,26 @@ public:
 	* @note vtable_index 191:0x2FC
 	* @note address 0x70AD50
 	*/
-	virtual ::Cell FindExitCell() const JMP_THIS(0x70AD50);
+	virtual ::Cell* __FindExitCell(::Cell* retstr) const JMP_THIS(0x70AD50);
+	::Cell FindExitCell() const
+	{
+		::Cell ret;
+		__FindExitCell(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Firing_Offset
 	* @note vtable_index 192:0x300
 	* @note address 0x6F3D60
 	*/
-	virtual Coordinate FiringOffset() const JMP_THIS(0x6F3D60);
+	virtual Coordinate* __FiringOffset(Coordinate* retstr) const JMP_THIS(0x6F3D60);
+	Coordinate FiringOffset() const
+	{
+		Coordinate ret;
+		__FiringOffset(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Desired_Load_Dir
@@ -713,7 +743,13 @@ public:
 	* @note vtable_index 194:0x308
 	* @note address 0x708D70
 	*/
-	virtual DirStruct GetRealFacing() const JMP_THIS(0x708D70);
+	virtual DirStruct* __GetRealFacing(DirStruct* retstr) const JMP_THIS(0x708D70);
+	DirStruct GetRealFacing() const
+	{
+		DirStruct ret;
+		__GetRealFacing(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Crew_Type
@@ -797,7 +833,13 @@ public:
 	* @note vtable_index 206:0x338
 	* @note address 0x70F8F0
 	*/
-	virtual ::Cell ScanForTiberium(int range, bool b = false) const JMP_THIS(0x70F8F0);
+	virtual ::Cell* __ScanForTiberium(::Cell* retstr, int range, bool b = false) const JMP_THIS(0x70F8F0);
+	::Cell ScanForTiberium(int range, bool b = false) const
+	{
+		::Cell ret;
+		__ScanForTiberium(&ret, range, b);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Try_Grinding
@@ -1224,7 +1266,13 @@ public:
 	* @note vtable_index 267:0x42C
 	* @note address 0x705CA0
 	*/
-	virtual Coordinate GetAttackCoordinates() const JMP_THIS(0x705CA0);
+	virtual Coordinate* __GetAttackCoordinates(Coordinate* retstr) const JMP_THIS(0x705CA0);
+	Coordinate GetAttackCoordinates() const
+	{
+		Coordinate ret;
+		__GetAttackCoordinates(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Is_Not_Warping_Out
@@ -1472,7 +1520,13 @@ public:
 	* @note vtable_index 302:0x4B8
 	* @note address 0x70F050
 	*/
-	virtual Coordinate GetAttackMoveCoords() const JMP_THIS(0x70F050);
+	virtual Coordinate* __GetAttackMoveCoords(Coordinate* retstr) const JMP_THIS(0x70F050);
+	Coordinate GetAttackMoveCoords() const
+	{
+		Coordinate ret;
+		__GetAttackMoveCoords(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Can_Use_Waypoint
@@ -1935,7 +1989,13 @@ public:
 	* @note original_name Get_Coord_70BCB0
 	* @note address 0x70BCB0
 	*/
-	Coordinate GetCoord_70BCB0() JMP_THIS(0x70BCB0);
+	Coordinate* __GetCoord_70BCB0(Coordinate* retstr) JMP_THIS(0x70BCB0);
+	Coordinate GetCoord_70BCB0()
+	{
+		Coordinate ret;
+		__GetCoord_70BCB0(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Get_Gattling_Slot

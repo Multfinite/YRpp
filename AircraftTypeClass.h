@@ -51,7 +51,7 @@ public:
 
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41CC20);
 
-	Point3D LeptonDimensions() const override JMP_THIS(0x41CBF0);
+	Point3D* __LeptonDimensions(Point3D* retstr) const override JMP_THIS(0x41CBF0);
 	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x41CBE0);
 	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x41CB20);
 	CellStruct* OccupiedCells(bool placement) const override JMP_THIS(0x41CB70);

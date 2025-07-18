@@ -518,7 +518,13 @@ public:
 	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
 
 	constexpr bool HasMultipleTurrets() const { return this->TurretCount > 0; }
-	CoordStruct GetParticleSysOffset() const JMP_THIS(0x7178C0);
+	Coordinate* __GetParticleSysOffset(Coordinate* retstr) const JMP_THIS(0x7178C0);
+	Coordinate GetParticleSysOffset() const
+	{
+		Coordinate ret;
+		__GetParticleSysOffset(&ret);
+		return ret;
+	}
 
 	bool InOwners(DWORD const bitHouseType) const { return 0u != (Ownable() & bitHouseType); }
 

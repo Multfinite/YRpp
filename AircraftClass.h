@@ -114,9 +114,9 @@ public:
 	int MissionSpyplaneApproach() override JMP_THIS(0x4155F0);
 	int MissionSpyplaneOverfly() override JMP_THIS(0x4157C0);
 
-	DirStruct TurretFacing() const override JMP_THIS(0x41C1E0);
+	DirStruct* __TurretFacing(DirStruct* retstr) const override JMP_THIS(0x41C1E0);
 	FacingType DesiredLoadDir(ObjectClass const* object, ::Cell* cell) const override JMP_THIS(0x4195A0);
-	DirStruct GetRealFacing() const override JMP_THIS(0x41A570);
+	DirStruct* __GetRealFacing(DirStruct* retstr) const override JMP_THIS(0x41A570);
 	bool ClickedMission(Mission Mission, ObjectClass* pTarget, CellClass* TargetCell, CellClass* NearestTargetCellICanEnter) override JMP_THIS(0x417CA0);
 	void DecreaseAmmo() override JMP_THIS(0x41B900);
 	FireError GetFireError(AbstractClass* pTarget, int nWeaponIndex, bool ignoreRange) const override JMP_THIS(0x41A9E0);

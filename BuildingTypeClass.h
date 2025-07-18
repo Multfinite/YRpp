@@ -269,10 +269,10 @@ public:
 	
 	bool LoadFromINI(CCINIClass* ini) override JMP_THIS(0x45FE50);
 
-	Coordinate FixupCoord(Coordinate& coord) const override JMP_THIS(0x464A70);
+	Coordinate* __FixupCoord(Coordinate* retstr, Coordinate& coord) const override JMP_THIS(0x464A70);
 	int MaxPips() const override JMP_THIS(0x45ECE0);
-	Point3D PixelDimensions() const override JMP_THIS(0x45EBD0);
-	Point3D LeptonDimensions() const override JMP_THIS(0x464AF0);
+	Point3D* __PixelDimensions(Point3D* retstr) const override JMP_THIS(0x45EBD0);
+	Point3D* __LeptonDimensions(Point3D* retstr) const override JMP_THIS(0x464AF0);
 	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
 	int CostOf(HouseClass* pHouse) const override JMP_THIS(0x45EDD0);
 	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x45E880);

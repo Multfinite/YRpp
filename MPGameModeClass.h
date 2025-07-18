@@ -223,9 +223,16 @@ public:
 	virtual void CreateMPTeams(DynamicVectorClass<MPTeam> *vecTeams)
 		{ JMP_THIS(0x5D6690); }
 
-	virtual CellStruct * AssignStartingPositionsToHouse(CellStruct *result, int idxHouse,
+	virtual CellStruct * __AssignStartingPositionsToHouse(CellStruct* retstr, int idxHouse,
 		DynamicVectorClass<CellStruct> *vecCoords, byte *housesSatisfied)
 		{ JMP_THIS(0x5D6890); }
+	Cell AssignStartingPositionsToHouse(int idxHouse,
+		DynamicVectorClass<CellStruct>* vecCoords, byte* housesSatisfied)
+	{
+		Cell ret;
+		__AssignStartingPositionsToHouse(&ret, idxHouse, vecCoords, housesSatisfied);
+		return ret;
+	}
 
 	virtual bool SpawnBaseUnits(HouseClass *House, DWORD dwUnused)
 		{ JMP_THIS(0x5D7030); }

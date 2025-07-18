@@ -33,9 +33,21 @@ public:
 	void Initialize(const CoordStruct& coords, double elasticity, double gravity,
 			double maxVelocity, const Vector3D<float>& velocity, double angularVelocity) JMP_THIS(0x4397E0);
 
-	CoordStruct Center() const JMP_THIS(0x4399A0);
+	Coordinate* __Center(Coordinate* retstr) const JMP_THIS(0x4399A0);
+	Coordinate Center() const
+	{
+		Coordinate ret;
+		__Center(&ret);
+		return ret;
+	}
 	double Distance() JMP_THIS(0x439A10);
-	Matrix3D GetDrawingMatrix() const JMP_THIS(0x4399E0);
+	Matrix3D* __GetDrawingMatrix(Matrix3D* retstr) const JMP_THIS(0x4399E0);
+	Matrix3D GetDrawingMatrix() const
+	{
+		Matrix3D ret;
+		__GetDrawingMatrix(&ret);
+		return ret;
+	}
 
 	Status AI() JMP_THIS(0x439B00);
 };

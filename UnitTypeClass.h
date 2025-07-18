@@ -80,9 +80,9 @@ public:
 	
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x747620);
 	
-	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x747EB0);
-	Point3D PixelDimensions() const override JMP_THIS(0x747590);
-	Point3D LeptonDimensions() const override JMP_THIS(0x7475D0);
+	CoordStruct* __FixupCoord(CoordStruct* retstr, CoordStruct& coord) const override JMP_THIS(0x747EB0);
+	Point3D* __PixelDimensions(Point3D* retstr) const override JMP_THIS(0x747590);
+	Point3D* __LeptonDimensions(Point3D* retstr) const override JMP_THIS(0x7475D0);
 	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x7474B0);
 	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x747560);
 	

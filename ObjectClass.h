@@ -96,7 +96,7 @@ public:
 	void InvalidatePointer(AbstractClass* target, bool all) override JMP_THIS(0x5F5230);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5F6250);
 	bool IsInactive() const override JMP_THIS(0x5F6690);
-	Coordinate Center() const override JMP_THIS(0x5F65A0);	
+	Coordinate* __Center(Coordinate* retstr) const override JMP_THIS(0x5F65A0);
 	bool IsOnGround() const override JMP_THIS(0x5F6B60);
 	bool IsInAir() const override JMP_THIS(0x5F6B90);
 	void AI() override JMP_THIS(0x5F3E70);
@@ -252,7 +252,13 @@ public:
 	* @note vtable_index 41:0xA4
 	* @note address 0x41BDD0
 	*/
-	virtual Coordinate TargetCoord() const JMP_THIS(0x41BDD0);
+	virtual Coordinate* __TargetCoord(Coordinate* retstr) const JMP_THIS(0x41BDD0);
+	Coordinate TargetCoord() const
+	{
+		Coordinate ret;
+		__TargetCoord(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Docking_Coord
@@ -260,28 +266,53 @@ public:
 	* @note vtable_index 42:0xA8
 	* @note address 0x5F6C80
 	*/
-	virtual Coordinate DockingCoord(TechnoClass* docker) const JMP_THIS(0x5F6C80);
+	virtual Coordinate* __DockingCoord(Coordinate* retstr, TechnoClass* docker) const JMP_THIS(0x5F6C80);
+	Coordinate DockingCoord(TechnoClass* docker) const
+	{
+		Coordinate ret;
+		__DockingCoord(&ret, docker);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Render_Coord
 	* @note vtable_index 43:0xAC
 	* @note address 0x41BE00
 	*/
-	virtual Coordinate RenderCoord() const JMP_THIS(0x41BE00);
+	virtual Coordinate* __RenderCoord(Coordinate* retstr) const JMP_THIS(0x41BE00);
+	Coordinate RenderCoord() const
+	{
+		Coordinate ret;
+		__RenderCoord(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Fire_Coord
 	* @note vtable_index 44:0xB0
 	* @note address 0x4263D0
 	*/
-	virtual Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const JMP_THIS(0x4263D0);
+	virtual Coordinate* __FLH(Coordinate* retstr, int idxWeapon, Coordinate baseCoords) const JMP_THIS(0x4263D0);
+	Coordinate FLH(int idxWeapon, Coordinate baseCoords) const
+	{
+		Coordinate ret;
+		__FLH(&ret, idxWeapon, baseCoords);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Exit_Coord
 	* @note vtable_index 45:0xB4
 	* @note address 0x41BE30
 	*/
-	virtual Coordinate ExitCoord() const JMP_THIS(0x41BE30);
+	virtual Coordinate* __ExitCoord(Coordinate* retstr) const JMP_THIS(0x41BE30);
+	Coordinate ExitCoord() const
+	{
+		Coordinate ret;
+		__ExitCoord(&ret);
+		return ret;
+	}
+
 
 	/*!
 	* @note vtable_index 46:0xB8
@@ -485,14 +516,14 @@ public:
 	* @note vtable_index 74:0x128
 	* @note address 0x5F4730
 	*/
-	virtual RectangleStruct* GetDimensions(RectangleStruct* pRect) const JMP_THIS(0x5F4730);
+	virtual RectangleStruct* GetDimensions(RectangleStruct* retstr) const JMP_THIS(0x5F4730);
 
 	/*!
 	* @note original_name Get_Render_Dimensions
 	* @note vtable_index 75:0x12C
 	* @note address 0x5F4870
 	*/
-	virtual RectangleStruct* GetRenderDimensions(RectangleStruct* pRect) JMP_THIS(0x5F4870);
+	virtual RectangleStruct* GetRenderDimensions(RectangleStruct* retstr) JMP_THIS(0x5F4870);
 
 	/*!
 	* @note original_name Draw_Radial_Indicator
@@ -740,7 +771,13 @@ public:
 	* @note vtable_index 110:0x1B8
 	* @note address 0x41BEA0
 	*/
-	virtual ::Cell Coord() const JMP_THIS(0x41BEA0);
+	virtual ::Cell* __Coord(::Cell* retstr) const JMP_THIS(0x41BEA0);
+	::Cell Coord() const
+	{
+		::Cell ret;
+		__Coord(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Coord_Cell_Ptr
@@ -754,7 +791,13 @@ public:
 	* @note vtable_index 112:0x1C0
 	* @note address 0x5F69C0
 	*/
-	virtual ::Cell DestinationCoord() const JMP_THIS(0x5F69C0);
+	virtual ::Cell* __DestinationCoord(::Cell* retstr) const JMP_THIS(0x5F69C0);
+	::Cell DestinationCoord() const
+	{
+		::Cell ret;
+		__DestinationCoord(&ret);
+		return ret;
+	}
 
 	/*!
 	* @note original_name Coord_Target_Cell_Ptr
@@ -836,7 +879,13 @@ public:
 	* @brief Direction from this object to target object.
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/
-	DirStruct DirectionTo(AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
+	DirStruct* DirectionTo(DirStruct* retstr, AbstractClass* pTarget) const JMP_THIS(0x5F3DB0);
+	DirStruct DirectionTo(AbstractClass* pTarget) const
+	{
+		DirStruct ret;
+		DirectionTo(&ret, pTarget);
+		return ret;
+	}
 	/*!
 	* @note in EXE this is method of ObjectClass, but it can be used with any Abstract.
 	*/

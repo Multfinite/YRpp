@@ -169,8 +169,8 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x459EC0);
 	int SizeOf() const override JMP_THIS(0x459E70);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x454260);
-	Coordinate Center() const override JMP_THIS(0x447AC0);
-	Coordinate GetDestination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x447E90);
+	Coordinate* __Center(Coordinate* retstr) const override JMP_THIS(0x447AC0);
+	Coordinate* __GetDestination(Coordinate* retstr, TechnoClass* pDocker = nullptr) const override JMP_THIS(0x447E90);
 	void AI() override JMP_THIS(0x43FB20);
 
 	VisualType VisualCharacter(VARIANT_BOOL specificOwner, HouseClass* whoIsAsking) const override JMP_THIS(0x4544A0);
@@ -183,11 +183,11 @@ public:
 	bool Repairable() const override JMP_THIS(0x452630);
 	bool Soldable() const override JMP_THIS(0x4494C0);
 	bool CanPlayerFire() const override JMP_THIS(0x44F5C0);
-	Coordinate TargetCoord() const override JMP_THIS(0x4500A0);
-	Coordinate DockingCoord(TechnoClass* docker) const override JMP_THIS(0x447B20);
-	Coordinate RenderCoord() const override JMP_THIS(0x459EF0);
-	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x453840);
-	Coordinate ExitCoord() const override JMP_THIS(0x44F640);
+	Coordinate* __TargetCoord(Coordinate* retstr) const override JMP_THIS(0x4500A0);
+	Coordinate* __DockingCoord(Coordinate* retstr, TechnoClass* docker) const override JMP_THIS(0x447B20);
+	Coordinate* __RenderCoord(Coordinate* retstr) const override JMP_THIS(0x459EF0);
+	Coordinate* __FLH(Coordinate* retstr, int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x453840);
+	Coordinate* __ExitCoord(Coordinate* retstr) const override JMP_THIS(0x44F640);
 	int YSort() const override JMP_THIS(0x449410);
 	bool Limbo() override JMP_THIS(0x445880);
 	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x440580);
@@ -229,18 +229,18 @@ public:
 	bool IsUnitFactory() const override JMP_THIS(0x455DA0);
 	bool IsReadyToCloak() const override JMP_THIS(0x457770);
 	bool ShouldNotBeCloaked() const override JMP_THIS(0x4578C0);
-	DirStruct TurretFacing() const override JMP_THIS(0x445E50);
+	DirStruct* __TurretFacing(DirStruct* retstr) const override JMP_THIS(0x445E50);
 	bool IsArmed() const override JMP_THIS(0x458DB0);
 	int GetPipFillLevel() const override JMP_THIS(0x44D700);
-	DirStruct UnknownFireangle(TechnoClass* techno) override JMP_THIS(0x43E940);
+	DirStruct* __UnknownFireangle(DirStruct* retstr, TechnoClass* techno) override JMP_THIS(0x43E940);
 	int GetCrewCount() const override JMP_THIS(0x451330);
 	int GetAntiAirValue() const override JMP_THIS(0x459870);
 	int GetAntiArmorValue() const override JMP_THIS(0x459880);
 	int GetAntiInfantryValue() const override JMP_THIS(0x459890);
 	void GotHijacked() override JMP_THIS(0x4576F0);
 	int GetZAdjustment() const override JMP_THIS(0x43E900);
-	Coordinate FiringOffset() const override JMP_THIS(0x453A70);
-	DirStruct GetRealFacing() const override JMP_THIS(0x44D7D0);
+	Coordinate* __FiringOffset(Coordinate* retstr) const override JMP_THIS(0x453A70);
+	DirStruct* __GetRealFacing(DirStruct* retstr) const override JMP_THIS(0x44D7D0);
 	InfantryTypeClass* GetCrew() const override JMP_THIS(0x44EB10);
 	bool IsRadarVisible(int* pOutDetection) const override JMP_THIS(0x457020);
 	bool IsPowerOnline() const override JMP_THIS(0x4555D0);
@@ -453,7 +453,13 @@ public:
 	void KillOccupants(TechnoClass* pAssaulter) JMP_THIS(0x4585C0);
 	// returns false if this is a gate that needs time to open, true otherwise
 	bool MakeTraversable() JMP_THIS(0x452540);
-	Matrix3D* GetVoxelBarrelOffsetMatrix(Matrix3D& ret) JMP_THIS(0x458810);
+	Matrix3D* __GetVoxelBarrelOffsetMatrix(Matrix3D* ret) JMP_THIS(0x458810);
+	Matrix3D GetVoxelBarrelOffsetMatrix()
+	{
+		Matrix3D ret;
+		__GetVoxelBarrelOffsetMatrix(&ret);
+		return ret;
+	}
 	// returns false if this is a gate that is closed, true otherwise
 	bool IsTraversable() const JMP_THIS(0x4525F0);
 	int DrawInfoTipAndSpiedSelection(Point2D* pLocation, RectangleStruct* pRect) const JMP_THIS(0x43E7B0);

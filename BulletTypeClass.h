@@ -91,7 +91,7 @@ public:
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x46C560);
 	
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46BEE0);
-	CoordStruct FixupCoord(CoordStruct& coord) const override JMP_THIS(0x46C4F0);
+	Coordinate* __FixupCoord(Coordinate* retstr, Coordinate& coord) const override JMP_THIS(0x46C4F0);
 	bool CreateAt(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
 	ObjectClass* Create(HouseClass* pOwner) override JMP_THIS(0x46C880);
 

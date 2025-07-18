@@ -66,7 +66,7 @@ public:
 	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x51E3B0);
 	ObjectTypeClass* ClassOf() const override JMP_THIS(0x51FAF0);
 	const wchar_t* FullName() const override JMP_THIS(0x51F2C0);
-	Coordinate FLH(int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x523250);
+	Coordinate* __FLH(Coordinate* retstr, int idxWeapon, Coordinate BaseCoords) const override JMP_THIS(0x523250);
 	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x5227F0);
 	ObjectTypeClass* DisguisedAs(bool disguisedAgainstAllies) const override JMP_THIS(0x522640);
 	HouseClass* DisguisedAsHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x5226C0);
@@ -94,7 +94,7 @@ public:
 	int MissionUnload() override JMP_THIS(0x51F6E0);
 	
 	int SelectWeapon(AbstractClass* pTarget) const override JMP_THIS(0x5218E0);
-	Coordinate FiringOffset() const override JMP_THIS(0x521D30);
+	Coordinate* __FiringOffset(Coordinate* retstr) const override JMP_THIS(0x521D30);
 	bool IsEngineer() const override JMP_THIS(0x5224D0);
 	bool CanCheer() const override JMP_THIS(0x522BC0);
 	void Cheer(bool Force) override JMP_THIS(0x522C00);

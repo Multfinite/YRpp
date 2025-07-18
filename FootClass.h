@@ -118,7 +118,7 @@ public:
 
 	void InvalidatePointer(AbstractClass* instance, bool all = true) override JMP_THIS(0x4D9960);
 	void ComputeCRC(CRCEngine & crc) const override JMP_THIS(0x4DBAD0);
-	Coordinate GetDestination(TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
+	Coordinate* __GetDestination(Coordinate* retstr, TechnoClass* pDocker = nullptr) const override JMP_THIS(0x4DBDF0);
 	bool IsInAir() const override JMP_THIS(0x4DE620);
 	void AI() override JMP_THIS(0x4DA530);
 	
@@ -170,11 +170,11 @@ public:
 	bool IsInSameZoneAsCoords(const Coordinate& coord) override JMP_THIS(0x4D3810);
 	int GetZAdjustment() const override JMP_THIS(0x4DAFC0);
 	ZGradient GetZGradient() const override JMP_THIS(0x4DB0A0);
-	::Cell GetLastFlightMapCoords() const override JMP_THIS(0x41C150);
+	::Cell* __GetLastFlightMapCoords(::Cell* retstr) const override JMP_THIS(0x41C150);
 	void SetLastFlightMapCoords(::Cell coord) override JMP_THIS(0x41C160);
 	bool IsAllowedToLeaveMap() const override JMP_THIS(0x4DA1D0);
 	void ProceedToNextPlanningWaypoint() override JMP_THIS(0x4DE580);
-	::Cell ScanForTiberium(int range, bool b = false) const override JMP_THIS(0x4DD0A0);
+	::Cell* __ScanForTiberium(::Cell* retstr, int range, bool b = false) const override JMP_THIS(0x4DD0A0);
 	bool EnterGrinder() override JMP_THIS(0x4DFA70);
 	bool EnterBioReactor() override JMP_THIS(0x4DFB70);
 	bool EnterTankBunker() override JMP_THIS(0x4DFF40);
@@ -187,7 +187,7 @@ public:
 	AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) override JMP_THIS(0x4D9920);
 	bool SetOwningHouse(HouseClass* pHouse, bool announce = true) override JMP_THIS(0x4DBED0);
 	bool Crash(ObjectClass* killer) override JMP_THIS(0x4DEBB0);
-	virtual Coordinate GetAttackCoordinates() const override JMP_THIS(0x4D8560);
+	Coordinate* __GetAttackCoordinates(Coordinate* retstr) const override JMP_THIS(0x4D8560);
 	void DrawActionLines(bool force, DWORD unkColorComponent) override JMP_THIS(0x4DC060);
 	void vt_entry_47C(DWORD dwUnk) override JMP_THIS(0x4D94A0);
 	void SetDestination(AbstractClass* target, bool a2) override JMP_THIS(0x4D94B0);
@@ -198,7 +198,7 @@ public:
 	bool HaveMegaMission() const override JMP_THIS(0x4DF1C0);
 	bool HaveAttackMoveTarget() const override JMP_THIS(0x4DF1D0);
 	Mission GetMegaMission() const override JMP_THIS(0x4DF1E0);
-	Coordinate GetAttackMoveCoords() const override JMP_THIS(0x4DF1F0);
+	Coordinate* __GetAttackMoveCoords(Coordinate* retstr) const override JMP_THIS(0x4DF1F0);
 	bool MegaMissionIsAttackMove() const override JMP_THIS(0x4DF310);
 	bool ContinueMegaMission() override JMP_THIS(0x4DF320);
 	void UpdateAttackMove() override JMP_THIS(0x4DF3A0);
@@ -266,7 +266,7 @@ public:
 	* @note vtable_index 316:0x4F0
 	* @note address 0x4D9FF0
 	*/
-	virtual Coordinate vt_entry_4F0() JMP_THIS(0x4D9FF0);
+	virtual Coordinate* vt_entry_4F0(Coordinate* retstr) JMP_THIS(0x4D9FF0);
 
 	/*!
 	* @brief

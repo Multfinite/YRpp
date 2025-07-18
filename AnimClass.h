@@ -90,7 +90,7 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x426580);
 	int SizeOf() const override JMP_THIS(0x426530);
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x425410);
-	Coordinate Center() const override JMP_THIS(0x422BE0);
+	Coordinate* __Center(Coordinate* retstr) const override JMP_THIS(0x422BE0);
 	void AI() override JMP_THIS(0x423AC0);
 
 	Layer InWhichLayer() const override JMP_THIS(0x424CB0);

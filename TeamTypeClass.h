@@ -100,8 +100,8 @@ public:
     TeamClass* CreateTeam(HouseClass* pHouse) JMP_THIS(0x6F09C0);
     void DestroyAllInstances() JMP_THIS(0x6F0A70);
     int GetGroup() const JMP_THIS(0x6F1870);
-    CellStruct* GetWaypoint(CellStruct* buffer) const JMP_THIS(0x6F18A0);
-    CellStruct* GetTransportWaypoint(CellStruct* buffer) const JMP_THIS(0x6F18E0);
+    CellStruct* GetWaypoint(CellStruct* retstr) const JMP_THIS(0x6F18A0);
+    CellStruct* GetTransportWaypoint(CellStruct* retstr) const JMP_THIS(0x6F18E0);
     bool CanRecruitUnit(FootClass* pUnit, HouseClass* pOwner) const JMP_THIS(0x6F1320);
     void FlashAllInstances(int Duration) JMP_THIS(0x6F1F30);
     TeamClass* FindFirstInstance() const JMP_THIS(0x6F1F70);

@@ -114,7 +114,7 @@ public:
 	FacingType DesiredLoadDir(ObjectClass const* object, ::Cell* cell) const JMP_THIS(0x740B60);
 	bool EnterIdleMode(bool initial, bool a2) override JMP_THIS(0x738970);
 	BulletClass* Fire(AbstractClass* pTarget, int nWeaponIndex) override JMP_THIS(0x741340);
-	DirStruct GetRealFacing() const override JMP_THIS(0x740F80);
+	DirStruct* __GetRealFacing(DirStruct* retstr) const override JMP_THIS(0x740F80);
 	bool CanAttackOnTheMove() const override JMP_THIS(0x746CC0);
 	AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) override JMP_THIS(0x743190);
 	bool IsDoorClosed() override JMP_THIS(0x744180);
@@ -122,7 +122,7 @@ public:
 	void Reload() override JMP_THIS(0x736CA0);
 	void DisguiseAs(AbstractClass* target) override JMP_THIS(0x746670);
 	double GetStoragePercentage() const override JMP_THIS(0x7414A0);
-	DirStruct TurretFacing() const override JMP_THIS(0x746E30);
+	DirStruct* __TurretFacing(DirStruct* retstr) const override JMP_THIS(0x746E30);
 	int SelectWeapon(AbstractClass* pTarget) const override JMP_THIS(0x746CD0);
 
 	AbstractClass* ApproachTarget(bool assign) override JMP_THIS(0x7414E0);

@@ -146,9 +146,9 @@ public:
 	RTTIType KindOf() const override JMP_THIS(0x487E60);
 	int SizeOf() const override JMP_THIS(0x487E70);
 
-	Coordinate Center() const override JMP_THIS(0x486840);
+	Coordinate* __Center(Coordinate* retstr) const override JMP_THIS(0x486840);
 	bool IsOnGround() const override JMP_THIS(0x4867E0);
-	Coordinate TargetingCoord() const override JMP_THIS(0x486890);
+	Coordinate* __TargetingCoord(Coordinate* retstr) const override JMP_THIS(0x486890);
 public:
 	TechnoClass* FindTechnoNearestTo(Point2D const& offsetPixel, bool alt, TechnoClass const* pExcludeThis = nullptr) const JMP_THIS(0x47C3D0);
 	ObjectClass* FindObjectOfType(AbstractType abs, bool alt) const JMP_THIS(0x47C4D0);
@@ -216,11 +216,17 @@ public:
 	void ReduceTiberium(int amount) JMP_THIS(0x480A80);
 	bool CanTiberiumGerminate(TiberiumClass* tib) JMP_THIS(0x4838E0);
 
-	void SetMapCoords(CoordStruct const& coords) JMP_THIS(0x485240);
+	void SetMapCoords(Coordinate const& coords) JMP_THIS(0x485240);
 	int GetFloorHeight(Point2D const& subcoords) const JMP_THIS(0x47B3A0);
 
 	// Factors in cell height from ramps, level etc.
-	CoordStruct GetCellCoords() const JMP_THIS(0x480A30);
+	Coordinate* __CellCoord(Coordinate* retstr) const JMP_THIS(0x480A30);
+	Coordinate CellCoord() const
+	{
+		Coordinate ret;
+		__CellCoord(&ret);
+		return ret;
+	}
 
 	void ActivateVeins() JMP_THIS(0x486920);
 
@@ -309,11 +315,7 @@ public:
 	}
 
 	// helper - gets coords and fixes height for bridge
-	CoordStruct GetCoordsWithBridge() const
-	{
-		CoordStruct buffer = this->Center();
-		return FixHeight(buffer);
-	}
+	Coordinate GetCoordsWithBridge() const { return FixHeight(this->Center()); }
 
 	void MarkForRedraw() JMP_THIS(0x486E70);
 
@@ -324,7 +326,13 @@ public:
 		CALL(0x489270);
 	}
 
-	CoordStruct* FindInfantrySubposition(const CoordStruct& coords, bool ignoreContents, bool alt, bool useCellCoords) JMP_THIS(0x481180);
+	Coordinate* __FindInfantrySubposition(Coordinate* retstr, const Coordinate& coords, bool ignoreContents, bool alt, bool useCellCoords) JMP_THIS(0x481180);
+	Coordinate FindInfantrySubposition(const Coordinate& coords, bool ignoreContents, bool alt, bool useCellCoords)
+	{
+		Coordinate ret;
+		__FindInfantrySubposition(&ret, coords, ignoreContents, alt, useCellCoords);
+		return ret;
+	}
 
 	bool TryAssignJumpjet(FootClass* pObject) JMP_THIS(0x487D70);
 	void AddContent(ObjectClass* Content, bool onBridge) JMP_THIS(0x47E8A0);

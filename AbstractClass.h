@@ -179,7 +179,13 @@ public:
 	* @note vtable_index 18:0x48
 	* @note address 0x4104C0
 	*/
-	virtual Coordinate Center() const JMP_THIS(0x4104C0);
+	virtual Coordinate* __Center(Coordinate* retstr) const JMP_THIS(0x4104C0);
+	Coordinate Center() const
+	{
+		Coordinate ret;
+		this->__Center(&ret);
+		return ret;
+	}
 
 	/*!
 	* @brief Where this is moving, or a building's dock for a techno. iow, a rendez-vous point.
@@ -187,8 +193,14 @@ public:
 	* @note vtable_index 19:0x4C
 	* @note address 0x4104F0
 	*/
-	virtual Coordinate GetDestination(TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
-	
+	virtual Coordinate* __GetDestination(Coordinate* retstr, TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
+	Coordinate GetDestination(TechnoClass* pDocker = nullptr) const
+	{
+		Coordinate ret;
+		this->__GetDestination(&ret, pDocker);
+		return ret;
+	}
+
 	/*!
 	* @note original_name On_Ground
 	* @note vtable_index 20:0x50
@@ -209,7 +221,14 @@ public:
 	* @note vtable_index 22:0x58
 	* @note address 0x410540
 	*/
-	virtual Coordinate TargetingCoord() const JMP_THIS(0x410540);
+	virtual Coordinate* __TargetingCoord(Coordinate* retstr) const JMP_THIS(0x410540);
+	Coordinate TargetingCoord() const
+	{
+		Coordinate ret;
+		this->__TargetingCoord(&ret);
+		return ret;
+	}
+
 	/*!
 	* @brief Process object per frame.
 	* @note original_name AI

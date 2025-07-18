@@ -101,7 +101,13 @@ public:
 	* @note vtable_index 27:0x6C
 	* @note address 0x41CF80
 	*/
-	virtual CoordStruct FixupCoord(CoordStruct& coord) const JMP_THIS(0x41CF80);
+	virtual Coordinate* __FixupCoord(Coordinate* retstr, Coordinate& coord) const JMP_THIS(0x41CF80);
+	Coordinate FixupCoord(Coordinate& coord) const
+	{
+		Coordinate ret;
+		__FixupCoord(&ret, coord);
+		return ret;
+	}
 
 	/*!
 	* @brief
@@ -125,7 +131,13 @@ public:
 	* @note vtable_index 30:0x78
 	* @note address 0x5F75C0
 	*/
-	virtual Point3D PixelDimensions() const JMP_THIS(0x5F75C0);
+	virtual Point3D* __PixelDimensions(Point3D* retstr) const JMP_THIS(0x5F75C0);
+	Point3D PixelDimensions() const
+	{
+		Point3D ret;
+		__PixelDimensions(&ret);
+		return ret;
+	}
 
 	/*!
 	* @brief
@@ -133,7 +145,13 @@ public:
 	* @note vtable_index 31:0x7C
 	* @note address 0x5F75E0
 	*/
-	virtual Point3D LeptonDimensions() const JMP_THIS(0x5F75E0);
+	virtual Point3D* __LeptonDimensions(Point3D* retstr) const JMP_THIS(0x5F75E0);
+	Point3D LeptonDimensions() const
+	{
+		Point3D ret;
+		__LeptonDimensions(&ret);
+		return ret;
+	}
 
 	/*!
 	* @brief
