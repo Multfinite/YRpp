@@ -18,10 +18,10 @@ public:
 	};
 	static inline vtables_t vtables{};
 public:
-
-	CoordStruct MovingDestination;
 	static constexpr uintptr_t ILocoVTable = 0x7F0B1C;
 	static constexpr size_t ClassSize = 0x60;
+public:
+	CoordStruct DestinationCoords;
 	RateTimer MissionTimer;
 	CDTimerClass TrailerTimer;
 	int MissionState;

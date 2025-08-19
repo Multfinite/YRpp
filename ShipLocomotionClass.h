@@ -1,5 +1,3 @@
-//Locomotor = {2BEA74E1-7CCA-11d3-BE14-00104B62A16C}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -31,6 +29,7 @@ public:
     DWORD PreviousRamp;
     DWORD CurrentRamp;
     RateTimer SlopeTimer;
+    CoordStruct DestinationCoords;
     CoordStruct HeadToCoord;
     int SpeedAccum;
     double movementspeed_50;
@@ -53,7 +52,6 @@ public:
 
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6A3E60);
 
-	CoordStruct Destination;
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x69EE90);
     HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x69EF10);
 
