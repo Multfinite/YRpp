@@ -81,15 +81,15 @@ public:
 
     virtual bool DrawLine_6DBB60(RectangleStruct const& a2, RectangleStruct const& a3, COLORREF a4, bool bool1) JMP_THIS(0x6DBB60);
 
-    void SetTacticalPosition(CoordStruct* pCoord) JMP_THIS(0x6D6070);
-    CellStruct* CoordsToCell(CellStruct* retstr, CoordStruct* pSource) JMP_THIS(0x6D6590);
-    [[deprecated]] bool CoordsToClient(CoordStruct const* coords, Point2D* pOutClient) const JMP_THIS(0x6D2140);
-    [[deprecated]] Point2D* CoordsToScreen(Point2D* retstr, const CoordStruct* pSource) JMP_THIS(0x6D1F10);
-    CoordStruct* ClientToCoords(CoordStruct* retstr, Point2D const& client) const JMP_THIS(0x6D2280);
+    void SetTacticalPosition(Coordinate* pCoord) JMP_THIS(0x6D6070);
+    CellStruct* CoordsToCell(CellStruct* retstr, Coordinate* pSource) JMP_THIS(0x6D6590);
+    [[deprecated]] bool CoordsToClient(Coordinate const* coords, Point2D* pOutClient) const JMP_THIS(0x6D2140);
+    [[deprecated]] Point2D* CoordsToScreen(Point2D* retstr, const Coordinate* pSource) JMP_THIS(0x6D1F10);
+    Coordinate* ClientToCoords(Coordinate* retstr, Point2D const& client) const JMP_THIS(0x6D2280);
     char GetOcclusion(const CellStruct& cell, bool fog) const JMP_THIS(0x6D8700);
 
     // Helper methods
-    std::pair<Point2D, bool> CoordsToClient(const CoordStruct& coords) const
+    std::pair<Point2D, bool> CoordsToClient(const Coordinate& coords) const
     {
 		DEFINE_NONSTATIC_REFERENCE(RectangleStruct, view_bound, 0xB0CE28)
         Point2D point = CoordsToScreen(coords) - this->TacticalPos;
@@ -98,15 +98,15 @@ public:
         return std::make_pair(point, visible);
     }
 
-    static Point2D CoordsToScreen(const CoordStruct& coord)
+    static Point2D CoordsToScreen(const Coordinate& coord)
     {
         auto [x, y] = AdjustForZShapeMove(coord.X, coord.Y);
         return Point2D{ x, y - AdjustForZ(coord.Z) };
     }
 
-    CoordStruct ClientToCoords(Point2D const& client) const
+    Coordinate ClientToCoords(Point2D const& client) const
     {
-        CoordStruct buffer;
+        Coordinate buffer;
         this->ClientToCoords(&buffer, client);
         return buffer;
     }
@@ -125,7 +125,7 @@ public:
     }
 
     // View operations
-    void FocusOn(CoordStruct* pDest, int Velocity) JMP_THIS(0x6D2420);
+    void FocusOn(Coordinate* pDest, int Velocity) JMP_THIS(0x6D2420);
     void RegisterDirtyArea(RectangleStruct Area, bool bUnk) JMP_THIS(0x6D2790);
     void RegisterCellAsVisible(CellClass* pCell) JMP_THIS(0x6DA7D0);
     static int DrawTimer(int index, ColorScheme* Scheme, int Time, wchar_t* Text, Point2D* someXY1, Point2D* someXY2) JMP_STD(0x6D4B50);

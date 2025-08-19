@@ -46,7 +46,7 @@ public:
 	int TintColor;
 	int ZAdjust;
 	int YSortAdjust; // same as YSortAdjust from Type
-	CoordStruct FlamingGuyCoords; // the destination the anim tries to reach
+	Coordinate FlamingGuyCoords; // the destination the anim tries to reach
 	int FlamingGuyRetries; // number of failed attemts to reach water. the random destination generator stops if >= 7
 	bool IsBuildingAnim; // whether this anim will invalidate on buildings, and whether it's tintable
 	bool UnderTemporal; // temporal'd building's active anims
@@ -158,7 +158,7 @@ protected:
 public:
 	AnimClass() : AnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);
 	AnimClass(noinit_t) noexcept : AnimClass(fake_noinit_t{}) JMP_THIS(0x422720);
-	AnimClass(AnimTypeClass* pAnimType, const CoordStruct& Location, int LoopDelay = 0,
+	AnimClass(AnimTypeClass* pAnimType, const Coordinate& Location, int LoopDelay = 0,
 		int LoopCount = 1, DWORD flags = 0x600, int ForceZAdjust = 0, bool reverse = false) noexcept
 		: AnimClass(fake_noinit_t{})
 	JMP_THIS(0x421EA0);

@@ -25,7 +25,7 @@ public:
 		{ JMP_STD(0x5FFFA0); }
 
 	//Constructor
-	SpotlightClass(CoordStruct coords, int size)
+	SpotlightClass(Coordinate coords, int size)
 		{ JMP_THIS(0x5FF250); }
 
 	//===========================================================================
@@ -34,7 +34,7 @@ public:
 
 public:
 
-	CoordStruct Coords;
+	Coordinate Coords;
 	int MovementRadius;
 	int Size;
 	SpotlightFlags DisableFlags;

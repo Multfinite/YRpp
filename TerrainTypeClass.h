@@ -56,7 +56,7 @@ public:
     
     int GetArrayIndex() const override JMP_THIS(0x71E350);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x71DEA0);
-    Coordinate* __FixupCoord(Coordinate& retstr, CoordStruct& coord) const override JMP_THIS(0x71E0D0);
+    Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x71E0D0);
     bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x71DE10);
     CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x71DE40);

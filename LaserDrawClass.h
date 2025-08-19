@@ -11,12 +11,12 @@ class LaserDrawClass
 {
 public:
 	//Constructor, Destructor
-	LaserDrawClass(const CoordStruct& source, const CoordStruct& target, const ColorStruct& innerColor,
+	LaserDrawClass(const Coordinate& source, const Coordinate& target, const ColorStruct& innerColor,
 		const ColorStruct& outerColor, const ColorStruct& outerSpread, int duration)
 			: LaserDrawClass(source, target, 0, 1, innerColor, outerColor, outerSpread, duration)
 	{ }
 
-	LaserDrawClass(CoordStruct source, CoordStruct target, int zAdjust, BYTE unknown,
+	LaserDrawClass(Coordinate source, Coordinate target, int zAdjust, BYTE unknown,
 		ColorStruct innerColor, ColorStruct outerColor, ColorStruct outerSpread,
 		int duration, bool blinks = false, bool fades = true,
 		float startIntensity = 1.0f, float endIntensity = 0.0f)
@@ -34,8 +34,8 @@ public:
 	bool IsHouseColor;
 	bool IsSupported; // this changes the values for InnerColor (false: halve, true: double), HouseColor only
 	PROTECTED_PROPERTY(BYTE, align_22[2]);
-	CoordStruct Source;
-	CoordStruct Target;
+	Coordinate Source;
+	Coordinate Target;
 	int ZAdjust;
 	char field_40;
 	ColorStruct InnerColor;

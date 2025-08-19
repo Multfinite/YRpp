@@ -79,7 +79,7 @@ protected:
     explicit __forceinline VoxelAnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    VoxelAnimClass(VoxelAnimTypeClass* pVoxelAnimType, CoordStruct* pLocation, HouseClass* pOwnerHouse)
+    VoxelAnimClass(VoxelAnimTypeClass* pVoxelAnimType, Coordinate* pLocation, HouseClass* pOwnerHouse)
         : VoxelAnimClass(fake_noinit_t{})
         JMP_THIS(0x7493B0);
     VoxelAnimClass() : VoxelAnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);

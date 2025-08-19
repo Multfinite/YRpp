@@ -149,9 +149,9 @@ public:
 	//Reads three integer values.
 	int* Read3Integers(int* pBuffer, const char* pSection, const char* pKey, int* pDefault)
 		{ JMP_THIS(0x529CA0); }
-	CoordStruct* ReadPoint3D(CoordStruct& ret, const char* pSection, const char* pKey, CoordStruct& defValue)
+	Coordinate* ReadPoint3D(Coordinate& ret, const char* pSection, const char* pKey, Coordinate& defValue)
 		{ JMP_THIS(0x529CA0); }
-	void GetPoint3D(const char* pSection, const char* pKey, CoordStruct& value)
+	void GetPoint3D(const char* pSection, const char* pKey, Coordinate& value)
 		{ ReadPoint3D(value, pSection, pKey, value); }
 
 	//Reads three byte values.

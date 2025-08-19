@@ -33,7 +33,7 @@ public:
     int LightIntensity;
     TintStruct LightTint;
     int DetailLevel;
-    CoordStruct Location;
+    Coordinate Location;
     int LightVisibility;
     bool Activated;
 
@@ -67,7 +67,7 @@ public:
     LightSourceClass(int X, int Y, int Z, int nVisibility, int nIntensity, int Red, int Green, int Blue)
         : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554760);
 
-    LightSourceClass(CoordStruct Crd, int nVisibility, int nIntensity, TintStruct Tint)
+    LightSourceClass(Coordinate Crd, int nVisibility, int nIntensity, TintStruct Tint)
         : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554760);
 
     LightSourceClass() : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554830);

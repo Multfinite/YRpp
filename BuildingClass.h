@@ -89,7 +89,7 @@ public:
 	// for hospital, armory, unitrepair etc
 	StageClass RepairProgress;
 	RectangleStruct unknown_rect_63C;
-	CoordStruct unknown_coord_64C;
+	Coordinate unknown_coord_64C;
 	int unknown_658;
 	DWORD unknown_65C;
 	bool HasPower;
@@ -446,7 +446,7 @@ public:
 	void BeginMode(BStateType bType) JMP_THIS(0x447780);
 	// returns Type->SuperWeapon2, if its AuxBuilding is satisfied
 	int SecondActiveSWIdx() const JMP_THIS(0x457690);
-	void FireLaser(CoordStruct Coords) JMP_THIS(0x44ABD0);
+	void FireLaser(Coordinate Coords) JMP_THIS(0x44ABD0);
 	bool IsBeingDrained() const JMP_THIS(0x70FEC0);
 	bool UpdateBunker() JMP_THIS(0x458E50);
 	void KillOccupants(TechnoClass* pAssaulter) JMP_THIS(0x4585C0);

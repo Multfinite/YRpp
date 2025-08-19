@@ -31,9 +31,9 @@ public:
 
 public:
     ParticleSystemTypeClass* Type;
-    CoordStruct SpawnDistanceToOwner;
+    Coordinate SpawnDistanceToOwner;
     DECLARE_PROPERTY(DynamicVectorClass<ParticleClass*>, Particles);
-    CoordStruct TargetCoords;
+    Coordinate TargetCoords;
     ObjectClass* Owner;
     /*! @brief CellClass or TechnoClass */
 	AbstractClass* Target;
@@ -83,8 +83,8 @@ protected:
     explicit __forceinline ParticleSystemClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    ParticleSystemClass(ParticleSystemTypeClass* pParticleSystemType, const CoordStruct& coords,
-        AbstractClass* pTarget, ObjectClass* pOwner, const CoordStruct& targetCoords,
+    ParticleSystemClass(ParticleSystemTypeClass* pParticleSystemType, const Coordinate& coords,
+        AbstractClass* pTarget, ObjectClass* pOwner, const Coordinate& targetCoords,
         HouseClass* pOwnerHouse) : ParticleSystemClass(fake_noinit_t{}) JMP_THIS(0x62DC50);
     ParticleSystemClass() : ParticleSystemClass(fake_noinit_t{}) JMP_THIS(0x62DC50);
     ParticleSystemClass(noinit_t)  noexcept : ParticleSystemClass(fake_noinit_t{}) { vtables.init(this); }

@@ -179,10 +179,10 @@ ILocomotion : IUnknown
 	virtual bool __stdcall Is_Moving() = 0;
 
 	// Fetches destination coordinate.
-	virtual CoordStruct __stdcall Destination() = 0;
+	virtual Coordinate __stdcall Destination() = 0;
 
 	//  Fetches immediate (next cell) destination coordinate.
-	virtual CoordStruct __stdcall Head_To_Coord() = 0;
+	virtual Coordinate __stdcall Head_To_Coord() = 0;
 
 	// Determine if specific cell can be entered.
 	virtual Move __stdcall Can_Enter_Cell(CellStruct cell) = 0;
@@ -215,7 +215,7 @@ ILocomotion : IUnknown
 	virtual bool __stdcall Process() = 0;
 
 	// Instruct to move to location specified.
-	virtual void __stdcall Move_To(CoordStruct to) = 0;
+	virtual void __stdcall Move_To(Coordinate to) = 0;
 
 	// Stop moving at first opportunity.
 	virtual void __stdcall Stop_Moving() = 0;
@@ -248,13 +248,13 @@ ILocomotion : IUnknown
 	virtual bool __stdcall Shove(DirStruct dir) = 0;
 
 	// Force drive track -- special case only.
-	virtual void __stdcall Force_Track(int track, CoordStruct coord) = 0;
+	virtual void __stdcall Force_Track(int track, Coordinate coord) = 0;
 
 	// What display layer is it located in.
 	virtual Layer __stdcall In_Which_Layer() = 0;
 
 	// Don't use this function.
-	virtual void __stdcall Force_Immediate_Destination(CoordStruct coord) = 0;
+	virtual void __stdcall Force_Immediate_Destination(Coordinate coord) = 0;
 
 	// Force a voxel unit to a given slope. Used in cratering.
 	virtual void __stdcall Force_New_Slope(int ramp) = 0;
@@ -284,7 +284,7 @@ ILocomotion : IUnknown
 	virtual void __stdcall Mark_All_Occupation_Bits(MarkType mark) = 0;
 
 	// Is this object in the process of moving into this coord.
-	virtual bool __stdcall Is_Moving_Here(CoordStruct to) = 0;
+	virtual bool __stdcall Is_Moving_Here(Coordinate to) = 0;
 
 	// Will this object jump tracks?
 	virtual bool __stdcall Will_Jump_Tracks() = 0;

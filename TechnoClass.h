@@ -271,7 +271,7 @@ public:
 	bool             IsImmobilized; // by chrono aftereffects
 	DWORD            unknown_280;
 	int              ChronoLockRemaining; // countdown after chronosphere warps things around
-	CoordStruct      ChronoDestCoords; // teleport loco and chsphere set this
+	Coordinate      ChronoDestCoords; // teleport loco and chsphere set this
 	AirstrikeClass*  Airstrike; //Boris
 	bool             Berzerk;
 	DWORD            BerzerkDurationLeft;

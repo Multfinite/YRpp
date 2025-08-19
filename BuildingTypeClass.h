@@ -54,8 +54,8 @@ public:
 	SHPStruct* Buildup;
 	bool BuildupLoaded;
 	BuildCat BuildCat;
-	CoordStruct HalfDamageSmokeLocation1;
-	CoordStruct HalfDamageSmokeLocation2;
+	Coordinate HalfDamageSmokeLocation1;
+	Coordinate HalfDamageSmokeLocation2;
 	DWORD align_E24;
 	double GateCloseDelay;
 	int LightVisibility;
@@ -83,8 +83,8 @@ public:
 	int field_EB0;
 	int Adjacent;
 	AbstractType Factory;
-	CoordStruct TargetCoordOffset;
-	CoordStruct ExitCoord;
+	Coordinate TargetCoordOffset;
+	Coordinate ExitCoord;
 	CellStruct* FoundationOutside;
 	int field_ED8;
 	int DeployFacing;
@@ -236,10 +236,10 @@ public:
 	int PsychicDetectionRadius;
 	int BarrelStartPitch;
 	char VoxelBarrelFile[0x1C];
-	CoordStruct VoxelBarrelOffsetToPitchPivotPoint;
-	CoordStruct VoxelBarrelOffsetToRotatePivotPoint;
-	CoordStruct VoxelBarrelOffsetToBuildingPivotPoint;
-	CoordStruct VoxelBarrelOffsetToBarrelEnd;
+	Coordinate VoxelBarrelOffsetToPitchPivotPoint;
+	Coordinate VoxelBarrelOffsetToRotatePivotPoint;
+	Coordinate VoxelBarrelOffsetToBuildingPivotPoint;
+	Coordinate VoxelBarrelOffsetToBarrelEnd;
 	bool DemandLoad;
 	bool DemandLoadBuildup;
 	bool FreeBuildup;
@@ -252,7 +252,7 @@ public:
 	bool CrateBeneathIsMoney;
 	char TheaterSpecificID[0x13];
 	int NumberOfDocks;
-	VectorClass<CoordStruct> DockingOffsets;
+	VectorClass<Coordinate> DockingOffsets;
 protected: DWORD align_1794;
 public:
 	virtual ~BuildingTypeClass() JMP_THIS(0x45E580);

@@ -68,7 +68,7 @@ public:
 		// 	m_ID = cell.X + 1000 * cell.Y;
 		// }
 	}
-	explicit TargetClass(const CoordStruct& coord)
+	explicit TargetClass(const Coordinate& coord)
 	{
 		JMP_THIS(0x6E6B70);
 		// m_RTTI = static_cast<unsigned char>(AbstractType::Cell);

@@ -29,7 +29,7 @@ public:
 public:
 	int ArrayIndex;
 	LandType MovementRestrictedTo;
-	CoordStruct HalfDamageSmokeLocation;
+	Coordinate HalfDamageSmokeLocation;
 	bool Passive;
 	bool CrateGoodie;
 	bool Harvester;
@@ -80,7 +80,7 @@ public:
 	
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x747620);
 	
-	CoordStruct* __FixupCoord(CoordStruct& retstr, CoordStruct& coord) const override JMP_THIS(0x747EB0);
+	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x747EB0);
 	Point3D* __PixelDimensions(Point3D& retstr) const override JMP_THIS(0x747590);
 	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x7475D0);
 	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x7474B0);

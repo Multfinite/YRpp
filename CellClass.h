@@ -162,7 +162,7 @@ public:
 	 * failing that, calls FindTechnoNearestTo,
 	 * if that fails too, reiterates Content looking for Terrain
 	 */
-	ObjectClass* GetSomeObject(const CoordStruct& coords, bool alt) const JMP_THIS(0x47C5A0);
+	ObjectClass* GetSomeObject(const Coordinate& coords, bool alt) const JMP_THIS(0x47C5A0);
 	
 	void SetWallOwner() JMP_THIS(0x47D210);
 
@@ -187,7 +187,7 @@ public:
 
 	bool CanThisExistHere(SpeedType SpeedType, BuildingTypeClass* pObject, HouseClass* pOwner) const JMP_THIS(0x47C620);
 	// those unks are passed to TechnoClass::Scatter in that same order
-	void ScatterContent(const CoordStruct &crd, bool ignoreMission, bool ignoreDestination, bool alt) JMP_THIS(0x481670);
+	void ScatterContent(const Coordinate &crd, bool ignoreMission, bool ignoreDestination, bool alt) JMP_THIS(0x481670);
 
 	CellClass* GetNeighbourCell(FacingType facing) const JMP_THIS(0x481810);
 
@@ -289,16 +289,16 @@ public:
 	ISTILE(NotWater, 0x4867E0);
 	ISTILE(DestroyableCliff, 0x486900);
 
-	inline static CoordStruct Cell2Coord(CellStruct const& cell, int z = 0)
+	inline static Coordinate Cell2Coord(CellStruct const& cell, int z = 0)
 	{
-		CoordStruct ret;
+		Coordinate ret;
 		ret.X = cell.X * 256 + 128;
 		ret.Y = cell.Y * 256 + 128;
 		ret.Z = z;
 		return ret;
 	}
 
-	inline static CellStruct Coord2Cell(CoordStruct const& crd)
+	inline static CellStruct Coord2Cell(Coordinate const& crd)
 	{
 		CellStruct ret;
 		ret.X = static_cast<short>(crd.X / 256);
@@ -306,7 +306,7 @@ public:
 		return ret;
 	}
 
-	inline CoordStruct FixHeight(CoordStruct crd) const
+	inline Coordinate FixHeight(Coordinate crd) const
 	{
 		if (this->ContainsBridge())
 			crd.Z += BridgeHeight;

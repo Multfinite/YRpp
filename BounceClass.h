@@ -24,13 +24,13 @@ public:
 	Quaternion AngularVelocity; // second quaternion as per-frame delta
 public:
 	BounceClass() = default;
-	BounceClass(const CoordStruct& coords, double elasticity, double gravity,
+	BounceClass(const Coordinate& coords, double elasticity, double gravity,
 		double maxVelocity, const Vector3D<float>& velocity, double angularVelocity)
 	{
 		this->Initialize(coords, elasticity, gravity, maxVelocity, velocity, angularVelocity);
 	}
 
-	void Initialize(const CoordStruct& coords, double elasticity, double gravity,
+	void Initialize(const Coordinate& coords, double elasticity, double gravity,
 			double maxVelocity, const Vector3D<float>& velocity, double angularVelocity) JMP_THIS(0x4397E0);
 
 	Coordinate* __Center(Coordinate& retstr) const JMP_THIS(0x4399A0);

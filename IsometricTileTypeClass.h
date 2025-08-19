@@ -70,7 +70,7 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x549B70);
     int GetArrayIndex() const override JMP_THIS(0x54A160);
    
-    CoordStruct* __FixupCoord(CoordStruct& retstr, CoordStruct& coord) const override JMP_THIS(0x549B50);
+    Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x549B50);
     bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x549AE0);
     CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x544D30);

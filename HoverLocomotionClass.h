@@ -30,8 +30,8 @@ protected:
 
 public:
 
-	CoordStruct Destination;
-	CoordStruct HeadToCoord;
+	Coordinate Destination;
+	Coordinate HeadToCoord;
 	FacingClass LocomotionFacing;
 	double MaxSpeed;
 	double CurrentSpeed;

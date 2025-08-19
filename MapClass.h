@@ -112,20 +112,20 @@ public:
 	// returns the cell at crdCur if it contains an obstacle, nullptr otherwise
 	static CellClass* __fastcall GetObstacle(
 		CellClass const* pCellSource, CellClass const* pCellTarget,
-		CellClass const* pCellBullet, CoordStruct crdCur,
+		CellClass const* pCellBullet, Coordinate crdCur,
 		BulletTypeClass const* pType, HouseClass const* pOwner)
 	{ JMP_STD(0x4CC360); }
 
 	// assumes linear movement, returns the first cell that has a cliff or wall
 	// in it, a nullptr otherwise.
 	static CellClass* __fastcall FindFirstObstacle(
-		CoordStruct const& crdSrc, CoordStruct const& crdTarget,
+		Coordinate const& crdSrc, Coordinate const& crdTarget,
 		BulletTypeClass const* pType, HouseClass const* pOwner)
 	{ JMP_STD(0x4CC100); }
 
 	// if the warhead can destroy walls, walls don't count as obstacle
 	static CellClass* __fastcall FindFirstImpenetrableObstacle(
-		CoordStruct const& crdSrc, CoordStruct const& crdTarget,
+		Coordinate const& crdSrc, Coordinate const& crdTarget,
 		WeaponTypeClass const* pWeapon, HouseClass const* pOwner)
 	{ JMP_STD(0x4CC310); }
 };
@@ -216,7 +216,7 @@ public:
 		return (idx >= 0 && idx < MaxCells) ? Cells[idx] : nullptr;
 	}
 
-	CellClass* TryGetCellAt(const CoordStruct& Crd) const {
+	CellClass* TryGetCellAt(const Coordinate& Crd) const {
 		CellStruct cell = CellClass::Coord2Cell(Crd);
 		return TryGetCellAt(cell);
 	}
@@ -232,7 +232,7 @@ public:
 		return pCell;
 	}
 
-	CellClass* GetCellAt(const CoordStruct &Crd) const {
+	CellClass* GetCellAt(const Coordinate &Crd) const {
 		CellStruct cell = CellClass::Coord2Cell(Crd);
 		return GetCellAt(cell);
 	}
@@ -247,7 +247,7 @@ public:
 	int GetThreatPosed(const CellStruct& cell, HouseClass* pHouse) const
 		{ JMP_THIS(0x56BCD0); }
 
-	bool IsLocationShrouded(const CoordStruct &crd) const
+	bool IsLocationShrouded(const Coordinate &crd) const
 		{ JMP_THIS(0x586360); }
 
 	static int GetCellIndex(const CellStruct &MapCoords) {
@@ -255,22 +255,22 @@ public:
 	}
 
 	// gets a coordinate in a random direction a fixed distance in leptons away from coords
-	static CoordStruct* __fastcall __GetRandomCoordsNear(CoordStruct* retstr, const CoordStruct &coords, int distance, bool center) {
+	static Coordinate* __fastcall __GetRandomCoordsNear(Coordinate* retstr, const Coordinate &coords, int distance, bool center) {
 		JMP_STD(0x49F420);
 	}
 
 	// gets a coordinate in a random direction a fixed distance in leptons away from coords
-	static CoordStruct GetRandomCoordsNear(const CoordStruct &coords, int distance, bool center) {
-		CoordStruct ret;
+	static Coordinate GetRandomCoordsNear(const Coordinate &coords, int distance, bool center) {
+		Coordinate ret;
 		__GetRandomCoordsNear(&ret, coords, distance, center);
 		return ret;
 	}
 
-	static CoordStruct* __stdcall __PickInfantrySublocation(CoordStruct* retstr, const CoordStruct &coords, bool ignoreContents = false)
+	static Coordinate* __stdcall __PickInfantrySublocation(Coordinate* retstr, const Coordinate &coords, bool ignoreContents = false)
 		{ JMP_STD(0x4ACA10); }
 
-	static CoordStruct PickInfantrySublocation(const CoordStruct &coords, bool ignoreContents = false) {
-		CoordStruct retstr;
+	static Coordinate PickInfantrySublocation(const Coordinate &coords, bool ignoreContents = false) {
+		Coordinate retstr;
 		__PickInfantrySublocation(&retstr, coords, ignoreContents);
 		return retstr;
 	}
@@ -300,7 +300,7 @@ public:
 	\param SourceHouse The house to which SourceObject belongs, the owner/bringer of damage.
 */
 	static DamageAreaResult __fastcall DamageArea(
-		const CoordStruct& Coords,
+		const Coordinate& Coords,
 		int Damage,
 		TechnoClass* SourceObject,
 		WarheadTypeClass *WH,
@@ -316,18 +316,18 @@ public:
 	 * }
 	 */
 	static AnimTypeClass * __fastcall SelectDamageAnimation
-		(int Damage, WarheadTypeClass *WH, LandType LandType, const CoordStruct& coords)
+		(int Damage, WarheadTypeClass *WH, LandType LandType, const Coordinate& coords)
 			{ JMP_STD(0x48A4F0); }
 
 	static void __fastcall FlashbangWarheadAt
-		(int Damage, WarheadTypeClass *WH, CoordStruct coords, bool Force = 0, SpotlightFlags CLDisableFlags = SpotlightFlags::None)
+		(int Damage, WarheadTypeClass *WH, Coordinate coords, bool Force = 0, SpotlightFlags CLDisableFlags = SpotlightFlags::None)
 			{JMP_STD(0x48A620); }
 
 	// get the damage a warhead causes to specific armor
 	static int __fastcall GetTotalDamage(int damage, const WarheadTypeClass* pWarhead, Armor armor, int distance)
 		{ JMP_STD(0x489180); }
 
-	int GetCellFloorHeight(const CoordStruct& crd) const
+	int GetCellFloorHeight(const Coordinate& crd) const
 		{ JMP_THIS(0x578080); }
 
 	CellStruct * __PickCellOnEdge(CellStruct* retstr, Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
@@ -374,7 +374,7 @@ public:
 	bool IsWithinUsableArea(CellClass* pCell, bool checkLevel) const
 		{ JMP_THIS(0x578540); }
 
-	bool IsWithinUsableArea(const CoordStruct& coords) const
+	bool IsWithinUsableArea(const Coordinate& coords) const
 		{ JMP_THIS(0x5785F0); }
 
 	bool CoordinatesLegal(const CellStruct& cell) const
@@ -390,16 +390,16 @@ public:
 //         FIRESTORM RELATED
 // ====================================
 
-	CoordStruct* __FindFirstFirestorm(
-		CoordStruct* retstr, const CoordStruct& start,
-		const CoordStruct& end, HouseClass const* pHouse = nullptr) const
+	Coordinate* __FindFirstFirestorm(
+		Coordinate* retstr, const Coordinate& start,
+		const Coordinate& end, HouseClass const* pHouse = nullptr) const
 	{ JMP_THIS(0x5880A0); }
 
-	CoordStruct FindFirstFirestorm(
-		const CoordStruct& start, const CoordStruct& end,
+	Coordinate FindFirstFirestorm(
+		const Coordinate& start, const Coordinate& end,
 		HouseClass const* pHouse = nullptr) const
 	{
-		CoordStruct ret;
+		Coordinate ret;
 		__FindFirstFirestorm(&ret, start, end, pHouse);
 		return ret;
 	}
@@ -414,7 +414,7 @@ public:
  * TalkBubble uses this to display the unit to the player
  */
 	void RevealArea1(
-		CoordStruct* Coords,
+		Coordinate* Coords,
 		int Radius,
 		HouseClass* OwnerHouse,
 		CellStruct arg4,
@@ -437,7 +437,7 @@ public:
  * ActionClass::RevealZoneOfWaypoint - reveal (r = 2) to player (0,0,0,1,x)
  */
 	void RevealArea2(
-		CoordStruct* Coords,
+		Coordinate* Coords,
 		int Radius,
 		HouseClass* OwnerHouse,
 		DWORD /*CellStruct*/ arg4,
@@ -458,7 +458,7 @@ public:
  * TechnoClass::Unlimbo
  * TechnoClass::Fire uses this (r = 4) right after using RevealArea0, wtfcock
  */
-	void RevealArea3(CoordStruct *Coords, int Height, int Radius, bool SkipReveal)
+	void RevealArea3(Coordinate *Coords, int Height, int Radius, bool SkipReveal)
 		{ JMP_THIS(0x567DA0); }
 
 	void Reveal(HouseClass* pHouse)
@@ -467,7 +467,7 @@ public:
 	void Reshroud(HouseClass* pHouse)
 		{ JMP_THIS(0x577AB0); }
 
-	int GetZPos(CoordStruct *Coords)
+	int GetZPos(Coordinate *Coords)
 		{ JMP_THIS(0x578080); }
 
 	// these two VERY slowly reprocess the map after gapgen state changes
@@ -498,9 +498,9 @@ public:
 	void DestroyCliff(CellClass *Cell)
 		{ JMP_THIS(0x581140); }
 
-	bool IsLocationFogged(const CoordStruct& coord)
+	bool IsLocationFogged(const Coordinate& coord)
 		{ JMP_THIS(0x5865E0); }
-	bool IsLocationFogged(CoordStruct&& coord)
+	bool IsLocationFogged(Coordinate&& coord)
 		{ return IsLocationFogged(coord); }
 
 	void RevealCheck(CellClass* pCell, HouseClass* pHouse, bool bUnk)

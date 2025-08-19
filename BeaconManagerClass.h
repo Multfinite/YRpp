@@ -17,7 +17,7 @@ public:
 	void Reset() JMP_THIS(0x430980)
 	void LoadArt() JMP_THIS(0x4309D0)
 	void Draw(Surface* pSurface, RectangleStruct bounds) JMP_THIS(0x430AC0)
-	void PlaceBeacon(int houseId, CoordStruct coord, int houseBeaconId = -1) JMP_THIS(0x430BA0)
+	void PlaceBeacon(int houseId, Coordinate coord, int houseBeaconId = -1) JMP_THIS(0x430BA0)
 	bool CanPlaceBeacon(int houseId) JMP_THIS(0x430F30)
 
 	// TODO rest of the functions

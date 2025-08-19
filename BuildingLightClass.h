@@ -27,8 +27,8 @@ public:
 	DEFINE_REFERENCE(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
 public:
 	double Speed;
-	CoordStruct field_B8;
-	CoordStruct field_C4;
+	Coordinate field_B8;
+	Coordinate field_C4;
 	double Acceleration;
 	bool Direction;
 	SpotlightBehaviour BehaviourMode;

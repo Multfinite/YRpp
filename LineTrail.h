@@ -5,7 +5,7 @@
 
 struct LineTrailNode
 {
-	CoordStruct Position;
+	Coordinate Position;
 	int Value;
 };
 

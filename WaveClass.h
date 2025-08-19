@@ -33,18 +33,18 @@ public:
 public:
     AbstractClass* Target;
     WaveType Type;
-    CoordStruct LimboCoords;
-    CoordStruct Pos0;
+    Coordinate LimboCoords;
+    Coordinate Pos0;
     Point2D WaveStartMiddle;
     Point2D WaveEndMiddle;
     Point2D WaveEndSide1;
     Point2D WaveEndSide2;
     Point2D WaveStartSide1;
     Point2D WaveStartSide2;
-    CoordStruct WaveEndSide1Coord;
-    CoordStruct WaveEndSide2Coord;
-    CoordStruct WaveStartSide1Coord;
-    CoordStruct WaveStartSide2Coord;
+    Coordinate WaveEndSide1Coord;
+    Coordinate WaveEndSide2Coord;
+    Coordinate WaveStartSide1Coord;
+    Coordinate WaveStartSide2Coord;
     bool IsTraveling;
     bool ShouldEnd;
     BYTE field_12E;
@@ -87,10 +87,10 @@ public:
     bool Unlimbo(const Coordinate& position, Dir256 direction) override JMP_THIS(0x75F8B0);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x75F9F0);
 
-    void DrawMagnetic(CoordStruct const& xyzFrom, CoordStruct const& xyzTo) JMP_THIS(0x762070);
-    void DrawNonMagnetic(CoordStruct const& xyzFrom, CoordStruct const& xyzTo) JMP_THIS(0x761640);
+    void DrawMagnetic(Coordinate const& xyzFrom, Coordinate const& xyzTo) JMP_THIS(0x762070);
+    void DrawNonMagnetic(Coordinate const& xyzFrom, Coordinate const& xyzTo) JMP_THIS(0x761640);
     void UpdateWave() JMP_THIS(0x762AF0);
-    void DamageArea(CoordStruct const& location) const JMP_THIS(0x75F330);
+    void DamageArea(Coordinate const& location) const JMP_THIS(0x75F330);
 
 /*
         void Add_Cell(Cell * cell) JMP_THIS(0x75F4C0);
@@ -112,7 +112,7 @@ protected:
     explicit __forceinline WaveClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    WaveClass(CoordStruct const& From, CoordStruct const& To, TechnoClass* Owner, WaveType mode, AbstractClass* Target)
+    WaveClass(Coordinate const& From, Coordinate const& To, TechnoClass* Owner, WaveType mode, AbstractClass* Target)
         : WaveClass(fake_noinit_t{})
     JMP_THIS(0x75E950);
     WaveClass() : WaveClass(fake_noinit_t{}) JMP_THIS(0x75EBE0);

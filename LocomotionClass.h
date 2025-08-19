@@ -74,8 +74,8 @@ public:
 	// virtual ULONG __stdcall Release() JMP_STD(0x4D0530);
 	/*3:0xC*/virtual HRESULT __stdcall Link_To_Object(void* pointer) JMP_STD(0x55A710);
 	/*4:0x10*/virtual bool __stdcall Is_Moving() JMP_STD(0x55ACD0);
-	/*5:0x14*/virtual CoordStruct __stdcall Destination() JMP_STD(0x55AC70);
-	/*6:0x18*/virtual CoordStruct __stdcall Head_To_Coord() JMP_STD(0x55ACA0);
+	/*5:0x14*/virtual Coordinate __stdcall Destination() JMP_STD(0x55AC70);
+	/*6:0x18*/virtual Coordinate __stdcall Head_To_Coord() JMP_STD(0x55ACA0);
 	/*7:0x1C*/virtual Move __stdcall Can_Enter_Cell(CellStruct cell) JMP_STD(0x55ABF0);
 	/*8:0x20*/virtual bool __stdcall Is_To_Have_Shadow() JMP_STD(0x55ABE0);
 	/*9:0x24*/virtual Matrix3D __stdcall Draw_Matrix(VoxelIndexKey* pIndex) JMP_STD(0x55A730);
@@ -86,7 +86,7 @@ public:
 	/*14:0x38*/virtual int __stdcall Z_Adjust() JMP_STD(0x55ABA0);
 	/*15:0x3C*/virtual ZGradient __stdcall Z_Gradient() JMP_STD(0x55ABB0);
 	/*16:0x40*/virtual bool __stdcall Process() JMP_STD(0x55AC60);
-	/*17:0x44*/virtual void __stdcall Move_To(CoordStruct to) JMP_STD(0x55AC50);
+	/*17:0x44*/virtual void __stdcall Move_To(Coordinate to) JMP_STD(0x55AC50);
 	/*18:0x48*/virtual void __stdcall Stop_Moving() JMP_STD(0x55AC40);
 	/*19:0x4C*/virtual void __stdcall Do_Turn(DirStruct coord) JMP_STD(0x55AC30);
 	/*20:0x50*/virtual void __stdcall Unlimbo() JMP_STD(0x55AC20);
@@ -97,9 +97,9 @@ public:
 	/*25:0x64*/virtual bool __stdcall Is_Ion_Sensitive() JMP_STD(0x55A940);
 	/*26:0x68*/virtual bool __stdcall Push(DirStruct dir) JMP_STD(0x55AB70);
 	/*27:0x6C*/virtual bool __stdcall Shove(DirStruct dir) JMP_STD(0x55AB80);
-	/*28:0x70*/virtual void __stdcall Force_Track(int track, CoordStruct coord) JMP_STD(0x55AC10);
+	/*28:0x70*/virtual void __stdcall Force_Track(int track, Coordinate coord) JMP_STD(0x55AC10);
 	/*29:0x74*/virtual Layer __stdcall In_Which_Layer() = 0;
-	/*30:0x78*/virtual void __stdcall Force_Immediate_Destination(CoordStruct coord) JMP_STD(0x55AC00);
+	/*30:0x78*/virtual void __stdcall Force_Immediate_Destination(Coordinate coord) JMP_STD(0x55AC00);
 	/*31:0x7C*/virtual void __stdcall Force_New_Slope(int ramp) JMP_STD(0x55ACE0);
 	/*32:0x80*/virtual bool __stdcall Is_Moving_Now() JMP_STD(0x4B6610);
 	/*33:0x84*/virtual int __stdcall Apparent_Speed() JMP_STD(0x55AD10);
@@ -109,7 +109,7 @@ public:
 	/*37:0x94*/virtual void __stdcall Acquire_Hunter_Seeker_Target() JMP_STD(0x4B4C70);
 	/*38:0x98*/virtual bool __stdcall Is_Surfacing() JMP_STD(0x4B4C80);
 	/*39:0x9C*/virtual void __stdcall Mark_All_Occupation_Bits(MarkType mark) JMP_STD(0x4B6620);
-	/*40:0xA0*/virtual bool __stdcall Is_Moving_Here(CoordStruct to) JMP_STD(0x4B6630);
+	/*40:0xA0*/virtual bool __stdcall Is_Moving_Here(Coordinate to) JMP_STD(0x4B6630);
 	/*41:0xA4*/virtual bool __stdcall Will_Jump_Tracks() JMP_STD(0x4B6640);
 	/*42:0xA8*/virtual bool __stdcall Is_Really_Moving_Now() JMP_STD(0x4B4C50);
 	/*43:0xAC*/virtual void __stdcall Stop_Movement_Animation() JMP_STD(0x4B4C90);

@@ -49,7 +49,7 @@ public:
 
 	static void __fastcall Play(const char* pName, int nUnk = -1, int nUnk2 = -1) JMP_STD(0x752700);
 	static void __fastcall PlayIndex(int index, int nUnk = -1, int nUnk2 = -1) JMP_STD(0x752480); 
-	static void __fastcall PlayAtPos(int index, CoordStruct *pCoords, DWORD dwUnk = 0) JMP_STD(0x750E20); 
+	static void __fastcall PlayAtPos(int index, Coordinate *pCoords, DWORD dwUnk = 0) JMP_STD(0x750E20); 
 	// no idea what this does, but Super::Launch uses it on "SW Ready" events right after firing said SW
 	static void __fastcall SilenceIndex(int index) JMP_STD(0x752A40); 
 	static const char* GetName(int index) JMP_STD(0x753330); 

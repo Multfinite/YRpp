@@ -13,7 +13,7 @@ public:
 
 	//WIP: DisplayClass::TacticalClass goes HERE
 
-	bool ProcessClickCoords(Point2D *src, CellStruct *XYdst, CoordStruct *XYZdst, ObjectClass **Target, BYTE *a5, BYTE *a6)
+	bool ProcessClickCoords(Point2D *src, CellStruct *XYdst, Coordinate *XYZdst, ObjectClass **Target, BYTE *a5, BYTE *a6)
 		{ JMP_THIS(0x692300); }
 
 	// the foundation for placement with green/red
@@ -47,7 +47,7 @@ public:
 	//Mouse is over cell pMapCoords which is bShrouded and holds pObject.
 	virtual bool ConvertAction(const CellStruct& cell, bool bShrouded, ObjectClass* pObject, Action action, bool dwUnk) RX;
 	virtual void LeftMouseButtonDown(const Point2D& point) RX;
-	virtual void LeftMouseButtonUp(const CoordStruct& coords, const CellStruct& cell, ObjectClass* pObject, Action action, DWORD dwUnk2) RX;
+	virtual void LeftMouseButtonUp(const Coordinate& coords, const CellStruct& cell, ObjectClass* pObject, Action action, DWORD dwUnk2) RX;
 	virtual void RightMouseButtonUp(DWORD dwUnk) RX;
 
 	//Non-virtual

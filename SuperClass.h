@@ -41,7 +41,7 @@ public:
     PROTECTED_PROPERTY(BYTE, unused_41[7]);
     LARGE_INTEGER BlinkTimer;
     int SpecialSoundDuration;
-    CoordStruct SpecialSoundLocation;
+    Coordinate SpecialSoundLocation;
     bool CanHold;
     PROTECTED_PROPERTY(BYTE, unused_61);
     CellStruct ChronoMapCoords;
@@ -70,7 +70,7 @@ public:
     int Size() const override JMP_THIS(0x6CE210);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6CE020);
 
-    void CreateChronoAnim(CoordStruct coords) JMP_THIS(0x6CB3A0);
+    void CreateChronoAnim(Coordinate coords) JMP_THIS(0x6CB3A0);
     void Reset() JMP_THIS(0x6CE0B0);
     bool SetOnHold(bool onHold) JMP_THIS(0x6CB4D0);
     bool Grant(bool oneTime, bool announce, bool onHold) JMP_THIS(0x6CB560);
@@ -131,7 +131,7 @@ public:
     static void RequestStop() { CALL(0x53A090); }
     static bool HasDeferment() { CALL(0x53A0E0); }
     static void Strike(CellStruct cell) { PUSH_VAR32(cell); CALL(0x53A140); }
-    static void Strike2(CoordStruct coords) JMP_STD(0x53A300);
+    static void Strike2(Coordinate coords) JMP_STD(0x53A300);
     static void PrintMessage() { CALL(0x53AE00); }
     static void Update() JMP_STD(0x53A6C0);
     static void Init() JMP_STD(0x53AB50);

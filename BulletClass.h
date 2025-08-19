@@ -12,7 +12,7 @@ struct BulletData
 {
 	CDTimerClass UnknownTimer;
 	CDTimerClass ArmTimer;
-	CoordStruct Location;
+	Coordinate Location;
 	int Distance;
 };
 
@@ -70,8 +70,8 @@ public:
     byte AnimFrame;
     byte AnimRateCounter;
     WeaponTypeClass* WeaponType;
-    CoordStruct SourceCoords;
-    CoordStruct TargetCoords;
+    Coordinate SourceCoords;
+    Coordinate TargetCoords;
     CellStruct LastMapCoords;
     int DamageMultiplier;
     AnimClass* NextAnim;
@@ -102,12 +102,12 @@ public:
 
     virtual BYTE GetAnimFrame() const JMP_THIS(0x468000);
     virtual void SetTarget(AbstractClass* pTarget) JMP_THIS(0x46B5A0);
-    virtual bool MoveTo(const CoordStruct& where, const BulletVelocity& velocity) JMP_THIS(0x468670);
+    virtual bool MoveTo(const Coordinate& where, const BulletVelocity& velocity) JMP_THIS(0x468670);
 
     void Construct(BulletTypeClass* pType, AbstractClass* pTarget, TechnoClass* pOwner,
         int damage, WarheadTypeClass* pWarhead, int speed, bool bright) JMP_THIS(0x4664C0);
     void Explode(bool destroy = false) JMP_THIS(0x468D80);
-    void Detonate(const CoordStruct& coords) JMP_THIS(0x4690B0);
+    void Detonate(const Coordinate& coords) JMP_THIS(0x4690B0);
     void Shrapnel() JMP_THIS(0x46A310);
     static void ApplyRadiationToCell(CellStruct cell, int radius, int amount) JMP_STD(0x46ADE0);
     void LoseTarget() JMP_THIS(0x468430);
@@ -127,7 +127,7 @@ public:
     bool IsHoming() const { return this->Type->ROT > 0; }
     void SetWeaponType(WeaponTypeClass* weapon) { this->WeaponType = weapon; }
     WeaponTypeClass* GetWeaponType() const { return this->WeaponType; }
-    CoordStruct TargetCoord() const { return this->Target ? this->Target->GetCoords() : this->GetCoords(); }
+    Coordinate TargetCoord() const { return this->Target ? this->Target->GetCoords() : this->GetCoords(); }
 
 protected:
     /*! @brief FAKE CTOR */

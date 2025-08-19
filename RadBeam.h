@@ -21,10 +21,10 @@ public:
 	void SetColor(const ColorStruct &color)
 		{ this->Color = color; }
 
-	void SetCoordsSource(const CoordStruct &loc)
+	void SetCoordsSource(const Coordinate &loc)
 		{ this->SourceLocation = loc; }
 
-	void SetCoordsTarget(const CoordStruct &loc)
+	void SetCoordsTarget(const Coordinate &loc)
 		{ this->TargetLocation = loc; }
 
 	//===========================================================================
@@ -49,8 +49,8 @@ public:
 	DWORD unknown_14;
 	double unknown_18;
 	ColorStruct Color;
-	CoordStruct SourceLocation; //FLH
-	CoordStruct TargetLocation;
+	Coordinate SourceLocation; //FLH
+	Coordinate TargetLocation;
 	DWORD Period;
 	double Amplitude;
 	double unknown_48;
@@ -61,12 +61,12 @@ public:
 	DWORD unknown_60;
 	DWORD unknown_64;
 	double unknown_68;
-	CoordStruct AnotherLocation;
+	Coordinate AnotherLocation;
 	DWORD unknown_7C;
 	double unknown_80;
 	DWORD unknown_88;
 	DWORD unknown_8C;
-	CoordStruct AndAnotherLocation;
+	Coordinate AndAnotherLocation;
 	DWORD unknown_9C;
 	DWORD unknown_A0;
 	DWORD unknown_A4;

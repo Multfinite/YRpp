@@ -49,7 +49,7 @@ public:
 	BYTE unknown_3D;
 	BYTE unknown_3E;
 	BYTE unknown_3F;
-	CoordStruct DestinationCoords;
+	Coordinate DestinationCoords;
 	bool IsMoving;
 	BYTE unknown_4D;
 	BYTE unknown_4E;
@@ -87,8 +87,8 @@ public:
 
 	HRESULT __stdcall Link_To_Object(void* pointer) override JMP_STD(0x54AD30);
 	bool __stdcall Is_Moving() override JMP_STD(0x54AE50);
-	CoordStruct __stdcall Destination() override JMP_STD(0x54AE60);
-	CoordStruct __stdcall Head_To_Coord() override JMP_STD(0x54D9B0);
+	Coordinate __stdcall Destination() override JMP_STD(0x54AE60);
+	Coordinate __stdcall Head_To_Coord() override JMP_STD(0x54D9B0);
 	Move __stdcall Can_Enter_Cell(CellStruct cell) override JMP_STD(0x55ABF0);
 	bool __stdcall Is_To_Have_Shadow() override JMP_STD(0x55ABE0);
 	Matrix3D __stdcall Draw_Matrix(VoxelIndexKey* pIndex) override JMP_STD(0x54DCC0);
@@ -99,7 +99,7 @@ public:
 	int __stdcall Z_Adjust() override JMP_STD(0x55ABA0);
 	ZGradient __stdcall Z_Gradient() override JMP_STD(0x55ABB0);
 	bool __stdcall Process() override JMP_STD(0x54AEC0);
-	void __stdcall Move_To(CoordStruct to) override JMP_STD(0x54B1C0);
+	void __stdcall Move_To(Coordinate to) override JMP_STD(0x54B1C0);
 	void __stdcall Stop_Moving() override JMP_STD(0x54B4D0);
 	void __stdcall Do_Turn(DirStruct coord) override JMP_STD(0x54B6E0);
 	void __stdcall Unlimbo() override JMP_STD(0x55AC20);
@@ -110,9 +110,9 @@ public:
 	bool __stdcall Is_Ion_Sensitive() override JMP_STD(0x55A940);
 	bool __stdcall Push(DirStruct dir) override JMP_STD(0x55AB70);
 	bool __stdcall Shove(DirStruct dir) override JMP_STD(0x55AB80);
-	void __stdcall Force_Track(int track, CoordStruct coord) override JMP_STD(0x55AC10);
+	void __stdcall Force_Track(int track, Coordinate coord) override JMP_STD(0x55AC10);
 	Layer __stdcall In_Which_Layer() override JMP_STD(0x54B8D0);
-	void __stdcall Force_Immediate_Destination(CoordStruct coord) override JMP_STD(0x55AC00);
+	void __stdcall Force_Immediate_Destination(Coordinate coord) override JMP_STD(0x55AC00);
 	void __stdcall Force_New_Slope(int ramp) override JMP_STD(0x55ACE0);
 	bool __stdcall Is_Moving_Now() override JMP_STD(0x54D0D0);
 	int __stdcall Apparent_Speed() override JMP_STD(0x55AD10);
@@ -122,7 +122,7 @@ public:
 	void __stdcall Acquire_Hunter_Seeker_Target() override JMP_STD(0x4B4C70);
 	bool __stdcall Is_Surfacing() override JMP_STD(0x4B4C80);
 	void __stdcall Mark_All_Occupation_Bits(MarkType mark) override JMP_STD(0x54D930);
-	bool __stdcall Is_Moving_Here(CoordStruct to) override JMP_STD(0x4B6630);
+	bool __stdcall Is_Moving_Here(Coordinate to) override JMP_STD(0x4B6630);
 	bool __stdcall Will_Jump_Tracks() override JMP_STD(0x4B6640);
 	bool __stdcall Is_Really_Moving_Now() override JMP_STD(0x4B4C50);
 	void __stdcall Stop_Movement_Animation() override JMP_STD(0x4B4C90);

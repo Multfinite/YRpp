@@ -23,7 +23,7 @@ public:
 		{ JMP_STD(0x53D850); }
 
 	//Constructor, Destructor
-	IonBlastClass(CoordStruct Crd)
+	IonBlastClass(Coordinate Crd)
 		{ JMP_THIS(0x53CB10); }
 
 	~IonBlastClass()
@@ -35,7 +35,7 @@ public:
 
 public:
 
-	CoordStruct Location;
+	Coordinate Location;
 	int Lifetime;
 	BOOL DisableIonBeam;	//0 = no, 1 = yes
 

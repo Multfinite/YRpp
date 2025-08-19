@@ -51,13 +51,13 @@ struct TurretControl
 struct WeaponStruct
 {
 	WeaponTypeClass*  WeaponType;
-	CoordStruct       FLH;
+	Coordinate       FLH;
 	int               BarrelLength;
 	int               BarrelThickness;
 	bool              TurretLocked;
 
 	WeaponStruct() : WeaponType(nullptr),
-		FLH(CoordStruct::Empty),
+		FLH(Coordinate::Empty),
 		BarrelLength(0),
 		BarrelThickness(0),
 		TurretLocked(false)
@@ -270,17 +270,17 @@ public:
 	TypeList<AnimTypeClass*> Explosion;
 	TypeList<AnimTypeClass*> DestroyAnim;
 	ParticleSystemTypeClass* NaturalParticleSystem;
-	CoordStruct NaturalParticleSystemLocation;
+	Coordinate NaturalParticleSystemLocation;
 	ParticleSystemTypeClass* RefinerySmokeParticleSystem;
 	TypeList<ParticleSystemTypeClass*> DamageParticleSystems;
 	TypeList<ParticleSystemTypeClass*> DestroyParticleSystems;
-	CoordStruct DamageSmokeOffset;
+	Coordinate DamageSmokeOffset;
 	bool            DamSmkOffScrnRel;
-	CoordStruct DestroySmokeOffset;
-	CoordStruct RefinerySmokeOffsetOne;
-	CoordStruct RefinerySmokeOffsetTwo;
-	CoordStruct RefinerySmokeOffsetThree;
-	CoordStruct RefinerySmokeOffsetFour;
+	Coordinate DestroySmokeOffset;
+	Coordinate RefinerySmokeOffsetOne;
+	Coordinate RefinerySmokeOffsetTwo;
+	Coordinate RefinerySmokeOffsetThree;
+	Coordinate RefinerySmokeOffsetFour;
 	int             ShadowIndex;
 	int             Storage;
 	bool            TurretNotExportedOnGround;
@@ -290,7 +290,7 @@ public:
 	int             WeaponCount;
 	bool            IsChargeTurret;
 	int             TurretWeapon[MaxWeapons];
-	CoordStruct     AlternativeFLH[5];
+	Coordinate     AlternativeFLH[5];
 	WeaponStruct	Weapon[MaxWeapons];
 	bool            ClearAllWeapons;
 	WeaponStruct	EliteWeapon[MaxWeapons];
@@ -413,7 +413,7 @@ public:
 	DWORD           ForbiddenHouses;
 	DWORD           SecretHouses;
 	bool            UseBuffer;
-	CoordStruct SecondSpawnOffset;
+	Coordinate SecondSpawnOffset;
 	bool            IsSelectableCombatant;
 	bool            Accelerates;
 	bool            DisableVoxelCache;

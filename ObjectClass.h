@@ -86,7 +86,7 @@ public:
 	bool               IsInLogic;      // has this object been added to the logic collection?
 	bool               IsVisible;      // was this object in viewport when drawn?
 	PROTECTED_PROPERTY(BYTE, align_99[0x2]);
-	CoordStruct        Location;       // Absolute current 3D location (in leptons)
+	Coordinate        Location;       // Absolute current 3D location (in leptons)
 	LineTrail*         LineTrailer;
 public:
 	virtual ~ObjectClass() JMP_THIS(0x5F3B80);

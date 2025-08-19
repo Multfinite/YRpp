@@ -31,7 +31,7 @@ public:
     ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
 
 public:
-    CoordStruct NextParticleOffset;
+    Coordinate NextParticleOffset;
     int XVelocity;
     int YVelocity;
     int MinZVelocity;
