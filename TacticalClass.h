@@ -15,14 +15,17 @@ struct TacticalSelectableStruct
 };
 
 class DSurface;
-class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
-NOVTABLE TacticalClass : public AbstractClass
+class CellClass;
+
 /*!
 * @brief TacticalClass - handles tactical map rendering and display
 */
+class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
+NOVTABLE TacticalClass : public AbstractClass
 {
 public:
     using base_type = AbstractClass;
+
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -38,7 +41,6 @@ public:
     static constexpr AbstractType AbsID = AbstractType::TacticalMap;
     static constexpr uintptr_t AbsVTable = 0x7F4348;
     static constexpr size_t ClassSize = 0xE18;
-
 
     DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)
 
