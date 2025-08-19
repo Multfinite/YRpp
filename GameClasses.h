@@ -28,6 +28,7 @@
 #include "DiskLaserClass.h"
 #include "EMPulseClass.h"
 #include "FactoryClass.h"
+#include "FoggedObjectClass.h"
 #include "HouseClass.h"
 #include "InfantryClass.h"
 #include "LightSourceClass.h"
