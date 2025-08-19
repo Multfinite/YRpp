@@ -1,7 +1,7 @@
 #pragma once
 
-#include <YRPP.h>
-#include <Helpers/CompileTime.h>
+#include "YRPP.h"
+#include "Helpers/CompileTime.h"
 
 class NOVTABLE EvadeClass
 {

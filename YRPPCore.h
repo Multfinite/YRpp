@@ -5,20 +5,20 @@ typedef unsigned short WORD;
 typedef unsigned long DWORD;
 
 // the most basic globals
-#include <Fundamentals.h>
+#include "Fundamentals.h"
 
 //Syringe interaction header - also includes <windows.h>
-#include <Syringe.h>
+#include "Syringe.h"
 
 //Assembly macros
-#include <ASMMacros.h>
+#include "ASMMacros.h"
 
-#include <Memory.h>
+#include "Memory.h"
 
 #include <wchar.h>
 #include <cstdio>
 
-#include <Helpers/EnumFlags.h>
+#include "Helpers/EnumFlags.h"
 
 //Avoid default CTOR trick
 #define DECLARE_PROPERTY(type,name)\

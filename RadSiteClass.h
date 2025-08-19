@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
 class LightSourceClass;
 class WeaponTypeClass;

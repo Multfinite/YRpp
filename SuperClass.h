@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <SuperWeaponTypeClass.h>
+#include "SuperWeaponTypeClass.h"
 
 //Forward declarations
 class AnimClass;

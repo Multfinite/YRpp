@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <LocomotionClass.h>
+#include "LocomotionClass.h"
 
 class NOVTABLE JumpjetLocomotionClass : public LocomotionClass, public IPiggyback
 {

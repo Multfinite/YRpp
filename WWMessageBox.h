@@ -1,8 +1,8 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <StringTable.h>
-#include <GameStrings.h>
+#include "YRPPCore.h"
+#include "StringTable.h"
+#include "GameStrings.h"
 
 class WWMessageBox
 {

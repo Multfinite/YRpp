@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <Helpers/CompileTime.h>
+#include "GeneralDefinitions.h"
+#include "Helpers/CompileTime.h"
 
 class RawFileClass;
 class CCFileClass;

@@ -1,5 +1,7 @@
 #pragma once
-#include <YRPP.h>
+#include "YRPPCore.h"
+#include "ArrayClasses.h"
+#include "Helpers/CompileTime.h"
 
 class IPXConnClass;
 class IPXGlobalConnClass;

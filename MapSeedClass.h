@@ -1,8 +1,9 @@
 #pragma once
 
-#include <LoadOptionsClass.h>
+#include "LoadOptionsClass.h"
+#include "Helpers/CompileTime.h"
 
-#include <Helpers/CompileTime.h>
+class BuildingTypeClass;
 
 //Random map generator
 class MapSeedClass : public LoadOptionsClass

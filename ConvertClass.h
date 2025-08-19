@@ -4,12 +4,12 @@
 
 #pragma once
 
-#include <AbstractClass.h>
-#include <ArrayClasses.h>
-#include <Surface.h>
-
-#include <FileFormats/SHP.h>
-#include <Helpers/CompileTime.h>
+#include "AbstractClass.h"
+#include "ArrayClasses.h"
+#include "Surface.h"
+			 
+#include "FileFormats/SHP.h"
+#include "Helpers/CompileTime.h"
 
 class Blitter;
 class RLEBlitter;

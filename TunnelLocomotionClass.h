@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <LocomotionClass.h>
+#include "LocomotionClass.h"
 
 class __declspec(align(4)) NOVTABLE TunnelLocomotionClass : public LocomotionClass
 {

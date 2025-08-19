@@ -1,5 +1,5 @@
 #pragma once
-#include <WinsockInterfaceClass.h>
+#include "WinsockInterfaceClass.h"
 
 class UDPInterfaceClass : public WinsockInterfaceClass
 {

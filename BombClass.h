@@ -1,9 +1,8 @@
 #pragma once
 
-#include <AbstractClass.h>
-#include <Audio.h>
+#include "AbstractClass.h"
+#include "Audio.h"
 
-//forward declarations
 class ObjectClass;
 class TechnoClass;
 class HouseClass;

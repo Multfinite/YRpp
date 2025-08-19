@@ -5,12 +5,12 @@
 #pragma once
 
 #include <wchar.h>
-#include <ASMMacros.h>
-#include <ColorScheme.h>
-#include <TextLabelClass.h>
-#include <CommandClass.h>
+#include "ASMMacros.h"
+#include "ColorScheme.h"
+#include "TextLabelClass.h"
+#include "CommandClass.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 // https://github.com/electronicarts/CnC_Remastered_Collection/blob/7d496e8a633a8bbf8a14b65f490b4d21fa32ca03/REDALERT/MSGLIST.H
 class MessageListClass

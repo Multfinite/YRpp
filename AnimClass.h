@@ -4,12 +4,11 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <AnimTypeClass.h>
-#include <BounceClass.h>
-#include <StageClass.h>
+#include "ObjectClass.h"
+#include "AnimTypeClass.h"
+#include "BounceClass.h"
+#include "StageClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class BulletClass;
 class HouseClass;

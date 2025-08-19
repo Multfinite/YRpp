@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <ParticleSystemTypeClass.h>
-#include <ParticleClass.h>
+#include "ObjectClass.h"
+#include "ParticleSystemTypeClass.h"
+#include "ParticleClass.h"
 
 class NOVTABLE ParticleSystemClass : public ObjectClass
 {

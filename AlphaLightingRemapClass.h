@@ -1,7 +1,8 @@
 #pragma once
 
-#include <YRPP.h>
-#include <Helpers/CompileTime.h>
+#include "YRPP.h"
+#include "Helpers/CompileTime.h"
+#include "ArrayClasses.h"
 
 class AlphaLightingRemapClass
 {

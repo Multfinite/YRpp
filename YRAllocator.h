@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <YRPPCore.h>
-#include <Memory.h>
+#include "YRPPCore.h"
+#include "Memory.h"
 
 class MemoryBuffer
 {

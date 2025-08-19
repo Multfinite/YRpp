@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class ParticleSystemTypeClass;
 class WarheadTypeClass;

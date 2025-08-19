@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <LocomotionClass.h>
+#include "LocomotionClass.h"
 
 class NOVTABLE RocketLocomotionClass : public LocomotionClass
 {

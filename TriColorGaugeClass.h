@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GaugeClass.h>
+#include "GaugeClass.h"
 
 class NOVTABLE TriColorGaugeClass : public GaugeClass
 {

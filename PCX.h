@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include <Drawing.h>
-#include <Surface.h>
-#include <GeneralDefinitions.h>
+#include "Drawing.h"
+#include "Surface.h"
+#include "GeneralDefinitions.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class PCX
 {

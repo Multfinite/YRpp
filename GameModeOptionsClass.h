@@ -1,8 +1,8 @@
 #pragma once
 
 #include <wchar.h>
-#include <Helpers/CompileTime.h>
 
+#include "Helpers/CompileTime.h"
 
 struct AISlotsStruct
 {

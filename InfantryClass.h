@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <FootClass.h>
-#include <InfantryTypeClass.h>
+#include "FootClass.h"
+#include "InfantryTypeClass.h"
 
 class NOVTABLE InfantryClass : public FootClass
 {

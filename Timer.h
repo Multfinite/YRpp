@@ -1,4 +1,11 @@
 #pragma once
+
+#include <concepts>
+
+#include "YRPPCore.h"
+#include "ASMMacros.h"
+#include "Fundamentals.h"
+
 template<typename T>
 concept TimerType = std::convertible_to<T, int> && requires (T t)
 {

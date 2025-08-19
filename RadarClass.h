@@ -1,6 +1,9 @@
 #pragma once
 
-#include <DisplayClass.h>
+#include "DisplayClass.h"
+
+#include "HashTable.h"
+
 struct RadarTrackingStruct;
 class NOVTABLE RadarClass : public DisplayClass
 {

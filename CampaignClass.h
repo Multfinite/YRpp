@@ -1,10 +1,11 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <CCINIClass.h>
 
 class NOVTABLE CampaignClass : public AbstractTypeClass {
 
+#include "GeneralDefinitions.h"
+#include "CCINIClass.h"
+#include "AbstractTypeClass.h"
 public:
 	static const AbstractType AbsID = AbstractType::Campaign;
 

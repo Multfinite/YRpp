@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <TechnoClass.h>
-#include <BuildingTypeClass.h>
-#include <BuildingLightClass.h>
-#include <StageClass.h>
+#include "TechnoClass.h"
+#include "BuildingTypeClass.h"
+#include "BuildingLightClass.h"
+#include "StageClass.h"
 
 class FactoryClass;
 class InfantryClass;

@@ -1,10 +1,11 @@
 #pragma once
 
-#include <MouseClass.h>
 #include <GeneralDefinitions.h>
 #include <GeneralStructures.h>
 #include <Drawing.h>
 #include <Helpers/CompileTime.h>
+#include <Surface.h>
+#include <MouseClass.h>
 
 struct SHPStruct;
 

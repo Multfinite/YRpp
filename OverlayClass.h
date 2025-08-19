@@ -33,8 +33,8 @@
 #define OVERLAY_LOBRIDGE3 0x7C
 #define OVERLAY_LOBRIDGE4 0x7D
 
-#include <ObjectClass.h>
-#include <OverlayTypeClass.h>
+#include "ObjectClass.h"
+#include "OverlayTypeClass.h"
 
 class NOVTABLE OverlayClass : public ObjectClass
 {

@@ -4,8 +4,9 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <BulletTypeClass.h>
+#include "Timer.h"
+#include "ObjectClass.h"
+#include "BulletTypeClass.h"
 
 class TechnoClass;
 class ObjectClass;

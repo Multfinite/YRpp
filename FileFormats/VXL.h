@@ -1,8 +1,8 @@
 #pragma once
 
-class CCFileClass;
-#include <GeneralStructures.h>
+#include "../GeneralStructures.h"
 
+class CCFileClass;
 struct VoxelSectionHeader;
 struct VoxelSectionTailer;
 

@@ -4,10 +4,11 @@
 
 #pragma once
 
-#include <YRPP.h>
-#include <HouseTypeClass.h>
-#include <TeamTypeClass.h>
-#include <AbstractTypeClass.h>
+#include "YRPP.h"
+#include "HouseTypeClass.h"
+#include "TeamTypeClass.h"
+#include "AbstractTypeClass.h"
+#include "TechnoTypeClass.h"
 
 //forward declarations
 class TechnoTypeClass;

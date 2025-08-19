@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <SmudgeTypeClass.h>
+#include "ObjectClass.h"
+#include "SmudgeTypeClass.h"
 
 class NOVTABLE SmudgeClass : public ObjectClass
 {

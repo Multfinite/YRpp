@@ -25,8 +25,8 @@ class FootClass;
 class BulletClass;
 class AnimClass;
 
-#include <CellClass.h>
-#include <MapClass.h>
+#include "CellClass.h"
+#include "MapClass.h"
 
 #pragma pack(push, 1)
 class TargetClass

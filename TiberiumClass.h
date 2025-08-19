@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
-#include <PriorityQueueClass.h>
+#include "AbstractTypeClass.h"
+#include "PriorityQueueClass.h"
 
-//forward declarations
 class AnimTypeClass;
 class OverlayTypeClass;
 

@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <ArrayClasses.h>
-#include <GeneralDefinitions.h>
-#include <CCINIClass.h>
+#include "ArrayClasses.h"
+#include "GeneralDefinitions.h"
+#include "CCINIClass.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class VoxClass
 {

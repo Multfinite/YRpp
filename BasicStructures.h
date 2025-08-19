@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Matrix3D.h>
+#include "Matrix3D.h"
+#include "Dir.h"
 
 struct Color16Struct;
 

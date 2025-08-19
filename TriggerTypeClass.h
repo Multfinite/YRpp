@@ -1,12 +1,12 @@
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
-//forward declarations
 class CCINIClass;
 class HouseTypeClass;
 class TActionClass;
 class TEventClass;
+class TagTypeClass;
 
 class NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {

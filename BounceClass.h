@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <GeneralStructures.h>
-#include <YRMathVector.h>
+#include "GeneralStructures.h"
+#include "YRMathVector.h"
 
 class BounceClass
 {

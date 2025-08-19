@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include <FootClass.h>
-#include <UnitTypeClass.h>
+#include "FootClass.h"
+#include "UnitTypeClass.h"
 
-//forward declarations
 class EBolt;
 
 class NOVTABLE UnitClass : public FootClass

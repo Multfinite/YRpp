@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
+#include "AbstractTypeClass.h"
 
 struct ScriptActionNode
 {
@@ -12,7 +12,6 @@ struct ScriptActionNode
 	int Argument;
 };
 
-//forward declarations
 class TechnoTypeClass;
 
 class NOVTABLE ScriptTypeClass : public AbstractTypeClass

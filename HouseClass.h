@@ -4,17 +4,18 @@
 
 #pragma once
 
-#include <AircraftTypeClass.h>
-#include <BuildingClass.h>
-#include <HouseTypeClass.h>
-#include <InfantryTypeClass.h>
-#include <ScenarioClass.h>
-#include <SessionClass.h>
-#include <SideClass.h>
-#include <UnitClass.h>
-#include <UnitTypeClass.h>
+#include "AircraftTypeClass.h"
+#include "BuildingClass.h"
+#include "HouseTypeClass.h"
+#include "InfantryTypeClass.h"
+#include "ScenarioClass.h"
+#include "SessionClass.h"
+#include "SideClass.h"
+#include "UnitClass.h"
+#include "UnitTypeClass.h"
 
-//forward declarations
+#include "Helpers/Cast.h"
+
 class AnimClass;
 class BulletClass;
 class CellClass;

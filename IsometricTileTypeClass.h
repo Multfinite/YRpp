@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
 class NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
 {

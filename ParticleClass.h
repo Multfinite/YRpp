@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <ParticleTypeClass.h>
+#include "ObjectClass.h"
+#include "ParticleTypeClass.h"
 
-//forward declarations
 class ParticleSystemClass;
 
 class NOVTABLE ParticleClass : public ObjectClass

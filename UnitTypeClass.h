@@ -1,6 +1,6 @@
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
 
 class TechnoClass;
 

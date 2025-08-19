@@ -1,6 +1,7 @@
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
+
 class OverlayTypeClass;
 class IsometricTileTypeClass;
 

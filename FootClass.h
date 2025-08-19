@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <TechnoClass.h>
-#include <ParasiteClass.h>
+#include "TechnoClass.h"
+#include "ParasiteClass.h"
 
 //forward declarations
 class LocomotionClass;

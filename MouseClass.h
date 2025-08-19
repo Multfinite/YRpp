@@ -1,7 +1,6 @@
 #pragma once
 
-#include <SidebarClass.h>
-
+#include "SidebarClass.h"
 
 class MouseCursor {
 public:

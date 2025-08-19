@@ -1,8 +1,8 @@
 #pragma once
 
 #include <windows.h>
-#include <GeneralDefinitions.h>
-#include <Unsorted.h>
+#include "GeneralDefinitions.h"
+#include "Unsorted.h"
 
 class UI {
 public:

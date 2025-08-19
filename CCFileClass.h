@@ -1,9 +1,9 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <YRAllocator.h>
-#include <YRPPCore.h>
-#include <GenericList.h>
+#include "GeneralDefinitions.h"
+#include "YRAllocator.h"
+#include "YRPPCore.h"
+#include "GenericList.h"
 
 enum class FileAccessMode : unsigned int {
 	None = 0,

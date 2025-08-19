@@ -1,7 +1,7 @@
 #pragma once
 
-#include <PowerClass.h>
-#include <StageClass.h>
+#include "PowerClass.h"
+#include "StageClass.h"
 
 class ColorScheme;
 class FactoryClass;

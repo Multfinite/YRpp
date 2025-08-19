@@ -1,12 +1,13 @@
 #pragma once
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
-#include <CellClass.h>
-#include <GeneralStructures.h>
-#include <ArrayClasses.h>
+#include "CellClass.h"
+#include "GeneralDefinitions.h"
+#include "ArrayClasses.h"
 
 class TechnoClass;
+class CellClass;
 
 // Tracks aerial units via 20x20 vectors spread across the maps for efficient search
 class AircraftTrackerClass

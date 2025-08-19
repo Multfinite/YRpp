@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
-//forward declarations
 class ObjectClass;
 class TechnoClass;
 class BuildingClass;

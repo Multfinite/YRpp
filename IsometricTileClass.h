@@ -1,8 +1,7 @@
 #pragma once
 
-#include <ObjectClass.h>
+#include "ObjectClass.h"
 
-//forward declarations
 class IsometricTileTypeClass;
 
 class NOVTABLE IsometricTileClass : public ObjectClass

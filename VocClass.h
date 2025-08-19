@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <ArrayClasses.h>
-#include <GeneralDefinitions.h>
-#include <Audio.h>
+#include "ArrayClasses.h"
+#include "GeneralDefinitions.h"
+#include "Audio.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 struct VocClassHeader
 {

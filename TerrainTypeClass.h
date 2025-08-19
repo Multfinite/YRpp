@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <ObjectTypeClass.h>
+#include "ObjectTypeClass.h"
 
 class NOVTABLE TerrainTypeClass : public ObjectTypeClass
 {

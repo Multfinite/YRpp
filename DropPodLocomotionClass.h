@@ -1,7 +1,7 @@
 #pragma once
-#include <LocomotionClass.h>
 
 class NOVTABLE DropPodLocomotionClass : public LocomotionClass, public IPiggyback
+#include "LocomotionClass.h"
 {
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7E8278;

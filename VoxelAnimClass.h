@@ -4,11 +4,10 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <VoxelAnimTypeClass.h>
-#include <BounceClass.h>
+#include "ObjectClass.h"
+#include "VoxelAnimTypeClass.h"
+#include "BounceClass.h"
 
-//forward declarations
 class HouseClass;
 class ParticleSystemClass;
 

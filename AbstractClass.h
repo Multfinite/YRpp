@@ -1,13 +1,12 @@
 #pragma once
 
-#include <Interfaces.h>
-#include <GeneralDefinitions.h>
-#include <GeneralStructures.h>
-#include <ArrayClasses.h>
-#include <IndexClass.h>
-#include <GameStrings.h>
+#include "Interfaces.h"
+#include "GeneralDefinitions.h"
+#include "GeneralStructures.h"
+#include "ArrayClasses.h"
+#include "IndexClass.h"
+#include "GameStrings.h"
 
-//forward declarations
 class TechnoClass;
 class HouseClass;
 class CRCEngine;

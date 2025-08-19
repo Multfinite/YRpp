@@ -1,9 +1,8 @@
 #pragma once
 
-#include <ToolTipManager.h>
-#include <Drawing.h>
-
-#include <Helpers/CompileTime.h>
+#include "ToolTipManager.h"
+#include "Drawing.h"
+#include "Helpers/CompileTime.h"
 
 class NOVTABLE CCToolTip : public ToolTipManager
 {

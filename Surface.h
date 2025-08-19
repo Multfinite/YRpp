@@ -1,10 +1,10 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <YRDDraw.h>
-#include <YRAllocator.h>
+#include "GeneralDefinitions.h"
+#include "YRDDraw.h"
+#include "YRAllocator.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class ConvertClass;
 struct SHPStruct;

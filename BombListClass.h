@@ -1,11 +1,10 @@
 #pragma once
 
-#include <AbstractClass.h>
-#include <ArrayClasses.h>
-#include <BombClass.h>
-#include <Helpers/CompileTime.h>
+#include "AbstractClass.h"
+#include "ArrayClasses.h"
+#include "BombClass.h"
+#include "Helpers/CompileTime.h"
 
-//forward declarations
 class ObjectClass;
 class TechnoClass;
 

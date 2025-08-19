@@ -1,8 +1,8 @@
 #pragma once
 
 #include <windows.h>
-#include <GeneralDefinitions.h>
-#include <Interfaces.h>
+#include "GeneralDefinitions.h"
+#include "Interfaces.h"
 
 namespace WOLAPI {
 	// Forward references and typedefs

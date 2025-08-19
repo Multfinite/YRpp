@@ -4,9 +4,10 @@
 
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <TechnoClass.h>
+#include "GeneralDefinitions.h"
+#include "ArrayClasses.h"
 
+class TechnoClass;
 class UnitClass;
 
 class EBolt

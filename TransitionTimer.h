@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
+#include "GeneralDefinitions.h"
 
 struct TransitionTimer
 {

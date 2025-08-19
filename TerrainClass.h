@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <ObjectClass.h>
-#include <TerrainTypeClass.h>
-#include <StageClass.h>
+#include "ObjectClass.h"
+#include "TerrainTypeClass.h"
+#include "StageClass.h"
 
 class NOVTABLE TerrainClass : public ObjectClass
 {

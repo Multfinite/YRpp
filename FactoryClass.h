@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <AbstractClass.h>
-#include <StageClass.h>
+#include "AbstractClass.h"
+#include "StageClass.h"
 
 class HouseClass;
 class TechnoClass;

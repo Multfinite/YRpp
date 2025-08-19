@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Helpers/CompileTime.h"
+#include "ASMMacros.h"
+
 class FPSCounter
 {
 public:

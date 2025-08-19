@@ -1,11 +1,12 @@
 #pragma once
 
-#include <Interfaces.h>
-#include <FootClass.h>
-#include <Unsorted.h>
-#include <YRCom.h>
-#include <Drawing.h>
-#include <Helpers/CompileTime.h>
+#include "Interfaces.h"
+#include "FootClass.h"
+#include "Unsorted.h"
+#include "YRCom.h"
+#include "Drawing.h"
+#include "Helpers/CompileTime.h"
+#include "Helpers/VTable.h"
 
 class LocomotionClass : public IPersistStream, public ILocomotion
 {

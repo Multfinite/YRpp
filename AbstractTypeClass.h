@@ -3,8 +3,8 @@
 */
 #pragma once
 
-#include <AbstractClass.h>
-#include <Memory.h>
+#include "AbstractClass.h"
+#include "Memory.h"
 
 //forward declarations
 class CCINIClass;

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <ArrayClasses.h>
-#include <IndexClass.h>
+#include "GeneralDefinitions.h"
+#include "ArrayClasses.h"
+#include "IndexClass.h"
 
-#include <Helpers/CompileTime.h>
+#include "Helpers/CompileTime.h"
 
 class NOVTABLE CommandClass
 {

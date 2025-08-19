@@ -1,8 +1,7 @@
 #pragma once
 
-#include <AbstractClass.h>
+#include "AbstractClass.h"
 
-//forward declarations
 class SuperClass;
 class TechnoClass;
 

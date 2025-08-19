@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GeneralStructures.h>
-#include <ObjectClass.h>
+#include "GeneralStructures.h"
+#include "ObjectClass.h"
 
 class NOVTABLE BuildingLightClass : public ObjectClass
 {

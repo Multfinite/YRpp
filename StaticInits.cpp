@@ -1,6 +1,6 @@
 //This file initializes static constant values.
 
-#include <YRPP.h>
+#include "YRPP.h"
 
 void SlaveManagerClass::ZeroOutSlaves() {
 	for(const auto& pNode : this->SlaveNodes) {

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <ControlClass.h>
-#include <ArrayClasses.h>
-#include <ShapeButtonClass.h>
-#include <SliderClass.h>
+#include "ControlClass.h"
+#include "ArrayClasses.h"
+#include "ShapeButtonClass.h"
+#include "SliderClass.h"
 
 class NOVTABLE ListClass : public ControlClass
 {

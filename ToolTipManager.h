@@ -1,9 +1,9 @@
 #pragma once
 
-#include <YRPPCore.h>
-#include <GeneralStructures.h>
-#include <ArrayClasses.h>
-#include <IndexClass.h>
+#include "YRPPCore.h"
+#include "GeneralStructures.h"
+#include "ArrayClasses.h"
+#include "IndexClass.h"
 
 struct ToolTip
 {

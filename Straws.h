@@ -1,6 +1,6 @@
 #pragma once
 
-#include <YRPP.h>
+#include "YRPP.h"
 
 class NOVTABLE Straw
 {

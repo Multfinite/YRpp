@@ -1,10 +1,10 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <GeneralStructures.h>
-#include <AbstractClass.h>
-#include <ColorScheme.h>
-#include <Helpers/CompileTime.h>
+#include "GeneralDefinitions.h"
+#include "GeneralStructures.h"
+#include "AbstractClass.h"
+#include "ColorScheme.h"
+#include "Helpers/CompileTime.h"
 
 class ObjectClass;
 class DSurface;

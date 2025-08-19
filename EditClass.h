@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ControlClass.h>
-#include <GeneralStructures.h>
+#include "ControlClass.h"
+#include "GeneralStructures.h"
 
 // Accept Alpha, Digit, and other characters, ToUpper will convert alpha into upper-case
 enum class EditFlag : int

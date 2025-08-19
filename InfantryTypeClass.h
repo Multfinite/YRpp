@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <TechnoTypeClass.h>
+#include "TechnoTypeClass.h"
 
 struct SubSequenceStruct
 {

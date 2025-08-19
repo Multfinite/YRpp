@@ -4,20 +4,22 @@
 
 #pragma once
 
-#include <Matrix3D.h>
-#include <RadioClass.h>
-#include <RadBeam.h>
-#include <TechnoTypeClass.h>
-#include <CaptureManagerClass.h>
-#include <SlaveManagerClass.h>
-#include <TeamClass.h>
-#include <TemporalClass.h>
-#include <LaserDrawClass.h>
-#include <Helpers/Template.h>
-#include <StageClass.h>
-#include <PlanningTokenClass.h>
+#include "Matrix3D.h"
+#include "RadioClass.h"
+#include "RadBeam.h"
+#include "TechnoTypeClass.h"
+#include "CaptureManagerClass.h"
+#include "SlaveManagerClass.h"
+#include "TeamClass.h"
+#include "TemporalClass.h"
+#include "LaserDrawClass.h"
+#include "Helpers/Template.h"
+#include "StageClass.h"
+#include "PlanningTokenClass.h"
+#include "GeneralStructures.h"
+#include "Timer.h"
+#include "EBolt.h"
 
-//forward declarations
 class AirstrikeClass;
 class AnimClass;
 class BulletClass;
@@ -34,7 +36,7 @@ class WaveClass;
 
 class EventClass;
 
-#include <TransitionTimer.h>
+#include "TransitionTimer.h"
 
 struct VeterancyStruct
 {

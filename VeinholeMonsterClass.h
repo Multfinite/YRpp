@@ -1,9 +1,9 @@
 #pragma once
 
-#include <FootClass.h>
-#include <PriorityQueueClass.h>
-#include <RulesClass.h>
-#include <CRT.h>
+#include "FootClass.h"
+#include "PriorityQueueClass.h"
+#include "RulesClass.h"
+#include "CRT.h"
 
 class VeinholeLogic
 {

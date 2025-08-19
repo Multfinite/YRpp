@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GeneralStructures.h>
-#include <YRPPCore.h>
+#include "GeneralStructures.h"
+#include "YRPPCore.h"
 
 //Scalar Deleting Destructor Flags
 #define SDDTOR_NODELETE				0x00

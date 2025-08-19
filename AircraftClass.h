@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <FootClass.h>
-#include <AircraftTypeClass.h>
+#include "FootClass.h"
+#include "AircraftTypeClass.h"
 
 //AircraftClass
 class NOVTABLE AircraftClass : public FootClass, public IFlyControl

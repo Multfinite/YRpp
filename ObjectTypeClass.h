@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <AbstractTypeClass.h>
-#include <FileSystem.h>
+#include "AbstractTypeClass.h"
+#include "FileSystem.h"
 
-#include <Drawing.h>
-#include <IndexClass.h>
+#include "Drawing.h"
+#include "IndexClass.h"
 
 //forward declarations
 class TechnoTypeClass;

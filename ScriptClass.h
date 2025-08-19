@@ -4,10 +4,8 @@
 
 #pragma once
 
-#include <AbstractClass.h>
-
-//forward declarations
-#include <ScriptTypeClass.h>
+#include "AbstractClass.h"
+#include "ScriptTypeClass.h"
 
 class NOVTABLE ScriptClass : public AbstractClass
 {
