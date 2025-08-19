@@ -8,7 +8,8 @@
 #include "ParticleSystemTypeClass.h"
 #include "ParticleClass.h"
 
-class NOVTABLE ParticleSystemClass : public ObjectClass
+class __declspec(uuid("0E272DC8-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE ParticleSystemClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::ParticleSystem;

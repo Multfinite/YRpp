@@ -18,6 +18,8 @@ struct TacticalSelectableStruct
 };
 
 class NOVTABLE TacticalClass : public AbstractClass
+class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
+NOVTABLE TacticalClass : public AbstractClass
 {
 public:
 	DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)

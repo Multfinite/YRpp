@@ -4,7 +4,8 @@
 
 #include "LocomotionClass.h"
 
-class NOVTABLE RocketLocomotionClass : public LocomotionClass
+class __declspec(uuid("B7B49766-E576-11d3-9BD9-00104B972FE8"))
+NOVTABLE RocketLocomotionClass : public LocomotionClass
 {
 public:
 	//IUnknown

@@ -11,7 +11,8 @@
 class HouseClass;
 class ParticleSystemClass;
 
-class NOVTABLE VoxelAnimClass : public ObjectClass
+class __declspec(uuid("0E272DC1-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE VoxelAnimClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::VoxelAnim;

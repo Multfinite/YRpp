@@ -7,7 +7,8 @@
 #include "AbstractClass.h"
 #include "ScriptTypeClass.h"
 
-class NOVTABLE ScriptClass : public AbstractClass
+class __declspec(uuid("42F3A646-0789-11D2-ACA5-006008055BB5"))
+NOVTABLE ScriptClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Script;

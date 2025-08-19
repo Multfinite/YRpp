@@ -5,7 +5,8 @@
 //forward declarations
 class TriggerClass;
 
-class NOVTABLE TagClass : public AbstractClass
+class __declspec(uuid("54F6E432-09ED-11D2-ACA5-006008055BB5"))
+NOVTABLE TagClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Tag;

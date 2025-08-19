@@ -23,7 +23,8 @@ class TagClass;
 class TiberiumClass;
 class PixelFXClass;
 
-class NOVTABLE CellClass : public AbstractClass
+class __declspec(uuid("C1BF99CE-1A8C-11D2-8175-006008055BB5"))
+NOVTABLE CellClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Cell;

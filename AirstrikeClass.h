@@ -9,7 +9,8 @@ class TechnoClass;
 class FootClass;
 
 //The AirstrikeClass handles the airstrikes Boris calls in.
-class NOVTABLE AirstrikeClass : public AbstractClass
+class __declspec(uuid("70DE3921-1E26-11D5-8F95-00A02483489C"))
+NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Airstrike;

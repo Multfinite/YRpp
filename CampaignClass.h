@@ -1,7 +1,6 @@
 #pragma once
 
 
-class NOVTABLE CampaignClass : public AbstractTypeClass {
 
 #include "GeneralDefinitions.h"
 #include "CCINIClass.h"
@@ -18,6 +17,9 @@ protected:
 		: AbstractTypeClass(noinit_t())
 	{ }
 
+class __declspec(uuid("FFDAC848-1517-11D2-8175-006008055BB5"))
+NOVTABLE CampaignClass : public AbstractTypeClass
+{
 public:
 	static void __fastcall CreateFromINIList(CCINIClass *pINI)
 		{ JMP_STD(0x46CE10); }

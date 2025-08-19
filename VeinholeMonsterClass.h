@@ -49,7 +49,8 @@ public:
 	bool* CellIndexesWithVeins;
 };
 
-class NOVTABLE VeinholeMonsterClass : public ObjectClass
+class __declspec(uuid("5192D06A-C632-11D2-B90B-006008C809ED"))
+NOVTABLE VeinholeMonsterClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::VeinholeMonster;

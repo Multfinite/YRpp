@@ -29,7 +29,8 @@ struct SpawnControl
 	BOOL IsSpawnMissile;
 };
 
-class NOVTABLE SpawnManagerClass : public AbstractClass
+class __declspec(uuid("0679E981-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE SpawnManagerClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::SpawnManager;

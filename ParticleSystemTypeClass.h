@@ -6,7 +6,8 @@
 
 #include "ObjectTypeClass.h"
 
-class NOVTABLE ParticleSystemTypeClass : public ObjectTypeClass
+class __declspec(uuid("703E044A-0FB1-11D2-8172-006008055BB5"))
+NOVTABLE ParticleSystemTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::ParticleSystemType;

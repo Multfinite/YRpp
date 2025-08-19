@@ -9,7 +9,8 @@
 
 class ObjectClass;
 
-class NOVTABLE AlphaShapeClass : public AbstractClass
+class __declspec(uuid("623C7584-74E7-11D2-B8F5-006008C809ED"))
+NOVTABLE AlphaShapeClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::AlphaShape;

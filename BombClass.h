@@ -7,7 +7,8 @@ class ObjectClass;
 class TechnoClass;
 class HouseClass;
 
-class NOVTABLE BombClass : public AbstractClass
+class __declspec(uuid("0679E983-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE BombClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Bomb;

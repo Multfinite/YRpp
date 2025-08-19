@@ -9,7 +9,8 @@ class CellClass;
 class ScriptClass;
 class TagClass;
 
-class NOVTABLE TeamClass : public AbstractClass
+class __declspec(uuid("0E272DCF-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE TeamClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Team;

@@ -2,7 +2,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE TubeClass : public AbstractClass
+class __declspec(uuid("0B4CA41C-B3A7-11D1-B457-006097C7A979"))
+NOVTABLE TubeClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Tube;

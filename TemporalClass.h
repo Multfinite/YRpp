@@ -6,7 +6,8 @@ class SuperClass;
 class TechnoClass;
 
 //The AirstrikeClass handles the airstrikes Boris calls in.
-class NOVTABLE TemporalClass : public AbstractClass
+class __declspec(uuid("94112424-E403-11D3-8E6E-005004AAB2FB"))
+NOVTABLE TemporalClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Temporal;

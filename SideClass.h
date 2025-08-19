@@ -6,7 +6,8 @@
 
 #include "AbstractTypeClass.h"
 
-class NOVTABLE SideClass : public AbstractTypeClass
+class __declspec(uuid("C53DD372-151E-11D2-8175-006008055BB5"))
+NOVTABLE SideClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Side;

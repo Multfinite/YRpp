@@ -1,7 +1,9 @@
 #pragma once
 
-class NOVTABLE DropPodLocomotionClass : public LocomotionClass, public IPiggyback
 #include "LocomotionClass.h"
+
+class __declspec(uuid("4A582745-9839-11d1-B709-00A024DDAFD1"))
+NOVTABLE DropPodLocomotionClass : public LocomotionClass, public IPiggyback
 {
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7E8278;

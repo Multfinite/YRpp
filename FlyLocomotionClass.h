@@ -4,7 +4,8 @@
 
 #include "LocomotionClass.h"
 
-class NOVTABLE FlyLocomotionClass : public LocomotionClass
+class __declspec(uuid("4A582746-9839-11d1-B709-00A024DDAFD1"))
+NOVTABLE FlyLocomotionClass : public LocomotionClass
 {
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7E89F4;

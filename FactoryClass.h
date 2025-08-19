@@ -11,7 +11,8 @@ class HouseClass;
 class TechnoClass;
 class TechnoTypeClass;
 
-class NOVTABLE FactoryClass : public AbstractClass
+class __declspec(uuid("34ECD9A8-0AB0-11D2-ACA7-006008055BB5"))
+NOVTABLE FactoryClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Factory;

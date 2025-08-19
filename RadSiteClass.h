@@ -9,7 +9,8 @@
 class LightSourceClass;
 class WeaponTypeClass;
 
-class NOVTABLE RadSiteClass : public AbstractClass
+class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
+NOVTABLE RadSiteClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::RadSite;

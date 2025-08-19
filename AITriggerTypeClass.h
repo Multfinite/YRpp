@@ -20,7 +20,8 @@ struct AITriggerConditionComparator
 	int ComparatorOperand;
 };
 
-class NOVTABLE AITriggerTypeClass : public AbstractTypeClass
+class __declspec(uuid("BA093524-4CF4-11D2-BC26-00104B8FB04D"))
+NOVTABLE AITriggerTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::AITriggerType;

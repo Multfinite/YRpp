@@ -14,7 +14,8 @@ struct ScriptActionNode
 
 class TechnoTypeClass;
 
-class NOVTABLE ScriptTypeClass : public AbstractTypeClass
+class __declspec(uuid("42F3A647-0789-11D2-ACA5-006008055BB5"))
+NOVTABLE ScriptTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::ScriptType;

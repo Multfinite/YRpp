@@ -6,7 +6,8 @@ class SuperClass;
 class TechnoClass;
 class TeamTypeClass;
 
-class NOVTABLE TEventClass : public AbstractClass
+class __declspec(uuid("4F0EC393-0A55-11D2-ACA7-006008055BB5"))
+NOVTABLE TEventClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Event;

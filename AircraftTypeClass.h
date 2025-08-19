@@ -2,7 +2,8 @@
 
 #include "TechnoTypeClass.h"
 
-class NOVTABLE AircraftTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33D9-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE AircraftTypeClass : public TechnoTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::AircraftType;

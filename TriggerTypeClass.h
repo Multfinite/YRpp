@@ -8,7 +8,8 @@ class TActionClass;
 class TEventClass;
 class TagTypeClass;
 
-class NOVTABLE TriggerTypeClass : public AbstractTypeClass
+class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
+NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::TriggerType;

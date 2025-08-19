@@ -4,7 +4,8 @@
 
 #include "LocomotionClass.h"
 
-class NOVTABLE JumpjetLocomotionClass : public LocomotionClass, public IPiggyback
+class __declspec(uuid("92612C46-F71F-11d1-AC9F-006008055BB5"))
+NOVTABLE JumpjetLocomotionClass : public LocomotionClass, public IPiggyback
 {
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7ECD68;

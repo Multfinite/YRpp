@@ -9,7 +9,8 @@ class TagTypeClass;
 class TriggerTypeClass;
 class TriggerClass;
 
-class NOVTABLE TActionClass : public AbstractClass
+class __declspec(uuid("4F0EC392-0A55-11D2-ACA7-006008055BB5"))
+NOVTABLE TActionClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Action;

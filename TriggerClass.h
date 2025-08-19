@@ -6,7 +6,8 @@ class ObjectClass;
 class TechnoClass;
 class TriggerTypeClass;
 
-class NOVTABLE TriggerClass : public AbstractClass
+class __declspec(uuid("C02D1590-0A2A-11D2-ACA7-006008055BB5"))
+NOVTABLE TriggerClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Trigger;

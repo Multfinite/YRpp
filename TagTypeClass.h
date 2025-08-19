@@ -6,7 +6,8 @@
 class CCINIClass;
 class TriggerTypeClass;
 
-class NOVTABLE TagTypeClass : public AbstractTypeClass
+class __declspec(uuid("54F6E433-09ED-11D2-ACA5-006008055BB5"))
+NOVTABLE TagTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::TagType;

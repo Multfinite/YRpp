@@ -11,6 +11,8 @@ class AnimTypeClass;
 class OverlayTypeClass;
 
 class TiberiumLogic
+class __declspec(uuid("C53DD373-151E-11D2-8175-006008055BB5"))
+NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
 	void Construct(int nCount = PriorityQueueClassNode::SurfaceDataCount())
@@ -46,8 +48,6 @@ public:
 	CDTimerClass Timer;
 };
 
-class NOVTABLE TiberiumClass : public AbstractTypeClass
-{
 public:
 	static const AbstractType AbsID = AbstractType::Tiberium;
 

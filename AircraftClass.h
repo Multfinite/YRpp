@@ -8,7 +8,8 @@
 #include "AircraftTypeClass.h"
 
 //AircraftClass
-class NOVTABLE AircraftClass : public FootClass, public IFlyControl
+class __declspec(uuid("0E272DC2-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE AircraftClass : public FootClass, public IFlyControl
 {
 public:
 	static const AbstractType AbsID = AbstractType::Aircraft;

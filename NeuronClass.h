@@ -6,7 +6,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE NeuronClass : public AbstractClass
+class __declspec(uuid("241AB316-4CF5-11D2-BC26-00104B8FB04D"))
+NOVTABLE NeuronClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Neuron;

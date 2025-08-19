@@ -10,7 +10,8 @@
 class AnimClass;
 class HouseClass;
 
-class NOVTABLE SuperClass : public AbstractClass
+class __declspec(uuid("D7F754C6-391C-11D2-9B64-00104B972FE8"))
+NOVTABLE SuperClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Super;

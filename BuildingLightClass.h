@@ -3,7 +3,8 @@
 #include "GeneralStructures.h"
 #include "ObjectClass.h"
 
-class NOVTABLE BuildingLightClass : public ObjectClass
+class __declspec(uuid("54822258-D8A8-11D1-B462-006097C6A979"))
+NOVTABLE BuildingLightClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::BuildingLight;

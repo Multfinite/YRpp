@@ -159,7 +159,8 @@ struct DropshipStruct
 };
 
 //--- Here we go, finally...
-class NOVTABLE HouseClass : public AbstractClass, public IHouse, public IPublicHouse, public IConnectionPointContainer
+class __declspec(uuid("D9D4A910-87C6-11D1-B707-00A024DDAFD1"))
+NOVTABLE HouseClass : public AbstractClass, public IHouse, public IPublicHouse, public IConnectionPointContainer
 {
 public:
 	static const AbstractType AbsID = AbstractType::House;

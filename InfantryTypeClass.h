@@ -32,7 +32,8 @@ struct SequenceStruct
 	SubSequenceStruct Sequences[42];
 };
 
-class NOVTABLE InfantryTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33D8-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE InfantryTypeClass : public TechnoTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::InfantryType;

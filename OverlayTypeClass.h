@@ -8,7 +8,8 @@
 
 class AnimTypeClass;
 
-class NOVTABLE OverlayTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE79-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE OverlayTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::OverlayType;

@@ -11,7 +11,8 @@ class AircraftTypeClass;
 class InfantryTypeClass;
 class UnitTypeClass;
 
-class NOVTABLE HouseTypeClass : public AbstractTypeClass
+class __declspec(uuid("1DD43928-046B-11D2-ACA4-006008055BB5"))
+NOVTABLE HouseTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::HouseType;

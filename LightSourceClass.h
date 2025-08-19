@@ -6,7 +6,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE LightSourceClass : public AbstractClass
+class __declspec(uuid("6F9C48F0-1207-11D2-8174-006008055BB5"))
+NOVTABLE LightSourceClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::LightSource;

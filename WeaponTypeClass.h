@@ -11,7 +11,8 @@ class BulletTypeClass;
 class ParticleSystemTypeClass;
 class WarheadTypeClass;
 
-class NOVTABLE WeaponTypeClass : public AbstractTypeClass
+class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
+NOVTABLE WeaponTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::WeaponType;

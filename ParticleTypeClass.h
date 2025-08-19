@@ -9,7 +9,8 @@
 class WarheadTypeClass;
 class RGBClass;
 
-class NOVTABLE ParticleTypeClass : public ObjectTypeClass
+class __declspec(uuid("703E044B-0FB1-11D2-8172-006008055BB5"))
+NOVTABLE ParticleTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::ParticleType;

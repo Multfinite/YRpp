@@ -26,7 +26,8 @@ struct BuildingAnimFrameStruct
 	int FrameDuration;
 };
 
-class NOVTABLE BuildingTypeClass : public TechnoTypeClass
+class __declspec(uuid("AE8B33DB-061C-11D2-ACA4-006008055BB5"))
+NOVTABLE BuildingTypeClass : public TechnoTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::BuildingType;

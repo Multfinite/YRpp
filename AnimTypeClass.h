@@ -10,7 +10,8 @@ class OverlayTypeClass;
 class ParticleTypeClass;
 class WarheadTypeClass;
 
-class NOVTABLE AnimTypeClass : public ObjectTypeClass
+class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
+NOVTABLE AnimTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::AnimType;

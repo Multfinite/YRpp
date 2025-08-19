@@ -6,7 +6,8 @@
 
 #include "AbstractClass.h"
 
-class NOVTABLE EMPulseClass : public AbstractClass
+class __declspec(uuid("B825CB22-200E-11D2-9FA9-0060089AD458"))
+NOVTABLE EMPulseClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::EMPulse;

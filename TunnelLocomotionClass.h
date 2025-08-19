@@ -4,7 +4,8 @@
 
 #include "LocomotionClass.h"
 
-class __declspec(align(4)) NOVTABLE TunnelLocomotionClass : public LocomotionClass
+class __declspec(uuid("4A582743-9839-11d1-B709-00A024DDAFD1"))
+NOVTABLE TunnelLocomotionClass : public LocomotionClass
 {
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7F5A24;

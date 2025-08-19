@@ -7,7 +7,8 @@
 #include "FootClass.h"
 #include "InfantryTypeClass.h"
 
-class NOVTABLE InfantryClass : public FootClass
+class __declspec(uuid("0E272DC4-9C0F-11D1-B709-00A024DDAFD1"))
+NOVTABLE InfantryClass : public FootClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Infantry;

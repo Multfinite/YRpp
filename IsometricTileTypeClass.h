@@ -2,7 +2,8 @@
 
 #include "ObjectTypeClass.h"
 
-class NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
+class __declspec(uuid("5AF2CE7A-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::IsotileType;

@@ -4,7 +4,8 @@
 
 class TechnoClass;
 
-class NOVTABLE UnitTypeClass : public TechnoTypeClass
+class __declspec(uuid("DCBD42EA-0546-11D2-ACA4-006008055BB5"))
+NOVTABLE UnitTypeClass : public TechnoTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::UnitType;

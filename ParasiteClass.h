@@ -5,7 +5,8 @@
 class AnimClass;
 class FootClass;
 
-class NOVTABLE ParasiteClass : public AbstractClass
+class __declspec(uuid("1D016B81-B24B-11D3-BE16-00104B62A16C"))
+NOVTABLE ParasiteClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Parasite;

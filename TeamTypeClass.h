@@ -13,7 +13,8 @@ class TagClass;
 class TeamClass;
 class TechnoTypeClass;
 
-class NOVTABLE TeamTypeClass : public AbstractTypeClass
+class __declspec(uuid("D1DBA64E-0778-11D2-ACA5-006008055BB5"))
+NOVTABLE TeamTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::TeamType;

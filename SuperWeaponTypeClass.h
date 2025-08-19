@@ -12,7 +12,8 @@ class BuildingTypeClass;
 class ObjectClass;
 class WeaponTypeClass;
 
-class NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
+class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
+NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::SuperWeaponType;

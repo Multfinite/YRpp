@@ -10,7 +10,8 @@ class LaserDrawClass;
 class TechnoClass;
 class WeaponTypeClass;
 
-class NOVTABLE DiskLaserClass : public AbstractClass
+class __declspec(uuid("5230C9A8-846A-47EC-BDA2-7E95445E1D49"))
+NOVTABLE DiskLaserClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::DiskLaser;

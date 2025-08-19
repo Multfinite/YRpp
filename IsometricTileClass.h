@@ -4,7 +4,8 @@
 
 class IsometricTileTypeClass;
 
-class NOVTABLE IsometricTileClass : public ObjectClass
+class __declspec(uuid("5AF2CE7A-0634-11D2-ACA4-006008055BB5"))
+NOVTABLE IsometricTileClass : public ObjectClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::Isotile;

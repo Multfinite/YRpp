@@ -18,7 +18,8 @@ struct ControlNode
 	DECLARE_PROPERTY(CDTimerClass, LinkDrawTimer);
 };
 
-class NOVTABLE CaptureManagerClass : public AbstractClass
+class __declspec(uuid("0679E982-AD9D-11D3-BE16-00104B62A16C"))
+NOVTABLE CaptureManagerClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::CaptureManager;

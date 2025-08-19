@@ -14,7 +14,8 @@ struct TaskForceEntryStruct
 	TechnoTypeClass* Type;
 };
 
-class NOVTABLE TaskForceClass : public AbstractTypeClass
+class __declspec(uuid("61DE341E-0774-11D2-ACA5-006008055BB5"))
+NOVTABLE TaskForceClass : public AbstractTypeClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::TaskForce;

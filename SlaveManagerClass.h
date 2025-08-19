@@ -25,7 +25,8 @@ enum class SlaveControlStatus : unsigned int {
 	Dead = 6
 };
 
-class NOVTABLE SlaveManagerClass : public AbstractClass
+class __declspec(uuid("335AAFE4-2DA6-11D5-BE22-00104B62A16C"))
+NOVTABLE SlaveManagerClass : public AbstractClass
 {
 public:
 
