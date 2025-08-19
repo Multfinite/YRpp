@@ -11,7 +11,21 @@ class __declspec(uuid("42F3A646-0789-11D2-ACA5-006008055BB5"))
 NOVTABLE ScriptClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Script;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F0F78;
+            this->IRTTITypeInfo = 0x7F0F5C;
+            this->INoticeSink = 0x7F0F54;
+            this->INoticeSource = 0x7F0F4C;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Script;
+    static constexpr uintptr_t AbsVTable = 0x7F0F78;
+    static constexpr size_t ClassSize = 0x30;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -45,23 +59,19 @@ public:
 	bool HasNextMission() const
 		{ JMP_THIS(0x6915B0); }
 
-	//Constructor
-	ScriptClass(ScriptTypeClass* pType) noexcept
-		: AbstractClass(noinit_t())
-	{ JMP_THIS(0x6913C0); }
 
 protected:
-	explicit __forceinline ScriptClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+    /*! @brief FAKE CTOR */
+    explicit __forceinline ScriptClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
 
 	ScriptTypeClass * Type;
 	int field_28;
 	int CurrentMission;
+    ScriptClass(ScriptTypeClass* pType) : ScriptClass(fake_noinit_t{}) JMP_THIS(0x6913C0);
 };
+static_assert(sizeof(ScriptClass) == ScriptClass::ClassSize);

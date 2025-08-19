@@ -8,7 +8,7 @@ class __declspec(uuid("4A582746-9839-11d1-B709-00A024DDAFD1"))
 NOVTABLE FlyLocomotionClass : public LocomotionClass
 {
 public:
-	static constexpr uintptr_t ILocoVTable = 0x7E89F4;
+	using base_type = LocomotionClass;
 
 	//IUnknown
 	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) R0;
@@ -41,20 +41,22 @@ public:
 
 	//FlyLocomotionClass
 
-	//Constructor
-	FlyLocomotionClass()
-		: LocomotionClass(noinit_t())
-	{ JMP_THIS(0x4CC9A0); }
-
-protected:
-	explicit __forceinline FlyLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E8AC0;
+			this->ILocomotion = 0x7E89F4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t ILocoVTable = 0x7E89F4;
+	static constexpr size_t ClassSize = 0x60;
 public:
 
 	bool AirportBound;
@@ -74,4 +76,9 @@ public:
 	bool unknown_bool_5D;
 	bool unknown_bool_5E;
 	bool unknown_bool_5F;
+protected:
+	explicit __forceinline FlyLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
+public:
+	FlyLocomotionClass() : LocomotionClass(noinit_t{}) JMP_THIS(0x4CC9A0);
 };
+static_assert(sizeof(FlyLocomotionClass) == FlyLocomotionClass::ClassSize);

@@ -15,7 +15,22 @@ class __declspec(uuid("1DD43928-046B-11D2-ACA4-006008055BB5"))
 NOVTABLE HouseTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::HouseType;
+	using base_type = AbstractTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EAB58;
+			this->IRTTITypeInfo = 0x7EAB3C;
+			this->INoticeSink = 0x7EAB34;
+			this->INoticeSource = 0x7EAB2C;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::HouseType;
+	static constexpr uintptr_t AbsVTable = 0x7EAB58;
+	static constexpr size_t ClassSize = 0x1B0;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
@@ -45,16 +60,6 @@ public:
 
 	static signed int __fastcall FindIndexOfName(const char *name)
 		{ JMP_STD(0x5117D0); }
-
-	//Constructor
-	HouseTypeClass(const char* pID) noexcept
-		: HouseTypeClass(noinit_t())
-	{ JMP_THIS(0x5113F0); }
-
-protected:
-	explicit __forceinline HouseTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -116,4 +121,10 @@ public:
 	bool           WallOwner;
 	bool           SmartAI; //"smart"?
 	PROTECTED_PROPERTY(BYTE, padding_1A9[7]);
+protected:
+	explicit __forceinline HouseTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
+public:
+	HouseTypeClass(noinit_t) noexcept : HouseTypeClass(fake_noinit_t{}) JMP_THIS(0x511650);
+	HouseTypeClass(const char* pId) : HouseTypeClass(fake_noinit_t{}) JMP_THIS(0x5113F0);
 };
+static_assert(sizeof(HouseTypeClass) == HouseTypeClass::ClassSize);

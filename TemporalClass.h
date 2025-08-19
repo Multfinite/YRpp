@@ -10,8 +10,23 @@ class __declspec(uuid("94112424-E403-11D3-8E6E-005004AAB2FB"))
 NOVTABLE TemporalClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Temporal;
-	static constexpr uintptr_t AbsVTable = 0x7F5180;
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F5180;
+            this->IRTTITypeInfo = 0x7F5164;
+            this->INoticeSink = 0x7F515C;
+            this->INoticeSource = 0x7F5154;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Temporal;
+    static constexpr uintptr_t AbsVTable = 0x7F5180;
+    static constexpr size_t ClassSize = 0x50;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TemporalClass*>, Array, 0xB0EC60u)
@@ -47,19 +62,13 @@ public:
 	void Detach()
 		{ JMP_THIS(0x71ADE0); }
 
-	//Constructor
-	TemporalClass(TechnoClass* pOwnerUnit) noexcept
-		: TemporalClass(noinit_t())
-	{ JMP_THIS(0x71A4E0); }
 
 protected:
-	explicit __forceinline TemporalClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TemporalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -74,4 +83,8 @@ public:
 
 	int                WarpRemaining;
 	int                WarpPerStep;
+    TemporalClass() : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A450);
+    TemporalClass(noinit_t) noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A5A0);
+    TemporalClass(TechnoClass* pOwnerUnit) : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A4E0);
 };
+static_assert(sizeof(TemporalClass) == TemporalClass::ClassSize);

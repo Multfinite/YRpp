@@ -10,7 +10,7 @@ class __declspec(uuid("703E044A-0FB1-11D2-8172-006008055BB5"))
 NOVTABLE ParticleSystemTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::ParticleSystemType;
+    using base_type = ObjectTypeClass;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(ParticleSystemTypeClass, 0xA83D68u);
@@ -18,10 +18,24 @@ public:
 	{ JMP_STD(0x644890); }
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F00A8;
+            this->IRTTITypeInfo = 0x7F008C;
+            this->INoticeSink = 0x7F0084;
+            this->INoticeSource = 0x7F007C;
+        }
+    };
+    static inline vtables_t vtables{};
 
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+    static constexpr AbstractType AbsID = AbstractType::ParticleSystemType;
+    static constexpr uintptr_t AbsVTable = 0x7F00A8;
+    static constexpr size_t ClassSize = 0x310;
 
 	//Destructor
 	virtual ~ParticleSystemTypeClass() RX;
@@ -34,19 +48,14 @@ public:
 	virtual bool SpawnAtMapCoords(CellStruct* mcoords, HouseClass* owner) R0;
 	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
 
-	//Constructor
-	ParticleSystemTypeClass(const char* pID) noexcept
-		: ParticleSystemTypeClass(noinit_t())
-	{ JMP_THIS(0x6440A0); }
 
-protected:
-	explicit __forceinline ParticleSystemTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline ParticleSystemTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -73,4 +82,7 @@ public:
 	ColorStruct LaserColor;
 	bool     Laser;
 	bool     OneFrameLight;
+    ParticleSystemTypeClass(const char* pID) : ParticleSystemTypeClass(fake_noinit_t{}) JMP_THIS(0x6440A0);
+    ParticleSystemTypeClass(noinit_t) noexcept : ParticleSystemTypeClass(fake_noinit_t{}) JMP_THIS(0x644220);
 };
+static_assert(sizeof(ParticleSystemTypeClass) == ParticleSystemTypeClass::ClassSize);

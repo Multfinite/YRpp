@@ -18,7 +18,23 @@ class __declspec(uuid("42F3A647-0789-11D2-ACA5-006008055BB5"))
 NOVTABLE ScriptTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::ScriptType;
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F1008;
+            this->IRTTITypeInfo = 0x7F0FEC;
+            this->INoticeSink = 0x7F0FE4;
+            this->INoticeSource = 0x7F0FDC;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::ScriptType;
+    static constexpr uintptr_t AbsVTable = 0x7F1008;
+    static constexpr size_t ClassSize = 0x234;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(ScriptTypeClass, 0x8B41C8u);
@@ -43,19 +59,13 @@ public:
 	static bool LoadFromINIList(CCINIClass *pINI, bool IsGlobal)
 		{ JMP_STD(0x691970); }
 
-	//Constructor
-	ScriptTypeClass(const char* pID) noexcept
-		: ScriptTypeClass(noinit_t())
-	{ JMP_THIS(0x6916B0); }
 
 protected:
-	explicit __forceinline ScriptTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline ScriptTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -63,4 +73,6 @@ public:
 	bool     IsGlobal;
 	int      ActionsCount;
 	ScriptActionNode ScriptActions [50];
+    ScriptTypeClass(const char* pID) noexcept : ScriptTypeClass(fake_noinit_t{}) JMP_THIS(0x6916B0);
 };
+static_assert(sizeof(ScriptTypeClass) == ScriptTypeClass::ClassSize);

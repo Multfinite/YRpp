@@ -53,7 +53,23 @@ class __declspec(uuid("5192D06A-C632-11D2-B90B-006008C809ED"))
 NOVTABLE VeinholeMonsterClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::VeinholeMonster;
+	using base_type = ObjectClass;
+
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F66A8;
+			this->IRTTITypeInfo = 0x7F668C;
+			this->INoticeSink = 0x7F6684;
+			this->INoticeSource = 0x7F667C;
+		}
+	};
+	static inline vtables_t vtables{};
+
+	static constexpr AbstractType AbsID = AbstractType::VeinholeMonster;
+	static constexpr uintptr_t AbsVTable = 0x7F4680;
+	static constexpr size_t ClassSize = 0x108;
 
 	DEFINE_REFERENCE(bool*, IsCurrentPosAffected, 0xA83DC8u)
 	DEFINE_REFERENCE(SHPStruct*, VeinSHPData, 0xB1D2ECu)
@@ -186,16 +202,8 @@ public:
 				pVeins->Update();
 		}
 	}
-
-	VeinholeMonsterClass(CellStruct* pWhere) noexcept
-		: VeinholeMonsterClass(noinit_t())
-	{
-		JMP_THIS(0x74C5B0);
-	}
-
 protected:
-	explicit __forceinline VeinholeMonsterClass(noinit_t) noexcept
-		: ObjectClass(noinit_t()) { }
+	explicit __forceinline VeinholeMonsterClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) { }
 public:
 
 	DECLARE_PROPERTY(VeinholeLogic, GrowthLogic);
@@ -212,6 +220,7 @@ public:
 	char IsDead;
 	char DontPuffGas;
 	int VeinCount;
+	VeinholeMonsterClass(CellStruct* pWhere)	: VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C5B0);
+	VeinholeMonsterClass(noinit_t) noexcept : VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C420);
 };
-
-static_assert(sizeof(VeinholeMonsterClass) == 0x108); //264
+static_assert(sizeof(VeinholeMonsterClass) == VeinholeMonsterClass::ClassSize);

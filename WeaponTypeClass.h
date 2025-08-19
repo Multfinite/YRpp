@@ -15,13 +15,29 @@ class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
 NOVTABLE WeaponTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::WeaponType;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(WeaponTypeClass, 0x887568u);
 
 	static WeaponTypeClass* __fastcall FindOrAllocate(const char* id)
 	{ JMP_STD(0x772FA0); }
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F73B8;
+            this->IRTTITypeInfo = 0x7F739C;
+            this->INoticeSink = 0x7F7394;
+            this->INoticeSource = 0x7F738C;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::WeaponType;
+    static constexpr uintptr_t AbsVTable = 0x7F73B8;
+    static constexpr size_t ClassSize = 0x160;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -45,19 +61,13 @@ public:
 	ThreatType AllowedThreats()
 		{ JMP_THIS(0x772A90); }
 
-	//Constructor
-	WeaponTypeClass(const char* pID = nullptr)
-		: WeaponTypeClass(noinit_t())
-	{ JMP_THIS(0x771C70); }
 
 protected:
-	explicit __forceinline WeaponTypeClass(noinit_t)
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline WeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -124,4 +134,8 @@ public:
 	bool IsRadEruption;
 	int RadLevel;
 	bool IsMagBeam;
+    WeaponTypeClass(const char* pID = nullptr) noexcept : WeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x771C70);
+    WeaponTypeClass(noinit_t) noexcept : WeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x771F00);
 };
+
+static_assert(sizeof(WeaponTypeClass) == WeaponTypeClass::ClassSize);

@@ -10,7 +10,21 @@ class __declspec(uuid("54F6E433-09ED-11D2-ACA5-006008055BB5"))
 NOVTABLE TagTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TagType;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F45C4;
+            this->IRTTITypeInfo = 0x7F45A8;
+            this->INoticeSink = 0x7F45A0;
+            this->INoticeSource = 0x7F4598;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::TagType;
+    static constexpr uintptr_t AbsVTable = 0x7F45C4;
+    static constexpr size_t ClassSize = 0xA4;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
@@ -78,22 +92,19 @@ public:
 	bool ContainsTrigger(TriggerTypeClass* pTrigger) const
 		{ JMP_THIS(0x6E62E0); }
 
-	//Constructor
-	TagTypeClass(char const* pName) noexcept
-		: TagTypeClass(noinit_t())
-	{ JMP_THIS(0x5447C0); }
 
 protected:
-	explicit __forceinline TagTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TagTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 
 public:
 	int ArrayIndex;
 	TriggerPersistence Persistence;
 	TriggerTypeClass* FirstTrigger;
+    TagTypeClass(char const* pName) : TagTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
+    TagTypeClass(noinit_t) noexcept : TagTypeClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(TagTypeClass) == TagTypeClass::ClassSize);

@@ -15,13 +15,27 @@ class __declspec(uuid("0E272DC1-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE VoxelAnimClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::VoxelAnim;
+    using base_type = ObjectClass;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<VoxelAnimClass*>, Array, 0x887388u)
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F6318;
+            this->IRTTITypeInfo = 0x7F62FC;
+            this->INoticeSink = 0x7F62F4;
+            this->INoticeSource = 0x7F62EC;
+        }
+    };
+    static inline vtables_t vtables{};
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    static constexpr AbstractType AbsID = AbstractType::VoxelAnim;
+    static constexpr uintptr_t AbsVTable = 0x7F6318;
+    static constexpr size_t ClassSize = 0x148;
 
 	//IPersistStream
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
@@ -36,20 +50,13 @@ public:
 	//ObjectClass
 	//VoxelAnimClass
 
-	//Constructor
-	VoxelAnimClass(
-		VoxelAnimTypeClass* pVoxelAnimType, CoordStruct* pLocation,
-		HouseClass* pOwnerHouse) : VoxelAnimClass(noinit_t())
-	{ JMP_THIS(0x7493B0); }
 
 protected:
-	explicit __forceinline VoxelAnimClass(noinit_t)
-		: ObjectClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline VoxelAnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
 
@@ -67,4 +74,9 @@ public:
 	PROTECTED_PROPERTY(BYTE, unused_13D[3]);
 	int Duration; // counting down to zero
 	PROTECTED_PROPERTY(DWORD, unused_144);
+    VoxelAnimClass(VoxelAnimTypeClass* pVoxelAnimType, CoordStruct* pLocation, HouseClass* pOwnerHouse)
+        : VoxelAnimClass(fake_noinit_t{})
+        JMP_THIS(0x7493B0);
+    VoxelAnimClass() : VoxelAnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);
 };
+static_assert(sizeof(VoxelAnimClass) == VoxelAnimClass::ClassSize);

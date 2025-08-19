@@ -16,7 +16,23 @@ class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
 NOVTABLE SuperWeaponTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::SuperWeaponType;
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F4090;
+            this->IRTTITypeInfo = 0x7F4074;
+            this->INoticeSink = 0x7F406C;
+            this->INoticeSource = 0x7F4064;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::SuperWeaponType;
+    static constexpr uintptr_t AbsVTable = 0x7F4090;
+    static constexpr size_t ClassSize = 0x100;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(SuperWeaponTypeClass, 0xA8E330u);
@@ -42,19 +58,13 @@ public:
 	static SuperWeaponTypeClass * __fastcall FindFirstOfAction(Action Action)
 		{ JMP_STD(0x6CEEB0); }
 
-	//Constructor
-	SuperWeaponTypeClass(const char* pID) noexcept
-		: SuperWeaponTypeClass(noinit_t())
-	{ JMP_THIS(0x6CE5B0); }
 
 protected:
-	explicit __forceinline SuperWeaponTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline SuperWeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -90,4 +100,7 @@ public:
 	float   Range;
 	int     LineMultiplier;
 
+    SuperWeaponTypeClass(const char* pID) : SuperWeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x6CE5B0);
+    SuperWeaponTypeClass(noinit_t) noexcept : SuperWeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x6CE700);
 };
+static_assert(sizeof(SuperWeaponTypeClass) == SuperWeaponTypeClass::ClassSize);

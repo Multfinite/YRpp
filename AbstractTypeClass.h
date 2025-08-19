@@ -31,7 +31,22 @@ class CCINIClass;
 class NOVTABLE AbstractTypeClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Abstract;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x07E2000;
+			this->IRTTITypeInfo = 0x7E1FE4;
+			this->INoticeSink = 0x7E1FDC;
+			this->INoticeSource = 0x7E1FD4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E2000;
+	static constexpr RTTIType AbsID = RTTIType::Abstract;
+	static constexpr size_t ClassSize = 0x98;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
@@ -48,15 +63,10 @@ public:
 		return this->ID;
 	}
 
-	//Constructor
-	AbstractTypeClass(const char* pID) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ JMP_THIS(0x410800); }
 
 protected:
-	explicit __forceinline AbstractTypeClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
+	/*! @brief FAKE CTOR */
+	explicit __forceinline AbstractTypeClass(fake_noinit_t) noexcept{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -69,4 +79,7 @@ public:
 	char UINameLabel [0x20];
 	const wchar_t* UIName;
 	char Name [0x31];
+	AbstractTypeClass(noinit_t) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410960);
+	AbstractTypeClass(char* pId) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410800);
 };
+static_assert(sizeof(AbstractTypeClass) == AbstractTypeClass::ClassSize);

@@ -35,18 +35,18 @@ _COM_SMARTPTR_TYPEDEF(IApplication, __uuidof(IApplication));
 
 __interface INoticeSource
 {
-	virtual void __stdcall INoticeSource_Unknown() = 0;
+	virtual void __stdcall Issue() = 0;
 };
 
 __interface INoticeSink
 {
-	virtual bool __stdcall INoticeSink_Unknown(DWORD dwUnknown) = 0;
+	virtual bool __stdcall Respond(DWORD command) = 0;
 };
 
 __interface __declspec(uuid("170DAC82-12E4-11D2-8175-006008055BB5"))
 IRTTITypeInfo : IUnknown
 {
-	virtual AbstractType __stdcall What_Am_I() const = 0;
+	virtual RTTIType __stdcall What_Am_I() const = 0;
 	virtual int __stdcall Fetch_ID() const = 0;
 	virtual void __stdcall Create_ID() = 0;
 };
@@ -227,7 +227,7 @@ ILocomotion : IUnknown
 	virtual void __stdcall Unlimbo() = 0;
 
 	// Special tilting AI function.
-	virtual void __stdcall Tilt_Pitch_AI() = 0;
+	virtual void __stdcall Tilt_Pitch_Update() = 0;
 
 	// Locomotor becomes powered.
 	virtual bool __stdcall Power_On() = 0;

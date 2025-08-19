@@ -11,6 +11,25 @@
 class LocomotionClass : public IPersistStream, public ILocomotion
 {
 public:
+	/*!
+	* @brief use only for setting virtual tables in missing noinit ctors
+	*/
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t
+	{
+		uintptr_t IPersistStream;
+		uintptr_t ILocomotion;
+
+		constexpr vtables_t() noexcept :
+			IPersistStream(0x7EAEC0)
+			, ILocomotion(0x7EADF4)
+		{}
+
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+
+	static constexpr size_t ClassSize = 0x18;
+public:
 	class CLSIDs
 	{
 	public:
@@ -158,10 +177,6 @@ public:
 
 		return false;
 	}
-
-	//Constructors
-	LocomotionClass() { JMP_THIS(0x55A6C0); }
-
 protected:
 	explicit __forceinline LocomotionClass(noinit_t) noexcept { }
 
@@ -173,37 +188,28 @@ public:
 	bool Powered;
 	bool Dirty;
 	int RefCount;
+	LocomotionClass() JMP_THIS(0x55A6C0);
 };
+static_assert(sizeof(LocomotionClass) == LocomotionClass::ClassSize);
 
 namespace detail
 {
 	template<typename Base>
-	concept LocoIsDerived = std::derived_from<Base, LocomotionClass> && !std::is_same_v<LocomotionClass, Base>;
-
-	template<typename Base>
-	concept LocoHasILocoVtbl = requires { { Base::ILocoVTable }->std::convertible_to<const uintptr_t>; };
+	concept LocoHasILocoVtbl = std::derived_from<Base, LocomotionClass> && !std::is_same_v<LocomotionClass, Base> && requires
+	{
+		{ Base::ILocoVTable }->std::convertible_to<const uintptr_t>;
+	};
 }
 
 template<typename T>
-concept LocoCastEligible = std::is_pointer_v<T> && detail::LocoIsDerived<std::remove_cvref_t<std::remove_const_t<std::remove_pointer_t<T>>>>;
+concept LocoCastEligible = std::is_pointer_v<T> && detail::LocoHasILocoVtbl<std::remove_cvref_t<std::remove_const_t<std::remove_pointer_t<T>>>>;
 
 
 template <LocoCastEligible T>
 __forceinline T locomotion_cast(ILocomotion* iLoco)
 {
 	using Base = std::remove_cvref_t<std::remove_const_t<std::remove_pointer_t<T>>>;
-
-	if constexpr (detail::LocoHasILocoVtbl<Base>)
-	{
-		return VTable::Get(iLoco) == Base::ILocoVTable ? static_cast<T>(iLoco) : nullptr;
-	}
-	else
-	{
-		CLSID clsid;
-		IPersistPtr comPersist = iLoco;
-
-		return (SUCCEEDED(comPersist->GetClassID(&clsid)) && clsid == __uuidof(Base)) ? static_cast<T>(iLoco) : nullptr;
-	}
+	return VTable::Get(iLoco) == Base::ILocoVTable ? static_cast<T>(iLoco) : nullptr;
 }
 
 template<LocoCastEligible T>

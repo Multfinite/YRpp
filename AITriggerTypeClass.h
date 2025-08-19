@@ -24,7 +24,22 @@ class __declspec(uuid("BA093524-4CF4-11D2-BC26-00104B8FB04D"))
 NOVTABLE AITriggerTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::AITriggerType;
+	using base_type = AbstractTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E2A50;
+			this->IRTTITypeInfo = 0x7E2A34;
+			this->INoticeSink = 0x7E2A2C;
+			this->INoticeSource = 0x7E2A24;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::AITriggerType;
+	static constexpr uintptr_t AbsVTable = 0x7E2A50;
+	static constexpr size_t ClassSize = 0x110;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
@@ -148,21 +163,15 @@ public:
 
 	}
 
-	//Constructor
-	AITriggerTypeClass(const char* pID) noexcept
-		: AITriggerTypeClass(noinit_t())
-	{ JMP_THIS(0x41E350); }
-
 protected:
-	explicit __forceinline AITriggerTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	explicit __forceinline AITriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
+	AITriggerTypeClass(noinit_t) noexcept : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
+	AITriggerTypeClass(const char* pId) : AITriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x41E350);
 
 	AITriggerCondition ConditionType;
 	int              IsGlobal;
@@ -189,3 +198,4 @@ public:
 	int              unknown_10C;
 
 };
+static_assert(sizeof(AITriggerTypeClass) == AITriggerTypeClass::ClassSize);

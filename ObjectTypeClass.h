@@ -51,21 +51,24 @@ public:
 	void LoadVoxel()
 		{ JMP_STD(0x5F8110); }
 
-	//Constructor
-	ObjectTypeClass(const char* pID) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ JMP_THIS(0x5F7090); }
-
-protected:
-	explicit __forceinline ObjectTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	using base_type = AbstractTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EF2D8;
+			this->IRTTITypeInfo = 0x7EF2BC;
+			this->INoticeSink = 0xEF2B4;
+			this->INoticeSource = 0x7EF2AC;
+		}
+	};
+	static inline vtables_t vtables{};
 public:
+	static constexpr uintptr_t AbsVTable = 0x7EF2D8;
 
 	ColorStruct RadialColor;
 	BYTE          unused_9B;
@@ -118,4 +121,12 @@ public:
 	IndexClass<TurretWeaponVoxelIndexKey, VoxelCacheStruct*> VoxelTurretWeaponCache;
 	IndexClass<ShadowVoxelIndexKey, VoxelCacheStruct*> VoxelShadowCache;
 	IndexClass<TurretBarrelVoxelIndexKey, VoxelCacheStruct*> VoxelTurretBarrelCache;
+protected:
+	explicit __forceinline ObjectTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{})
+		, RadialColor{}, Armor{}, MainVoxel{}, TurretVoxel{}, BarrelVoxel{}, LineTrailColor{}
+		, VoxelMainCache{}, VoxelTurretWeaponCache{}, VoxelShadowCache{}, VoxelTurretBarrelCache{}
+	{ }
+
+	ObjectTypeClass(noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) JMP_THIS(0x5F7320);
+	ObjectTypeClass(const char* pId) : ObjectTypeClass(fake_noinit_t{}) JMP_THIS(0x5F7090);
 };

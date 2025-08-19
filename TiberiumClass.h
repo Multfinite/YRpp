@@ -47,9 +47,25 @@ public:
 	PriorityQueueClassNode* Nodes;
 	CDTimerClass Timer;
 };
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream =0x7F5728;
+            this->IRTTITypeInfo = 0x7F570C;
+            this->INoticeSink = 0x7F5704;
+            this->INoticeSource = 0x7F56FC;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Tiberium;
+    static constexpr uintptr_t AbsVTable = 0x7F5728;
+    static constexpr size_t ClassSize = 0x128;
 
 public:
-	static const AbstractType AbsID = AbstractType::Tiberium;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
@@ -86,20 +102,14 @@ public:
 		return Array.GetItemOrDefault(idx);
 	}
 
-	//Constructor
-	TiberiumClass(const char* pID)
-		: TiberiumClass(noinit_t())
-	{ JMP_THIS(0x7216C0); }
 
 protected:
-	explicit __forceinline TiberiumClass(noinit_t)
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TiberiumClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 public:
 
 	int ArrayIndex;
@@ -117,4 +127,6 @@ public:
 	int NumSlopes;
 	DECLARE_PROPERTY(TiberiumLogic, SpreadLogic);
 	DECLARE_PROPERTY(TiberiumLogic, GrowthLogic);
+    TiberiumClass(const char* pID) : TiberiumClass(fake_noinit_t{}) JMP_THIS(0x7216C0);
 };
+static_assert(sizeof(TiberiumClass) == TiberiumClass::ClassSize);

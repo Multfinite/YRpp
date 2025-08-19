@@ -20,7 +20,17 @@ public:
 class NOVTABLE WaypointPathClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Waypoint;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7F6E70;
+            this->IRTTITypeInfo = 0x7F6E54;
+            this->INoticeSink = 0x7F6E4C;
+            this->INoticeSource = 0x7F6E44;
+        }
+    };
+    static inline vtables_t vtables{};
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -49,16 +59,22 @@ public:
 	{ JMP_THIS(0x763810); }
 
 protected:
-	explicit __forceinline WaypointPathClass(noinit_t)
-		: AbstractClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline WaypointPathClass(fake_noinit_t) noexcept
+        : AbstractClass(fake_noinit_t{})
+    {}
 
 public:
 
 	int  CurrentWaypointIndex; //seems that way
 	DynamicVectorClass<WaypointClass> Waypoints; // actual path waypoints, no *
+    WaypointPathClass(int idx) noexcept : WaypointPathClass(fake_noinit_t{})
+        JMP_THIS(0x763810);
+    WaypointPathClass() noexcept : WaypointPathClass(fake_noinit_t{})
+        JMP_THIS(0x763730);
 };
+static_assert(sizeof(WaypointPathClass) == WaypointPathClass::ClassSize);

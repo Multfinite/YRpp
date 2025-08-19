@@ -8,6 +8,23 @@ class __declspec(uuid("4A582747-9839-11d1-B709-00A024DDAFD1"))
 NOVTABLE TeleportLocomotionClass : public LocomotionClass, public IPiggyback
 {
 public:
+	using base_type = LocomotionClass;
+
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		uintptr_t IPiggyBack;
+
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F50CC;
+			this->ILocomotion = 0x7F5000;
+			this->IPiggyBack = 0x7F4FDC;
+		}
+
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
 	static constexpr uintptr_t ILocoVTable = 0x7F5000;
 
 	//IUnknown
@@ -50,20 +67,11 @@ public:
 	virtual void vt_entry_28(DWORD dwUnk) RX;
 	virtual bool IsStill() R0;
 
-	//Constructor
-	TeleportLocomotionClass()
-		: TeleportLocomotionClass(noinit_t())
-	{ JMP_THIS(0x718000); }
-
-protected:
-	explicit __forceinline TeleportLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	static constexpr size_t ClassSize = 0x4C;
 public:
 
 	CoordStruct MovingDestination;	//Current destination
@@ -74,4 +82,9 @@ public:
 	int State;
 	CDTimerClass Timer;
 	ILocomotion* Piggybackee;
+protected:
+	explicit __forceinline TeleportLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
+public:
+	TeleportLocomotionClass() : TeleportLocomotionClass(noinit_t{}) JMP_THIS(0x718000);
 };
+static_assert(sizeof(TeleportLocomotionClass) == TeleportLocomotionClass::ClassSize);

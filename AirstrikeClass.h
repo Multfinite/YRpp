@@ -13,7 +13,6 @@ class __declspec(uuid("70DE3921-1E26-11D5-8F95-00A02483489C"))
 NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Airstrike;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -36,20 +35,26 @@ public:
 	void InvalidatePointer(void* ptr)
 	{ JMP_THIS(0x41D540); }
 
-	//Constructor
-	AirstrikeClass(TechnoClass* pOwner) noexcept
-		: AirstrikeClass(noinit_t())
-	{ JMP_THIS(0x41D380); }
-
-protected:
-	explicit __forceinline AirstrikeClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E29A8;
+			this->IRTTITypeInfo = 0x7E298C;
+			this->INoticeSink = 0x7E2984;
+			this->INoticeSource = 0x7E297C;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E29A8;
+	static constexpr AbstractType AbsID = AbstractType::Airstrike;
+	static constexpr size_t ClassSize = 0x60;
 public:
 
 	int AirstrikeTeam;			//As in the INI files.
@@ -68,4 +73,11 @@ public:
 	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
 	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
 	FootClass* FirstObject;
+protected:
+	explicit __forceinline AirstrikeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+public:
+	AirstrikeClass(noinit_t) noexcept : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
+	AirstrikeClass(TechnoClass* pOwner) : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D380);
+	AirstrikeClass() : AirstrikeClass(fake_noinit_t{}) JMP_THIS(0x41D300);
 };
+static_assert(sizeof(AirstrikeClass) == AirstrikeClass::ClassSize);

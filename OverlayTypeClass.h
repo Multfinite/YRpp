@@ -12,7 +12,23 @@ class __declspec(uuid("5AF2CE79-0634-11D2-ACA4-006008055BB5"))
 NOVTABLE OverlayTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::OverlayType;
+    using base_type = ObjectTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7EF600;
+            this->IRTTITypeInfo = 0x7EF5E4;
+            this->INoticeSink = 0x7EF5DC;
+            this->INoticeSource = 0x7EF5D4;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::OverlayType;
+    static constexpr uintptr_t AbsVTable = 0x7EF600;
+    static constexpr size_t ClassSize = 0x2BC;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(OverlayTypeClass, 0xA83D80u);
@@ -40,19 +56,13 @@ public:
 	//OverlayTypeClass
 	virtual void Draw(Point2D* pClientCoords, RectangleStruct* pClipRect, int nFrame) RX;
 
-	//Constructor
-	OverlayTypeClass(const char* pID) noexcept
-		: OverlayTypeClass(noinit_t())
-	{ JMP_THIS(0x5FE250); }
 
 protected:
-	explicit __forceinline OverlayTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline OverlayTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -77,4 +87,7 @@ public:
 	bool               IsARock;
 	ColorStruct RadarColor;
 
+    OverlayTypeClass(const char* pID) : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE250);
+    OverlayTypeClass(noinit_t) noexcept : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE3C0);
 };
+static_assert(sizeof(OverlayTypeClass) == OverlayTypeClass::ClassSize);

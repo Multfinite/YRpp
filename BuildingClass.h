@@ -30,8 +30,22 @@ class __declspec(uuid("0E272DC6-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE BuildingClass : public TechnoClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Building;
+	using base_type = TechnoClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3EBC;
+			this->IRTTITypeInfo = 0x7E3EA0;
+			this->INoticeSink = 0x7E3E98;
+			this->INoticeSource = 0x7E3E90;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::Building;
 	static constexpr uintptr_t AbsVTable = 0x7E3EBC;
+	static constexpr size_t ClassSize = 0x720;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<BuildingClass*>, Array, 0xA8EB40u)
@@ -242,19 +256,12 @@ public:
 		return this->AnimStates[static_cast<int>(slot)];
 	}
 
-	//Constructor
-	BuildingClass(BuildingTypeClass* pType, HouseClass* pOwner) noexcept
-		: BuildingClass(noinit_t())
-	{ JMP_THIS(0x43B740); }
-
 protected:
-	explicit __forceinline BuildingClass(noinit_t) noexcept
-		: TechnoClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+	/*! @brief FAKE CTOR */
+	explicit __forceinline BuildingClass(fake_noinit_t) noexcept : TechnoClass(fake_noinit_t{}) {}
 
 public:
 
@@ -348,4 +355,7 @@ public:
 	DWORD DelayBeforeFiring;
 
 	int BunkerState; // used in UpdateBunker and friends
+	BuildingClass(noinit_t) noexcept : TechnoClass(fake_noinit_t{}) { vtables.init(this); };
+	BuildingClass(InfantryTypeClass* pType, HouseClass* pOwner) noexcept : BuildingClass(fake_noinit_t{}) JMP_THIS(0x43B740);
 };
+static_assert(sizeof(BuildingClass) == BuildingClass::ClassSize);

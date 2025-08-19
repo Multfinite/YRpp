@@ -6,7 +6,23 @@ class __declspec(uuid("5AF2CE7A-0634-11D2-ACA4-006008055BB5"))
 NOVTABLE IsometricTileTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::IsotileType;
+    using base_type = ObjectTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7ECC48;
+            this->IRTTITypeInfo = 0x7ECC2C;
+            this->INoticeSink = 0x7ECC24;
+            this->INoticeSource = 0x7ECC1C;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::IsotileType;
+    static constexpr uintptr_t AbsVTable = 0x7ECC48;
+    static constexpr size_t ClassSize = 0x30C;
 
 	//Array
 	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileTypeClass*>, Array, 0xA8ED28u)
@@ -37,17 +53,6 @@ public:
 
 	//Destructor
 	virtual ~IsometricTileTypeClass() RX;
-
-	//Constructor
-	IsometricTileTypeClass(int ArrayIndex, int Minus65, int Zero1,
-		const char* pName, int Zero2) noexcept
-		: IsometricTileTypeClass(noinit_t())
-	{ JMP_THIS(0x5447C0); }
-
-protected:
-	explicit __forceinline IsometricTileTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -81,4 +86,13 @@ public:
 	bool AllowBurrowing;
 	bool AllowTiberium;
 	DWORD unk_308;
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline IsometricTileTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
+
+public:
+    IsometricTileTypeClass(int ArrayIndex, int Minus65, int Zero1,
+        const char* pName, int Zero2) noexcept : IsometricTileTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
+	IsometricTileTypeClass(noinit_t) noexcept : IsometricTileTypeClass(fake_noinit_t{}) JMP_THIS(0x544A00);
 };
+static_assert(sizeof(IsometricTileTypeClass) == IsometricTileTypeClass::ClassSize);

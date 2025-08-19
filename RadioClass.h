@@ -17,6 +17,21 @@ public:
 	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
 	//Destructor
+	using base_type = MissionClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F0508;
+			this->IRTTITypeInfo = 0x7F04EC;
+			this->INoticeSink = 0x7F04E4;
+			this->INoticeSource = 0x7F04DC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F0508;
+	static constexpr size_t ClassSize = 0xF0;
 	virtual ~RadioClass() RX;
 
 	//RadioClass
@@ -56,16 +71,8 @@ public:
 	void SetLinkCount(int count)
 		{ JMP_THIS(0x65AE60); }
 
-	//Constructor
-	RadioClass() noexcept
-		: RadioClass(noinit_t())
-	{ JMP_THIS(0x65A750); }
 
 protected:
-	explicit __forceinline RadioClass(noinit_t) noexcept
-		: MissionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -74,4 +81,9 @@ public:
 
 	RadioCommand LastCommands[3]; // new command updates these
 	DECLARE_PROPERTY(VectorClass<TechnoClass*>, RadioLinks);	//Docked units etc
+	/*! @brief FAKE CTOR */
+	explicit __forceinline RadioClass(fake_noinit_t) noexcept : MissionClass(fake_noinit_t{}) {}
+	RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);
+	RadioClass() : RadioClass(fake_noinit_t{}) JMP_THIS(0x65A750);
 };
+static_assert(sizeof(RadioClass) == RadioClass::ClassSize);

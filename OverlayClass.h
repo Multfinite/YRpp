@@ -40,7 +40,23 @@ class __declspec(uuid("0E272DC7-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE OverlayClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Overlay;
+    using base_type = ObjectClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7EF3D4;
+            this->IRTTITypeInfo = 0x7EF3CC;
+            this->INoticeSink = 0x7EF3B0;
+            this->INoticeSource = 0x7EF3A8;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Overlay;
+    static constexpr uintptr_t AbsVTable = 0x7EF3D4;
+    static constexpr size_t ClassSize = 0xB0;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
@@ -63,18 +79,18 @@ public:
 	static int __fastcall GetTiberiumType(int overlayTypeIndex)
 		{ JMP_THIS(0x5FDD20); }
 
-	//Constructor
-	OverlayClass(OverlayTypeClass* pType, const CellStruct& mapCoord, int flag) noexcept : OverlayClass(noinit_t())
-		{ JMP_THIS(0x5FC380); }
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 protected:
-	explicit OverlayClass(noinit_t) noexcept : ObjectClass(noinit_t())
-		{}
+    /*! @brief FAKE CTOR */
+    explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
 	OverlayTypeClass* Type;
+    OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) : OverlayClass(fake_noinit_t{}) JMP_THIS(0x5FC380);
+    OverlayClass(noinit_t) noexcept : OverlayClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(OverlayClass) == OverlayClass::ClassSize);

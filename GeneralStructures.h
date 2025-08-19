@@ -9,9 +9,13 @@
 #include "Facing.h"
 
 //used for cell coordinates/vectors
-using CellStruct = Vector2D<short>;
+using Cell = Vector2D<short>;
+using CellStruct = Cell;
 using Point2D = Vector2D<int>;
-using CoordStruct = Vector3D<int>;
+using Point3D = Vector3D<int>;
+using Point3Df = Vector3D<float>;
+using Coordinate = Vector3D<int>;
+using CoordStruct = Coordinate;
 
 struct BasePlanningCell {
 	int Weight;
@@ -32,4 +36,23 @@ struct BasePlanningCellContainer {
 	// for qsort
 	static int __cdecl Comparator(const void *, const void *)
 		{ JMP_STD(0x5108F0); }
+};
+
+struct __declspec(align(4)) VoxelCalcStruct
+{
+	RectangleStruct rect;
+	int datalength;
+	int spanmaybe;
+};
+
+struct __declspec(align(4)) PathType
+{
+	CellStruct Start;
+	int Cost;
+	int Length;
+	FacingType* Command;
+	int field_10;
+	int* Overlap;
+	CellStruct LastOverlap;
+	CellStruct LastFixup;
 };

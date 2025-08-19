@@ -39,7 +39,30 @@ struct StorageClass
 class NOVTABLE AbstractClass : public IPersistStream, public IRTTITypeInfo, public INoticeSink, public INoticeSource
 {
 public:
-	static const AbstractType AbsID = AbstractType::Abstract;
+	/*!
+	* @brief use only for setting virtual tables in missing noinit ctors
+	*/
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t
+	{
+		uintptr_t IPersistStream;
+		uintptr_t IRTTITypeInfo;
+		uintptr_t INoticeSink;
+		uintptr_t INoticeSource;
+
+		constexpr vtables_t() noexcept :
+			  IPersistStream(0x7E1F50)
+			, IRTTITypeInfo(0x7E1F34)
+			, INoticeSink(0x7E1F2C)
+			, INoticeSource(0x7E1F24)
+		{}
+
+		__forceinline void init(AbstractClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E1F50;
+	static constexpr RTTIType AbsID = RTTIType::Abstract;
+	static constexpr size_t ClassSize = 0x24;
 
 	DEFINE_REFERENCE(DynamicVectorClass<AbstractClass*>, Array, 0xB0F720u)
 	DEFINE_REFERENCE((IndexClass<int, int>), TargetIndex, 0xB0E840u)
@@ -142,15 +165,6 @@ public:
 		return this->UniqueID < rhs.UniqueID;
 	}
 
-	//Constructor : Don't call this!
-	AbstractClass() noexcept = delete;
-	/*
-	: AbstractClass(noinit_t())
-	{ JMP_THIS(0x410170); }
-	*/
-protected:
-	explicit __forceinline AbstractClass(noinit_t) noexcept
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -164,7 +178,13 @@ public:
 	LONG RefCount;
 	bool Dirty;		// for IPersistStream.
 	PROTECTED_PROPERTY(BYTE, padding_21[0x3]);
+protected:
+	/*! @brief FAKE CTOR */
+	explicit __forceinline AbstractClass(fake_noinit_t) noexcept {}
+	AbstractClass() : AbstractClass(fake_noinit_t{}) JMP_THIS(0x410170);
+	AbstractClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x4101C0);
 };
+static_assert(sizeof(AbstractClass) == AbstractClass::ClassSize);
 
 template<typename T>
 concept HasAbsVTable = std::is_base_of_v<AbstractClass,T> && requires {

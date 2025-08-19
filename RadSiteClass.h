@@ -13,7 +13,23 @@ class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
 NOVTABLE RadSiteClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::RadSite;
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F0810;
+            this->IRTTITypeInfo = 0x7F07F4;
+            this->INoticeSink = 0x7F07EC;
+            this->INoticeSource = 0x7F07E4;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::RadSite;
+    static constexpr uintptr_t AbsVTable = 0x7F0810;
+    static constexpr size_t ClassSize = 0x74;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<RadSiteClass*>, Array, 0xB04BD0u)
@@ -90,27 +106,14 @@ public:
 			static_cast<double>(this->RadTimeLeft) / static_cast<double>(this->RadDuration);
 	}
 
-	//Constructor
-	RadSiteClass()
-		: RadSiteClass(noinit_t())
-	{ JMP_THIS(0x65B1E0); }
 
-	RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) noexcept
-		: RadSiteClass()
-	{
-		SetBaseCell(&nBaseCoords);
-		SetSpread(nSpread);
-		SetRadLevel(nRadLevel);
-	}
 
 protected:
-	explicit __forceinline RadSiteClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline RadSiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
 
@@ -128,4 +131,13 @@ public:
 	int               IntensityDecrement; // Intensity decremented by this every time RadLightDelay elapses
 	int               RadDuration; // as currently set up, the rad site will stay for so many frames
 	int               RadTimeLeft; // the remaining frames. divided by RadDuration gives the factor
+    RadSiteClass() : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B1E0);
+    RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) : RadSiteClass()
+    {
+        SetBaseCell(&nBaseCoords);
+        SetSpread(nSpread);
+        SetRadLevel(nRadLevel);
+    }
+    RadSiteClass(noinit_t) noexcept : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B2A0);
 };
+static_assert(sizeof(RadSiteClass) == RadSiteClass::ClassSize);

@@ -184,7 +184,6 @@ struct RecoilData
 class NOVTABLE TechnoClass : public RadioClass
 {
 public:
-	static const auto AbsDerivateID = AbstractFlags::Techno;
 
 	DEFINE_REFERENCE(DynamicVectorClass<TechnoClass*>, Array, 0xA8EC78u)
 
@@ -449,6 +448,8 @@ public:
 
 	void DrawVoxelShadow(VoxelStruct* vxl, int shadow_index, VoxelIndexKey vxl_index_key, IndexClass<ShadowVoxelIndexKey, VoxelCacheStruct*>* shadow_cache,
 		RectangleStruct* bound, Point2D* a3, Matrix3D* matrix, bool again, Surface* surface, Point2D shadow_point)
+	using base_type = RadioClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		JMP_THIS(0x706BD0);
 	}
@@ -513,9 +514,20 @@ public:
 	{
 		// what TS does
 		if (maxHealth > 0 && this->Health > maxHealth)
+		constexpr vtables_t() noexcept : base_type::vtables_t()
 		{
 			return (this->WhatAmI() == AbstractType::Building) ? 3 : 1;
+			this->IPersistStream = 0x7F4960;
+			this->IRTTITypeInfo = 0x7F4944;
+			this->INoticeSink = 0x7F493C;
+			this->INoticeSource = 0x7F4934;
 		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F4960;
+	static constexpr auto AbsDerivateID = AbstractFlags::Techno;
+	static constexpr size_t ClassSize = 0x520;
 
 		return this->GetIonCannonValue(difficulty);
 	}
@@ -551,18 +563,6 @@ public:
 	// mind that this locks up the source too, Magnetron style
 	void ImbueLocomotor(FootClass* target, CLSID clsid)
 	{ JMP_THIS(0x710000); }
-
-	//Constructor
-	TechnoClass(HouseClass* pOwner) noexcept
-		: TechnoClass(noinit_t())
-	{
-		JMP_THIS(0x6F2B40);
-	}
-
-protected:
-	explicit __forceinline TechnoClass(noinit_t) noexcept
-		: RadioClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -781,4 +781,10 @@ public:
 	PlanningTokenClass* PlanningToken;
 	ObjectTypeClass* Disguise;
 	HouseClass*      DisguisedAsHouse;
+protected:
+	/*! @brief FAKE CTOR */
+	explicit __forceinline TechnoClass(fake_noinit_t) noexcept : RadioClass(fake_noinit_t{}) {}
+	TechnoClass(noinit_t) noexcept : TechnoClass(fake_noinit_t{}) JMP_THIS(0x6F4300);
+	TechnoClass(HouseClass* house) : TechnoClass(fake_noinit_t{}) JMP_THIS(0x6F2B40);
 };
+static_assert(sizeof(TechnoClass) == TechnoClass::ClassSize);

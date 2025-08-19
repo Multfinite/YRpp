@@ -13,7 +13,22 @@ class __declspec(uuid("4F0EC392-0A55-11D2-ACA7-006008055BB5"))
 NOVTABLE TActionClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Action;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F443C;
+			this->IRTTITypeInfo = 0x7F4420;
+			this->INoticeSink = 0x7F4418;
+			this->INoticeSource = 0x7F4410;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F443C;
+	static constexpr AbstractType AbsID = AbstractType::Action;
+	static constexpr size_t ClassSize = 0x94;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TActionClass*>, Array, 0xB0E658u)
@@ -268,20 +283,13 @@ public:
 	HouseClass* FindHouseByIndex(TriggerClass* pTrigger, int idxHouse) const
 		{ JMP_THIS(0x6E45E0); }
 
-	//Constructor
-	TActionClass() noexcept
-		: TActionClass(noinit_t())
-	{ JMP_THIS(0x71E6A0); }
 
 protected:
-	explicit __forceinline TActionClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	explicit __forceinline TActionClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
 	int                ArrayIndex;
 	TActionClass*      NextAction;
@@ -306,4 +314,7 @@ public:
 	char               Text[0x20];
 	PROTECTED_PROPERTY(BYTE, align_8D[3]);
 	int                Value; // multipurpose
+	TActionClass() : TActionClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
+	TActionClass(noinit_t) noexcept : TActionClass(fake_noinit_t{}) JMP_STD(0x6DD180);
 };
+static_assert(sizeof(TActionClass) == TActionClass::ClassSize);

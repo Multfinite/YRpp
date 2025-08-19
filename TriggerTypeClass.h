@@ -12,7 +12,23 @@ class __declspec(uuid("4104D740-D507-11D3-8C38-00A0C933BE44"))
 NOVTABLE TriggerTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TriggerType;
+    using base_type = AbstractTypeClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F5904;
+            this->IRTTITypeInfo = 0x7F58E8;
+            this->INoticeSink = 0x7F58E0;
+            this->INoticeSource = 0x7F58D8;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::TriggerType;
+    static constexpr uintptr_t AbsVTable = 0x7F5904;
+    static constexpr size_t ClassSize = 0xB4;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
@@ -84,20 +100,14 @@ public:
 	bool RemoveEvent(TEventClass* pEvent)
 		{ JMP_THIS(0x727A40); }
 
-	//Constructor
-	TriggerTypeClass(char const* pName)
-		: TriggerTypeClass(noinit_t())
-	{ JMP_THIS(0x726C80); }
 
 protected:
-	explicit __forceinline TriggerTypeClass(noinit_t)
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
 	int ArrayIndex;
 	bool Difficulty[3]; // easy = 0, normal = 1, hard = 2
@@ -108,4 +118,6 @@ public:
 	TriggerTypeClass* NextTrigger;
 	TEventClass* FirstEvent;
 	TActionClass* FirstAction;
+    TriggerTypeClass(char const* pName) : TriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x726C80);
 };
+static_assert(sizeof(TriggerTypeClass) == TriggerTypeClass::ClassSize);

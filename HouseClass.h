@@ -163,7 +163,29 @@ class __declspec(uuid("D9D4A910-87C6-11D1-B707-00A024DDAFD1"))
 NOVTABLE HouseClass : public AbstractClass, public IHouse, public IPublicHouse, public IConnectionPointContainer
 {
 public:
-	static const AbstractType AbsID = AbstractType::House;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		uintptr_t IHouse;
+		uintptr_t IPublicHouse;
+		uintptr_t IConnectionPointContainer;
+
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EA8A0;
+			this->IRTTITypeInfo = 0x7EA884;
+			this->INoticeSink = 0x7EA87C;
+			this->INoticeSource = 0x7EA874;
+			this->IHouse = 0x7EA834;
+			this->IPublicHouse = 0x7EA80C;
+			this->IConnectionPointContainer = 0x7EA7F4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7EA8A0;
+	static constexpr AbstractType AbsID = AbstractType::House;
+	static constexpr size_t ClassSize = 0x160B8;
 
 	// <Player @ A> and friends map to these constants
 	enum {PlayerAtA = 4475, PlayerAtB, PlayerAtC, PlayerAtD, PlayerAtE, PlayerAtF, PlayerAtG, PlayerAtH};
@@ -761,20 +783,13 @@ public:
 	bool AISupers()
 		{ JMP_THIS(0x50B1D0); }
 
-	//Constructor
-	HouseClass(HouseTypeClass* pCountry) noexcept
-		: HouseClass(noinit_t())
-	{ JMP_THIS(0x4F54A0); }
 
 protected:
-	explicit __forceinline HouseClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	explicit __forceinline HouseClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
 
 	int                   ArrayIndex;
@@ -1060,4 +1075,7 @@ public:
 	int TotalOwnedVehicleCost;
 	int TotalOwnedAircraftCost;
 	int PowerSurplus;
+	HouseClass(HouseTypeClass* pCountry) : HouseClass(fake_noinit_t{}) JMP_THIS(0x4F54A0);
+	HouseClass(noinit_t) noexcept : HouseClass(fake_noinit_t{}) JMP_THIS(0x4F5190);
 };
+static_assert(sizeof(HouseClass) == HouseClass::ClassSize);

@@ -18,7 +18,22 @@ class __declspec(uuid("5AF2CE77-0634-11D2-ACA4-006008055BB5"))
 NOVTABLE BulletTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::BulletType;
+	using base_type = ObjectTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E4948;
+			this->IRTTITypeInfo = 0x7E492C;
+			this->INoticeSink = 0x7E4924;
+			this->INoticeSource = 0x7E491C;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::BulletType;
+	static constexpr uintptr_t AbsVTable = 0x7E4948;
+	static constexpr size_t ClassSize = 0x2F8;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);
@@ -56,16 +71,6 @@ public:
 		int Speed,
 		bool Bright)
 		{ JMP_STD(0x46B050); }
-
-	//Constructor
-	BulletTypeClass(const char* pID) noexcept
-		: BulletTypeClass(noinit_t())
-	{ JMP_THIS(0x46BBC0); }
-
-protected:
-	explicit __forceinline BulletTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -115,4 +120,10 @@ public:
 	byte AnimHigh;
 	byte AnimRate;
 	bool Flat;
+protected:
+	explicit __forceinline BulletTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
+public:
+	BulletTypeClass(noinit_t) noexcept : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BDE0);
+	BulletTypeClass(const char* pId) : BulletTypeClass(fake_noinit_t{}) JMP_THIS(0x46BBC0);
 };
+static_assert(sizeof(BulletTypeClass) == BulletTypeClass::ClassSize);

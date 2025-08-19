@@ -7,9 +7,23 @@ class __declspec(uuid("54822258-D8A8-11D1-B462-006097C6A979"))
 NOVTABLE BuildingLightClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::BuildingLight;
-
-	//Static
+	using base_type = ObjectClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3AD0;
+			this->IRTTITypeInfo = 0x7E3AB4;
+			this->INoticeSink = 0x7E3AAC;
+			this->INoticeSource = 0x7E3AA4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::BuildingLight;
+	static constexpr uintptr_t AbsVTable = 0x7E3AD0;
+	static constexpr size_t ClassSize = 0xE8;
+public:
 	DEFINE_REFERENCE(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
 
 	//IPersist
@@ -29,16 +43,6 @@ public:
 	void SetBehaviour(SpotlightBehaviour mode)
 		{ JMP_THIS(0x436BE0); }
 
-	//Constructor
-	BuildingLightClass(ObjectClass* pOwner) noexcept
-		: BuildingLightClass(noinit_t())
-	{ JMP_THIS(0x435820); }
-
-protected:
-	explicit __forceinline BuildingLightClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -53,4 +57,10 @@ public:
 	SpotlightBehaviour BehaviourMode;
 	ObjectClass * FollowingObject;
 	TechnoClass * OwnerObject;
+protected:
+	explicit __forceinline BuildingLightClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
+public:
+	BuildingLightClass(noinit_t) noexcept : BuildingLightClass(fake_noinit_t{}) { vtables.init(this); }
+	BuildingLightClass(ObjectClass* pOwner) : BuildingLightClass(fake_noinit_t{}) JMP_THIS(0x435820);
 };
+static_assert(sizeof(BuildingLightClass) == BuildingLightClass::ClassSize);

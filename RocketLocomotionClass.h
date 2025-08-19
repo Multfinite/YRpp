@@ -39,23 +39,25 @@ public:
 
 	//RocketLocomotionClass
 
-	//Constructor
-	RocketLocomotionClass()
-		: RocketLocomotionClass(noinit_t())
-	{ JMP_THIS(0x661EC0); }
-
-protected:
-	explicit __forceinline RocketLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+	using base_type = LocomotionClass;
 
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F0BE8;
+			this->ILocomotion = 0x7F0B1C;
+		}
+	};
+	static inline vtables_t vtables{};
 public:
 
 	CoordStruct MovingDestination;
+	static constexpr uintptr_t ILocoVTable = 0x7F0B1C;
+	static constexpr size_t ClassSize = 0x60;
 	RateTimer MissionTimer;
 	CDTimerClass TrailerTimer;
 	int MissionState;
@@ -66,4 +68,9 @@ public:
 	float CurrentPitch;
 	DWORD unknown_58;
 	DWORD unknown_5C;
+protected:
+	explicit __forceinline RocketLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
+public:
+	RocketLocomotionClass() : RocketLocomotionClass(noinit_t{}) JMP_THIS(0x661EC0);
 };
+static_assert(sizeof(RocketLocomotionClass) == RocketLocomotionClass::ClassSize);

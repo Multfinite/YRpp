@@ -30,8 +30,22 @@ class __declspec(uuid("AE8B33DB-061C-11D2-ACA4-006008055BB5"))
 NOVTABLE BuildingTypeClass : public TechnoTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::BuildingType;
+	using base_type = TechnoTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E4570;
+			this->IRTTITypeInfo = 0x7E4554;
+			this->INoticeSink = 0x7E454C;
+			this->INoticeSource = 0x7E4544;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::BuildingType;
 	static constexpr uintptr_t AbsVTable = 0x7E4570;
+	static constexpr size_t ClassSize = 0x1798;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
@@ -91,16 +105,6 @@ public:
 	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const {
 		return this->BuildingAnim[static_cast<int>(slot)];
 	}
-
-	//Constructor
-	BuildingTypeClass(const char* pID) noexcept
-		: BuildingTypeClass(noinit_t())
-	{ JMP_THIS(0x45DD90); }
-
-protected:
-	explicit __forceinline BuildingTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -316,4 +320,10 @@ public:
 	int NumberOfDocks;
 	VectorClass<CoordStruct> DockingOffsets;
 private: DWORD align_1794;
+protected:
+	explicit __forceinline BuildingTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
+public:
+	BuildingTypeClass(noinit_t) noexcept : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45E520);
+	BuildingTypeClass(const char* pId) : BuildingTypeClass(fake_noinit_t{}) JMP_THIS(0x45DD90);
 };
+static_assert(sizeof(BuildingTypeClass) == BuildingTypeClass::ClassSize);

@@ -17,7 +17,23 @@ class __declspec(uuid("D1DBA64E-0778-11D2-ACA5-006008055BB5"))
 NOVTABLE TeamTypeClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TeamType;
+    using base_type = AbstractTypeClass;
+    
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F47D0;
+            this->IRTTITypeInfo = 0x7F47B4;
+            this->INoticeSink = 0x7F47AC;
+            this->INoticeSource = 0x7F47A4;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::TeamType;
+    static constexpr uintptr_t AbsVTable = 0x7F47D0;
+    static constexpr size_t ClassSize = 0xF8;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TeamTypeClass, 0xA8ECA0u);
@@ -72,19 +88,13 @@ public:
 	HouseClass* GetHouse() const
 		{ JMP_THIS(0x6F2070); }
 
-	//Constructor
-	TeamTypeClass(const char* pID) noexcept
-		: TeamTypeClass(noinit_t())
-	{ JMP_THIS(0x6F06E0); }
 
 protected:
-	explicit __forceinline TeamTypeClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TeamTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 
 public:
 
@@ -131,4 +141,6 @@ public:
 	bool     IsBaseDefense;
 	bool     OnlyTargetHouseEnemy;
 
+    TeamTypeClass(const char* pID) : TeamTypeClass(fake_noinit_t{}) JMP_THIS(0x6F06E0);
 };
+static_assert(sizeof(TeamTypeClass) == TeamTypeClass::ClassSize);

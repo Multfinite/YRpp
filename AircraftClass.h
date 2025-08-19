@@ -12,8 +12,26 @@ class __declspec(uuid("0E272DC2-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE AircraftClass : public FootClass, public IFlyControl
 {
 public:
-	static const AbstractType AbsID = AbstractType::Aircraft;
+	using base_type = TechnoClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		uintptr_t IFlyControl;
+
+		constexpr vtables_t() noexcept : base_type::vtables_t(), IFlyControl(0x7E2250)
+		{
+			this->IPersistStream = 0x7E22A4;
+			this->IRTTITypeInfo = 0x7E2288;
+			this->INoticeSink = 0x7E2280;
+			this->INoticeSource = 0x7E2278;
+		}
+
+		__forceinline void init(AircraftClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::Aircraft;
 	static constexpr uintptr_t AbsVTable = 0x7E22A4;
+	static constexpr size_t ClassSize = 0x6D8;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AircraftClass*>, Array, 0xA8E390u)
@@ -45,19 +63,6 @@ public:
 	//Destructor
 	virtual ~AircraftClass() RX;
 
-	//Constructor
-	AircraftClass(AircraftTypeClass* pType, HouseClass* pOwner) noexcept
-		: AircraftClass(noinit_t())
-	{ JMP_THIS(0x413D20); }
-
-	AbstractClass* FindFireLocation(AbstractClass* pTarget)
-		{ JMP_THIS(0x4197C0); }
-
-protected:
-	explicit __forceinline AircraftClass(noinit_t) noexcept
-		: FootClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -75,4 +80,14 @@ public:
 	char NumParadropsLeft;
 	bool IsCarryallNotLanding;
 	bool IsReturningFromAttackRun; // Aircraft finished attack run and/or went idle and is now returning from it
+protected:
+
+	/*! @brief FAKE CTOR */
+	explicit __forceinline AircraftClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
+	
+public:
+	//AircraftClass() {}
+	AircraftClass(noinit_t) noexcept : FootClass(fake_noinit_t{}) { vtables.init(this); }
+	AircraftClass(AircraftTypeClass* type, HouseClass* owner) : AircraftClass(fake_noinit_t{}) JMP_THIS(0x413D20);
 };
+static_assert(sizeof(AircraftClass) == AircraftClass::ClassSize);

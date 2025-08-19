@@ -10,7 +10,23 @@ class __declspec(uuid("4F0EC393-0A55-11D2-ACA7-006008055BB5"))
 NOVTABLE TEventClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Event;
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F5578;
+            this->IRTTITypeInfo = 0x7F555C;
+            this->INoticeSink = 0x7F5554;
+            this->INoticeSource = 0x7F554C; 
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Event;
+    static constexpr uintptr_t AbsVTable = 0x7F5578;
+    static constexpr size_t ClassSize = 0x58;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TEventClass*>, Array, 0xB0F1A0u)
@@ -60,21 +76,13 @@ public:
 	) const
 		JMP_THIS(0x71E940);
 
-	//Constructor
-	TEventClass() noexcept
-		: TEventClass(noinit_t())
-	{
-		JMP_THIS(0x71E6A0);
-	}
 
 protected:
-	explicit __forceinline TEventClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TEventClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
 	int ArrayIndex;
@@ -84,4 +92,7 @@ public:
 	int Value;
 	char String[0x1C];
 	HouseClass* House;
+    TEventClass() : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
+    TEventClass(noinit_t) noexcept : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E800);
 };
+static_assert(sizeof(TEventClass) == TEventClass::ClassSize);

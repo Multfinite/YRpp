@@ -8,10 +8,24 @@ class __declspec(uuid("4A582743-9839-11d1-B709-00A024DDAFD1"))
 NOVTABLE TunnelLocomotionClass : public LocomotionClass
 {
 public:
-	static constexpr uintptr_t ILocoVTable = 0x7F5A24;
 	DEFINE_REFERENCE(double const, TunnelMovementSpeed, 0x7F5B20u)
+	using base_type = LocomotionClass;
 
 	enum State
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F5AF0;
+			this->ILocomotion = 0x7F5A24;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t ILocoVTable = 0x7F5A24;
+	static constexpr size_t ClassSize = 0x3C;
+	DEFINE_REFERENCE(double, TunnelMovementSpeed, 0x7F5B20u)
+public:
 	{
 		Idle = 0,
 		PreDigIn = 1,
@@ -46,25 +60,18 @@ public:
 	bool ProcessDugOut()
 		{ JMP_THIS(0x729480); }
 
-	TunnelLocomotionClass()
-		: TunnelLocomotionClass(noinit_t())
-	{ JMP_THIS(0x728A00); }
 
 protected:
-	explicit __forceinline TunnelLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
-
+	explicit __forceinline TunnelLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
 public:
 
 	TunnelLocomotionClass::State State;
 	CoordStruct Coords;
 	RateTimer DigTimer;
 	bool bool38;
+	TunnelLocomotionClass()	: TunnelLocomotionClass(noinit_t{}) JMP_THIS(0x728A00);
 };
-
-static_assert(sizeof(TunnelLocomotionClass) == 0x3C);
+static_assert(sizeof(TunnelLocomotionClass) == TunnelLocomotionClass::ClassSize);

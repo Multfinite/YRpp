@@ -13,8 +13,22 @@ class __declspec(uuid("0E272DCA-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE UnitClass : public FootClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Unit;
+	using base_type = FootClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F5C70;
+			this->IRTTITypeInfo = 0x7F5C54;
+			this->INoticeSink = 0x7F5C4C;
+			this->INoticeSource = 0x7F5C44;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::Unit;
 	static constexpr uintptr_t AbsVTable = 0x7F5C70;
+	static constexpr size_t ClassSize = 0x8E8;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
@@ -91,20 +105,13 @@ public:
 	AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
 	bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
 
-
-	//Constructor
-	UnitClass(UnitTypeClass* pType, HouseClass* pOwner) noexcept : UnitClass(noinit_t())
-		{ JMP_THIS(0x7353C0); }
-
 protected:
-	explicit __forceinline UnitClass(noinit_t) noexcept
-		: FootClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	/*! @brief FAKE CTOR */
+	explicit __forceinline UnitClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 public:
 
 	int CurrentFiringFrame;
@@ -124,4 +131,7 @@ public:
 	int NonPassengerCount; // Set when unloading passengers. Units with TurretCount>0 will not unload the gunner.
 
 	wchar_t ToolTipText[0x100];
+	UnitClass(noinit_t) noexcept : FootClass(fake_noinit_t{}) { vtables.init(this); };
+	UnitClass(UnitTypeClass* type, HouseClass* house) : UnitClass(fake_noinit_t{}) JMP_THIS(0x7353C0);
 };
+static_assert(sizeof(UnitClass) == UnitClass::ClassSize);

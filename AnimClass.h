@@ -18,7 +18,22 @@ class __declspec(uuid("0E272DC3-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE AnimClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Anim;
+	using base_type = ObjectClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3354;
+			this->IRTTITypeInfo = 0x7E3338;
+			this->INoticeSink = 0x7E3330;
+			this->INoticeSource = 0x7E3328;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::Anim;
+	static constexpr uintptr_t AbsVTable = 0x7E3354;
+	static constexpr size_t ClassSize = 0x1C8;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, Array, 0xA8E9A8u)
@@ -56,13 +71,6 @@ public:
 		this->Unpaused = true;
 	}
 
-	//Constructor
-	// TODO fix
-	AnimClass(AnimTypeClass* pAnimType, const CoordStruct& Location, int LoopDelay = 0,
-		int LoopCount = 1, DWORD flags = 0x600, int ForceZAdjust = 0, bool reverse = false) noexcept
-		: AnimClass(noinit_t())
-	{ JMP_THIS(0x421EA0); }
-
 	// Anim start logic: sound event handling, tiberium chain reaction etc.
 	void Start() const
 		{ JMP_THIS(0x424CE0); }
@@ -70,11 +78,6 @@ public:
 	// Anim midpoint logic: particle spawning, smudges etc.
 	bool Middle() const
 		{ JMP_THIS(0x424F00); }
-
-protected:
-	explicit __forceinline AnimClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -123,4 +126,14 @@ public:
 	PROTECTED_PROPERTY(BYTE, unused_19F);
 	DECLARE_PROPERTY(AudioController, Audio3);
 	DECLARE_PROPERTY(AudioController, Audio4);
+protected:
+	explicit __forceinline AnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
+public:
+	AnimClass() : AnimClass(fake_noinit_t{}) JMP_THIS(0x7498D0);
+	AnimClass(noinit_t) noexcept : AnimClass(fake_noinit_t{}) JMP_THIS(0x422720);
+	AnimClass(AnimTypeClass* pAnimType, const CoordStruct& Location, int LoopDelay = 0,
+		int LoopCount = 1, DWORD flags = 0x600, int ForceZAdjust = 0, bool reverse = false) noexcept
+		: AnimClass(fake_noinit_t{})
+	JMP_THIS(0x421EA0);
 };
+static_assert(sizeof(AnimClass) == AnimClass::ClassSize);

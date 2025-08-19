@@ -27,8 +27,24 @@ class __declspec(uuid("C1BF99CE-1A8C-11D2-8175-006008055BB5"))
 NOVTABLE CellClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Cell;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E4EEC;
+			this->IRTTITypeInfo = 0x7E4ED0;
+			this->INoticeSink = 0x7E4EC8;
+			this->INoticeSource = 0x7E4EC0;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E4EEC;
+	static constexpr AbstractType AbsID = AbstractType::Cell;
+	static constexpr size_t ClassSize = 0x148;
 
+public:
 	static constexpr int BridgeLevels = 4;
 
 	// the height of a bridge in leptons
@@ -381,16 +397,6 @@ public:
 	bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, int zone, MovementZone movementZone, int level, bool isBridge)
 		{ JMP_THIS(0x4834A0); }
 
-protected:
-	//Constructor
-	CellClass() noexcept
-		: CellClass(noinit_t())
-	{ JMP_THIS(0x47BBF0); }
-
-	explicit __forceinline CellClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -429,7 +435,11 @@ protected:
 	unsigned short               DisguiseSensorsOfHouses[0x18]; // ! 24 houses instead of 32 like cloakgen
 	// use DisguiseSensors_ funcs above
 
+	/*! @brief FAKE CTOR */
+	explicit __forceinline CellClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
+	CellClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x47B360);
+	CellClass() : CellClass(fake_noinit_t{}) JMP_THIS(0x47BBF0);
 
 	DWORD              BaseSpacerOfHouses; // & (1 << HouseX->ArrayIndex) == base spacing dummy for HouseX
 	FootClass*         Jumpjet; // a jumpjet occupying this cell atm
@@ -485,3 +495,4 @@ public:
 	CellFlags          Flags;	//Various settings.
 	PROTECTED_PROPERTY(BYTE,     padding_144[4]);
 };
+static_assert(sizeof(CellClass) == CellClass::ClassSize);

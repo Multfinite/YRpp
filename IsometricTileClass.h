@@ -8,7 +8,23 @@ class __declspec(uuid("5AF2CE7A-0634-11D2-ACA4-006008055BB5"))
 NOVTABLE IsometricTileClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Isotile;
+    using base_type = ObjectClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7EC258;
+            this->IRTTITypeInfo = 0x7EC23C;
+            this->INoticeSink = 0x7EC234;
+            this->INoticeSource = 0x7EC22C;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Isotile;
+    static constexpr uintptr_t AbsVTable = 0x7EC258;
+    static constexpr size_t ClassSize = 0xB0;
 
 	//Array
 	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
@@ -32,20 +48,17 @@ public:
 	//Destructor
 	virtual ~IsometricTileClass() RX;
 
-	//Constructor
-	IsometricTileClass(int idxType, CellStruct const& location) noexcept
-		: IsometricTileClass(noinit_t())
-	{ JMP_THIS(0x543780); }
 
 protected:
-	explicit __forceinline IsometricTileClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline IsometricTileClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 	IsometricTileTypeClass* Type;
+    IsometricTileClass(int idxType, CellStruct const& location) : IsometricTileClass(fake_noinit_t{}) JMP_THIS(0x543780);
+    IsometricTileClass(noinit_t) noexcept : IsometricTileClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(IsometricTileClass) == IsometricTileClass::ClassSize);

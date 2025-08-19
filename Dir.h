@@ -2,7 +2,7 @@
 
 #include <bit>
 
-enum class DirType : unsigned char;
+enum class Dir256 : unsigned char;
 
 // North -> 0x0000
 // South -> 0x8000
@@ -14,7 +14,7 @@ public:
 	constexpr explicit DirStruct() noexcept : Raw { 0 } { }
 	constexpr explicit DirStruct(int raw) noexcept : Raw { static_cast<unsigned short>(raw) } { }
 	constexpr explicit DirStruct(double rad) noexcept { SetRadian<65536>(rad); }
-	constexpr explicit DirStruct(const DirType dir) noexcept { SetDir(dir); }
+	constexpr explicit DirStruct(const Dir256 dir) noexcept { SetDir(dir); }
 	constexpr explicit DirStruct(const noinit_t&) noexcept { }
 
 	constexpr bool operator==(const DirStruct& another) const
@@ -27,14 +27,14 @@ public:
 		return Raw != another.Raw;
 	}
 
-	constexpr void SetDir(DirType dir)
+	constexpr void SetDir(Dir256 dir)
 	{
 		Raw = static_cast<unsigned short>(static_cast<unsigned char>(dir) * 256);
 	}
 
-	constexpr DirType GetDir() const
+	constexpr Dir256 GetDir() const
 	{
-		return static_cast<DirType>(Raw / 256);
+		return static_cast<Dir256>(Raw / 256);
 	}
 
 	// If you want to divide it into 32 facings, as 32 has 5 bits

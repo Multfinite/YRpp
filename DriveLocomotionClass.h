@@ -18,20 +18,28 @@ public:
 	//Destructor
 	virtual ~DriveLocomotionClass() RX;
 
-	//Constructor
-	DriveLocomotionClass()
-		: DriveLocomotionClass(noinit_t())
-	{ JMP_THIS(0x4AF540); }
-
-protected:
-	explicit __forceinline DriveLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
+    using base_type = LocomotionClass;
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        uintptr_t IPiggyBack;
 
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7E7F7C;
+            this->ILocomotion = 0x7E7EB0;
+            this->IPiggyBack = 0x7E7E8C;
+        }
+    
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+    };
+    static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t ILocoVTable = 0x7E7EB0;
+    static constexpr size_t ClassSize = 0x70;
 public:
 
 	DWORD PreviousRamp;
@@ -53,4 +61,9 @@ public:
 	int field_6C;
 };
 
-static_assert(sizeof(DriveLocomotionClass) == 0x70);
+protected:
+	explicit __forceinline DriveLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
+public:
+    DriveLocomotionClass() : DriveLocomotionClass(noinit_t{}) JMP_THIS(0x4AF540);
+};
+static_assert(sizeof(DriveLocomotionClass) == DriveLocomotionClass::ClassSize);

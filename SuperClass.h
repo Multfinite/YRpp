@@ -14,7 +14,6 @@ class __declspec(uuid("D7F754C6-391C-11D2-9B64-00104B972FE8"))
 NOVTABLE SuperClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Super;
 	static constexpr uintptr_t AbsVTable = 0x7F3FE8;
 
 	//Static
@@ -53,6 +52,23 @@ public:
 	// true if this was ->Granted
 	bool Lose()
 		{ JMP_THIS(0x6CB7B0); }
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F3FE8;
+            this->IRTTITypeInfo = 0x7F3FCC;
+            this->INoticeSink = 0x7F3FC4;
+            this->INoticeSource = 0x7F3FBC;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Super;
+    static constexpr uintptr_t AbsVTable = 0x7F3FE8;
+    static constexpr size_t ClassSize = 0x80;
 
 	bool IsPowered() const
 		{ return this->Type->IsPowered; }
@@ -99,19 +115,13 @@ public:
 	bool ShouldFlashTab() const // sidebar
 		{ JMP_THIS(0x6CE1A0); }
 
-	//Constructor
-	SuperClass(SuperWeaponTypeClass* pSWType, HouseClass* pOwner) noexcept
-		: SuperClass(noinit_t())
-	{ JMP_THIS(0x6CAF90); }
 
 protected:
-	explicit __forceinline SuperClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline SuperClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -139,7 +149,10 @@ public:
 	int ReadyFrame; // when did it become ready?
 	int CameoChargeState;
 	ChargeDrainState ChargeDrainState;
+    SuperClass(SuperWeaponTypeClass* pSWType, HouseClass* pOwner) noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAF90);
+    SuperClass() noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAEC0);
 };
+static_assert(sizeof(SuperClass) == SuperClass::ClassSize);
 
 class LightningStorm
 {

@@ -14,17 +14,30 @@ class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
 NOVTABLE VoxelAnimTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::VoxelAnimType;
-
 	//Array
 	ABSTRACTTYPE_ARRAY(VoxelAnimTypeClass, 0xA8EB28u);
+    using base_type = ObjectTypeClass;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F6548;
+            this->IRTTITypeInfo = 0x7F652C;
+            this->INoticeSink = 0x7F6524;
+            this->INoticeSource = 0x7F651C;
+        }
+    };
+    static inline vtables_t vtables{};
 
 	//AbstractClass
 	virtual AbstractType WhatAmI() const RT(AbstractType);
 	virtual int	Size() const R0;
+    static constexpr AbstractType AbsID = AbstractType::VoxelAnimType;
+    static constexpr uintptr_t AbsVTable = 0x7F6548;
+    static constexpr size_t ClassSize = 0x308;
 
 	//ObjectTypeClass
 	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
@@ -35,19 +48,15 @@ public:
 	//Destructor
 	virtual ~VoxelAnimTypeClass() RX;
 
-	//Constructor
-	VoxelAnimTypeClass(const char* pID)
-		: VoxelAnimTypeClass(noinit_t())
-	{ JMP_THIS(0x74AD80); }
 
 protected:
-	explicit __forceinline VoxelAnimTypeClass(noinit_t)
-		: ObjectTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline VoxelAnimTypeClass(fake_noinit_t) noexcept
+        : ObjectTypeClass(fake_noinit_t{})
+    {}
 
 public:
 
@@ -78,4 +87,7 @@ public:
 	ParticleSystemTypeClass* AttachedSystem;
 	bool IsTiberium;
 	PROTECTED_PROPERTY(BYTE, unused_301[3]);
+    VoxelAnimTypeClass(const char* pID) : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AD80);
+    VoxelAnimTypeClass() : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AF70);
 };
+static_assert(sizeof(VoxelAnimTypeClass) == VoxelAnimTypeClass::ClassSize);

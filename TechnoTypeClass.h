@@ -87,14 +87,27 @@ public:
 	}
 
 	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
+	using base_type = ObjectTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		for(int i = 0; i < Array.Count; ++i) {
 			if(!_strcmpi(Array[i]->get_ID(), pID)) {
 				return i;
 			}
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7F4ED8;
+			this->IRTTITypeInfo = 0x7F4EBC;
+			this->INoticeSink = 0x7F4EB4;
+			this->INoticeSource = 0x7F4EAC;
 		}
 		return -1;
 	}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7F4ED8;
+	static constexpr size_t ClassSize = 0xDF8;
 
 	static constexpr auto MaxWeapons = 18;
 
@@ -172,16 +185,6 @@ public:
 	WeaponStruct const& GetWeapon(size_t const index, bool const elite) const {
 		return elite ? this->EliteWeapon[index] : this->Weapon[index];
 	}
-
-	//Constructor
-	TechnoTypeClass(const char* id, SpeedType speedtype) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ JMP_THIS(0x710AF0); }
-
-protected:
-	explicit __forceinline TechnoTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -521,4 +524,9 @@ public:
 	char            PaletteFile[0x20];
 	DynamicVectorClass<ColorScheme*>*           Palette; //no... idea....
 	DWORD           align_DF4;
+protected:
+	explicit __forceinline TechnoTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
+	TechnoTypeClass(noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x711840);
+	TechnoTypeClass(const char* pId, ::SpeedType speed) : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x710AF0);
 };
+static_assert(sizeof(TechnoTypeClass) == TechnoTypeClass::ClassSize);

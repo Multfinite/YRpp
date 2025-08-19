@@ -8,8 +8,26 @@ class __declspec(uuid("92612C46-F71F-11d1-AC9F-006008055BB5"))
 NOVTABLE JumpjetLocomotionClass : public LocomotionClass, public IPiggyback
 {
 public:
-	static constexpr uintptr_t ILocoVTable = 0x7ECD68;
+	using base_type = LocomotionClass;
 
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		uintptr_t IPiggyBack;
+
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7ECE34;
+			this->ILocomotion = 0x7ECD68;
+			this->IPiggyBack = 0x7ECD44;
+		}
+
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t ILocoVTable = 0x7ECD68;
+	static constexpr size_t ClassSize = 0x98;
+public:
 	enum State
 	{
 		Grounded = 0,
@@ -59,16 +77,6 @@ public:
 
 	//JumpjetLocomotionClass
 
-	//Constructor
-	JumpjetLocomotionClass()
-		: LocomotionClass(noinit_t())
-	{ JMP_THIS(0x54AC40); }
-
-protected:
-	explicit __forceinline JumpjetLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -113,4 +121,9 @@ public:
 	ILocomotion* Piggybackee;
 };
 
-static_assert(sizeof(JumpjetLocomotionClass) == 0x98);
+protected:
+	explicit __forceinline JumpjetLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
+public:
+	JumpjetLocomotionClass() : LocomotionClass(noinit_t{}) JMP_THIS(0x54AC40);
+};
+static_assert(sizeof(JumpjetLocomotionClass) == JumpjetLocomotionClass::ClassSize);

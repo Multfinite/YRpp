@@ -13,7 +13,23 @@ class __declspec(uuid("0E272DCF-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE TeamClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Team;
+	using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F4730;
+            this->IRTTITypeInfo = 0x7F4714;
+            this->INoticeSink = 0x7F470C;
+            this->INoticeSource = 0x7F4704;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Team;
+    static constexpr uintptr_t AbsVTable = 0x7F4730;
+    static constexpr size_t ClassSize = 0xA0;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TeamClass*>, Array, 0x8B40E8u)
@@ -50,17 +66,10 @@ public:
 	virtual AbstractType WhatAmI() const RT(AbstractType);
 	virtual int Size() const R0;
 
-	//Constructor
-	TeamClass(TeamTypeClass* pType, HouseClass* pOwner, int _unknown_44) noexcept
-		: TeamClass(noinit_t())
-	{
-		JMP_THIS(0x6E8A90);
-	}
 
 protected:
-	explicit __forceinline TeamClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TeamClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -105,4 +114,8 @@ public:
 	bool           AchievedGreatSuccess; // executed script action 49, 0
 
 	int CountObjects[6]; // counts of each object specified in the Type
+    TeamClass(TeamTypeClass* pType, HouseClass* pOwner, int _unknown_44) : TeamClass(fake_noinit_t{})
+        JMP_THIS(0x6E8A90);
+	TeamClass(noinit_t) noexcept  : TeamClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(TeamClass) == TeamClass::ClassSize);

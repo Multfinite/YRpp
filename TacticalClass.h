@@ -22,6 +22,22 @@ class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
 NOVTABLE TacticalClass : public AbstractClass
 {
 public:
+    using base_type = AbstractClass;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F4348;
+            this->IRTTITypeInfo = 0x7F432C;
+            this->INoticeSink = 0x7F4324;
+            this->INoticeSource = 0x7F431C;
+        }
+    };
+    static inline vtables_t vtables{};
+public:
+    static constexpr AbstractType AbsID = AbstractType::TacticalMap;
+    static constexpr uintptr_t AbsVTable = 0x7F4348;
+    static constexpr size_t ClassSize = 0xE18;
 	DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)
 
 	virtual bool sub_6DBB60(CoordStruct const& a2, CoordStruct const& a3, COLORREF a4, DWORD dwUnk) R0;
@@ -166,4 +182,12 @@ public:
 	Matrix3D IsoTransformMatrix;
 	DWORD field_E14;
 
+protected:
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TacticalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
+
+public:
+    TacticalClass() : TacticalClass(fake_noinit_t{}) JMP_THIS(0x6D1C20);
+    TacticalClass(noinit_t) noexcept : TacticalClass(fake_noinit_t{}) JMP_THIS(0x6D1E30);
 };
+static_assert(sizeof(TacticalClass) == TacticalClass::ClassSize);

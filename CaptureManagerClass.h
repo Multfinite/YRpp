@@ -22,7 +22,21 @@ class __declspec(uuid("0679E982-AD9D-11D3-BE16-00104B62A16C"))
 NOVTABLE CaptureManagerClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::CaptureManager;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7E4B40;
+            this->IRTTITypeInfo = 0x7E4B24;
+            this->INoticeSink = 0x7E4B1C;
+            this->INoticeSource = 0x7E4B14;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::CaptureManager;
+    static constexpr uintptr_t AbsVTable = 0x7E4B40;
+    static constexpr size_t ClassSize = 0x50;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
@@ -71,19 +85,15 @@ public:
 	HouseClass* GetOriginalOwner(TechnoClass *Unit) const
 		{ JMP_THIS(0x4722F0); }
 
-	//Constructor
-	CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
-		: CaptureManagerClass(noinit_t())
-	{ JMP_THIS(0x4717D0); }
 
 protected:
-	explicit __forceinline CaptureManagerClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline CaptureManagerClass(fake_noinit_t) noexcept
+        : AbstractClass(fake_noinit_t{})
+    { }
 
 public:
 
@@ -94,4 +104,10 @@ public:
 	int OverloadPipState; // Used to create the red overloading pip by returning true in IsOverloading's wasDamageApplied for 10 frames.
 	TechnoClass* Owner;
 	int OverloadDamageDelay; // Decremented every frame. If it reaches zero, OverloadDamage is applied.
+    CaptureManagerClass(noinit_t) noexcept : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471950);
+    CaptureManagerClass() : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471890);
+    CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept
+        : CaptureManagerClass(fake_noinit_t{})
+    JMP_THIS(0x4717D0);
 };
+static_assert(sizeof(CaptureManagerClass) == CaptureManagerClass::ClassSize);

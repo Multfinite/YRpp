@@ -10,7 +10,23 @@ class __declspec(uuid("C02D1590-0A2A-11D2-ACA7-006008055BB5"))
 NOVTABLE TriggerClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Trigger;
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F5904;
+            this->IRTTITypeInfo = 0x7F58E8;
+            this->INoticeSink = 0x7F58E0;
+            this->INoticeSource = 0x7F58D8;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Trigger;
+    static constexpr uintptr_t AbsVTable = 0x7F5904;
+    static constexpr size_t ClassSize = 0x48;
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TriggerClass*>, Array, 0xA8EAE8u)
@@ -101,19 +117,13 @@ public:
 	bool FireActions(ObjectClass* pObj, CellStruct location)
 		{ JMP_THIS(0x7265C0); }
 
-	//Constructor
-	TriggerClass(TriggerTypeClass* pType)
-		: TriggerClass(noinit_t())
-	{ JMP_THIS(0x725FA0); }
 
 protected:
-	explicit __forceinline TriggerClass(noinit_t)
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TriggerClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
 	TriggerTypeClass*	Type;
@@ -125,4 +135,6 @@ public:
 	DWORD				OccuredEvents; // bitfield for 32 events max
 	bool				Enabled;
 	PROTECTED_PROPERTY(BYTE, padding_45[3]);
+    TriggerClass(TriggerTypeClass* pType) : TriggerClass(fake_noinit_t{}) JMP_THIS(0x725FA0);
 };
+static_assert(sizeof(TriggerClass) == TriggerClass::ClassSize);

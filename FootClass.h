@@ -14,7 +14,22 @@ class TeamClass;
 class NOVTABLE FootClass : public TechnoClass
 {
 public:
-	static const auto AbsDerivateID = AbstractFlags::Foot;
+	using base_type = TechnoClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E8C94;
+			this->IRTTITypeInfo = 0x7E8C78;
+			this->INoticeSink = 0x7E8C70;
+			this->INoticeSource = 0x7E8C68;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7E8C94;
+	static constexpr auto AbsDerivateID = AbstractFlags::Foot;
+	static constexpr size_t ClassSize = 0x6C0;
 
 	DEFINE_REFERENCE(DynamicVectorClass<FootClass*>, Array, 0x8B3DC0u)
 
@@ -135,15 +150,6 @@ public:
 	bool MoveToWeed(int radius)
 		{ JMP_THIS(0x4DDB90); }
 
-	//Constructor
-	FootClass(HouseClass* pOwner) noexcept : FootClass(noinit_t())
-		{ JMP_THIS(0x4D31E0); }
-
-protected:
-	explicit __forceinline FootClass(noinit_t) noexcept
-		: TechnoClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -223,6 +229,11 @@ public:
 	bool              IsWaitingBlockagePath;
 	bool              unknown_bool_6B8;
 	PROTECTED_PROPERTY(DWORD,   unused_6BC);	//???
-};
+protected:
 
-static_assert(sizeof(FootClass) == 0x6C0);
+	/*! @brief FAKE CTOR */
+	explicit __forceinline FootClass(fake_noinit_t) noexcept : TechnoClass(fake_noinit_t{}) {}
+	FootClass(noinit_t) noexcept : TechnoClass(fake_noinit_t{}) JMP_THIS(0x4D3540);
+	FootClass(HouseClass* house) : FootClass(fake_noinit_t{}) JMP_THIS(0x4D31E0);
+};
+static_assert(sizeof(FootClass) == FootClass::ClassSize);

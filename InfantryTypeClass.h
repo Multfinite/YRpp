@@ -36,8 +36,22 @@ class __declspec(uuid("AE8B33D8-061C-11D2-ACA4-006008055BB5"))
 NOVTABLE InfantryTypeClass : public TechnoTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::InfantryType;
+	using base_type = TechnoTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EB610;
+			this->IRTTITypeInfo = 0x7EB5F4;
+			this->INoticeSink = 0x7EB5EC;
+			this->INoticeSource = 0x7EB5E4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::InfantryType;
 	static constexpr uintptr_t AbsVTable = 0x7EB610;
+	static constexpr size_t ClassSize = 0xED0;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(InfantryTypeClass, 0xA8E348u);
@@ -59,16 +73,6 @@ public:
 	//ObjectTypeClass
 	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
 	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
-	//Constructor
-	InfantryTypeClass(const char* pID) noexcept
-		: InfantryTypeClass(noinit_t())
-	{ JMP_THIS(0x5236A0); }
-
-protected:
-	explicit __forceinline InfantryTypeClass(noinit_t) noexcept
-		: TechnoTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -115,4 +119,10 @@ public:
 	bool UseOwnName;
 	bool JumpJetTurn;
 private: DWORD align_ECC;
+protected:
+	explicit __forceinline InfantryTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
+public:
+	InfantryTypeClass(noinit_t) noexcept : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x523980);
+	InfantryTypeClass(const char* pId) : InfantryTypeClass(fake_noinit_t{}) JMP_THIS(0x5236A0);
 };
+static_assert(sizeof(InfantryTypeClass) == InfantryTypeClass::ClassSize);

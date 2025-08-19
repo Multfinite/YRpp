@@ -27,7 +27,23 @@ class __declspec(uuid("0E272DC9-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE BulletClass : public ObjectClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Bullet;
+    using base_type = ObjectClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7E46E4;
+            this->IRTTITypeInfo = 0x7E46C8;
+            this->INoticeSink = 0x7E46C0;
+            this->INoticeSource = 0x7E46B8;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Bullet;
+    static constexpr uintptr_t AbsVTable = 0x7E46E4;
+    static constexpr size_t ClassSize = 0x160;
 
 	//Array
 	DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
@@ -110,20 +126,13 @@ public:
 		}
 	}
 
-	//Constructor
-protected:
-	BulletClass() noexcept
-		: BulletClass(noinit_t())
-	{ JMP_THIS(0x466380); }
 
 protected:
-	explicit __forceinline BulletClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline BulletClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -155,4 +164,7 @@ public:
 	AnimClass* NextAnim;
 	bool SpawnNextAnim;
 	int Range;
+    BulletClass() : BulletClass(fake_noinit_t{}) JMP_THIS(0x466380);
+    BulletClass(noinit_t) noexcept : BulletClass(fake_noinit_t{}) { vtables.init(this); }
 };
+static_assert(sizeof(BulletClass) == BulletClass::ClassSize);

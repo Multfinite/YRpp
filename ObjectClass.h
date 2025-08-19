@@ -32,7 +32,6 @@ struct WeaponStruct;
 class NOVTABLE ObjectClass : public AbstractClass
 {
 public:
-	static const auto AbsDerivateID = AbstractFlags::Object;
 
 	//global arrays
 	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, CurrentObjects, 0xA8ECB8u)
@@ -247,6 +246,8 @@ public:
 
 	// On non-buildings this is same as GetCenterCoord(), on buildings it returns the target coordinate that is affected by TargetCoordOffset.
 	CoordStruct GetTargetCoords() const
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		CoordStruct ret;
 		this->GetTargetCoords(&ret);
@@ -265,14 +266,20 @@ public:
 		return ret;
 	}
 
-	//Constructor NEVER CALL IT DIRECTLY
-	/*ObjectClass()  noexcept
-		{ JMP_THIS(0x5F3900); }*/
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EF060;
+			this->IRTTITypeInfo = 0x7EF044;
+			this->INoticeSink = 0x7EF03C;
+			this->INoticeSource = 0x7EF034;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7EF060;
+	static constexpr auto AbsDerivateID = AbstractFlags::Object;
+	static constexpr size_t ClassSize = 0xAC;
 
-protected:
-	explicit __forceinline ObjectClass(noinit_t)  noexcept
-		: AbstractClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -314,4 +321,11 @@ public:
 	PROTECTED_PROPERTY(BYTE, align_99[0x2]);
 	CoordStruct        Location;       // Absolute current 3D location (in leptons)
 	LineTrail*         LineTrailer;
+protected:
+
+	/*! @brief FAKE CTOR */
+	explicit __forceinline ObjectClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+	ObjectClass(noinit_t) noexcept : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3B50);
+	ObjectClass() : ObjectClass(fake_noinit_t{}) JMP_THIS(0x5F3900);
 };
+static_assert(sizeof(ObjectClass) == ObjectClass::ClassSize);

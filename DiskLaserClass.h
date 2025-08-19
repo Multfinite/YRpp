@@ -14,7 +14,21 @@ class __declspec(uuid("5230C9A8-846A-47EC-BDA2-7E95445E1D49"))
 NOVTABLE DiskLaserClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::DiskLaser;
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractClass::vtables_t
+    {
+        constexpr vtables_t() noexcept : AbstractClass::vtables_t()
+        {
+            this->IPersistStream = 0x7E5FB8;
+            this->IRTTITypeInfo = 0x7E5F9C;
+            this->INoticeSink = 0x7E5F94;
+            this->INoticeSource = 0x7E5F8C;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::DiskLaser;
+    static constexpr uintptr_t AbsVTable = 0x7E5FB8;
+    static constexpr size_t ClassSize = 0x40;
 
 	// static
 	DEFINE_REFERENCE(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
@@ -43,20 +57,14 @@ public:
 	void PointerGotInvalid(AbstractClass* pInvalid)
 		{ JMP_THIS(0x4A7900); }
 
-	//Constructor
-	DiskLaserClass() noexcept
-		: DiskLaserClass(noinit_t())
-	{ JMP_THIS(0x4A7A30); }
 
 protected:
-	explicit __forceinline DiskLaserClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+    /*! @brief FAKE CTOR */
+    explicit __forceinline DiskLaserClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
 
 	TechnoClass* Owner;
@@ -66,4 +74,7 @@ public:
 	DWORD unknown_34;
 	DWORD unknown_38;
 	int Damage;
+    DiskLaserClass() : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7A30);
+    DiskLaserClass(noinit_t) noexcept : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7AD0);
 };
+static_assert(sizeof(DiskLaserClass) == DiskLaserClass::ClassSize);

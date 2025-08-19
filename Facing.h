@@ -5,6 +5,20 @@
 
 #include <algorithm>
 
+enum class FacingType : char
+{
+	North = 0,
+	NorthEast = 1,
+	East = 2,
+	SouthEast = 3,
+	South = 4,
+	SouthWest = 5,
+	West = 6,
+	NorthWest = 7,
+	Count = 8,
+	None = -1,
+};
+
 class FacingClass
 {
 public:
@@ -20,7 +34,7 @@ public:
 		DesiredFacing = facing;
 	}
 
-	explicit FacingClass(DirType dir) noexcept
+	explicit FacingClass(Dir256 dir) noexcept
 	{
 		DesiredFacing.SetDir(dir);
 	}
@@ -121,7 +135,7 @@ public:
 	{
 		if (rate > 127)
 			rate = 127;
-		ROT.SetDir(static_cast<DirType>(rate));
+		ROT.SetDir(static_cast<Dir256>(rate));
 	}
 
 private:

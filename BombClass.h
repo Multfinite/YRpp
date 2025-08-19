@@ -11,7 +11,6 @@ class __declspec(uuid("0679E983-AD9D-11D3-BE16-00104B62A16C"))
 NOVTABLE BombClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Bomb;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -42,22 +41,26 @@ public:
 	bool TimeToExplode() const
 		{ JMP_THIS(0x438A70); }
 
-	//Constructor
-	//Bombs have a special constructor that just should not be called like this...
-	//See BombListClass::Plant
-	BombClass() noexcept
-		: AbstractClass(noinit_t())
-	{ JMP_THIS(0x4385D0); }
-
-protected:
-	explicit __forceinline BombClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3D10;
+			this->IRTTITypeInfo = 0x7E3CF4;
+			this->INoticeSink = 0x7E3CEC;
+			this->INoticeSource = 0x7E3CE4;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::Bomb;
+	static constexpr uintptr_t AbsVTable = 0x7E3D10;
+	static constexpr size_t ClassSize = 0x5C;
 public:
 
 	TechnoClass* Owner;		//Most likely Ivan.
@@ -70,4 +73,10 @@ public:
 	int TickSound;
 	BOOL ShouldPlayTickingSound; // seems so
 	bool Harmless; // (mostly) set to 0 on plant, 1 on detonation/removal ?
+protected:
+	explicit __forceinline BombClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+public:
+	BombClass(noinit_t) noexcept : BombClass(fake_noinit_t{}) JMP_THIS(0x4386F0);
+	BombClass() : BombClass(fake_noinit_t{}) JMP_THIS(0x4385D0);	
 };
+static_assert(sizeof(BombClass) == BombClass::ClassSize);

@@ -6,7 +6,6 @@ class __declspec(uuid("4A582745-9839-11d1-B709-00A024DDAFD1"))
 NOVTABLE DropPodLocomotionClass : public LocomotionClass, public IPiggyback
 {
 public:
-	static constexpr uintptr_t ILocoVTable = 0x7E8278;
 	//IUnknown
 	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) R0;
 	virtual ULONG __stdcall AddRef() R0;
@@ -40,22 +39,36 @@ public:
 	//LocomotionClass
 	virtual	int Size() R0;
 
-	//Constructor
-	DropPodLocomotionClass()
-		: DropPodLocomotionClass(noinit_t())
+	using base_type = LocomotionClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		JMP_THIS(0x4B5AB0);
 	}
+		uintptr_t IPiggyBack;
 
-protected:
-	explicit __forceinline DropPodLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
-	{}
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E8344;
+			this->ILocomotion = 0x7E8278;
+			this->IPiggyBack = 0x7E8254;
+		}
 
+		__forceinline void init(LocomotionClass* instance) { memcpy(instance, this, sizeof(vtables_t)); }
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t ILocoVTable = 0x7E8278;
+	static constexpr size_t ClassSize = 0x30;
 public:
 	bool OutOfMap;
 	CoordStruct DestinationCoords;
 	ILocomotionPtr Piggybackee;
 };
 
-static_assert(sizeof(DropPodLocomotionClass) == 0x30);
+protected:
+	explicit __forceinline DropPodLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) {}
+public:
+	DropPodLocomotionClass() : DropPodLocomotionClass(noinit_t{}) JMP_THIS(0x4B5AB0);
+
+};
+static_assert(sizeof(DropPodLocomotionClass) == DropPodLocomotionClass::ClassSize);

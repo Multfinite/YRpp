@@ -14,7 +14,22 @@ class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
 NOVTABLE AnimTypeClass : public ObjectTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::AnimType;
+	using base_type = ObjectTypeClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7E3608;
+			this->IRTTITypeInfo = 0x7E35EC;
+			this->INoticeSink = 0x7E35E4;
+			this->INoticeSource = 0x7E35DC;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr AbstractType AbsID = AbstractType::AnimType;
+	static constexpr uintptr_t AbsVTable = 0x7E3608;
+	static constexpr size_t ClassSize = 0x378;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(AnimTypeClass, 0x8B4150u);
@@ -37,16 +52,6 @@ public:
 
 	//Destructor
 	virtual ~AnimTypeClass() RX;
-
-	//Constructor
-	AnimTypeClass(const char* pID) noexcept
-		: AnimTypeClass(noinit_t())
-	{ JMP_THIS(0x427530); }
-
-protected:
-	explicit __forceinline AnimTypeClass(noinit_t) noexcept
-		: ObjectTypeClass(noinit_t())
-	{ }
 
 	//===========================================================================
 	//===== Properties ==========================================================
@@ -124,4 +129,10 @@ public:
 	bool Shadow;
 	bool PsiWarning;
 	bool ShouldFogRemove;
+protected:
+	explicit __forceinline AnimTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
+public:
+	AnimTypeClass(noinit_t) noexcept  : AnimTypeClass(fake_noinit_t{}) JMP_THIS(0x427850);
+	AnimTypeClass(const char* pId) : AnimTypeClass(fake_noinit_t{}) JMP_THIS(0x427530);
 };
+static_assert(sizeof(AnimTypeClass) == AnimTypeClass::ClassSize);

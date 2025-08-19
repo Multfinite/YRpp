@@ -15,7 +15,23 @@ class __declspec(uuid("34ECD9A8-0AB0-11D2-ACA7-006008055BB5"))
 NOVTABLE FactoryClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Factory;
+    using base_type = AbstractClass;
+
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7E88D0;
+            this->IRTTITypeInfo = 0x7E88B4;
+            this->INoticeSink = 0x7E88AC;
+            this->INoticeSource = 0x7E88A4;
+        }
+    };
+    static inline vtables_t vtables{};
+
+    static constexpr AbstractType AbsID = AbstractType::Factory;
+    static constexpr uintptr_t AbsVTable = 0x7E88D0;
+    static constexpr size_t ClassSize = 0x74;
 
 	DEFINE_REFERENCE(DynamicVectorClass<FactoryClass*>, Array, 0xA83E30u)
 
@@ -100,20 +116,14 @@ public:
 		return nullptr;
 	}
 
-	//Constructor
-	FactoryClass() noexcept
-		: FactoryClass(noinit_t())
-	{ JMP_THIS(0x4C98B0); }
 
 protected:
-	explicit __forceinline FactoryClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+    /*! @brief FAKE CTOR */
+    explicit __forceinline FactoryClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 public:
 	StageClass      Production; // hardcoded to be 54 steps (so cameo clock should be 54 frames)
 	DynamicVectorClass<TechnoTypeClass*> QueuedObjects;
@@ -128,4 +138,8 @@ public:
 	bool               IsSuspended; //completed production, before next (or waiting to place)
 	bool               IsManual; // whether the current suspension state was caused by the player
 	PROTECTED_PROPERTY(BYTE, padding_72[2]);
+    FactoryClass() : FactoryClass(fake_noinit_t{}) JMP_THIS(0x4C98B0);
+    FactoryClass(noinit_t) noexcept : FactoryClass(fake_noinit_t{}) { vtables.init(this); }
 };
+
+static_assert(sizeof(FactoryClass) == FactoryClass::ClassSize);

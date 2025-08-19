@@ -89,20 +89,25 @@ public:
 	virtual int Mission_SpyPlaneApproach() R0;
 	virtual int Mission_SpyPlaneOverfly() R0;
 
-	//Constructor
-	MissionClass() noexcept
-		: MissionClass(noinit_t())
-	{ THISCALL(0x5B2DA0); }
-
-protected:
-	explicit __forceinline MissionClass(noinit_t) noexcept
-		: ObjectClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	using base_type = ObjectClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EDCC0;
+			this->IRTTITypeInfo = 0x7EDCA4;
+			this->INoticeSink = 0x7EDC9C;
+			this->INoticeSource = 0x7EDC94;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7EDCC0;
+	static constexpr size_t ClassSize = 0xD4;
 public:
 
 	Mission  CurrentMission;
@@ -113,4 +118,10 @@ public:
 	int      CurrentMissionStartTime;	//in frames
 	int      MissionAccumulateTime;
 	DECLARE_PROPERTY(CDTimerClass, UpdateTimer);
+protected:
+	/*! @brief FAKE CTOR */
+	explicit __forceinline MissionClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}), UpdateTimer(noinit_t{}) {}
+	MissionClass(noinit_t) noexcept : MissionClass(fake_noinit_t{}) { vtables.init(this); };
+	MissionClass() : MissionClass(fake_noinit_t{}) JMP_THIS(0x5B2DA0);
 };
+static_assert(sizeof(MissionClass) == MissionClass::ClassSize);

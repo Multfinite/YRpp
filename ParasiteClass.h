@@ -9,7 +9,22 @@ class __declspec(uuid("1D016B81-B24B-11D3-BE16-00104B62A16C"))
 NOVTABLE ParasiteClass : public AbstractClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::Parasite;
+	using base_type = AbstractClass;
+	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+	{
+		constexpr vtables_t() noexcept : base_type::vtables_t()
+		{
+			this->IPersistStream = 0x7EF890;
+			this->IRTTITypeInfo = 0x7EF874;
+			this->INoticeSink = 0x7EF86C;
+			this->INoticeSource = 0x7EF864;
+		}
+	};
+	static inline vtables_t vtables{};
+public:
+	static constexpr uintptr_t AbsVTable = 0x7EF890;
+	static constexpr AbstractType AbsID = AbstractType::Parasite;
+	static constexpr size_t ClassSize = 0x58;
 
 	DEFINE_REFERENCE(DynamicVectorClass<ParasiteClass*>, Array, 0xAC4910u)
 
@@ -46,16 +61,6 @@ public:
 	bool CanExistOnVictimCell() const
 		{ JMP_THIS(0x62AB40); }
 
-	//Constructor
-	ParasiteClass(FootClass* pOwner = nullptr) noexcept
-		: ParasiteClass(noinit_t())
-	{ JMP_THIS(0x6292B0); }
-
-protected:
-	explicit __forceinline ParasiteClass(noinit_t) noexcept
-		: AbstractClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -71,4 +76,12 @@ public:
 	int             GrappleAnimFrame;
 	int             GrappleAnimDelay;
 	bool            GrappleAnimGotInvalid;
+protected:
+
+	/*! @brief FAKE CTOR */
+	explicit __forceinline ParasiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
+public:
+	ParasiteClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x629210);
+	ParasiteClass(FootClass* owner = nullptr) : ParasiteClass(fake_noinit_t{}) JMP_THIS(0x6292B0);
 };
+static_assert(sizeof(ParasiteClass) == ParasiteClass::ClassSize);

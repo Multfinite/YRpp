@@ -18,13 +18,27 @@ class __declspec(uuid("61DE341E-0774-11D2-ACA5-006008055BB5"))
 NOVTABLE TaskForceClass : public AbstractTypeClass
 {
 public:
-	static const AbstractType AbsID = AbstractType::TaskForce;
+    using base_type = AbstractTypeClass;
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TaskForceClass, 0xA8E8D0u);
+    struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
+    {
+        constexpr vtables_t() noexcept : base_type::vtables_t()
+        {
+            this->IPersistStream = 0x7F4680;
+            this->IRTTITypeInfo = 0x7F4664;
+            this->INoticeSink = 0x7F465C;
+            this->INoticeSource = 0x7F4654;
+        }
+    };
+    static inline vtables_t vtables{};
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    static constexpr AbstractType AbsID = AbstractType::TaskForce;
+    static constexpr uintptr_t AbsVTable = 0x7F4680;
+    static constexpr size_t ClassSize = 0xD4;
 
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
@@ -37,19 +51,13 @@ public:
 	virtual AbstractType WhatAmI() const RT(AbstractType);
 	virtual int Size() const R0;
 
-	//Constructor
-	TaskForceClass(const char* pID) noexcept
-		: TaskForceClass(noinit_t())
-	{ JMP_THIS(0x6E7E80); }
 
 protected:
-	explicit __forceinline TaskForceClass(noinit_t) noexcept
-		: AbstractTypeClass(noinit_t())
-	{ }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    /*! @brief FAKE CTOR */
+    explicit __forceinline TaskForceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
 
@@ -57,4 +65,7 @@ public:
 	int     CountEntries;
 	bool    IsGlobal;
 	TaskForceEntryStruct Entries [0x6];
+    TaskForceClass(const char* pID) : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7E80);
+    TaskForceClass(noinit_t) noexcept : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7F50);
 };
+static_assert(sizeof(TaskForceClass) == TaskForceClass::ClassSize);
