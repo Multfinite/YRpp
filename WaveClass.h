@@ -28,33 +28,44 @@ public:
     static constexpr size_t ClassSize = 0x240;
 
 	DEFINE_REFERENCE(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
+public:
+    virtual ~WaveClass() JMP_THIS(0x75ED30);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x75F840);
 
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x75F650);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75F7D0);
+    
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x75F610);
+    RTTIType WhatAmI() const override JMP_THIS(0x7631F0);
+    int Size() const override JMP_THIS(0x75F880);    
+    void Update() override JMP_THIS(0x760F50);
 
-	//Destructor
-	virtual ~WaveClass() RX;
+    Layer InWhichLayer() const override JMP_THIS(0x75F890);
+    ObjectTypeClass* GetType() const override JMP_THIS(0x75F8A0);
+    bool Limbo() override JMP_THIS(0x75F980);
+    bool Unlimbo(const Coordinate& position, Dir256 direction) override JMP_THIS(0x75F8B0);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x75F9F0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    void DrawMagnetic(CoordStruct const& xyzFrom, CoordStruct const& xyzTo) JMP_THIS(0x762070);
+    void DrawNonMagnetic(CoordStruct const& xyzFrom, CoordStruct const& xyzTo) JMP_THIS(0x761640);
+    void UpdateWave() JMP_THIS(0x762AF0);
+    void DamageArea(CoordStruct const& location) const JMP_THIS(0x75F330);
 
-	void Draw_Magnetic(const CoordStruct& xyzFrom, const CoordStruct& xyzTo)
-		{ JMP_THIS(0x762070); }
-
-	void Draw_NonMagnetic(const CoordStruct& xyzFrom, const CoordStruct& xyzTo)
-		{ JMP_THIS(0x761640); }
-
-	void Update_Wave()
-		{ JMP_THIS(0x762AF0); }
-
-	// ambient
-	void DamageArea(const CoordStruct& location) const
-		{ JMP_THIS(0x75F330); }
-
+/*
+        void Add_Cell(Cell * cell) JMP_THIS(0x75F4C0);
+        void AI_Old() JMP_THIS(0x7610A0);
+        void AI_Old_0() JMP_THIS(0x761030);
+        void Calculate_Magnetic_Beam(int32_t arg_0, int32_t arg_4, int32_t a4, uint16_t * color) JMP_THIS(0x760190);
+        void Calculate_Sonic_Beam(int32_t a2, int32_t a3, int32_t a4, uint16_t * color) JMP_THIS(0x75EDF0);
+        int16_t * Draw_Laser(uint32_t * , int32_t * ) JMP_THIS(0x7609E0);
+        void Draw_Magnetic_Beam(uint32_t * , int32_t * ) JMP_THIS(0x7602E0);
+        int32_t Draw_Sonic_Beam(Point2D * arg0, int32_t a3) JMP_THIS(0x75FA90);
+        void Laser_AI() JMP_THIS(0x7610D0);
+        void Update_Cells() JMP_THIS(0x7610F0);
+        void Wave_AI() JMP_THIS(0x762AF0);
+        void wavecolor_75EF30(uint16_t * a1, int32_t a2) JMP_THIS(0x75EF30);
+*/
 
 protected:
 	//===========================================================================

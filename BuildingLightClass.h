@@ -25,24 +25,6 @@ public:
 	static constexpr size_t ClassSize = 0xE8;
 public:
 	DEFINE_REFERENCE(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//Destructor
-	virtual ~BuildingLightClass() RX;
-
-	// non-virtual
-	void SetBehaviour(SpotlightBehaviour mode)
-		{ JMP_THIS(0x436BE0); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -57,6 +39,30 @@ public:
 	SpotlightBehaviour BehaviourMode;
 	ObjectClass * FollowingObject;
 	TechnoClass * OwnerObject;
+public:
+	virtual ~BuildingLightClass() JMP_THIS(0x435B50);
+	
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x436910);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x436950);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4369C0);
+	
+	void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x436A00);
+	RTTIType WhatAmI() const override JMP_THIS(0x4370B0);
+	int Size() const override JMP_THIS(0x436900);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x436F40);
+	void Update() override JMP_THIS(0x4361D0);
+	
+	Layer InWhichLayer() const override JMP_THIS(0x4369F0);
+	ObjectTypeClass* GetType() const override JMP_THIS(0x4369E0);
+	bool Limbo() override JMP_THIS(0x437030);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x437050);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x435BE0);
+
+	void SetBehaviour(SpotlightBehaviour mode) JMP_THIS(0x436BE0);
+	int32_t MovementRadius() JMP_THIS(0x436E80);
+	int32_t SpotlightRadius() JMP_THIS(0x436DA0);
+
 protected:
 	explicit __forceinline BuildingLightClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 public:

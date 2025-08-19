@@ -40,51 +40,38 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
+public:
+    virtual ~CaptureManagerClass() JMP_THIS(0x4719A0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x472960);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x472720);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4728E0);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x4729B0);
+    int Size() const override JMP_THIS(0x4729A0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4726F0);
 
-	//Destructor
-	virtual ~CaptureManagerClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
-	bool CaptureUnit(TechnoClass* pUnit)
-		{ JMP_THIS(0x471D40); }
-	bool FreeUnit(TechnoClass* pUnit)
-		{ JMP_THIS(0x471FF0); }
-	void FreeAll()
-		{ JMP_THIS(0x472140); }
-
-	int NumControlNodes() const
-		{ return ControlNodes.Count; }
-
-	bool CanCapture(TechnoClass *Target) const
-		{ JMP_THIS(0x471C90); }
-	bool CannotControlAnyMore() const
-		{ JMP_THIS(0x4722A0); }
-	bool IsControllingSomething() const
-		{ JMP_THIS(0x4722C0); }
-	bool IsOverloading(bool *wasDamageApplied) const
-		{ JMP_THIS(0x4726C0); }
-	void HandleOverload()
-		{ JMP_THIS(0x471A50); }
-	bool NeedsToDrawLinks() const
-		{ JMP_THIS(0x472640); }
-	bool DrawLinks()
-		{ JMP_THIS(0x472160); }
-	void DecideUnitFate(TechnoClass *Unit)
-		{ JMP_THIS(0x4723B0); }
-	HouseClass* GetOriginalOwner(TechnoClass *Unit) const
-		{ JMP_THIS(0x4722F0); }
-
+    bool CaptureUnit(TechnoClass* pUnit) JMP_THIS(0x471D40);
+    bool FreeUnit(TechnoClass* pUnit) JMP_THIS(0x471FF0);
+    void FreeAll() JMP_THIS(0x472140);
+    int NumControlNodes() const JMP_THIS(0x4722D0);
+    bool CanCapture(TechnoClass* Target) const JMP_THIS(0x471C90);
+    bool CannotControlAnyMore() const JMP_THIS(0x4722A0);
+    bool IsControllingSomething() const JMP_THIS(0x4722C0);
+    bool IsOverloading(bool* wasDamageApplied) const JMP_THIS(0x4726C0);
+    void HandleOverload() JMP_THIS(0x471A50);
+    bool NeedsToDrawLinks() const JMP_THIS(0x472640);
+    bool DrawLinks() JMP_THIS(0x472160);
+    /*! @brief AI_Capture */
+    void DecideUnitFate(TechnoClass* Unit) JMP_THIS(0x4723B0);
+    HouseClass* GetOriginalOwner(TechnoClass* Unit) const JMP_THIS(0x4722F0);
+/*
+    int32_t Can_Control_Only_One() JMP_THIS(0x4722E0);
+    int8_t Detach(int32_t a2) JMP_THIS(0x471F90);
+    HouseClass* GetOriginalOwner(int32_t a2) JMP_THIS(0x4722F0);
+    bool Set_Owner_To_Civilian(TechnoClass* techno) JMP_THIS(0x472330);
+*/
 
 protected:
 	//===========================================================================

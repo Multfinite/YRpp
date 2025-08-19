@@ -34,24 +34,23 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* mcoords, HouseClass* owner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
-
-	//Destructor
-	virtual ~ParticleTypeClass() RX;
-
+public:
+    virtual ~ParticleTypeClass() JMP_THIS(0x644E40);
+    
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x645620);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x645660);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6457A0);
+    
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x6458B0);
+    RTTIType WhatAmI() const override JMP_THIS(0x645920);
+    int Size() const override JMP_THIS(0x645910);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6454E0);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x644F50);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x645930);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x645940);
 
 protected:
 	//===========================================================================

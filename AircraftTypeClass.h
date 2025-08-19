@@ -25,23 +25,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(AircraftTypeClass, 0xA8B218u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//Destructor
-	virtual ~AircraftTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
-	//TechnoTypeClass
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -59,6 +42,29 @@ public:
 	bool FlyBack;
 	bool AirportBound;
 	bool Fighter;
+public:
+	virtual ~AircraftTypeClass() JMP_THIS(0x41CA20);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41CEB0);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41CE20);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41CE90);
+
+	RTTIType WhatAmI() const override JMP_THIS(0x41CFB0);
+	int Size() const override JMP_THIS(0x41CFC0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41CDB0);
+	int GetArrayIndex() const override JMP_THIS(0x41CFD0);
+
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41CC20);
+
+	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x41CBF0);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x41CBE0);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x41CB20);
+	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x41CB70);
+
+	bool CanUseWaypoint() const override JMP_THIS(0x41CB50);
+	bool CanAttackMove() const override JMP_THIS(0x41CB60);
+
 protected:
 	explicit __forceinline AircraftTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:

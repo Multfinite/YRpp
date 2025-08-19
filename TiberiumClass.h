@@ -15,32 +15,6 @@ class __declspec(uuid("C53DD373-151E-11D2-8175-006008055BB5"))
 NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
-	void Construct(int nCount = PriorityQueueClassNode::SurfaceDataCount())
-	{
-		Nodes = (PriorityQueueClassNode*)YRMemory::Allocate(sizeof(PriorityQueueClassNode) * nCount);
-		CellIndexesWithTiberium = (bool*)YRMemory::Allocate(sizeof(bool) * nCount);
-
-		Queue = GameCreate<PriorityQueueClass<PriorityQueueClassNode>>(nCount);
-	}
-
-	void Destruct()
-	{
-		GameDelete(Queue);
-		Queue = nullptr;
-
-		if (Nodes)
-		{
-			YRMemory::Deallocate(Nodes);
-			Nodes = nullptr;
-		}
-
-		if (CellIndexesWithTiberium)
-		{
-			YRMemory::Deallocate(CellIndexesWithTiberium);
-			CellIndexesWithTiberium = nullptr;
-		}
-	}
-
 	int Count;
 	PriorityQueueClass<PriorityQueueClassNode>* Queue;
 	bool* CellIndexesWithTiberium;
@@ -70,38 +44,51 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
-
-	//Destructor
-	virtual ~TiberiumClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//TiberiumClass
-
-	void RegisterForGrowth(CellStruct* cell)
-		{ JMP_THIS(0x7235A0); }
 
 	//Static helpers
+public:
+    virtual ~TiberiumClass() JMP_THIS(0x721880);
 
-	static int FindIndex(int idxOverlayType) {
-		SET_REG32(ecx, idxOverlayType);
-		CALL(0x5FDD20);
-	}
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x721E40);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x721E80);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7220D0);
+    
+    HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_THIS(0x7220A0);
+    
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x722140);
+    RTTIType WhatAmI() const override JMP_THIS(0x7236F0);
+    int Size() const override JMP_THIS(0x7236E0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x721DC0);
+    int GetArrayIndex() const override JMP_THIS(0x723700);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x721A50);
 
-	static TiberiumClass* Find(int idxOverlayType) {
-		int idx = FindIndex(idxOverlayType);
-		return Array.GetItemOrDefault(idx);
-	}
+    void RegisterForGrowth(CellStruct* cell) JMP_THIS(0x7235A0);
 
+/*
+    void Delete_Growth_Data() JMP_THIS(0x723510);
+    void Delete_Spread_Data() JMP_THIS(0x722A20);
+    void Grow() JMP_THIS(0x722F00);
+    void Init() JMP_THIS(0x7236D0);
+    void Init_Growth_Data() JMP_THIS(0x723260);
+    CellClass* Init_Spread_Data() JMP_THIS(0x722770);
+    void Queue_Growth_At_Cell(Cell* a2) JMP_THIS(0x7235A0);
+    void Queue_Spread_At_Cell(Cell* a2) JMP_THIS(0x722AF0);
+    void Recalc_Growth_Data() JMP_THIS(0x7233A0);
+    void Recalc_Spread_Data() JMP_THIS(0x7228B0);
+    void Spread() JMP_THIS(0x722440);
+*/
+
+    static int FindIndex(int idxOverlayType) {
+        SET_REG32(ecx, idxOverlayType);
+        CALL(0x5FDD20);
+    }
+
+    static TiberiumClass* Find(int idxOverlayType) {
+        int idx = FindIndex(idxOverlayType);
+        return Array.GetItemOrDefault(idx);
+    }
 
 protected:
 	//===========================================================================

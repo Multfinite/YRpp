@@ -29,100 +29,53 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TagClass*>, Array, 0xB0E720u)
 
-	// finds an instance using the type, or creates one
-	static TagClass* __fastcall GetInstance(TagTypeClass* pType)
-		{ JMP_STD(0x6E52A0); }
 
-	// deletes every tag in array
-	static void __stdcall DeleteAll()
-		{ JMP_STD(0x6E5570); }
-
-	// notifies all tags in array that a global was updated
-	static void __fastcall NotifyGlobalChanged(int idxGlobal)
-		{ JMP_STD(0x6E57F0); }
-
-	// notifies all tags in array that a global was updated
-	static void __fastcall NotifyLocalChanged(int idxLocal)
-		{ JMP_STD(0x6E5820); }
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) override R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
-
-	//Destructor
-	virtual ~TagClass() RX;
-
-	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) override RX;
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-
-	// contains at least one Crosses Horizontal Line event
-	bool HasCrossesHorizontalLineEvent() const
-		{ JMP_THIS(0x6E5320); }
-
-	// contains at least one Crosses Vertical Line event
-	bool HasCrossesVerticalLineEvent() const
-		{ JMP_THIS(0x6E5300); }
-
-	// contains at least one Zone Entry By event
-	bool HasZoneEntryByEvent() const
-		{ JMP_THIS(0x6E5340); }
-
-	// contains at least one Allow Win action
-	bool HasAllowWinAction() const
-		{ JMP_THIS(0x6E5360); }
-
-	// called when a global is updated
-	void GlobalChanged(int idxGlobal)
-		{ JMP_THIS(0x6E55A0); }
-
-	// called when a local is updated
-	void LocalChanged(int idxLocal)
-		{ JMP_THIS(0x6E55B0); }
-
-	// whether there exist no other tag having the same type
-	// note: this is not the same as this->InstanceCount
-	bool IsOnlyInstanceOfType() const
-		{ JMP_THIS(0x6E5850); }
-
-	bool RaiseEvent(
-		TriggerEvent event, ObjectClass* pTagOwner, CellStruct location,
-		bool forceAllOccured = false, TechnoClass* pSource = nullptr)
-	{ JMP_THIS(0x6E53A0); }
-
-	// whether the tag transfers when the owner is "changed",
-	// like vehicle thief to tank and vice versa
-	bool ShouldReplace() const
-		{ JMP_THIS(0x6E57C0); }
-
-	void Destroy()
-		{ JMP_THIS(0x6E5230); }
-	bool HasBeenDestroyed() const
-		{ return this->Destroyed; }
-
-	// adds a trigger to the list
-	void AddTrigger(TriggerClass* pTrigger)
-		{ JMP_THIS(0x6E55C0); }
-
-	// removes a trigger from the list
-	bool RemoveTrigger(TriggerClass* pTrigger)
-		{ JMP_THIS(0x6E55D0); }
-
-	// check whether the trigger is contained in the list
-	bool ContainsTrigger(TriggerClass* pTrigger) const
-		{ JMP_THIS(0x6E5380); }
-
+public:
+    virtual ~TagClass() JMP_THIS(0x6E4F60);
 
 protected:
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E56A0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E5730);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E57A0);
+   
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x6E5610);
+    RTTIType WhatAmI() const override JMP_THIS(0x6E58A0);
+    int Size() const override JMP_THIS(0x6E5890);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E56E0);
 
+    bool HasCrossesHorizontalLineEvent() const JMP_THIS(0x6E5320);
+    bool HasCrossesVerticalLineEvent() const JMP_THIS(0x6E5300);
+    bool HasZoneEntryByEvent() const JMP_THIS(0x6E5340);
+    bool HasAllowWinAction() const JMP_THIS(0x6E5360);
+    void GlobalChanged(int idxGlobal) JMP_THIS(0x6E55A0);
+    void LocalChanged(int idxLocal) JMP_THIS(0x6E55B0);
+    bool IsOnlyInstanceOfType() const JMP_THIS(0x6E5850);
+    bool RaiseEvent(TriggerEvent event, ObjectClass* pTagOwner, CellStruct location, bool forceAllOccured = false, TechnoClass* pSource = nullptr) JMP_THIS(0x6E53A0);
+    bool ShouldReplace() const JMP_THIS(0x6E57C0);
+    void Destroy() JMP_THIS(0x6E5230);
+    void AddTrigger(TriggerClass* pTrigger) JMP_THIS(0x6E55C0);
+    bool RemoveTrigger(TriggerClass* pTrigger) JMP_THIS(0x6E55D0);
+    bool ContainsTrigger(TriggerClass* pTrigger) const JMP_THIS(0x6E5380);
+
+    constexpr bool HasBeenDestroyed() const { return this->Destroyed; }
+
+    static TagClass* __fastcall GetInstance(TagTypeClass* pType) JMP_STD(0x6E52A0);
+    static void __stdcall DeleteAll() JMP_STD(0x6E5570);
+    static void __fastcall NotifyGlobalChanged(int idxGlobal) JMP_STD(0x6E57F0);
+    static void __fastcall NotifyLocalChanged(int idxLocal) JMP_STD(0x6E5820);
+
+/*
+    void Get_Cell(Cell* cell) JMP_THIS(0x6E52F0);
+    bool Has_Zone_Entry_By_Event() JMP_THIS(0x6E5340);
+    int8_t Is_Destroyed() JMP_THIS(0x6E5290);
+    void Set_Cell(int32_t cell) JMP_THIS(0x6E5560);
+*/
+
+protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TagClass(fake_noinit_t) noexcept  : AbstractClass(fake_noinit_t{}) {}
 public:

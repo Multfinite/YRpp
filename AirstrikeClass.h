@@ -13,28 +13,6 @@ class __declspec(uuid("70DE3921-1E26-11D5-8F95-00A02483489C"))
 NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AirstrikeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//non-virtual
-	void StartMission(ObjectClass* pTarget)
-		{ JMP_THIS(0x41D830); }
-
-	void InvalidatePointer(void* ptr)
-	{ JMP_THIS(0x41D540); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -73,6 +51,37 @@ public:
 	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
 	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
 	FootClass* FirstObject;
+public:
+	virtual ~AirstrikeClass() JMP_THIS(0x41D4C0);
+	
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41D7A0);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41D6F0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41D780);
+	
+	RTTIType WhatAmI() const override JMP_THIS(0x41DD40);
+	int Size() const override JMP_THIS(0x41DD30);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41D6E0);
+	void Update() override JMP_THIS(0x41DC50);
+
+	/*!
+	* @note original_name Setup_Target
+	* @address 0x41D830
+	*/
+	void StartMission(ObjectClass* pTarget) JMP_THIS(0x41D830);
+	/*!
+	* @note original_name Detach
+	* @address 0x41D540
+	*/
+	void InvalidatePointer(void* ptr) JMP_THIS(0x41D540);
+/*
+	bool Can_Strike(int32_t target) JMP_THIS(0x41D7E0);
+	FootClass* Remove_Member(FootClass* a2) JMP_THIS(0x41DC80);
+	void Reset_Target() JMP_THIS(0x41DB40);
+	void Set_Target(TechnoClass* target) JMP_THIS(0x41DA20);
+	void Setup(TechnoClass* target) JMP_THIS(0x41D860);
+*/
+
 protected:
 	explicit __forceinline AirstrikeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:

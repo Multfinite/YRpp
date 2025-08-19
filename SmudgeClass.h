@@ -32,20 +32,22 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<SmudgeClass*>, Array, 0xA8B1E0u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~SmudgeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
+public:
+    virtual ~SmudgeClass() noexcept JMP_THIS(0x6B4B40);
+   
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B4F50);
+   
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B4EA0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B4F00);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x6B4F40);
+    int Size() const override JMP_THIS(0x6B4F30);
+    ObjectTypeClass* GetType() const override JMP_THIS(0x6B4F20);
+    
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x6B4F90);
+    bool Mark(MarkType value) override JMP_THIS(0x6B4BE0);
 
 protected:
 	//===========================================================================

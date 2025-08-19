@@ -18,8 +18,6 @@ public:
 	ABSTRACTTYPE_ARRAY(VoxelAnimTypeClass, 0xA8EB28u);
     using base_type = ObjectTypeClass;
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -32,23 +30,36 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
     static constexpr AbstractType AbsID = AbstractType::VoxelAnimType;
     static constexpr uintptr_t AbsVTable = 0x7F6548;
     static constexpr size_t ClassSize = 0x308;
 
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
 
 	//VoxelAnimTypeClass
 
-	//Destructor
-	virtual ~VoxelAnimTypeClass() RX;
+public:
+    virtual ~VoxelAnimTypeClass() JMP_THIS(0x74AF70);
 
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74B7D0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x74B810);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x74B8D0);
+    
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x74B8F0);
+    RTTIType WhatAmI() const override JMP_THIS(0x74B9F0);
+    int Size() const override JMP_THIS(0x74BA00);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x74B690);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x74B050);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x74BA10);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x74BA20);
 
+/*
+    VoxelAnimTypeClass * Find_Or_Make() JMP_THIS(0x74B960);
+    VoxelAnimTypeClass * Find_Or_Make_0(DynamicVectorClass * a2) JMP_THIS(0x74BB20);
+    int32_t From_Name() JMP_THIS(0x74B640);
+    int8_t * Get_Name() JMP_THIS(0x74B620);
+*/
 protected:
 	//===========================================================================
 	//===== Properties ==========================================================

@@ -33,79 +33,54 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override R0;
 
-	virtual HRESULT __stdcall Load(IStream* pStm) override R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
+public:
+    virtual ~TriggerTypeClass() JMP_THIS(0x726E00);
 
-	//Destructor
-	virtual ~TriggerTypeClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x727BB0);
 
-	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) override RX;
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x727BF0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x727CD0);
 
-	//AbstractTypeClass
-	virtual int GetArrayIndex() const override R0;
-	virtual bool LoadFromINI(CCINIClass* pINI) override R0;
-	virtual bool SaveToINI(CCINIClass* pINI) override R0;
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x727090);
+    RTTIType WhatAmI() const override JMP_THIS(0x727CA0);
+    int Size() const override JMP_THIS(0x727CB0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x727B30);
 
-	//static
-	static void __fastcall LoadFromINIList(CCINIClass* pINI)
-		{ JMP_STD(0x7275D0); }
+    int ArrayIndex() const override JMP_THIS(0x727CC0);
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x727240);
+    bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x7276A0);
 
-	static void __fastcall SaveToINIList(CCINIClass* pINI)
-		{ JMP_STD(0x727880); }
-
-	TagTypeClass* __fastcall FindByNameOrID(char const* pName)
-		{ JMP_STD(0x727120); }
-
-	//non-virtual
-	using Flags = BYTE; // same as trigger and event flags?
-	Flags GetFlags() const
-		{ JMP_THIS(0x7271E0); }
-
-	// contains at least one Allow Win action
-	bool HasAllowWinAction() const
-		{ JMP_THIS(0x726FE0); }
-
-	// contains at least one Global Set or Global Cleared event
-	bool HasGlobalSetOrClearedEvent(int idxGlobal) const
-		{ JMP_THIS(0x727010); }
-
-	// contains at least one Local Set or Local Cleared event
-	bool HasLocalSetOrClearedEvent(int idxLocal) const
-		{ JMP_THIS(0x727050); }
-
-	// contains at least one Crosses Horizontal Line event
-	bool HasCrossesHorizontalLineEvent() const
-		{ JMP_THIS(0x726F80); }
-
-	// contains at least one Crosses Vertical Line event
-	bool HasCrossesVerticalLineEvent() const
-		{ JMP_THIS(0x726F50); }
-
-	// contains at least one Zone Entry By event
-	bool HasZoneEntryByEvent() const
-		{ JMP_THIS(0x726FB0); }
-
-	// deletes an action from the list
-	bool RemoveAction(TActionClass* pAction)
-		{ JMP_THIS(0x7279E0); }
-
-	// deletes an event from the list
-	bool RemoveEvent(TEventClass* pEvent)
-		{ JMP_THIS(0x727A40); }
-
+public:
+    static void __fastcall LoadFromINIList(CCINIClass* pINI) JMP_STD(0x7275D0);
+    static void __fastcall SaveToINIList(CCINIClass* pINI) JMP_STD(0x727880);
+    TagTypeClass* __fastcall FindByNameOrID(char const* pName) JMP_STD(0x727120);
 
 protected:
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    using Flags = BYTE;
+    Flags GetFlags() const JMP_THIS(0x7271E0);
+    bool HasAllowWinAction() const JMP_THIS(0x726FE0);
+    bool HasGlobalSetOrClearedEvent(int idxGlobal) const JMP_THIS(0x727010);
+    bool HasLocalSetOrClearedEvent(int idxLocal) const JMP_THIS(0x727050);
+    bool HasCrossesHorizontalLineEvent() const JMP_THIS(0x726F80);
+    bool HasCrossesVerticalLineEvent() const JMP_THIS(0x726F50);
+    bool HasZoneEntryByEvent() const JMP_THIS(0x726FB0);
+    bool RemoveAction(TActionClass* pAction) JMP_THIS(0x7279E0);
+    bool RemoveEvent(TEventClass* pEvent) JMP_THIS(0x727A40);
 
+/*
+    AttachType Attaches_To() JMP_THIS(0x7271E0);
+    int32_t Clear_INI_Entries() JMP_THIS(0x727880);
+    TriggerTypeClass * Find_Or_Make() JMP_THIS(0x727AA0);
+    int8_t * Name_From_Persistance() JMP_THIS(0x7271D0);
+    int32_t Persistance_From_Name() JMP_THIS(0x727190);
+    void Read_INI() JMP_THIS(0x7275D0);
+*/
+
+protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:

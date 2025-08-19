@@ -32,21 +32,24 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AlphaShapeClass*>, Array, 0x88A0F0u)
+	virtual ~AlphaShapeClass() JMP_THIS(0x420C80);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x420D40);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x420DE0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x420E40);
+	
+	void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x420E70);
+	RTTIType WhatAmI() const override JMP_THIS(0x420D80);
+	int Size() const override JMP_THIS(0x420D90);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x420DA0);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AlphaShapeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
+/*
+	void Update() JMP_THIS(0x420E90);
+	int32_t Blit(tagRECT* edx0) JMP_THIS(0x420F40);
+	int32_t Blit_Rect() JMP_THIS(0x421350);
+	uint32_t Init_Array() JMP_THIS(0x4216C0);
+*/
 
 protected:
 	//===========================================================================

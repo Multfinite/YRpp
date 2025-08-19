@@ -38,47 +38,6 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, Array, 0xA8E9A8u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~AnimClass() RX;
-
-	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool detachFromAll) override JMP_THIS(0x425150);
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//ObjectClass
-	//AnimClass
-	virtual int AnimExtras() R0; // tumbling for IsMeteor and Bouncer anims
-	virtual int GetEnd() const R0; //End tag from the AnimType
-
-	void SetOwnerObject(ObjectClass *pOwner)
-		{ JMP_THIS(0x424B50); }
-
-	void Pause() {
-		this->Paused = true;
-		this->Unpaused = false;
-		this->PausedAnimFrame = this->Animation.Value;
-	}
-
-	void Unpause() {
-		this->Paused = false;
-		this->Unpaused = true;
-	}
-
-	// Anim start logic: sound event handling, tiberium chain reaction etc.
-	void Start() const
-		{ JMP_THIS(0x424CE0); }
-
-	// Anim midpoint logic: particle spawning, smudges etc.
-	bool Middle() const
-		{ JMP_THIS(0x424F00); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -126,6 +85,82 @@ public:
 	PROTECTED_PROPERTY(BYTE, unused_19F);
 	DECLARE_PROPERTY(AudioController, Audio3);
 	DECLARE_PROPERTY(AudioController, Audio4);
+
+public:
+	virtual ~AnimClass() JMP_THIS(0x4228E0);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x426540);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x425280);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4253B0);
+	
+	void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x425150);
+	RTTIType WhatAmI() const override JMP_THIS(0x426580);
+	int Size() const override JMP_THIS(0x426530);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x425410);
+	Coordinate* __GetCoords(Coordinate& retstr) const override JMP_THIS(0x422BE0);
+	void Update() override JMP_THIS(0x423AC0);
+
+	Layer InWhichLayer() const override JMP_THIS(0x424CB0);
+	ObjectTypeClass* GetType() const override JMP_THIS(0x425520);
+	int GetYSort() const override JMP_THIS(0x422BC0);
+	bool Limbo() override JMP_THIS(0x425530);
+	void MarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426270);
+	void UnmarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426300);
+	void UnInit() override JMP_THIS(0x4255B0);
+	bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x422C70);
+	CellStruct const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x4238D0);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x422CA0);
+	bool Mark(MarkType value) override JMP_THIS(0x4238B0);
+	int GetZ() const override JMP_THIS(0x425630);
+
+	/*!
+	* @note original_name BounceAI
+	* @note vtable_index 122:0x1E8
+	* @note address 0x423930
+	*/
+	virtual int BounceAI() JMP_THIS(0x423930);
+	/*!
+	* @note original_name GetEnd
+	* @note vtable_index 123:0x1EC
+	* @note address 0x425510
+	*/
+	virtual int GetEndFrame() JMP_THIS(0x425510);
+
+	void SetOwnerObject(ObjectClass *pOwner) JMP_THIS(0x424B50);
+
+	void Pause() {
+		this->Paused = true;
+		this->Unpaused = false;
+		this->PausedAnimFrame = this->Animation.Value;
+	}
+
+	void Unpause() {
+		this->Paused = false;
+		this->Unpaused = true;
+	}
+
+	// Anim start logic: sound event handling, tiberium chain reaction etc.
+	void Start() const JMP_THIS(0x424CE0);
+
+	// Anim midpoint logic: particle spawning, smudges etc.
+	bool Middle() const JMP_THIS(0x424F00);
+
+/*
+	void Attach_To(ObjectClass * obj) JMP_THIS(0x424B50);
+	void Do_Atom_Damage(Cell * cell) JMP_THIS(0x4251F0);
+	void Flaming_Guy_AI() JMP_THIS(0x425670);
+	bool Flaming_Guy_Allowed(Cell * a2) JMP_THIS(0x4260F0);
+	int32_t Flaming_Guy_Coords(Coordinate * a2) JMP_THIS(0x425D10);
+	int32_t Init() JMP_THIS(0x4261D0);
+	void Power_Off() JMP_THIS(0x425260);
+	void Power_On() JMP_THIS(0x425270);
+	void Set_House(int32_t house) JMP_THIS(0x424CA0);
+	void Set_Projectile(int32_t a2) JMP_THIS(0x424C90);
+	void Start() JMP_THIS(0x424CE0);
+	void Stop_Attached_Anim() JMP_THIS(0x422B80);
+*/
+
 protected:
 	explicit __forceinline AnimClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 public:

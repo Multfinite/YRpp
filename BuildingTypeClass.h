@@ -49,63 +49,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	//Destructor
-	virtual ~BuildingTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//AbstractTypeClass
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
-	//TechnoTypeClass
-	//BuildingTypeClass
-	virtual SHPStruct* LoadBuildup() R0;
-
-	//non-virtual
-	void ClearBuildUp()
-		{ JMP_THIS(0x465AF0); }
-
-	bool IsVehicle() const
-		{ JMP_THIS(0x465D40); }
-
-	short GetFoundationWidth() const
-		{ JMP_THIS(0x45EC90); }
-	short GetFoundationHeight(bool bIncludeBib) const
-		{ JMP_THIS(0x45ECA0); }
-
-	bool CanPlaceHere(CellStruct* cell, HouseClass* owner) const
-		{ JMP_THIS(0x464AC0); }
-
-	// helpers
-	bool HasSuperWeapon(int index) const {
-		return (this->SuperWeapon == index || this->SuperWeapon2 == index);
-	}
-
-	bool HasSuperWeapon() const {
-		return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1);
-	}
-
-	bool CanTogglePower() const {
-		return this->TogglePower && (this->PowerDrain > 0 || this->Powered);
-	}
-
-	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
-	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const {
-		return this->BuildingAnim[static_cast<int>(slot)];
-	}
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -320,6 +263,50 @@ public:
 	int NumberOfDocks;
 	VectorClass<CoordStruct> DockingOffsets;
 private: DWORD align_1794;
+public:
+	virtual ~BuildingTypeClass() JMP_THIS(0x45E580);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) JMP_STD(0x465380);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x465010);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x465300);
+
+	RTTIType WhatAmI() const override JMP_THIS(0x465D90);
+	int Size() const override JMP_THIS(0x465DA0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x464B30);
+	int GetArrayIndex() const override JMP_THIS(0x465DB0);
+	
+	bool LoadFromINI(CCINIClass* ini) override JMP_THIS(0x45FE50);
+
+	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x464A70);
+	int GetPipMax() const override JMP_THIS(0x45ECE0);
+	Point3D* __PixelDimensions(Point3D& retstr) const override JMP_THIS(0x45EBD0);
+	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x464AF0);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
+	int GetActualCost(HouseClass* pHouse) const override JMP_THIS(0x45EDD0);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x45E880);
+	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x45EC20);
+	SHPStruct* GetImage() const override JMP_THIS(0x45F040);
+
+	bool CanUseWaypoint() const override JMP_THIS(0x465910);
+	bool CanAttackMove() const override JMP_THIS(0x465920);
+	bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const override JMP_THIS(0x464AC0);
+	int GetCost() const override JMP_THIS(0x45ED50);
+
+	virtual SHPStruct* LoadBuildup() JMP_THIS(0x465960);
+
+	void ClearBuildUp() JMP_THIS(0x465AF0);
+	bool IsVehicle() const JMP_THIS(0x465D40);
+
+	short GetFoundationWidth() const JMP_THIS(0x45EC90);
+	short GetFoundationHeight(bool bIncludeBib) const JMP_THIS(0x45ECA0);
+
+	bool HasSuperWeapon(int index) const { return (this->SuperWeapon == index || this->SuperWeapon2 == index); }
+	bool HasSuperWeapon() const { return (this->SuperWeapon != -1 || this->SuperWeapon2 != -1); }
+	bool CanTogglePower() const { return this->TogglePower && (this->PowerDrain > 0 || this->Powered); }
+	BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) { return this->BuildingAnim[static_cast<int>(slot)]; }
+	const BuildingAnimStruct& GetBuildingAnim(BuildingAnimSlot slot) const { return this->BuildingAnim[static_cast<int>(slot)]; }
+
 protected:
 	explicit __forceinline BuildingTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:

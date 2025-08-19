@@ -28,24 +28,48 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     static constexpr AbstractType AbsID = AbstractType::Terrain;
     static constexpr uintptr_t AbsVTable = 0x7F522C;
     static constexpr size_t ClassSize = 0xE0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~TerrainClass() RX;
-
-	//identification
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<TerrainClass*>, Array, 0xA8E988u)
 
 
+public:
+    virtual ~TerrainClass() JMP_THIS(0x71B7B0);
+
+public:
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71D310);
+
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71CDA0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71CF30);
+    
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x71CFD0);
+    RTTIType WhatAmI() const override JMP_THIS(0x71D300);
+    int Size() const override JMP_THIS(0x71D2F0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71CF50);
+    void Update() override JMP_THIS(0x71C730);
+   
+    ObjectTypeClass* GetType() const override JMP_THIS(0x71D150);
+    bool Limbo() override JMP_THIS(0x71C930);
+    bool Unlimbo(const Coordinate& coords, Dir256 dir) override JMP_THIS(0x71D000);
+    void MarkAllOccupationBits(const Coordinate& coord) override JMP_THIS(0x71C110);
+    void UnmarkAllOccupationBits(const Coordinate& coord) override JMP_THIS(0x71C070);
+    bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x71CC50);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x71C1B0);
+    void DrawAgain(const Point2D& location, const RectangleStruct& bounds) const override JMP_THIS(0x71C360);
+    bool Mark(MarkType mark) override JMP_THIS(0x71BFB0);
+    RectangleStruct* __GetRenderDimensions(RectangleStruct& retstr) const override JMP_THIS(0x71D160);
+    DamageState ReceiveDamage(int* damage, int distance, WarheadTypeClass* warhead, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x71B920);
+    bool Ignite() override JMP_THIS(0x71C5B0);
+    void Extinguish() override JMP_THIS(0x71C6B0);
+    Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x71C4D0);
+/*
+    void Read_INI() JMP_THIS(0x71CA70);
+    void Start_To_Crumble() JMP_THIS(0x71C8E0);
+    void Write_INI() JMP_THIS(0x71CB90);
+*/
 
 	//===========================================================================
 	//===== Properties ==========================================================

@@ -31,20 +31,19 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(SideClass, 0x8B4120u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~SideClass() RX;
+public:
+    virtual ~SideClass() JMP_THIS(0x6A4610);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6A4740);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6A4780);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6A48A0);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x6A4920);
+    int Size() const override JMP_THIS(0x6A4910);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6A4710);
 
 protected:
 	//===========================================================================

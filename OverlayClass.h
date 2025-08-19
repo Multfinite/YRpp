@@ -61,24 +61,30 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+    virtual ~OverlayClass() JMP_THIS(0x5FC4D0);
 
-	//Destructor
-	virtual ~OverlayClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x5FDF10);
+   
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5FD8F0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FD950);
+   
+    RTTIType WhatAmI() const override JMP_THIS(0x5FDF50);
+    int Size() const override JMP_THIS(0x5FDF00);
+   
+    ObjectTypeClass* GetType() const override JMP_THIS(0x5FDDE0);
+    bool Unlimbo(const Coordinate& coords, Dir256 dir) override JMP_THIS(0x5FD270);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x5FDF60);
+    void DrawAgain(const Point2D& location, const RectangleStruct& bounds) const override JMP_THIS(0x5FD970);
+    bool Mark(MarkType mark) override JMP_THIS(0x5FC570);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    static int __fastcall GetTiberiumType(int overlayTypeIndex) JMP_STD(0x5FDD20);
 
-	// Gets overlay's tiberium type
-	static int __fastcall GetTiberiumType(int overlayTypeIndex)
-		{ JMP_THIS(0x5FDD20); }
-
+/*
+    int32_t Read_INI() JMP_THIS(0x5FD2E0);
+    void Write_INI(OverlayClass* pThis) JMP_THIS(0x5FD6A0);
+*/
 
 	//===========================================================================
 	//===== Properties ==========================================================

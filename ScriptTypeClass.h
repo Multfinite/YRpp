@@ -38,27 +38,31 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(ScriptTypeClass, 0x8B41C8u);
-	static ScriptTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x691C00); }
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+    virtual ~ScriptTypeClass() noexcept JMP_THIS(0x691770);
 
-	//Destructor
-	virtual ~ScriptTypeClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x691D50);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x691D90);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691DE0);
+    
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x691E30);
+    RTTIType WhatAmI() const override JMP_THIS(0x691F70);
+    int Size() const override JMP_THIS(0x691F80);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x691E00);
+    int GetArrayIndex() const override JMP_THIS(0x691F90);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6918A0);
+    bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6917F0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    static ScriptTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x691C00);
+    static bool LoadFromINIList(CCINIClass* pINI, bool IsGlobal) JMP_STD(0x691970);
 
-	//AbstractTypeClass
-	static bool LoadFromINIList(CCINIClass *pINI, bool IsGlobal)
-		{ JMP_STD(0x691970); }
-
+/*
+    void Write_Scenario_INI(int32_t a2) JMP_THIS(0x691B30);
+*/
 
 protected:
 	//===========================================================================

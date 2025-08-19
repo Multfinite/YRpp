@@ -67,110 +67,177 @@ public:
 	DEFINE_REFERENCE(DynamicVectorClass<AbstractClass*>, Array, 0xB0F720u)
 	DEFINE_REFERENCE((IndexClass<int, int>), TargetIndex, 0xB0E840u)
 
-	const char* GetRTTIName() const { return GetRTTIName(WhatAmI()); }
-	static const char* GetRTTIName(AbstractType abs) JMP_THIS(0x40DCB0);
+	const char* GetRTTIName() const { return AbstractClass::GetRTTIName(this->WhatAmI()); }
+	static const char* GetRTTIName(RTTIType abs) JMP_THIS(0x40DCB0);
+public:
+	void __stdcall Issue() override JMP_STD(0x410590);
+	bool __stdcall Respond(DWORD command) override JMP_STD(0x410580);
 
-	//IUnknown
-	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) R0;
-	virtual ULONG __stdcall AddRef() R0;
-	virtual ULONG __stdcall Release() R0;
+	RTTIType __stdcall What_Am_I() const override JMP_STD(0x410210);
+	int __stdcall Fetch_ID() const override JMP_STD(0x410220);
+	void __stdcall Create_ID() override JMP_STD(0x410230);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) = 0;
+	/*00:0x00*/
+	HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_STD(0x410260);
+	/*01:0x04*/
+	ULONG __stdcall AddRef() override JMP_STD(0x410300);
+	/*02:0x08*/
+	ULONG __stdcall Release() override JMP_STD(0x410310);
+	/*04:0x10*/
+	HRESULT __stdcall IsDirty() override JMP_STD(0x410450);
+	/*07:0x1C*/
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x4103E0);
 
-	//IPersistStream
-	virtual HRESULT __stdcall IsDirty() R0;
-	virtual HRESULT __stdcall Load(IStream* pStm) = 0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) = 0;
+	/*08:0x20*/
+	virtual ~AbstractClass(/*DestructorFlags flags*/) JMP_THIS(0x4105A0);
 
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
+	/*!
+	* @note original_name Init
+	* @note vtable_index 09:0x24
+	* @note address 0x410470
+	*/
+	virtual void Init() JMP_THIS(0x410470);
 
-	//IRTTITypeInfo
-	virtual AbstractType __stdcall What_Am_I() const RT(AbstractType);
-	virtual int __stdcall Fetch_ID() const R0;
-	virtual void __stdcall Create_ID() RX;
+	/*!
+	* @brief Invalidate pointers to instance (clear fields which containing it). Broadcast.
+	* @note original_name Detach
+	* @note vtable_index 10:0x28
+	* @note address 0x410480
+	*/
+	virtual void PointerExpired(AbstractClass* instance, bool removed) JMP_THIS(0x410480);
 
-	//INoticeSink
-	virtual bool __stdcall INoticeSink_Unknown(DWORD dwUnknown) R0;
+	/*!
+	* @note original_name Kind_Of
+	* @note vtable_index 11:0x2C
+	* @note address 0x0
+	*/
+	virtual RTTIType WhatAmI() const = 0;
 
-	//INoticeSource
-	virtual void __stdcall INoticeSource_Unknown() RX;
-
-	//Destructor
-	virtual ~AbstractClass() RX;
-
-	//AbstractClass
-	virtual void Init() RX;
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) RX;
-	virtual AbstractType WhatAmI() const = 0;
+	/*!
+	* @note original_name Size_Of
+	* @note vtable_index 12:0x30
+	* @note address 0x0
+	*/
 	virtual int Size() const = 0;
-	virtual void ComputeCRC(CRCEngine& crc) const RX;
-	virtual int GetOwningHouseIndex() const R0;
-	virtual HouseClass* GetOwningHouse() const R0;
-	virtual int GetArrayIndex() const R0;
-	virtual bool IsDead() const R0;
-	virtual CoordStruct* GetCoords(CoordStruct* pCrd) const R0;
-	virtual CoordStruct* GetDestination(CoordStruct* pCrd, TechnoClass* pDocker = nullptr) const R0; // where this is moving, or a building's dock for a techno. iow, a rendez-vous point
-	virtual bool IsOnFloor() const R0;
-	virtual bool IsInAir() const R0;
-	virtual CoordStruct* GetCenterCoords(CoordStruct* pCrd) const R0;
-	virtual void Update() RX;
 
-	//non-virtual
-	static void __fastcall AnnounceExpiredPointer(AbstractClass* pAbstract, bool removed = true)
-		{ JMP_THIS(0x7258D0); }
+	/*!
+	* @note original_name Compute_CRC
+	* @note vtable_index 13:0x34
+	* @note address 0x410410
+	*/
+	virtual void ComputeCRC(CRCEngine& crc) const JMP_THIS(0x410410);
+
+	/*!
+	* @brief returns owner house ID (index)
+	* @note original_name Owner
+	* @note vtable_index 14:0x38
+	* @note address 0x410490
+	*/
+	virtual int GetOwningHouseIndex() const JMP_THIS(0x410490);
+
+	/*!
+	* @brief returns owner house
+	* @note original_name Owning_House
+	* @note vtable_index 15:0x3C
+	* @note address 0x4104A0
+	*/
+	virtual HouseClass* GetOwningHouse() const JMP_THIS(0x4104A0);
+
+	/*!
+	* @note original_name Get_Heap_ID
+	* @note vtable_index 16:0x40
+	* @note address 0x4104B0
+	*/
+	virtual int GetArrayIndex() const JMP_THIS(0x4104B0);
+
+	/*!
+	* @note original_name Is_Inactive
+	* @note vtable_index 17:0x44
+	* @note address 0x410440
+	*/
+	virtual bool IsDead() const JMP_THIS(0x410440);
+
+	/*!
+	* @note original_name Center_Coord
+	* @note vtable_index 18:0x48
+	* @note address 0x4104C0
+	*/
+	virtual Coordinate* __GetCoords(Coordinate& retstr) const JMP_THIS(0x4104C0);
+	__forceinline Coordinate GetCoords() const
+	{
+		Coordinate ret;
+		__GetCoords(ret);
+		return ret;
+	}
+
+	/*!
+	* @brief Where this is moving, or a building's dock for a techno. iow, a rendez-vous point.
+	* @note original_name Target_Coord
+	* @note vtable_index 19:0x4C
+	* @note address 0x4104F0
+	*/
+	virtual Coordinate* __GetDestination(Coordinate& retstr, TechnoClass* pDocker = nullptr) const JMP_THIS(0x4104F0);
+	__forceinline Coordinate GetDestination(TechnoClass* pDocker = nullptr) const
+	{
+		Coordinate ret;
+		__GetDestination(ret, pDocker);
+		return ret;
+	}
+
+	/*!
+	* @note original_name On_Ground
+	* @note vtable_index 20:0x50
+	* @note address 0x410520
+	*/
+	virtual bool IsOnFloor() const JMP_THIS(0x410520);
+
+	/*!
+	* @note original_name In_Air
+	* @note vtable_index 21:0x54
+	* @note address 0x410530
+	*/
+	virtual bool IsInAir() const JMP_THIS(0x410530);
+
+	/*!
+	* @brief DO NOT USE THIS WHEN YOU NEED A CENTER. This is some specific-special functions. It used in BulletClass to get coords of the targets. It's overriden only in CellClass.
+	* @note original_name Get_Coord
+	* @note vtable_index 22:0x58
+	* @note address 0x410540
+	*/
+	virtual Coordinate* __GetCenterCoords(Coordinate& retstr) const JMP_THIS(0x410540);
+	__forceinline Coordinate GetCenterCoords() const
+	{
+		Coordinate ret;
+		__GetCenterCoords(ret);
+		return ret;
+	}
+
+	/*!
+	* @brief Process object per frame.
+	* @note original_name AI
+	* @note vtable_index 23:0x5C
+	* @note address 0x410570
+	*/
+	virtual void Update() JMP_THIS(0x410570);
+
+	static void __fastcall AnnounceExpiredPointer(AbstractClass* instance, bool removed = true) JMP_THIS(0x7258D0);
+	void AnnounceExpiredPointer(bool removed = true) { AnnounceExpiredPointer(this, removed); }
 
 	static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
-
-	void AnnounceExpiredPointer(bool removed = true) {
-		AnnounceExpiredPointer(this, removed);
-	}
-
-	CoordStruct GetCoords() const {
-		CoordStruct ret;
-		this->GetCoords(&ret);
-		return ret;
-	}
-
-	CoordStruct GetDestination(TechnoClass* pDocker = nullptr) const {
-		CoordStruct ret;
-		this->GetDestination(&ret, pDocker);
-		return ret;
-	}
-
-	CoordStruct GetCenterCoords() const {
-		CoordStruct ret;
-		this->GetCenterCoords(&ret);
-		return ret;
-	}
-
-	DirStruct* GetTargetDirection(DirStruct* pDir, AbstractClass* pTarget) const
-		{ JMP_THIS(0x5F3DB0); }
-
-	DirStruct GetTargetDirection(AbstractClass* pTarget) const
-	{
-		DirStruct ret;
-		this->GetTargetDirection(&ret, pTarget);
-		return ret;
-	}
-
-	int DistanceFrom(AbstractClass *that) const
-		{ JMP_THIS(0x5F6440); }
-
-	int DistanceFrom3D(AbstractClass *that) const
-		{ JMP_THIS(0x5F6360); }
-
-	//Operators
-	bool operator < (const AbstractClass &rhs) const {
-		return this->UniqueID < rhs.UniqueID;
-	}
-
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+	/*! @brief It is not VIRTUAL <IPersistStream::Load> functions, it is proxy which used at EACH override of virtual. */
+	HRESULT __stdcall Load(IStream* stream) JMP_THIS(0x410380);
+	/*! @brief It is not VIRTUAL <IPersistStream::Save> functions, it is proxy which used at EACH override of virtual. */
+	HRESULT __stdcall Save(IStream* stream, int32_t fClearDirty) JMP_THIS(0x410320);
+	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN ACTION SELECTION.*/
+	TechnoClass* AsTechno() JMP_THIS(0x40DD20);
+	/*! @brief Return if this is any ancestor of TechnoClass otherwise return null. USED IN DAMAGE/SELECTION/PER CELL PROCESS.*/
+	TechnoClass* _AsTechno() JMP_THIS(0x40DD70);
 
-public:
+	constexpr bool operator<(const AbstractClass &rhs) const { return this->UniqueID < rhs.UniqueID; }
 
 	DWORD UniqueID; // generated by IRTTIInfo::Create_ID through an amazingly simple sequence of return ++ScenarioClass::Instance->UniqueID;
 	AbstractFlags AbstractFlags;	// flags, see AbstractFlags enum in GeneralDefinitions.

@@ -10,8 +10,6 @@ class __declspec(uuid("FFDAC848-1517-11D2-8175-006008055BB5"))
 NOVTABLE CampaignClass : public AbstractTypeClass
 {
 public:
-	static void __fastcall CreateFromINIList(CCINIClass *pINI)
-		{ JMP_STD(0x46CE10); }
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
 	{
 		constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
@@ -24,8 +22,6 @@ public:
 	};
 	static inline vtables_t vtables{};
 
-	static signed int __fastcall FindIndex(const char* name)
-		{ JMP_STD(0x46CC90); }
 	static constexpr AbstractType AbsID = AbstractType::Campaign;
 	static constexpr uintptr_t AbsVTable = 0x7E4A28;
 	static constexpr size_t ClassSize = 0x3A0;
@@ -35,6 +31,22 @@ public:
 	char Scenario[512];
 	int FinalMovie;
 	wchar_t Description[128];
+public:
+	virtual ~CampaignClass() JMP_THIS(0x46CC10);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46CF80);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x46D000);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46D050);
+	
+	RTTIType KindOf() const override JMP_THIS(0x46D080);
+	int SizeOf() const override JMP_THIS(0x46D070);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x46CFC0);
+	
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46CCD0);
+public:
+	static void __fastcall CreateFromINIList(CCINIClass* pINI) JMP_STD(0x46CE10);
+	static signed int __fastcall FindIndex(const char* name) JMP_STD(0x46CC90);
 protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline CampaignClass(fake_noinit_t) noexcept

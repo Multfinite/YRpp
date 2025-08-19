@@ -29,25 +29,26 @@ public:
 	//Array
 	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) override R0;
 
-	virtual HRESULT __stdcall Load(IStream* pStm) override R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override R0;
+public:
+    IsometricTileTypeClass* Type;
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
+public:
+    virtual ~IsometricTileClass() JMP_THIS(0x543880);
 
-	//ObjectClass
-	virtual ObjectTypeClass* GetType() const override R0;
-	virtual bool Limbo() override R0;
-	virtual bool Unlimbo(const CoordStruct& Crd, DirType dFaceDir) override R0;
-	virtual void Draw(Point2D* pLocation, RectangleStruct* pBounds) const override RX;
-
-	//Destructor
-	virtual ~IsometricTileClass() RX;
-
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x543AB0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x543990);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5439F0);
+    
+    RTTIType KindOf() const override JMP_THIS(0x543AA0);
+    int SizeOf() const override JMP_THIS(0x543A90);
+    
+    ObjectTypeClass* ClassOf() const override JMP_THIS(0x543AF0);
+    bool Limbo() override JMP_THIS(0x543A40);
+    bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x543A10);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x543B00);
+    bool Mark(MarkType mark) override JMP_THIS(0x543330);
 
 protected:
 	//===========================================================================

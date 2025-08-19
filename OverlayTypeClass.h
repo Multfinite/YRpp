@@ -33,29 +33,35 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(OverlayTypeClass, 0xA83D80u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+    virtual ~OverlayTypeClass() JMP_THIS(0x5FE3F0);
 
-	//Destructor
-	virtual ~OverlayTypeClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x5FEC30);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x5FEAF0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x5FEC10);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x5FEF00);
+    int Size() const override JMP_THIS(0x5FEF10);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x5FEA50);
+    int GetArrayIndex() const override JMP_THIS(0x5FEF20);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5FE770);
+    Coordinate* __FixupCoord(Coordinate& retstr, CoordStruct& coord) const override JMP_THIS(0x5FEA30);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x5FE530);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x5FE570);
+    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x5FE4C0);
+    SHPStruct* GetImage() const override JMP_THIS(0x5FEDE0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    virtual void Draw(Point2D* pClientCoords, RectangleStruct* pClipRect, int nFrame) JMP_THIS(0x5FE5A0);
 
-	//ObjectTypeClass
-	virtual CoordStruct* vt_entry_6C(CoordStruct* pDest,CoordStruct* pSrc) const R0;
-
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
-	//OverlayTypeClass
-	virtual void Draw(Point2D* pClientCoords, RectangleStruct* pClipRect, int nFrame) RX;
-
+/*
+    OverlayTypeClass* Find_Or_Make() JMP_THIS(0x5FEC70);
+    int32_t From_Name() JMP_THIS(0x5FE470);
+    RGBClass Get_Radar_Color(int32_t a3) JMP_THIS(0x5FED00);
+    void Init() JMP_THIS(0x5FE620);
+*/
 
 protected:
 	//===========================================================================

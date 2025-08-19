@@ -36,27 +36,22 @@ public:
 	static constexpr auto Radius = 240;
 	DEFINE_ARRAY_REFERENCE(Point2D, [16], DrawCoords, 0x8A0180u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
+public:
+    virtual ~DiskLaserClass() JMP_THIS(0x4A7B00);
 
-	//Destructor
-	virtual ~DiskLaserClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4A7C30);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4A7B90);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4A7C10);
+   
+    RTTIType WhatAmI() const override JMP_THIS(0x4A7C80);
+    int Size() const override JMP_THIS(0x4A7C70);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4A7B80);
+    void Update() override JMP_THIS(0x4A7340);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
-	void Fire(TechnoClass* pOwner, TechnoClass* pTarget, WeaponTypeClass* pWeapon, int nDamage)
-		{ JMP_THIS(0x4A71A0); }
-
-	void PointerGotInvalid(AbstractClass* pInvalid)
-		{ JMP_THIS(0x4A7900); }
-
+    void Fire(TechnoClass* pOwner, TechnoClass* pTarget, WeaponTypeClass* pWeapon, int nDamage) JMP_THIS(0x4A71A0);
+    void PointerGotInvalid(AbstractClass* pInvalid) JMP_THIS(0x4A7900);
 
 protected:
 	//===========================================================================

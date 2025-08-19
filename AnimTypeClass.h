@@ -35,24 +35,6 @@ public:
 	ABSTRACTTYPE_ARRAY(AnimTypeClass, 0x8B4150u);
 	static AnimTypeClass* __fastcall FindOrAllocate(const char* id)
 	{ JMP_STD(0x428B80); }
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0; // ! this just returns NULL instead of creating the anim, fucking slackers
-
-	//AnimTypeClass
-	virtual SHPStruct* LoadImage() R0;
-	virtual void Load2DArt() RX;
-
-	//Destructor
-	virtual ~AnimTypeClass() RX;
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -129,6 +111,43 @@ public:
 	bool Shadow;
 	bool PsiWarning;
 	bool ShouldFogRemove;
+public:
+	// scalar 0x428EA0
+	virtual ~AnimTypeClass() RX;
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x428990);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x428800);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x428970);
+
+	void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x428C10);
+	RTTIType WhatAmI() const override JMP_THIS(0x428E50);
+	int Size() const override JMP_THIS(0x428E70);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4289D0);
+	
+	int GetArrayIndex() const override JMP_THIS(0x428E60);
+	void LoadTheaterSpecificArt(TheaterType th_type) override JMP_THIS(0x427A80);
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x427D00);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x428E80);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x428E90);
+	SHPStruct* GetImage() const override JMP_THIS(0x428C30);
+	
+	/*!
+	* @note original_name Load2DArt
+	* @note vtable_index 40:0xA0
+	* @note address 0x427B50
+	*/
+	virtual void Load2DArt() JMP_THIS(0x427B50);
+
+/*
+	AnimTypeClass * Find_Or_Make() JMP_THIS(0x428B80);
+	AnimTypeClass * Find_Or_Make_0(int32_t ) JMP_THIS(0x428F70);
+	void Free_Image(AnimTypeClass * pThis) JMP_THIS(0x428DE0);
+	AnimTypeClass * From_Name() JMP_THIS(0x422B20);
+	int32_t From_Name() JMP_THIS(0x427CB0);
+	void Init() JMP_THIS(0x427940);
+*/
+
 protected:
 	explicit __forceinline AnimTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
 public:

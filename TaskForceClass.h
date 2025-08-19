@@ -34,23 +34,26 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     static constexpr AbstractType AbsID = AbstractType::TaskForce;
     static constexpr uintptr_t AbsVTable = 0x7F4680;
     static constexpr size_t ClassSize = 0xD4;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~TaskForceClass() RX;
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+public:
+    virtual ~TaskForceClass() JMP_THIS(0x6E7F80);
 
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E8710);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E86A0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x6E8680);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x6E87D0);
+    int Size() const override JMP_THIS(0x6E87E0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E8750);
+   
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6E8420);
+    bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6E8510);
 
 protected:
 	//===========================================================================

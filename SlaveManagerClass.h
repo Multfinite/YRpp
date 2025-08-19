@@ -62,57 +62,58 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<SlaveManagerClass*>, Array, 0xB0B5F0u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+    virtual ~SlaveManagerClass() JMP_THIS(0x6AF4A0);
 
-	//Destructor
-	virtual ~SlaveManagerClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B1130);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B1170);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B1300);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x6B1380);
+    int Size() const override JMP_THIS(0x6B1370);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6B10F0);
+    void Update() override JMP_THIS(0x6AF5F0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    void SetOwner(TechnoClass* NewOwner) JMP_THIS(0x6AF580);
+    void CreateSlave(SlaveControl* Node) JMP_THIS(0x6AF650);
+    void LostSlave(InfantryClass* Slave) JMP_THIS(0x6B0A20);
+    void Deploy2() JMP_THIS(0x6B0D60);
+    void Killed(TechnoClass* Killer, HouseClass* ForcedOwnerHouse = nullptr) JMP_THIS(0x6B0AE0);
+    bool ShouldWakeUpNow() JMP_THIS(0x6B1020);
 
-	// non-virtual
-	void SetOwner(TechnoClass *NewOwner)
-		{ JMP_THIS(0x6AF580); }
+/*
+    Cell* Cell1(Cell* a2) JMP_THIS(0x6B0690);
+    Cell* Cell2(Cell* a2) JMP_THIS(0x6B0750);
+    bool Cell3(InfantryClass* infantry, CellClass* cell) JMP_THIS(0x6B0880);
+    void Create_Slave(SlaveControl* ctrl) JMP_THIS(0x6AF650);
+    void Deploy1() JMP_THIS(0x6B0D10);
+    uint32_t* Find_More_Ore(uint32_t* a2) JMP_THIS(0x6B02C0);
+    int32_t Found_More_Ore() JMP_THIS(0x6B0260);
+    void Guard() JMP_THIS(0x6B0CC0);
+    void Harvest() JMP_THIS(0x6B0DB0);
+    void Idle() JMP_THIS(0x6B0C80);
+    void Owner_AI() JMP_THIS(0x6AFD60);
+    void Recall_Slaves() JMP_THIS(0x6B0490);
+    void Release_A_Slave(int32_t a2) JMP_THIS(0x6B0A90);
+    void Send_Slaves() JMP_THIS(0x6B04C0);
+    void Set_State(int32_t a2) JMP_THIS(0x6B10D0);
+    uint64_t Slave_AI() JMP_THIS(0x6AF6C0);
+    int** Where_To_Deploy(int** a2, int32_t a3) JMP_THIS(0x6B0300);
+*/
 
-	void CreateSlave(SlaveControl *Node)
-		{ JMP_THIS(0x6AF650); }
-
-	void LostSlave(InfantryClass *Slave)
-		{ JMP_THIS(0x6B0A20); }
-
-	void Deploy2()
-		{ JMP_THIS(0x6B0D60); }
-
-	// switches the slaves to the killer house with cheers and hoorahs
-	// note that this->Owner will be NULL once this function is done
-	void Killed(TechnoClass *Killer, HouseClass * ForcedOwnerHouse = nullptr)
-		{ JMP_THIS(0x6B0AE0); }
-
-	bool ShouldWakeUpNow()
-		{ JMP_THIS(0x6B1020); }
-
-	// the slaves will become free citizens without any announcements or cheers, if you don't call Killed() beforehand
-	void ZeroOutSlaves();
-
-	// stops scanning, spawning slaves and driving around.
-	void SuspendWork() {
-		this->RespawnTimer.StartTime = -1;
-		if(!this->RespawnTimer.TimeLeft) {
-			this->RespawnTimer.TimeLeft = 1;
-		}
-	}
-
-	// resumes to harvest automatically.
-	void ResumeWork() {
-		this->RespawnTimer.Resume();
-	}
-
+    // Helper methods
+    void ZeroOutSlaves();
+    void SuspendWork() {
+        this->RespawnTimer.StartTime = -1;
+        if (!this->RespawnTimer.TimeLeft) {
+            this->RespawnTimer.TimeLeft = 1;
+        }
+    }
+    void ResumeWork() {
+        this->RespawnTimer.Resume();
+    }
 
 protected:
     /*! @brief FAKE CTOR */

@@ -44,59 +44,43 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+public:
+	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x41E500);
 
-	//Destructor
-	virtual ~AITriggerTypeClass() RX;
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x41E540);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x41E5C0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	RTTIType WhatAmI() const override JMP_THIS(0x41FFD0);
+	int Size() const override JMP_THIS(0x41FFE0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x41E5E0);
 
-	static bool LoadFromINIList(CCINIClass *pINI)
-		{ JMP_STD(0x41F2E0); }
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41F580);
+	bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x41FB10);
+
+	static bool LoadFromINIList(CCINIClass *pINI) JMP_STD(0x41F2E0);
 
 	// Global == saving into AI.ini as opposed to map?
 	// if !Global, [AITriggerTypesEnable] gets saved as well
-	static bool SaveToINIList(CCINIClass *pINI, bool Global)
-		{ JMP_STD(0x41F490); }
+	static bool SaveToINIList(CCINIClass *pINI, bool Global) JMP_STD(0x41F490);
 
 	// non-virtual
 
 	// teams finished script, and
-	void RegisterSuccess()
-		{ JMP_THIS(0x41FD60); }
-
-	void RegisterFailure()
-		{ JMP_THIS(0x41FE20); }
-
+	void RegisterSuccess() JMP_THIS(0x41FD60);
+	void RegisterFailure() JMP_THIS(0x41FE20);
+	
 	// the main condition
-	bool ConditionMet(HouseClass *CallingHouse, HouseClass *TargetHouse, bool EnoughBaseDefense) const
-		{ JMP_THIS(0x41E720); }
+	bool ConditionMet(HouseClass *CallingHouse, HouseClass *TargetHouse, bool EnoughBaseDefense) const JMP_THIS(0x41E720);
 
 	// slaves
-	bool OwnerHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41EE90); }
-
-	bool CivilianHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41EC90); }
-
-	bool EnemyHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41EAF0); }
-
-	bool IronCurtainCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41F0D0); }
-
-	bool ChronoSphereCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41F180); }
-
-	bool HouseCredits(HouseClass *CallingHouse, HouseClass *TargetHouse) const
-		{ JMP_THIS(0x41F230); }
+	bool OwnerHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EE90);
+	bool CivilianHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EC90); 
+	bool EnemyHouseOwns(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41EAF0);
+	bool IronCurtainCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F0D0);
+	bool ChronoSphereCharged(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F180); 
+	bool HouseCredits(HouseClass *CallingHouse, HouseClass *TargetHouse) const JMP_THIS(0x41F230);
 
 	void FormatForSaving(char * buffer, size_t size) const {
 		const char *Team1Name = "<none>";
@@ -196,6 +180,20 @@ public:
 	int              TimesExecuted;
 	int              TimesCompleted;
 	int              unknown_10C;
+/*
+	bool Chronosphere_Near_Ready(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F180);
+	bool Enemy_Owns(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41EAF0);
+	bool Enemy_Red_Power(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F080);
+	bool Enemy_Yellow_Power(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F030);
+	AITriggerTypeClass* Find_Or_Make() JMP_THIS(0x41FCA0);
+	bool Iron_Curtain_Near_Ready(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F0D0);
+	bool Neutral_Owns(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41EC90);
+	int8_t New_Team(HouseClass* house1, HouseClass* house2, bool skip) JMP_THIS(0x41E720);
+	uint64_t Read_Scenario_INI() JMP_THIS(0x41F2E0);
+	void Set_Team_1(int32_t a2) JMP_THIS(0x41FD40);
+	void Set_Team_2(int32_t a2) JMP_THIS(0x41FD50);
+	int32_t Write_Scenario_INI() JMP_THIS(0x41F490);
+*/
 
 };
 static_assert(sizeof(AITriggerTypeClass) == AITriggerTypeClass::ClassSize);

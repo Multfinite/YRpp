@@ -196,57 +196,11 @@ public:
 	DEFINE_REFERENCE(HouseClass*, CurrentPlayer, 0xA83D4Cu) // House of player at this computer.
 	DEFINE_REFERENCE(HouseClass*, Observer, 0xAC1198u);     // House of player that is observer.
 
-	//IConnectionPointContainer
-	virtual HRESULT __stdcall EnumConnectionPoints(IEnumConnectionPoints** ppEnum) R0;
-	virtual HRESULT __stdcall FindConnectionPoint(GUID* riid, IConnectionPoint** ppCP) R0;
 
-	//IPublicHouse
-	virtual long __stdcall Apparent_Category_Quantity(Category category) const override R0;
-	virtual long __stdcall Apparent_Category_Power(Category category) const override R0;
-	virtual CellStruct __stdcall Apparent_Base_Center() const RT(CellStruct);
-	virtual bool __stdcall Is_Powered() const R0;
 
-	//IHouse
-	virtual long __stdcall ID_Number() const override R0;
-	virtual BSTR __stdcall Name() const override R0;
-	virtual IApplication* __stdcall Get_Application() override R0;
-	virtual long __stdcall Available_Money() const override R0;
-	virtual long __stdcall Available_Storage() const override R0;
-	virtual long __stdcall Power_Output() const override R0;
-	virtual long __stdcall Power_Drain() const override R0;
-	virtual long __stdcall Category_Quantity(Category category) const override R0;
-	virtual long __stdcall Category_Power(Category category) const override R0;
-	virtual CellStruct __stdcall Base_Center() const override RT(CellStruct);
-	virtual HRESULT __stdcall Fire_Sale() const override R0;
-	virtual HRESULT __stdcall All_To_Hunt() override R0;
 
-	//IUnknown
-	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) R0;
-	virtual ULONG __stdcall AddRef() R0;
-	virtual ULONG __stdcall Release() R0;
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~HouseClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	bool MakeObserver() const
 	{
-		if (HouseClass::CurrentPlayer != this)
-			return false;
 
-		HouseClass::Observer = const_cast<HouseClass*>(this);
-		return true;
-	}
 
 	bool IsAlliedWith(int idxHouse) const
 		//{ JMP_THIS(0x4F9A10); }
@@ -275,12 +229,6 @@ public:
 		//	{ JMP_THIS(0x4F9AF0); }
 	{
 		return this->IsAlliedWith(generic_cast<ObjectClass const*>(pAbstract));
-	}
-
-	inline bool IsMutualAlly(HouseClass const* pHouse) const
-	{
-		return pHouse == this
-			|| (this->Allies.Contains(pHouse->ArrayIndex) && pHouse->Allies.Contains(this->ArrayIndex));
 	}
 
 	void MakeAlly(int iHouse, bool bAnnounce)
@@ -465,13 +413,11 @@ public:
 	static void __fastcall LoadFromINIList(CCINIClass *pINI)
 		{ JMP_STD(0x5009B0); }
 
-	int GetSpawnPosition() const {
-		const int currentIndex = this->ArrayIndex;
-		const int* houseIndices = ScenarioClass::Instance->HouseIndices;
-
+	int GetSpawnPosition() {
+		ScenarioClass* pScenario = ScenarioClass::Instance;
 		for (int i = 0; i < 8; i++)
 		{
-			if (houseIndices[i] == currentIndex)
+			if (HouseClass::Array.GetItemOrDefault(pScenario->HouseIndices[i], nullptr) == this)
 				return i;
 		}
 		return -1;
@@ -681,22 +627,18 @@ public:
 	bool Fire_SW(int idx, const CellStruct &coords)
 		{ JMP_THIS(0x4FAE50); }
 
-	CellStruct* PickTargetByType(CellStruct &outBuffer, QuarryType targetType) const
-		{ JMP_THIS(0x50D170); }
-
+	CellStruct* __PickTargetByType(CellStruct& retstr, QuarryType targetType) const JMP_THIS(0x50D170);
 	CellStruct PickTargetByType(QuarryType targetType) const {
-		CellStruct outBuffer;
-		this->PickTargetByType(outBuffer, targetType);
-		return outBuffer;
+		CellStruct ret;
+		this->__PickTargetByType(ret, targetType);
+		return ret;
 	}
 
-	CellStruct* PickIonCannonTarget(CellStruct &outBuffer) const
-		{ JMP_THIS(0x50CBF0); }
-
+	CellStruct* PickIonCannonTarget(CellStruct& retstr) const JMP_THIS(0x50CBF0); 
 	CellStruct PickIonCannonTarget() const {
-		CellStruct outBuffer;
-		this->PickIonCannonTarget(outBuffer);
-		return outBuffer;
+		CellStruct ret;
+		this->PickIonCannonTarget(ret);
+		return ret;
 	}
 
 	bool IsIonCannonEligibleTarget(const TechnoClass* pTechno) const;
@@ -715,9 +657,6 @@ public:
 
 	void SetPrimaryFactory(FactoryClass* pFactory, AbstractType absID, bool naval, BuildCat buildCat)
 		{ JMP_THIS(0x500850); }
-
-	void AssignHandicap(int difficulty)
-		{ JMP_THIS(0x4F6EC0); }
 
 	const CellStruct& GetBaseCenter() const {
 		if(this->BaseCenter != CellStruct::Empty) {
@@ -755,11 +694,6 @@ public:
 		return this == Observer;
 	}
 
-	bool inline IsInitiallyObserver() const
-	{
-		return this->IsHumanPlayer && (this->GetSpawnPosition() == -1);
-	}
-
 	// Whether CurrentPlayer is equal to Observer
 	static bool IsCurrentPlayerObserver() {
 		return CurrentPlayer && CurrentPlayer->IsObserver();
@@ -783,6 +717,158 @@ public:
 	bool AISupers()
 		{ JMP_THIS(0x50B1D0); }
 
+/*
+	ProdFailType Abandon_Production(int32_t rtti, int32_t heapid, bool naval, bool abandon_all) JMP_THIS(0x4FAA10);
+	void Activate_Powered_Units1(TechnoTypeClass*) JMP_THIS(0x50E010);
+	void Activate_Powered_Units2(TechnoTypeClass*) JMP_THIS(0x50E1C0);
+	void Active_Add(BuildingClass* a2) JMP_THIS(0x4FFA50);
+	void Active_Remove(BuildingClass* a2) JMP_THIS(0x4FF980);
+	void Adjust_Threat(int32_t region, int32_t risk) JMP_THIS(0x4FA2E0);
+	void Adjust_Threats() JMP_THIS(0x509400);
+	int32_t AI_Aircraft() JMP_THIS(0x4FF210);
+	UrgencyType AI_Build_Income() JMP_THIS(0x4FD9A0);
+	int32_t AI_Building() JMP_THIS(0x4FE3E0);
+	bool AI_Fire_Sale(UrgencyType urgency) JMP_THIS(0x4FDCE0);
+	uint64_t AI_Infantry() JMP_THIS(0x4FEEE0);
+	bool AI_Raise_Money(UrgencyType urgency) JMP_THIS(0x4FDD10);
+	bool AI_Supers() JMP_THIS(0x50B1D0);
+	int8_t AI_Takeover() JMP_THIS(0x50A5C0);
+	int32_t AI_Unit() JMP_THIS(0x4FEA60);
+	int32_t allocate_planning_paths() JMP_THIS(0x5090A0);
+	HouseClass* As_Pointer() JMP_THIS(0x502D30);
+	int32_t Assign_Handicap(int32_t a2) JMP_THIS(0x4F6EC0);
+	void Attacked(BuildingClass* source) JMP_THIS(0x4F93E0);
+	void AUTO_BASE_BUILDING_50C210() JMP_THIS(0x50C210);
+	Coordinate* Base_Center(Coordinate* a2) JMP_THIS(0x50DF30);
+	int8_t Base_Spacer(BuildingTypeClass* buildtype, Cell* cell) JMP_THIS(0x50B760);
+	ProdFailType Begin_Production(RTTIType rtti, int32_t id, bool naval, bool forcemaybe) JMP_THIS(0x4FA350);
+	void Blackout_Radar(int32_t duration) JMP_THIS(0x50BCD0);
+	void Blowup_All() JMP_THIS(0x4FC6D0);
+	int8_t Blowup_Buildings() JMP_THIS(0x4FC790);
+	int8_t Blowup_Land_Units() JMP_THIS(0x4FC820);
+	int8_t Blowup_Naval_Units() JMP_THIS(0x4FC8D0);
+	char** Build_Node_AI() JMP_THIS(0x5082C0);
+	int32_t Calc_Cost_Mult() JMP_THIS(0x50BF60);
+	void Calc_Predictions() JMP_THIS(0x508150);
+	int32_t Can_Build(BuildingTypeClass* type, int8_t more_checks, int8_t even_more_checks) JMP_THIS(0x4F7870);
+	int32_t Check_Fire_Sale() JMP_THIS(0x4FD940);
+	void Clear_Defensive_Target_Cell() JMP_THIS(0x50DA50);
+	void Clear_Prefered_Target_Cell() JMP_THIS(0x50DA10);
+	void Clobber_All() JMP_THIS(0x4FB920);
+	void Computer_Paranoid() JMP_THIS(0x501640);
+	void Deactivate_Powered_Units1(TechnoTypeClass*) JMP_THIS(0x50E0E0);
+	void Deactivate_Powered_Units2(TechnoTypeClass*) JMP_THIS(0x50E280);
+	int8_t Does_Enemy_Building_Exist(int32_t building) JMP_THIS(0x4FBD00);
+	int32_t edgestuff_50DB00(BuildingClass* bld) JMP_THIS(0x50DB00);
+	uint64_t Expert_AI() JMP_THIS(0x4FD500);
+	int32_t Factory_Count(int32_t rtti, int8_t ship) JMP_THIS(0x500910);
+	int32_t* Factory_Counter(int32_t rtti, bool naval) JMP_THIS(0x4FF8F0);
+	FactoryClass* Fetch_Factory(int32_t rtti, int8_t naval, int32_t defensebuilding) JMP_THIS(0x500510);
+	int32_t Find_Best_Storage_Building() JMP_THIS(0x4F9670);
+	int32_t Find_Build_Location(int32_t a2) JMP_THIS(0x4FD120);
+	Cell* Find_Build_Location(Cell* cell, BuildingTypeClass* buildtype, _DWORD(*)(int, int)* somefunc, int32_t a5) JMP_THIS(0x5060B0);
+	BuildingClass* Find_Building(int32_t building, ZoneType zone) JMP_THIS(0x4FD060);
+	int32_t Find_Juicy_Target(Coordinate* coord) JMP_THIS(0x500300);
+	bool Flag_Attach(Cell* cell, int32_t newloc) JMP_THIS(0x4FBF60);
+	bool Flag_Attach(UnitClass* a2, int32_t a3) JMP_THIS(0x4FC060);
+	bool Flag_Remove(UnitClass* unit, int32_t newloc) JMP_THIS(0x4FBE40);
+	void Flag_To_Chear() JMP_THIS(0x50C8C0);
+	int8_t Force_End() JMP_THIS(0x4FCDC0);
+	void* Get_Base_Center(uint32_t* a2) JMP_THIS(0x50DEF0);
+	DynamicVectorClass Get_Buildable_AntiAir(DynamicVectorClass* ownedNonDefenseBuildings) JMP_THIS(0x507B80);
+	int32_t Get_Buildable_AntiArmor(DynamicVectorClass* arg0, int32_t a2) JMP_THIS(0x507D70);
+	int32_t Get_Buildable_AntiInf(DynamicVectorClass* arg0, TechnoTypeClass* a2) JMP_THIS(0x507F60);
+	double Get_BuildTimeMult(BuildingTypeClass* a2) JMP_THIS(0x50C0A0);
+	double Get_CostMult(BuildingTypeClass* a2) JMP_THIS(0x50BEB0);
+	int8_t* Get_Factory(int32_t a2) JMP_THIS(0x4F83C0);
+	UnitTypeClass* Get_First_Ownable(TypeList* typelist) JMP_THIS(0x505310);
+	double Get_IncomeMult() JMP_THIS(0x50C160);
+	double Get_SpeedMult(BuildingTypeClass* a2) JMP_THIS(0x50C050);
+	double Get_Type_Armor_Mult(BuildingTypeClass* a2) JMP_THIS(0x50BD30);
+	double Get_Type_CostMult(BuildingTypeClass* a2) JMP_THIS(0x50BDF0);
+	float Harvested_Ore(float number) JMP_THIS(0x4F9610);
+	void Harvested_Weeds(int32_t a2, int32_t a3) JMP_THIS(0x4F9700);
+	int32_t Has_Powered_Unit_Centers(int32_t) JMP_THIS(0x50E1B0);
+	bool Infantry_Self_Heal() JMP_THIS(0x50D9C0);
+	int32_t Infantry_SelfHealAmount() JMP_THIS(0x50D9E0);
+	void Init_Data(int32_t color, int32_t a3, int32_t credits) JMP_THIS(0x4FCE00);
+	void init_laser_color() JMP_THIS(0x50BA00);
+	void Init_PlanningPaths(int32_t a2) JMP_THIS(0x504740);
+	bool Is_Allowed_To_Ally(HouseClass* a2) JMP_THIS(0x501540);
+	bool Is_Ally(int32_t a2) JMP_THIS(0x4F9A10);
+	bool Is_Ally(TechnoClass* a2) JMP_THIS(0x4F9A90);
+	bool Is_Ally(HouseClass* a2) JMP_THIS(0x4F9A50);
+	bool Is_Player_Control() JMP_THIS(0x50B730);
+	bool Is_Target_Ally(TechnoClass*) JMP_THIS(0x4F9AF0);
+	void Make_Ally(int8_t a3, int32_t a3a) JMP_THIS(0x4F9B50);
+	void Make_Ally(HouseClass*, int8_t) JMP_THIS(0x4F9B70);
+	void Make_Enemy(HouseClass* house, bool dont_speak) JMP_THIS(0x4F9F90);
+	void Make_Enemy(int32_t, bool) JMP_THIS(0x4F9F70);
+	bool Manual_Place(BuildingClass* builder, BuildingClass* object) JMP_THIS(0x4FB840);
+	void mindcontrolbuildings(HouseClass* a2) JMP_THIS(0x50D290);
+	char** mindcontrolbuildings_0(int32_t a2) JMP_THIS(0x50D2D0);
+	void One_Time() JMP_THIS(0x4F6EB0);
+	Cell* Pick_Any_Target_For_SW(Cell* arg0) JMP_THIS(0x50CBF0);
+	int32_t* Pick_Prefered_Target_For_SW(int32_t*, QuarryType quarry) JMP_THIS(0x50D170);
+	bool Place_Object(RTTIType rtti, int32_t heapid, int32_t is_ship, Cell* cellnum) JMP_THIS(0x4FB0E0);
+	bool Place_Special_Blast(int32_t id, Cell* cell) JMP_THIS(0x4FAE50);
+	bool Player_Has_Control() JMP_THIS(0x50B6F0);
+	double Power_Fraction() JMP_THIS(0x4FCE30);
+	void Radar_Spied(HouseClass* arg0) JMP_THIS(0x5092F0);
+	uint32_t* Random_Cell_In_Zone(uint32_t* random_cell, ZoneType zone) JMP_THIS(0x501AC0);
+	int32_t Read_HouseTypes() JMP_THIS(0x5009B0);
+	void Read_INI(CCINIClass* ini) JMP_THIS(0x500B40);
+	void Recalc_Center() JMP_THIS(0x4FD150);
+	void Refund_Money(int32_t a2) JMP_THIS(0x4F9950);
+	void Register_Just_Built(TechnoClass* arg0) JMP_THIS(0x4FB6B0);
+	Cell Reset_Base_Center() JMP_THIS(0x50DFF0);
+	void Sell_Wall(Cell* cell, int8_t skip_sound) JMP_THIS(0x4FCE80);
+	Cell Set_Base_Center(Cell) JMP_THIS(0x50DFE0);
+	Cell Set_Base_Spawn_Cell(Cell) JMP_THIS(0x50E000);
+	void Set_Defensive_Target_Cell(int32_t a2) JMP_THIS(0x50DA20);
+	void Set_Factory(int32_t primary, RTTIType rtti, int8_t isship, int32_t defensebuilding) JMP_THIS(0x500850);
+	void Set_Force_Shield_Blackout(int32_t a2) JMP_THIS(0x50BC90);
+	void Set_HasThreatNode() JMP_THIS(0x509130);
+	void Set_Prefered_Target_Cell(int32_t a2) JMP_THIS(0x50DA00);
+	void shroudmap() JMP_THIS(0x50BD10);
+	void Silo_Redraw_Check(int32_t oldtib, int32_t oldcap) JMP_THIS(0x4F9970);
+	int32_t Special_Weapon_AI(int32_t super, int32_t a3) JMP_THIS(0x4FAD20);
+	void Spend_Money(int32_t money) JMP_THIS(0x4F9790);
+	void SpySat_AI() JMP_THIS(0x508F60);
+	void startingunitclearvector() JMP_THIS(0x50D5D0);
+	int32_t startingunitfillvector(int32_t a2, int32_t a3) JMP_THIS(0x50D560);
+	void startingunitstuff() JMP_THIS(0x50D610);
+	void startingunitstuff_buildings() JMP_THIS(0x50D320);
+	void startingunitstuff_infantry_units() JMP_THIS(0x50D440);
+	int32_t Suggest_New_Building() JMP_THIS(0x4FD040);
+	int8_t* Suggest_New_Object(int32_t rtti, int32_t kennel) JMP_THIS(0x4FBD80);
+	TypeList* Suggested_New_Team(TypeList* possible_teams_1, bool alerted) JMP_THIS(0x4FA210);
+	void Super_Weapon_Handler() JMP_THIS(0x50AF10);
+	int32_t Super_Weapon_Handler_Old() JMP_THIS(0x4F9370);
+	int8_t SuperWeapon_AI() JMP_THIS(0x5098F0);
+	int32_t Suspend_Production(int32_t rtti, int32_t heap_id, bool naval) JMP_THIS(0x4FA910);
+	uint64_t Target_Dominator(int8_t) JMP_THIS(0x50A150);
+	uint64_t Target_Lighting_Storm(int8_t) JMP_THIS(0x509E00);
+	int32_t Team_Type_Count(int32_t teamtype) JMP_THIS(0x5095D0);
+	void Tracking_Add(BuildingClass* techno) JMP_THIS(0x4FF700);
+	void Tracking_Remove(BuildingClass* a2) JMP_THIS(0x4FF550);
+	int32_t Unit_SelfHealAmount() JMP_THIS(0x50D9F0);
+	bool Units_Self_Heal() JMP_THIS(0x50D9D0);
+	uint64_t Update_Anger_Nodes(int32_t score_add, HouseClass* house) JMP_THIS(0x504790);
+	void Update_Base_Nodes(int32_t a2) JMP_THIS(0x5048A0);
+	void Update_Counts_0(BuildingClass* a2, int32_t arg4) JMP_THIS(0x5025F0);
+	void Update_Counts_1(BuildingClass* a2, int32_t a3_1) JMP_THIS(0x502A80);
+	BuildingClass* Update_Factories(int32_t rtti, bool is_ship, int32_t buildcat) JMP_THIS(0x509140);
+	void Update_Scout_Nodes(HouseClass* house) JMP_THIS(0x504860);
+	double Weed_Fraction() JMP_THIS(0x4F9750);
+	int32_t Where_To_Go(int32_t a1, BuildingClass* a2) JMP_THIS(0x500200);
+	ZoneType Which_Zone(Coordinate* a2) JMP_THIS(0x4FFB20);
+	ZoneType Which_Zone(Cell* a2) JMP_THIS(0x4FFD90);
+	ZoneType Which_Zone(ObjectClass* a2) JMP_THIS(0x4FFD50);
+	void Write_HouseTypes() JMP_THIS(0x501160);
+	void Write_INI(int8_t* a1) JMP_THIS(0x501210);
+	Cell* Zone_Cell(Cell* retval_1, ZoneType zone) JMP_THIS(0x4FFDD0);
+*/
 
 protected:
 	//===========================================================================

@@ -26,29 +26,23 @@ public:
 	}
 
 	void Initialize(const CoordStruct& coords, double elasticity, double gravity,
-			double maxVelocity, const Vector3D<float>& velocity, double angularVelocity)
-		{ JMP_THIS(0x4397E0); }
+			double maxVelocity, const Vector3D<float>& velocity, double angularVelocity) JMP_THIS(0x4397E0);
 
-	CoordStruct* GetCoords(CoordStruct* pBuffer) const
-		{ JMP_THIS(0x4399A0); }
-
-	CoordStruct GetCoords() const {
-		CoordStruct buffer;
-		this->GetCoords(&buffer);
-		return buffer;
+	Coordinate* __Center(Coordinate& retstr) const JMP_THIS(0x4399A0);
+	Coordinate Center() const
+	{
+		Coordinate ret;
+		__Center(ret);
+		return ret;
 	}
-
-	Matrix3D* GetDrawingMatrix(Matrix3D* pBuffer) const
-		{ JMP_THIS(0x4399E0); }
-
-	Matrix3D GetDrawingMatrix() const {
-		Matrix3D buffer;
-		this->GetDrawingMatrix(&buffer);
-		return buffer;
+	double Distance() JMP_THIS(0x439A10);
+	Matrix3D* __GetDrawingMatrix(Matrix3D& retstr) const JMP_THIS(0x4399E0);
+	Matrix3D GetDrawingMatrix() const
+	{
+		Matrix3D ret;
+		__GetDrawingMatrix(ret);
+		return ret;
 	}
-
-	Status Update()
-		{ JMP_THIS(0x439B00); }
 
 	double Elasticity{ 0.0 }; // speed multiplier when bouncing off the ground
 	double Gravity{ 0.0 }; // subtracted from the Z coords every frame
@@ -57,5 +51,6 @@ public:
 	Vector3D<float> Velocity; // speed components
 	Quaternion CurrentAngle; // quaternion for drawing
 	Quaternion AngularVelocity; // second quaternion as per-frame delta
+	Status AI() JMP_THIS(0x439B00);
 };
 

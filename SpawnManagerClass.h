@@ -54,45 +54,28 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<SpawnManagerClass*>, Array, 0xB0B880u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+    virtual ~SpawnManagerClass() JMP_THIS(0x6B7010);
 
-	//Destructor
-	virtual ~SpawnManagerClass() RX;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6B7ED0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6B7F10);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6B80B0);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x6B8130);
+    int Size() const override JMP_THIS(0x6B8120);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6B7DE0);
+    void Update() override JMP_THIS(0x6B7230); 
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	// non-virtual
-	void KillNodes()
-		{ JMP_THIS(0x6B7100); }
-
-	void SetTarget(AbstractClass* pTarget)
-		{ JMP_THIS(0x6B7B90); }
-
-	bool UpdateTarget()
-		{ JMP_THIS(0x6B7C40); }
-
-	void ResetTarget()
-		{ JMP_THIS(0x6B7BB0); }
-
-	int CountAliveSpawns() const
-		{ JMP_THIS(0x6B7D30); }
-
-	int CountDockedSpawns() const
-		{ JMP_THIS(0x6B7D50); }
-
-	int CountLaunchingSpawns() const
-		{ JMP_THIS(0x6B7D80); }
-
-	void UnlinkPointer(AbstractClass* pRemove)
-		{ JMP_THIS(0x6B7C60); }
-
+    void KillNodes() JMP_THIS(0x6B7100);
+    void SetTarget(AbstractClass* pTarget) JMP_THIS(0x6B7B90);
+    bool UpdateTarget() JMP_THIS(0x6B7C40);
+    void ResetTarget() JMP_THIS(0x6B7BB0);
+    int CountAliveSpawns() const JMP_THIS(0x6B7D30);
+    int CountDockedSpawns() const JMP_THIS(0x6B7D50);
+    int CountLaunchingSpawns() const JMP_THIS(0x6B7D80);
+    void UnlinkPointer(AbstractClass* pRemove) JMP_THIS(0x6B7C60);
 
 protected:
 	//===========================================================================

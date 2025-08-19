@@ -27,33 +27,6 @@ public:
 	//Array
 	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileTypeClass*>, Array, 0xA8ED28u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) RX;
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-	virtual void ComputeCRC(CRCEngine& crc) const RX;
-
-	virtual int GetArrayIndex() const R0;
-
-	//ObjectTypeClass
-	virtual CoordStruct* vt_entry_6C(CoordStruct* pDest, CoordStruct* pSrc) const R0;
-
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-	virtual void vt_entry_90(DWORD dwUnk) RX;
-
-	virtual SHPStruct* GetImage() const R0;
-
-	//Destructor
-	virtual ~IsometricTileTypeClass() RX;
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -86,6 +59,48 @@ public:
 	bool AllowBurrowing;
 	bool AllowTiberium;
 	DWORD unk_308;
+
+public:
+    virtual ~IsometricTileTypeClass() JMP_THIS(0x544A70);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x549D90);
+   
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x549C80);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x549D70);
+   
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x549DD0);
+    RTTIType WhatAmI() const override JMP_THIS(0x54A140);
+    int Size() const override JMP_THIS(0x54A150);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x549B70);
+    int GetArrayIndex() const override JMP_THIS(0x54A160);
+   
+    CoordStruct* __FixupCoord(CoordStruct& retstr, CoordStruct& coord) const override JMP_THIS(0x549B50);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x549AE0);
+    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x544D30);
+    SHPStruct* GetImage() const override JMP_THIS(0x544CB0);
+
+/*
+	bool Check_Tile(int32_t tile, bool loadimage) JMP_THIS(0x544C20);
+	bool Determine_Offsets(int8_t tile, uint32_t* xoffset, uint32_t* yoffset) JMP_THIS(0x547150);
+	void Draw_Shadow_Cast(int32_t a2, int32_t a1, int32_t a5, int32_t argC, int32_t a6, int32_t a7, int32_t a8, int32_t a9, int32_t a10) JMP_THIS(0x547230);
+	void Draw_Tile(LightConvertClass* a2, int32_t a3, int32_t a4, int32_t a5, int32_t a6, int32_t a7, int32_t a8, int32_t a9, int32_t a10, int32_t a11, int32_t a12, int8_t a13, int32_t a14, int8_t a15, int8_t a16, int8_t a17, int32_t a18) JMP_THIS(0x547CF0);
+	IsometricTileTypeClass* fetch_tile_from_ptr(int32_t modval) JMP_THIS(0x544E00);
+	int8_t Fetch_Tile_To_Buffer(int32_t sizemod, char** data, int32_t size1, int32_t size2) JMP_THIS(0x549830);
+	int32_t From_Name() JMP_THIS(0x544CE0);
+	RadarImageStruct* Get_Radar_ImageData(uint8_t tile, int8_t level) JMP_THIS(0x549E50);
+	Cell* Get_ShadowCaster_list() JMP_THIS(0x547370);
+	int32_t get_tile() JMP_THIS(0x544E30);
+	int32_t Get_Y_Offset(int32_t a2) JMP_THIS(0x549A60);
+	LightConvertClass* Init_Drawer(int32_t green, int32_t blue) JMP_THIS(0x544E70);
+	void Init_Drawers() JMP_THIS(0x545000);
+	LandType Land_Type(uint8_t tile) JMP_THIS(0x544BE0);
+	bool Load_Tile() JMP_THIS(0x544C80);
+	int32_t Load_Tile_0() JMP_THIS(0x547020);
+	void Make_Radar_Image() JMP_THIS(0x549E90);
+	RampType Ramp_Type(uint8_t tile) JMP_THIS(0x5471B0);
+	void Read_INI(int8_t reloadtile) JMP_THIS(0x545150);
+*/
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline IsometricTileTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}

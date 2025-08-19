@@ -28,24 +28,44 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     static constexpr AbstractType AbsID = AbstractType::ParticleSystem;
     static constexpr uintptr_t AbsVTable = 0x7EFB9C;
     static constexpr size_t ClassSize = 0x100;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~ParticleSystemClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
 
 
+public:
+    virtual ~ParticleSystemClass() JMP_THIS(0x62E070);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6301A0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x62FF20);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x630090);
+    
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x62FE90);
+    RTTIType WhatAmI() const override JMP_THIS(0x630210);
+    int Size() const override JMP_THIS(0x630200);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x630100);
+    bool IsDead() const override JMP_THIS(0x62FE60);
+    void Update() override JMP_THIS(0x62FD60);
+    
+    Layer InWhichLayer() const override JMP_THIS(0x62FE80);
+    ObjectTypeClass* GetType() const override JMP_THIS(0x630220);
+    void UnInit() override JMP_THIS(0x6301E0);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x62E280);
+
+/*
+    ParticleClass* addtovector(ParticleTypeClass*, Coordinate*) JMP_THIS(0x62E430);
+    ParticleClass* addtovector_0(Coordinate*, Coordinate*, int32_t arg8) JMP_THIS(0x62E4C0);
+    int8_t Fire_AI() JMP_THIS(0x62F9A0);
+    void Gas_AI() JMP_THIS(0x62E6D0);
+    int8_t Railgun_AI() JMP_THIS(0x62F230);
+    int8_t removefromvector(int32_t a2) JMP_THIS(0x62E5D0);
+    void removefromvector_0() JMP_THIS(0x62E650);
+    void set_lifetime(int32_t a2) JMP_THIS(0x6301F0);
+    void Smoke_AI() JMP_THIS(0x62ED40);
+    int8_t Spark_AI() JMP_THIS(0x62E840);
+*/
 
 	//===========================================================================
 	//===== Properties ==========================================================

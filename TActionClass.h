@@ -32,46 +32,43 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TActionClass*>, Array, 0xB0E658u)
+public:
+	virtual ~TActionClass() JMP_THIS(0x6DD1B0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6E3D70);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6E3DB0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6E3E30);
+	
+	void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x6DD2C0);
+	RTTIType WhatAmI() const override JMP_THIS(0x6E4640);
+	int Size() const override JMP_THIS(0x6E4630);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6E3E50);
+	int GetArrayIndex() const override JMP_THIS(0x6E4650);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~TActionClass() RX;
-
-	//AbstractClass
-	virtual void PointerExpired(AbstractClass* pAbstract, bool removed) override RX;
-	virtual AbstractType WhatAmI() const override RT(AbstractType);
-	virtual int Size() const override R0;
-	virtual void ComputeCRC(CRCEngine& crc) const override RX;
-	virtual int GetArrayIndex() const override R0;
+	HouseClass* TriggerOwner(TriggerClass* trigger, int houseId) JMP_THIS(0x6E45E0);
+	Coordinate GetWaypoint() JMP_THIS(0x6E3F70);
 
 	// you are responsible for doing INI::ReadString and strtok'ing it before calling
 	// this func only calls strtok again, doesn't know anything about buffers
-	void LoadFromINI()
-		{ JMP_THIS(0x6DD5B0); }
+	void LoadFromINI() JMP_THIS(0x6DD5B0);
 
 	// you allocate the buffer for this, and save it to ini yourself after this returns
 	// this func only sprintf's the stuff it needs into buffer
-	void PrepareSaveToINI(char *buffer) const
-		{ JMP_THIS(0x6DD300); }
+	void PrepareSaveToINI(char *buffer) const JMP_THIS(0x6DD300);
 
 	// fuck if I know what's the purpose of this, returns a bitfield of flags for trigger logic
-	static int GetFlags(int actionKind)
-		{ JMP_STD(0x6E3EE0); }
+	static int GetFlags(int actionKind) JMP_STD(0x6E3EE0);
 
 	// transforms actionKind to a number saying what to parse arguments as (team/tag/trigger id, waypoint, integer, etc)
-	static int GetMode(int actionKind)
-		{ JMP_STD(0x6E3B60); }
+	static int GetMode(int actionKind) JMP_STD(0x6E3B60); 
+
+	HouseClass* FindHouseByIndex(TriggerClass* pTrigger, int idxHouse) const JMP_THIS(0x6E45E0);
 
 	// main brain, returns whether succeeded (mostly, no consistency in results what so ever)
 	// trigger fires all actions regardless of result of this
 	bool Execute(HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
-		{ JMP_THIS(0x6DD8B0); }
+		JMP_THIS(0x6DD8B0);
 
 	// BIG LIST OF EXECUTE'S SLAVE FUNCTIONS - feel free to use
 
@@ -279,9 +276,6 @@ public:
 #undef ACTION_FUNC
 #pragma pop_macro("ACTION_FUNC")
 	// WHEEEEEW. End of slave functions.
-
-	HouseClass* FindHouseByIndex(TriggerClass* pTrigger, int idxHouse) const
-		{ JMP_THIS(0x6E45E0); }
 
 
 protected:

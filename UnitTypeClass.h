@@ -27,27 +27,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(UnitTypeClass, 0xA83CE0u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~UnitTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//AbstractTypeClass
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
 	//TechnoTypeClass
 
 	//===========================================================================
@@ -94,6 +73,31 @@ public:
 	char WalkFrames;
 	char FiringFrames;
 	char AltImageFile [0x19];
+public:
+	virtual ~UnitTypeClass() JMP_THIS(0x7472F0);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x747F30);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x748010);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x7480B0);
+	
+	RTTIType WhatAmI() const override JMP_THIS(0x748170);
+	int Size() const override JMP_THIS(0x748160);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x747F70);
+	int GetArrayIndex() const override JMP_THIS(0x748180);
+	
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x747620);
+	
+	CoordStruct* __FixupCoord(CoordStruct& retstr, CoordStruct& coord) const override JMP_THIS(0x747EB0);
+	Point3D* __PixelDimensions(Point3D& retstr) const override JMP_THIS(0x747590);
+	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x7475D0);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x7474B0);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x747560);
+	
+	bool CanUseWaypoint() const override JMP_THIS(0x7473C0);
+	bool CanAttackMove() const override JMP_THIS(0x7473D0);
+	int GetRepairStep() const override JMP_THIS(0x747F20);
+
 protected:
 	explicit __forceinline UnitTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:

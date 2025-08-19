@@ -31,25 +31,34 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     static constexpr AbstractType AbsID = AbstractType::VoxelAnim;
     static constexpr uintptr_t AbsVTable = 0x7F6318;
     static constexpr size_t ClassSize = 0x148;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~VoxelAnimClass() RX;
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
+public:
+    virtual ~VoxelAnimClass() JMP_THIS(0x7499F0);
 
-	//ObjectClass
-	//VoxelAnimClass
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74AAD0);
+    
+    HRESULT __stdcall Load(IStream* pStm) JMP_STD(0x74A970);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) JMP_STD(0x74AA10);
+   
+    RTTIType WhatAmI() const override JMP_THIS(0x74AB20);
+    int Size() const override JMP_THIS(0x74AB10);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x74AA30);
+    
+    void Update() override JMP_THIS(0x749F30);
+    Layer InWhichLayer() const override JMP_THIS(0x74A960);
+    ObjectTypeClass* GetType() const override JMP_THIS(0x74AB30);
+    bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x749B20);
+    CellStruct const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x74AB40);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x749B70);
 
+/*
+    int32_t Init_Clear() JMP_THIS(0x749F00);
+*/
 
 protected:
 	//===========================================================================

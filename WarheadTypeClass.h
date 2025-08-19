@@ -24,12 +24,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(WarheadTypeClass, 0x8874C0u);
-
-	static WarheadTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x75E3B0); }
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public AbstractTypeClass::vtables_t
     {
         constexpr vtables_t() noexcept : AbstractTypeClass::vtables_t()
@@ -46,19 +40,29 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F6B30;
     static constexpr size_t ClassSize = 0x1D0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~WarheadTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
 
 	//AbstractTypeClass
 
+public:
+    virtual ~WarheadTypeClass() JMP_THIS(0x75D230);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x75E080);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x75E0C0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x75E2C0);
+    
+    void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x75E440);
+    RTTIType WhatAmI() const override JMP_THIS(0x75E500);
+    int Size() const override JMP_THIS(0x75E4F0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x75DEC0);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x75D3A0);
+
+    static WarheadTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x75E3B0);
+/*
+    WarheadTypeClass * Find_Or_Make_0() JMP_THIS(0x75E3B0);
+    int32_t From_Name() JMP_THIS(0x75E4A0);
+*/
 
 protected:
 	//===========================================================================

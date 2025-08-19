@@ -14,10 +14,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(TerrainTypeClass, 0xA8E318u);
-	static TerrainTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x71E2A0); }
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -30,31 +26,38 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
     static constexpr AbstractType AbsID = AbstractType::TerrainType;
     static constexpr uintptr_t AbsVTable = 0x7F5458;
     static constexpr size_t ClassSize = 0x2BC;
 
-	//Destructor
-	virtual ~TerrainTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
 
 
+public:
+    virtual ~TerrainTypeClass() JMP_THIS(0x71DC00);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71E260);
+
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71E1D0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71E240);
 
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    RTTIType WhatAmI() const override JMP_THIS(0x71E330);
+    int Size() const override JMP_THIS(0x71E340);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71E140);
+    
+    int GetArrayIndex() const override JMP_THIS(0x71E350);
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x71DEA0);
+    Coordinate* __FixupCoord(Coordinate& retstr, CoordStruct& coord) const override JMP_THIS(0x71E0D0);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x71DE10);
+    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x71DE40);
 
-public:
+    static TerrainTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x71E2A0);
+/*
+    int32_t From_Name() JMP_THIS(0x71DD80);
+*/
 
 	int ArrayIndex;
 	int Foundation;

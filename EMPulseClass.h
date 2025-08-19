@@ -31,20 +31,25 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<EMPulseClass*>, Array, 0x8A3870u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~EMPulseClass() RX;
+public:
+    virtual ~EMPulseClass() JMP_THIS(0x4C53E0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4C59F0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4C5A30);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4C5A80);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x4C5AB0);
+    int Size() const override JMP_THIS(0x4C5AA0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4C59A0);
 
+/*
+    int32_t Update() JMP_THIS(0x4C54A0);
+    void Create(int32_t arg0) JMP_THIS(0x4C54E0);
+    int32_t Init_Clear() JMP_THIS(0x4C5470);
+*/
 
 protected:
 	//===========================================================================

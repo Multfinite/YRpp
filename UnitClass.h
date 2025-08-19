@@ -33,47 +33,105 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+public:
+	virtual ~UnitClass() JMP_THIS(0x735780);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x746DE0);
 
-	//Destructor
-	virtual ~UnitClass() RX;
+	HRESULT __stdcall Load(IStream* pStm)  override JMP_STD(0x744470);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x744600);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	/*0:0x0*/virtual void UnitClass_sink_746100() JMP_THIS(0x746100);
 
-	//ObjectClass
+	void Init() override JMP_THIS(0x746810);
+	void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x7446E0);
+	RTTIType WhatAmI() const override JMP_THIS(0x746E20);
+	int Size() const override JMP_THIS(0x746DD0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x744640);
+	void Update() override JMP_THIS(0x7360C0);
 
-	virtual Action MouseOverCell(CellStruct const* pCell, bool checkFog = false, bool ignoreForce = false) const override { JMP_THIS(0x7404B0) };
-	virtual Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override { JMP_THIS(0x73FD50) };
+	Action MouseOverCell(::Cell const* pCell, bool checkFog = false, bool ignoreForce = false) const override JMP_THIS(0x7404B0);
+	Action MouseOverObject(ObjectClass const* pObject, bool ignoreForce = false) const override JMP_THIS(0x73FD50);
+	bool IsStrange() const override JMP_THIS(0x746400);
+	ObjectTypeClass* GetType() const override JMP_THIS(0x741490);
+	const wchar_t* GetUIName() const override JMP_THIS(0x746B20);
+	bool IsDisguisedAs(HouseClass* target) const override JMP_THIS(0x746750);
+	ObjectTypeClass* GetDisguise(bool disguisedAgainstAllies) const override JMP_THIS(0x7465B0);
+	HouseClass* GetDisguiseHouse(bool disguisedAgainstAllies) const override JMP_THIS(0x7465F0);
+	bool Limbo() override JMP_THIS(0x7440B0);
+	bool Unlimbo(const Coordinate& position, Dir256 dir) override JMP_THIS(0x737BA0);
+	void RegisterDestruction(ObjectClass const* destroyedBy) override JMP_THIS(0x744720);
+	void MarkAllOccupationBits(const Coordinate& coords) override JMP_THIS(0x7441B0);
+	void UnmarkAllOccupationBits(const Coordinate& coords) override JMP_THIS(0x744210);
+	bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x73B0B0);
+	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x73CEC0);
+	bool ObjectClickedAction(Action action, ObjectClass* pTarget, bool bUnk) override JMP_THIS(0x738910);
+	bool CellClickedAction(Action action, ::Cell* pCell, ::Cell* pCell1, bool bUnk) override JMP_THIS(0x738890);
+	DamageState ReceiveDamage(int* pDamage, int distanceFromEpicenter, WarheadTypeClass* pWH, ObjectClass* source, bool ignoreDefenses, bool preventPassengerEscape, HouseClass* attacker) override JMP_THIS(0x737C90);
+	void Destroy() override JMP_THIS(0x746D60);
+	void Scatter(const Coordinate& crd, bool ignoreMission, bool ignoreDestination) override JMP_THIS(0x743A50);
+	void UpdatePosition(PCPType how) override JMP_THIS(0x739EC0);
+	RadioCommand ReceiveCommand(TechnoClass* pSender, RadioCommand command, AbstractClass*& pInOut) override JMP_THIS(0x737430);
+	Move IsCellOccupied(CellClass* pDestCell, FacingType facing, int level, CellClass* pSourceCell, bool alt) const override JMP_THIS(0x73F0A0);
+	
+	bool ReadyToNextMission() override JMP_THIS(0x744270);
+	int Mission_Attack() override JMP_THIS(0x7447A0);
+	int Mission_Guard() override JMP_THIS(0x740810);
+	int Mission_AreaGuard() override JMP_THIS(0x744100);
+	int Mission_Harvest() override JMP_THIS(0x73E5E0);
+	int Mission_Move() override JMP_THIS(0x740A90);
+	int Mission_Patrol() override JMP_THIS(0x740B10);
+	int Mission_Repair() override JMP_THIS(0x740EF0);
+	int Mission_Unload() override JMP_THIS(0x73D630);
 
-	virtual void MarkAllOccupationBits(const CoordStruct& coords) override { JMP_THIS(0x7441B0) };
-	virtual void UnmarkAllOccupationBits(const CoordStruct& coords) override { JMP_THIS(0x744210) };
-	// ...and so on
-	// FIXME other virtual function explicit addresses
+	void SetDestination(AbstractClass* target, bool a2) override JMP_THIS(0x741970);
+	FireError GetFireError(AbstractClass* pTarget, int nWeaponIndex, bool ignoreRange) const override JMP_THIS(0x740FD0);
+	void Stun() override JMP_THIS(0x746C90);
+	bool SetOwningHouse(HouseClass* pHouse, bool announce = true) override JMP_THIS(0x7463A0);
+	void ClearDisguise() override JMP_THIS(0x746720);
+	InfantryTypeClass* GetCrew() const override JMP_THIS(0x740EE0);
+	FacingType DesiredLoadDir(ObjectClass const* object, ::Cell* cell) const JMP_THIS(0x740B60);
+	bool EnterIdleMode(bool initial, bool a2) override JMP_THIS(0x738970);
+	BulletClass* Fire(AbstractClass* pTarget, int nWeaponIndex) override JMP_THIS(0x741340);
+	DirStruct* __GetRealFacing(DirStruct& retstr) const override JMP_THIS(0x740F80);
+	bool CanAttackOnTheMove() const override JMP_THIS(0x746CC0);
+	AbstractClass* GreatestThreat(ThreatType threat, Coordinate* pCoord, bool onlyTargetHouseEnemy) override JMP_THIS(0x743190);
+	bool IsDoorClosed() override JMP_THIS(0x744180);
+	int GetPipFillLevel() const override JMP_THIS(0x740E50);
+	void Reload() override JMP_THIS(0x736CA0);
+	void DisguiseAs(AbstractClass* target) override JMP_THIS(0x746670);
+	double GetStoragePercentage() const override JMP_THIS(0x7414A0);
+	DirStruct* __TurretFacing(DirStruct& retstr) const override JMP_THIS(0x746E30);
+	int SelectWeapon(AbstractClass* pTarget) const override JMP_THIS(0x746CD0);
 
-	virtual FireError GetFireError(AbstractClass* pTarget, int nWeaponIndex, bool ignoreRange) const override JMP_THIS(0x740FD0);
+	AbstractClass* ApproachTarget(bool assign) override JMP_THIS(0x7414E0);
+	void OverrunSquare(volatile ::Cell* a2, ::Cell a3) override JMP_THIS(0x7416A0);
 
-	//UnitClass
-	// main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
-	virtual void DrawAsVXL(Point2D Coords, RectangleStruct BoundingRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73B470); }
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__Draw_Voxel
+	* @note vtable_index 341:x554
+	* @note address 0x73B470
+	*/
+	virtual void DrawAsVXL(Point2D coords, RectangleStruct boundingRect, int brightness, int tint) JMP_THIS(0x73B470);
+	
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__drawcode
+	* @note vtable_index 342x558
+	* @note address 0x73C5F0
+	*/
+	virtual void DrawAsSHP(Point2D coords, RectangleStruct boundingRect, int brightness, int tint) JMP_THIS(0x73C5F0);
 
-	virtual void DrawAsSHP(Point2D Coords, RectangleStruct BoundingRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73C5F0); }
+	/*!
+	* @brief main drawing functions - Draw() calles one of these, they call parent's Draw_A_smth
+	* @note original_name UnitClass__Draw_Object343
+	* @note vtable_index 343x55C
+	* @note address 0x73B140
+	*/
+	virtual void DrawObject(Surface* surface, Point2D coords, RectangleStruct cacheRect, int brightness, int tint) JMP_THIS(0x73B140);
 
-	virtual void DrawObject(Surface* pSurface, Point2D Coords, RectangleStruct CacheRect, int Brightness, int Tint)
-		{ JMP_THIS(0x73B140); }
-
-	// non-virtual
-
-	bool IsDeactivated() const
-		{ JMP_THIS(0x70FBD0); }
+	bool IsDeactivated() const JMP_THIS(0x70FBD0);
 
 	void UpdateTube() JMP_THIS(0x7359F0);
 	void UpdateRotation() JMP_THIS(0x736990);
@@ -88,6 +146,29 @@ public:
 	bool TryToDeploy() JMP_THIS(0x7393C0);
 	void Deploy() JMP_THIS(0x739AC0);
 	void Undeploy() JMP_THIS(0x739CD0);
+
+	/*!
+	* @brief Object deployed.
+	* @note original_name HasDeployed
+	* @note address 0x746D80
+	*/
+	bool HasDeployed() JMP_THIS(0x746D80);
+
+	/*!
+	* @brief Object deployed already or deploying now
+	* @note original_name IsDeploying
+	* @note address 0x746D90
+	*/
+	bool IsDeployed() JMP_THIS(0x746D90);
+
+	/*!
+	* @brief Object changes it's state: being deploying or undeploying
+	* @note original_name IsDeploying
+	* @note address 0x746DB0
+	*/
+	bool InDeployTansition() JMP_THIS(0x746DB0);
+
+	bool IsSimpleDeployerDeployToLand() JMP_THIS(0x746D10);
 
 	bool Harvesting() JMP_THIS(0x73D450);
 
@@ -105,6 +186,9 @@ public:
 	AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
 	bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
 
+	int32_t DisguiseStuff(ObjectTypeClass* type) JMP_THIS(0x746630);
+	int64_t CreditLoad() JMP_THIS(0x7438B0);
+	bool DeployFire() const JMP_THIS(0x746D00);
 protected:
 	//===========================================================================
 	//===== Properties ==========================================================

@@ -30,38 +30,32 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TemporalClass*>, Array, 0xB0EC60u)
+public:
+    virtual ~TemporalClass() JMP_THIS(0x71A5D0);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71A720);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71A660);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71A700);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x71B1A0);
+    int Size() const override JMP_THIS(0x71B190);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71A650);
+    void Update() override JMP_THIS(0x71A760);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
+    void Fire(TechnoClass* pTarget) JMP_THIS(0x71AF20);
+    bool CanWarpTarget(TechnoClass* pTarget) const JMP_THIS(0x71AE50);
+    int GetWarpPerStep(int nHelperCount = 0) const JMP_THIS(0x71AB10);
+    void LetGo() JMP_THIS(0x71ABC0);
+    void JustLetGo() JMP_THIS(0x71AD40);
+    void InvalidatePointer() JMP_THIS(0x71ADE0);
 
-	//Destructor
-	virtual ~TemporalClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
-	void Fire(TechnoClass* pTarget)
-		{ JMP_THIS(0x71AF20); }
-	bool CanWarpTarget(TechnoClass* pTarget) const
-		{ JMP_THIS(0x71AE50); }
-
-	// hardcoded to accumulate only up to 50 helpers
-	int GetWarpPerStep( int nHelperCount = 0 ) const
-		{ JMP_THIS(0x71AB10); }
-
-	void LetGo()
-		{ JMP_THIS(0x71ABC0); }
-	void JustLetGo()
-		{ JMP_THIS(0x71AD40); }
-	void Detach()
-		{ JMP_THIS(0x71ADE0); }
-
+/*
+    void Clear_Target() JMP_THIS(0x71ACB0);
+    void Clear_Target_Building() JMP_THIS(0x71ACD0);
+    BuildingClass* Detach(int32_t a2) JMP_THIS(0x71AB60);
+    int32_t Release() JMP_THIS(0x71ADB0);
+*/
 
 protected:
 	//===========================================================================

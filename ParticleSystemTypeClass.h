@@ -14,10 +14,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(ParticleSystemTypeClass, 0xA83D68u);
-	static ParticleSystemTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x644890); }
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -30,25 +26,29 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
     static constexpr AbstractType AbsID = AbstractType::ParticleSystemType;
     static constexpr uintptr_t AbsVTable = 0x7F00A8;
     static constexpr size_t ClassSize = 0x310;
 
-	//Destructor
-	virtual ~ParticleSystemTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* mcoords, HouseClass* owner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
 
 
+public:
+    virtual ~ParticleSystemTypeClass() JMP_THIS(0x644250);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6447A0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6447E0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x644830);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x644930);
+    int Size() const override JMP_THIS(0x644920);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x644700);
+    
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6442D0);
+    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x644940);
+    ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x644950);
+
+    static ParticleSystemTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x644890);
 
 	//===========================================================================
 	//===== Properties ==========================================================

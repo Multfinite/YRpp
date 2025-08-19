@@ -28,21 +28,19 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E3DF0;
     static constexpr size_t ClassSize = 0x38;
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~NeuronClass() RX;
+public:
+    virtual ~NeuronClass() JMP_THIS(0x43A440);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-
-	virtual int Size() const R0;
-
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x43A500);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x43A540);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x43A5B0);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x43A9A0);
+    int Size() const override JMP_THIS(0x43A9B0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x43A5D0);
 
 protected:
 	//===========================================================================
@@ -65,7 +63,7 @@ static_assert(sizeof(NeuronClass) == NeuronClass::ClassSize);
 class BrainClass
 {
 public:
-	virtual ~BrainClass() RX;
+	virtual ~BrainClass() JMP_THIS(0x43AA90);
 
 	BrainClass() { THISCALL(0x43A600); }
 

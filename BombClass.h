@@ -11,36 +11,6 @@ class __declspec(uuid("0679E983-AD9D-11D3-BE16-00104B62A16C"))
 NOVTABLE BombClass : public AbstractClass
 {
 public:
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~BombClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	void Detonate()
-		{ JMP_THIS(0x438720); }
-
-	void Disarm()
-		{ JMP_THIS(0x4389B0); }
-
-	BOOL IsDeathBomb() const
-		{ JMP_THIS(0x4389F0); }
-
-	int GetCurrentFlickerFrame() const // which frame of the ticking bomb to draw
-		{ JMP_THIS(0x438A00); }
-
-	bool TimeToExplode() const
-		{ JMP_THIS(0x438A70); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -73,6 +43,25 @@ public:
 	int TickSound;
 	BOOL ShouldPlayTickingSound; // seems so
 	bool Harmless; // (mostly) set to 0 on plant, 1 on detonation/removal ?
+public:
+	virtual ~BombClass() JMP_THIS(0x438670);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x438B00);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x438B40);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x438BD0);
+
+	RTTIType WhatAmI() const override JMP_THIS(0x4393E0);
+	int Size() const override JMP_THIS(0x4393D0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x438A90);
+
+	void Detonate() JMP_THIS(0x438720); 
+	void Disarm() JMP_THIS(0x4389B0); 
+	BOOL IsDeathBomb() const JMP_THIS(0x4389F0);
+	/*! @brief which frame of the ticking bomb to draw */
+	int GetCurrentFlickerFrame() const JMP_THIS(0x438A00);
+	bool TimeToExplode() const JMP_THIS(0x438A70);
+
 protected:
 	explicit __forceinline BombClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:

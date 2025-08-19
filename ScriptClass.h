@@ -27,43 +27,35 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F0F78;
     static constexpr size_t ClassSize = 0x30;
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~ScriptClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	ScriptActionNode* GetCurrentAction(ScriptActionNode *buffer) const
-		{ JMP_THIS(0x691500); }
-
-	ScriptActionNode* GetNextAction(ScriptActionNode *buffer) const
-		{ JMP_THIS(0x691540); }
-
-	bool ClearMission()
-		{ JMP_THIS(0x691590); }
-
-	bool SetMission(int nLine)
-		{ JMP_THIS(0x6915A0); }
-
-	bool NextMission()
-		{ ++this->CurrentMission; return this->HasNextMission(); }
-
-	bool HasNextMission() const
-		{ JMP_THIS(0x6915B0); }
-
+public:
+    virtual ~ScriptClass() JMP_THIS(0x691460);
 
 protected:
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6915F0);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x691630);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x691690);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x691EC0);
+    int Size() const override JMP_THIS(0x691ED0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6914E0);
+
+    ScriptActionNode* GetCurrentAction(ScriptActionNode* buffer) const JMP_THIS(0x691500);
+    ScriptActionNode* GetNextAction(ScriptActionNode* buffer) const JMP_THIS(0x691540);
+    bool ClearMission() JMP_THIS(0x691590);
+    bool SetMission(int nLine) JMP_THIS(0x6915A0);
+    bool HasNextMission() const JMP_THIS(0x6915B0);
+    bool HasMissionsRemaining() JMP_THIS(0x6915D0);
+
+    // Helper method
+    bool NextMission() {
+        ++this->CurrentMission;
+        return this->HasNextMission();
+    }
 
     /*! @brief FAKE CTOR */
     explicit __forceinline ScriptClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}

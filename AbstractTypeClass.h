@@ -50,19 +50,34 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
+public:
+	virtual ~AbstractTypeClass() JMP_THIS(0x4109C0);
 
-	//Destructor
-	virtual ~AbstractTypeClass() RX;
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x410BE0);
 
-	//AbstractTypeClass
-	virtual void LoadTheaterSpecificArt(TheaterType th_type) RX;
-	virtual bool LoadFromINI(CCINIClass* pINI) R0;
-	virtual bool SaveToINI(CCINIClass* pINI) R0;
+	/*!
+	* @brief It's commonly empty. Only AnimClass override this.
+	* @note original_name Load_Image
+	* @note vtable_index 24:0x60
+	* @note address 0x410C20
+	*/
+	virtual void LoadTheaterSpecificArt(TheaterType th_type) JMP_THIS(0x410C20);
+	/*!
+	* @note original_name Read_INI
+	* @note vtable_index 25:0x64
+	* @note address 0x410A60
+	*/
+	virtual bool LoadFromINI(CCINIClass* pINI) JMP_THIS(0x410A60);
+	/*!
+	* @note original_name Write_INI
+	* @note vtable_index 26:0x68
+	* @note address 0x410B90
+	*/
+	virtual bool SaveToINI(CCINIClass* pINI) JMP_THIS(0x410B90);
 
-	const char* get_ID() const {
-		return this->ID;
-	}
+	const char* get_ID() const { return this->ID; }
 
+	bool SameName(const char* name) JMP_THIS(0x410A40);
 
 protected:
 	/*! @brief FAKE CTOR */

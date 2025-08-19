@@ -25,20 +25,23 @@ public:
 
 	DEFINE_REFERENCE(DynamicVectorClass<TubeClass*>, Array, 0x8B4138u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+public:
+	virtual ~TubeClass() JMP_THIS(0x7280D0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x7286D0);
 
-	//Destructor
-	virtual ~TubeClass() RX;
+	HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x7281A0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x7281A0);
 
+	AbstractType WhatAmI() const override JMP_THIS(0x7286C0);
+	int Size() const override JMP_THIS(0x7286B0);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x728630);
+
+/*
+	void Read_INI() JMP_THIS(0x7283C0);
+	void Write_INI() JMP_THIS(0x728280);
+*/
 
 protected:
 	/*! @brief FAKE CTOR */

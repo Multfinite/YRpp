@@ -19,8 +19,6 @@ public:
 	//Array
 	ABSTRACTTYPE_ARRAY(WeaponTypeClass, 0x887568u);
 
-	static WeaponTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x772FA0); }
     using base_type = AbstractTypeClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -39,28 +37,25 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F73B8;
     static constexpr size_t ClassSize = 0x160;
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~WeaponTypeClass() RX;
+public:
+    virtual ~WeaponTypeClass() JMP_THIS(0x771F50);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x772C90);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x772CD0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x772EB0);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x7730E0);
+    int Size() const override JMP_THIS(0x7730D0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x772AE0);
+    bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x772080);
 
-	//AbstractTypeClass
+    void CalculateSpeed() JMP_THIS(0x7729F0);
+    ThreatType AllowedThreats() JMP_THIS(0x772A90);
 
-	void CalculateSpeed()
-		{ JMP_THIS(0x7729F0); }
-
-	ThreatType AllowedThreats()
-		{ JMP_THIS(0x772A90); }
-
+    static WeaponTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x772FA0);
 
 protected:
 	//===========================================================================

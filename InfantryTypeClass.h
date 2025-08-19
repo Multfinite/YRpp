@@ -55,25 +55,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(InfantryTypeClass, 0xA8E348u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~InfantryTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* pOwner) R0;
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -119,6 +100,32 @@ public:
 	bool UseOwnName;
 	bool JumpJetTurn;
 private: DWORD align_ECC;
+public:
+	virtual ~InfantryTypeClass() JMP_THIS(0x5239D0);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x524C70);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x524960);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x524B60);
+
+	RTTIType WhatAmI() const override JMP_THIS(0x524D40);
+	int Size() const override JMP_THIS(0x524D50);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x524840);
+	int GetArrayIndex() const override JMP_THIS(0x524D60);
+
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x5240A0);
+
+	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x5247D0);
+	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x524760);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x523B10);
+	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x523C20);
+
+	bool CanUseWaypoint() const override JMP_THIS(0x5247B0);
+	bool CanAttackMove() const override JMP_THIS(0x5247C0);
+	int GetRepairStepCost() const override JMP_THIS(0x5247A0);
+	int GetRepairStep() const override JMP_THIS(0x524790);
+
 protected:
 	explicit __forceinline InfantryTypeClass(fake_noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) {}
 public:

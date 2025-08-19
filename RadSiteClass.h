@@ -34,79 +34,37 @@ public:
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<RadSiteClass*>, Array, 0xB04BD0u)
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~RadSiteClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
 public:
-	// Start irradiating an area. Be sure to set the BaseCell, Spread and RadLevel first!
-	void Activate()
-		{ JMP_THIS(0x65B580); }
+    virtual ~RadSiteClass() JMP_THIS(0x65B2F0);
 
-	// Remove the radiation effect of this site completely
-	void Deactivate()
-		{ JMP_THIS(0x65BB50); }
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x65B470);
+   
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x65B3D0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x65B450);
+   
+    RTTIType WhatAmI() const override JMP_THIS(0x65B3C0);
+    int Size() const override JMP_THIS(0x65B3A0);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x65B3B0);
+    void Update() override JMP_THIS(0x65B800);
 
-	// Add the radiation of this RadSite to the cells.
-	void Radiate()
-		{ JMP_THIS(0x65B9C0); }
+    void Activate() JMP_THIS(0x65B580);
+    void Deactivate() JMP_THIS(0x65BB50);
+    void Radiate() JMP_THIS(0x65B9C0);
+    void DecreaseRadiation() JMP_THIS(0x65BD00);
+    void DecreaseLight() JMP_THIS(0x65BE90);
+    void Add(int nRadLevel) JMP_THIS(0x65B530);
+    int GetRadLevel() JMP_THIS(0x65B510);
+    int GetRadLevelAt(CellStruct* pCell) JMP_THIS(0x65B8F0);
+    void SetRadLevel(int nRadLevel) JMP_THIS(0x65B4F0);
+    void SetBaseCell(CellStruct* pCell) JMP_THIS(0x65B4C0);
+    void GetSpread() JMP_THIS(0x65B4B0);
+    void SetSpread(int nCells) JMP_THIS(0x65B4D0);
 
-	// Decrease the radiation of this RadSite by one step.
-	void DecreaseRadiation()
-		{ JMP_THIS(0x65BD00); }
-
-	// Decrease the cell tint and intensity of this RadSite.
-	void DecreaseLight()
-		{ JMP_THIS(0x65BE90); }
-
-	// Add this RadLevel to the current radiation.
-	void Add(int nRadLevel)
-		{ JMP_THIS(0x65B530); }
-
-	// Gets the current rad level (corresponds to the RadLevel at BaseCell).
-	int GetRadLevel()
-		{ JMP_THIS(0x65B510); }
-
-	// Gets the rad level applied by this RadSite to a certain cell.
-	int GetRadLevelAt(CellStruct* pCell)
-		{ JMP_THIS(0x65B8F0); }
-
-	// Sets the rad level and the appropriate duration values.
-	void SetRadLevel(int nRadLevel)
-		{ JMP_THIS(0x65B4F0); }
-
-	// Sets the center cell. Do not change when RadSite is activated.
-	void SetBaseCell(CellStruct* pCell)
-		{ JMP_THIS(0x65B4C0); }
-
-	// Gets the spread in cells.
-	void GetSpread()
-		{ JMP_THIS(0x65B4B0); }
-
-	// Sets the spread in cells. Also updates the SpreadInLeptons.
-	void SetSpread(int nCells)
-		{ JMP_THIS(0x65B4D0); }
-
-	//helper methods
-
-	// Gets the current strenght of the effect, the ratio between time left and initial duration.
-	double GetEffectPercentage() {
-		return (this->RadDuration <= 0) ? 0.0 :
-			static_cast<double>(this->RadTimeLeft) / static_cast<double>(this->RadDuration);
-	}
-
-
+    // Helper methods
+    double GetEffectPercentage() {
+        return (this->RadDuration <= 0) ? 0.0 :
+            static_cast<double>(this->RadTimeLeft) / static_cast<double>(this->RadDuration);
+    }
 
 protected:
 	//===========================================================================

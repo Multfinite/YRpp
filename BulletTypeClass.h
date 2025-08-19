@@ -37,45 +37,11 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);
-	static BulletTypeClass* __fastcall FindOrAllocate(const char* id)
-	{ JMP_STD(0x46C790); }
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//Destructor
-	virtual ~BulletTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//AbstractTypeClass
-	//ObjectTypeClass
-	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords,HouseClass* pOwner) R0;
-	virtual ObjectClass* CreateObject(HouseClass* owner) R0;
-
-	bool Rotates() const {
-		return !this->NoRotate;
-	}
-
-	void SetScaledSpawnDelay(int delay) {
-		// JMP_THIS(0x46C840);
-		this->ScaledSpawnDelay = delay;
-	}
-
-	BulletClass* __fastcall CreateBullet(
-		AbstractClass* Target,
-		TechnoClass* Owner,
-		int Damage,
-		WarheadTypeClass *WH,
-		int Speed,
-		bool Bright)
-		{ JMP_STD(0x46B050); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
 
+	static BulletTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x46C790);
 public:
 
 	bool Airburst;
@@ -120,6 +86,45 @@ public:
 	byte AnimHigh;
 	byte AnimRate;
 	bool Flat;
+public:
+	virtual ~BulletTypeClass() JMP_THIS(0x46BE10);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x46C750);
+	
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x46C6A0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x46C730);
+	
+	void PointerExpired(AbstractClass* instance, bool removed) override JMP_THIS(0x46C820);
+	RTTIType WhatAmI() const override JMP_THIS(0x46C850);
+	int Size() const override JMP_THIS(0x46C860);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x46C560);
+	
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46BEE0);
+	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x46C4F0);
+	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
+	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x46C880);
+
+	bool Rotates() const { return !this->NoRotate; }
+
+	void SetScaledSpawnDelay(int delay) {
+		// JMP_THIS(0x46C840);
+		this->ScaledSpawnDelay = delay;
+	}
+
+	BulletClass* __fastcall CreateBullet(
+		AbstractClass* Target,
+		TechnoClass* Owner,
+		int Damage,
+		WarheadTypeClass *WH,
+		int Speed,
+		bool Bright) JMP_STD(0x46B050);
+
+/*
+		int32_t From_Name() JMP_THIS(0x46C440);
+		int8_t * Name_From() JMP_THIS(0x46C4D0);
+		void Set_Scaled_Spawn_Delay(int32_t scaled_spawn_delay) JMP_THIS(0x46C840);
+*/
+
 protected:
 	explicit __forceinline BulletTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
 public:

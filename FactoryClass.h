@@ -34,88 +34,54 @@ public:
     static constexpr size_t ClassSize = 0x74;
 
 	DEFINE_REFERENCE(DynamicVectorClass<FactoryClass*>, Array, 0xA83E30u)
+public:
+    virtual ~FactoryClass() JMP_THIS(0x4C9A10);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x4CA230);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x4CA270);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x4CA3C0);
+    
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x4CA580);
+    RTTIType WhatAmI() const override JMP_THIS(0x4CA750);
+    int Size() const override JMP_THIS(0x4CA760);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4CA430);
+    void Update() override JMP_THIS(0x4C9B20);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
+    bool HasProgressChanged() JMP_THIS(0x4C9C60);
+    bool DemandProduction(TechnoTypeClass const* pType, HouseClass* pOwner, bool shouldQueue) JMP_THIS(0x4C9C70);
+    void SetObject(TechnoClass* pObject) JMP_THIS(0x4C9E10);
+    bool Suspend(bool manual) JMP_THIS(0x4C9E60);
+    bool Unsuspend(bool manual) JMP_THIS(0x4C9EA0);
+    int GetBuildTimeFrames() const JMP_THIS(0x4C9FB0);
+    bool AbandonProduction() JMP_THIS(0x4C9FF0);
+    int GetProgress() const JMP_THIS(0x4CA120);
+    bool IsDone() const JMP_THIS(0x4CA130);
+    int GetCostPerStep() const JMP_THIS(0x4CA180);
+    bool CompletedProduction() JMP_THIS(0x4CA1A0);
+    void StartProduction() JMP_THIS(0x4CA5A0);
+    bool RemoveOneFromQueue(TechnoTypeClass const* pItem) JMP_THIS(0x4CA620);
+    int CountTotal(TechnoTypeClass const* pType) const JMP_THIS(0x4CA670);
+    bool IsQueued(TechnoTypeClass const* pType) const JMP_THIS(0x4CA6B0);
 
-	//Destructor
-	virtual ~FactoryClass() RX;
+/*
+    FootClass* Get_Object() JMP_THIS(0x4CA160);
+    int32_t Get_Special_Item() JMP_THIS(0x4CA170);
+    bool On_Hold() JMP_THIS(0x4C9C50);
+    int32_t Total_Techno_Queued(TechnoTypeClass* techno) JMP_THIS(0x4CA670);
+*/
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
-
-	// returns whether progress "IsDifferent" and resets the flag
-	bool HasProgressChanged()
-		{ JMP_THIS(0x4C9C60); }
-
-	bool DemandProduction(TechnoTypeClass const* pType, HouseClass* pOwner, bool shouldQueue)
-		{ JMP_THIS(0x4C9C70); }
-
-	// aborts current product and puts the object in, completed and suspended
-	void SetObject(TechnoClass* pObject)
-		{ JMP_THIS(0x4C9E10); }
-
-	bool Suspend(bool manual)
-		{ JMP_THIS(0x4C9E60); }
-
-	bool Unsuspend(bool manual)
-		{ JMP_THIS(0x4C9EA0); }
-
-	int GetBuildTimeFrames() const
-		{ JMP_THIS(0x4C9FB0); }
-
-	bool AbandonProduction()
-		{ JMP_THIS(0x4C9FF0); }
-
-	// returns Production.Value
-	int GetProgress() const
-		{ JMP_THIS(0x4CA120); }
-
-	bool IsDone() const
-		{ JMP_THIS(0x4CA130); }
-
-	int GetCostPerStep() const
-		{ JMP_THIS(0x4CA180); }
-
-	// checks the progress and updates the state if done
-	bool CompletedProduction()
-		{ JMP_THIS(0x4CA1A0); }
-
-	// builds an item from the queue
-	void StartProduction()
-		{ JMP_THIS(0x4CA5A0); }
-
-	bool RemoveOneFromQueue(TechnoTypeClass const* pItem)
-		{ JMP_THIS(0x4CA620); }
-
-	// in queue and in production
-	int CountTotal(TechnoTypeClass const* pType) const
-		{ JMP_THIS(0x4CA670); }
-
-	// whether at least one item is queued, not in production
-	bool IsQueued(TechnoTypeClass const* pType) const
-		{ JMP_THIS(0x4CA6B0); }
-
-	static FactoryClass* FindByOwnerAndProduct(
-		HouseClass const* const pHouse, TechnoTypeClass const* const pItem)
-	{
-		for(auto const& pFact : FactoryClass::Array) {
-			if(pFact->Owner == pHouse) {
-				if(pFact->CountTotal(pItem) > 0) {
-					return pFact;
-				}
-			}
-		}
-		return nullptr;
-	}
-
+    static FactoryClass* FindByOwnerAndProduct(HouseClass const* const pHouse, TechnoTypeClass const* const pItem)
+    {
+        for (auto const& pFact : FactoryClass::Array) {
+            if (pFact->Owner == pHouse) {
+                if (pFact->CountTotal(pItem) > 0) {
+                    return pFact;
+                }
+            }
+        }
+        return nullptr;
+    }
 
 protected:
 	//===========================================================================

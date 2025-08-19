@@ -27,40 +27,6 @@ public:
 	static constexpr size_t ClassSize = 0x58;
 
 	DEFINE_REFERENCE(DynamicVectorClass<ParasiteClass*>, Array, 0xAC4910u)
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~ParasiteClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//non-virtual
-	void UpdateSquid()
-		{ JMP_THIS(0x6297F0); }
-
-	bool UpdateGrapple()
-		{ JMP_THIS(0x629720); }
-
-	void ExitUnit()
-		{ JMP_THIS(0x62A4A0); }
-
-	bool CanInfect(FootClass *pTarget) const
-		{ JMP_THIS(0x62A8E0); }
-
-	void TryInfect(FootClass *pTarget)
-		{ JMP_THIS(0x62A980); }
-
-	bool CanExistOnVictimCell() const
-		{ JMP_THIS(0x62AB40); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -76,6 +42,74 @@ public:
 	int             GrappleAnimFrame;
 	int             GrappleAnimDelay;
 	bool            GrappleAnimGotInvalid;
+public:
+	virtual ~ParasiteClass() JMP_THIS(0x6293E0);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6296D0);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6295B0);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6296B0);
+
+	void PointerExpired(AbstractClass* instance, bool removed = true) JMP_THIS(0x410480);
+	RTTIType WhatAmI() const override JMP_THIS(0x62AF60);
+	int Size() const override JMP_THIS(0x62AF50);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6294D0);
+	void Update() override JMP_THIS(0x629FD0);
+public:
+	/*!
+	* @brief
+	* @note original_name Can_Infect
+	* @note address 0x62A8E0
+	*/
+	bool CanInfect(FootClass* pTarget) const JMP_THIS(0x62A8E0);
+
+	/*!
+	* @brief
+	* @note original_name Infect
+	* @note address 0x62A980
+	*/
+	void TryInfect(FootClass* pTarget) JMP_THIS(0x62A980);
+
+	/*!
+	* @brief
+	* @note original_name Victims_Cell_Valid
+	* @note address 0x62AB40
+	*/
+	bool CanExistOnVictimCell() const JMP_THIS(0x62AB40);
+
+	/*!
+	* @brief
+	* @note original_name Grapple_AI
+	* @note address 0x6297F0
+	*/
+	void UpdateSquid() JMP_THIS(0x6297F0);
+
+	/*!
+	* @brief
+	* @note original_name Grapple_AI
+	* @note address 0x629720
+	*/
+	bool UpdateGrapple() JMP_THIS(0x629720);
+
+	/*!
+	* @brief
+	* @note original_name Uninfect
+	* @note address 0x62A4A0
+	*/
+	void ExitUnit() JMP_THIS(0x62A4A0);
+
+	/*!
+	* @note original_name Detach_From_Victim
+	* @note address 0x62AC30
+	*/
+	int32_t DetachFromVictim(int32_t arg0) JMP_THIS(0x62AC30);
+
+	/*!
+	* @note original_name Reset_Grapple
+	* @note address 0x629710
+	*/
+	int32_t ResetGrapple() JMP_THIS(0x629710);
+
 protected:
 
 	/*! @brief FAKE CTOR */

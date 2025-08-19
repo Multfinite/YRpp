@@ -29,27 +29,45 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
     static constexpr AbstractType AbsID = AbstractType::Particle;
     static constexpr uintptr_t AbsVTable = 0x7EF954;
     static constexpr size_t ClassSize = 0x138;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~ParticleClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	//ParticleClass
-	virtual int vt_entry_1E8() R0;
 
 
+
+public:
+    virtual ~ParticleClass() JMP_THIS(0x62BCC0);
+
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x62D930);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x62D7A0);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x62D810);
+   
+    RTTIType WhatAmI() const override JMP_THIS(0x62D980);
+    int Size() const override JMP_THIS(0x62D970);
+   
+    Layer InWhichLayer() const override JMP_THIS(0x62D770);
+    ObjectTypeClass* GetType() const override JMP_THIS(0x62D990);
+    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x62D710);
+    void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x62CEC0);
+    bool Mark(MarkType mark) override JMP_THIS(0x62D6F0);
+    
+    virtual int ShapeNumber() const JMP_THIS(0x62D830);
+
+/*
+    void Update() JMP_THIS(0x62CE40);
+    void Coord_AI() JMP_THIS(0x62D5E0);
+    void Fire_AI() JMP_THIS(0x62CB10);
+    int32_t Fire_Wind() JMP_THIS(0x62D510);
+    int8_t Gas_AI() JMP_THIS(0x62BD50);
+    void Gas_Wind() JMP_THIS(0x62D3F0);
+    void ParticleClass() JMP_THIS(0x62BCC0);
+    void Railgun_AI() JMP_THIS(0x62C3A0);
+    void Smoke_AI() JMP_THIS(0x62C540);
+    int32_t Smoke_Coord_Update() JMP_THIS(0x62D2A0);
+    void Spark_AI() JMP_THIS(0x62C6E0);
+*/
 
 	//===========================================================================
 	//===== Properties ==========================================================

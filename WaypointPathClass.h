@@ -32,32 +32,28 @@ public:
     };
     static inline vtables_t vtables{};
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
-	//Destructor
-	virtual ~WaypointPathClass() RX;
+public:
+    virtual ~WaypointPathClass() JMP_THIS(0x7638C0);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_THIS(0x763C30);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_THIS(0x763C70);
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_THIS(0x763D90);
+    
+    RTTIType WhatAmI() const override JMP_THIS(0x763E10);
+    int Size() const override JMP_THIS(0x763E00);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x763C00);
 
-	WaypointClass * GetWaypoint(int idx) const
-		{ JMP_THIS(0x763980); }
-	WaypointClass * GetWaypointAfter(int idx) const
-		{ JMP_THIS(0x763BA0); }
-	bool WaypointExistsAt(WaypointClass *wpt) const
-		{ JMP_THIS(0x763A50); }
-
-	// Constructor
-	WaypointPathClass(int idx)
-		: WaypointPathClass(noinit_t())
-	{ JMP_THIS(0x763810); }
-
+    WaypointClass* GetWaypoint(int idx) const JMP_THIS(0x763980);
+    WaypointClass* GetWaypointAfter(int idx) const JMP_THIS(0x763BA0);
+    bool WaypointExistsAt(WaypointClass* wpt) const JMP_THIS(0x763A50);
+    void Clear() JMP_THIS(0x763BE0);
+/*
+    WaypointClass* Get_WP(int32_t index, WaypointClass* retval) JMP_THIS(0x763AF0);
+    bool Set(Coordinate* a2) JMP_THIS(0x7639A0);
+*/
 protected:
 
 	//===========================================================================

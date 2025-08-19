@@ -110,82 +110,6 @@ public:
 	static constexpr size_t ClassSize = 0xDF8;
 
 	static constexpr auto MaxWeapons = 18;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
-	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
-
-	//Destructor
-	virtual ~TechnoTypeClass() RX;
-
-	//ObjectTypeClass
-
-	//TechnoTypeClass
-	virtual bool CanUseWaypoint() const R0;
-	virtual bool CanAttackMove() const R0;
-	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const R0;
-	virtual int GetCost() const R0;
-	virtual int GetRepairStepCost() const R0;
-	virtual int GetRepairStep() const R0;
-	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const R0;
-	virtual int GetFlightLevel() const R0;
-
-	// non-virtual
-	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index)
-		{ JMP_THIS(0x48DCD0); }
-
-	bool HasMultipleTurrets() const
-	{
-		return this->TurretCount > 0;
-	}
-
-	CoordStruct* GetParticleSysOffset(CoordStruct* pBuffer) const
-		{ JMP_THIS(0x7178C0); }
-
-	CoordStruct GetParticleSysOffset() const
-	{
-		CoordStruct buffer;
-		GetParticleSysOffset(&buffer);
-		return buffer;
-	}
-
-	bool InOwners(DWORD const bitHouseType) const {
-		return 0u != (this->GetOwners() & bitHouseType);
-	}
-
-	bool InRequiredHouses(DWORD const bitHouseType) const {
-		auto const test = this->RequiredHouses;
-		if(static_cast<int>(test) == -1) {
-			return true;
-		}
-		return 0u != (test & bitHouseType);
-	}
-
-	bool InForbiddenHouses(DWORD const bitHouseType) const {
-		auto const test = this->ForbiddenHouses;
-		if(static_cast<int>(test) == -1) {
-			return false;
-		}
-		return 0u != (test & bitHouseType);
-	}
-
-	// weapon related
-	WeaponStruct* GetWeapon(int index)
-	{ JMP_THIS(0x7177C0); }
-
-	WeaponStruct* GetEliteWeapon(int index)
-	{ JMP_THIS(0x7177E0); }
-
-	// weapon related
-	WeaponStruct& GetWeapon(size_t const index, bool const elite) {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
-	WeaponStruct const& GetWeapon(size_t const index, bool const elite) const {
-		return elite ? this->EliteWeapon[index] : this->Weapon[index];
-	}
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -524,6 +448,147 @@ public:
 	char            PaletteFile[0x20];
 	DynamicVectorClass<ColorScheme*>*           Palette; //no... idea....
 	DWORD           align_DF4;
+public:
+	virtual ~TechnoTypeClass() JMP_THIS(0x711AE0);
+
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x7162F0);
+
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x716DC0);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x7170A0);
+
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x7171A0);
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x712170);
+	DWORD GetOwners() const override JMP_THIS(0x711EC0);
+	int GetPipMax() const override JMP_THIS(0x716290);
+	int GetActualCost(HouseClass* pHouse) const override JMP_THIS(0x711F00);
+	int GetBuildSpeed() const override JMP_THIS(0x711EE0);
+	SHPStruct* GetCameo() const override JMP_THIS(0x712040);
+
+	/*!
+	* @brief
+	* @note original_name new_theater_A0_5247B0
+	* @note vtable_index 40:0xA0
+	* @note address 0x711E80
+	*/
+	virtual bool CanUseWaypoint() const JMP_THIS(0x711E80);
+
+	/*!
+	* @brief
+	* @note original_name Can_Attack_Move
+	* @note vtable_index 41:0xA4
+	* @note address 0x711E90
+	*/
+	virtual bool CanAttackMove() const JMP_THIS(0x711E90);
+
+	/*!
+	* @brief
+	* @note original_name Legal_Placement
+	* @note vtable_index 42:0xA8
+	* @note address 0x716150
+	*/
+	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const JMP_THIS(0x716150);
+
+	/*!
+	* @brief
+	* @note original_name Raw_Cost
+	* @note vtable_index 43:0xAC
+	* @note address 0x711EB0
+	*/
+	virtual int GetCost() const JMP_THIS(0x711EB0);
+
+	/*!
+	* @brief
+	* @note original_name Repair_Cost
+	* @note vtable_index 44:0xB0
+	* @note address 0x7120D0
+	*/
+	virtual int GetRepairStepCost() const JMP_THIS(0x7120D0);
+
+	/*!
+	* @brief
+	* @note original_name Repair_Step
+	* @note vtable_index 45:0xB4
+	* @note address 0x712120
+	*/
+	virtual int GetRepairStep() const JMP_THIS(0x712120);
+
+	/*!
+	* @brief
+	* @note original_name Refund_Amount
+	* @note vtable_index 46:0xB8
+	* @note address 0x711F60
+	*/
+	virtual int GetRefund(HouseClass* pHouse, bool bUnk) const JMP_THIS(0x711F60);
+
+	/*!
+	* @brief
+	* @note original_name Flight_Level
+	* @note vtable_index 47:0xBC
+	* @note address 0x717800
+	*/
+	virtual int GetFlightLevel() const JMP_THIS(0x717800);
+
+	WeaponStruct* GetWeapon(int index) JMP_THIS(0x7177C0);
+	WeaponStruct* GetEliteWeapon(int index) JMP_THIS(0x7177E0);
+	int GetTurretWeapon(int index) JMP_THIS(0x7178B0);
+	bool HasTurret() const JMP_THIS(0x717880);
+	// looks like this function return true if weapon burst more than 1
+	bool IsTwoShooter() JMP_THIS(0x712130);
+	void SetPalette() JMP_THIS(0x717820);
+	int SetPalettes() JMP_THIS(0x717840);
+	void SetTurretWeapon(int index, int weapon) JMP_THIS(0x717890);
+
+	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index) JMP_THIS(0x48DCD0);
+
+	constexpr bool HasMultipleTurrets() const { return this->TurretCount > 0; }
+	Coordinate* __GetParticleSysOffset(Coordinate* retstr) const JMP_THIS(0x7178C0);
+	Coordinate GetParticleSysOffset() const
+	{
+		Coordinate ret;
+		__GetParticleSysOffset(&ret);
+		return ret;
+	}
+
+	bool InOwners(DWORD const bitHouseType) const { return 0u != (GetOwners() & bitHouseType); }
+
+	constexpr bool InRequiredHouses(DWORD const bitHouseType) const {
+		auto const test = this->RequiredHouses;
+		if(static_cast<int>(test) == -1) {
+			return true;
+		}
+		return 0u != (test & bitHouseType);
+	}
+	constexpr bool InForbiddenHouses(DWORD const bitHouseType) const {
+		auto const test = this->ForbiddenHouses;
+		if(static_cast<int>(test) == -1) {
+			return false;
+		}
+		return 0u != (test & bitHouseType);
+	}
+
+	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
+	{
+		for (auto pItem : Array) {
+			if (!_strcmpi(pItem->ID, pID)) {
+				return pItem;
+			}
+		}
+		return nullptr;
+	}
+
+	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
+	{
+		for (int i = 0; i < Array.Count; ++i) {
+			if (!_strcmpi(Array.Items[i]->get_ID(), pID)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	constexpr WeaponStruct& GetWeapon(size_t const index, bool const elite) { return elite ? this->EliteWeapon[index] : this->Weapon[index]; }
+	constexpr WeaponStruct const& GetWeapon(size_t const index, bool const elite) const { return elite ? this->EliteWeapon[index] : this->Weapon[index]; }
+
 protected:
 	explicit __forceinline TechnoTypeClass(fake_noinit_t) noexcept : ObjectTypeClass(fake_noinit_t{}) {}
 	TechnoTypeClass(noinit_t) noexcept : TechnoTypeClass(fake_noinit_t{}) JMP_THIS(0x711840);

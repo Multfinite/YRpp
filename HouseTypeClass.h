@@ -34,33 +34,6 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
-
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
-
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm,BOOL fClearDirty) R0;
-
-	//Destructor
-	virtual ~HouseTypeClass() RX;
-
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int	Size() const R0;
-
-	//helpers
-	HouseTypeClass* FindParentCountry() const {
-		return HouseTypeClass::Find(this->ParentCountry);
-	}
-
-	int FindParentCountryIndex() const {
-		return HouseTypeClass::FindIndexOfName(this->ParentCountry);
-	}
-
-	static signed int __fastcall FindIndexOfName(const char *name)
-		{ JMP_STD(0x5117D0); }
-
 	//===========================================================================
 	//===== Properties ==========================================================
 	//===========================================================================
@@ -121,6 +94,30 @@ public:
 	bool           WallOwner;
 	bool           SmartAI; //"smart"?
 	PROTECTED_PROPERTY(BYTE, padding_1A9[7]);
+public:
+	virtual ~HouseTypeClass() JMP_THIS(0x5116A0);
+
+	HRESULT __stdcall QueryInterface(REFIID riid, void** ppvObject) override JMP_STD(0x5125A0);
+	ULONG __stdcall AddRef() override JMP_STD(0x512740);
+	ULONG __stdcall Release() override JMP_STD(0x512750);
+
+	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x512640);
+
+	HRESULT __stdcall IsDirty() override JMP_STD(0x512280);
+	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x512290);
+	HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x512480);
+	HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) override JMP_STD(0x512570);
+	RTTIType WhatAmI() const override JMP_THIS(0x512710);
+	int Size() const override JMP_THIS(0x512720);
+	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x512170);
+	int GetArrayIndex() const override JMP_THIS(0x512730);
+	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x511850);
+
+	HouseTypeClass* FindParentCountry() const { return HouseTypeClass::Find(this->ParentCountry); }
+	int FindParentCountryIndex() const { return HouseTypeClass::FindIndexOfName(this->ParentCountry); }
+	static signed int __fastcall FindIndexOfName(const char* name) JMP_STD(0x5117D0);
+	static HouseTypeClass* __fastcall FindOrMake(const char* name) JMP_STD(0x512680);
+
 protected:
 	explicit __forceinline HouseTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:

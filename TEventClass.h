@@ -30,52 +30,36 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TEventClass*>, Array, 0xB0F1A0u)
+public:
+    virtual ~TEventClass() JMP_THIS(0x71E830);
 
-	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
+    HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x71F880);
+    
+    HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71F8C0);    
+    HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71F930);
 
-	//IPersistStream
-	virtual HRESULT __stdcall Load(IStream* pStm) R0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
+    void PointerExpired(AbstractClass* instance, bool removed = true) override JMP_THIS(0x71F800);
+    RTTIType WhatAmI() const override JMP_THIS(0x71FA60);
+    int Size() const override JMP_THIS(0x71FA50);
+    void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71F820);
+    int GetArrayIndex() const override JMP_THIS(0x71FA70);
 
-	//Destructor
-	virtual ~TEventClass() RX;
+    // Event handling
+    void LoadFromINI() JMP_THIS(0x71F4E0);
+    void PrepareSaveToINI(char* buffer) const JMP_THIS(0x71F390);
+    static TriggerAttachType __fastcall GetAttachType(int eventKind) JMP_STD(0x71F680);
+    bool GetStateA() const JMP_THIS(0x71F950);
+    bool GetStateB() const JMP_THIS(0x71F9C0);
+    bool HasOccured(int eventKind, HouseClass* pHouse, ObjectClass* Object,
+        CDTimerClass* ActivationFrame, bool* isRepeating) const JMP_THIS(0x71E940);
 
-	//AbstractClass
-	virtual AbstractType WhatAmI() const RT(AbstractType);
-	virtual int Size() const R0;
-
-	// you are responsible for doing INI::ReadString and strtok'ing it before calling
-	// this func only calls strtok again, doesn't know anything about buffers
-	void LoadFromINI()
-		JMP_THIS(0x71F4E0);
-
-	// you allocate the buffer for this, and save it to ini yourself after this returns
-	// this func only sprintf's the stuff it needs into buffer
-	void PrepareSaveToINI(char* buffer) const
-		JMP_THIS(0x71F390);
-
-	static TriggerAttachType __fastcall GetAttachType(int eventKind)
-		JMP_STD(0x71F680);
-
-	// used in TriggerClass::HaveEventsOccured , when trigger is repeating
-	// both need to be true to check this event as done
-	bool GetStateA() const
-		JMP_THIS(0x71F950);
-
-	bool GetStateB() const
-		JMP_THIS(0x71F9C0);
-
-	// main brain
-	bool HasOccured(
-		int eventKind,
-		HouseClass* pHouse,
-		ObjectClass* Object,
-		CDTimerClass* ActivationFrame,
-		bool* isRepeating
-	) const
-		JMP_THIS(0x71E940);
-
+/*
+    int32_t Get_House() JMP_THIS(0x71FA30);
+    NeedType Needs() JMP_THIS(0x71F5B0);
+    void Set_House(HouseClass* a2) JMP_THIS(0x71FA40);
+    int32_t Static_CTOR() JMP_THIS(0x71E620);
+    void Static_DTOR() JMP_THIS(0x71E660);
+*/
 
 protected:
 	//===========================================================================
