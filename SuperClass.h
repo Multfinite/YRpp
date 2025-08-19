@@ -44,7 +44,7 @@ public:
     Coordinate SpecialSoundLocation;
     bool CanHold;
     PROTECTED_PROPERTY(BYTE, unused_61);
-    CellStruct ChronoMapCoords;
+    ::Cell ChronoMapCoords;
     PROTECTED_PROPERTY(BYTE, unused_66[2]);
     AnimClass* Animation;
     bool AnimationGotInvalid;
@@ -76,11 +76,11 @@ public:
     bool Grant(bool oneTime, bool announce, bool onHold) JMP_THIS(0x6CB560);
     bool Lose() JMP_THIS(0x6CB7B0);
     bool IsPowered() const { return this->Type->IsPowered; }
-    void Launch(const CellStruct& cell, bool isPlayer) JMP_THIS(0x6CC390);
+    void Launch(const ::Cell& cell, bool isPlayer) JMP_THIS(0x6CC390);
     char CanFire() const JMP_THIS(0x6CC360);
     void SetReadiness(bool ready) JMP_THIS(0x6CB820);
     char StopPreclickAnim(bool isPlayer) JMP_THIS(0x6CB830);
-    char ClickFire(bool isPlayer, const CellStruct& cell) JMP_THIS(0x6CB920);
+    char ClickFire(bool isPlayer, const ::Cell& cell) JMP_THIS(0x6CB920);
     bool HasChargeProgressed(bool isPlayer) JMP_THIS(0x6CBCA0);
     signed int AnimStage() const JMP_THIS(0x6CBEE0);
     void SetCharge(int percentage) JMP_THIS(0x6CC1E0);
@@ -112,7 +112,7 @@ class LightningStorm
 {
 public:
     DEFINE_REFERENCE(double, CloudHeightFactor, 0xB0CDD8u)
-    DEFINE_REFERENCE(CellStruct, Coords, 0xA9F9CCu)
+    DEFINE_REFERENCE(::Cell, Coords, 0xA9F9CCu)
     DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FACCu)
     DEFINE_REFERENCE(int, Deferment, 0xA9FAB8u)
     DEFINE_REFERENCE(int, Duration, 0x827FC4u)
@@ -124,13 +124,13 @@ public:
     DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, CloudsManifesting, 0xA9FA60u)
     DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, BoltsPresent, 0xA9FA18u)
 
-    static void Start(int duration, int deferment, CellStruct cell, HouseClass* pOwner)
+    static void Start(int duration, int deferment, ::Cell cell, HouseClass* pOwner)
     {
         PUSH_VAR32(pOwner); PUSH_VAR32(cell); SET_REG32(EDX, deferment); SET_REG32(ECX, duration); CALL(0x539EB0);
     }
     static void RequestStop() { CALL(0x53A090); }
     static bool HasDeferment() { CALL(0x53A0E0); }
-    static void Strike(CellStruct cell) { PUSH_VAR32(cell); CALL(0x53A140); }
+    static void Strike(::Cell cell) { PUSH_VAR32(cell); CALL(0x53A140); }
     static void Strike2(Coordinate coords) JMP_STD(0x53A300);
     static void PrintMessage() { CALL(0x53AE00); }
     static void Update() JMP_STD(0x53A6C0);
@@ -141,11 +141,11 @@ class PsyDom
 {
 public:
     DEFINE_REFERENCE(PsychicDominatorStatus, Status, 0xA9FAC0u)
-    DEFINE_REFERENCE(CellStruct, Coords, 0xA9FA48u)
+    DEFINE_REFERENCE(::Cell, Coords, 0xA9FA48u)
     DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FAC8u)
     DEFINE_REFERENCE(AnimClass*, Anim, 0xA9FAC4u)
 
-    static void Start(HouseClass* pOwner, CellStruct coords)
+    static void Start(HouseClass* pOwner, ::Cell coords)
     { PUSH_VAR32(coords); SET_REG32(ECX, pOwner); CALL(0x53AE50); }
     static void Update() { CALL(0x53AF40); }
     static void Fire() { CALL(0x53B080); }

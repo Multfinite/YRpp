@@ -76,7 +76,7 @@ public:
 	/*4:0x10*/virtual bool __stdcall Is_Moving() JMP_STD(0x55ACD0);
 	/*5:0x14*/virtual Coordinate __stdcall Destination() JMP_STD(0x55AC70);
 	/*6:0x18*/virtual Coordinate __stdcall Head_To_Coord() JMP_STD(0x55ACA0);
-	/*7:0x1C*/virtual Move __stdcall Can_Enter_Cell(CellStruct cell) JMP_STD(0x55ABF0);
+	/*7:0x1C*/virtual Move __stdcall Can_Enter_Cell(::Cell cell) JMP_STD(0x55ABF0);
 	/*8:0x20*/virtual bool __stdcall Is_To_Have_Shadow() JMP_STD(0x55ABE0);
 	/*9:0x24*/virtual Matrix3D __stdcall Draw_Matrix(VoxelIndexKey* pIndex) JMP_STD(0x55A730);
 	/*10:0x28*/virtual Matrix3D __stdcall Shadow_Matrix(VoxelIndexKey* pIndex) JMP_STD(0x55A7D0);

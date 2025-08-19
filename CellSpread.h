@@ -10,13 +10,13 @@ public:
 		return reinterpret_cast<size_t*>(0x7ED3D0)[nSpread];
 	}
 
-	static const CellStruct& GetCell(size_t n) {
-		return reinterpret_cast<const CellStruct*>(0xABD490)[n];
+	static const ::Cell& GetCell(size_t n) {
+		return reinterpret_cast<const ::Cell*>(0xABD490)[n];
 	}
 
-	static const CellStruct& GetNeighbourOffset(size_t direction) {
+	static const ::Cell& GetNeighbourOffset(size_t direction) {
 		if(direction > 7) {
-			return CellStruct::Empty;
+			return ::Cell::Empty;
 		}
 		return Unsorted::AdjacentCell[direction];
 	}
@@ -34,7 +34,7 @@ public:
 		}
 	};
 
-	static size_t GetDistance(const CellStruct &offset) {
+	static size_t GetDistance(const ::Cell &offset) {
 		return GetDistance(offset.X, offset.Y);
 	};
 };

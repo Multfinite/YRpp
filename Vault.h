@@ -18,13 +18,13 @@ class MapRegionClass
 	int                           Level;          //0x10
 	bool                          Wet;            //0x14
 	bool                          GreenTile;      //0x15
-	CellStruct                    BaseCellCoords; //0x16!
+	::Cell                    BaseCellCoords; //0x16!
 	bool                          unknown_bool_1A;
 	bool                          unknown_bool_1B;
 	DWORD                         unknown_1C;
 	DWORD                         unknown_20;
 	bool                          unknown_24;
-	DynamicVectoClass<CellStruct> Cells;
+	DynamicVectoClass<::Cell> Cells;
 	DWORD                         unknown_40;
 	DWORD                         unknown_44;
 	DWORD                         unknown_48;
@@ -33,7 +33,7 @@ class MapRegionClass
 
 struct RMGCellDataStruct
 {
-	CellStruct Coords;
+	::Cell Coords;
 	DWORD      unknown_04;
 	DWORD      unknown_08;
 	DWORD      unknown_0C;

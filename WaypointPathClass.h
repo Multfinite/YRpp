@@ -16,7 +16,7 @@ public:
     }
 
     // Properties
-    CellStruct Coords;
+    ::Cell Coords;
     DWORD unknown;
 };
 

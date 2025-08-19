@@ -92,7 +92,7 @@ protected:
     explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) : OverlayClass(fake_noinit_t{}) JMP_THIS(0x5FC380);
+    OverlayClass(OverlayTypeClass* pType, ::Cell const& mapCoord, int houseId) : OverlayClass(fake_noinit_t{}) JMP_THIS(0x5FC380);
     OverlayClass(noinit_t) noexcept : OverlayClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(OverlayClass) == OverlayClass::ClassSize);

@@ -66,7 +66,7 @@ public:
     void ResetTimers() JMP_THIS(0x726400);
     void Destroy() JMP_THIS(0x726720);
     bool RegisterEvent(TriggerEvent event, ObjectClass* pObject, bool forceFire, bool persistent, TechnoClass* pSource) JMP_THIS(0x7264C0);
-    bool FireActions(ObjectClass* pObj, CellStruct location) JMP_THIS(0x7265C0);
+    bool FireActions(ObjectClass* pObj, ::Cell location) JMP_THIS(0x7265C0);
 
     static TriggerClass* __fastcall GetInstance(TriggerTypeClass* pType) JMP_STD(0x726630);
 

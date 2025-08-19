@@ -76,7 +76,7 @@ public:
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6CEA20);
     
-    virtual ::Action MouseOverObject(CellStruct const& cell, ObjectClass* pObjBelowMouse) const JMP_THIS(0x6CEF80);
+    virtual ::Action MouseOverObject(::Cell const& cell, ObjectClass* pObjBelowMouse) const JMP_THIS(0x6CEF80);
     
     static SuperWeaponTypeClass* __fastcall FindFirstOfAction(::Action action) JMP_STD(0x6CEEB0);
 

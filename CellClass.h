@@ -48,7 +48,7 @@ public:
 	static constexpr int BridgeHeight = BridgeLevels * Unsorted::LevelHeight;
 
 public:
-	CellStruct MapCoords;	//Where on the map does this Cell lie?
+	::Cell MapCoords;	//Where on the map does this Cell lie?
 	DynamicVectorClass<FoggedObjectClass*>* FoggedObjects;
 	CellClass* BridgeOwnerCell;
 	DWORD              unknown_30;
@@ -289,7 +289,7 @@ public:
 	ISTILE(NotWater, 0x4867E0);
 	ISTILE(DestroyableCliff, 0x486900);
 
-	inline static Coordinate Cell2Coord(CellStruct const& cell, int z = 0)
+	inline static Coordinate Cell2Coord(::Cell const& cell, int z = 0)
 	{
 		Coordinate ret;
 		ret.X = cell.X * 256 + 128;
@@ -298,9 +298,9 @@ public:
 		return ret;
 	}
 
-	inline static CellStruct Coord2Cell(Coordinate const& crd)
+	inline static ::Cell Coord2Cell(Coordinate const& crd)
 	{
-		CellStruct ret;
+		::Cell ret;
 		ret.X = static_cast<short>(crd.X / 256);
 		ret.Y = static_cast<short>(crd.Y / 256);
 		return ret;
@@ -321,7 +321,7 @@ public:
 
 	void ChainReaction()
 	{
-		CellStruct* cell = &this->MapCoords;
+		::Cell* cell = &this->MapCoords;
 		SET_REG32(ecx, cell);
 		CALL(0x489270);
 	}

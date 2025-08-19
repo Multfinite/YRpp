@@ -159,7 +159,7 @@ public:
 	* @note vtable_index 32:0x80
 	* @note address 0x4C9150
 	*/
-	virtual bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) = 0;
+	virtual bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) = 0;
 
 	/*!
 	* @brief
@@ -191,7 +191,7 @@ public:
 	* @note vtable_index 36:0x90
 	* @note address 0x5F7640
 	*/
-	virtual CellStruct* GetFoundationData(bool placement) const JMP_THIS(0x5F7640);
+	virtual ::Cell* GetFoundationData(bool placement) const JMP_THIS(0x5F7640);
 
 	/*!
 	* @brief

@@ -80,7 +80,7 @@ template <typename T>
 struct CellRangeIterator
 {
 	template <typename Func>
-	void operator () (CellStruct const center, double radius, Func&& action) const {
+	void operator () (::Cell const center, double radius, Func&& action) const {
 		CellRangeIterator<ObjectClass>{}(center, radius, [&action](ObjectClass* const pObject)
 		{
 			if(auto const pItem = abstract_cast<T*>(pObject)) {
@@ -97,7 +97,7 @@ template <>
 struct CellRangeIterator<ObjectClass>
 {
 	template <typename Func>
-	void operator () (CellStruct const center, double radius, Func&& action) const {
+	void operator () (::Cell const center, double radius, Func&& action) const {
 		CellRangeIterator<CellClass>{}(center, radius, [&action](CellClass* const pCell)
 		{
 			for(NextObject object(pCell->GetContent()); object; ++object) {
@@ -113,7 +113,7 @@ struct CellRangeIterator<ObjectClass>
 template <>
 struct CellRangeIterator<CellClass> {
 	template <typename Func>
-	void operator () (CellStruct const center, double radius, Func&& action) const {
+	void operator () (::Cell const center, double radius, Func&& action) const {
 		for(CellRangeEnumerator cell(center, radius); cell; ++cell) {
 			if(auto const pCell = MapClass::Instance.TryGetCellAt(*cell)) {
 				if(!action(pCell)) {
@@ -139,7 +139,7 @@ template <typename T>
 struct CellSpreadIterator
 {
 	template <typename Func>
-	void operator () (CellStruct const center, size_t const spread, Func&& action) const {
+	void operator () (::Cell const center, size_t const spread, Func&& action) const {
 		CellSpreadIterator<ObjectClass>{}(center, spread, [&action](ObjectClass* const pObject)
 		{
 			if(auto const pItem = abstract_cast<T*>(pObject)) {
@@ -156,7 +156,7 @@ template <>
 struct CellSpreadIterator<ObjectClass>
 {
 	template <typename Func>
-	void operator () (CellStruct const center, size_t const spread, Func&& action) const {
+	void operator () (::Cell const center, size_t const spread, Func&& action) const {
 		CellSpreadIterator<CellClass>{}(center, spread, [&action](CellClass* const pCell)
 		{
 			for(NextObject object(pCell->GetContent()); object; ++object) {
@@ -172,7 +172,7 @@ struct CellSpreadIterator<ObjectClass>
 template <>
 struct CellSpreadIterator<CellClass> {
 	template <typename Func>
-	void operator () (CellStruct const center, size_t const spread, Func&& action) const {
+	void operator () (::Cell const center, size_t const spread, Func&& action) const {
 		auto const legacy = std::min(spread, 10u);
 		auto const count = CellSpread::NumCells(legacy);
 		for(auto i = 0u; i < count; ++i) {

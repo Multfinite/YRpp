@@ -82,11 +82,11 @@ public:
     virtual bool DrawLine_6DBB60(RectangleStruct const& a2, RectangleStruct const& a3, COLORREF a4, bool bool1) JMP_THIS(0x6DBB60);
 
     void SetTacticalPosition(Coordinate* pCoord) JMP_THIS(0x6D6070);
-    CellStruct* CoordsToCell(CellStruct* retstr, Coordinate* pSource) JMP_THIS(0x6D6590);
+    ::Cell* CoordsToCell(::Cell* retstr, Coordinate* pSource) JMP_THIS(0x6D6590);
     [[deprecated]] bool CoordsToClient(Coordinate const* coords, Point2D* pOutClient) const JMP_THIS(0x6D2140);
     [[deprecated]] Point2D* CoordsToScreen(Point2D* retstr, const Coordinate* pSource) JMP_THIS(0x6D1F10);
     Coordinate* ClientToCoords(Coordinate* retstr, Point2D const& client) const JMP_THIS(0x6D2280);
-    char GetOcclusion(const CellStruct& cell, bool fog) const JMP_THIS(0x6D8700);
+    char GetOcclusion(const ::Cell& cell, bool fog) const JMP_THIS(0x6D8700);
 
     // Helper methods
     std::pair<Point2D, bool> CoordsToClient(const Coordinate& coords) const

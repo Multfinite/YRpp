@@ -205,7 +205,7 @@ public:
 	bool ShouldCrashIt(TechnoClass* pTarget) JMP_THIS(0x7438F0);
 
 	AbstractClass* AssignDestination_7447B0(AbstractClass* pTarget) JMP_THIS(0x7447B0);
-	bool AStarAttempt(const CellStruct& cell1, const CellStruct& cell2) JMP_THIS(0x746000);
+	bool AStarAttempt(const ::Cell& cell1, const ::Cell& cell2) JMP_THIS(0x746000);
 
 	int32_t DisguiseStuff(ObjectTypeClass* type) JMP_THIS(0x746630);
 	int64_t CreditLoad() JMP_THIS(0x7438B0);

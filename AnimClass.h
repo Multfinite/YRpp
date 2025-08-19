@@ -101,7 +101,7 @@ public:
 	void UnmarkAllOccupationBits(Coordinate const& coords) override JMP_THIS(0x426300);
 	void UnInit() override JMP_THIS(0x4255B0);
 	bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x422C70);
-	CellStruct const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x4238D0);
+	::Cell const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x4238D0);
 	void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const override JMP_THIS(0x422CA0);
 	bool Mark(MarkType value) override JMP_THIS(0x4238B0);
 	int GetZ() const override JMP_THIS(0x425630);

@@ -463,7 +463,7 @@ public:
 	* @note vtable_index 42:0xA8
 	* @note address 0x716150
 	*/
-	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const JMP_THIS(0x716150);
+	virtual bool CanCreateHere(const ::Cell& mapCoords, HouseClass* pOwner) const JMP_THIS(0x716150);
 
 	/*!
 	* @brief

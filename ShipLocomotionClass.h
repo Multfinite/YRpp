@@ -59,7 +59,7 @@ public:
 	bool __stdcall Is_Moving() override JMP_STD(0x69F290);
 	Coordinate __stdcall Destination() override JMP_STD(0x69F3A0);
 	Coordinate __stdcall Head_To_Coord() override JMP_STD(0x69F3D0);
-	Move __stdcall Can_Enter_Cell(CellStruct cell) override JMP_STD(0x55ABF0);
+	Move __stdcall Can_Enter_Cell(::Cell cell) override JMP_STD(0x55ABF0);
 	bool __stdcall Is_To_Have_Shadow() override JMP_STD(0x55ABE0);
 	Matrix3D __stdcall Draw_Matrix(VoxelIndexKey* pIndex) override JMP_STD(0x69F670);
 	Matrix3D __stdcall Shadow_Matrix(VoxelIndexKey* pIndex) override JMP_STD(0x69FB20);

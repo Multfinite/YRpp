@@ -83,7 +83,7 @@ public:
 	int AnimationUpdatePeriod;
 	int MonsterFrameIdxChange;
 	CDTimerClass UpdateStateTimer;
-	CellStruct Position;
+	::Cell Position;
 	int MonsterFrameToDraw;
 	char IsInactive;
 	char DontPuffGas;
@@ -118,8 +118,8 @@ public:
 	void Draw_It() JMP_THIS(0x74D490);
 */
 
-	static VeinholeMonsterClass* __fastcall GetVeinholeMonsterAt(CellStruct* pCell) JMP_STD(0x74CDB0);
-	static VeinholeMonsterClass* __fastcall GetVeinholeMonsterFrom(CellStruct* pCell) JMP_STD(0x74CD60);
+	static VeinholeMonsterClass* __fastcall GetVeinholeMonsterAt(::Cell* pCell) JMP_STD(0x74CDB0);
+	static VeinholeMonsterClass* __fastcall GetVeinholeMonsterFrom(::Cell* pCell) JMP_STD(0x74CD60);
 	void RemoveFrom(CellClass* pCell) const	JMP_THIS(0x74EF10);
 	void ClearVector() const JMP_THIS(0x74EA30);
 	void ClearGrowthData() { GrowthLogic.Destruct(); }
@@ -149,7 +149,7 @@ public:
 
 	//called 687A80
 	static void __fastcall InitVeinGrowthData(bool bAllocate = true) JMP_STD(0x74DE90);
-	static bool __fastcall IsCellEligibleForVeinHole(CellStruct& nWhere) 	JMP_STD(0x74D670);
+	static bool __fastcall IsCellEligibleForVeinHole(::Cell& nWhere) 	JMP_STD(0x74D670);
 	static void __fastcall TheaterInit(TheaterType nType) JMP_STD(0x74D450);
 	static TerrainTypeClass* __fastcall GetTerrainType() JMP_STD(0x74EF00);
 	static HRESULT __fastcall SaveVector(void* stream, DynamicVectorClass<VeinholeMonsterClass*>* a2) JMP_STD(0x74ED60);
@@ -172,7 +172,7 @@ public:
 protected:
 	explicit __forceinline VeinholeMonsterClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) { }
 public:
-	VeinholeMonsterClass(CellStruct* pWhere)	: VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C5B0);
+	VeinholeMonsterClass(::Cell* pWhere)	: VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C5B0);
 	VeinholeMonsterClass(noinit_t) noexcept : VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C420);
 };
 static_assert(sizeof(VeinholeMonsterClass) == VeinholeMonsterClass::ClassSize);

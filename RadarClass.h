@@ -54,7 +54,7 @@ public:
 	RectangleStruct unknown_rect_120C;
 	DWORD unknown_121C;
 	DWORD unknown_1220;
-	DynamicVectorClass<CellStruct> unknown_cells_1124;
+	DynamicVectorClass<::Cell> unknown_cells_1124;
 	DWORD unknown_123C;
 	DWORD unknown_1240;
 	DWORD unknown_1244;

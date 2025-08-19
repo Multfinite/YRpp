@@ -31,7 +31,7 @@ class Crate
 public:
 	//Properties
 	CDTimerClass CrateTimer;
-	CellStruct Location;
+	::Cell Location;
 };
 
 struct CellLevelPassabilityStruct
@@ -51,8 +51,8 @@ struct LevelAndPassabilityStruct2
 //ZoneConnectionClass - Holding zone connection info from tubes or bridges (probably used for pathfinding)
 struct ZoneConnectionClass
 {
-	CellStruct	FromMapCoords;
-	CellStruct	ToMapCoords;
+	::Cell	FromMapCoords;
+	::Cell	ToMapCoords;
 	bool		unknown_bool_08;
 	CellClass*	Cell;
 
@@ -195,7 +195,7 @@ public:
 	}
 
 	//IGameMap
-	virtual long __stdcall Is_Visible(CellStruct cell) override R0;
+	virtual long __stdcall Is_Visible(::Cell cell) override R0;
 
 	//Destructor
 	virtual ~MapClass() RX;
@@ -211,17 +211,17 @@ public:
 	virtual void SetVisibleRect(const RectangleStruct& mapRect) RX;
 
 	//Non-virtual
-	CellClass* TryGetCellAt(const CellStruct& MapCoords) const {
+	CellClass* TryGetCellAt(const ::Cell& MapCoords) const {
 		int idx = GetCellIndex(MapCoords);
 		return (idx >= 0 && idx < MaxCells) ? Cells[idx] : nullptr;
 	}
 
 	CellClass* TryGetCellAt(const Coordinate& Crd) const {
-		CellStruct cell = CellClass::Coord2Cell(Crd);
+		::Cell cell = CellClass::Coord2Cell(Crd);
 		return TryGetCellAt(cell);
 	}
 
-	CellClass* GetCellAt(const CellStruct &MapCoords) const {
+	CellClass* GetCellAt(const ::Cell &MapCoords) const {
 		auto pCell = TryGetCellAt(MapCoords);
 
 		if(!pCell) {
@@ -233,24 +233,24 @@ public:
 	}
 
 	CellClass* GetCellAt(const Coordinate &Crd) const {
-		CellStruct cell = CellClass::Coord2Cell(Crd);
+		::Cell cell = CellClass::Coord2Cell(Crd);
 		return GetCellAt(cell);
 	}
 
 	CellClass* GetTargetCell(Point2D& location)
 		{ JMP_THIS(0x565730); }
 
-	bool CellExists(const CellStruct &MapCoords) const {
+	bool CellExists(const ::Cell &MapCoords) const {
 		return TryGetCellAt(MapCoords) != nullptr;
 	}
 
-	int GetThreatPosed(const CellStruct& cell, HouseClass* pHouse) const
+	int GetThreatPosed(const ::Cell& cell, HouseClass* pHouse) const
 		{ JMP_THIS(0x56BCD0); }
 
 	bool IsLocationShrouded(const Coordinate &crd) const
 		{ JMP_THIS(0x586360); }
 
-	static int GetCellIndex(const CellStruct &MapCoords) {
+	static int GetCellIndex(const ::Cell &MapCoords) {
 		return (MapCoords.Y << 9) + MapCoords.X;
 	}
 
@@ -287,7 +287,7 @@ public:
 	CellClass* CellIteratorNext()
 		{ CALL(0x578290); }
 
-	int GetMovementZoneType(const CellStruct& MapCoords, MovementZone movementZone, bool isBridge)
+	int GetMovementZoneType(const ::Cell& MapCoords, MovementZone movementZone, bool isBridge)
 		{ JMP_THIS(0x56D230); }
 
 // the key damage delivery
@@ -330,14 +330,14 @@ public:
 	int GetCellFloorHeight(const Coordinate& crd) const
 		{ JMP_THIS(0x578080); }
 
-	CellStruct * __PickCellOnEdge(CellStruct* retstr, Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
+	::Cell * __PickCellOnEdge(::Cell* retstr, Edge Edge, const ::Cell &CurrentLocation, const ::Cell &Fallback,
 		SpeedType SpeedType, bool ValidateReachability, MovementZone MovZone) const
 			{ JMP_THIS(0x4AA440); }
 
-	CellStruct PickCellOnEdge(Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
+	::Cell PickCellOnEdge(Edge Edge, const ::Cell &CurrentLocation, const ::Cell &Fallback,
 		SpeedType SpeedType, bool ValidateReachability, MovementZone MovZone) const
 	{
-		CellStruct ret;
+		::Cell ret;
 		__PickCellOnEdge(&ret, Edge, CurrentLocation, Fallback, SpeedType, ValidateReachability, MovZone);
 		return ret;
 	}
@@ -348,27 +348,27 @@ public:
 	void Update_Pathfinding_1()
 		{ JMP_THIS(0x56C510); }
 
-	void Update_Pathfinding_2(const DynamicVectorClass<CellStruct> &where)
+	void Update_Pathfinding_2(const DynamicVectorClass<::Cell> &where)
 		{ JMP_THIS(0x586990); }
 
 	// Find nearest spot
-	CellStruct* __NearByLocation(CellStruct& retstr, const CellStruct &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const CellStruct &closeTo, bool a15, bool buildable)
+	::Cell* __NearByLocation(::Cell& retstr, const ::Cell &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const ::Cell &closeTo, bool a15, bool buildable)
 		{ JMP_THIS(0x56DC20); }
 
-	CellStruct NearByLocation(const CellStruct &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const CellStruct &closeTo, bool a15, bool buildable) {
-		CellStruct ret;
+	::Cell NearByLocation(const ::Cell &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const ::Cell &closeTo, bool a15, bool buildable) {
+		::Cell ret;
 		__NearByLocation(ret, position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, closeTo, a15, buildable);
 		return ret;
 	}
 
-	void  AddContentAt(CellStruct *coords, TechnoClass *Content)
+	void  AddContentAt(::Cell *coords, TechnoClass *Content)
 		{ JMP_THIS(0x5683C0); }
 
-	void  RemoveContentAt(CellStruct *coords, TechnoClass *Content)
+	void  RemoveContentAt(::Cell *coords, TechnoClass *Content)
 		{ JMP_THIS(0x5687F0); }
 
 
-	bool IsWithinUsableArea(const CellStruct& cell, bool checkLevel) const
+	bool IsWithinUsableArea(const ::Cell& cell, bool checkLevel) const
 		{ JMP_THIS(0x578460); }
 
 	bool IsWithinUsableArea(CellClass* pCell, bool checkLevel) const
@@ -377,13 +377,13 @@ public:
 	bool IsWithinUsableArea(const Coordinate& coords) const
 		{ JMP_THIS(0x5785F0); }
 
-	bool CoordinatesLegal(const CellStruct& cell) const
+	bool CoordinatesLegal(const ::Cell& cell) const
 		{ JMP_THIS(0x568300); }
 
-	bool IsLinkedBridgeDestroyed(const CellStruct& cell) const
+	bool IsLinkedBridgeDestroyed(const ::Cell& cell) const
 		{ JMP_THIS(0x587410); }
 
-	bool PlacePowerupCrate(CellStruct cell, Powerup type)
+	bool PlacePowerupCrate(::Cell cell, Powerup type)
 		{ JMP_THIS(0x56BEC0); }
 
 // ====================================
@@ -417,7 +417,7 @@ public:
 		Coordinate* Coords,
 		int Radius,
 		HouseClass* OwnerHouse,
-		CellStruct arg4,
+		::Cell arg4,
 		BYTE RevealByHeight,
 		BYTE arg6,
 		BYTE arg7,
@@ -440,7 +440,7 @@ public:
 		Coordinate* Coords,
 		int Radius,
 		HouseClass* OwnerHouse,
-		DWORD /*CellStruct*/ arg4,
+		DWORD /*::Cell*/ arg4,
 		BYTE RevealByHeight,
 		BYTE arg6,
 		BYTE arg7,
@@ -507,25 +507,25 @@ public:
 		{ JMP_THIS(0x5865F0); }
 
 	// returns false if visitor should wait for a gate to open, true otherwise
-	bool MakeTraversable(ObjectClass const* pVisitor, CellStruct const& cell) const
+	bool MakeTraversable(ObjectClass const* pVisitor, ::Cell const& cell) const
 		{ JMP_THIS(0x578AD0); }
 
-	void BuildingToFirestormWall(CellStruct const& cell,HouseClass* pHouse,BuildingTypeClass* pBldType)
+	void BuildingToFirestormWall(::Cell const& cell,HouseClass* pHouse,BuildingTypeClass* pBldType)
 		{ JMP_THIS(0x588570); }
 
-	void BuildingToWall(CellStruct const& cell, HouseClass* pHouse, BuildingTypeClass* pBldType)
+	void BuildingToWall(::Cell const& cell, HouseClass* pHouse, BuildingTypeClass* pBldType)
 		{ JMP_THIS(0x588750); }
 
 	// Called on wall state updates etc. when the wall hasn't been removed.
-	void RecalculateZones(CellStruct const& cell)
+	void RecalculateZones(::Cell const& cell)
 		{ JMP_THIS(0x56D5A0);}
 
 	// Called on wall state updates etc. when the wall HAS been removed.
-	void ResetZones(CellStruct const& cell)
+	void ResetZones(::Cell const& cell)
 	{ JMP_THIS(0x56D460); }
 
 	// Called on wall state updates etc
-	void RecalculateSubZones(CellStruct const& cell)
+	void RecalculateSubZones(::Cell const& cell)
 	{ JMP_THIS(0x584550); }
 
 
@@ -553,7 +553,7 @@ public:
 	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking1;
 	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking2;
 	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking3;
-	DynamicVectorClass<CellStruct> CellStructs1;
+	DynamicVectorClass<::Cell> CellStructs1;
 	RectangleStruct MapRect;
 	RectangleStruct VisibleRect;
 	int CellIterator_NextX;
@@ -571,5 +571,5 @@ public:
 	int MaxNumCells;
 	Crate Crates [0x100];
 	BOOL Redraws;
-	DynamicVectorClass<CellStruct> TaggedCells;
+	DynamicVectorClass<::Cell> TaggedCells;
 };

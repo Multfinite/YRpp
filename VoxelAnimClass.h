@@ -67,7 +67,7 @@ public:
     Layer InWhichLayer() const override JMP_THIS(0x74A960);
     ObjectTypeClass* GetType() const override JMP_THIS(0x74AB30);
     bool DrawIfVisible(RectangleStruct* pBounds, bool EvenIfCloaked, DWORD dwUnk3) const override JMP_THIS(0x749B20);
-    CellStruct const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x74AB40);
+    ::Cell const* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x74AB40);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x749B70);
 
 /*

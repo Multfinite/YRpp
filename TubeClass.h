@@ -26,8 +26,8 @@ public:
 	DEFINE_REFERENCE(DynamicVectorClass<TubeClass*>, Array, 0x8B4138u)
 
 public:
-	CellStruct EnterCell;
-	CellStruct ExitCell;
+	::Cell EnterCell;
+	::Cell ExitCell;
 	int ExitFace;
 	int Faces[100];
 	int FaceCount;
@@ -54,7 +54,7 @@ protected:
 	explicit __forceinline TubeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t {}) { }
 
 public:
-	TubeClass(CellStruct* cell, int32_t facing) noexcept : TubeClass(fake_noinit_t{}) JMP_THIS(0x727FD0);
+	TubeClass(::Cell* cell, int32_t facing) noexcept : TubeClass(fake_noinit_t{}) JMP_THIS(0x727FD0);
 	TubeClass(noinit_t) noexcept : TubeClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(TubeClass) == TubeClass::ClassSize);

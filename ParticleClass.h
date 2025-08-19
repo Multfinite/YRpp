@@ -109,7 +109,7 @@ public:
    
     Layer InWhichLayer() const override JMP_THIS(0x62D770);
     ObjectTypeClass* GetType() const override JMP_THIS(0x62D990);
-    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x62D710);
+    ::Cell* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x62D710);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x62CEC0);
     bool Mark(MarkType mark) override JMP_THIS(0x62D6F0);
     

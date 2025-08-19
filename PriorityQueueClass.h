@@ -135,14 +135,14 @@ public:
 struct PriorityQueueClassNode
 {
 	static int __fastcall SurfaceDataCount() JMP_STD(0x42B1F0);
-	static int __fastcall ToSurfaceIndex(const CellStruct& mapCoord) JMP_STD(0x42B1C0);
+	static int __fastcall ToSurfaceIndex(const ::Cell& mapCoord) JMP_STD(0x42B1C0);
 
 	int ToSurfaceIndex()
 	{
 		return ToSurfaceIndex(MapCoord);
 	}
 
-	CellStruct MapCoord;
+	::Cell MapCoord;
 	float Score;
 
 	bool operator<(const PriorityQueueClassNode& another) const

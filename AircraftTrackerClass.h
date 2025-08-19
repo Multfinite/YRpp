@@ -26,13 +26,13 @@ public:
 	TechnoClass* Get() JMP_THIS(0x4137A0)
 
 	void Add(TechnoClass* entry) JMP_THIS(0x4134A0)
-	void AI(TechnoClass* entry, CellStruct oldPos, CellStruct newPos) JMP_THIS(0x4138C0)
+	void AI(TechnoClass* entry, ::Cell oldPos, ::Cell newPos) JMP_THIS(0x4138C0)
 	void Remove(TechnoClass* entry) JMP_THIS(0x4135D0)
 
 	bool Clear() { JMP_THIS(0x413800) }
 
 	bool IsJumpjet(TechnoClass* entry) JMP_THIS(0x4135A0)
-	int GetVectorIndex(CellStruct pos) JMP_THIS(0x412AC0)
+	int GetVectorIndex(::Cell pos) JMP_THIS(0x412AC0)
 
 	// TODO write other entries
 

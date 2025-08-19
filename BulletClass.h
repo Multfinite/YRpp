@@ -72,7 +72,7 @@ public:
     WeaponTypeClass* WeaponType;
     Coordinate SourceCoords;
     Coordinate TargetCoords;
-    CellStruct LastMapCoords;
+    ::Cell LastMapCoords;
     int DamageMultiplier;
     AnimClass* NextAnim;
     bool SpawnNextAnim;
@@ -96,7 +96,7 @@ public:
     
     Layer InWhichLayer() const override JMP_THIS(0x468B90);
     ObjectTypeClass* GetType() const override JMP_THIS(0x46B5B0);
-    CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x466660);
+    ::Cell* GetFoundationData(bool placement) const override JMP_THIS(0x466660);
     void DrawIt(Point2D* location, RectangleStruct* bounds) const override JMP_THIS(0x468090);
     bool Mark(MarkType mark) override JMP_THIS(0x4666C0);
 
@@ -109,7 +109,7 @@ public:
     void Explode(bool destroy = false) JMP_THIS(0x468D80);
     void Detonate(const Coordinate& coords) JMP_THIS(0x4690B0);
     void Shrapnel() JMP_THIS(0x46A310);
-    static void ApplyRadiationToCell(CellStruct cell, int radius, int amount) JMP_STD(0x46ADE0);
+    static void ApplyRadiationToCell(::Cell cell, int radius, int amount) JMP_STD(0x46ADE0);
     void LoseTarget() JMP_THIS(0x468430);
     void InitScalable() JMP_THIS(0x46B280);
     void NukeMaker() JMP_THIS(0x46B310);

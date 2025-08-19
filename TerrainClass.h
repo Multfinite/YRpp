@@ -76,7 +76,7 @@ protected:
     explicit __forceinline TerrainClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-    TerrainClass(TerrainTypeClass* tt, CellStruct coords) : TerrainClass(fake_noinit_t{})
+    TerrainClass(TerrainTypeClass* tt, ::Cell coords) : TerrainClass(fake_noinit_t{})
         JMP_THIS(0x71BB90);
     TerrainClass() : TerrainClass(fake_noinit_t{})
         JMP_THIS(0x71BDF0);

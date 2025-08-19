@@ -74,7 +74,7 @@ IHouse : IUnknown
 	virtual long __stdcall				Power_Drain() const = 0;
 	virtual long __stdcall				Category_Quantity(Category category) const = 0;
 	virtual long __stdcall				Category_Power(Category category) const = 0;
-	virtual CellStruct __stdcall		Base_Center() const = 0;
+	virtual ::Cell __stdcall		Base_Center() const = 0;
 	virtual HRESULT __stdcall			Fire_Sale() const = 0;
 	virtual HRESULT __stdcall			All_To_Hunt() = 0;
 };
@@ -88,7 +88,7 @@ IPublicHouse : IUnknown
 	virtual BSTR __stdcall			Name() const = 0;
 	virtual long __stdcall			Apparent_Category_Quantity(Category category) const = 0;
 	virtual long __stdcall			Apparent_Category_Power(Category category) const = 0;
-	virtual CellStruct __stdcall	Apparent_Base_Center() const = 0;
+	virtual ::Cell __stdcall	Apparent_Base_Center() const = 0;
 	virtual bool __stdcall			Is_Powered() const = 0;
 };
 
@@ -142,7 +142,7 @@ IEnumConnectionPoints : IUnknown
 __interface __declspec(uuid("96F02EC7-6FE8-11D1-B6FD-00A024DDAFD1"))
 IGameMap : IUnknown
 {
-	virtual long __stdcall Is_Visible(CellStruct cell) = 0;
+	virtual long __stdcall Is_Visible(::Cell cell) = 0;
 };
 
 _COM_SMARTPTR_TYPEDEF(IGameMap, __uuidof(IGameMap));
@@ -185,7 +185,7 @@ ILocomotion : IUnknown
 	virtual Coordinate __stdcall Head_To_Coord() = 0;
 
 	// Determine if specific cell can be entered.
-	virtual Move __stdcall Can_Enter_Cell(CellStruct cell) = 0;
+	virtual Move __stdcall Can_Enter_Cell(::Cell cell) = 0;
 
 	// Should object cast a shadow?
 	virtual bool __stdcall Is_To_Have_Shadow() = 0;

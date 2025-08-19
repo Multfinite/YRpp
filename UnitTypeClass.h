@@ -83,7 +83,7 @@ public:
 	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x747EB0);
 	Point3D* __PixelDimensions(Point3D& retstr) const override JMP_THIS(0x747590);
 	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x7475D0);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x7474B0);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x7474B0);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x747560);
 	
 	bool CanUseWaypoint() const override JMP_THIS(0x7473C0);

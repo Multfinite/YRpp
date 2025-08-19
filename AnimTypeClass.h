@@ -122,7 +122,7 @@ public:
 	int GetArrayIndex() const override JMP_THIS(0x428E60);
 	void LoadTheaterSpecificArt(TheaterType th_type) override JMP_THIS(0x427A80);
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x427D00);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x428E80);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x428E80);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x428E90);
 	SHPStruct* GetImage() const override JMP_THIS(0x428C30);
 	

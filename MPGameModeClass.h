@@ -225,11 +225,11 @@ public:
 	virtual void CreateMPTeams(DynamicVectorClass<MPTeam> *vecTeams)
 		{ JMP_THIS(0x5D6690); }
 
-	virtual CellStruct * __AssignStartingPositionsToHouse(CellStruct& retstr, int idxHouse,
-		DynamicVectorClass<CellStruct> *vecCoords, byte *housesSatisfied)
+	virtual ::Cell * __AssignStartingPositionsToHouse(::Cell& retstr, int idxHouse,
+		DynamicVectorClass<::Cell> *vecCoords, byte *housesSatisfied)
 		{ JMP_THIS(0x5D6890); }
 	Cell AssignStartingPositionsToHouse(int idxHouse,
-		DynamicVectorClass<CellStruct>* vecCoords, byte* housesSatisfied)
+		DynamicVectorClass<::Cell>* vecCoords, byte* housesSatisfied)
 	{
 		Cell ret;
 		__AssignStartingPositionsToHouse(ret, idxHouse, vecCoords, housesSatisfied);

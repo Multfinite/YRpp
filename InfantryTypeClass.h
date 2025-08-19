@@ -108,9 +108,9 @@ public:
 
 	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x5247D0);
 	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x524760);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x523B40);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x523B10);
-	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x523C20);
+	::Cell* GetFoundationData(bool placement) const override JMP_THIS(0x523C20);
 
 	bool CanUseWaypoint() const override JMP_THIS(0x5247B0);
 	bool CanAttackMove() const override JMP_THIS(0x5247C0);

@@ -51,7 +51,7 @@ struct ZoneInfoStruct
 struct StartingTechnoStruct
 {
 	TechnoTypeClass *  Unit;
-	CellStruct         Cell;
+	::Cell         Cell;
 };
 
 // that's how WW calls it, seems to track levels of how much it hates other houses... typical ww style, with bugs
@@ -96,7 +96,7 @@ public:
 	}
 
 	int        BuildingTypeIndex;
-	CellStruct MapCoords;
+	::Cell MapCoords;
 	bool       Placed;
 	int        Attempts;
 };
@@ -129,9 +129,9 @@ public:
 	//Properties
 	DECLARE_PROPERTY(DynamicVectorClass<BaseNodeClass>, BaseNodes);
 	int PercentBuilt;
-	DECLARE_PROPERTY(DynamicVectorClass<CellStruct>, Cells_24);
-	DECLARE_PROPERTY(DynamicVectorClass<CellStruct>, Cells_38);
-	CellStruct Center;
+	DECLARE_PROPERTY(DynamicVectorClass<::Cell>, Cells_24);
+	DECLARE_PROPERTY(DynamicVectorClass<::Cell>, Cells_38);
+	::Cell Center;
 
 	PROTECTED_PROPERTY(BYTE, unknown_54[0x20]);
 
@@ -362,15 +362,15 @@ public:
 	BYTE                  unknown_53DA;
 	BYTE                  unknown_53DB;
 	UnitClass* OurFlagCarrier;
-	CellStruct            OurFlagCoords;
+	::Cell            OurFlagCoords;
 	//for endgame score screen
 	int                   KilledUnitsOfHouses[20];     // 20 Houses only!
 	int                   TotalKilledUnits;
 	int                   KilledBuildingsOfHouses[20]; // 20 Houses only!
 	int                   TotalKilledBuildings;
 	int                   WhoLastHurtMe;
-	CellStruct            BaseSpawnCell;
-	CellStruct            BaseCenter; // set by map action 137 and 138
+	::Cell            BaseSpawnCell;
+	::Cell            BaseCenter; // set by map action 137 and 138
 	int                   Radius;
 	DECLARE_PROPERTY_ARRAY(ZoneInfoStruct, ZoneInfos, 5);
 	int                   LATime;
@@ -380,9 +380,9 @@ public:
 	IndexBitfield<HouseClass*> RadarVisibleTo;  // this crap is being rewritten to use house indices instead of house types
 	int                   SiloMoney;
 	QuarryType            PreferredTargetType; // Set via map action 35. The preferred object type to attack.
-	CellStruct            PreferredTargetCell; // Set via map action 135 and 136. Used to override firing location of targettable SWs.
-	CellStruct            PreferredDefensiveCell; // Set via map action 140 and 141, or when an AIDefendAgainst SW is launched.
-	CellStruct            PreferredDefensiveCell2; // No known function sets this to a real value, but it would take precedence over the other.
+	::Cell            PreferredTargetCell; // Set via map action 135 and 136. Used to override firing location of targettable SWs.
+	::Cell            PreferredDefensiveCell; // Set via map action 140 and 141, or when an AIDefendAgainst SW is launched.
+	::Cell            PreferredDefensiveCell2; // No known function sets this to a real value, but it would take precedence over the other.
 	int                   PreferredDefensiveCellStartTime; // The frame the PreferredDefensiveCell was set. Used to fire the Force Shield.
 
 	// Used for: Counting objects ever owned
@@ -439,8 +439,8 @@ public:
 	bool                  SpySatActive;
 	bool                  IsBeingDrained;
 	Edge                  Edge;
-	CellStruct            EMPTarget;
-	CellStruct            NukeTarget;
+	::Cell            EMPTarget;
+	::Cell            NukeTarget;
 	IndexBitfield<HouseClass*> Allies; // flags, one bit per HouseClass instance
 	//                                 //-> 32 players possible here
 	DECLARE_PROPERTY(CDTimerClass, DamageDelayTimer);
@@ -461,7 +461,7 @@ public:
 	union
 	{
 		int               StartingPoint;
-		CellStruct        StartingCell;     // Could it really be a CellStruct ? - Saved for backwards compatibility
+		::Cell        StartingCell;     // Could it really be a ::Cell ? - Saved for backwards compatibility
 	};
 	IndexBitfield<HouseClass*> StartingAllies;
 	DWORD                 unknown_16060;
@@ -488,7 +488,7 @@ public:
 
 	long __stdcall Apparent_Category_Quantity(Category category) const override JMP_STD(0x4F6A80);
 	long __stdcall Apparent_Category_Power(Category category) const override JMP_STD(0x4F6B50);
-	CellStruct __stdcall Apparent_Base_Center() const override JMP_STD(0x4F6D10);
+	::Cell __stdcall Apparent_Base_Center() const override JMP_STD(0x4F6D10);
 	bool __stdcall Is_Powered() const override JMP_STD(0x4F6910);
 
 	long __stdcall ID_Number() const override JMP_STD(0x4F6E60);
@@ -500,7 +500,7 @@ public:
 	long __stdcall Power_Drain() const override JMP_STD(0x4F6A10);
 	long __stdcall Category_Quantity(Category category) const override JMP_STD(0x4F6A20);
 	long __stdcall Category_Power(Category category) const override JMP_STD(0x4F6AE0);
-	CellStruct __stdcall Base_Center() const override JMP_STD(0x4F6BC0);
+	::Cell __stdcall Base_Center() const override JMP_STD(0x4F6BC0);
 	HRESULT __stdcall Fire_Sale() const override JMP_STD(0x5013A0);
 	HRESULT __stdcall All_To_Hunt() override JMP_STD(0x501400);
 	
@@ -739,7 +739,7 @@ public:
 		return -1;
 	}
 
-	WaypointClass * GetPlanningWaypointAt(CellStruct *coords)
+	WaypointClass * GetPlanningWaypointAt(::Cell *coords)
 		{ JMP_THIS(0x5023B0); }
 	bool GetPlanningWaypointProperties(WaypointClass *wpt, int &idxPath, BYTE &idxWP)
 		{ JMP_THIS(0x502460); }
@@ -940,19 +940,19 @@ public:
 	void AI_TryFireSW()
 		{ JMP_THIS(0x5098F0); }
 
-	bool Fire_SW(int idx, const CellStruct &coords)
+	bool Fire_SW(int idx, const ::Cell &coords)
 		{ JMP_THIS(0x4FAE50); }
 
-	CellStruct* __PickTargetByType(CellStruct& retstr, QuarryType targetType) const JMP_THIS(0x50D170);
-	CellStruct PickTargetByType(QuarryType targetType) const {
-		CellStruct ret;
+	::Cell* __PickTargetByType(::Cell& retstr, QuarryType targetType) const JMP_THIS(0x50D170);
+	::Cell PickTargetByType(QuarryType targetType) const {
+		::Cell ret;
 		this->__PickTargetByType(ret, targetType);
 		return ret;
 	}
 
-	CellStruct* PickIonCannonTarget(CellStruct& retstr) const JMP_THIS(0x50CBF0); 
-	CellStruct PickIonCannonTarget() const {
-		CellStruct ret;
+	::Cell* PickIonCannonTarget(::Cell& retstr) const JMP_THIS(0x50CBF0); 
+	::Cell PickIonCannonTarget() const {
+		::Cell ret;
 		this->PickIonCannonTarget(ret);
 		return ret;
 	}
@@ -962,7 +962,7 @@ public:
 	void UpdateFlagCoords(UnitClass *NewCarrier, DWORD dwUnk)
 		{ JMP_THIS(0x4FBE40); }
 
-	void DroppedFlag(CellStruct *Where, UnitClass *Who)
+	void DroppedFlag(::Cell *Where, UnitClass *Who)
 		{ JMP_THIS(0x4FBF60); }
 
 	char PickedUpFlag(UnitClass *Who, DWORD dwUnk)
@@ -974,8 +974,8 @@ public:
 	void SetPrimaryFactory(FactoryClass* pFactory, AbstractType absID, bool naval, BuildCat buildCat)
 		{ JMP_THIS(0x500850); }
 
-	const CellStruct& GetBaseCenter() const {
-		if(this->BaseCenter != CellStruct::Empty) {
+	const ::Cell& GetBaseCenter() const {
+		if(this->BaseCenter != ::Cell::Empty) {
 			return this->BaseCenter;
 		} else {
 			return this->BaseSpawnCell;

@@ -68,13 +68,13 @@ using NextTeamMember = ListEnumerator<FootClass, &FootClass::NextTeamMember>;
 class CellRectEnumerator
 {
 	LTRBStruct bounds;
-	CellStruct current;
+	::Cell current;
 
 public:
 	CellRectEnumerator(LTRBStruct const bounds)
 		: bounds(bounds), current()
 	{
-		current = CellStruct{
+		current = ::Cell{
 			static_cast<short>(bounds.Left),
 			static_cast<short>(bounds.Top) };
 	}
@@ -83,7 +83,7 @@ public:
 		return current.Y <= bounds.Bottom;
 	}
 
-	const CellStruct& operator * () const {
+	const ::Cell& operator * () const {
 		return current;
 	}
 
@@ -119,11 +119,11 @@ protected:
 class CellRangeEnumerator
 {
 	CellRectEnumerator inner;
-	CellStruct center;
+	::Cell center;
 	double radius_sqr;
 
 public:
-	CellRangeEnumerator(CellStruct const center, double const radius)
+	CellRangeEnumerator(::Cell const center, double const radius)
 		: center(center), radius_sqr(radius * radius),
 		inner(convert(center, radius))
 	{
@@ -134,7 +134,7 @@ public:
 		return inner != false;
 	}
 
-	const CellStruct& operator * () const {
+	const ::Cell& operator * () const {
 		return *inner;
 	}
 
@@ -150,7 +150,7 @@ public:
 	}
 
 protected:
-	static LTRBStruct convert(CellStruct const center, double const radius) {
+	static LTRBStruct convert(::Cell const center, double const radius) {
 		auto const range = static_cast<int>(std::floor(radius + 0.99)) * 2 + 1;
 
 		auto const topleft = Point2D{
@@ -197,7 +197,7 @@ protected:
 */
 class CellSpreadEnumerator
 {
-	CellStruct current;
+	::Cell current;
 	size_t spread;
 	size_t curspread;
 	bool hasTwo;
@@ -206,7 +206,7 @@ class CellSpreadEnumerator
 public:
 	static const size_t Max = 0x100u;
 
-	CellSpreadEnumerator(size_t spread, size_t start=0u) : current(CellStruct()), spread(spread), curspread(0u), hasTwo(false), hadTwo(false) {
+	CellSpreadEnumerator(size_t spread, size_t start=0u) : current(::Cell()), spread(spread), curspread(0u), hasTwo(false), hadTwo(false) {
 		if(spread > Max) {
 			spread = Max;
 		}
@@ -218,7 +218,7 @@ public:
 		return curspread <= spread;
 	}
 
-	const CellStruct& operator * () const {
+	const ::Cell& operator * () const {
 		return current;
 	}
 
@@ -248,7 +248,7 @@ protected:
 
 		// center or top-right-most cell finishes this
 		// round. move to the start of the next one.
-		if((current == CellStruct::Empty) || (current.X == 1 && current.Y == static_cast<short>(curspread))) {
+		if((current == ::Cell::Empty) || (current.X == 1 && current.Y == static_cast<short>(curspread))) {
 			reset(curspread + 1);
 			return *this;
 		}
@@ -312,15 +312,15 @@ protected:
 */
 class CellSequenceEnumerator
 {
-	CellStruct current;
-	CellStruct end;
-	CellStruct offset;
-	CellStruct distance;
+	::Cell current;
+	::Cell end;
+	::Cell offset;
+	::Cell distance;
 	int value;
 	bool valid;
 
 public:
-	CellSequenceEnumerator(const CellStruct& start, const CellStruct& end) :
+	CellSequenceEnumerator(const ::Cell& start, const ::Cell& end) :
 		current(start),
 		end(end),
 		valid(true)
@@ -345,7 +345,7 @@ public:
 		return valid;
 	}
 
-	const CellStruct& operator * () const {
+	const ::Cell& operator * () const {
 		return current;
 	}
 

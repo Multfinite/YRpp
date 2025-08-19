@@ -34,7 +34,7 @@ public:
     LightSourceClass* LightSource;
     DECLARE_PROPERTY(CDTimerClass, RadLevelTimer);
     DECLARE_PROPERTY(CDTimerClass, RadLightTimer);
-    CellStruct BaseCell;
+    ::Cell BaseCell;
     int Spread;
     int SpreadInLeptons;
     int RadLevel;
@@ -66,9 +66,9 @@ public:
     void DecreaseLight() JMP_THIS(0x65BE90);
     void Add(int nRadLevel) JMP_THIS(0x65B530);
     int GetRadLevel() JMP_THIS(0x65B510);
-    int GetRadLevelAt(CellStruct* pCell) JMP_THIS(0x65B8F0);
+    int GetRadLevelAt(::Cell* pCell) JMP_THIS(0x65B8F0);
     void SetRadLevel(int nRadLevel) JMP_THIS(0x65B4F0);
-    void SetBaseCell(CellStruct* pCell) JMP_THIS(0x65B4C0);
+    void SetBaseCell(::Cell* pCell) JMP_THIS(0x65B4C0);
     void GetSpread() JMP_THIS(0x65B4B0);
     void SetSpread(int nCells) JMP_THIS(0x65B4D0);
 
@@ -84,7 +84,7 @@ protected:
 
 public:
     RadSiteClass() : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B1E0);
-    RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) : RadSiteClass()
+    RadSiteClass(::Cell nBaseCoords, int nSpread, int nRadLevel) : RadSiteClass()
     {
         SetBaseCell(&nBaseCoords);
         SetSpread(nSpread);

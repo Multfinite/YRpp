@@ -57,7 +57,7 @@ public:
     int Size() const override JMP_THIS(0x4D27C0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4D2810);
 
-    virtual CellStruct Get_Cell() const JMP_THIS(0x4D28D0);
+    virtual ::Cell Get_Cell() const JMP_THIS(0x4D28D0);
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline FoggedObjectClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}

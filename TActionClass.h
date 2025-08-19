@@ -89,7 +89,7 @@ public:
 
 	// main brain, returns whether succeeded (mostly, no consistency in results what so ever)
 	// trigger fires all actions regardless of result of this
-	bool Execute(HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+	bool Execute(HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, ::Cell const& location)
 		JMP_THIS(0x6DD8B0);
 
 	// BIG LIST OF EXECUTE'S SLAVE FUNCTIONS - feel free to use
@@ -98,7 +98,7 @@ public:
 	// Ergo, hooking into them by their address will not always override builtin handling.
 	// If you need to know which are inlined, poke me.
 #define ACTION_FUNC(name, addr) \
-	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, CellStruct const& location) JMP_THIS(addr);
+	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, ::Cell const& location) JMP_THIS(addr);
 
 	ACTION_FUNC(LightningStrikeAt, 0x6E0050);
 	ACTION_FUNC(RemoveParticleSystemsAt, 0x6E0080);

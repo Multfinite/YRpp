@@ -54,7 +54,7 @@ protected:
     explicit __forceinline IsometricTileClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-    IsometricTileClass(int idxType, CellStruct const& location) : IsometricTileClass(fake_noinit_t{}) JMP_THIS(0x543780);
+    IsometricTileClass(int idxType, ::Cell const& location) : IsometricTileClass(fake_noinit_t{}) JMP_THIS(0x543780);
     IsometricTileClass(noinit_t) noexcept : IsometricTileClass(fake_noinit_t{}) { vtables.init(this); }
 };
 static_assert(sizeof(IsometricTileClass) == IsometricTileClass::ClassSize);

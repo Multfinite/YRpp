@@ -32,7 +32,7 @@ public:
     TagTypeClass* Type;
     TriggerClass* FirstTrigger;
     int InstanceCount;
-    CellStruct DefaultCoords;
+    ::Cell DefaultCoords;
     bool Destroyed;
     bool IsExecuting;
     PROTECTED_PROPERTY(BYTE, padding_36[2]);
@@ -57,7 +57,7 @@ public:
     void GlobalChanged(int idxGlobal) JMP_THIS(0x6E55A0);
     void LocalChanged(int idxLocal) JMP_THIS(0x6E55B0);
     bool IsOnlyInstanceOfType() const JMP_THIS(0x6E5850);
-    bool RaiseEvent(TriggerEvent event, ObjectClass* pTagOwner, CellStruct location, bool forceAllOccured = false, TechnoClass* pSource = nullptr) JMP_THIS(0x6E53A0);
+    bool RaiseEvent(TriggerEvent event, ObjectClass* pTagOwner, ::Cell location, bool forceAllOccured = false, TechnoClass* pSource = nullptr) JMP_THIS(0x6E53A0);
     bool ShouldReplace() const JMP_THIS(0x6E57C0);
     void Destroy() JMP_THIS(0x6E5230);
     void AddTrigger(TriggerClass* pTrigger) JMP_THIS(0x6E55C0);

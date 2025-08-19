@@ -19,7 +19,7 @@ using CoordStruct = Coordinate;
 
 struct BasePlanningCell {
 	int Weight;
-	CellStruct Position;
+	::Cell Position;
 };
 
 // this crap is used in several Base planning routines
@@ -47,12 +47,12 @@ struct __declspec(align(4)) VoxelCalcStruct
 
 struct __declspec(align(4)) PathType
 {
-	CellStruct Start;
+	::Cell Start;
 	int Cost;
 	int Length;
 	FacingType* Command;
 	int field_10;
 	int* Overlap;
-	CellStruct LastOverlap;
-	CellStruct LastFixup;
+	::Cell LastOverlap;
+	::Cell LastFixup;
 };

@@ -69,7 +69,7 @@ public:
 	}
 
 	// Sellcell
-	explicit EventClass(int houseIndex, EventType eventType, const CellStruct& cell)
+	explicit EventClass(int houseIndex, EventType eventType, const ::Cell& cell)
 	{
 		JMP_THIS(0x4C6650);
 	}
@@ -81,7 +81,7 @@ public:
 	}
 
 	// Anim
-	explicit EventClass(int houseIndex, int anim_id, HouseClass* pHouse, const CellStruct& cell)
+	explicit EventClass(int houseIndex, int anim_id, HouseClass* pHouse, const ::Cell& cell)
 	{
 		JMP_THIS(0x4C6800);
 	}
@@ -117,13 +117,13 @@ public:
 	}
 
 	// Place
-	explicit EventClass(int houseIndex, EventType eventType, AbstractType rttitype, int heapid, int is_naval, const CellStruct& cell)
+	explicit EventClass(int houseIndex, EventType eventType, AbstractType rttitype, int heapid, int is_naval, const ::Cell& cell)
 	{
 		JMP_THIS(0x4C6AE0);
 	}
 
 	// SpecialPlace
-	explicit EventClass(int houseIndex, EventType eventType, int id, const CellStruct& cell)
+	explicit EventClass(int houseIndex, EventType eventType, int id, const ::Cell& cell)
 	{
 		JMP_THIS(0x4C6B60);
 	}
@@ -235,7 +235,7 @@ public:
 			AbstractType RTTIType;
 			int HeapID;
 			int IsNaval;
-			CellStruct Location;
+			::Cell Location;
 		} Place;
 
 		struct OPTIONS
@@ -282,7 +282,7 @@ public:
 		struct SPECIAL_PLACE
 		{
 			int ID;
-			CellStruct Location;
+			::Cell Location;
 		} SpecialPlace;
 
 		struct EXIT
@@ -312,7 +312,7 @@ public:
 		// Used to sell walls
 		struct SELLCELL
 		{
-			CellStruct Location;
+			::Cell Location;
 		} SellCell;
 
 		// Update the special control flags. This is necessary so that in a multiplayer

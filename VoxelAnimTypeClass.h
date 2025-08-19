@@ -77,7 +77,7 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x74B690);
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x74B050);
-    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x74BA10);
+    bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x74BA10);
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x74BA20);
 
 /*

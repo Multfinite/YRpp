@@ -57,10 +57,10 @@ public:
 		// 	m_ID = 0;
 		// }
 	}
-	explicit TargetClass(const CellStruct& cell)
+	explicit TargetClass(const ::Cell& cell)
 	{
 		JMP_THIS(0x6E6B20);
-		// if (cell == CellStruct::Empty)
+		// if (cell == ::Cell::Empty)
 		// 	m_RTTI = 0;
 		// else
 		// {
@@ -94,7 +94,7 @@ public:
 	// 		if (m_RTTI != static_cast<int>(AbstractType::Cell))
 	// 			return nullptr;
 	//
-	// 		CellStruct cell { m_ID % 1000,m_ID / 1000 };
+	// 		::Cell cell { m_ID % 1000,m_ID / 1000 };
 	// 		return MapClass::Instance->GetCellAt(cell);
 	// 	}
 	// 	else

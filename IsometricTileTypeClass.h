@@ -71,9 +71,9 @@ public:
     int GetArrayIndex() const override JMP_THIS(0x54A160);
    
     Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x549B50);
-    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
+    bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x549AA0);
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x549AE0);
-    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x544D30);
+    ::Cell* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x544D30);
     SHPStruct* GetImage() const override JMP_THIS(0x544CB0);
 
 /*

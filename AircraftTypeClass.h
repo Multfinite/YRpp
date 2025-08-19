@@ -52,9 +52,9 @@ public:
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x41CC20);
 
 	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x41CBF0);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x41CBE0);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x41CBE0);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x41CB20);
-	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x41CB70);
+	::Cell* GetFoundationData(bool placement) const override JMP_THIS(0x41CB70);
 
 	bool CanUseWaypoint() const override JMP_THIS(0x41CB50);
 	bool CanAttackMove() const override JMP_THIS(0x41CB60);

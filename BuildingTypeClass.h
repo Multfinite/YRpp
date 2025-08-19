@@ -50,7 +50,7 @@ public:
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
 public:
 	int ArrayIndex;
-	CellStruct* FoundationData;
+	::Cell* FoundationData;
 	SHPStruct* Buildup;
 	bool BuildupLoaded;
 	BuildCat BuildCat;
@@ -85,7 +85,7 @@ public:
 	AbstractType Factory;
 	Coordinate TargetCoordOffset;
 	Coordinate ExitCoord;
-	CellStruct* FoundationOutside;
+	::Cell* FoundationOutside;
 	int field_ED8;
 	int DeployFacing;
 	int PowerBonus;
@@ -273,15 +273,15 @@ public:
 	int GetPipMax() const override JMP_THIS(0x45ECE0);
 	Point3D* __PixelDimensions(Point3D& retstr) const override JMP_THIS(0x45EBD0);
 	Point3D* __LeptonDimensions(Point3D& retstr) const override JMP_THIS(0x464AF0);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x45E800);
 	int GetActualCost(HouseClass* pHouse) const override JMP_THIS(0x45EDD0);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x45E880);
-	CellStruct* GetFoundationData(bool placement) const override JMP_THIS(0x45EC20);
+	::Cell* GetFoundationData(bool placement) const override JMP_THIS(0x45EC20);
 	SHPStruct* GetImage() const override JMP_THIS(0x45F040);
 
 	bool CanUseWaypoint() const override JMP_THIS(0x465910);
 	bool CanAttackMove() const override JMP_THIS(0x465920);
-	bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const override JMP_THIS(0x464AC0);
+	bool CanCreateHere(const ::Cell& mapCoords, HouseClass* pOwner) const override JMP_THIS(0x464AC0);
 	int GetCost() const override JMP_THIS(0x45ED50);
 
 	virtual SHPStruct* LoadBuildup() JMP_THIS(0x465960);

@@ -40,7 +40,7 @@ public:
     bool IsFlammable;
     bool IsAnimated;
     bool IsVeinhole;
-    CellStruct* FoundationData;
+    ::Cell* FoundationData;
 
 public:
     virtual ~TerrainTypeClass() JMP_THIS(0x71DC00);
@@ -57,9 +57,9 @@ public:
     int GetArrayIndex() const override JMP_THIS(0x71E350);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x71DEA0);
     Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x71E0D0);
-    bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
+    bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x71DDD0);
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x71DE10);
-    CellStruct* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x71DE40);
+    ::Cell* GetFoundationData(bool includeBib = false) const override JMP_THIS(0x71DE40);
 
     static TerrainTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x71E2A0);
 /*

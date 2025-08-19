@@ -92,7 +92,7 @@ public:
 	
 	bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x46BEE0);
 	Coordinate* __FixupCoord(Coordinate& retstr, Coordinate& coord) const override JMP_THIS(0x46C4F0);
-	bool SpawnAtMapCoords(CellStruct& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
+	bool SpawnAtMapCoords(::Cell& position, HouseClass* pOwner) override JMP_THIS(0x46C870);
 	ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x46C880);
 
 	bool Rotates() const { return !this->NoRotate; }

@@ -28,7 +28,7 @@ public:
     DEFINE_REFERENCE(DynamicVectorClass<EMPulseClass*>, Array, 0x8A3870u)
 
 public:
-    CellStruct BaseCoords;
+    ::Cell BaseCoords;
     int Spread;
     int CreationTime;
     int Duration;
@@ -55,7 +55,7 @@ protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline EMPulseClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 public:
-    EMPulseClass(CellStruct dwCrd, int nSpread, int nDuration, TechnoClass* pGenerator) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C52B0);
+    EMPulseClass(::Cell dwCrd, int nSpread, int nDuration, TechnoClass* pGenerator) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C52B0);
     EMPulseClass() : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C5370);
     EMPulseClass(noinit_t) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C53B0);
 };

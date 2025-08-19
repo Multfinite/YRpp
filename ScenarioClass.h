@@ -112,11 +112,11 @@ public:
 	bool IsDefinedWaypoint(int idx)
 		{ JMP_THIS(0x68BD80); }
 
-	CellStruct * __GetWaypointCoords(CellStruct *retstr, int idx)
+	::Cell * __GetWaypointCoords(::Cell *retstr, int idx)
 		{ JMP_THIS(0x68BCC0); }
 
-	CellStruct GetWaypointCoords(int idx) {
-		CellStruct ret;
+	::Cell GetWaypointCoords(int idx) {
+		::Cell ret;
 		__GetWaypointCoords(&ret, idx);
 		return ret;
 	}
@@ -131,8 +131,8 @@ public:
 	ScenarioFlags SpecialFlags;
 	char NextScenario [0x104];
 	char AltNextScenario [0x104];
-	int HomeCell; //CellStruct?
-	int AltHomeCell; //CellStruct?
+	int HomeCell; //::Cell?
+	int AltHomeCell; //::Cell?
 	int UniqueID; //defaults to 1,000,000 - random salt for this game's communications
 	Randomizer Random; //218
 	DWORD Difficulty1;
@@ -141,7 +141,7 @@ public:
 	CDTimerClass PauseTimer;
 	DWORD unknown_62C;
 	bool IsGamePaused;
-	CellStruct Waypoints [702];
+	::Cell Waypoints [702];
 
 	//Map Header
 	int StartX;
@@ -151,7 +151,7 @@ public:
 	int NumberStartingPoints;
 	Point2D StartingPoints [0x8];
 	int HouseIndices [0x10]; // starting position => HouseClass::Array->GetItem(#)
-	CellStruct HouseHomeCells [0x8];
+	::Cell HouseHomeCells [0x8];
 	bool TeamsPresent;
 	int NumCoopHumanStartSpots;
 	CDTimerClass MissionTimer;
@@ -189,10 +189,10 @@ public:
 	Variable GlobalVariables [50];
 	Variable LocalVariables [100];
 
-	CellStruct View1;
-	CellStruct View2;
-	CellStruct View3;
-	CellStruct View4;
+	::Cell View1;
+	::Cell View2;
+	::Cell View3;
+	::Cell View4;
 	DWORD unknown_34A0;
 	bool FreeRadar; //34A4
 	bool TrainCrate;

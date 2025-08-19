@@ -79,7 +79,7 @@ public:
     
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x721A50);
 
-    void RegisterForGrowth(CellStruct* cell) JMP_THIS(0x7235A0);
+    void RegisterForGrowth(::Cell* cell) JMP_THIS(0x7235A0);
 
 /*
     void Delete_Growth_Data() JMP_THIS(0x723510);
