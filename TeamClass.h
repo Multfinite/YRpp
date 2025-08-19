@@ -31,44 +31,51 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F4730;
     static constexpr size_t ClassSize = 0xA0;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<TeamClass*>, Array, 0x8B40E8u)
-
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<TeamClass*>, Array, 0x8B40E8u)
 
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TeamClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 public:
-	TeamTypeClass* Type;
-	ScriptClass*   CurrentScript;
-	HouseClass*    Owner;
-	HouseClass*    Target;
-	CellClass*     SpawnCell;
-	FootClass*     ClosestMember;
-	AbstractClass* QueuedFocus;
-	AbstractClass* Focus;
-	int            unknown_44;
-	int            TotalObjects;
-	int            TotalThreatValue;
-	int            CreationFrame;
-	FootClass*     FirstUnit;
-	CDTimerClass   GuardAreaTimer;
-	CDTimerClass   SuspendTimer;
-	TagClass*      Tag;
-	bool           IsTransient;
-	bool           NeedsReGrouping;
-	bool           GuardSlowerIsNotUnderStrength;
-	bool           IsForcedActive;
+    TeamTypeClass* Type;
+    ScriptClass* CurrentScript;
+    HouseClass* Owner;
+    HouseClass* Target;
+    CellClass* SpawnCell;
+    FootClass* ClosestMember;
+    AbstractClass* QueuedFocus;
+    AbstractClass* Focus;
+    int unknown_44;
+    int TotalObjects;
+    int TotalThreatValue;
+    int CreationFrame;
+    FootClass* FirstUnit;
+    CDTimerClass GuardAreaTimer;
+    CDTimerClass SuspendTimer;
+    TagClass* Tag;
+    bool IsTransient;
+    bool NeedsReGrouping;
+    bool GuardSlowerIsNotUnderStrength;
+    bool IsForcedActive;
+    bool IsHasBeen;
+    bool IsFullStrength;
+    bool IsUnderStrength;
+    bool IsReforming;
+    bool IsLagging;
+    bool NeedsToDisappear;
+    bool JustDisappeared;
+    bool IsMoving;
+    bool StepCompleted;
+    bool TargetNotAssigned;
+    bool IsLeavingMap;
+    bool IsSuspended;
+    bool AchievedGreatSuccess;
+    int CountObjects[6];
+
+public:
 	virtual ~TeamClass() JMP_THIS(0x6E8DE0);
 
-	bool           IsHasBeen;
-	bool           IsFullStrength;
-	bool           IsUnderStrength;
-	bool           IsReforming;
 	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6EC560);
 	
 	HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6EC450);
@@ -80,19 +87,11 @@ public:
 	void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6EC5A0);
 	void Update() override JMP_THIS(0x6E9140);
 
-	bool           IsLagging;
-	bool           NeedsToDisappear;
-	bool           JustDisappeared;
-	bool           IsMoving;
     void GetTaskForceMissingMemberTypes(DynamicVectorClass<TechnoTypeClass*>& dest) const JMP_THIS(0x6EF4D0);
     void LiberateMember(FootClass* pFoot, int idx = -1, byte count = 0) JMP_THIS(0x6EA870);
     bool AddMember(FootClass* pFoot, bool bForce) JMP_THIS(0x6EA500);
     void AssignMissionTarget(AbstractClass* pTarget) JMP_THIS(0x6E9050);
 
-	bool           StepCompleted; // can proceed to the next step of the script
-	bool           TargetNotAssigned;
-	bool           IsLeavingMap;
-	bool           IsSuspended;
 /*
     bool Add(FootClass * a2) JMP_THIS(0x6EA4F0);
     bool Add(FootClass * obj, int8_t arg_4) JMP_THIS(0x6EA500);
@@ -186,9 +185,7 @@ public:
     void Took_Damage(FootClass * a2, ResultType result, ObjectClass * source) JMP_THIS(0x6EB380);
 */
 
-	bool           AchievedGreatSuccess; // executed script action 49, 0
 
-	int CountObjects[6]; // counts of each object specified in the Type
     TeamClass(TeamTypeClass* pType, HouseClass* pOwner, int _unknown_44) : TeamClass(fake_noinit_t{})
         JMP_THIS(0x6E8A90);
 	TeamClass(noinit_t) noexcept  : TeamClass(fake_noinit_t{}) { vtables.init(this); }

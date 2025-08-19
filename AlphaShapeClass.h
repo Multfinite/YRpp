@@ -1,7 +1,3 @@
-/*
-	RadSites
-*/
-
 #pragma once
 
 #include "FileSystem.h"
@@ -9,6 +5,9 @@
 
 class ObjectClass;
 
+/*!
+* @brief RadSites
+*/
 class __declspec(uuid("623C7584-74E7-11D2-B8F5-006008C809ED"))
 NOVTABLE AlphaShapeClass : public AbstractClass
 {
@@ -30,8 +29,16 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E32A4;
 	static constexpr size_t ClassSize = 0x40;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AlphaShapeClass*>, Array, 0x88A0F0u)
+public:
+	//To which object is this AlphaShape attached?
+	ObjectClass* AttachedTo;
+	RectangleStruct Rect;
+	SHPStruct* AlphaImage;
+	//Set if AttachedTo is NULL.
+	bool IsObjectGone;
+	char field_3D;
+public:
 	virtual ~AlphaShapeClass() JMP_THIS(0x420C80);
 
 	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x420D40);
@@ -52,17 +59,8 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	explicit __forceinline AlphaShapeClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-
-	ObjectClass* AttachedTo;	//To which object is this AlphaShape attached?
-	RectangleStruct Rect;
-	SHPStruct* AlphaImage;
-	bool IsObjectGone;	//Set if AttachedTo is NULL.
 	AlphaShapeClass() : AlphaShapeClass(fake_noinit_t{}) JMP_THIS(0x420AF0);
 	AlphaShapeClass(noinit_t) noexcept : AlphaShapeClass(fake_noinit_t{}) JMP_THIS(0x420C50);
 	AlphaShapeClass(ObjectClass* pObj, int nX, int nY) : AlphaShapeClass(fake_noinit_t{}) JMP_THIS(0x420960);

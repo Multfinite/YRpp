@@ -1,7 +1,3 @@
-/*
-	Projectiles
-*/
-
 #pragma once
 
 #include "Timer.h"
@@ -21,8 +17,11 @@ struct BulletData
 };
 
 // the velocities along the axes, or something like that
-using BulletVelocity = Vector3D<double>; // :3 -pd
+using BulletVelocity = Vector3D<double>;
 
+/*!
+* @brief Projectiles
+*/
 class __declspec(uuid("0E272DC9-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE BulletClass : public ObjectClass
 {
@@ -45,11 +44,39 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E46E4;
     static constexpr size_t ClassSize = 0x160;
 
-	//Array
-	DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, Array, 0xA8ED40u)
+    DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, ScalableBullets, 0x89DE18u)
 
-	DEFINE_REFERENCE(DynamicVectorClass<BulletClass*>, ScalableBullets, 0x89DE18u)
-
+public:
+    BulletTypeClass* Type;
+    TechnoClass* Owner;
+    bool IsInaccurate;
+    BulletData Data;
+    bool Bright;
+    DWORD unknown_E4;
+    BulletVelocity Velocity;
+    DWORD unknown_100;
+    bool unknown_104;
+    bool CourseLock;
+    int CourseLockCounter;
+    AbstractClass* Target;
+    int Speed;
+    int InheritedColor;
+    DWORD unknown_118;
+    DWORD unknown_11C;
+    double unknown_120;
+    WarheadTypeClass* WH;
+    byte AnimFrame;
+    byte AnimRateCounter;
+    WeaponTypeClass* WeaponType;
+    CoordStruct SourceCoords;
+    CoordStruct TargetCoords;
+    CellStruct LastMapCoords;
+    int DamageMultiplier;
+    AnimClass* NextAnim;
+    bool SpawnNextAnim;
+    int Range;
 
 public:
     virtual ~BulletClass() JMP_THIS(0x466560);
@@ -103,42 +130,10 @@ public:
     CoordStruct TargetCoord() const { return this->Target ? this->Target->GetCoords() : this->GetCoords(); }
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline BulletClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	BulletTypeClass* Type;
-	TechnoClass* Owner;
-	bool unknown_B4;
-	BulletData Data;
-	bool Bright;
-	DWORD unknown_E4;
-	BulletVelocity Velocity;
-	DWORD unknown_100;
-	bool unknown_104;
-	bool CourseLock;
-	int CourseLockCounter;
-	AbstractClass* Target;
-	int Speed;
-	int InheritedColor;
-	DWORD unknown_118;
-	DWORD unknown_11C;
-	double unknown_120;
-	WarheadTypeClass* WH;
-	byte AnimFrame;
-	byte AnimRateCounter;
-	WeaponTypeClass* WeaponType;
-	CoordStruct SourceCoords;
-	CoordStruct TargetCoords;
-	CellStruct LastMapCoords;
-	int DamageMultiplier;
-	AnimClass* NextAnim;
-	bool SpawnNextAnim;
-	int Range;
     BulletClass() : BulletClass(fake_noinit_t{}) JMP_THIS(0x466380);
     BulletClass(noinit_t) noexcept : BulletClass(fake_noinit_t{}) { vtables.init(this); }
 };

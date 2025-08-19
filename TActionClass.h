@@ -2,7 +2,6 @@
 
 #include "AbstractClass.h"
 
-//forward declarations
 class SuperClass;
 class TechnoClass;
 class TagTypeClass;
@@ -30,8 +29,31 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Action;
 	static constexpr size_t ClassSize = 0x94;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<TActionClass*>, Array, 0xB0E658u)
+public:
+	int                ArrayIndex;
+	TActionClass* NextAction;
+	TriggerAction      ActionKind;
+	TeamTypeClass* TeamType;
+	union
+	{
+		RectangleStruct    Bounds; // map bounds for use with action 40
+		struct
+		{
+			int Param3;
+			int Param4;
+			int Param5;
+			int Param6;
+		};
+	}; // It's enough for calling Bounds.X, just use a union here now. - secsome
+	int                Waypoint;
+	int                Value2; // multipurpose
+	TagTypeClass* TagType;
+	TriggerTypeClass* TriggerType;
+	char               TechnoID[0x19];
+	char               Text[0x20];
+	PROTECTED_PROPERTY(BYTE, align_8D[3]);
+	int                Value; // multipurpose
 public:
 	virtual ~TActionClass() JMP_THIS(0x6DD1B0);
 
@@ -75,11 +97,8 @@ public:
 	// NOTE: most of these are defined as separate functions AS WELL AS inlined in Execute() above.
 	// Ergo, hooking into them by their address will not always override builtin handling.
 	// If you need to know which are inlined, poke me.
-#pragma push_macro("ACTION_FUNC")
-
 #define ACTION_FUNC(name, addr) \
-	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, CellStruct const& location) \
-		{ JMP_THIS(addr); }
+	bool name(HouseClass* pTargetHouse, ObjectClass* pSourceObject, TriggerClass* pTrigger, CellStruct const& location) JMP_THIS(addr);
 
 	ACTION_FUNC(LightningStrikeAt, 0x6E0050);
 	ACTION_FUNC(RemoveParticleSystemsAt, 0x6E0080);
@@ -272,42 +291,11 @@ public:
 	ACTION_FUNC(ResetBaseCenter, 0x6E4540);
 
 	ACTION_FUNC(FlashBuildingsOfType, 0x6E4560);
-
 #undef ACTION_FUNC
-#pragma pop_macro("ACTION_FUNC")
-	// WHEEEEEW. End of slave functions.
-
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	explicit __forceinline TActionClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
-	int                ArrayIndex;
-	TActionClass*      NextAction;
-	TriggerAction      ActionKind;
-	TeamTypeClass*     TeamType;
-	union
-	{
-		RectangleStruct    Bounds; // map bounds for use with action 40
-		struct
-		{
-			int Param3;
-			int Param4;
-			int Param5;
-			int Param6;
-		};
-	}; // It's enough for calling Bounds.X, just use a union here now. - secsome
-	int                Waypoint;
-	int                Value2; // multipurpose
-	TagTypeClass*      TagType;
-	TriggerTypeClass*  TriggerType;
-	char               TechnoID[0x19];
-	char               Text[0x20];
-	PROTECTED_PROPERTY(BYTE, align_8D[3]);
-	int                Value; // multipurpose
 	TActionClass() : TActionClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
 	TActionClass(noinit_t) noexcept : TActionClass(fake_noinit_t{}) JMP_STD(0x6DD180);
 };

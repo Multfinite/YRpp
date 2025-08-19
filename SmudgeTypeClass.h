@@ -1,7 +1,3 @@
-/*
-	SmudgeTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -28,9 +24,15 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F3528;
     static constexpr size_t ClassSize = 0x2A4;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(SmudgeTypeClass, 0xA8EC18u);
+public:
+    ABSTRACTTYPE_ARRAY(SmudgeTypeClass, 0xA8EC18u);
 
+public:
+    int ArrayIndex;
+    int Width;
+    int Height;
+    bool Crater;
+    bool Burn;
 
 public:
     virtual ~SmudgeTypeClass() JMP_THIS(0x6B53A0);
@@ -62,19 +64,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline SmudgeTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int ArrayIndex;
-	int Width;
-	int Height;
-	bool Crater;
-	bool Burn;
     SmudgeTypeClass(const char* pID) noexcept : SmudgeTypeClass(fake_noinit_t{}) JMP_THIS(0x6B5260);
     SmudgeTypeClass(noinit_t) : SmudgeTypeClass(fake_noinit_t{}) JMP_THIS(0x6B5370);
 };

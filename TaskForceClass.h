@@ -1,7 +1,3 @@
-/*
-	TaskForces as in the AI inis
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -10,8 +6,8 @@ class TechnoTypeClass;
 
 struct TaskForceEntryStruct
 {
-	int Amount;
-	TechnoTypeClass* Type;
+    int Amount;
+    TechnoTypeClass* Type;
 };
 
 class __declspec(uuid("61DE341E-0774-11D2-ACA5-006008055BB5"))
@@ -20,8 +16,6 @@ NOVTABLE TaskForceClass : public AbstractTypeClass
 public:
     using base_type = AbstractTypeClass;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TaskForceClass, 0xA8E8D0u);
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -38,7 +32,14 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F4680;
     static constexpr size_t ClassSize = 0xD4;
 
+public:
+    ABSTRACTTYPE_ARRAY(TaskForceClass, 0xA8E8D0u);
 
+public:
+    int Group;
+    int CountEntries;
+    bool IsGlobal;
+    TaskForceEntryStruct Entries[0x6];
 
 public:
     virtual ~TaskForceClass() JMP_THIS(0x6E7F80);
@@ -56,18 +57,10 @@ public:
     bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6E8510);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TaskForceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int     Group;
-	int     CountEntries;
-	bool    IsGlobal;
-	TaskForceEntryStruct Entries [0x6];
     TaskForceClass(const char* pID) : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7E80);
     TaskForceClass(noinit_t) noexcept : TaskForceClass(fake_noinit_t{}) JMP_THIS(0x6E7F50);
 };

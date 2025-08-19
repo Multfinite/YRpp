@@ -1,7 +1,3 @@
-/*
-	Base class for units that can move (that have "feet")
-*/
-
 #pragma once
 
 #include "TechnoClass.h"
@@ -11,6 +7,9 @@
 class LocomotionClass;
 class TeamClass;
 
+/*!
+	@brief Base class for units that can move (that have "feet")
+*/
 class NOVTABLE FootClass : public TechnoClass
 {
 public:
@@ -32,64 +31,63 @@ public:
 	static constexpr size_t ClassSize = 0x6C0;
 
 	DEFINE_REFERENCE(DynamicVectorClass<FootClass*>, Array, 0x8B3DC0u)
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int             PlanningPathIdx; // which planning path am I following?
-	CellStruct      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
-	CellStruct      WaypointCell; // current waypoint cell
-	DWORD           unknown_52C;	//unused?
-	DWORD           unknown_530;
-	DWORD           unknown_534;
+	::Cell      WaypointNearbyAccessibleCellDelta; // add to WaypointCell to get Nearby_Cell for this foot
+	::Cell      WaypointCell; // current waypoint cell
+	DWORD           __gap_52C;
+	double           ThreatAvoidanceCoefficient;
 	int				WalkedFramesSoFar;
 	bool            IsMoveSoundPlaying;
 	int             MoveSoundDelay;
 
 	DECLARE_PROPERTY(AudioController, MoveSoundAudioController);
 
-	CellStruct      CurrentMapCoords;
-	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
-	CellStruct      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
-	CellStruct      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
-	CoordStruct     CurrentTunnelCoords;
-	PROTECTED_PROPERTY(DWORD,   unused_574);
+	::Cell      CurrentMapCoords;
+	::Cell      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
+	::Cell      LastFlightMapCoords; // which cell was I occupying previously? only for AircraftTracker-tracked stuff
+	::Cell      CurrentJumpjetMapCoords; // unconfirmed, which cell am I occupying? only for jumpjets
+	Coordinate     CurrentTunnelCoords;
+	PROTECTED_PROPERTY(DWORD, unused_574);
 	double          SpeedPercentage;
 	double          SpeedMultiplier;
-	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_588);
-	AbstractClass*  unknown_5A0;
-	AbstractClass*  Destination; // possibly other objects as well
-	AbstractClass*  LastDestination;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue2);
+	AbstractClass* FollowingMaybe_5A0;
+	// NavCom
+	// possibly other objects as well
+	AbstractClass* Destination;
+	// SuspendedNavCom
+	AbstractClass* LastDestination;
 	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, NavQueue); // Stores sequence of movement destinations
 	Mission         MegaMission; // only Mission::AttackMove or Mission::None
-	AbstractClass*  MegaDestination; // when AttackMove target is a cell
-	AbstractClass*  MegaTarget; // when AttackMove target is an object
-	BYTE            unknown_5D0;	//unused?
-	bool            HaveAttackMoveTarget; // fighting an enemy on the way
-	TeamClass*      Team;
-	FootClass*      NextTeamMember;        //next unit in team
-	DWORD           unknown_5DC;
+	AbstractClass* MegaDestination; // when AttackMove target is a cell
+	AbstractClass* MegaTarget; // when AttackMove target is an object
+	BYTE            __gap_5D0;	//unused?
+	bool            IsAttackMoveTargetAssigned; // fighting an enemy on the way
+	TeamClass* Team;
+	FootClass* NextTeamMember;        //next unit in team
+	CellClass* SomeCell_5DC;
 	int             PathDirections[24]; // list of directions to move in next, like tube directions
 	DECLARE_PROPERTY(CDTimerClass, PathDelayTimer);
 	int             PathWaitTimes;
-	DECLARE_PROPERTY(CDTimerClass, unknown_timer_650);
+	DECLARE_PROPERTY(CDTimerClass, BaseAttackTimer);
 	DECLARE_PROPERTY(CDTimerClass, SightTimer);
 	DECLARE_PROPERTY(CDTimerClass, BlockagePathTimer);
 	DECLARE_PROPERTY(ILocomotionPtr, Locomotor);
-	CoordStruct       unknown_point3d_678;
-	signed char       TubeIndex;	//I'm in this tunnel
-	signed char       TubeFaceIndex;
-	signed char       WaypointIndex; // which waypoint in my planning path am I following?
+	Coordinate       HeadTo;
+	//I'm in this tunnel
+	signed char    TubeIndex;
+	signed char    TubeFaceIndex;
+	signed char    WaypointIndex; // which waypoint in my planning path am I following?
 	bool              ShouldScatterInNextIdle;
 	bool              IsScanLimited;
 	bool              IsInitiated; // Is a fully joined member of a team, used for regroup etc. checks
+	// IsNewNavCom
 	bool              ShouldScanForTarget;
-	bool              unknown_bool_68B; //unused?
+	bool              IsPlanningToLook;
 	bool              IsDeploying;
 	bool              IsFiring;
-	bool              unknown_bool_68E;
+	bool              AssignNewThreat;
 	bool              ShouldEnterAbsorber; // orders the unit to enter the closest bio reactor
 	bool              ShouldEnterOccupiable; // orders the unit to enter the closest battle bunker
 	bool              ShouldGarrisonStructure; // orders the unit to enter the closest neutral building
@@ -100,17 +98,19 @@ public:
 	bool              unknown_bool_6AC;
 	bool              IsAttackedByLocomotor; // the unit's locomotor is jammed by a magnetron
 	bool              IsLetGoByLocomotor; // a magnetron attacked this unit and let it go. falling, landing, or sitting on the ground
-	bool              unknown_bool_6AF;
-	bool              unknown_bool_6B0;
-	bool              unknown_bool_6B1;
-	bool              unknown_bool_6B2;
-	bool              unknown_bool_6B3;
-	bool              unknown_bool_6B4;
+	bool              IsRotating;
+	bool              IsUnloading;
+	bool              IsNavQueueLoop;
+	bool              IsScattering;
+	bool              IsIdle_6B3;
+	bool              HeightSubtract_6B4;
 	bool              IsCrushingSomething;
-	bool              FrozenStill; // frozen in first frame of the proper facing - when magnetron'd or warping
+	// also called aircraft state - from db
+	// frozen in first frame of the proper facing - when magnetron'd or warping
+	bool              FrozenStill;
 	bool              IsWaitingBlockagePath;
-	bool              unknown_bool_6B8;
-	PROTECTED_PROPERTY(DWORD,   unused_6BC);	//???
+	bool              Removed;
+	PROTECTED_PROPERTY(DWORD, unused_6BC);	//???
 public:
 	virtual ~FootClass() JMP_THIS(0x4D3590); // i am not sure about the address
 

@@ -1,7 +1,3 @@
-/*
-	[AITriggerTypes]
-*/
-
 #pragma once
 
 #include "YRPP.h"
@@ -20,6 +16,9 @@ struct AITriggerConditionComparator
 	int ComparatorOperand;
 };
 
+/*!
+* @brief[AITriggerTypes]
+*/
 class __declspec(uuid("BA093524-4CF4-11D2-BC26-00104B8FB04D"))
 NOVTABLE AITriggerTypeClass : public AbstractTypeClass
 {
@@ -41,8 +40,31 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E2A50;
 	static constexpr size_t ClassSize = 0x110;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(AITriggerTypeClass, 0xA8B200u);
+public:
+	AITriggerCondition ConditionType;
+	int              IsGlobal;
+	AITriggerHouseType OwnerHouseType;
+	bool             IsEnabled;
+	int              HouseIndex;
+	int              SideIndex;
+	int              TechLevel;
+	int              unknown_B4;
+	double           Weight_Current;
+	double           Weight_Minimum;
+	double           Weight_Maximum;
+	bool             IsForSkirmish;
+	bool             IsForBaseDefense;
+	bool             Enabled_Easy;
+	bool             Enabled_Normal;
+	bool             Enabled_Hard;
+	TechnoTypeClass* ConditionObject;
+	TeamTypeClass* Team1;
+	TeamTypeClass* Team2;
+	AITriggerConditionComparator Conditions[4]; // don't ask
+	int              TimesExecuted;
+	int              TimesCompleted;
+	int              unknown_10C;
 
 public:
 	virtual ~AITriggerTypeClass() JMP_THIS(0x41E480);
@@ -144,42 +166,14 @@ public:
 			this->Enabled_Normal,
 			this->Enabled_Hard
 		);
-
 	}
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	explicit __forceinline AITriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
 	AITriggerTypeClass(noinit_t) noexcept : AITriggerTypeClass(fake_noinit_t{}) { vtables.init(this); };
 	AITriggerTypeClass(const char* pId) : AITriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x41E350);
 
-	AITriggerCondition ConditionType;
-	int              IsGlobal;
-	AITriggerHouseType OwnerHouseType;
-	bool             IsEnabled;
-	int              HouseIndex;
-	int              SideIndex;
-	int              TechLevel;
-	int              unknown_B4;
-	double           Weight_Current;
-	double           Weight_Minimum;
-	double           Weight_Maximum;
-	bool             IsForSkirmish;
-	bool             IsForBaseDefense;
-	bool             Enabled_Easy;
-	bool             Enabled_Normal;
-	bool             Enabled_Hard;
-	TechnoTypeClass* ConditionObject;
-	TeamTypeClass*   Team1;
-	TeamTypeClass*   Team2;
-	AITriggerConditionComparator Conditions [4]; // don't ask
-	int              TimesExecuted;
-	int              TimesCompleted;
-	int              unknown_10C;
 /*
 	bool Chronosphere_Near_Ready(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41F180);
 	bool Enemy_Owns(HouseClass* house, HouseClass* enemy) JMP_THIS(0x41EAF0);

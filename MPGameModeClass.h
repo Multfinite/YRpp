@@ -62,6 +62,13 @@ public:
 
 	static MPGameModeClass* __fastcall Get(int index)
 		{ JMP_STD(0x5D5F30); }
+	static bool Set(int index)
+	{
+		THISCALL_EX(index, 0x5D5F30);
+		MEM_WRITEIMM32(0xA8B23C, eax);
+		VAR8_REG(bool, success, al);
+		return success;
+	}
 
 	/*
 	static UNINIT_FUNC(0x5D7FD0);
@@ -218,9 +225,16 @@ public:
 	virtual void CreateMPTeams(DynamicVectorClass<MPTeam> *vecTeams)
 		{ JMP_THIS(0x5D6690); }
 
-	virtual CellStruct * AssignStartingPositionsToHouse(CellStruct *result, int idxHouse,
+	virtual CellStruct * __AssignStartingPositionsToHouse(CellStruct& retstr, int idxHouse,
 		DynamicVectorClass<CellStruct> *vecCoords, byte *housesSatisfied)
 		{ JMP_THIS(0x5D6890); }
+	Cell AssignStartingPositionsToHouse(int idxHouse,
+		DynamicVectorClass<CellStruct>* vecCoords, byte* housesSatisfied)
+	{
+		Cell ret;
+		__AssignStartingPositionsToHouse(ret, idxHouse, vecCoords, housesSatisfied);
+		return ret;
+	}
 
 	virtual bool SpawnBaseUnits(HouseClass *House, DWORD dwUnused)
 		{ JMP_THIS(0x5D7030); }
@@ -272,12 +286,12 @@ class MPBattleClass : public MPGameModeClass
 	*/
 
 	MPBattleClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPBattleClass(noinit_t())
+		: MPBattleClass(noinit_t{})
 	{ JMP_THIS(0x5D8170); }
 
 protected:
 	explicit __forceinline MPBattleClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 	//FACTORY(0x7EEEBC);
 };
@@ -295,12 +309,12 @@ class MPManBattleClass : public MPGameModeClass
 
 	//Constructor
 	MPManBattleClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPManBattleClass(noinit_t())
+		: MPManBattleClass(noinit_t{})
 	{ JMP_THIS(0x5C6150); }
 
 protected:
 	explicit __forceinline MPManBattleClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 	//FACTORY(0x7EEEB0);
 };
@@ -333,12 +347,12 @@ class MPFreeForAllClass : public MPGameModeClass
 
 	//Constructor
 	MPFreeForAllClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPFreeForAllClass(noinit_t())
+		: MPFreeForAllClass(noinit_t{})
 	{ JMP_THIS(0x5C5CE0); }
 
 protected:
 	explicit __forceinline MPFreeForAllClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 	//FACTORY(0x7EEE8C);
 };
@@ -354,12 +368,12 @@ class MPMegawealthClass : public MPGameModeClass
 
 	//Constructor
 	MPMegawealthClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPMegawealthClass(noinit_t())
+		: MPMegawealthClass(noinit_t{})
 	{ JMP_THIS(0x5C93E0); }
 
 protected:
 	explicit __forceinline MPMegawealthClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 };
 
@@ -388,12 +402,12 @@ class MPUnholyAllianceClass : public MPGameModeClass
 
 	//Constructor
 	MPUnholyAllianceClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPUnholyAllianceClass(noinit_t())
+		: MPUnholyAllianceClass(noinit_t{})
 	{ JMP_THIS(0x5CB3A0); }
 
 protected:
 	explicit __forceinline MPUnholyAllianceClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 	//FACTORY(0x7EEE98);
 };
@@ -435,12 +449,12 @@ class MPSiegeClass : public MPGameModeClass
 
 	//Constructor
 	MPSiegeClass(wchar_t **CSFTitle, wchar_t **CSFTooltip, char **INIFileName, char **mapfilter, bool AIAllowed, int MPModeIndex)
-		: MPSiegeClass(noinit_t())
+		: MPSiegeClass(noinit_t{})
 	{ JMP_THIS(0x5CA630); }
 
 protected:
 	explicit __forceinline MPSiegeClass(noinit_t)
-		: MPGameModeClass(noinit_t())
+		: MPGameModeClass(noinit_t{})
 	{ }
 	//FACTORY(0x7EEEA4);
 };

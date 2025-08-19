@@ -1,7 +1,3 @@
-/*
-	RadSites
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -31,8 +27,24 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F0810;
     static constexpr size_t ClassSize = 0x74;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<RadSiteClass*>, Array, 0xB04BD0u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<RadSiteClass*>, Array, 0xB04BD0u)
+
+public:
+    LightSourceClass* LightSource;
+    DECLARE_PROPERTY(CDTimerClass, RadLevelTimer);
+    DECLARE_PROPERTY(CDTimerClass, RadLightTimer);
+    CellStruct BaseCell;
+    int Spread;
+    int SpreadInLeptons;
+    int RadLevel;
+    int LevelSteps;
+    int Intensity;
+    TintStruct Tint;
+    int IntensitySteps;
+    int IntensityDecrement;
+    int RadDuration;
+    int RadTimeLeft;
 
 public:
     virtual ~RadSiteClass() JMP_THIS(0x65B2F0);
@@ -67,28 +79,10 @@ public:
     }
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline RadSiteClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-
-	LightSourceClass* LightSource; // the light source attached to this instance
-	DECLARE_PROPERTY(CDTimerClass, RadLevelTimer); // used to count down RadLevelDelay
-	DECLARE_PROPERTY(CDTimerClass, RadLightTimer); // used to count down RadLightDelay
-	CellStruct        BaseCell; // center cell
-	int               Spread; // range in cells
-	int               SpreadInLeptons; // range in leptons
-	int               RadLevel; // the radiation level,
-	int               LevelSteps; // cell's rad level reduced by (RadLevel/LevelSteps) every time RadLevelTimer elapses
-	int               Intensity; // the intensity at the beginning
-	TintStruct        Tint; // RadColor at the current level
-	int               IntensitySteps; // the number of intensity decreases during the duration
-	int               IntensityDecrement; // Intensity decremented by this every time RadLightDelay elapses
-	int               RadDuration; // as currently set up, the rad site will stay for so many frames
-	int               RadTimeLeft; // the remaining frames. divided by RadDuration gives the factor
     RadSiteClass() : RadSiteClass(fake_noinit_t{}) JMP_THIS(0x65B1E0);
     RadSiteClass(CellStruct nBaseCoords, int nSpread, int nRadLevel) : RadSiteClass()
     {

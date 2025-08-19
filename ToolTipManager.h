@@ -57,7 +57,7 @@ public:
 
 	//Constructors
 	ToolTipManager(HWND hWnd) noexcept
-		: ToolTipManager(noinit_t()) { JMP_THIS(0x724000); }
+		: ToolTipManager(noinit_t{}) { JMP_THIS(0x724000); }
 
 protected:
 	explicit __forceinline ToolTipManager(noinit_t)  noexcept

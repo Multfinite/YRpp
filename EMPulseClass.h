@@ -1,7 +1,3 @@
-/*
-	EMP - no, you're NOT seeing things :P
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -28,10 +24,14 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E87A8;
     static constexpr size_t ClassSize = 0x34;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<EMPulseClass*>, Array, 0x8A3870u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<EMPulseClass*>, Array, 0x8A3870u)
 
-
+public:
+    CellStruct BaseCoords;
+    int Spread;
+    int CreationTime;
+    int Duration;
 
 public:
     virtual ~EMPulseClass() JMP_THIS(0x4C53E0);
@@ -52,18 +52,9 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
     /*! @brief FAKE CTOR */
     explicit __forceinline EMPulseClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 public:
-
-	CellStruct BaseCoords;
-	int Spread;
-	int CreationTime;	//frame in which this EMP got created
-	int Duration;
     EMPulseClass(CellStruct dwCrd, int nSpread, int nDuration, TechnoClass* pGenerator) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C52B0);
     EMPulseClass() : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C5370);
     EMPulseClass(noinit_t) noexcept : EMPulseClass(fake_noinit_t{}) JMP_THIS(0x4C53B0);

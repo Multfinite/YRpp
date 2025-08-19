@@ -16,12 +16,12 @@ public:
 
 	//Constructor
 	HoverLocomotionClass()
-		: LocomotionClass(noinit_t())
+		: LocomotionClass(noinit_t{})
 	{ JMP_THIS(0x513C20); }
 
 protected:
 	explicit __forceinline HoverLocomotionClass(noinit_t)
-		: LocomotionClass(noinit_t())
+		: LocomotionClass(noinit_t{})
 	{ }
 
 	//===========================================================================

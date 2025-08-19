@@ -112,13 +112,13 @@ public:
 	bool IsDefinedWaypoint(int idx)
 		{ JMP_THIS(0x68BD80); }
 
-	CellStruct * GetWaypointCoords(CellStruct *dest, int idx)
+	CellStruct * __GetWaypointCoords(CellStruct *retstr, int idx)
 		{ JMP_THIS(0x68BCC0); }
 
 	CellStruct GetWaypointCoords(int idx) {
-		CellStruct dest;
-		GetWaypointCoords(&dest, idx);
-		return dest;
+		CellStruct ret;
+		__GetWaypointCoords(&ret, idx);
+		return ret;
 	}
 
 	//CTOR / DTOR
@@ -150,7 +150,7 @@ public:
 	int Height;
 	int NumberStartingPoints;
 	Point2D StartingPoints [0x8];
-	int HouseIndices [0x10]; // starting position => HouseClass::Array.GetItem(#)
+	int HouseIndices [0x10]; // starting position => HouseClass::Array->GetItem(#)
 	CellStruct HouseHomeCells [0x8];
 	bool TeamsPresent;
 	int NumCoopHumanStartSpots;

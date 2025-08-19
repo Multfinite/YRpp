@@ -1,7 +1,3 @@
-/*
-	ParticleSystemTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -12,8 +8,6 @@ NOVTABLE ParticleSystemTypeClass : public ObjectTypeClass
 public:
     using base_type = ObjectTypeClass;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(ParticleSystemTypeClass, 0xA83D68u);
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -30,7 +24,33 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F00A8;
     static constexpr size_t ClassSize = 0x310;
 
+public:
+    ABSTRACTTYPE_ARRAY(ParticleSystemTypeClass, 0xA83D68u);
 
+public:
+    int HoldsWhat; // ParticleType array index
+    bool Spawns;
+    int SpawnFrames;
+    float Slowdown;
+    int ParticleCap;
+    int SpawnRadius;
+    float SpawnCutoff;
+    float SpawnTranslucencyCutoff;
+    BehavesLike BehavesLike;
+    int Lifetime;
+    Vector3D<float> SpawnDirection;
+    double ParticlesPerCoord;
+    double SpiralDeltaPerCoord;
+    double SpiralRadius;
+    double PositionPerturbationCoefficient;
+    double MovementPerturbationCoefficient;
+    double VelocityPerturbationCoefficient;
+    double SpawnSparkPercentage;
+    int SparkSpawnFrames;
+    int LightSize;
+    ColorStruct LaserColor;
+    bool Laser;
+    bool OneFrameLight;
 
 public:
     virtual ~ParticleSystemTypeClass() JMP_THIS(0x644250);
@@ -50,38 +70,11 @@ public:
 
     static ParticleSystemTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x644890);
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline ParticleSystemTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int      HoldsWhat; //ParticleType Array index
-	bool     Spawns;
-	int      SpawnFrames;
-	float    Slowdown;
-	int      ParticleCap;
-	int      SpawnRadius;
-	float    SpawnCutoff;
-	float    SpawnTranslucencyCutoff;
-	BehavesLike BehavesLike;
-	int      Lifetime;
-	Vector3D<float> SpawnDirection;
-	double   ParticlesPerCoord;
-	double   SpiralDeltaPerCoord;
-	double   SpiralRadius;
-	double   PositionPerturbationCoefficient;
-	double   MovementPerturbationCoefficient;
-	double   VelocityPerturbationCoefficient;
-	double   SpawnSparkPercentage;
-	int      SparkSpawnFrames;
-	int      LightSize;
-	ColorStruct LaserColor;
-	bool     Laser;
-	bool     OneFrameLight;
     ParticleSystemTypeClass(const char* pID) : ParticleSystemTypeClass(fake_noinit_t{}) JMP_THIS(0x6440A0);
     ParticleSystemTypeClass(noinit_t) noexcept : ParticleSystemTypeClass(fake_noinit_t{}) JMP_THIS(0x644220);
 };

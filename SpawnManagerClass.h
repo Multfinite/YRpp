@@ -2,31 +2,28 @@
 
 #include "AircraftClass.h"
 
-enum class SpawnManagerStatus : unsigned int
-{
-	Idle = 0, // no target or out of range
-	Launching = 1, // one launch in progress
-	CoolDown = 2 // waiting for launch to complete
+enum class SpawnManagerStatus : unsigned int {
+    Idle = 0,       // no target or out of range
+    Launching = 1,  // one launch in progress
+    CoolDown = 2    // waiting for launch to complete
 };
 
-enum class SpawnNodeStatus : unsigned int
-{
-	Idle = 0, // docked, waiting for target
-	TakeOff = 1, // missile tilting and launch
-	Preparing = 2, // gathering, waiting
-	Attacking = 3, // attacking until no ammo
-	Returning = 4, // return to carrier
-	//Unused_5, // not used
-	Reloading = 6, // docked, reloading ammo and health
-	Dead = 7 // respawning
+enum class SpawnNodeStatus : unsigned int {
+    Idle = 0,       // docked, waiting for target
+    TakeOff = 1,    // missile tilting and launch
+    Preparing = 2,  // gathering, waiting
+    Attacking = 3,  // attacking until no ammo
+    Returning = 4,  // return to carrier
+    // 5 unused
+    Reloading = 6,  // docked, reloading ammo and health
+    Dead = 7        // respawning
 };
 
-struct SpawnControl
-{
-	AircraftClass* Unit;
-	SpawnNodeStatus Status;
-	CDTimerClass SpawnTimer;
-	BOOL IsSpawnMissile;
+struct SpawnControl {
+    AircraftClass* Unit;
+    SpawnNodeStatus Status;
+    CDTimerClass SpawnTimer;
+    BOOL IsSpawnMissile;
 };
 
 class __declspec(uuid("0679E981-AD9D-11D3-BE16-00104B62A16C"))
@@ -51,9 +48,21 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F3650;
     static constexpr size_t ClassSize = 0x74;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<SpawnManagerClass*>, Array, 0xB0B880u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<SpawnManagerClass*>, Array, 0xB0B880u)
 
+public:
+    TechnoClass* Owner;
+    AircraftTypeClass* SpawnType;
+    int SpawnCount;
+    int RegenRate;
+    int ReloadRate;
+    DynamicVectorClass<SpawnControl*> SpawnedNodes;
+    CDTimerClass UpdateTimer;
+    CDTimerClass SpawnTimer;
+    AbstractClass* Target;
+    AbstractClass* NewTarget;
+    SpawnManagerStatus Status;
 
 public:
     virtual ~SpawnManagerClass() JMP_THIS(0x6B7010);
@@ -78,25 +87,10 @@ public:
     void UnlinkPointer(AbstractClass* pRemove) JMP_THIS(0x6B7C60);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline SpawnManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	TechnoClass* Owner;
-	AircraftTypeClass* SpawnType;
-	int SpawnCount;
-	int RegenRate;
-	int ReloadRate;
-	DynamicVectorClass<SpawnControl*> SpawnedNodes;
-	CDTimerClass UpdateTimer;
-	CDTimerClass SpawnTimer;
-	AbstractClass* Target;
-	AbstractClass* NewTarget;
-	SpawnManagerStatus Status;
     SpawnManagerClass(TechnoClass* pOwner, AircraftTypeClass* pSpawnType, int nMaxNodes,
         int RegenRate, int ReloadRate) : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6C90);
     SpawnManagerClass() : SpawnManagerClass(fake_noinit_t{}) JMP_THIS(0x6B6EA0);

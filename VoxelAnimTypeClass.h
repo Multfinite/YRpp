@@ -1,7 +1,3 @@
-/*
-	VoxelAnimTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -10,12 +6,13 @@ class AnimTypeClass;
 class ParticleSystemTypeClass;
 class WarheadTypeClass;
 
+/*!
+* @brief VoxelAnimTypes are initialized by INI files.
+*/
 class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
 NOVTABLE VoxelAnimTypeClass : public ObjectTypeClass
 {
 public:
-	//Array
-	ABSTRACTTYPE_ARRAY(VoxelAnimTypeClass, 0xA8EB28u);
     using base_type = ObjectTypeClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -34,8 +31,37 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F6548;
     static constexpr size_t ClassSize = 0x308;
 
+public:
+    ABSTRACTTYPE_ARRAY(VoxelAnimTypeClass, 0xA8EB28u);
 
-	//VoxelAnimTypeClass
+public:
+    bool Normalized;
+    bool Translucent;
+    bool SourceShared;
+    PROTECTED_PROPERTY(BYTE, unused_297);
+    int VoxelIndex;
+    int Duration;
+    double Elasticity;
+    double MinAngularVelocity;
+    double MaxAngularVelocity;
+    double MinZVel;
+    double MaxZVel;
+    double MaxXYVel;
+    bool IsMeteor;
+    PROTECTED_PROPERTY(BYTE, unused_2D1[3]);
+    VoxelAnimTypeClass* Spawns;
+    int SpawnCount;
+    int StartSound;
+    int StopSound;
+    AnimTypeClass* BounceAnim;
+    AnimTypeClass* ExpireAnim;
+    AnimTypeClass* TrailerAnim;
+    int Damage;
+    int DamageRadius;
+    WarheadTypeClass* Warhead;
+    ParticleSystemTypeClass* AttachedSystem;
+    bool IsTiberium;
+    PROTECTED_PROPERTY(BYTE, unused_301[3]);
 
 public:
     virtual ~VoxelAnimTypeClass() JMP_THIS(0x74AF70);
@@ -61,43 +87,12 @@ public:
     int8_t * Get_Name() JMP_THIS(0x74B620);
 */
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline VoxelAnimTypeClass(fake_noinit_t) noexcept
         : ObjectTypeClass(fake_noinit_t{})
     {}
 
 public:
-
-	bool Normalized;
-	bool Translucent;
-	bool SourceShared;
-	PROTECTED_PROPERTY(BYTE, unused_297);
-	int VoxelIndex;
-	int Duration;
-	double Elasticity;
-	double MinAngularVelocity;
-	double MaxAngularVelocity;
-	double MinZVel;
-	double MaxZVel;
-	double MaxXYVel;
-	bool IsMeteor;
-	PROTECTED_PROPERTY(BYTE, unused_2D1[3]);
-	VoxelAnimTypeClass* Spawns;
-	int SpawnCount;
-	int StartSound;
-	int StopSound;
-	AnimTypeClass* BounceAnim;
-	AnimTypeClass* ExpireAnim;
-	AnimTypeClass* TrailerAnim;
-	int Damage;
-	int DamageRadius;
-	WarheadTypeClass* Warhead;
-	ParticleSystemTypeClass* AttachedSystem;
-	bool IsTiberium;
-	PROTECTED_PROPERTY(BYTE, unused_301[3]);
     VoxelAnimTypeClass(const char* pID) : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AD80);
     VoxelAnimTypeClass() : VoxelAnimTypeClass(fake_noinit_t{}) JMP_THIS(0x74AF70);
 };

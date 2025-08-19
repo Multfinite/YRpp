@@ -1,7 +1,3 @@
-/*
-	[ScriptTypes]
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -36,9 +32,14 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F1008;
     static constexpr size_t ClassSize = 0x234;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(ScriptTypeClass, 0x8B41C8u);
+public:
+    ABSTRACTTYPE_ARRAY(ScriptTypeClass, 0x8B41C8u);
 
+public:
+    int ArrayIndex;
+    bool IsGlobal;
+    int ActionsCount;
+    ScriptActionNode ScriptActions[50];
 
 public:
     virtual ~ScriptTypeClass() noexcept JMP_THIS(0x691770);
@@ -65,18 +66,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline ScriptTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int      ArrayIndex;
-	bool     IsGlobal;
-	int      ActionsCount;
-	ScriptActionNode ScriptActions [50];
     ScriptTypeClass(const char* pID) noexcept : ScriptTypeClass(fake_noinit_t{}) JMP_THIS(0x6916B0);
 };
 static_assert(sizeof(ScriptTypeClass) == ScriptTypeClass::ClassSize);

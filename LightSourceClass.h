@@ -1,16 +1,14 @@
-/*
-	LightSource - used for light posts and radiation
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
 
+/*!
+* @brief LightSource - used for light posts and radiation
+*/
 class __declspec(uuid("6F9C48F0-1207-11D2-8174-006008055BB5"))
 NOVTABLE LightSourceClass : public AbstractClass
 {
 public:
-	DEFINE_REFERENCE(DynamicVectorClass<LightSourceClass*>, Array, 0xABCA10)
     using base_type = AbstractClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -29,7 +27,15 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7ED028;
     static constexpr size_t ClassSize = 0x4C;
 
+    DEFINE_REFERENCE(DynamicVectorClass<LightSourceClass*>, Array, 0xABCA10)
 
+public:
+    int LightIntensity;
+    TintStruct LightTint;
+    int DetailLevel;
+    CoordStruct Location;
+    int LightVisibility;
+    bool Activated;
 
 public:
     virtual ~LightSourceClass() JMP_THIS(0x554910);
@@ -54,9 +60,6 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline LightSourceClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
@@ -67,12 +70,6 @@ public:
     LightSourceClass(CoordStruct Crd, int nVisibility, int nIntensity, TintStruct Tint)
         : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554760);
 
-	int LightIntensity;
-	TintStruct LightTint;
-	int DetailLevel;
-	CoordStruct Location;
-	int LightVisibility;
-	bool Activated;
     LightSourceClass() : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x554830);
     LightSourceClass(noinit_t) noexcept : LightSourceClass(fake_noinit_t{}) JMP_THIS(0x5548E0);
 };

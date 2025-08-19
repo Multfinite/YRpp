@@ -1,7 +1,6 @@
-/*
-	Actual AI Team Scripts
+/*!
+* @brief ScriptClass - handles AI team script execution
 */
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -27,14 +26,14 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F0F78;
     static constexpr size_t ClassSize = 0x30;
 
+public:
+    ScriptTypeClass* Type;
+    int field_28;
+    int CurrentMission;
 
 public:
     virtual ~ScriptClass() JMP_THIS(0x691460);
 
-protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6915F0);
     
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x691630);
@@ -57,13 +56,10 @@ protected:
         return this->HasNextMission();
     }
 
+protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline ScriptClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
-
-	ScriptTypeClass * Type;
-	int field_28;
-	int CurrentMission;
     ScriptClass(ScriptTypeClass* pType) : ScriptClass(fake_noinit_t{}) JMP_THIS(0x6913C0);
 };
 static_assert(sizeof(ScriptClass) == ScriptClass::ClassSize);

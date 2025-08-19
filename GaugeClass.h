@@ -21,11 +21,11 @@ public:
 
 	//Constructors
 	GaugeClass(unsigned int nID, int nX, int nY, int nWidth, int nHeight) noexcept
-		: ControlClass(noinit_t()) { JMP_THIS(0x4E2500); }
+		: ControlClass(noinit_t{}) { JMP_THIS(0x4E2500); }
 
 protected:
 	explicit __forceinline GaugeClass(noinit_t)  noexcept
-		: ControlClass(noinit_t())
+		: ControlClass(noinit_t{})
 	{
 	}
 

@@ -1,6 +1,3 @@
-/*
-	AbstractTypes are abstract template objects initialized by INI files
-*/
 #pragma once
 
 #include "AbstractClass.h"
@@ -26,8 +23,10 @@ class CCINIClass;
 				return i;\
 		return -1;\
 	}
-//---
 
+/*!
+* @brief AbstractType is abstract template objects initialized by INI files.
+*/
 class NOVTABLE AbstractTypeClass : public AbstractClass
 {
 public:
@@ -48,8 +47,16 @@ public:
 	static constexpr RTTIType AbsID = RTTIType::Abstract;
 	static constexpr size_t ClassSize = 0x98;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AbstractTypeClass*>, Array, 0xA8E968u)
+public:
+	char ID[0x19-1];
+	/*! @brief Nullterminator of ID (some cursed string handler class do this) */
+	PROTECTED_PROPERTY(BYTE, __ID_ZERO);
+	char UINameLabel[0x20-1];
+	/*! @brief Nullterminator of ID (some cursed string handler class do this) */
+	PROTECTED_PROPERTY(BYTE, __UINameLabel_ZERO);
+	const wchar_t* UIName;
+	char Name[0x31];
 public:
 	virtual ~AbstractTypeClass() JMP_THIS(0x4109C0);
 
@@ -83,17 +90,6 @@ protected:
 	/*! @brief FAKE CTOR */
 	explicit __forceinline AbstractTypeClass(fake_noinit_t) noexcept{ }
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	char ID [0x18];
-	PROTECTED_PROPERTY(BYTE, zero_3C);
-	char UINameLabel [0x20];
-	const wchar_t* UIName;
-	char Name [0x31];
 	AbstractTypeClass(noinit_t) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410960);
 	AbstractTypeClass(char* pId) : AbstractTypeClass(fake_noinit_t{}) JMP_THIS(0x410800);
 };

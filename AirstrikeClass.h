@@ -8,15 +8,13 @@ class ObjectClass;
 class TechnoClass;
 class FootClass;
 
-//The AirstrikeClass handles the airstrikes Boris calls in.
+/*!
+* @brief The AirstrikeClass handles the airstrikes Boris calls in.
+*/
 class __declspec(uuid("70DE3921-1E26-11D5-8F95-00A02483489C"))
 NOVTABLE AirstrikeClass : public AbstractClass
 {
 public:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	using base_type = AbstractClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -34,7 +32,6 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Airstrike;
 	static constexpr size_t ClassSize = 0x60;
 public:
-
 	int AirstrikeTeam;			//As in the INI files.
 	int EliteAirstrikeTeam;	//As in the INI files.
 	int AirstrikeTeamTypeIndex;	//As in the INI files.
@@ -50,6 +47,7 @@ public:
 	ObjectClass* Target;	//The Airstrike's target.
 	AircraftTypeClass* AirstrikeTeamType;	//As in the INI files.
 	AircraftTypeClass* EliteAirstrikeTeamType;	//As in the INI files.
+	// TeamPointer
 	FootClass* FirstObject;
 public:
 	virtual ~AirstrikeClass() JMP_THIS(0x41D4C0);

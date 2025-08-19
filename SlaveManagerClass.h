@@ -53,15 +53,19 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F31C8;
     static constexpr size_t ClassSize = 0x64;
 
-	struct SlaveControl {
-		InfantryClass* Slave;
-		SlaveControlStatus State;
-		CDTimerClass RespawnTimer;
-	};
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<SlaveManagerClass*>, Array, 0xB0B5F0u)
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<SlaveManagerClass*>, Array, 0xB0B5F0u)
-
+public:
+    TechnoClass* Owner;
+    InfantryTypeClass* SlaveType;
+    int SlaveCount;
+    int RegenRate;
+    int ReloadRate;
+    DynamicVectorClass<SlaveControl*> SlaveNodes;
+    CDTimerClass RespawnTimer;
+    SlaveManagerStatus State;
+    int LastScanFrame;
 
 public:
     virtual ~SlaveManagerClass() JMP_THIS(0x6AF4A0);
@@ -120,20 +124,6 @@ protected:
     explicit __forceinline SlaveManagerClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-	TechnoClass* Owner;
-	InfantryTypeClass* SlaveType;
-	int SlaveCount;
-	int RegenRate;
-	int ReloadRate;
-	DynamicVectorClass<SlaveControl*> SlaveNodes;
-	CDTimerClass RespawnTimer;
-	SlaveManagerStatus State;
-	int LastScanFrame;
     SlaveManagerClass(TechnoClass* pOwner, InfantryTypeClass* pSlave, int num, int RegenRate, int ReloadRate) noexcept
         : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF1A0);
     SlaveManagerClass() : SlaveManagerClass(fake_noinit_t{}) JMP_THIS(0x6AF360);

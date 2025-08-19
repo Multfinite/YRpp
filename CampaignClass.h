@@ -1,11 +1,12 @@
 #pragma once
 
-
-
 #include "GeneralDefinitions.h"
 #include "CCINIClass.h"
 #include "AbstractTypeClass.h"
 
+/*!
+* @brief Campaign class handling campaign data and progression.
+*/
 class __declspec(uuid("FFDAC848-1517-11D2-8175-006008055BB5"))
 NOVTABLE CampaignClass : public AbstractTypeClass
 {
@@ -25,6 +26,8 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Campaign;
 	static constexpr uintptr_t AbsVTable = 0x7E4A28;
 	static constexpr size_t ClassSize = 0x3A0;
+public:
+	DEFINE_REFERENCE(DynamicVectorClass<CampaignClass*>, Array, 0x887300u)
 
 public:
 	int idxCD;

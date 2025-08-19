@@ -1,7 +1,3 @@
-/*
-	ObjectTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -16,14 +12,12 @@ class HouseTypeClass;
 class ObjectClass;
 class BuildingClass;
 
+/*!
+	@brief ObjectType is type of object which can be placed on battle map.
+*/
 class NOVTABLE ObjectTypeClass : public AbstractTypeClass
 {
 public:
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	using base_type = AbstractTypeClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -39,6 +33,8 @@ public:
 public:
 	static constexpr uintptr_t AbsVTable = 0x7EF2D8;
 
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectTypeClass*>, Array, 0xAC1418u)
+public:
 	ColorStruct RadialColor;
 	BYTE          unused_9B;
 	Armor         Armor;
@@ -51,8 +47,8 @@ public:
 	VoxelStruct TurretVoxel; //also used for WO voxels
 	VoxelStruct BarrelVoxel;
 
-	VoxelStruct ChargerTurrets [0x12];
-	VoxelStruct ChargerBarrels [0x12];
+	VoxelStruct ChargerTurrets[0x12];
+	VoxelStruct ChargerBarrels[0x12];
 
 	bool          NoSpawnAlt;
 	PROTECTED_PROPERTY(BYTE, align_1E9[3]);
@@ -60,12 +56,12 @@ public:
 	int           CrushSound; //index
 	int           AmbientSound; //index
 
-	char ImageFile [0x19];
+	char ImageFile[0x19];
 
 	bool           AlternateArcticArt;
 	bool           ArcticArtInUse; //not read from ini
 
-	char AlphaImageFile [0x19];
+	char AlphaImageFile[0x19];
 
 	bool           Theater;
 	bool           Crushable;

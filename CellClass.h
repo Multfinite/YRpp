@@ -1,7 +1,3 @@
-/*
-	Cells
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -51,18 +47,93 @@ public:
 	// see ABC5DC, AC13BC
 	static constexpr int BridgeHeight = BridgeLevels * Unsorted::LevelHeight;
 
+public:
+	CellStruct MapCoords;	//Where on the map does this Cell lie?
+	DynamicVectorClass<FoggedObjectClass*>* FoggedObjects;
+	CellClass* BridgeOwnerCell;
+	DWORD              unknown_30;
+	LightConvertClass* LightConvert;
+	int                IsoTileTypeIndex;	//What tile is this Cell?
+	TagClass* AttachedTag;			// The cell tag
+	BuildingTypeClass* Rubble;				// The building type that provides the rubble image
+	int                OverlayTypeIndex;	//What Overlay lies on this Cell?
+	int                SmudgeTypeIndex;	//What Smudge lies on this Cell?
 
+	PassabilityType    Passability;
+	int                WallOwnerIndex; // Which House owns the wall placed in this Cell?
+	//                                 // Determined by finding the nearest BuildingType and taking its owner
+	int                InfantryOwnerIndex;
+	int                AltInfantryOwnerIndex;
+	DWORD              unknown_5C;
+	DWORD              unknown_60;
+	DWORD              RedrawFrame;
+	RectangleStruct    InViewportRect;
+	//Is this cell in a cloak generator's radius? One bit per House.
+	DWORD              CloakedByHouses;	
+protected:
+	// use Sensors_ funcs above
+	// Is this cell in range of some SensorsSight= equipment? One Word(!) per House, ++ and -- per unit.
+	// ! 24 houses instead of 32 like cloakgen
+	unsigned short               SensorsOfHouses[0x18]; 
 
+	// use DisguiseSensors_ funcs
+	// Is this cell in range of some DetectDisguise= equipment? One Word(!) per House, ++ and -- per unit.
+	// ! 24 houses instead of 32 like cloakgen
+	unsigned short               DisguiseSensorsOfHouses[0x18]; 
+public:
+	DWORD              BaseSpacerOfHouses; // & (1 << HouseX->ArrayIndex) == base spacing dummy for HouseX
+	FootClass* Jumpjet; // a jumpjet occupying this cell atm
 
+	ObjectClass* FirstObject;	//The first Object on this Cell. NextObject functions as a linked list.
+	ObjectClass* AltObject;
 
+	LandType           LandType;	//What type of floor is this Cell?
+	double             RadLevel;	//The level of radiation on this Cell.
+	RadSiteClass* RadSite;	//A pointer to the responsible RadSite.
 
+	PixelFXClass* PixelFX;
+	int                OccupyHeightsCoveringMe;
+	DWORD              Intensity;
+	WORD               Ambient;
+	WORD			   Intensity_Normal;
+	WORD               Intensity_Terrain;
+	WORD               Color1_Blue;
+	//ColorStruct      Color2; //110-114
+	WORD               Color2_Red;
+	WORD               Color2_Green;
+	WORD               Color2_Blue;
+	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
+	char               unknown_118;
+	char               IsIceGrowthAllowed;
+	char               Height;
+	char               Level;
 
+	BYTE               SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
+	BYTE               unknown_11D;
 
+	unsigned char      OverlayData;	//The crate type on this cell. Also indicates some other weird properties
 
+	BYTE               SmudgeData;
+	char               Visibility; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
+	char               Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
+	BYTE               BlockedNeighbours; // number of somehow occupied cells next to this
+	PROTECTED_PROPERTY(BYTE, align_123);
 
+	// SubOccupations - 0x1 Center 0x2 Top(Abandoned) 0x4 Right 0x8 Left 0x10 Down / Terrains
+	// 0x20 Units 0x40 Aircrafts 0x80 Buildings
+	DWORD              OccupationFlags;
+	DWORD              AltOccupationFlags;
 
+	AltCellFlags	   AltFlags;	// related to Flags below
+	int                ShroudCounter;
+	DWORD              GapsCoveringThisCell; // actual count of gapgens in this cell, no idea why they need a second layer
+	bool               VisibilityChanged;
+	PROTECTED_PROPERTY(BYTE, align_139[0x3]);
+	DWORD              unknown_13C;
 
+	CellFlags          Flags;	//Various settings.
+	PROTECTED_PROPERTY(BYTE, padding_144[4]);
 
 public:
 	virtual ~CellClass() JMP_THIS(0x47BB60);
@@ -277,103 +348,13 @@ public:
 	void DrawOverlayShadow(const Point2D& Location, const RectangleStruct& Bound) JMP_THIS(0x47F510);
 	bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, int zone, MovementZone movementZone, int level, bool isBridge) JMP_THIS(0x4834A0);
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
-	CellStruct MapCoords;	//Where on the map does this Cell lie?
-	DynamicVectorClass<FoggedObjectClass*>* FoggedObjects;
-	CellClass*         BridgeOwnerCell;
-	DWORD              unknown_30;
-	LightConvertClass* LightConvert;
-	int                IsoTileTypeIndex;	//What tile is this Cell?
-	TagClass*          AttachedTag;			// The cell tag
-	BuildingTypeClass* Rubble;				// The building type that provides the rubble image
-	int                OverlayTypeIndex;	//What Overlay lies on this Cell?
-	int                SmudgeTypeIndex;	//What Smudge lies on this Cell?
-
-	PassabilityType    Passability;
-	int                WallOwnerIndex; // Which House owns the wall placed in this Cell?
-	//                                 // Determined by finding the nearest BuildingType and taking its owner
-	int                InfantryOwnerIndex;
-	int                AltInfantryOwnerIndex;
-	DWORD              unknown_5C;
-	DWORD              unknown_60;
-	DWORD              RedrawFrame;
-	RectangleStruct    InViewportRect;
-	DWORD              CloakedByHouses;	//Is this cell in a cloak generator's radius? One bit per House.
-
-	// Is this cell in range of some SensorsSight= equipment? One Word(!) per House, ++ and -- per unit.
 protected:
-	unsigned short               SensorsOfHouses[0x18]; // ! 24 houses instead of 32 like cloakgen
-	// use Sensors_ funcs above
-
-	// Is this cell in range of some DetectDisguise= equipment? One Word(!) per House, ++ and -- per unit.
-protected:
-	unsigned short               DisguiseSensorsOfHouses[0x18]; // ! 24 houses instead of 32 like cloakgen
-	// use DisguiseSensors_ funcs above
-
 	/*! @brief FAKE CTOR */
 	explicit __forceinline CellClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 public:
 	CellClass(noinit_t) noexcept : AbstractClass(fake_noinit_t{}) JMP_THIS(0x47B360);
 	CellClass() : CellClass(fake_noinit_t{}) JMP_THIS(0x47BBF0);
 
-	DWORD              BaseSpacerOfHouses; // & (1 << HouseX->ArrayIndex) == base spacing dummy for HouseX
-	FootClass*         Jumpjet; // a jumpjet occupying this cell atm
-
-	ObjectClass*       FirstObject;	//The first Object on this Cell. NextObject functions as a linked list.
-	ObjectClass*       AltObject;
-
-	LandType           LandType;	//What type of floor is this Cell?
-	double             RadLevel;	//The level of radiation on this Cell.
-	RadSiteClass*      RadSite;	//A pointer to the responsible RadSite.
-
-	PixelFXClass*      PixelFX;
-	int                OccupyHeightsCoveringMe;
-	DWORD              Intensity;
-	WORD               Ambient;
-	WORD			   Intensity_Normal;
-	WORD               Intensity_Terrain;
-	WORD               Color1_Blue;
-	//ColorStruct      Color2; //110-114
-	WORD               Color2_Red;
-	WORD               Color2_Green;
-	WORD               Color2_Blue;
-	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
-
-	char               unknown_118;
-	char               IsIceGrowthAllowed;
-	char               Height;
-	char               Level;
-
-	BYTE               SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
-	BYTE               unknown_11D;
-
-	unsigned char      OverlayData;	//The crate type on this cell. Also indicates some other weird properties
-
-	BYTE               SmudgeData;
-	char               Visibility; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
-	char               Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
-	BYTE               BlockedNeighbours; // number of somehow occupied cells next to this
-	PROTECTED_PROPERTY(BYTE, align_123);
-
-	// SubOccupations - 0x1 Center 0x2 Top(Abandoned) 0x4 Right 0x8 Left 0x10 Down / Terrains
-	// 0x20 Units 0x40 Aircrafts 0x80 Buildings
-	DWORD              OccupationFlags;
-	DWORD              AltOccupationFlags;
-
-	AltCellFlags	   AltFlags;	// related to Flags below
-	int                ShroudCounter;
-	DWORD              GapsCoveringThisCell; // actual count of gapgens in this cell, no idea why they need a second layer
-	bool               VisibilityChanged;
-	PROTECTED_PROPERTY(BYTE,     align_139[0x3]);
-	DWORD              unknown_13C;
-
-	CellFlags          Flags;	//Various settings.
-	PROTECTED_PROPERTY(BYTE,     padding_144[4]);
 /*
 	CellClass * Adjacent_Cell(int32_t dir) JMP_THIS(0x481810);
 	void Adjust_Threat(int32_t house, int32_t threat_value) JMP_THIS(0x481870);

@@ -1,7 +1,3 @@
-/*
-	AnimTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "TechnoTypeClass.h"
@@ -53,14 +49,8 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7EB610;
 	static constexpr size_t ClassSize = 0xED0;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(InfantryTypeClass, 0xA8E348u);
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	PipIndex Pip;
 	PipIndex OccupyPip;
@@ -78,7 +68,8 @@ public:
 	int LeaveWaterSound;
 	bool Cyborg;
 	bool NotHuman;
-	bool Ivan; //used for the bomb attack cursor...
+	// Used for the bomb attack cursor...
+	bool Ivan;
 	int DirectionDistance;
 	bool Occupier;
 	bool Assaulter;
@@ -99,7 +90,7 @@ public:
 	bool DeployedCrushable;
 	bool UseOwnName;
 	bool JumpJetTurn;
-private: DWORD align_ECC;
+protected: DWORD align_ECC;
 public:
 	virtual ~InfantryTypeClass() JMP_THIS(0x5239D0);
 

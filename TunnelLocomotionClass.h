@@ -1,5 +1,3 @@
-//Locomotor = {4A582743-9839-11d1-B709-00A024DDAFD1}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -8,10 +6,8 @@ class __declspec(uuid("4A582743-9839-11d1-B709-00A024DDAFD1"))
 NOVTABLE TunnelLocomotionClass : public LocomotionClass
 {
 public:
-	DEFINE_REFERENCE(double const, TunnelMovementSpeed, 0x7F5B20u)
 	using base_type = LocomotionClass;
 
-	enum State
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
 		constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -26,6 +22,7 @@ public:
 	static constexpr size_t ClassSize = 0x3C;
 	DEFINE_REFERENCE(double, TunnelMovementSpeed, 0x7F5B20u)
 public:
+	enum State : int
 	{
 		Idle = 0,
 		PreDigIn = 1,
@@ -37,6 +34,10 @@ public:
 		DugOut = 7
 	};
 
+	TunnelLocomotionClass::State State;
+	Coordinate Coords;
+	RateTimer DigTimer;
+	bool IsMoving;
 public:
 	/* SDTOR: 0x72A210 */
 	virtual ~TunnelLocomotionClass() RX;
@@ -103,16 +104,8 @@ public:
 	bool ProcessDugOut() JMP_THIS(0x729480);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 	explicit __forceinline TunnelLocomotionClass(noinit_t) : LocomotionClass(noinit_t{}) { }
 public:
-
-	TunnelLocomotionClass::State State;
-	CoordStruct Coords;
-	RateTimer DigTimer;
-	bool bool38;
 	TunnelLocomotionClass()	: TunnelLocomotionClass(noinit_t{}) JMP_THIS(0x728A00);
 };
 static_assert(sizeof(TunnelLocomotionClass) == TunnelLocomotionClass::ClassSize);

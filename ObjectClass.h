@@ -1,7 +1,3 @@
-/*
-	Base class for all game objects.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -29,12 +25,12 @@ class HouseTypeClass;
 class LineTrail;
 struct WeaponStruct;
 
+/*!
+* @brief Base class for all game objects.
+*/
 class NOVTABLE ObjectClass : public AbstractClass
 {
 public:
-
-	//global arrays
-	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, CurrentObjects, 0xA8ECB8u)
 	using base_type = AbstractClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -52,10 +48,9 @@ public:
 	static constexpr auto AbsDerivateID = AbstractFlags::Object;
 	static constexpr size_t ClassSize = 0xAC;
 
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, CurrentObjects, 0xA8ECB8u)
+	DEFINE_REFERENCE(DynamicVectorClass<ObjectClass*>, Array, 0xA8E360u)
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 public:
 	DWORD              unknown_24;
 	DWORD              unknown_28;

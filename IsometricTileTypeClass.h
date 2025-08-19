@@ -24,12 +24,8 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7ECC48;
     static constexpr size_t ClassSize = 0x30C;
 
-	//Array
-	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileTypeClass*>, Array, 0xA8ED28u)
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<IsometricTileTypeClass*>, Array, 0xA8ED28u)
 
 public:
 	int ArrayIndex;

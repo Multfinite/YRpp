@@ -157,7 +157,7 @@ public:
 
 	constexpr Matrix3D operator*(const Matrix3D& B) const
 	{
-		Matrix3D ret { noinit_t() };
+		Matrix3D ret { noinit_t{} };
 		MatrixMultiply(&ret, this, &B);
 		return ret;
 	}
@@ -307,7 +307,7 @@ public:
 	static Matrix3D* __fastcall FromQuaternion(Matrix3D* mat, const Quaternion* q) { JMP_STD(0x646980); }
 	static Matrix3D FromQuaternion(const Quaternion& q)
 	{
-		Matrix3D buffer { noinit_t() };
+		Matrix3D buffer { noinit_t{} };
 		FromQuaternion(&buffer, &q);
 		return buffer;
 	}
@@ -317,7 +317,7 @@ public:
 
 	Quaternion ToQuaternion() const
 	{
-		Quaternion ret { noinit_t() };
+		Quaternion ret { noinit_t{} };
 		ToQuaternion(&ret, this);
 		return ret;
 	}

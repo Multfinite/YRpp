@@ -1,7 +1,3 @@
-/*
-	TechnoTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -71,29 +67,15 @@ struct WeaponStruct
 		{ return false; }
 };
 
+/*!
+* @brief TechnoTypes are initialized by INI files.
+*/
 class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
-	DEFINE_REFERENCE(DynamicVectorClass<TechnoTypeClass*>, Array, 0xA8EB00u)
-
-	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
-	{
-		for(auto pItem : Array) {
-			if(!_strcmpi(pItem->ID, pID)) {
-				return pItem;
-			}
-		}
-		return nullptr;
-	}
-
-	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
 	using base_type = ObjectTypeClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
-		for(int i = 0; i < Array.Count; ++i) {
-			if(!_strcmpi(Array[i]->get_ID(), pID)) {
-				return i;
-			}
 		constexpr vtables_t() noexcept : base_type::vtables_t()
 		{
 			this->IPersistStream = 0x7F4ED8;
@@ -101,19 +83,14 @@ public:
 			this->INoticeSink = 0x7F4EB4;
 			this->INoticeSource = 0x7F4EAC;
 		}
-		return -1;
-	}
 	};
 	static inline vtables_t vtables{};
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F4ED8;
 	static constexpr size_t ClassSize = 0xDF8;
 
+	DEFINE_REFERENCE(DynamicVectorClass<TechnoTypeClass*>, Array, 0xA8EB00u)
 	static constexpr auto MaxWeapons = 18;
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
 
 	int             WalkRate;
@@ -282,8 +259,8 @@ public:
 	SHPStruct*      Cameo;
 	bool            CameoAllocated;
 	char            AltCameoFile[0x19];
-	PROTECTED_PROPERTY(BYTE,  align_70E[2]);
-	SHPStruct*      AltCameo;
+	PROTECTED_PROPERTY(BYTE, align_70E[2]);
+	SHPStruct* AltCameo;
 	bool            AltCameoAllocated;
 	int             RotCount;
 	int             ROT;
@@ -360,8 +337,8 @@ public:
 	bool            Teleporter;
 	bool            IsGattling;
 	int             WeaponStages;
-	int WeaponStage [6];
-	int EliteStage [6];
+	int WeaponStage[6];
+	int EliteStage[6];
 	int             RateUp;
 	int             RateDown;
 	bool            SelfHealing;

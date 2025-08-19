@@ -45,6 +45,13 @@ public:
 		DEFINE_REFERENCE(CLSID const, Jumpjet, 0x7E9AC0u)
 		DEFINE_REFERENCE(CLSID const, Rocket, 0x7E9AD0u)
 	};
+public:
+	FootClass* Owner;
+	FootClass* LinkedTo;
+	bool Powered;
+	bool Dirty;
+	int RefCount;
+public:
 
 	HRESULT __stdcall QueryInterface(REFIID iid, LPVOID* ppvObject) JMP_STD(0x55A9B0);
 	ULONG __stdcall AddRef() JMP_STD(0x55A950);
@@ -176,15 +183,7 @@ public:
 	}
 protected:
 	explicit __forceinline LocomotionClass(noinit_t) noexcept { }
-
-	//Properties
 public:
-
-	FootClass* Owner;
-	FootClass* LinkedTo;
-	bool Powered;
-	bool Dirty;
-	int RefCount;
 	LocomotionClass() JMP_THIS(0x55A6C0);
 };
 static_assert(sizeof(LocomotionClass) == LocomotionClass::ClassSize);

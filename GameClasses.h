@@ -71,6 +71,11 @@
 #include "DriveLocomotionClass.h"
 #include "DropPodLocomotionClass.h"
 #include "FlyLocomotionClass.h"
+#include "JumpjetLocomotionClass.h"
+#include "RocketLocomotionClass.h"
+#include "ShipLocomotionClass.h"
+#include "TeleportLocomotionClass.h"
+#include "TunnelLocomotionClass.h"
 
 //GScreenClass Tree
 #include "SidebarClass.h"

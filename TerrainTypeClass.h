@@ -1,7 +1,3 @@
-/*
-	TerrainTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -12,8 +8,6 @@ NOVTABLE TerrainTypeClass : public ObjectTypeClass
 public:
     using base_type = ObjectTypeClass;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TerrainTypeClass, 0xA8E318u);
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -30,7 +24,23 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F5458;
     static constexpr size_t ClassSize = 0x2BC;
 
+public:
+    ABSTRACTTYPE_ARRAY(TerrainTypeClass, 0xA8E318u);
 
+public:
+    int ArrayIndex;
+    int Foundation;
+    ColorStruct RadarColor;
+    int AnimationRate;
+    float AnimationProbability;
+    int TemperateOccupationBits;
+    int SnowOccupationBits;
+    bool WaterBound;
+    bool SpawnsTiberium;
+    bool IsFlammable;
+    bool IsAnimated;
+    bool IsVeinhole;
+    CellStruct* FoundationData;
 
 public:
     virtual ~TerrainTypeClass() JMP_THIS(0x71DC00);
@@ -40,9 +50,6 @@ public:
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x71E1D0);
     HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x71E240);
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     RTTIType WhatAmI() const override JMP_THIS(0x71E330);
     int Size() const override JMP_THIS(0x71E340);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x71E140);
@@ -59,19 +66,6 @@ public:
     int32_t From_Name() JMP_THIS(0x71DD80);
 */
 
-	int ArrayIndex;
-	int Foundation;
-	ColorStruct RadarColor;
-	int AnimationRate;
-	float AnimationProbability;
-	int TemperateOccupationBits;
-	int SnowOccupationBits;
-	bool WaterBound;
-	bool SpawnsTiberium;
-	bool IsFlammable;
-	bool IsAnimated;
-	bool IsVeinhole;
-	CellStruct* FoundationData;
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TerrainTypeClass(fake_noinit_t) noexcept

@@ -8,7 +8,6 @@
 class VeinholeLogic
 {
 public:
-
 	//74DFAF
 	void Construct(int nCount = RulesClass::Instance->MaxVeinholeGrowth)
 	{
@@ -74,7 +73,22 @@ public:
 	DEFINE_REFERENCE(bool*, IsCurrentPosAffected, 0xA83DC8u)
 	DEFINE_REFERENCE(SHPStruct*, VeinSHPData, 0xB1D2ECu)
 	DEFINE_REFERENCE(DynamicVectorClass<VeinholeMonsterClass*>, Array, 0xB1D290u)
-
+public:
+	DECLARE_PROPERTY(VeinholeLogic, GrowthLogic);
+	int CurrentState;
+	int NextState;
+	int MonsterFrameIdx;
+	char IsAnimationUpToDate;
+	CDTimerClass UpdateAnimationFrameTimer;
+	int AnimationUpdatePeriod;
+	int MonsterFrameIdxChange;
+	CDTimerClass UpdateStateTimer;
+	CellStruct Position;
+	int MonsterFrameToDraw;
+	char IsInactive;
+	char DontPuffGas;
+	int VeinCount;
+public:
 	virtual ~VeinholeMonsterClass() JMP_THIS(0x74C9F0);
 
 	HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x74F2D0);
@@ -120,9 +134,9 @@ public:
 
 		/*
 		//pop back ?
-		for (int i = Array.Count - 1; i >= 0; --i)
+		for (int i = Array->Count - 1; i >= 0; --i)
 		{
-			auto pVeinholes = Array.GetItem(i);
+			auto pVeinholes = Array->GetItem(i);
 			pVeinholes->ClearGrowthData();
 		}
 
@@ -158,21 +172,6 @@ public:
 protected:
 	explicit __forceinline VeinholeMonsterClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) { }
 public:
-
-	DECLARE_PROPERTY(VeinholeLogic, GrowthLogic);
-	int CurrentState;
-	int NextState;
-	int MonsterFrameIdx;
-	char IsAnimationUpToDate;
-	CDTimerClass UpdateAnimationFrameTimer;
-	int AnimationUpdatePeriod;
-	int MonsterFrameIdxChange;
-	CDTimerClass UpdateStateTimer;
-	CellStruct Position;
-	int MonsterFrameToDraw;
-	char IsDead;
-	char DontPuffGas;
-	int VeinCount;
 	VeinholeMonsterClass(CellStruct* pWhere)	: VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C5B0);
 	VeinholeMonsterClass(noinit_t) noexcept : VeinholeMonsterClass(fake_noinit_t{}) JMP_THIS(0x74C420);
 };

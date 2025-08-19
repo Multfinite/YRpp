@@ -1,13 +1,11 @@
-/*
-	Aircraft
-*/
-
 #pragma once
 
 #include "FootClass.h"
 #include "AircraftTypeClass.h"
 
-//AircraftClass
+/*!
+* @brief Aircraft
+*/
 class __declspec(uuid("0E272DC2-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE AircraftClass : public FootClass, public IFlyControl
 {
@@ -33,26 +31,25 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E22A4;
 	static constexpr size_t ClassSize = 0x6D8;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AircraftClass*>, Array, 0xA8E390u)
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	AircraftTypeClass* Type;
-	bool ShouldLoseAmmo; // Whether or not to deduct ammo after firing run (strafing) is over
-	bool HasPassengers;	//parachutes
-	bool IsKamikaze; // when crashing down, duh
+	// Whether or not to deduct ammo after firing run (strafing) is over
+	bool ShouldLoseAmmo;
+	//parachutes
+	bool HasPassengers;
+	// when crashing down, duh
+	bool IsKamikaze;
 	BuildingClass* DockNowHeadingTo;
 	bool unknown_bool_6D0;
 	bool unknown_bool_6D1;
-	bool IsLocked; // Whether or not aircraft is locked to a firing run (strafing)
+	// Whether or not aircraft is locked to a firing run (strafing)
+	bool IsLocked;
 	char NumParadropsLeft;
 	bool IsCarryallNotLanding;
-	bool IsReturningFromAttackRun; // Aircraft finished attack run and/or went idle and is now returning from it
+	// Aircraft finished attack run and/or went idle and is now returning from it
+	bool IsReturningFromAttackRun;
+public:
 	virtual ~AircraftClass() JMP_THIS(0x414080);
 
 	int __stdcall Landing_Altitude() override JMP_STD(0x41B6A0);

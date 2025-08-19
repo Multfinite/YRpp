@@ -24,12 +24,12 @@ public:
 	//Constructors
 	DropListClass(unsigned int nID, wchar_t* pText, int nMaxLength, TextPrintType eTextFlag, int nX, int nY,
 		int nWidth, int nHeight, EditFlag eEditFlag,int nSomeHeight, SHPStruct* UpSHP, SHPStruct* DownSHP) noexcept
-		: DropListClass(noinit_t()) { JMP_THIS(0x4B4E10); }
+		: DropListClass(noinit_t{}) { JMP_THIS(0x4B4E10); }
 
 protected:
 	explicit __forceinline DropListClass(noinit_t)  noexcept
-		: EditClass(noinit_t())
-		, List(noinit_t())
+		: EditClass(noinit_t{})
+		, List(noinit_t{})
 	{
 	}
 

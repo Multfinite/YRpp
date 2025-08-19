@@ -1,7 +1,3 @@
-/*
-	Electric Bolts
-*/
-
 #pragma once
 
 #include "GeneralDefinitions.h"
@@ -10,6 +6,9 @@
 class TechnoClass;
 class UnitClass;
 
+/*!
+* @brief Electric Bolts
+*/
 class EBolt
 {
 public:
@@ -28,13 +27,11 @@ public:
 	void ClearOwner()
 		{ JMP_THIS(0x4C1E50); }
 
-	CoordStruct* GetSourceCoords(CoordStruct* outBuffer) const
-		{ JMP_THIS(0x4C2B40); }
-
+	CoordStruct* __GetSourceCoords(CoordStruct* retstr) const { JMP_THIS(0x4C2B40); }
 	CoordStruct GetSourceCoords() const {
-		CoordStruct buffer;
-		GetSourceCoords(&buffer);
-		return buffer;
+		CoordStruct ret;
+		__GetSourceCoords(&ret);
+		return ret;
 	}
 
 	void Fire(CoordStruct P1, CoordStruct P2, DWORD arg18)
@@ -51,7 +48,7 @@ public:
 
 	CoordStruct Point1;
 	CoordStruct Point2;
-	DWORD unknown_18;	//Duration?
+	DWORD ZAdjust;
 	int Random;	//Random number between 0 and 256
 	TechnoClass* Owner;	//ingame this is a UnitClass but needed to circumvent some issues
 	int WeaponSlot; // which weapon # to use from owner

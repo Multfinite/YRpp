@@ -7,9 +7,6 @@
 #include "Helpers/CompileTime.h"
 
 class ObjectClass;
-class DSurface;
-class CellClass;
-
 struct TacticalSelectableStruct
 {
 	ObjectClass* Object;
@@ -17,9 +14,12 @@ struct TacticalSelectableStruct
 	int Y;
 };
 
-class NOVTABLE TacticalClass : public AbstractClass
+class DSurface;
 class __declspec(uuid("CF56B38A-240D-11D2-817C-006008055BB5"))
 NOVTABLE TacticalClass : public AbstractClass
+/*!
+* @brief TacticalClass - handles tactical map rendering and display
+*/
 {
 public:
     using base_type = AbstractClass;
@@ -38,40 +38,43 @@ public:
     static constexpr AbstractType AbsID = AbstractType::TacticalMap;
     static constexpr uintptr_t AbsVTable = 0x7F4348;
     static constexpr size_t ClassSize = 0xE18;
-	DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)
 
+
+    DEFINE_REFERENCE(TacticalClass*, Instance, 0x887324u)
+
+    // Properties
+    wchar_t ScreenText[64];
+    int EndGameGraphicsFrame;
+    int LastAIFrame;
+    bool field_AC;
+    bool field_AD;
+    PROTECTED_PROPERTY(char, gap_AE[2]);
+    Point2D TacticalPos;
+    Point2D LastTacticalPos;
+    double ZoomInFactor;
+    Point2D Point_C8;
+    Point2D Point_D0;
+    float field_D8;
+    float field_DC;
+    int VisibleCellCount;
+    CellClass* VisibleCells[800];
+    Point2D TacticalCoord1;
+    DWORD field_D6C;
+    DWORD field_D70;
+    Point2D TacticalCoord2;
+    bool field_D7C;
+    bool Redrawing;
+    PROTECTED_PROPERTY(char, gap_D7E[2]);
+    RectangleStruct ContainingMapCoords;
+    LTRBStruct Band;
+    DWORD MouseFrameIndex;
+    CDTimerClass StartTime;
+    int SelectableCount;
+    Matrix3D Unused_Matrix3D;
+    Matrix3D IsoTransformMatrix;
+    DWORD field_E14;
 
 public:
-	wchar_t ScreenText[64];
-	int EndGameGraphicsFrame;
-	int LastAIFrame;
-	bool field_AC;
-	bool field_AD;
-	PROTECTED_PROPERTY(char, gap_AE[2]);
-	Point2D TacticalPos;
-	Point2D LastTacticalPos;
-	double ZoomInFactor;
-	Point2D Point_C8;
-	Point2D Point_D0;
-	float field_D8;
-	float field_DC;
-	int VisibleCellCount;
-	CellClass* VisibleCells[800];
-	Point2D TacticalCoord1;
-	DWORD field_D6C;
-	DWORD field_D70;
-	Point2D TacticalCoord2;
-	bool field_D7C;
-	bool Redrawing; // set while redrawing - cheap mutex // TacticalPosUpdated
-	PROTECTED_PROPERTY(char, gap_D7E[2]);
-	RectangleStruct ContainingMapCoords;
-	LTRBStruct Band;
-	DWORD MouseFrameIndex;
-	CDTimerClass StartTime;
-	int SelectableCount;
-	Matrix3D Unused_Matrix3D;
-	Matrix3D IsoTransformMatrix;
-	DWORD field_E14;
     virtual ~TacticalClass() JMP_THIS(0x6D1C20);
 
     virtual bool DrawLine_6DBB60(RectangleStruct const& a2, RectangleStruct const& a3, COLORREF a4, bool bool1) JMP_THIS(0x6DBB60);

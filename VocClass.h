@@ -1,7 +1,3 @@
-/*
-	Sound effects!
-*/
-
 #pragma once
 
 #include "ArrayClasses.h"
@@ -29,55 +25,16 @@ struct VolumeStruct	//pretty uncreative name, but it's all I can come up with at
 	int   unknown_int_1C; // default is 16384
 };
 
+/*!
+* @brief Sound effects!
+*/
 class VocClass
 {
 public:
 	DEFINE_REFERENCE(DynamicVectorClass<VocClass*>, Array, 0xB1D378u)
 
 	DEFINE_REFERENCE(bool, VoicesEnabled, 0x8464ACu)
-
-	static VocClass* Find(const char* pName)
-	{
-		for (int i = 0; i < Array.Count; ++i)
-		{
-			if (!_strcmpi(Array[i]->Name, pName))
-				return Array[i];
-		}
-		return nullptr;
-	}
-	/* dunno what gives, but this doesn't work, the one below does
-		static int FindIndexOf(const char* pName)
-		{
-			for(int i = 0; i < Array.get_Count(); i++)
-				if(!_strcmpi(Array[i]->get_Name(),pName))return i;
-			return -1;
-		}
-	*/
-	static int __fastcall FindIndex(const char* pName)
-		JMP_STD(0x7514D0);
-
-	/* Play a sound independant of the position.
-		n = Index of VocClass in Array to be played
-		Volume = 0.0f to 1.0f
-		Panning = 0x0000 (left) to 0x4000 (right) (0x2000 is center)
-	*/
-	static void __fastcall PlayGlobal(int n, int Panning, float Volume, AudioController* pCtrl = nullptr)
-		JMP_STD(0x750920);
-
-	/* Play a sound at a certain Position.
-		n = Index of VocClass in Array to be played
-	*/
-	static void __fastcall PlayAt(int n, const CoordStruct& coords, AudioController* pCtrl = nullptr)
-		JMP_STD(0x7509E0);
-
-	// calls the one above ^ - probably sanity checks and whatnot
-	static void __fastcall PlayIndexAtPos(int n, const CoordStruct& coords, int a3 = 0)
-		JMP_STD(0x750E20);
-
-	//Properties
-
 public:
-
 	VocClassHeader Header;
 	int SamplesOK;         //0 or 1, determines whether all samples are OK to use
 	SoundControl Control;
@@ -115,7 +72,46 @@ public:
 	int Decay;
 	DWORD unknown_140;
 	DWORD unknown_144;
+public:
+	static VocClass* Find(const char* pName)
+	{
+		for (int i = 0; i < Array.Count; ++i)
+		{
+			if (!_strcmpi(Array.Items[i]->Name, pName))
+				return Array.Items[i];
+		}
+		return nullptr;
+	}
+	/* dunno what gives, but this doesn't work, the one below does
+		static int FindIndexOf(const char* pName)
+		{
+			for(int i = 0; i < Array->get_Count(); i++)
+				if(!_strcmpi((*Array)[i]->get_Name(),pName))return i;
+			return -1;
+		}
+	*/
+	static int __fastcall FindIndex(const char* pName)
+		JMP_STD(0x7514D0);
 
+	/* Play a sound independant of the position.
+		n = Index of VocClass in Array to be played
+		Volume = 0.0f to 1.0f
+		Panning = 0x0000 (left) to 0x4000 (right) (0x2000 is center)
+	*/
+	static void __fastcall PlayGlobal(int n, int Panning, float Volume, AudioController* pCtrl = nullptr)
+		JMP_STD(0x750920);
+
+	/* Play a sound at a certain Position.
+		n = Index of VocClass in Array to be played
+	*/
+	static void __fastcall PlayAt(int n, const CoordStruct& coords, AudioController* pCtrl = nullptr)
+		JMP_STD(0x7509E0);
+
+	// calls the one above ^ - probably sanity checks and whatnot
+	static void __fastcall PlayIndexAtPos(int n, const CoordStruct& coords, int a3 = 0)
+		JMP_STD(0x750E20);
+
+public:
 	//constructor and destructor should never be needed
 	VocClass() = delete;
 	~VocClass() = delete;

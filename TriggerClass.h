@@ -28,8 +28,20 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F5904;
     static constexpr size_t ClassSize = 0x48;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<TriggerClass*>, Array, 0xA8EAE8u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<TriggerClass*>, Array, 0xA8EAE8u)
+
+public:
+    TriggerTypeClass* Type;
+    TriggerClass* NextTrigger;
+    HouseClass* House;
+    bool Destroyed;
+    PROTECTED_PROPERTY(BYTE, align_31[3]);
+    CDTimerClass Timer;
+    DWORD OccuredEvents;
+    bool Enabled;
+    PROTECTED_PROPERTY(BYTE, padding_45[3]);
+
 public:
     virtual ~TriggerClass() JMP_THIS(0x726140);
 
@@ -73,22 +85,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TriggerClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-	TriggerTypeClass*	Type;
-	TriggerClass*		NextTrigger;
-	HouseClass*			House;
-	bool				Destroyed; // ActionClass::DestroyTrigger called on
-	PROTECTED_PROPERTY(BYTE, align_31[3]);
-	CDTimerClass			Timer;
-	DWORD				OccuredEvents; // bitfield for 32 events max
-	bool				Enabled;
-	PROTECTED_PROPERTY(BYTE, padding_45[3]);
     TriggerClass(TriggerTypeClass* pType) : TriggerClass(fake_noinit_t{}) JMP_THIS(0x725FA0);
 };
 static_assert(sizeof(TriggerClass) == TriggerClass::ClassSize);

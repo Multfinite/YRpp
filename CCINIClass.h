@@ -74,7 +74,6 @@ public:
 		{ JMP_THIS(0x528A10); }
 	int GetString(const char* pSection, const char* pKey, char* pBuffer,size_t szBufferSize)
 		{ return ReadString(pSection, pKey, pBuffer, pBuffer, szBufferSize); }
-
 	//Writes an ANSI string.
 	bool WriteString(const char* pSection, const char* pKey, const char* pString)
 		{ JMP_THIS(0x528660); }
@@ -361,23 +360,7 @@ public:
 		if (file.Exists())
 			this->ReadCCFile(&file);
 	}
-
-	static CCINIClass* LoadINIFile(const char* pFileName)
-	{
-		CCINIClass* pINI = GameCreate<CCINIClass>();
-		pINI->LoadFromFile(pFileName);
-		return pINI;
-	}
-
-	static void UnloadINIFile(CCINIClass*& pINI)
- 	{
- 		if (pINI)
- 		{
- 			GameDelete(pINI);
- 			pINI = nullptr;
- 		}
- 	}
-
+	
 	//Parses an INI file from a CCFile
 	CCINIClass* ReadCCFile(FileClass* pCCFile, bool bDigest = false, bool bLoadComments = false)
 		{ JMP_THIS(0x4741F0); }

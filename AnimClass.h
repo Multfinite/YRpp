@@ -1,7 +1,3 @@
-/*
-	Animations
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -14,6 +10,9 @@ class BulletClass;
 class HouseClass;
 class LightConvertClass;
 
+/*!
+* @brief Animations
+*/
 class __declspec(uuid("0E272DC3-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE AnimClass : public ObjectClass
 {
@@ -35,21 +34,14 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3354;
 	static constexpr size_t ClassSize = 0x1C8;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, Array, 0xA8E9A8u)
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	DECLARE_PROPERTY(StageClass, Animation);
 	AnimTypeClass* Type; //The AnimType.
-	ObjectClass * OwnerObject; // set by AnimClass::SetOwnerObject (0x424B50)
+	ObjectClass* OwnerObject; // set by AnimClass::SetOwnerObject (0x424B50)
 	DWORD unknown_D0;
 	LightConvertClass* LightConvert;	 //Palette?
-	int LightConvertIndex; // assert(ColorScheme::Array[this->LightConvertIndex] == this->LightConvert);
+	int LightConvertIndex; // assert( (*ColorScheme::Array)[this->LightConvertIndex] == this->LightConvert ;
 	char PaletteName[0x20]; // filename set for destroy anims
 	int TintColor;
 	int ZAdjust;

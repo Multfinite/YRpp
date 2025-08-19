@@ -11,10 +11,6 @@ class __declspec(uuid("0679E983-AD9D-11D3-BE16-00104B62A16C"))
 NOVTABLE BombClass : public AbstractClass
 {
 public:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	using base_type = AbstractClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -32,7 +28,6 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3D10;
 	static constexpr size_t ClassSize = 0x5C;
 public:
-
 	TechnoClass* Owner;		//Most likely Ivan.
 	HouseClass* OwnerHouse;
 	ObjectClass* Target; // attaching to objects is possible, but it will never detonate

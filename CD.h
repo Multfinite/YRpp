@@ -6,44 +6,31 @@ class CDDriveManagerClass
 {
 public:
 	//Static
-	static CDDriveManagerClass* Global()
-		{ return *((CDDriveManagerClass**)0x89E414); }
-
-protected:
-	//CTOR
-	CDDriveManagerClass()
-		{ JMP_THIS(0x4E6070); }
-
+	static CDDriveManagerClass* Global() { return *((CDDriveManagerClass**)0x89E414); }
 public:
-	/*
-	Retrieves the number of the currently inserted disc
-	0 = RA2 Allied,
-	1 = RA2 Soviet,
-	2 = YR
-	*/
-	int GetCDNumber()
-		{ JMP_THIS(0x4A80D0); }
-
-	//Properties
-
-public:
-
-	int CDDriveNames [26]; //int + 'A' would be the drive's name
+	int CDDriveNames[26]; //int + 'A' would be the drive's name
 	int NumCDDrives;
 	DWORD unknown_6C;
+protected:
+	CDDriveManagerClass() JMP_THIS(0x4E6070);
+public:
+	/*!
+	* @brief Retrieves the number of the currently inserted disc
+	* @brief 0 = RA2 Allied,
+	* @brief 1 = RA2 Soviet,
+	* @brief 2 = YR
+	*/
+	int GetCDNumber() JMP_THIS(0x4A80D0);
 };
 
 class CD
 {
 public:
+	DWORD unknown_04;
+public:
 	virtual bool ForceAvailable(int nCDNumber) R0;
 	virtual bool InsertCDDialog() R0;
-	virtual void SwapToDisk() R0;
-
-public:
-
-	DWORD unknown_04;
-
+	virtual void SwapToDisk() RX;
 protected:
-	CD() RX;
+	CD() {}
 };

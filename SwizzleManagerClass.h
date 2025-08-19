@@ -50,7 +50,7 @@ public:
 
 	//CTOR
 	SwizzleManagerClass()
-		: SwizzleManagerClass(noinit_t())
+		: SwizzleManagerClass(noinit_t{})
 	{ JMP_THIS(0x6CF180); }
 
 protected:

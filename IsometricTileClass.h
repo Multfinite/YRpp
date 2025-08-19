@@ -26,9 +26,8 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7EC258;
     static constexpr size_t ClassSize = 0xB0;
 
-	//Array
-	DEFINE_REFERENCE(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
-
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<IsometricTileClass*>, Array, 0x87F750u)
 
 public:
     IsometricTileTypeClass* Type;
@@ -51,14 +50,10 @@ public:
     bool Mark(MarkType mark) override JMP_THIS(0x543330);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline IsometricTileClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-	IsometricTileTypeClass* Type;
     IsometricTileClass(int idxType, CellStruct const& location) : IsometricTileClass(fake_noinit_t{}) JMP_THIS(0x543780);
     IsometricTileClass(noinit_t) noexcept : IsometricTileClass(fake_noinit_t{}) { vtables.init(this); }
 };

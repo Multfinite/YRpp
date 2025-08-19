@@ -1,7 +1,3 @@
-/*
-	CaptureManager - used for mind control.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -11,13 +7,16 @@ class TechnoClass;
 
 struct ControlNode
 {
-	explicit ControlNode() noexcept { }
+    explicit ControlNode() noexcept {}
 
-	TechnoClass* Unit;
-	HouseClass* OriginalOwner;
-	DECLARE_PROPERTY(CDTimerClass, LinkDrawTimer);
+    TechnoClass* Unit;
+    HouseClass* OriginalOwner;
+    DECLARE_PROPERTY(CDTimerClass, LinkDrawTimer);
 };
 
+/*!
+* @brief CaptureManager - used for mind control.
+*/
 class __declspec(uuid("0679E982-AD9D-11D3-BE16-00104B62A16C"))
 NOVTABLE CaptureManagerClass : public AbstractClass
 {
@@ -38,8 +37,18 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E4B40;
     static constexpr size_t ClassSize = 0x50;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<CaptureManagerClass*>, Array, 0x89E0F0u)
+
+public:
+    DynamicVectorClass<ControlNode*> ControlNodes;
+    int MaxControlNodes;
+    bool InfiniteMindControl;
+    bool OverloadDeathSoundPlayed;
+    int OverloadPipState;
+    TechnoClass* Owner;
+    int OverloadDamageDelay;
+
 public:
     virtual ~CaptureManagerClass() JMP_THIS(0x4719A0);
 
@@ -74,23 +83,12 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline CaptureManagerClass(fake_noinit_t) noexcept
         : AbstractClass(fake_noinit_t{})
     { }
 
 public:
-
-	DynamicVectorClass<ControlNode*> ControlNodes;
-	int MaxControlNodes;
-	bool InfiniteMindControl;
-	bool OverloadDeathSoundPlayed; // Has the mind control death sound played already?
-	int OverloadPipState; // Used to create the red overloading pip by returning true in IsOverloading's wasDamageApplied for 10 frames.
-	TechnoClass* Owner;
-	int OverloadDamageDelay; // Decremented every frame. If it reaches zero, OverloadDamage is applied.
     CaptureManagerClass(noinit_t) noexcept : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471950);
     CaptureManagerClass() : CaptureManagerClass(fake_noinit_t{}) JMP_THIS(0x471890);
     CaptureManagerClass(TechnoClass* pOwner, int nMaxControlNodes, bool bInfiniteControl) noexcept

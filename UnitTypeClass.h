@@ -25,16 +25,8 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7F6218;
 	static constexpr size_t ClassSize = 0xE78;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(UnitTypeClass, 0xA83CE0u);
-	//TechnoTypeClass
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	LandType MovementRestrictedTo;
 	CoordStruct HalfDamageSmokeLocation;
@@ -72,7 +64,7 @@ public:
 	SHPStruct* AltImage;
 	char WalkFrames;
 	char FiringFrames;
-	char AltImageFile [0x19];
+	char AltImageFile[0x19];
 public:
 	virtual ~UnitTypeClass() JMP_THIS(0x7472F0);
 

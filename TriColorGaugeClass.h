@@ -15,11 +15,11 @@ public:
 
 	//Constructors
 	TriColorGaugeClass(unsigned int nID, int nX, int nY, int nWidth, int nHeight) noexcept
-		: GaugeClass(noinit_t()) { JMP_THIS(0x4E2A50); }
+		: GaugeClass(noinit_t{}) { JMP_THIS(0x4E2A50); }
 
 protected:
 	explicit __forceinline TriColorGaugeClass(noinit_t)  noexcept
-		: GaugeClass(noinit_t())
+		: GaugeClass(noinit_t{})
 	{
 	}
 

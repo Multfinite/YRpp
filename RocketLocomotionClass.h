@@ -1,5 +1,3 @@
-//Locomotor = {B7B49766-E576-11d3-9BD9-00104B972FE8}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -8,9 +6,6 @@ class __declspec(uuid("B7B49766-E576-11d3-9BD9-00104B972FE8"))
 NOVTABLE RocketLocomotionClass : public LocomotionClass
 {
 public:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 	using base_type = LocomotionClass;
 
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t

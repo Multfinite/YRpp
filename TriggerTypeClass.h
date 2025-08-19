@@ -30,9 +30,19 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F5904;
     static constexpr size_t ClassSize = 0xB4;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
+public:
+    ABSTRACTTYPE_ARRAY(TriggerTypeClass, 0x8B4178u);
 
+public:
+    int ArrayIndex;
+    bool Difficulty[3]; // easy = 0, normal = 1, hard = 2
+    bool Enabled;
+    bool MustTransfer;
+    PROTECTED_PROPERTY(BYTE, align_A1[3]);
+    HouseTypeClass* House;
+    TriggerTypeClass* NextTrigger;
+    TEventClass* FirstEvent;
+    TActionClass* FirstAction;
 
 public:
     virtual ~TriggerTypeClass() JMP_THIS(0x726E00);
@@ -56,10 +66,6 @@ public:
     static void __fastcall SaveToINIList(CCINIClass* pINI) JMP_STD(0x727880);
     TagTypeClass* __fastcall FindByNameOrID(char const* pName) JMP_STD(0x727120);
 
-protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     using Flags = BYTE;
     Flags GetFlags() const JMP_THIS(0x7271E0);
     bool HasAllowWinAction() const JMP_THIS(0x726FE0);
@@ -84,15 +90,6 @@ protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TriggerTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 public:
-	int ArrayIndex;
-	bool Difficulty[3]; // easy = 0, normal = 1, hard = 2
-	bool Enabled;
-	bool MustTransfer; // vehicle thieves must take Tag with it when hijacking
-	PROTECTED_PROPERTY(BYTE, align_A1[3]);
-	HouseTypeClass* House;
-	TriggerTypeClass* NextTrigger;
-	TEventClass* FirstEvent;
-	TActionClass* FirstAction;
     TriggerTypeClass(char const* pName) : TriggerTypeClass(fake_noinit_t{}) JMP_THIS(0x726C80);
 };
 static_assert(sizeof(TriggerTypeClass) == TriggerTypeClass::ClassSize);

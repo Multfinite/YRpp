@@ -71,14 +71,14 @@ public:
 
 	//Constructors
 	GadgetClass(int nX,int nY,int nWidth,int nHeight,GadgetFlag eFlag, bool bSticky) noexcept
-		: GadgetClass(noinit_t()) { JMP_THIS(0x4E12F0); }
+		: GadgetClass(noinit_t{}) { JMP_THIS(0x4E12F0); }
 
 	GadgetClass(GadgetClass& another) noexcept
-		: GadgetClass(noinit_t()) { JMP_THIS(0x4E1340); }
+		: GadgetClass(noinit_t{}) { JMP_THIS(0x4E1340); }
 
 protected:
 	explicit __forceinline GadgetClass(noinit_t)  noexcept
-		: LinkClass(noinit_t())
+		: LinkClass(noinit_t{})
 	{
 	}
 

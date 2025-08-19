@@ -173,7 +173,6 @@ public:
 class NOVTABLE MapClass : public GScreenClass
 {
 public:
-	//Static
 	DEFINE_REFERENCE(MapClass, Instance, 0x87F7E8u)
 
 	DEFINE_REFERENCE(CellClass, InvalidCell, 0xABDC50u)
@@ -186,7 +185,7 @@ public:
 	/// <summary>
 	/// Some sort of hardcoded constant lookup matrix with rows (0-8) representing CellClass Passability(Type) and columns are MovementZones, used to determine pathfinding behaviour.
 	/// </summary>
-	DEFINE_ARRAY_REFERENCE(int, [13][8], MovementAdjustArray, 0x82A594u)
+	DEFINE_ARRAY_REFERENCE(int, [static_cast<size_t>(MovementZone::Count)][static_cast<size_t>(PassabilityType::Count)], MovementAdjustArray, 0x82A594u)
 
 	static LayerClass* GetLayer(Layer lyr)
 	{
@@ -256,24 +255,24 @@ public:
 	}
 
 	// gets a coordinate in a random direction a fixed distance in leptons away from coords
-	static CoordStruct* __fastcall GetRandomCoordsNear(CoordStruct &outBuffer, const CoordStruct &coords, int distance, bool center) {
+	static CoordStruct* __fastcall __GetRandomCoordsNear(CoordStruct* retstr, const CoordStruct &coords, int distance, bool center) {
 		JMP_STD(0x49F420);
 	}
 
 	// gets a coordinate in a random direction a fixed distance in leptons away from coords
 	static CoordStruct GetRandomCoordsNear(const CoordStruct &coords, int distance, bool center) {
-		CoordStruct outBuffer;
-		GetRandomCoordsNear(outBuffer, coords, distance, center);
-		return outBuffer;
+		CoordStruct ret;
+		__GetRandomCoordsNear(&ret, coords, distance, center);
+		return ret;
 	}
 
-	static CoordStruct* __stdcall PickInfantrySublocation(CoordStruct &outBuffer, const CoordStruct &coords, bool ignoreContents = false)
+	static CoordStruct* __stdcall __PickInfantrySublocation(CoordStruct* retstr, const CoordStruct &coords, bool ignoreContents = false)
 		{ JMP_STD(0x4ACA10); }
 
 	static CoordStruct PickInfantrySublocation(const CoordStruct &coords, bool ignoreContents = false) {
-		CoordStruct outBuffer;
-		PickInfantrySublocation(outBuffer, coords, ignoreContents);
-		return outBuffer;
+		CoordStruct retstr;
+		__PickInfantrySublocation(&retstr, coords, ignoreContents);
+		return retstr;
 	}
 
 	static void __fastcall UnselectAll()
@@ -331,16 +330,16 @@ public:
 	int GetCellFloorHeight(const CoordStruct& crd) const
 		{ JMP_THIS(0x578080); }
 
-	CellStruct * PickCellOnEdge(CellStruct &buffer, Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
+	CellStruct * __PickCellOnEdge(CellStruct* retstr, Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
 		SpeedType SpeedType, bool ValidateReachability, MovementZone MovZone) const
 			{ JMP_THIS(0x4AA440); }
 
 	CellStruct PickCellOnEdge(Edge Edge, const CellStruct &CurrentLocation, const CellStruct &Fallback,
 		SpeedType SpeedType, bool ValidateReachability, MovementZone MovZone) const
 	{
-		CellStruct buffer;
-		this->PickCellOnEdge(buffer, Edge, CurrentLocation, Fallback, SpeedType, ValidateReachability, MovZone);
-		return buffer;
+		CellStruct ret;
+		__PickCellOnEdge(&ret, Edge, CurrentLocation, Fallback, SpeedType, ValidateReachability, MovZone);
+		return ret;
 	}
 
 // Pathfinding voodoo
@@ -353,13 +352,13 @@ public:
 		{ JMP_THIS(0x586990); }
 
 	// Find nearest spot
-	CellStruct* NearByLocation(CellStruct &outBuffer, const CellStruct &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const CellStruct &closeTo, bool a15, bool buildable)
+	CellStruct* __NearByLocation(CellStruct& retstr, const CellStruct &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const CellStruct &closeTo, bool a15, bool buildable)
 		{ JMP_THIS(0x56DC20); }
 
 	CellStruct NearByLocation(const CellStruct &position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, const CellStruct &closeTo, bool a15, bool buildable) {
-		CellStruct outBuffer;
-		NearByLocation(outBuffer, position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, closeTo, a15, buildable);
-		return outBuffer;
+		CellStruct ret;
+		__NearByLocation(ret, position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, closeTo, a15, buildable);
+		return ret;
 	}
 
 	void  AddContentAt(CellStruct *coords, TechnoClass *Content)
@@ -391,8 +390,8 @@ public:
 //         FIRESTORM RELATED
 // ====================================
 
-	CoordStruct* FindFirstFirestorm(
-		CoordStruct* pOutBuffer, const CoordStruct& start,
+	CoordStruct* __FindFirstFirestorm(
+		CoordStruct* retstr, const CoordStruct& start,
 		const CoordStruct& end, HouseClass const* pHouse = nullptr) const
 	{ JMP_THIS(0x5880A0); }
 
@@ -400,9 +399,9 @@ public:
 		const CoordStruct& start, const CoordStruct& end,
 		HouseClass const* pHouse = nullptr) const
 	{
-		CoordStruct outBuffer;
-		FindFirstFirestorm(&outBuffer, start, end, pHouse);
-		return outBuffer;
+		CoordStruct ret;
+		__FindFirstFirestorm(&ret, start, end, pHouse);
+		return ret;
 	}
 
 // ====================================
@@ -540,7 +539,7 @@ protected:
 
 public:
 	DWORD unknown_10;
-	HashTable<DWORD,DWORD>* unknown_pointer_14;
+	void* unknown_pointer_14;
 	void* MovementZones [13];
 	DWORD somecount_4C;
 	DynamicVectorClass<ZoneConnectionClass> ZoneConnections;
@@ -550,8 +549,10 @@ public:
 	DWORD unknown_74;
 	DWORD unknown_78;
 	DWORD unknown_7C;
-	HashTable<DWORD, SubzoneConnectionStruct>* unknown_80[3]; // somehow connected to the 3 vectors below
-	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking[3];
+	DWORD unknown_80[3]; // somehow connected to the 3 vectors below
+	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking1;
+	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking2;
+	DynamicVectorClass<SubzoneTrackingStruct> SubzoneTracking3;
 	DynamicVectorClass<CellStruct> CellStructs1;
 	RectangleStruct MapRect;
 	RectangleStruct VisibleRect;

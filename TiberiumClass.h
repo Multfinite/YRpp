@@ -1,7 +1,3 @@
-/*
-	Tiberiums are initialized by INI files.
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -10,17 +6,13 @@
 class AnimTypeClass;
 class OverlayTypeClass;
 
-class TiberiumLogic
+/*!
+* @brief Tiberiums are initialized by INI files.
+*/
 class __declspec(uuid("C53DD373-151E-11D2-8175-006008055BB5"))
 NOVTABLE TiberiumClass : public AbstractTypeClass
 {
 public:
-	int Count;
-	PriorityQueueClass<PriorityQueueClassNode>* Queue;
-	bool* CellIndexesWithTiberium;
-	PriorityQueueClassNode* Nodes;
-	CDTimerClass Timer;
-};
     using base_type = AbstractTypeClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -40,12 +32,35 @@ public:
     static constexpr size_t ClassSize = 0x128;
 
 public:
+    ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TiberiumClass, 0xB0F4E8u);
+public:
+    int ArrayIndex;
+    int Spread;
+    double SpreadPercentage;
+    int Growth;
+    double GrowthPercentage;
+    int Value;
+    int Power;
+    int Color;
+    DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Debris);
+    OverlayTypeClass* Image;
+    int NumFrames;
+    int NumImages;
+    int NumSlopes;
 
+    int SpreadCount;
+    PriorityQueueClass<PriorityQueueClassNode>* SpreadQueue;
+    bool* SpreadCellIndexesWithTiberium;
+    PriorityQueueClassNode* SpreadNodes;
+    CDTimerClass SpreadTimer;
 
-	//Static helpers
+    int GrowthCount;
+    PriorityQueueClass<PriorityQueueClassNode>* GrowthQueue;
+    bool* GrowthCellIndexesWithTiberium;
+    PriorityQueueClassNode* GrowthNodes;
+    CDTimerClass GrowthTimer;
+
 public:
     virtual ~TiberiumClass() JMP_THIS(0x721880);
 
@@ -91,29 +106,9 @@ public:
     }
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
     /*! @brief FAKE CTOR */
     explicit __forceinline TiberiumClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 public:
-
-	int ArrayIndex;
-	int Spread;
-	double SpreadPercentage;
-	int Growth;
-	double GrowthPercentage;
-	int Value;
-	int Power;
-	int Color;
-	DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Debris);
-	OverlayTypeClass* Image;
-	int NumFrames;
-	int NumImages;
-	int NumSlopes;
-	DECLARE_PROPERTY(TiberiumLogic, SpreadLogic);
-	DECLARE_PROPERTY(TiberiumLogic, GrowthLogic);
     TiberiumClass(const char* pID) : TiberiumClass(fake_noinit_t{}) JMP_THIS(0x7216C0);
 };
 static_assert(sizeof(TiberiumClass) == TiberiumClass::ClassSize);

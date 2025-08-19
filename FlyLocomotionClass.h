@@ -1,5 +1,3 @@
-//Locomotor = {4A582746-9839-11d1-B709-00A024DDAFD1}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -9,10 +7,6 @@ NOVTABLE FlyLocomotionClass : public LocomotionClass
 {
 public:
 	using base_type = LocomotionClass;
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -27,7 +21,6 @@ public:
 	static constexpr uintptr_t ILocoVTable = 0x7E89F4;
 	static constexpr size_t ClassSize = 0x60;
 public:
-
 	bool AirportBound;
 	CoordStruct MovingDestination;
 	CoordStruct XYZ2;

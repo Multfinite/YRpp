@@ -1,7 +1,3 @@
-/*
-	Trees
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -14,8 +10,6 @@ NOVTABLE TerrainClass : public ObjectClass
 public:
     using base_type = ObjectClass;
 
-	//global array
-	DEFINE_REFERENCE(DynamicVectorClass<TerrainClass*>, Array, 0xA8E988u)
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -35,6 +29,12 @@ public:
 public:
     DEFINE_REFERENCE(DynamicVectorClass<TerrainClass*>, Array, 0xA8E988u)
 
+public:
+    StageClass Animation;
+    TerrainTypeClass* Type;
+    bool IsBurning;
+    bool IsCrumbling;
+    RectangleStruct unknown_rect_D0;
 
 public:
     virtual ~TerrainClass() JMP_THIS(0x71B7B0);
@@ -71,21 +71,11 @@ public:
     void Write_INI() JMP_THIS(0x71CB90);
 */
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline TerrainClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-
-	StageClass Animation;
-	TerrainTypeClass* Type;
-	bool IsBurning; // this terrain object has been ignited
-	bool IsCrumbling; // finish the animation and uninit
-	RectangleStruct unknown_rect_D0;
-
     TerrainClass(TerrainTypeClass* tt, CellStruct coords) : TerrainClass(fake_noinit_t{})
         JMP_THIS(0x71BB90);
     TerrainClass() : TerrainClass(fake_noinit_t{})

@@ -1,13 +1,12 @@
-/*
-	OverlayTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
 
 class AnimTypeClass;
 
+/*!
+* @brief OverlayTypes are initialized by INI files.
+*/
 class __declspec(uuid("5AF2CE79-0634-11D2-ACA4-006008055BB5"))
 NOVTABLE OverlayTypeClass : public ObjectTypeClass
 {
@@ -30,9 +29,30 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7EF600;
     static constexpr size_t ClassSize = 0x2BC;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(OverlayTypeClass, 0xA83D80u);
+public:
+    ABSTRACTTYPE_ARRAY(OverlayTypeClass, 0xA83D80u);
 
+public:
+    int ArrayIndex;
+    LandType LandType;
+    AnimTypeClass* CellAnim;
+    int DamageLevels;
+    int Strength;
+    bool Wall;
+    bool Tiberium;
+    bool Crate;
+    bool CrateTrigger;
+    bool NoUseTileLandType;
+    bool IsVeinholeMonster;
+    bool IsVeins;
+    bool ImageLoaded;
+    bool Explodes;
+    bool ChainReaction;
+    bool Overrides;
+    bool DrawFlat;
+    bool IsRubble;
+    bool IsARock;
+    ColorStruct RadarColor;
 
 public:
     virtual ~OverlayTypeClass() JMP_THIS(0x5FE3F0);
@@ -64,35 +84,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline OverlayTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int                ArrayIndex;
-	LandType           LandType;
-	AnimTypeClass*     CellAnim;
-	int                DamageLevels;
-	int                Strength;
-	bool               Wall;
-	bool               Tiberium;
-	bool               Crate;
-	bool               CrateTrigger;
-	bool               NoUseTileLandType;
-	bool               IsVeinholeMonster;
-	bool               IsVeins;
-	bool               ImageLoaded;	//not INI
-	bool               Explodes;
-	bool               ChainReaction;
-	bool               Overrides;
-	bool               DrawFlat;
-	bool               IsRubble;
-	bool               IsARock;
-	ColorStruct RadarColor;
-
     OverlayTypeClass(const char* pID) : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE250);
     OverlayTypeClass(noinit_t) noexcept : OverlayTypeClass(fake_noinit_t{}) JMP_THIS(0x5FE3C0);
 };

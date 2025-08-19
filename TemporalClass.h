@@ -5,7 +5,6 @@
 class SuperClass;
 class TechnoClass;
 
-//The AirstrikeClass handles the airstrikes Boris calls in.
 class __declspec(uuid("94112424-E403-11D3-8E6E-005004AAB2FB"))
 NOVTABLE TemporalClass : public AbstractClass
 {
@@ -28,8 +27,20 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F5180;
     static constexpr size_t ClassSize = 0x50;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<TemporalClass*>, Array, 0xB0EC60u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<TemporalClass*>, Array, 0xB0EC60u)
+
+public:
+    TechnoClass* Owner;
+    TechnoClass* Target;
+    CDTimerClass LifeTimer;
+    void* unknown_pointer_38;
+    SuperClass* SourceSW;
+    TemporalClass* NextTemporal;
+    TemporalClass* PrevTemporal;
+    int WarpRemaining;
+    int WarpPerStep;
+
 public:
     virtual ~TemporalClass() JMP_THIS(0x71A5D0);
 
@@ -58,25 +69,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TemporalClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	TechnoClass*       Owner;
-	TechnoClass*       Target;
-	CDTimerClass       LifeTimer;
-	void*              unknown_pointer_38;
-	SuperClass*        SourceSW;
-
-	TemporalClass*     NextTemporal;
-	TemporalClass*     PrevTemporal;
-
-	int                WarpRemaining;
-	int                WarpPerStep;
     TemporalClass() : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A450);
     TemporalClass(noinit_t) noexcept : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A5A0);
     TemporalClass(TechnoClass* pOwnerUnit) : TemporalClass(fake_noinit_t{}) JMP_THIS(0x71A4E0);

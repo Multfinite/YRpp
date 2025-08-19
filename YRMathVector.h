@@ -13,13 +13,13 @@ public:
 	static const Vector2D Empty;
 
 	//no constructor, so this class stays aggregate and can be initialized using the curly braces {}
-	T X,Y;
+	T X, Y;
 
 	//operator overloads
 	//addition
 	constexpr Vector2D operator+(const Vector2D& a) const
 	{
-		return Vector2D{ X + a.X, Y + a.Y };
+		return Vector2D { X + a.X, Y + a.Y };
 	}
 	//addition
 	constexpr Vector2D& operator+=(const Vector2D& a)
@@ -31,7 +31,7 @@ public:
 	//substraction
 	constexpr Vector2D operator-(const Vector2D& a) const
 	{
-		return Vector2D{ X - a.X, Y - a.Y };
+		return Vector2D { X - a.X, Y - a.Y };
 	}
 	//substraction
 	constexpr Vector2D& operator-=(const Vector2D& a)
@@ -43,7 +43,7 @@ public:
 	//negation
 	constexpr Vector2D operator-() const
 	{
-		return Vector2D{ -X, -Y };
+		return Vector2D { -X, -Y };
 	}
 	//equality
 	constexpr bool operator==(const Vector2D& a) const
@@ -58,7 +58,7 @@ public:
 	//scalar multiplication
 	constexpr Vector2D operator*(double r) const
 	{
-		return Vector2D{ static_cast<T>(X * r), static_cast<T>(Y * r) };
+		return Vector2D { static_cast<T>(X * r), static_cast<T>(Y * r) };
 	}
 	//scalar multiplication
 	constexpr Vector2D& operator*=(double r)
@@ -110,7 +110,7 @@ public:
 };
 
 template <typename T>
-const Vector2D<T> Vector2D<T>::Empty = {T(), T()};
+const Vector2D<T> Vector2D<T>::Empty = { T(), T() };
 
 /*==========================================
 ============ 3D Vector =====================
@@ -122,13 +122,13 @@ public:
 	static const Vector3D Empty;
 
 	//no constructor, so this class stays aggregate and can be initialized using the curly braces {}
-	T X,Y,Z;
+	T X, Y, Z;
 
 	//operator overloads
 	//addition
 	constexpr Vector3D operator+(const Vector3D& a) const
 	{
-		return Vector3D{ X + a.X, Y + a.Y, Z + a.Z };
+		return Vector3D { X + a.X, Y + a.Y, Z + a.Z };
 	}
 	//addition
 	constexpr Vector3D& operator+=(const Vector3D& a)
@@ -141,7 +141,7 @@ public:
 	//substraction
 	constexpr Vector3D operator-(const Vector3D& a) const
 	{
-		return Vector3D{ X - a.X, Y - a.Y, Z - a.Z };
+		return Vector3D { X - a.X, Y - a.Y, Z - a.Z };
 	}
 	//substraction
 	constexpr Vector3D& operator-=(const Vector3D& a)
@@ -154,7 +154,7 @@ public:
 	//negation
 	constexpr Vector3D operator-() const
 	{
-		return Vector3D{ -X, -Y, -Z };
+		return Vector3D { -X, -Y, -Z };
 	}
 	//equality
 	constexpr bool operator==(const Vector3D& a) const
@@ -164,7 +164,7 @@ public:
 	//scalar multiplication
 	constexpr Vector3D operator*(double r) const
 	{
-		return Vector3D{
+		return Vector3D {
 			static_cast<T>(X * r),
 			static_cast<T>(Y * r),
 			static_cast<T>(Z * r) };
@@ -237,7 +237,7 @@ public:
 	//cross product
 	constexpr Vector3D CrossProduct(const Vector3D& a) const
 	{
-		return Vector3D{
+		return Vector3D {
 			Y * a.Z - Z * a.Y,
 			Z * a.X - X * a.Z,
 			X * a.Y - Y * a.X };
@@ -251,4 +251,4 @@ public:
 };
 
 template <typename T>
-const Vector3D<T> Vector3D<T>::Empty = {T(), T(), T()};
+const Vector3D<T> Vector3D<T>::Empty = { T(), T(), T() };

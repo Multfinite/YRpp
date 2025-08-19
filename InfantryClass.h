@@ -1,12 +1,11 @@
-/*
-	Infantry
-*/
-
 #pragma once
 
 #include "FootClass.h"
 #include "InfantryTypeClass.h"
 
+/*!
+* @brief Infantry
+*/
 class __declspec(uuid("0E272DC4-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE InfantryClass : public FootClass
 {
@@ -28,28 +27,25 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7EB058;
 	static constexpr size_t ClassSize = 0x6F0;
 
-	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<InfantryClass*>, Array, 0xA83DE8u)
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	InfantryTypeClass* Type;
-	Sequence SequenceAnim; //which is currently playing
-	CDTimerClass unknown_Timer_6C8;
-	DWORD          PanicDurationLeft; // set in ReceiveDamage on panicky units
-	bool           PermanentBerzerk; // set by script action, not cleared anywhere
-	bool           Technician;
-	bool           unknown_bool_6DA;
+	//IT IS MORE THAT JUST ANIMATION. IT IS INFANTRY STATE!
+	InfantryState State;
+	CDTimerClass CommentTimer;
+	// set in ReceiveDamage on panicky units
+	DWORD          PanicDurationLeft;
+	// set by script action, not cleared anywhere
+	bool           PermanentBerzerk;
+	bool           IsTechnician;
+	bool           IsStroked;
 	bool           Crawling;
-	bool           unknown_bool_6DC;
-	bool           unknown_bool_6DD;
-	DWORD          unknown_6E0;
+	bool           IsZoneCheat;
+	bool           WasSelected;
+	DWORD      unknown_6E0;
 	bool           ShouldDeploy;
-	int            unknown_int_6E8;
-	PROTECTED_PROPERTY(DWORD, unused_6EC); //??
+	int            OnLand;
+	PROTECTED_PROPERTY(DWORD, unused_6EC);
 public:
 	virtual ~InfantryClass() JMP_THIS(0x517D90);
 

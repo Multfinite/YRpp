@@ -25,20 +25,15 @@ public:
 	static constexpr size_t ClassSize = 0xE8;
 public:
 	DEFINE_REFERENCE(DynamicVectorClass<BuildingLightClass*>, Array, 0x8B4190u)
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	double Speed;
 	CoordStruct field_B8;
 	CoordStruct field_C4;
 	double Acceleration;
 	bool Direction;
 	SpotlightBehaviour BehaviourMode;
-	ObjectClass * FollowingObject;
-	TechnoClass * OwnerObject;
+	ObjectClass* FollowingObject;
+	TechnoClass* OwnerObject;
 public:
 	virtual ~BuildingLightClass() JMP_THIS(0x435B50);
 	

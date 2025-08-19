@@ -27,17 +27,12 @@ public:
 	static constexpr size_t ClassSize = 0x58;
 
 	DEFINE_REFERENCE(DynamicVectorClass<ParasiteClass*>, Array, 0xAC4910u)
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
-	FootClass*      Owner;
-	FootClass*      Victim;
+	FootClass* Owner;
+	FootClass* Victim;
 	CDTimerClass    SuppressionTimer;
 	CDTimerClass    DamageDeliveryTimer;
-	AnimClass*      GrappleAnim;
+	AnimClass* GrappleAnim;
 	ParasiteState   GrappleState;
 	int             GrappleAnimFrame;
 	int             GrappleAnimDelay;

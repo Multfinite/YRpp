@@ -28,11 +28,11 @@ public:
 
 	//Constructors
 	EditClass(int ID, wchar_t* Text, int nMaxLength, TextPrintType eTextFlag, int X, int Y, int Width, int Height, EditFlag eEditFlag) noexcept
-		: ControlClass(noinit_t()) { JMP_THIS(0x4C2FC0); }
+		: ControlClass(noinit_t{}) { JMP_THIS(0x4C2FC0); }
 
 protected:
 	explicit __forceinline EditClass(noinit_t)  noexcept
-		: ControlClass(noinit_t())
+		: ControlClass(noinit_t{})
 	{
 	}
 

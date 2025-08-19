@@ -1,7 +1,3 @@
-/*
-	Smudges
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -29,10 +25,11 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F32FC;
     static constexpr size_t ClassSize = 0xB0;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<SmudgeClass*>, Array, 0xA8B1E0u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<SmudgeClass*>, Array, 0xA8B1E0u)
 
-
+public:
+    SmudgeTypeClass* Type;
 
 public:
     virtual ~SmudgeClass() noexcept JMP_THIS(0x6B4B40);
@@ -50,16 +47,10 @@ public:
     bool Mark(MarkType value) override JMP_THIS(0x6B4BE0);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline SmudgeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	SmudgeTypeClass* Type;
-
     SmudgeClass(SmudgeTypeClass const* pType, Coordinate const& pos, int houseId) : SmudgeClass(fake_noinit_t{}) JMP_THIS(0x6B4A50);
     SmudgeClass(noinit_t) noexcept : SmudgeClass(fake_noinit_t{}) { vtables.init(this); }
 };

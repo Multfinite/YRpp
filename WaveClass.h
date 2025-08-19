@@ -27,7 +27,47 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F6BF4;
     static constexpr size_t ClassSize = 0x240;
 
-	DEFINE_REFERENCE(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
+
+public:
+    AbstractClass* Target;
+    WaveType Type;
+    CoordStruct LimboCoords;
+    CoordStruct Pos0;
+    Point2D WaveStartMiddle;
+    Point2D WaveEndMiddle;
+    Point2D WaveEndSide1;
+    Point2D WaveEndSide2;
+    Point2D WaveStartSide1;
+    Point2D WaveStartSide2;
+    CoordStruct WaveEndSide1Coord;
+    CoordStruct WaveEndSide2Coord;
+    CoordStruct WaveStartSide1Coord;
+    CoordStruct WaveStartSide2Coord;
+    bool IsTraveling;
+    bool ShouldEnd;
+    BYTE field_12E;
+    BYTE field_12F;
+    int WaveEC;
+    int WaveCount;
+    double MatrixScale1;
+    double MatrixScale2;
+    int PointData_Counter;
+    DWORD PointData_Pointer;
+    Point2D SonicPoints[6];
+    Point2D MagPoints[4];
+    int PointData2_X;
+    int PointData2_Y;
+    DWORD PointData2_Pointer;
+    int PitchData[8];
+    int FacingIndex;
+    int LaserEC;
+    TechnoClass* Owner;
+    FacingClass Facing;
+    DynamicVectorClass<CellClass*> Cells;
+    int ColorData[14];
+
 public:
     virtual ~WaveClass() JMP_THIS(0x75ED30);
 
@@ -68,49 +108,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline WaveClass(fake_noinit_t) noexcept : ObjectClass(fake_noinit_t{}) {}
 
 public:
-	AbstractClass* Target;
-	WaveType Type;
-	CoordStruct LimboCoords;
-	CoordStruct Pos0;
-	Point2D WaveStartMiddle;
-	Point2D WaveEndMiddle;
-	Point2D WaveEndSide1;
-	Point2D WaveEndSide2;
-	Point2D WaveStartSide1;
-	Point2D WaveStartSide2;
-	CoordStruct WaveEndSide1Coord;
-	CoordStruct WaveEndSide2Coord;
-	CoordStruct WaveStartSide1Coord;
-	CoordStruct WaveStartSide2Coord;
-	bool IsTraveling;
-	bool ShouldEnd;
-	BYTE field_12E;
-	BYTE field_12F;
-	int WaveEC; // for sonic/magna only
-	int WaveCount;
-	double MatrixScale1;
-	double MatrixScale2;
-	int PointData_Counter;
-	DWORD PointData_Pointer;
-	Point2D SonicPoints[6];
-	Point2D MagPoints[4];
-	int PointData2_X;
-	int PointData2_Y;
-	DWORD PointData2_Pointer;
-	int PitchData[8];
-	int FacingIndex;
-	int LaserEC; // for lasers only, ctor = 160, per frame -= 6, 32 == dtor
-	TechnoClass* Owner;
-	FacingClass Facing;
-	DynamicVectorClass<CellClass*> Cells;
-	int ColorData[14];
     WaveClass(CoordStruct const& From, CoordStruct const& To, TechnoClass* Owner, WaveType mode, AbstractClass* Target)
         : WaveClass(fake_noinit_t{})
     JMP_THIS(0x75E950);

@@ -27,37 +27,33 @@ public:
 public:
     static constexpr uintptr_t ILocoVTable = 0x7F2D8C;
     static constexpr size_t ClassSize = 0x70;
+public:
+    DWORD PreviousRamp;
+    DWORD CurrentRamp;
+    RateTimer SlopeTimer;
+    CoordStruct HeadToCoord;
+    int SpeedAccum;
+    double movementspeed_50;
+    DWORD TrackNumber;
+    int TrackIndex;
+    bool IsOnShortTrack;
+    BYTE IsTurretLockedDown;
+    bool IsRotating;
+    bool IsDriving;
+    bool IsRocking;
+    bool IsLocked;
+    ILocomotion* Piggybackee;
 
 public:
     virtual ~ShipLocomotionClass() RX;
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) override JMP_STD(0x69EE30);
     ULONG __stdcall AddRef() override JMP_STD(0x6A4260);
     ULONG __stdcall Release() override JMP_STD(0x6A4270);
 
-public:
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6A3E60);
 
-	DWORD PreviousRamp;
-	DWORD CurrentRamp;
-	RateTimer SlopeTimer;
 	CoordStruct Destination;
-	CoordStruct HeadToCoord;
-	int SpeedAccum;
-	double movementspeed_50;
-	DWORD TrackNumber;
-	int TrackIndex;
-	bool IsOnShortTrack;
-	BYTE IsTurretLockedDown;
-	bool IsRotating;
-	bool IsDriving;
-	bool IsRocking;
-	bool IsLocked;
-	ILocomotion* Piggybackee;
-};
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x69EE90);
     HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x69EF10);
 

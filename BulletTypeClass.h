@@ -1,7 +1,3 @@
-/*
-	Projectiles
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -35,15 +31,9 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E4948;
 	static constexpr size_t ClassSize = 0x2F8;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(BulletTypeClass, 0xA83C80u);
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	static BulletTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x46C790);
 public:
-
 	bool Airburst;
 	bool Floater;
 	bool SubjectToCliffs;
@@ -57,7 +47,8 @@ public:
 	bool Inviso;
 	bool Proximity;
 	bool Ranged;
-	bool NoRotate; // actually has opposite meaning of Rotates. false means Rotates=yes.
+	// actually has opposite meaning of Rotates. false means Rotates=yes.
+	bool NoRotate;
 	bool Inaccurate;
 	bool FlakScatter;
 	bool AA;

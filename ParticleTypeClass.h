@@ -1,7 +1,3 @@
-/*
-	ParticleTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -31,9 +27,40 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F0188;
     static constexpr size_t ClassSize = 0x318;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
+public:
+    ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
 
+public:
+    CoordStruct NextParticleOffset;
+    int XVelocity;
+    int YVelocity;
+    int MinZVelocity;
+    int ZVelocityRange;
+    double ColorSpeed;
+    TypeList<RGBClass*> ColorList;
+    ColorStruct StartColor1;
+    ColorStruct StartColor2;
+    int MaxDC;
+    int MaxEC;
+    WarheadTypeClass* Warhead;
+    int Damage;
+    int StartFrame;
+    int NumLoopFrames;
+    int Translucency;
+    int WindEffect;
+    float Velocity;
+    float Deacc;
+    int Radius;
+    bool DeleteOnStateLimit;
+    BYTE EndStateAI;
+    BYTE StartStateAI;
+    BYTE StateAIAdvance;
+    BYTE FinalDamageState;
+    BYTE Translucent25State;
+    BYTE Translucent50State;
+    bool Normalized;
+    ParticleTypeClass* NextParticle;
+    BehavesLike BehavesLike;
 
 public:
     virtual ~ParticleTypeClass() JMP_THIS(0x644E40);
@@ -53,45 +80,10 @@ public:
     ObjectClass* CreateObject(HouseClass* pOwner) override JMP_THIS(0x645940);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline ParticleTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	CoordStruct NextParticleOffset;
-	int    XVelocity;
-	int    YVelocity;
-	int    MinZVelocity;
-	int    ZVelocityRange;
-	double ColorSpeed;
-	TypeList<RGBClass*> ColorList;
-	ColorStruct StartColor1;
-	ColorStruct StartColor2;
-	int    MaxDC;
-	int    MaxEC;
-	WarheadTypeClass* Warhead;
-	int    Damage;
-	int    StartFrame;
-	int    NumLoopFrames;
-	int    Translucency;
-	int    WindEffect;
-	float  Velocity;
-	float  Deacc;
-	int    Radius;
-	bool   DeleteOnStateLimit;
-	BYTE   EndStateAI;
-	BYTE   StartStateAI;
-	BYTE   StateAIAdvance;
-	BYTE   FinalDamageState;
-	BYTE   Translucent25State;
-	BYTE   Translucent50State;
-	bool   Normalized;
-	ParticleTypeClass* NextParticle;
-	BehavesLike BehavesLike;
-
     ParticleTypeClass(const char* pID) : ParticleTypeClass(fake_noinit_t{}) JMP_THIS(0x644BE0);
     ParticleTypeClass(noinit_t) noexcept : ParticleTypeClass(fake_noinit_t{}) JMP_THIS(0x644DD0);
 };

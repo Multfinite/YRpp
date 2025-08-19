@@ -1,7 +1,3 @@
-/*
-	AnimTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "ObjectTypeClass.h"
@@ -10,6 +6,9 @@ class OverlayTypeClass;
 class ParticleTypeClass;
 class WarheadTypeClass;
 
+/*!
+* @brief AnimTypes are initialized by INI files.
+*/
 class __declspec(uuid("2EBB6D66-0D4D-11D2-8172-006008055BB5"))
 NOVTABLE AnimTypeClass : public ObjectTypeClass
 {
@@ -31,16 +30,11 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E3608;
 	static constexpr size_t ClassSize = 0x378;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(AnimTypeClass, 0x8B4150u);
 	static AnimTypeClass* __fastcall FindOrAllocate(const char* id)
 	{ JMP_STD(0x428B80); }
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 
 public:
-
 	int ArrayIndex;
 	int MiddleFrameIndex;
 	int MiddleFrameWidth;

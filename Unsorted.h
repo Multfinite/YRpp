@@ -27,9 +27,8 @@ public:
 static_assert(sizeof(MouseThreadClass) == 0x24);
 
 // things that I can't put into nice meaningful classes
-class Game
+struct Game
 {
-public:
 	DEFINE_REFERENCE(MouseThreadClass, MouseThread, 0xB78138u)
 	// the magic checksum for version validation - linked in StaticInits
 	DEFINE_REFERENCE(DWORD, Savegame_Magic, 0x83D560u)
@@ -157,7 +156,7 @@ public:
 
 	// Main loop of the game.
 	static void __fastcall MainLoop()
-		{ JMP_STD(0x55D360); }
+	{ JMP_STD(0x55D360); }
 
 	static void __fastcall KeyboardProcess(DWORD& input)
 	{ JMP_STD(0x55DEE0); }
@@ -186,7 +185,7 @@ public:
 		}
 	}
 
-	static void __fastcall DrawRadialIndicator(bool drawLine, bool adjustColor, const CoordStruct pCoord, ColorStruct color, float lineMultiplier, bool unknown1, bool unknown2)
+	static void __fastcall DrawRadialIndicator(bool drawLine, bool adjustColor, Coordinate pCoord, ColorStruct color, float lineMultiplier, bool unknown1, bool unknown2)
 	{ JMP_STD(0x456980); }
 
 	static void __fastcall PlayMovie(
@@ -568,7 +567,7 @@ public:
 	// and string management is done manually
 	DEFINE_REFERENCE(DynamicVectorClass<MovieInfo>, Array, 0xABF390u)
 
-	bool operator== (MovieInfo const& rhs) const
+		bool operator== (MovieInfo const& rhs) const
 	{
 		return !_strcmpi(this->Name, rhs.Name);
 	}
@@ -647,14 +646,14 @@ namespace Unsorted
 
 	DEFINE_REFERENCE(ColorPacker, ColorPackData, 0x8A0DD0)
 
-	DEFINE_REFERENCE(CellStruct, CellSpreadTable, 0xABD490)
+	DEFINE_REFERENCE(Cell, CellSpreadTable, 0xABD490)
 
 	DEFINE_REFERENCE(int, CurrentSWType, 0x8809A0)
 
 	static const int except_txt_length = 0xFFFF;
 	DEFINE_ARRAY_REFERENCE(char, [65536], except_txt_content, 0x8A3A08)
 
-	DEFINE_ARRAY_REFERENCE(CellStruct, [8], AdjacentCell, 0x89F688)
+	DEFINE_ARRAY_REFERENCE(Cell, [8], AdjacentCell, 0x89F688)
 	DEFINE_ARRAY_REFERENCE(Point2D, [8], AdjacentCoord, 0x89F6D8)
 
 	/*

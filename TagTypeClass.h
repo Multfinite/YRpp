@@ -2,7 +2,6 @@
 
 #include "AbstractTypeClass.h"
 
-//forward declarations
 class CCINIClass;
 class TriggerTypeClass;
 
@@ -26,8 +25,13 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F45C4;
     static constexpr size_t ClassSize = 0xA4;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
+public:
+    ABSTRACTTYPE_ARRAY(TagTypeClass, 0xB0E780u);
+
+public:
+    int ArrayIndex;
+    TriggerPersistence Persistence;
+    TriggerTypeClass* FirstTrigger;
 
 public:
     virtual ~TagTypeClass() JMP_THIS(0x6E5CA0);
@@ -66,16 +70,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TagTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) { }
 
 public:
-	int ArrayIndex;
-	TriggerPersistence Persistence;
-	TriggerTypeClass* FirstTrigger;
     TagTypeClass(char const* pName) : TagTypeClass(fake_noinit_t{}) JMP_THIS(0x5447C0);
     TagTypeClass(noinit_t) noexcept : TagTypeClass(fake_noinit_t{}) { vtables.init(this); }
 };

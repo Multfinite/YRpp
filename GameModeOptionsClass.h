@@ -4,6 +4,8 @@
 
 #include "Helpers/CompileTime.h"
 
+class StartingSlotClass;
+
 struct AISlotsStruct
 {
 	int Difficulties[8];
@@ -16,7 +18,7 @@ struct AISlotsStruct
 class GameModeOptionsClass
 {
 public:
-	// this is the same as SessionClass::Instance.Config
+	// this is the same as SessionClass::Instance->Config
 	DEFINE_REFERENCE(GameModeOptionsClass, Instance, 0xA8B250u)
 
 	int MPModeIndex;

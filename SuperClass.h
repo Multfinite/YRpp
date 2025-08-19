@@ -1,12 +1,7 @@
-/*
-	Supers
-*/
-
 #pragma once
 
 #include "SuperWeaponTypeClass.h"
 
-//Forward declarations
 class AnimClass;
 class HouseClass;
 
@@ -14,8 +9,6 @@ class __declspec(uuid("D7F754C6-391C-11D2-9B64-00104B972FE8"))
 NOVTABLE SuperClass : public AbstractClass
 {
 public:
-	static constexpr uintptr_t AbsVTable = 0x7F3FE8;
-
     using base_type = AbstractClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -34,7 +27,35 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F3FE8;
     static constexpr size_t ClassSize = 0x80;
 
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<SuperClass*>, Array, 0xA83CB8u)
+    DEFINE_REFERENCE(DynamicVectorClass<SuperClass*>, ShowTimers, 0xA83D50u)
 
+public:
+    int CustomChargeTime;
+    SuperWeaponTypeClass* Type;
+    HouseClass* Owner;
+    CDTimerClass RechargeTimer;
+    PROTECTED_PROPERTY(DWORD, unused_3C);
+    bool BlinkState;
+    PROTECTED_PROPERTY(BYTE, unused_41[7]);
+    LARGE_INTEGER BlinkTimer;
+    int SpecialSoundDuration;
+    CoordStruct SpecialSoundLocation;
+    bool CanHold;
+    PROTECTED_PROPERTY(BYTE, unused_61);
+    CellStruct ChronoMapCoords;
+    PROTECTED_PROPERTY(BYTE, unused_66[2]);
+    AnimClass* Animation;
+    bool AnimationGotInvalid;
+    bool IsPresent;
+    bool IsOneTime;
+    bool IsReady;
+    bool IsSuspended;
+    PROTECTED_PROPERTY(BYTE, unused_71[3]);
+    int ReadyFrame;
+    int CameoChargeState;
+    ChargeDrainState ChargeDrainState;
 
 public:
     virtual ~SuperClass() noexcept JMP_THIS(0x6CB120);
@@ -78,38 +99,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline SuperClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int CustomChargeTime;
-	SuperWeaponTypeClass* Type;
-	HouseClass* Owner;
-	CDTimerClass RechargeTimer;
-	PROTECTED_PROPERTY(DWORD, unused_3C);
-	bool BlinkState;
-	PROTECTED_PROPERTY(BYTE, unused_41[7]);
-	LARGE_INTEGER BlinkTimer;
-	int SpecialSoundDuration; // see 0x6CD14F
-	CoordStruct SpecialSoundLocation;
-	bool CanHold;          // 0x60
-	PROTECTED_PROPERTY(BYTE, unused_61);
-	CellStruct ChronoMapCoords;  // 0x62
-	PROTECTED_PROPERTY(BYTE, unused_66[2]);
-	AnimClass* Animation;                // 0x68
-	bool AnimationGotInvalid;
-	bool IsPresent;
-	bool IsOneTime; // remove this SW when it has been fired once
-	bool IsReady;
-	bool IsSuspended;
-	PROTECTED_PROPERTY(BYTE, unused_71[3]);
-	int ReadyFrame; // when did it become ready?
-	int CameoChargeState;
-	ChargeDrainState ChargeDrainState;
     SuperClass(SuperWeaponTypeClass* pSWType, HouseClass* pOwner) noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAF90);
     SuperClass() noexcept : SuperClass(fake_noinit_t{}) JMP_THIS(0x6CAEC0);
 };
@@ -118,18 +111,18 @@ static_assert(sizeof(SuperClass) == SuperClass::ClassSize);
 class LightningStorm
 {
 public:
-	DEFINE_REFERENCE(double, CloudHeightFactor, 0xB0CDD8u)
-	DEFINE_REFERENCE(CellStruct, Coords, 0xA9F9CCu)
-	DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FACCu)
-	DEFINE_REFERENCE(int, Deferment, 0xA9FAB8u)
-	DEFINE_REFERENCE(int, Duration, 0x827FC4u)
-	DEFINE_REFERENCE(int, StartTime, 0x827FC0u)
-	DEFINE_REFERENCE(bool, Active, 0xA9FAB4u)
-	DEFINE_REFERENCE(bool, TimeToEnd, 0xA9FAD0u)
+    DEFINE_REFERENCE(double, CloudHeightFactor, 0xB0CDD8u)
+    DEFINE_REFERENCE(CellStruct, Coords, 0xA9F9CCu)
+    DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FACCu)
+    DEFINE_REFERENCE(int, Deferment, 0xA9FAB8u)
+    DEFINE_REFERENCE(int, Duration, 0x827FC4u)
+    DEFINE_REFERENCE(int, StartTime, 0x827FC0u)
+    DEFINE_REFERENCE(bool, Active, 0xA9FAB4u)
+    DEFINE_REFERENCE(bool, TimeToEnd, 0xA9FAD0u)
 
-	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, CloudsPresent, 0xA9F9D0u)
-	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, CloudsManifesting, 0xA9FA60u)
-	DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, BoltsPresent, 0xA9FA18u)
+    DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, CloudsPresent, 0xA9F9D0u)
+    DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, CloudsManifesting, 0xA9FA60u)
+    DEFINE_REFERENCE(DynamicVectorClass<AnimClass*>, BoltsPresent, 0xA9FA18u)
 
     static void Start(int duration, int deferment, CellStruct cell, HouseClass* pOwner)
     {
@@ -147,10 +140,10 @@ public:
 class PsyDom
 {
 public:
-	DEFINE_REFERENCE(PsychicDominatorStatus, Status, 0xA9FAC0u)
-	DEFINE_REFERENCE(CellStruct, Coords, 0xA9FA48u)
-	DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FAC8u)
-	DEFINE_REFERENCE(AnimClass*, Anim, 0xA9FAC4u)
+    DEFINE_REFERENCE(PsychicDominatorStatus, Status, 0xA9FAC0u)
+    DEFINE_REFERENCE(CellStruct, Coords, 0xA9FA48u)
+    DEFINE_REFERENCE(HouseClass*, Owner, 0xA9FAC8u)
+    DEFINE_REFERENCE(AnimClass*, Anim, 0xA9FAC4u)
 
     static void Start(HouseClass* pOwner, CellStruct coords)
     { PUSH_VAR32(coords); SET_REG32(ECX, pOwner); CALL(0x53AE50); }
@@ -163,9 +156,8 @@ public:
 class ChronoScreenEffect
 {
 public:
-	DEFINE_REFERENCE(int, Status, 0xA9FAB0u)
-	DEFINE_REFERENCE(int, Duration, 0xA9FA98u)
-
+    DEFINE_REFERENCE(int, Status, 0xA9FAB0u)
+    DEFINE_REFERENCE(int, Duration, 0xA9FA98u)
 
     static void Start(int duration) { SET_REG32(ECX, duration); CALL(0x53B460); }
     static void Update() { CALL(0x53B560); }
@@ -175,10 +167,9 @@ public:
 class NukeFlash
 {
 public:
-	DEFINE_REFERENCE(NukeFlashStatus, Status, 0xA9FABCu)
-	DEFINE_REFERENCE(int, StartTime, 0x827FC8u)
-	DEFINE_REFERENCE(int, Duration, 0x827FCCu)
-
+    DEFINE_REFERENCE(NukeFlashStatus, Status, 0xA9FABCu)
+    DEFINE_REFERENCE(int, StartTime, 0x827FC8u)
+    DEFINE_REFERENCE(int, Duration, 0x827FCCu)
 
     static void FadeIn() { CALL(0x53AB70); }
     static void FadeOut() { CALL(0x53AC50); }

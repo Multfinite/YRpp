@@ -1,7 +1,3 @@
-/*
-	Factories are responsible for producing units and buildings.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -11,6 +7,9 @@ class HouseClass;
 class TechnoClass;
 class TechnoTypeClass;
 
+/*!
+* @brief Factories are responsible for producing units and buildings. 
+*/
 class __declspec(uuid("34ECD9A8-0AB0-11D2-ACA7-006008055BB5"))
 NOVTABLE FactoryClass : public AbstractClass
 {
@@ -33,7 +32,24 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E88D0;
     static constexpr size_t ClassSize = 0x74;
 
-	DEFINE_REFERENCE(DynamicVectorClass<FactoryClass*>, Array, 0xA83E30u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<FactoryClass*>, Array, 0xA83E30u)
+
+public:
+    StageClass Production;
+    DynamicVectorClass<TechnoTypeClass*> QueuedObjects;
+    TechnoClass* Object;
+    bool OnHold;
+    bool IsDifferent;
+    PROTECTED_PROPERTY(BYTE, align_5E[2]);
+    int Balance;
+    int OriginalBalance;
+    int SpecialItem;
+    HouseClass* Owner;
+    bool IsSuspended;
+    bool IsManual;
+    PROTECTED_PROPERTY(BYTE, padding_72[2]);
+
 public:
     virtual ~FactoryClass() JMP_THIS(0x4C9A10);
 
@@ -84,26 +100,9 @@ public:
     }
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
     /*! @brief FAKE CTOR */
     explicit __forceinline FactoryClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 public:
-	StageClass      Production; // hardcoded to be 54 steps (so cameo clock should be 54 frames)
-	DynamicVectorClass<TechnoTypeClass*> QueuedObjects;
-	TechnoClass*       Object;
-	bool               OnHold; // paused when out of money, restored when funds available
-	bool               IsDifferent;	// changed progress
-	PROTECTED_PROPERTY(BYTE, align_5E[2]);
-	int                Balance; // credits house still owes us for building this
-	int                OriginalBalance;
-	int                SpecialItem; // -1 = none, else Iron Curtain? (was EMPulse in TS)
-	HouseClass*        Owner;
-	bool               IsSuspended; //completed production, before next (or waiting to place)
-	bool               IsManual; // whether the current suspension state was caused by the player
-	PROTECTED_PROPERTY(BYTE, padding_72[2]);
     FactoryClass() : FactoryClass(fake_noinit_t{}) JMP_THIS(0x4C98B0);
     FactoryClass(noinit_t) noexcept : FactoryClass(fake_noinit_t{}) { vtables.init(this); }
 };

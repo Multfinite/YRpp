@@ -1,20 +1,23 @@
+/*!
+* @brief WaypointPathClass - handles path planning waypoints
+*/
 #pragma once
 
 #include "AbstractClass.h"
 
-// this refers to the "planning mode" waypoints you place with your mouse, not mapping waypoints
+// This refers to the "planning mode" waypoints you place with your mouse, not mapping waypoints
 class WaypointClass
 {
 public:
-	//need to define a == operator so it can be used in array classes
-	bool operator == (const WaypointClass& tWaypoint) const
-	{
-		return (Coords == tWaypoint.Coords && unknown == tWaypoint.unknown);
-	}
+    // Need to define a == operator so it can be used in array classes
+    bool operator == (const WaypointClass& tWaypoint) const
+    {
+        return (Coords == tWaypoint.Coords && unknown == tWaypoint.unknown);
+    }
 
-	//Properties
-	CellStruct Coords;
-	DWORD       unknown;
+    // Properties
+    CellStruct Coords;
+    DWORD unknown;
 };
 
 class NOVTABLE WaypointPathClass : public AbstractClass
@@ -32,7 +35,13 @@ public:
     };
     static inline vtables_t vtables{};
 
+    static constexpr AbstractType AbsID = AbstractType::Waypoint;
+    static constexpr uintptr_t AbsVTable = 0x7F6E70;
+    static constexpr size_t ClassSize = 0x40;
 
+public:
+    int CurrentWaypointIndex;
+    DynamicVectorClass<WaypointClass> Waypoints;
 
 public:
     virtual ~WaypointPathClass() JMP_THIS(0x7638C0);
@@ -55,19 +64,12 @@ public:
     bool Set(Coordinate* a2) JMP_THIS(0x7639A0);
 */
 protected:
-
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline WaypointPathClass(fake_noinit_t) noexcept
         : AbstractClass(fake_noinit_t{})
     {}
 
 public:
-
-	int  CurrentWaypointIndex; //seems that way
-	DynamicVectorClass<WaypointClass> Waypoints; // actual path waypoints, no *
     WaypointPathClass(int idx) noexcept : WaypointPathClass(fake_noinit_t{})
         JMP_THIS(0x763810);
     WaypointPathClass() noexcept : WaypointPathClass(fake_noinit_t{})

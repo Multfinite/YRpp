@@ -1,7 +1,3 @@
-/*
-	ObjectTypes are initialized by INI files.
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -34,12 +30,7 @@ public:
 
 	//Array
 	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	FixedString<25> ParentCountry;
 	PROTECTED_PROPERTY(BYTE, align_B1[3]);
 	int            ArrayIndex;

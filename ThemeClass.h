@@ -65,7 +65,7 @@ public:
 	void Suspend()
 		JMP_THIS(0x720F70);
 
-	void AI()
+	void Update()
 		JMP_THIS(0x7209D0);
 
 	void Scan()

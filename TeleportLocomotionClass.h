@@ -1,5 +1,3 @@
-//Locomotor = {4A582747-9839-11d1-B709-00A024DDAFD1}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -26,13 +24,8 @@ public:
 	static inline vtables_t vtables{};
 public:
 	static constexpr uintptr_t ILocoVTable = 0x7F5000;
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	static constexpr size_t ClassSize = 0x4C;
 public:
-
 	CoordStruct MovingDestination;	//Current destination
 	CoordStruct LastCoords; //Marked occupation bits there
 	bool Moving;	//Is currently moving

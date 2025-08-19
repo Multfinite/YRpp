@@ -1,7 +1,3 @@
-/*
-	Ground & Naval Vehicles
-*/
-
 #pragma once
 
 #include "FootClass.h"
@@ -9,6 +5,9 @@
 
 class EBolt;
 
+/*!
+* @brief Ground & Naval Vehicles
+*/
 class __declspec(uuid("0E272DCA-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE UnitClass : public FootClass
 {
@@ -32,7 +31,29 @@ public:
 
 	//Static
 	DEFINE_REFERENCE(DynamicVectorClass<UnitClass*>, Array, 0x8B4108u)
+public:
+	int CurrentFiringFrame;
+	UnitTypeClass* Type;
+	// groovy - link defined in the map's [Units] section, looked up on startup
+	UnitClass* FollowerCar;
+	// Carrying the flag of this House
+	int FlagHouseIndex;
+	// This vehicle is another vehicle's FollowerCar (such as a train car following train).
+	bool IsFollowerCar;
+	bool Unloading;
+	bool IsHarvesting;
+	bool TerrainPalette;
+	int Visceroid_direction;
+	int DeathFrameCounter;
+	//Unit is the owner of this
+	EBolt* ElectricBolt;
+	bool Deployed;
+	bool Deploying;
+	bool Undeploying;
+	// // Set when unloading passengers. Units with TurretCount>0 will not unload the gunner.
+	int NonPassengerCount;
 
+	wchar_t ToolTipText[0x100];
 public:
 	virtual ~UnitClass() JMP_THIS(0x735780);
 
@@ -190,31 +211,10 @@ public:
 	int64_t CreditLoad() JMP_THIS(0x7438B0);
 	bool DeployFire() const JMP_THIS(0x746D00);
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 
 	/*! @brief FAKE CTOR */
 	explicit __forceinline UnitClass(fake_noinit_t) noexcept : FootClass(fake_noinit_t{}) {}
 public:
-
-	int CurrentFiringFrame;
-	UnitTypeClass* Type;
-	UnitClass* FollowerCar; // groovy - link defined in the map's [Units] section, looked up on startup
-	int FlagHouseIndex; // Carrying the flag of this House
-	bool IsFollowerCar; // This vehicle is another vehicle's FollowerCar (such as a train car following train).
-	bool Unloading;
-	bool IsHarvesting;
-	bool TerrainPalette;
-	int unknown_int_6D4;
-	int DeathFrameCounter;
-	EBolt* ElectricBolt; //Unit is the owner of this
-	bool Deployed;
-	bool Deploying;
-	bool Undeploying;
-	int NonPassengerCount; // Set when unloading passengers. Units with TurretCount>0 will not unload the gunner.
-
-	wchar_t ToolTipText[0x100];
 	UnitClass(noinit_t) noexcept : FootClass(fake_noinit_t{}) { vtables.init(this); };
 	UnitClass(UnitTypeClass* type, HouseClass* house) : UnitClass(fake_noinit_t{}) JMP_THIS(0x7353C0);
 };

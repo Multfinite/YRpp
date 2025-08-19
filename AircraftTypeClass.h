@@ -23,14 +23,8 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E2868;
 	static constexpr size_t ClassSize = 0xE10;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(AircraftTypeClass, 0xA8B218u);
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	bool Carryall;
 	AnimTypeClass* Trailer;

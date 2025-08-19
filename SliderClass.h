@@ -17,19 +17,19 @@ public:
 
 	//Constructors
 	SliderClass(unsigned int nID, int nX, int nY, int nWidth, int nHeight, bool bBelongToList) noexcept
-		: GaugeClass(noinit_t())
+		: GaugeClass(noinit_t{})
 	{
 		JMP_THIS(0x6B1B20);
 	}
 
 	SliderClass(SliderClass& another) noexcept
-		: GaugeClass(noinit_t())
+		: GaugeClass(noinit_t{})
 	{
 		JMP_THIS(0x5581A0);
 	}
 
 	explicit __forceinline SliderClass(noinit_t) noexcept // not protected for ListClass Constructor
-		: GaugeClass(noinit_t())
+		: GaugeClass(noinit_t{})
 	{ }
 
 	//Properties

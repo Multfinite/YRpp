@@ -1,7 +1,3 @@
-/*
-	Particles
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -15,8 +11,6 @@ NOVTABLE ParticleClass : public ObjectClass
 public:
     using base_type = ObjectClass;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<ParticleClass*>, Array, 0xA83DC8u)
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -33,8 +27,74 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7EF954;
     static constexpr size_t ClassSize = 0x138;
 
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<ParticleClass*>, Array, 0xA83DC8u)
 
+public:
+    ParticleTypeClass* Type;
+    RGBClass unknown_color_B0;
+    DWORD RefCount;
+    DWORD unknown_B8;
+    DWORD unknown_BC;
+    Coordinate Velocity;
+    DWORD unknown_CC;
+    double unknown_double_D0;
+    DWORD unknown_D8;
+    DWORD unknown_DC;
+    DWORD unknown_E0;
+    float Speed;
+    Coordinate unknown_coords_E8;
+    Coordinate unknown_coords_F4;
+    Coordinate unknown_coords_100;
+    Vector3D<float> unknown_vector3d_10C;
+    Vector3D<float> unknown_vector3d_118;
+    ParticleSystemClass* ParticleSystem;
+    WORD RemainingEC;
+    WORD RemainingDC;
+    BYTE StateAIAdvance; // bool ?
+    BYTE unknown_12D;
+    BYTE StartStateAI; // bool ?
+    BYTE Translucency;
+    BYTE unknown_130;
+    BYTE HasRemaining; // bool?
+    PROTECTED_PROPERTY(DWORD, unused_134);
 
+/*
+    ParticleTypeClass* Type;
+    RGBClass byteB0;
+    uint64_t RefCount;
+    double doubleB8;
+    Coordinate Gas_AI_C0;
+    float floatCC;
+    float floatD0;
+    float floatD4;
+    uint64_t dwordD8;
+    uint64_t dwordDC;
+    uint64_t dwordE0;
+    float Velocity;
+    Coordinate gapE8;
+    Coordinate dwordF4;
+    Coordinate dword100;
+    Vector3D vector3_10C;
+    float float118;
+    float float11C;
+    float float120;
+    ParticleSystemClass* ParticleSystem;
+    int16_t RemainingEC;
+    int16_t RemainingDC;
+    uint8_t StateAIAdvance;
+    uint8_t byte12D;
+    uint8_t StartStateAI;
+    uint8_t Translucency;
+    uint8_t byte130;
+    uint8_t hasremaining;
+    int8_t field_132;
+    int8_t field_133;
+    int8_t field_134;
+    int8_t field_135;
+    int8_t field_136;
+    int8_t field_137;
+*/
 
 public:
     virtual ~ParticleClass() JMP_THIS(0x62BCC0);
@@ -69,44 +129,11 @@ public:
     void Spark_AI() JMP_THIS(0x62C6E0);
 */
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline ParticleClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	ParticleTypeClass* Type;
-	BYTE   unknown_B0;
-	BYTE   unknown_B1;
-	BYTE   unknown_B2;
-	DWORD  unknown_B4;
-	DWORD  unknown_B8;
-	DWORD  unknown_BC;
-	CoordStruct Velocity;
-	DWORD  unknown_CC;
-	double unknown_double_D0;
-	DWORD  unknown_D8;
-	DWORD  unknown_DC;
-	DWORD  unknown_E0;
-	float  Speed;
-	CoordStruct unknown_coords_E8; //Crd2 in CTOR
-	CoordStruct unknown_coords_F4; //Crd1 in CTOR
-	CoordStruct unknown_coords_100; //{ 0, 0, 0} in CTOR
-	Vector3D<float> unknown_vector3d_10C;
-	Vector3D<float> unknown_vector3d_118;
-	ParticleSystemClass*   ParticleSystem;
-	WORD   RemainingEC;
-	WORD   RemainingDC;
-	BYTE   StateAIAdvance;
-	BYTE   unknown_12D;
-	BYTE   StartStateAI;
-	BYTE   Translucency;
-	BYTE   unknown_130;
-	BYTE   unknown_131;
-	PROTECTED_PROPERTY(DWORD,        unused_134); //??
     ParticleClass(ParticleTypeClass* pParticleType, Coordinate* pCrd1,
         Coordinate* pCrd2, ParticleSystemClass* pParticleSystem)
         : ParticleClass(fake_noinit_t{}) JMP_THIS(0x62B5E0);

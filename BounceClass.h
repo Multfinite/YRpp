@@ -1,12 +1,11 @@
-/*
-	Ballistic trajectory data used by Animations and Voxel Animations.
-*/
-
 #pragma once
 
 #include "GeneralStructures.h"
 #include "YRMathVector.h"
 
+/*!
+* Ballistic trajectory data used by Animations and Voxel Animations.
+*/
 class BounceClass
 {
 public:
@@ -15,10 +14,16 @@ public:
 		Bounce = 1,
 		Impact = 2
 	};
-
-	// constructors
+public:
+	double Elasticity{ 0.0 }; // speed multiplier when bouncing off the ground
+	double Gravity{ 0.0 }; // subtracted from the Z coords every frame
+	double MaxVelocity{ 0.0 }; // 0.0 disables check
+	Vector3D<float> Coords; // position with precision
+	Vector3D<float> Velocity; // speed components
+	Quaternion CurrentAngle; // quaternion for drawing
+	Quaternion AngularVelocity; // second quaternion as per-frame delta
+public:
 	BounceClass() = default;
-
 	BounceClass(const CoordStruct& coords, double elasticity, double gravity,
 		double maxVelocity, const Vector3D<float>& velocity, double angularVelocity)
 	{
@@ -44,13 +49,6 @@ public:
 		return ret;
 	}
 
-	double Elasticity{ 0.0 }; // speed multiplier when bouncing off the ground
-	double Gravity{ 0.0 }; // subtracted from the Z coords every frame
-	double MaxVelocity{ 0.0 }; // 0.0 disables check
-	Vector3D<float> Coords; // position with precision
-	Vector3D<float> Velocity; // speed components
-	Quaternion CurrentAngle; // quaternion for drawing
-	Quaternion AngularVelocity; // second quaternion as per-frame delta
 	Status AI() JMP_THIS(0x439B00);
 };
 

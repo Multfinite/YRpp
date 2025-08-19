@@ -13,11 +13,11 @@ public:
 
 	//Constructors
 	ToggleClass(unsigned int nID, int nX, int nY, int nWidth, int nHeight) noexcept
-		: ToggleClass(noinit_t()) { JMP_THIS(0x723E60); }
+		: ToggleClass(noinit_t{}) { JMP_THIS(0x723E60); }
 
 protected:
 	explicit __forceinline ToggleClass(noinit_t)  noexcept
-		: ControlClass(noinit_t())
+		: ControlClass(noinit_t{})
 	{ }
 
 	//Properties

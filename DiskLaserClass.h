@@ -1,7 +1,3 @@
-/*
-	DiskLasers are the floating disks' purple lasers.
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -10,6 +6,9 @@ class LaserDrawClass;
 class TechnoClass;
 class WeaponTypeClass;
 
+/*!
+* @brief DiskLasers are the floating disks' purple lasers.
+*/
 class __declspec(uuid("5230C9A8-846A-47EC-BDA2-7E95445E1D49"))
 NOVTABLE DiskLaserClass : public AbstractClass
 {
@@ -30,12 +29,19 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E5FB8;
     static constexpr size_t ClassSize = 0x40;
 
-	// static
-	DEFINE_REFERENCE(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<DiskLaserClass*>, Array, 0x8A0208u)
+    static constexpr auto Radius = 240;
+    DEFINE_ARRAY_REFERENCE(Point2D, [16], DrawCoords, 0x8A0180u)
 
-	static constexpr auto Radius = 240;
-	DEFINE_ARRAY_REFERENCE(Point2D, [16], DrawCoords, 0x8A0180u)
-
+public:
+    TechnoClass* Owner;
+    TechnoClass* Target;
+    WeaponTypeClass* Weapon;
+    DWORD LogicState;
+    DWORD drawoffset34;
+    DWORD drawoffset38;
+    int Damage;
 
 public:
     virtual ~DiskLaserClass() JMP_THIS(0x4A7B00);
@@ -54,21 +60,9 @@ public:
     void PointerGotInvalid(AbstractClass* pInvalid) JMP_THIS(0x4A7900);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
     /*! @brief FAKE CTOR */
     explicit __forceinline DiskLaserClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) { }
 public:
-
-	TechnoClass* Owner;
-	TechnoClass* Target;
-	WeaponTypeClass* Weapon;
-	DWORD unknown_30;
-	DWORD unknown_34;
-	DWORD unknown_38;
-	int Damage;
     DiskLaserClass() : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7A30);
     DiskLaserClass(noinit_t) noexcept : DiskLaserClass(fake_noinit_t{}) JMP_THIS(0x4A7AD0);
 };

@@ -1,5 +1,3 @@
-//General linked list class
-
 #pragma once
 
 #include "YRPPCore.h"
@@ -57,6 +55,7 @@ protected:
 	GenericNode* PrevNode;
 };
 
+/*! @brief General linked list class */
 class GenericList
 {
 public:

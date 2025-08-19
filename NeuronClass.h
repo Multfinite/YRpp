@@ -1,7 +1,3 @@
-/*
-	I have not the slightest idea what this is good for...
-*/
-
 #pragma once
 
 #include "AbstractClass.h"
@@ -28,7 +24,22 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7E3DF0;
     static constexpr size_t ClassSize = 0x38;
 
+public:
+/*
+    void* unknown_ptr_24;
+    void* unknown_ptr_28;
+    void* unknown_ptr_2C;
+    CDTimerClass unknown_timer_30;
+*/
 
+    int swizzledword_24;
+    int swizzledword_28;
+    int swizzledword_2C;
+    int timer_30;
+    char field_34;
+    char field_35;
+    char field_36;
+    char field_37;
 
 public:
     virtual ~NeuronClass() JMP_THIS(0x43A440);
@@ -43,23 +54,14 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x43A5D0);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline NeuronClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	void* unknown_ptr_24;
-	void* unknown_ptr_28;
-	void* unknown_ptr_2C;
-	CDTimerClass unknown_timer_30;
     NeuronClass() : NeuronClass(fake_noinit_t{}) JMP_THIS(0x43A350);
 };
 static_assert(sizeof(NeuronClass) == NeuronClass::ClassSize);
 
-//Even more questions marks on the use of this... >.<
 class BrainClass
 {
 public:
@@ -67,6 +69,5 @@ public:
 
 	BrainClass() { THISCALL(0x43A600); }
 
-	//Properties
-	VectorClass<NeuronClass*> Neurons;	//???
+	VectorClass<NeuronClass*> Neurons;
 };

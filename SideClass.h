@@ -1,7 +1,3 @@
-/*
-	Sides
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -28,10 +24,12 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F2EC0;
     static constexpr size_t ClassSize = 0xB4;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(SideClass, 0x8B4120u);
+public:
+    ABSTRACTTYPE_ARRAY(SideClass, 0x8B4120u);
 
-
+public:
+    /*! @brief Indexes */
+    TypeList<int> HouseTypes;
 
 public:
     virtual ~SideClass() JMP_THIS(0x6A4610);
@@ -46,16 +44,10 @@ public:
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6A4710);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline SideClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	TypeList<int> HouseTypes;	//indices!
-
     SideClass(const char* pID) : SideClass(fake_noinit_t{}) JMP_THIS(0x6A4550);
     SideClass(noinit_t) noexcept : SideClass(fake_noinit_t{}) { vtables.init(this); }
 };

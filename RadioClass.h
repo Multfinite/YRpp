@@ -1,7 +1,3 @@
-/*
-	Base class for WHAT?? I DUNNO =(
-*/
-
 #pragma once
 
 #include "MissionClass.h"
@@ -9,6 +5,9 @@
 //forward declarations
 class TechnoClass;
 
+/*!
+* Base class for any object that can respobd via radio
+*/
 class NOVTABLE RadioClass : public MissionClass
 {
 public:
@@ -27,6 +26,12 @@ public:
 public:
 	static constexpr uintptr_t AbsVTable = 0x7F0508;
 	static constexpr size_t ClassSize = 0xF0;
+public:
+	// new command updates these
+	RadioCommand LastCommands[3];
+	// Docked units etc
+	DECLARE_PROPERTY(VectorClass<TechnoClass*>, RadioLinks);
+public:
 	// 0x65AEB0 SDTOR
 	virtual ~RadioClass() RX;
 
@@ -124,14 +129,7 @@ public:
 	void SetLinkCount(int count) JMP_THIS(0x65AE60);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 
-public:
-
-	RadioCommand LastCommands[3]; // new command updates these
-	DECLARE_PROPERTY(VectorClass<TechnoClass*>, RadioLinks);	//Docked units etc
 	/*! @brief FAKE CTOR */
 	explicit __forceinline RadioClass(fake_noinit_t) noexcept : MissionClass(fake_noinit_t{}) {}
 	RadioClass(noinit_t) : MissionClass(fake_noinit_t{}) JMP_THIS(0x65A7E0);

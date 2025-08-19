@@ -1,7 +1,3 @@
-/*
-	Base class for all game objects with missions (yeah... not many).
-*/
-
 #pragma once
 
 #include "ObjectClass.h"
@@ -44,13 +40,12 @@ class MissionControlClass
 		double AARate; //default 0.016
 };
 
+/*!
+* @brief Base class for all game objects with missions (yeah... not many).
+*/
 class NOVTABLE MissionClass : public ObjectClass
 {
 public:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 	using base_type = ObjectClass;
 	struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
 	{
@@ -67,13 +62,13 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7EDCC0;
 	static constexpr size_t ClassSize = 0xD4;
 public:
-
 	Mission  CurrentMission;
 	Mission  SuspendedMission;
 	Mission  QueuedMission;
-	bool     unknown_bool_B8;
+	bool     AssignmentState;
 	int      MissionStatus;
-	int      CurrentMissionStartTime;	//in frames
+	//in frames
+	int      CurrentMissionStartTime;	
 	int      MissionAccumulateTime;
 	DECLARE_PROPERTY(CDTimerClass, UpdateTimer);
 public:

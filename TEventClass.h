@@ -28,8 +28,18 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F5578;
     static constexpr size_t ClassSize = 0x58;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<TEventClass*>, Array, 0xB0F1A0u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<TEventClass*>, Array, 0xB0F1A0u)
+
+public:
+    int ArrayIndex;
+    TEventClass* NextEvent;
+    TriggerEvent EventKind;
+    TeamTypeClass* TeamType;
+    int Value;
+    char String[0x1C];
+    HouseClass* House;
+
 public:
     virtual ~TEventClass() JMP_THIS(0x71E830);
 
@@ -62,20 +72,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TEventClass(fake_noinit_t) noexcept : AbstractClass(fake_noinit_t{}) {}
 
 public:
-	int ArrayIndex;
-	TEventClass* NextEvent;
-	TriggerEvent EventKind;
-	TeamTypeClass* TeamType; // If this event needs to reference a team type, then this is the pointer to the team type object.
-	int Value;
-	char String[0x1C];
-	HouseClass* House;
     TEventClass() : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E6A0);
     TEventClass(noinit_t) noexcept : TEventClass(fake_noinit_t{}) JMP_THIS(0x71E800);
 };

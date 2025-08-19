@@ -9,11 +9,14 @@
 class TechnoClass;
 class CellClass;
 
-// Tracks aerial units via 20x20 vectors spread across the maps for efficient search
+/*! @brief Tracks aerial units via 20x20 vectors spread across the maps for efficient search */
 class AircraftTrackerClass
 {
 public:
 	DEFINE_REFERENCE(AircraftTrackerClass, Instance, 0x887888u)
+public:
+	DynamicVectorClass<TechnoClass*> TrackerVectors[20][20];
+	DynamicVectorClass<TechnoClass*> CurrentVector;
 
 public:
 	// Fills CurrentVector with items from TrackerVectors matching given range around cell.
@@ -35,10 +38,6 @@ public:
 
 private:
 	AircraftTrackerClass() {}
-
-public:
-	DynamicVectorClass<TechnoClass*> TrackerVectors[20][20];
-	DynamicVectorClass<TechnoClass*> CurrentVector;
 };
 
 static_assert(sizeof(AircraftTrackerClass) == 0x2598);

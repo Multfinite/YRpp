@@ -1,5 +1,3 @@
-//Locomotor = {92612C46-F71F-11d1-AC9F-006008055BB5}
-
 #pragma once
 
 #include "LocomotionClass.h"
@@ -39,12 +37,6 @@ public:
 		Unknown = 6,
 	};
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
-public:
-
 	int TurnRate;
 	int Speed;
 	float Climb;
@@ -81,7 +73,6 @@ public:
 	BYTE unknown_92;
 	BYTE unknown_93;
 	ILocomotion* Piggybackee;
-};
 public:
 	virtual ~JumpjetLocomotionClass() JMP_THIS(0x54AD00);
 

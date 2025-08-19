@@ -33,11 +33,11 @@ public:
 
 	//Constructors
 	ListClass(unsigned int nID, int nX, int nY, int nWidth, int nHeight, TextPrintType eFlag, SHPStruct* UpSHP, SHPStruct* DownSHP) noexcept
-		: ListClass(noinit_t()) { JMP_THIS(0x557230); }
+		: ListClass(noinit_t{}) { JMP_THIS(0x557230); }
 
 	explicit __forceinline ListClass(noinit_t)  noexcept
-		: ControlClass(noinit_t())
-		, Scroller(noinit_t())
+		: ControlClass(noinit_t{})
+		, Scroller(noinit_t{})
 	{
 	}
 

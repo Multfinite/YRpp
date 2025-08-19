@@ -11,10 +11,10 @@ public:
 
 	//Constructors
 	TextLabelClass(wchar_t* pText, int X, int Y, int ColorSchemeIndex, TextPrintType style) noexcept
-		: GadgetClass(noinit_t()) { JMP_THIS(0x72A440); }
+		: GadgetClass(noinit_t{}) { JMP_THIS(0x72A440); }
 protected:
 	explicit __forceinline TextLabelClass(noinit_t)  noexcept
-		: GadgetClass(noinit_t())
+		: GadgetClass(noinit_t{})
 	{
 	}
 

@@ -8,7 +8,11 @@ class AlphaLightingRemapClass
 {
 public:
 	DEFINE_REFERENCE(DynamicVectorClass<AlphaLightingRemapClass*>, Array, 0x88A080)
-
+public:
+	uint16_t Table[256][256];
+	int IntensityCount;
+	int RefCount;
+public:
 	// Notice:
 	// When a ConvertClass is constructed by the game, it will generate [IntensityCount] color
 	// tables from dark to bright. Each of them just changes the intensity of the source palette.
@@ -18,9 +22,5 @@ public:
 	static void __stdcall Release(AlphaLightingRemapClass* pItem) JMP_STD(0x420270);
 
 	// The game never directly called this function, it just call FindOrAllocate and this CTOR is inlined!
-
-	WORD Table[256][256];
-	int IntensityCount;
-	int RefCount;
 	explicit AlphaLightingRemapClass(int intensityCount) noexcept JMP_THIS(0x4202F0);
 };

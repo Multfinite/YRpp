@@ -1,7 +1,3 @@
-/*
-	Weapons
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -15,10 +11,6 @@ class __declspec(uuid("0CF2BCE7-36E4-11D2-B8D8-006008C809ED"))
 NOVTABLE WeaponTypeClass : public AbstractTypeClass
 {
 public:
-
-	//Array
-	ABSTRACTTYPE_ARRAY(WeaponTypeClass, 0x887568u);
-
     using base_type = AbstractTypeClass;
 
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
@@ -37,7 +29,73 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F73B8;
     static constexpr size_t ClassSize = 0x160;
 
+public:
+    ABSTRACTTYPE_ARRAY(WeaponTypeClass, 0x887568u);
 
+public:
+    int AmbientDamage;
+    int Burst;
+    BulletTypeClass* Projectile;
+    int Damage;
+    int Speed;
+    WarheadTypeClass* Warhead;
+    int ROF;
+    int Range;
+    int MinimumRange;
+    DECLARE_PROPERTY(TypeList<int>, Report);
+    DECLARE_PROPERTY(TypeList<int>, DownReport);
+    DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Anim);
+    AnimTypeClass* OccupantAnim;
+    AnimTypeClass* AssaultAnim;
+    AnimTypeClass* OpenToppedAnim;
+    ParticleSystemTypeClass* AttachedParticleSystem;
+    ColorStruct LaserInnerColor;
+    ColorStruct LaserOuterColor;
+    ColorStruct LaserOuterSpread;
+    bool UseFireParticles;
+    bool UseSparkParticles;
+    bool OmniFire;
+    bool DistributedWeaponFire;
+    bool IsRailgun;
+    bool Lobber;
+    bool Bright;
+    bool IsSonic;
+    bool Spawner;
+    bool LimboLaunch;
+    bool DecloakToFire;
+    bool CellRangefinding;
+    bool FireOnce;
+    bool NeverUse;
+    bool RevealOnFire;
+    bool TerrainFire;
+    bool SabotageCursor;
+    bool MigAttackCursor;
+    bool DisguiseFireOnly;
+    int DisguiseFakeBlinkTime;
+    bool InfiniteMindControl;
+    bool FireWhileMoving;
+    bool DrainWeapon;
+    bool FireInTransport;
+    bool Suicide;
+    bool TurboBoost;
+    bool Supress;
+    bool Camera;
+    bool Charges;
+    bool IsLaser;
+    bool DiskLaser;
+    bool IsLine;
+    bool IsBigLaser;
+    bool IsHouseColor;
+    char LaserDuration;
+    bool IonSensitive;
+    bool AreaFire;
+    bool IsElectricBolt;
+    bool DrawBoltAsLaser;
+    bool IsAlternateColor;
+    bool IsRadBeam;
+    bool IsRadEruption;
+    int RadLevel;
+    bool IsMagBeam;
 
 public:
     virtual ~WeaponTypeClass() JMP_THIS(0x771F50);
@@ -58,77 +116,10 @@ public:
     static WeaponTypeClass* __fastcall FindOrAllocate(const char* id) JMP_STD(0x772FA0);
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline WeaponTypeClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	int AmbientDamage;
-	int Burst;
-	BulletTypeClass* Projectile;
-	int Damage;
-	int Speed;
-	WarheadTypeClass* Warhead;
-	int ROF;
-	int Range; // int(256 * ini value)
-	int MinimumRange; // int(256 * ini value)
-	DECLARE_PROPERTY(TypeList<int>, Report);		//sound indices
-	DECLARE_PROPERTY(TypeList<int>, DownReport);	//sound indices
-	DECLARE_PROPERTY(TypeList<AnimTypeClass*>, Anim);
-	AnimTypeClass* OccupantAnim;
-	AnimTypeClass* AssaultAnim;
-	AnimTypeClass* OpenToppedAnim;
-	ParticleSystemTypeClass* AttachedParticleSystem;
-	ColorStruct LaserInnerColor;
-	ColorStruct LaserOuterColor;
-	ColorStruct LaserOuterSpread;
-	bool UseFireParticles;
-	bool UseSparkParticles;
-	bool OmniFire;
-	bool DistributedWeaponFire;
-	bool IsRailgun;
-	bool Lobber;
-	bool Bright;
-	bool IsSonic;
-	bool Spawner;
-	bool LimboLaunch;
-	bool DecloakToFire;
-	bool CellRangefinding;
-	bool FireOnce;
-	bool NeverUse;
-	bool RevealOnFire;
-	bool TerrainFire;
-	bool SabotageCursor;
-	bool MigAttackCursor;
-	bool DisguiseFireOnly;
-	int DisguiseFakeBlinkTime;
-	bool InfiniteMindControl;
-	bool FireWhileMoving;
-	bool DrainWeapon;
-	bool FireInTransport;
-	bool Suicide;
-	bool TurboBoost;
-	bool Supress;
-	bool Camera;
-	bool Charges;
-	bool IsLaser;
-	bool DiskLaser;
-	bool IsLine;
-	bool IsBigLaser;
-	bool IsHouseColor;
-	char LaserDuration;
-	bool IonSensitive;
-	bool AreaFire;
-	bool IsElectricBolt;
-	bool DrawBoltAsLaser;
-	bool IsAlternateColor;
-	bool IsRadBeam;
-	bool IsRadEruption;
-	int RadLevel;
-	bool IsMagBeam;
     WeaponTypeClass(const char* pID = nullptr) noexcept : WeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x771C70);
     WeaponTypeClass(noinit_t) noexcept : WeaponTypeClass(fake_noinit_t{}) JMP_THIS(0x771F00);
 };

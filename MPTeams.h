@@ -41,7 +41,7 @@ public:
 protected:
 	//Constructor
 	MPCombatTeam()
-		: MPTeam(noinit_t())
+		: MPTeam(noinit_t{})
 	{ }
 };
 
@@ -55,7 +55,7 @@ public:
 protected:
 	//Constructor
 	MPSiegeDefenderTeam()
-		: MPTeam(noinit_t())
+		: MPTeam(noinit_t{})
 	{ JMP_THIS(0x5CAE10); }
 };
 
@@ -68,7 +68,7 @@ public:
 
 	//Constructor
 	MPSiegeAttackerTeam()
-		: MPTeam(noinit_t())
+		: MPTeam(noinit_t{})
 	{ JMP_THIS(0x5CAEB0); }
 };
 
@@ -81,6 +81,6 @@ public:
 
 	//Constructor
 	MPObserverTeam()
-		: MPTeam(noinit_t())
+		: MPTeam(noinit_t{})
 	{ JMP_THIS(0x5C9470); }
 };

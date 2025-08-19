@@ -12,6 +12,9 @@
 class StageClass
 {
 public:
+	/*!
+	* @note address 0x6AC870
+	*/
 	constexpr StageClass() = default;
 	StageClass(int rate) { this->Rate = rate; this->Start(rate); }
 

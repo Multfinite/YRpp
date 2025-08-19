@@ -1,7 +1,3 @@
-/*
-	Overlays (mainly Ore and Gems)
-*/
-
 #pragma once
 
 /*
@@ -36,6 +32,9 @@
 #include "ObjectClass.h"
 #include "OverlayTypeClass.h"
 
+ /*!
+ * @brief Overlays (mainly Ore and Gems)
+ */
 class __declspec(uuid("0E272DC7-9C0F-11D1-B709-00A024DDAFD1"))
 NOVTABLE OverlayClass : public ObjectClass
 {
@@ -58,9 +57,11 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7EF3D4;
     static constexpr size_t ClassSize = 0xB0;
 
-	//Static
-	DEFINE_REFERENCE(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
+public:
+    DEFINE_REFERENCE(DynamicVectorClass<OverlayClass*>, Array, 0xA8EC50u)
 
+public:
+    OverlayTypeClass* Type;
 
 public:
     virtual ~OverlayClass() JMP_THIS(0x5FC4D0);
@@ -86,16 +87,11 @@ public:
     void Write_INI(OverlayClass* pThis) JMP_THIS(0x5FD6A0);
 */
 
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
 protected:
     /*! @brief FAKE CTOR */
     explicit __forceinline OverlayClass(fake_noinit_t) noexcept : base_type(fake_noinit_t{}) {}
 
 public:
-
-	OverlayTypeClass* Type;
     OverlayClass(OverlayTypeClass* pType, CellStruct const& mapCoord, int houseId) : OverlayClass(fake_noinit_t{}) JMP_THIS(0x5FC380);
     OverlayClass(noinit_t) noexcept : OverlayClass(fake_noinit_t{}) { vtables.init(this); }
 };

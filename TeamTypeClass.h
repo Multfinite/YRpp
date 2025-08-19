@@ -1,7 +1,3 @@
-/*
-	[TeamTypes]
-*/
-
 #pragma once
 
 #include "AbstractTypeClass.h"
@@ -35,9 +31,52 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F47D0;
     static constexpr size_t ClassSize = 0xF8;
 
-	//Array
-	ABSTRACTTYPE_ARRAY(TeamTypeClass, 0xA8ECA0u);
+public:
+    ABSTRACTTYPE_ARRAY(TeamTypeClass, 0xA8ECA0u);
 
+public:
+    int ArrayIndex;
+    int Group;
+    int VeteranLevel;
+    bool Loadable;
+    bool Full;
+    bool Annoyance;
+    bool GuardSlower;
+    bool Recruiter;
+    bool Autocreate;
+    bool Prebuild;
+    bool Reinforce;
+    bool Whiner;
+    bool Aggressive;
+    bool LooseRecruit;
+    bool Suicide;
+    bool Droppod;
+    bool UseTransportOrigin;
+    bool DropshipLoadout;
+    bool OnTransOnly;
+    int Priority;
+    int Max;
+    int field_BC;
+    int MindControlDecision;
+    HouseClass* Owner;
+    int idxHouse;
+    int TechLevel;
+    TagClass* Tag;
+    int Waypoint;
+    int TransportWaypoint;
+    int cntInstances;
+    ScriptTypeClass* ScriptType;
+    TaskForceClass* TaskForce;
+    int IsGlobal;
+    int field_EC;
+    bool field_F0;
+    bool field_F1;
+    bool AvoidThreats;
+    bool IonImmune;
+    bool TransportsReturnOnUnload;
+    bool AreTeamMembersRecruitable;
+    bool IsBaseDefense;
+    bool OnlyTargetHouseEnemy;
 
 public:
     virtual ~TeamTypeClass() JMP_THIS(0x6F08F0);
@@ -79,57 +118,10 @@ public:
 */
 
 protected:
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
     /*! @brief FAKE CTOR */
     explicit __forceinline TeamTypeClass(fake_noinit_t) noexcept : AbstractTypeClass(fake_noinit_t{}) {}
 
 public:
-
-	int      ArrayIndex;
-	int      Group;
-	int      VeteranLevel;
-	bool     Loadable;
-	bool     Full;
-	bool     Annoyance;
-	bool     GuardSlower;
-	bool     Recruiter;
-	bool     Autocreate;
-	bool     Prebuild;
-	bool     Reinforce;
-	bool     Whiner;
-	bool     Aggressive;
-	bool     LooseRecruit;
-	bool     Suicide;
-	bool     Droppod;
-	bool     UseTransportOrigin;
-	bool     DropshipLoadout;
-	bool     OnTransOnly;
-	int      Priority;
-	int      Max;
-	int      field_BC;
-	int      MindControlDecision;
-	HouseClass *     Owner;
-	int      idxHouse; // idx for MP
-	int      TechLevel;
-	TagClass* Tag;
-	int      Waypoint;
-	int      TransportWaypoint;
-	int      cntInstances;
-	ScriptTypeClass*  ScriptType;
-	TaskForceClass*   TaskForce;
-	int      IsGlobal;
-	int      field_EC;
-	bool     field_F0;
-	bool     field_F1;
-	bool     AvoidThreats;
-	bool     IonImmune;
-	bool     TransportsReturnOnUnload;
-	bool     AreTeamMembersRecruitable;
-	bool     IsBaseDefense;
-	bool     OnlyTargetHouseEnemy;
-
     TeamTypeClass(const char* pID) : TeamTypeClass(fake_noinit_t{}) JMP_THIS(0x6F06E0);
 };
 static_assert(sizeof(TeamTypeClass) == TeamTypeClass::ClassSize);

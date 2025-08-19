@@ -47,14 +47,8 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E4570;
 	static constexpr size_t ClassSize = 0x1798;
 
-	//Array
 	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
-	//===========================================================================
-	//===== Properties ==========================================================
-	//===========================================================================
-
 public:
-
 	int ArrayIndex;
 	CellStruct* FoundationData;
 	SHPStruct* Buildup;
@@ -73,7 +67,7 @@ public:
 	Point2D SecondaryFirePixelOffset;
 	OverlayTypeClass* ToOverlay;
 	IsometricTileTypeClass* ToTile;
-	char BuildupFile [0x10];
+	char BuildupFile[0x10];
 	int BuildupSound;
 	int PackupSound;
 	int CreateUnitSound;
@@ -81,7 +75,7 @@ public:
 	int UnitExitSound;
 	int WorkingSound;
 	int NotWorkingSound;
-	char PowersUpBuilding [0x18];
+	char PowersUpBuilding[0x18];
 	UnitTypeClass* FreeUnit;
 	InfantryTypeClass* SecretInfantry;
 	UnitTypeClass* SecretUnit;
@@ -106,7 +100,7 @@ public:
 
 	BuildingAnimFrameStruct BuildingAnimFrame[6];
 
-	BuildingAnimStruct BuildingAnim[0x15];
+	BuildingAnimStruct BuildingAnim[static_cast<size_t>(BuildingAnimSlot::Count)];
 
 	int Upgrades;
 	SHPStruct* DeployingAnim;
@@ -129,10 +123,7 @@ public:
 	int AntiArmorValue;
 	int AntiInfantryValue;
 	Point2D ZShapePointMove;
-	int unknown_1538;
-	int unknown_153C;
-	int unknown_1540;
-	int unknown_1544;
+	RectangleStruct unknown_1538;
 	WORD ExtraLight;
 	bool TogglePower;
 	bool HasSpotlight;
@@ -244,7 +235,7 @@ public:
 	bool ConcentricRadialIndicator;
 	int PsychicDetectionRadius;
 	int BarrelStartPitch;
-	char VoxelBarrelFile [0x1C];
+	char VoxelBarrelFile[0x1C];
 	CoordStruct VoxelBarrelOffsetToPitchPivotPoint;
 	CoordStruct VoxelBarrelOffsetToRotatePivotPoint;
 	CoordStruct VoxelBarrelOffsetToBuildingPivotPoint;
@@ -259,10 +250,10 @@ public:
 	bool CrateBeneath;
 	bool LeaveRubble;
 	bool CrateBeneathIsMoney;
-	char TheaterSpecificID [0x13];
+	char TheaterSpecificID[0x13];
 	int NumberOfDocks;
 	VectorClass<CoordStruct> DockingOffsets;
-private: DWORD align_1794;
+protected: DWORD align_1794;
 public:
 	virtual ~BuildingTypeClass() JMP_THIS(0x45E580);
 
