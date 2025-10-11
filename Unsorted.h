@@ -726,3 +726,6 @@ struct CheatData
 
 // this holds four original cheats, keep that limit in mind
 DEFINE_ARRAY_REFERENCE(CheatData, [4], OriginalCheats, 0x825C28)
+
+HRESULT __stdcall LoadMiscValues(IStream* pStm) JMP_STD(0x67F7E0);
+HRESULT __stdcall SaveMiscValues(IStream* pStm) JMP_STD(0x67F9C0);
