@@ -336,8 +336,8 @@ public:
 	* @note address 0x4DAF10
 	*/
 	virtual void DrawVoxel(
-		VoxelStruct* VXL, int HVAFrameIndex, int Flags, IndexClass<int, int>* Cache, RectangleStruct* Rectangle,
-		Point2D* CenterPoint, Matrix3D* Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) JMP_THIS(0x4DAF10);
+		VoxelStruct* VXL, int HVAFrameIndex, int Flags, IndexClass<VoxelIndexKey, VoxelCacheStruct*>* Cache, RectangleStruct* Rectangle,
+		Point2D* CenterPoint, Matrix3D* Matrix, int Brightness, BlitterFlags DrawFlags, DWORD dwUnk10) JMP_THIS(0x4DAF10);
 
 	/*!
 	* @brief
