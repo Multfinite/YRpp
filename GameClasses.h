@@ -56,8 +56,10 @@
 #include "TerrainClass.h"
 #include "TiberiumClass.h"
 #include "TriggerClass.h"
+#include "TriggerTypeClass.h"
 #include "TubeClass.h"
 #include "UnitClass.h"
+#include "VeinholeMonsterClass.h"
 #include "VoxelAnimTypeClass.h"
 #include "VoxelAnimClass.h"
 #include "WaveClass.h"
@@ -86,22 +88,24 @@
 #include "LinkClass.h"
 
 //Classes without a VTable
+#include "AircraftTrackerClass.h"
 #include "ColorScheme.h"
 #include "ConvertClass.h"
+#include "StageClass.h"
 #include "EBolt.h"
 #include "IonBlastClass.h"
 #include "LaserDrawClass.h"
 #include "LineTrail.h"
+#include "LoadProgressManager.h"
 #include "RadarEventClass.h"
 #include "RadBeam.h"
 #include "Theater.h"
 #include "VocClass.h"
 #include "VoxClass.h"
 #include "WaveClass.h"
-#include "LoadProgressManager.h"
-
-#include "StageClass.h"
+#include "ThemeClass.h"
 #include "TransitionTimer.h"
+#include "Kamikaze.h"
 
 //Static classes
 #include "Ion.h"
@@ -113,5 +117,6 @@
 //The law!
 #include "RulesClass.h"
 #include "ScenarioClass.h"
+#include "EvadeClass.h"
 
 #include "UI.h"
