@@ -82,10 +82,10 @@ public:
 	PROTECTED_PROPERTY(BYTE, align_23E[2]);
 	int            LineTrailColorDecrement;
 
-	IndexClass<MainVoxelIndexKey, VoxelCacheStruct*> VoxelMainCache;
-	IndexClass<TurretWeaponVoxelIndexKey, VoxelCacheStruct*> VoxelTurretWeaponCache;
+	IndexClass<VoxelIndexKey, VoxelCacheStruct*> VoxelMainCache;
+	IndexClass<VoxelIndexKey, VoxelCacheStruct*> VoxelTurretWeaponCache;
 	IndexClass<ShadowVoxelIndexKey, VoxelCacheStruct*> VoxelShadowCache;
-	IndexClass<TurretBarrelVoxelIndexKey, VoxelCacheStruct*> VoxelTurretBarrelCache;
+	IndexClass<VoxelIndexKey, VoxelCacheStruct*> VoxelTurretBarrelCache;
 public:
 	virtual ~ObjectTypeClass() JMP_THIS(0x5F7400);
 	
