@@ -31,6 +31,8 @@ public:
 	static constexpr uintptr_t AbsVTable = 0x7E29A8;
 	static constexpr AbstractType AbsID = AbstractType::Airstrike;
 	static constexpr size_t ClassSize = 0x60;
+
+	DEFINE_REFERENCE(DynamicVectorClass<AirstrikeClass>, Array, 0x889FB8u)
 public:
 	int AirstrikeTeam;			//As in the INI files.
 	int EliteAirstrikeTeam;	//As in the INI files.

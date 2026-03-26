@@ -39,6 +39,7 @@ public:
     static constexpr uintptr_t AbsVTable = 0x7F6E70;
     static constexpr size_t ClassSize = 0x40;
 
+	DEFINE_REFERENCE(DynamicVectorClass<AbstractClass*>, Array, 0xB72608)
 public:
     int CurrentWaypointIndex;
     DynamicVectorClass<WaypointClass> Waypoints;

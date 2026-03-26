@@ -25,6 +25,8 @@ public:
     static constexpr AbstractType AbsID = AbstractType::FoggedObject;
     static constexpr uintptr_t AbsVTable = 0x7E8B38;
     static constexpr size_t ClassSize = 0x78;
+
+	DEFINE_REFERENCE(DynamicVectorClass<FoggedObjectClass*>, Array, 0x8B3D10)
 public:
     struct DrawRecord
     {

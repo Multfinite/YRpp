@@ -27,6 +27,8 @@ public:
 	static constexpr AbstractType AbsID = AbstractType::Bomb;
 	static constexpr uintptr_t AbsVTable = 0x7E3D10;
 	static constexpr size_t ClassSize = 0x5C;
+
+	DEFINE_REFERENCE(DynamicVectorClass<BombClass*>, Array, 0x89C668u)
 public:
 	TechnoClass* Owner;		//Most likely Ivan.
 	HouseClass* OwnerHouse;

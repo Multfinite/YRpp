@@ -31,6 +31,7 @@ public:
     int field_28;
     int CurrentMission;
 
+	DEFINE_REFERENCE(DynamicVectorClass<ScriptClass*>, Array, 0x8872B0u)
 public:
     virtual ~ScriptClass() JMP_THIS(0x691460);
 
