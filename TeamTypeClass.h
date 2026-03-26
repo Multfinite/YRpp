@@ -5,7 +5,7 @@
 #include "TaskForceClass.h"
 
 class FootClass;
-class TagClass;
+class TagTypeClass;
 class TeamClass;
 class TechnoTypeClass;
 
@@ -14,7 +14,7 @@ NOVTABLE TeamTypeClass : public AbstractTypeClass
 {
 public:
     using base_type = AbstractTypeClass;
-    
+
     struct __declspec(align(sizeof(uintptr_t))) vtables_t : public base_type::vtables_t
     {
         constexpr vtables_t() noexcept : base_type::vtables_t()
@@ -61,7 +61,7 @@ public:
     HouseClass* Owner;
     int idxHouse;
     int TechLevel;
-    TagClass* Tag;
+    TagTypeClass* Tag;
     int Waypoint;
     int TransportWaypoint;
     int cntInstances;
@@ -82,15 +82,15 @@ public:
     virtual ~TeamTypeClass() JMP_THIS(0x6F08F0);
 
     HRESULT __stdcall GetClassID(CLSID* pClassID) override JMP_STD(0x6F1C40);
-    
+
     HRESULT __stdcall Load(IStream* pStm) override JMP_STD(0x6F1BB0);
     HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) override JMP_STD(0x6F1B90);
-    
+
     void PointerExpired(AbstractClass* instance, bool all = true) override JMP_THIS(0x6F1030);
     RTTIType WhatAmI() const override JMP_THIS(0x6F20A0);
     int Size() const override JMP_THIS(0x6F20B0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x6F1C80);
-    
+
     int GetArrayIndex() const override JMP_THIS(0x6F20C0);
     bool LoadFromINI(CCINIClass* pINI) override JMP_THIS(0x6F1090);
     bool SaveToINI(CCINIClass* pINI) override JMP_THIS(0x6F1550);
@@ -100,8 +100,20 @@ public:
     TeamClass* CreateTeam(HouseClass* pHouse) JMP_THIS(0x6F09C0);
     void DestroyAllInstances() JMP_THIS(0x6F0A70);
     int GetGroup() const JMP_THIS(0x6F1870);
-    ::Cell* GetWaypoint(::Cell* retstr) const JMP_THIS(0x6F18A0);
-    ::Cell* GetTransportWaypoint(::Cell* retstr) const JMP_THIS(0x6F18E0);
+    ::Cell* __GetWaypoint(::Cell* retstr) const JMP_THIS(0x6F18A0);
+	__forceinline Cell GetWaypoint() const
+	{
+		Cell ret;
+		__GetWaypoint(&ret);
+		return ret;
+	}
+    ::Cell* __GetTransportWaypoint(::Cell* retstr) const JMP_THIS(0x6F18E0);
+	__forceinline Cell GetTransportWaypoint() const
+	{
+		Cell ret;
+		__GetTransportWaypoint(&ret);
+		return ret;
+	}
     bool CanRecruitUnit(FootClass* pUnit, HouseClass* pOwner) const JMP_THIS(0x6F1320);
     void FlashAllInstances(int Duration) JMP_THIS(0x6F1F30);
     TeamClass* FindFirstInstance() const JMP_THIS(0x6F1F70);

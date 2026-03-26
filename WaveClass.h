@@ -29,6 +29,7 @@ public:
 
 public:
     DEFINE_REFERENCE(DynamicVectorClass<WaveClass*>, Array, 0xA8EC38u)
+	DEFINE_REFERENCE(char, WaveLUTsCalculated, 0xB725CC)
 
 public:
     AbstractClass* Target;
@@ -91,6 +92,8 @@ public:
     void DrawNonMagnetic(Coordinate const& xyzFrom, Coordinate const& xyzTo) JMP_THIS(0x761640);
     void UpdateWave() JMP_THIS(0x762AF0);
     void DamageArea(Coordinate const& location) const JMP_THIS(0x75F330);
+
+	static void GenerateWaveTables() JMP_STD(0x75F020);
 
 /*
         void Add_Cell(Cell * cell) JMP_THIS(0x75F4C0);

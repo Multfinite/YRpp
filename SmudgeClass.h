@@ -27,6 +27,7 @@ public:
 
 public:
     DEFINE_REFERENCE(DynamicVectorClass<SmudgeClass*>, Array, 0xA8B1E0u)
+	DEFINE_REFERENCE(int32_t, ToOwn, 0x83FFD8) // HousesType
 
 public:
     SmudgeTypeClass* Type;

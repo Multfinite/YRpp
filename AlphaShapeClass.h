@@ -30,6 +30,7 @@ public:
 	static constexpr size_t ClassSize = 0x40;
 
 	DEFINE_REFERENCE(DynamicVectorClass<AlphaShapeClass*>, Array, 0x88A0F0u)
+	DEFINE_REFERENCE(char, IsArrayInitialized, 0x89A134)
 public:
 	//To which object is this AlphaShape attached?
 	ObjectClass* AttachedTo;

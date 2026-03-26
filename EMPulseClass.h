@@ -45,9 +45,10 @@ public:
     int Size() const override JMP_THIS(0x4C5AA0);
     void ComputeCRC(CRCEngine& crc) const override JMP_THIS(0x4C59A0);
 
+	void Create(TechnoClass& generator) JMP_THIS(0x4C54E0);
+
 /*
     int32_t Update() JMP_THIS(0x4C54A0);
-    void Create(int32_t arg0) JMP_THIS(0x4C54E0);
     int32_t Init_Clear() JMP_THIS(0x4C5470);
 */
 
